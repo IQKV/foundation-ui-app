@@ -1,6 +1,1 @@
-export {
-  useSessionStore,
-  getAccessToken,
-  setAccessToken,
-  clearSession,
-} from "./session.store";
+export { useSessionStore, getAccessToken, setAccessToken, clearSession } from "./session.store";

@@ -13,8 +13,8 @@ export default defineConfig(({ mode }) => {
   // Strip the path prefix from the target so we proxy to the origin only.
   // e.g. "https://api.iqkv.site/api" → target "https://api.iqkv.site", rewrite "/api" → ""
   const url = new URL(apiTarget);
-  const proxyTarget = url.origin;          // https://api.iqkv.site
-  const apiBasePath = url.pathname;        // /api
+  const proxyTarget = url.origin; // https://api.iqkv.site
+  const apiBasePath = url.pathname; // /api
 
   return {
     resolve: {
@@ -44,10 +44,7 @@ export default defineConfig(({ mode }) => {
           secure: true,
           // Rewrite "/api/v1/..." → "<apiBasePath>/v1/..."
           // If apiBasePath is already "/api" this is a no-op rewrite.
-          rewrite: (path) =>
-            apiBasePath === "/api"
-              ? path
-              : path.replace(/^\/api/, apiBasePath),
+          rewrite: (path) => (apiBasePath === "/api" ? path : path.replace(/^\/api/, apiBasePath)),
         },
       },
     },

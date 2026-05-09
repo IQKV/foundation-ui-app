@@ -1,10 +1,6 @@
 import type { AxiosError, InternalAxiosRequestConfig } from "axios";
 import { httpClient } from "./http-client";
-import {
-  getAccessToken,
-  setAccessToken,
-  clearSession,
-} from "@/processes/session";
+import { getAccessToken, setAccessToken, clearSession } from "@/processes/session";
 
 /** Extend the Axios config type to carry a retry flag. */
 interface RetryableConfig extends InternalAxiosRequestConfig {

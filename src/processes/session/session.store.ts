@@ -23,11 +23,9 @@ export const useSessionStore = create<SessionState>((set) => ({
 }));
 
 /** Read the current access token outside of React (e.g. in Axios interceptors). */
-export const getAccessToken = (): string | null =>
-  useSessionStore.getState().accessToken;
+export const getAccessToken = (): string | null => useSessionStore.getState().accessToken;
 
 export const setAccessToken = (token: string): void =>
   useSessionStore.getState().setAccessToken(token);
 
-export const clearSession = (): void =>
-  useSessionStore.getState().clearSession();
+export const clearSession = (): void => useSessionStore.getState().clearSession();
