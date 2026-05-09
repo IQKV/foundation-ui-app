@@ -12,11 +12,9 @@ import {
   Badge,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { notifications } from "@mantine/notifications";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { IconCheck, IconX } from "@tabler/icons-react";
-import type { IamUser, IamUserStatus } from "@/shared/api";
-import { iamApi } from "@/shared/api";
+import type { IamUser } from "@/shared/api";
+import { useEditUser, STATUS_OPTIONS } from "../model";
+import type { EditUserFormValues } from "../model";
 
 interface EditUserModalProps {
   user: IamUser | null;
@@ -24,22 +22,8 @@ interface EditUserModalProps {
   onClose: () => void;
 }
 
-interface FormValues {
-  firstName: string;
-  lastName: string;
-  status: IamUserStatus;
-}
-
-const statusOptions: { value: IamUserStatus; label: string }[] = [
-  { value: "ACTIVE", label: "Active" },
-  { value: "LOCKED", label: "Locked" },
-  { value: "SUSPENDED", label: "Suspended" },
-];
-
 export function EditUserModal({ user, opened, onClose }: EditUserModalProps) {
-  const queryClient = useQueryClient();
-
-  const form = useForm<FormValues>({
+  const form = useForm<EditUserFormValues>({
     initialValues: {
       firstName: "",
       lastName: "",
@@ -51,7 +35,6 @@ export function EditUserModal({ user, opened, onClose }: EditUserModalProps) {
     },
   });
 
-  // Sync form when user changes
   useEffect(() => {
     if (user) {
       form.setValues({
@@ -63,37 +46,21 @@ export function EditUserModal({ user, opened, onClose }: EditUserModalProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
-  const mutation = useMutation({
-    mutationFn: (values: FormValues) => iamApi.updateUser(user!.id, values),
-    onSuccess: () => {
-      notifications.show({
-        title: "User updated",
-        message: `${form.values.firstName} ${form.values.lastName} has been updated.`,
-        color: "green",
-        icon: <IconCheck size={16} />,
-      });
-      void queryClient.invalidateQueries({ queryKey: ["admin", "users"] });
-      onClose();
-    },
-    onError: () => {
-      notifications.show({
-        title: "Update failed",
-        message: "Could not update the user. Please try again.",
-        color: "red",
-        icon: <IconX size={16} />,
-      });
-    },
+  const mutation = useEditUser({
+    userId: user?.id ?? "",
+    displayName: `${form.values.firstName} ${form.values.lastName}`.trim(),
+    onSuccess: handleClose,
   });
 
   const handleSubmit = form.onSubmit((values) => {
     mutation.mutate(values);
   });
 
-  const handleClose = () => {
+  function handleClose() {
     form.reset();
     mutation.reset();
     onClose();
-  };
+  }
 
   return (
     <Modal
@@ -168,7 +135,7 @@ export function EditUserModal({ user, opened, onClose }: EditUserModalProps) {
             rightSectionWidth={72}
           />
 
-          <Select label="Status" data={statusOptions} {...form.getInputProps("status")} />
+          <Select label="Status" data={STATUS_OPTIONS} {...form.getInputProps("status")} />
 
           <Divider />
 
