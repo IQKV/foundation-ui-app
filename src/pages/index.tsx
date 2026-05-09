@@ -1,20 +1,8 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { Container, Title, Text, Stack, Button } from "@mantine/core";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({
-  component: HomePage,
+  beforeLoad: () => {
+    throw redirect({ to: "/admin" });
+  },
+  component: () => null,
 });
-
-function HomePage() {
-  return (
-    <Container size="sm" py="xl">
-      <Stack align="center" gap="md">
-        <Title>Welcome</Title>
-        <Text c="dimmed">Your app starts here.</Text>
-        <Button component={Link} to="/loading-demo" variant="light">
-          View Loading Demo
-        </Button>
-      </Stack>
-    </Container>
-  );
-}

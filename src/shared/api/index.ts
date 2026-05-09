@@ -3,3 +3,5 @@
 import "./auth-interceptor";
 
 export { httpClient } from "./http-client";
+export { iamAdminApi } from "./iam-admin";
+export type { AdminUser, PagedResponse, ListUsersParams, UserStatus } from "./iam-admin";

@@ -10,13 +10,21 @@
 
 import { Route as rootRouteImport } from "./pages/__root"
 import { Route as LoadingDemoRouteImport } from "./pages/loading-demo"
+import { Route as AdminRouteImport } from "./pages/admin"
 import { Route as R500RouteImport } from "./pages/500"
 import { Route as R404RouteImport } from "./pages/404"
 import { Route as IndexRouteImport } from "./pages/index"
+import { Route as AdminIndexRouteImport } from "./pages/admin/index"
+import { Route as AdminUsersRouteImport } from "./pages/admin/users"
 
 const LoadingDemoRoute = LoadingDemoRouteImport.update({
   id: "/loading-demo",
   path: "/loading-demo",
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: "/admin",
+  path: "/admin",
   getParentRoute: () => rootRouteImport,
 } as any)
 const R500Route = R500RouteImport.update({
@@ -34,38 +42,72 @@ const IndexRoute = IndexRouteImport.update({
   path: "/",
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: "/",
+  path: "/",
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminUsersRoute = AdminUsersRouteImport.update({
+  id: "/users",
+  path: "/users",
+  getParentRoute: () => AdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   "/": typeof IndexRoute
   "/404": typeof R404Route
   "/500": typeof R500Route
+  "/admin": typeof AdminRouteWithChildren
   "/loading-demo": typeof LoadingDemoRoute
+  "/admin/users": typeof AdminUsersRoute
+  "/admin/": typeof AdminIndexRoute
 }
 export interface FileRoutesByTo {
   "/": typeof IndexRoute
   "/404": typeof R404Route
   "/500": typeof R500Route
   "/loading-demo": typeof LoadingDemoRoute
+  "/admin/users": typeof AdminUsersRoute
+  "/admin": typeof AdminIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   "/": typeof IndexRoute
   "/404": typeof R404Route
   "/500": typeof R500Route
+  "/admin": typeof AdminRouteWithChildren
   "/loading-demo": typeof LoadingDemoRoute
+  "/admin/users": typeof AdminUsersRoute
+  "/admin/": typeof AdminIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: "/" | "/404" | "/500" | "/loading-demo"
+  fullPaths:
+    | "/"
+    | "/404"
+    | "/500"
+    | "/admin"
+    | "/loading-demo"
+    | "/admin/users"
+    | "/admin/"
   fileRoutesByTo: FileRoutesByTo
-  to: "/" | "/404" | "/500" | "/loading-demo"
-  id: "__root__" | "/" | "/404" | "/500" | "/loading-demo"
+  to: "/" | "/404" | "/500" | "/loading-demo" | "/admin/users" | "/admin"
+  id:
+    | "__root__"
+    | "/"
+    | "/404"
+    | "/500"
+    | "/admin"
+    | "/loading-demo"
+    | "/admin/users"
+    | "/admin/"
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   R404Route: typeof R404Route
   R500Route: typeof R500Route
+  AdminRoute: typeof AdminRouteWithChildren
   LoadingDemoRoute: typeof LoadingDemoRoute
 }
 
@@ -76,6 +118,13 @@ declare module "@tanstack/react-router" {
       path: "/loading-demo"
       fullPath: "/loading-demo"
       preLoaderRoute: typeof LoadingDemoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    "/admin": {
+      id: "/admin"
+      path: "/admin"
+      fullPath: "/admin"
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     "/500": {
@@ -99,13 +148,40 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    "/admin/": {
+      id: "/admin/"
+      path: "/"
+      fullPath: "/admin/"
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    "/admin/users": {
+      id: "/admin/users"
+      path: "/users"
+      fullPath: "/admin/users"
+      preLoaderRoute: typeof AdminUsersRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
+
+interface AdminRouteChildren {
+  AdminUsersRoute: typeof AdminUsersRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminUsersRoute: AdminUsersRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   R404Route: R404Route,
   R500Route: R500Route,
+  AdminRoute: AdminRouteWithChildren,
   LoadingDemoRoute: LoadingDemoRoute,
 }
 export const routeTree = rootRouteImport

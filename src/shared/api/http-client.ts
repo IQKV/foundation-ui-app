@@ -4,36 +4,44 @@ import { getConfig } from "@/app/config";
 /**
  * Base Axios instance shared by all API modules.
  *
- * baseURL resolves in priority order:
- *   1. window.VITE_API_SERVER_URL  (runtime override via public/config.js — nginx/production)
- *   2. import.meta.env.VITE_API_SERVER_URL  (build-time .env — CI/CD)
+ * baseURL resolution strategy:
  *
- * In development the Vite proxy rewrites /api/* to the remote origin, so the
- * browser never makes a cross-origin request and CORS is not an issue.
+ * DEVELOPMENT (`pnpm dev`):
+ *   Uses "/api" — a relative path that hits the Vite dev proxy.
+ *   The proxy (vite.config.ts) forwards /api/* to the remote origin server-side,
+ *   so the browser never makes a cross-origin request and CORS is not an issue.
+ *   withCredentials is set to false in dev to avoid the browser enforcing
+ *   Access-Control-Allow-Credentials on the proxied response.
  *
- * In production (nginx) the value must be the full API origin + base path,
- * e.g. "https://api.iqkv.site/api". Set it in public/config.js — nginx must
- * serve that file with Cache-Control: no-store so deployments take effect
- * immediately.
- *
- * withCredentials: true is required so the browser sends the httpOnly refresh
- * cookie on every request, including the silent-refresh call to /auth/refresh.
- * The API must respond with Access-Control-Allow-Credentials: true and an
- * exact (non-wildcard) Access-Control-Allow-Origin for this to work.
+ * PRODUCTION / CI:
+ *   Uses window.VITE_API_SERVER_URL (runtime override via public/config.js) or
+ *   import.meta.env.VITE_API_SERVER_URL (build-time .env).
+ *   Must be the full API origin + base path, e.g. "https://api.iqkv.site/api".
+ *   The server must respond with Access-Control-Allow-Credentials: true and an
+ *   exact (non-wildcard) Access-Control-Allow-Origin for withCredentials to work.
  */
-const apiUrl = getConfig("VITE_API_SERVER_URL");
+const isDev = import.meta.env.DEV;
 
-if (!apiUrl) {
+/**
+ * In dev we always route through the Vite proxy (/api → remote origin).
+ * In production we use the configured full URL.
+ */
+const apiUrl = isDev ? "/api" : getConfig("VITE_API_SERVER_URL");
+
+if (!isDev && !apiUrl) {
   throw new Error(
     "[http-client] VITE_API_SERVER_URL is not configured.\n" +
-      "  Development: set it in .env.local\n" +
+      "  Development: requests are proxied via Vite — no config needed.\n" +
       "  Production:  set window.VITE_API_SERVER_URL in public/config.js",
   );
 }
 
 export const httpClient = axios.create({
   baseURL: apiUrl,
-  withCredentials: true,
+  // withCredentials must be false when going through the Vite proxy (dev) because
+  // the proxy response won't carry Access-Control-Allow-Credentials: true.
+  // In production the real API server handles CORS correctly.
+  withCredentials: !isDev,
   headers: {
     "Content-Type": "application/json",
     Accept: "application/json",

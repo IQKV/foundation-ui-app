@@ -17,6 +17,7 @@ import { ErrorBoundary, LoadingOverlay } from "@/shared/ui";
 import "@mantine/core/styles.css";
 import "@mantine/notifications/styles.css";
 import "@mantine/nprogress/styles.css";
+import "mantine-datatable/styles.layer.css";
 
 const queryClient = new QueryClient({
   defaultOptions: {
