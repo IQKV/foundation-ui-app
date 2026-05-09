@@ -1,0 +1,5 @@
+// Copy this file to public/config.js to override build-time VITE_* envs at runtime
+// Do NOT commit secrets here.
+
+window.VITE_API_SERVER_URL = "https://api.example.com/api";
+window.VITE_LOG_LEVEL = "info";

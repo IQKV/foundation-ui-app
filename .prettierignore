@@ -1,0 +1,34 @@
+
+
+node_modules
+package-lock.json
+pnpm-lock.yaml
+
+.tanstack
+routeTree.gen.ts
+.git
+build/
+dist/
+locales/*.ts
+
+.eslintrc.cjs
+.prettierrc.cjs
+tsconfig.json
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Optional npm cache directory
+.npm
+
+.pnpm-store
+
+# Optional eslint cache
+.eslintcache
+
+# Optional stylelint cache
+.stylelintcache
+
+public/mockServiceWorker.js
+CLAUDE.md
+CLAUDE.local.md
