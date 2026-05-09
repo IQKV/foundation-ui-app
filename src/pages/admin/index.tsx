@@ -20,10 +20,7 @@ export const Route = createFileRoute("/admin/")({
 function AdminDashboardPage() {
   return (
     <Container size="xl" py={0}>
-      <PageHeader
-        title="Dashboard"
-        breadcrumbs={[{ label: "Home" }, { label: "Dashboard" }]}
-      />
+      <PageHeader title="Dashboard" breadcrumbs={[{ label: "Home" }, { label: "Dashboard" }]} />
 
       <SimpleGrid cols={{ base: 1, sm: 2, lg: 3 }} spacing="md">
         <Card withBorder radius="md" p="lg">
@@ -33,9 +30,13 @@ function AdminDashboardPage() {
             </ThemeIcon>
           </Group>
           <Skeleton visible height={28} width={60} radius="sm" mb={4}>
-            <Text size="xl" fw={700}>—</Text>
+            <Text size="xl" fw={700}>
+              —
+            </Text>
           </Skeleton>
-          <Text size="sm" c="dimmed">Total Users</Text>
+          <Text size="sm" c="dimmed">
+            Total Users
+          </Text>
           <Button
             component={Link}
             to="/admin/users"
@@ -55,9 +56,15 @@ function AdminDashboardPage() {
               <IconBuilding size={20} />
             </ThemeIcon>
           </Group>
-          <Text size="xl" fw={700}>—</Text>
-          <Text size="sm" c="dimmed">Organizations</Text>
-          <Text size="xs" c="dimmed" mt="md">Coming soon</Text>
+          <Text size="xl" fw={700}>
+            —
+          </Text>
+          <Text size="sm" c="dimmed">
+            Organizations
+          </Text>
+          <Text size="xs" c="dimmed" mt="md">
+            Coming soon
+          </Text>
         </Card>
 
         <Card withBorder radius="md" p="lg">
@@ -66,9 +73,15 @@ function AdminDashboardPage() {
               <IconCreditCard size={20} />
             </ThemeIcon>
           </Group>
-          <Text size="xl" fw={700}>—</Text>
-          <Text size="sm" c="dimmed">Active Subscriptions</Text>
-          <Text size="xs" c="dimmed" mt="md">Coming soon</Text>
+          <Text size="xl" fw={700}>
+            —
+          </Text>
+          <Text size="sm" c="dimmed">
+            Active Subscriptions
+          </Text>
+          <Text size="xs" c="dimmed" mt="md">
+            Coming soon
+          </Text>
         </Card>
       </SimpleGrid>
     </Container>

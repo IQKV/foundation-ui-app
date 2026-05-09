@@ -27,7 +27,6 @@ interface EditUserModalProps {
 interface FormValues {
   firstName: string;
   lastName: string;
-  email: string;
   status: UserStatus;
 }
 
@@ -44,13 +43,11 @@ export function EditUserModal({ user, opened, onClose }: EditUserModalProps) {
     initialValues: {
       firstName: "",
       lastName: "",
-      email: "",
       status: "ACTIVE",
     },
     validate: {
       firstName: (v) => (v.trim().length < 1 ? "First name is required" : null),
       lastName: (v) => (v.trim().length < 1 ? "Last name is required" : null),
-      email: (v) => (/^\S+@\S+\.\S+$/.test(v) ? null : "Invalid email"),
     },
   });
 
@@ -60,7 +57,6 @@ export function EditUserModal({ user, opened, onClose }: EditUserModalProps) {
       form.setValues({
         firstName: user.firstName,
         lastName: user.lastName,
-        email: user.email,
         status: user.status,
       });
     }
@@ -133,11 +129,7 @@ export function EditUserModal({ user, opened, onClose }: EditUserModalProps) {
                 <Text size="sm" c="dimmed">
                   Email verified:
                 </Text>
-                <Badge
-                  color={user.emailVerified ? "green" : "orange"}
-                  variant="light"
-                  size="xs"
-                >
+                <Badge color={user.emailVerified ? "green" : "orange"} variant="light" size="xs">
                   {user.emailVerified ? "Verified" : "Unverified"}
                 </Badge>
               </Group>
@@ -159,20 +151,34 @@ export function EditUserModal({ user, opened, onClose }: EditUserModalProps) {
 
           <TextInput
             label="Email"
-            placeholder="user@example.com"
-            {...form.getInputProps("email")}
+            value={user?.email ?? ""}
+            readOnly
+            styles={{
+              input: {
+                cursor: "default",
+                color: "var(--mantine-color-gray-6)",
+                background: "var(--mantine-color-gray-0)",
+              },
+            }}
+            rightSection={
+              <Text size="xs" c="dimmed" pr={4}>
+                read-only
+              </Text>
+            }
+            rightSectionWidth={72}
           />
 
-          <Select
-            label="Status"
-            data={statusOptions}
-            {...form.getInputProps("status")}
-          />
+          <Select label="Status" data={statusOptions} {...form.getInputProps("status")} />
 
           <Divider />
 
           <Group justify="flex-end" gap="sm">
-            <Button variant="subtle" color="gray" onClick={handleClose} disabled={mutation.isPending}>
+            <Button
+              variant="subtle"
+              color="gray"
+              onClick={handleClose}
+              disabled={mutation.isPending}
+            >
               Cancel
             </Button>
             <Button type="submit" loading={mutation.isPending}>

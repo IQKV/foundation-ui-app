@@ -87,18 +87,9 @@ function AdminUsersPage() {
       {/* ── Page header: title left, breadcrumb right ── */}
       <PageHeader
         title="Users"
-        breadcrumbs={[
-          { label: "Home", to: "/admin/" },
-          { label: "Platform" },
-          { label: "Users" },
-        ]}
+        breadcrumbs={[{ label: "Home", to: "/admin/" }, { label: "Platform" }, { label: "Users" }]}
         toolbar={
-          <Button
-            variant="light"
-            size="sm"
-            leftSection={<IconDownload size={15} />}
-            disabled
-          >
+          <Button variant="light" size="sm" leftSection={<IconDownload size={15} />} disabled>
             Export
           </Button>
         }
@@ -246,11 +237,7 @@ function AdminUsersPage() {
                   accessor: "emailVerified",
                   title: "Email",
                   render: (user) => (
-                    <Badge
-                      variant="dot"
-                      color={user.emailVerified ? "green" : "orange"}
-                      size="sm"
-                    >
+                    <Badge variant="dot" color={user.emailVerified ? "green" : "orange"} size="sm">
                       {user.emailVerified ? "Verified" : "Unverified"}
                     </Badge>
                   ),

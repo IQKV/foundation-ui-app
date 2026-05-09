@@ -63,10 +63,7 @@ export function PageHeader({ title, breadcrumbs, toolbar }: PageHeaderProps) {
 
       {/* Optional toolbar row */}
       {toolbar && (
-        <Group
-          py="sm"
-          style={{ borderBottom: "1px solid var(--mantine-color-gray-2)" }}
-        >
+        <Group py="sm" style={{ borderBottom: "1px solid var(--mantine-color-gray-2)" }}>
           {toolbar}
         </Group>
       )}
