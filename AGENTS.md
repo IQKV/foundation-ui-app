@@ -22,7 +22,7 @@
 - **React 19** - Latest React with concurrent features and improved performance
 - **TypeScript 6** - Strict type safety with latest language features
 - **Vite 8** - Lightning-fast development with instant HMR and optimized builds
-- **PNPM 11.0.8** - Fast, disk space efficient package manager (required)
+- **PNPM 10.33.2** - Fast, disk space efficient package manager (required)
 
 ### UI & Styling
 
@@ -1198,7 +1198,7 @@ export type { SignInFormValues } from "./model/types";
 ### Development Requirements
 
 - **Node.js**: >= 24.0.0 (LTS recommended)
-- **Package Manager**: pnpm 11.0.8 (required - specified in package.json)
+- **Package Manager**: pnpm 10.33.2 (required - specified in package.json)
 - **Editor**: VS Code with recommended extensions (optional but recommended)
 
 ### Environment Variables (TEMPLATE DEFAULTS)
