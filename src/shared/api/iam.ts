@@ -38,20 +38,12 @@ export interface ListIamUsersParams {
 
 export const iamApi = {
   listUsers: (params: ListIamUsersParams = {}) =>
-    httpClient
-      .get<PagedResponse<IamUser>>("/v1/iam/admin/users", { params })
-      .then((r) => r.data),
+    httpClient.get<PagedResponse<IamUser>>("/v1/iam/admin/users", { params }).then((r) => r.data),
 
-  getUser: (id: string) =>
-    httpClient.get<IamUser>(`/v1/iam/admin/users/${id}`).then((r) => r.data),
+  getUser: (id: string) => httpClient.get<IamUser>(`/v1/iam/admin/users/${id}`).then((r) => r.data),
 
-  updateUser: (
-    id: string,
-    data: Partial<Pick<IamUser, "firstName" | "lastName" | "status">>,
-  ) =>
-    httpClient
-      .patch<IamUser>(`/v1/iam/admin/users/${id}`, data)
-      .then((r) => r.data),
+  updateUser: (id: string, data: Partial<Pick<IamUser, "firstName" | "lastName" | "status">>) =>
+    httpClient.patch<IamUser>(`/v1/iam/admin/users/${id}`, data).then((r) => r.data),
 
   deleteUser: (id: string) => httpClient.delete(`/v1/iam/admin/users/${id}`),
 };
