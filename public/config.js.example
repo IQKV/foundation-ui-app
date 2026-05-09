@@ -1,5 +1,26 @@
-// Copy this file to public/config.js to override build-time VITE_* envs at runtime
+// Runtime environment overrides.
+//
+// Copy this file to public/config.js and set values for your environment.
+// Values here take precedence over build-time VITE_* variables — no rebuild needed.
+//
+// NGINX REQUIREMENT: serve config.js with no-cache headers so deployments
+// take effect immediately:
+//
+//   location = /config.js {
+//       add_header Cache-Control "no-store, no-cache, must-revalidate";
+//   }
+//
+// SPA ROUTING REQUIREMENT: add a fallback rule so direct URL hits work:
+//
+//   location / {
+//       try_files $uri $uri/ /index.html;
+//   }
+//
+// CORS REQUIREMENT: the API must respond with:
+//   Access-Control-Allow-Origin: <exact SPA origin>   (not *)
+//   Access-Control-Allow-Credentials: true
+//
 // Do NOT commit secrets here.
 
-window.VITE_API_SERVER_URL = "https://api.example.com/api";
+window.VITE_API_SERVER_URL = "https://api.iqkv.site/api";
 window.VITE_LOG_LEVEL = "info";
