@@ -15,11 +15,11 @@ import { useForm } from "@mantine/form";
 import { notifications } from "@mantine/notifications";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { IconCheck, IconX } from "@tabler/icons-react";
-import type { AdminUser, UserStatus } from "@/shared/api";
-import { iamAdminApi } from "@/shared/api";
+import type { IamUser, IamUserStatus } from "@/shared/api";
+import { iamApi } from "@/shared/api";
 
 interface EditUserModalProps {
-  user: AdminUser | null;
+  user: IamUser | null;
   opened: boolean;
   onClose: () => void;
 }
@@ -27,10 +27,10 @@ interface EditUserModalProps {
 interface FormValues {
   firstName: string;
   lastName: string;
-  status: UserStatus;
+  status: IamUserStatus;
 }
 
-const statusOptions: { value: UserStatus; label: string }[] = [
+const statusOptions: { value: IamUserStatus; label: string }[] = [
   { value: "ACTIVE", label: "Active" },
   { value: "LOCKED", label: "Locked" },
   { value: "SUSPENDED", label: "Suspended" },
@@ -64,7 +64,7 @@ export function EditUserModal({ user, opened, onClose }: EditUserModalProps) {
   }, [user]);
 
   const mutation = useMutation({
-    mutationFn: (values: FormValues) => iamAdminApi.updateUser(user!.id, values),
+    mutationFn: (values: FormValues) => iamApi.updateUser(user!.id, values),
     onSuccess: () => {
       notifications.show({
         title: "User updated",

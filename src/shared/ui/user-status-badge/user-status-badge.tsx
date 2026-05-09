@@ -1,7 +1,7 @@
 import { Badge } from "@mantine/core";
-import type { UserStatus } from "@/shared/api";
+import type { IamUserStatus } from "@/shared/api";
 
-const statusConfig: Record<UserStatus, { color: string; label: string }> = {
+const statusConfig: Record<IamUserStatus, { color: string; label: string }> = {
   ACTIVE: { color: "green", label: "Active" },
   LOCKED: { color: "orange", label: "Locked" },
   SUSPENDED: { color: "red", label: "Suspended" },
@@ -9,7 +9,7 @@ const statusConfig: Record<UserStatus, { color: string; label: string }> = {
 };
 
 interface UserStatusBadgeProps {
-  status: UserStatus;
+  status: IamUserStatus;
 }
 
 export function UserStatusBadge({ status }: UserStatusBadgeProps) {

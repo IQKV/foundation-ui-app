@@ -3,5 +3,12 @@
 import "./auth-interceptor";
 
 export { httpClient } from "./http-client";
-export { iamAdminApi } from "./iam-admin";
-export type { AdminUser, PagedResponse, ListUsersParams, UserStatus } from "./iam-admin";
+export { iamApi } from "./iam";
+export type {
+  IamUser,
+  IamUserStatus,
+  IamUserSortField,
+  SortDirection,
+  PagedResponse,
+  ListIamUsersParams,
+} from "./iam";

@@ -18,7 +18,7 @@ import {
 } from "@mantine/core";
 import { useDisclosure, useDebouncedValue } from "@mantine/hooks";
 import { useQuery } from "@tanstack/react-query";
-import { DataTable } from "mantine-datatable";
+import { DataTable, type DataTableSortStatus } from "mantine-datatable";
 import {
   IconSearch,
   IconEdit,
@@ -27,8 +27,8 @@ import {
   IconDownload,
 } from "@tabler/icons-react";
 import dayjs from "dayjs";
-import { iamAdminApi } from "@/shared/api";
-import type { AdminUser } from "@/shared/api";
+import { iamApi } from "@/shared/api";
+import type { IamUser, IamUserSortField, SortDirection } from "@/shared/api";
 import { UserStatusBadge, PageHeader } from "@/shared/ui";
 import { EditUserModal } from "@/features/edit-user";
 
@@ -38,7 +38,7 @@ export const Route = createFileRoute("/admin/users")({
 
 const PAGE_SIZE = 20;
 
-/** Deterministic color from a string — keeps avatars consistent across renders. */
+/** Deterministic avatar color from a string. */
 function avatarColor(str: string): string {
   const colors = ["blue", "cyan", "teal", "green", "violet", "grape", "pink", "orange", "red"];
   let hash = 0;
@@ -50,25 +50,51 @@ function initials(first: string, last: string): string {
   return `${first.charAt(0)}${last.charAt(0)}`.toUpperCase();
 }
 
+/**
+ * mantine-datatable uses the column `accessor` string as the sort key.
+ * Map those accessor names to the backend field names the API expects.
+ */
+const SORT_FIELD_MAP: Record<string, IamUserSortField> = {
+  firstName: "firstName",
+  email: "email",
+  updatedAt: "updatedAt",
+  createdAt: "createdAt",
+};
+
 function AdminUsersPage() {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
   const [debouncedSearch] = useDebouncedValue(search, 300);
 
+  const [sortStatus, setSortStatus] = useState<DataTableSortStatus<IamUser>>({
+    columnAccessor: "createdAt",
+    direction: "desc",
+  });
+
   const [editModalOpened, { open: openEditModal, close: closeEditModal }] = useDisclosure(false);
-  const [selectedUser, setSelectedUser] = useState<AdminUser | null>(null);
+  const [selectedUser, setSelectedUser] = useState<IamUser | null>(null);
+
+  const sortBy = SORT_FIELD_MAP[sortStatus.columnAccessor] ?? "createdAt";
+  const sortDir = sortStatus.direction as SortDirection;
 
   const { data, isLoading, isError, refetch, isFetching } = useQuery({
-    queryKey: ["admin", "users", page, debouncedSearch],
+    queryKey: ["admin", "users", page, debouncedSearch, sortBy, sortDir],
     queryFn: () =>
-      iamAdminApi.listUsers({
+      iamApi.listUsers({
         page: page - 1,
         size: PAGE_SIZE,
+        sortBy,
+        sortDir,
         ...(debouncedSearch ? { search: debouncedSearch } : {}),
       }),
   });
 
-  const handleEdit = (user: AdminUser) => {
+  const handleSortChange = (next: DataTableSortStatus<IamUser>) => {
+    setSortStatus(next);
+    setPage(1); // reset to page 1 on sort change
+  };
+
+  const handleEdit = (user: IamUser) => {
     setSelectedUser(user);
     openEditModal();
   };
@@ -84,19 +110,26 @@ function AdminUsersPage() {
 
   return (
     <Container size="xl" py={0}>
-      {/* ── Page header: title left, breadcrumb right ── */}
       <PageHeader
         title="Users"
-        breadcrumbs={[{ label: "Home", to: "/admin/" }, { label: "Platform" }, { label: "Users" }]}
+        breadcrumbs={[
+          { label: "Home", to: "/admin/" },
+          { label: "Platform" },
+          { label: "Users" },
+        ]}
         toolbar={
-          <Button variant="light" size="sm" leftSection={<IconDownload size={15} />} disabled>
+          <Button
+            variant="light"
+            size="sm"
+            leftSection={<IconDownload size={15} />}
+            disabled
+          >
             Export
           </Button>
         }
       />
 
       <Stack gap="md">
-        {/* Error state */}
         {isError && (
           <Alert
             icon={<IconAlertCircle size={16} />}
@@ -111,7 +144,6 @@ function AdminUsersPage() {
           </Alert>
         )}
 
-        {/* ── Data card ── */}
         <Paper withBorder radius="md" style={{ overflow: "hidden" }}>
           {/* Card inner header */}
           <Group
@@ -193,6 +225,9 @@ function AdminUsersPage() {
               fetching={isFetching && !isLoading}
               minHeight={300}
               noRecordsText="No users found"
+              // ── Sorting ──────────────────────────────────────────────────
+              sortStatus={sortStatus}
+              onSortStatusChange={handleSortChange}
               styles={{
                 header: {
                   background: "var(--mantine-color-gray-0)",
@@ -205,8 +240,9 @@ function AdminUsersPage() {
               }}
               columns={[
                 {
-                  accessor: "member",
+                  accessor: "firstName",
                   title: "Member",
+                  sortable: true,
                   render: (user) => (
                     <Group gap="sm" wrap="nowrap">
                       <Avatar
@@ -229,6 +265,14 @@ function AdminUsersPage() {
                   ),
                 },
                 {
+                  accessor: "email",
+                  title: "Email",
+                  sortable: true,
+                  // Hidden visually — only here to enable email sort.
+                  // The email is already shown in the Member column above.
+                  hidden: true,
+                },
+                {
                   accessor: "status",
                   title: "Status",
                   render: (user) => <UserStatusBadge status={user.status} />,
@@ -237,14 +281,29 @@ function AdminUsersPage() {
                   accessor: "emailVerified",
                   title: "Email",
                   render: (user) => (
-                    <Badge variant="dot" color={user.emailVerified ? "green" : "orange"} size="sm">
+                    <Badge
+                      variant="dot"
+                      color={user.emailVerified ? "green" : "orange"}
+                      size="sm"
+                    >
                       {user.emailVerified ? "Verified" : "Unverified"}
                     </Badge>
                   ),
                 },
                 {
+                  accessor: "updatedAt",
+                  title: "Last updated",
+                  sortable: true,
+                  render: (user) => (
+                    <Text size="sm" c="dimmed">
+                      {user.updatedAt ? dayjs(user.updatedAt).format("MMM D, YYYY") : "—"}
+                    </Text>
+                  ),
+                },
+                {
                   accessor: "createdAt",
                   title: "Joined",
+                  sortable: true,
                   render: (user) => (
                     <Text size="sm" c="dimmed">
                       {dayjs(user.createdAt).format("MMM D, YYYY")}
@@ -276,7 +335,6 @@ function AdminUsersPage() {
           )}
         </Paper>
 
-        {/* Range summary */}
         {!isLoading && totalElements > 0 && (
           <Text size="xs" c="dimmed">
             Showing {rangeStart}–{rangeEnd} of {totalElements} users
