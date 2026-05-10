@@ -32,7 +32,7 @@ export const Route = createFileRoute("/admin")({
     if (!token) {
       // ── Path 1: no token — attempt silent refresh ──────────────────────────
       try {
-        const { data } = await httpClient.post<{ accessToken: string }>("/v1/iam/auth/refresh");
+        const { data } = await httpClient.post<{ accessToken: string }>("/v1/iam/auth/admin/refresh");
         setAccessToken(data.accessToken);
 
         const payload = decodeJwt(data.accessToken);

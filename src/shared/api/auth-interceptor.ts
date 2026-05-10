@@ -16,8 +16,11 @@ let refreshPromise: Promise<string> | null = null;
 const silentRefresh = (): Promise<string> => {
   if (refreshPromise) return refreshPromise;
 
+  // Use the platform-admin-specific refresh endpoint — the regular /auth/refresh
+  // requires an X-Tenant-ID header and a tenant-scoped token, neither of which
+  // applies to platform admin sessions (tenant_id is null in the token).
   refreshPromise = httpClient
-    .post<{ accessToken: string }>("/v1/iam/auth/refresh")
+    .post<{ accessToken: string }>("/v1/iam/auth/admin/refresh")
     .then((res) => {
       const token = res.data.accessToken;
       setAccessToken(token);
@@ -37,7 +40,7 @@ const silentRefresh = (): Promise<string> => {
 
 /**
  * REQUEST interceptor — attach the in-memory access token as a Bearer header.
- * Skips the refresh endpoint itself to avoid an infinite loop.
+ * Skips auth endpoints to avoid infinite loops.
  */
 httpClient.interceptors.request.use((config: InternalAxiosRequestConfig) => {
   const token = getAccessToken();
@@ -54,20 +57,22 @@ httpClient.interceptors.request.use((config: InternalAxiosRequestConfig) => {
 });
 
 /**
- * RESPONSE interceptor — on 401, attempt a silent token refresh once, then
- * replay the original request. If the refresh also fails, clear the session
- * so the router guard can redirect to the login page.
+ * RESPONSE interceptor:
+ * - 401: attempt a silent token refresh once, then replay the original request.
+ *        If the refresh also fails, clear the session so the router guard redirects to login.
+ * - 403 on an admin endpoint: the user's PLATFORM_ADMIN authority was revoked server-side.
+ *        Clear the session and redirect to /sign-in?reason=forbidden.
  */
 httpClient.interceptors.response.use(
   (response) => response,
   async (error: AxiosError) => {
     const originalConfig = error.config as RetryableConfig | undefined;
 
-    const is401 = error.response?.status === 401;
+    const status = error.response?.status;
     const isRefreshEndpoint = originalConfig?.url?.includes("/auth/refresh");
     const alreadyRetried = originalConfig?._retry;
 
-    if (is401 && !isRefreshEndpoint && !alreadyRetried && originalConfig) {
+    if (status === 401 && !isRefreshEndpoint && !alreadyRetried && originalConfig) {
       originalConfig._retry = true;
 
       try {
@@ -78,6 +83,14 @@ httpClient.interceptors.response.use(
         // Refresh failed — session is gone, let the caller handle the rejection.
         return Promise.reject(error);
       }
+    }
+
+    // 403 on an admin API call means the user's PLATFORM_ADMIN authority was revoked.
+    // Clear the session and redirect to the sign-in page with a contextual reason.
+    if (status === 403 && originalConfig?.url?.includes("/iam/admin/")) {
+      clearSession();
+      window.location.href = "/sign-in?reason=forbidden";
+      return Promise.reject(error);
     }
 
     return Promise.reject(error);
