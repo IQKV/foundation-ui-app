@@ -34,12 +34,7 @@ export function SignInForm({ redirectTo }: SignInFormProps) {
         {/* ARIA live region for server-side error messages (Requirement 8.5) */}
         <div aria-live="polite" aria-atomic="true">
           {errorMessage && (
-            <Alert
-              icon={<IconAlertCircle size={16} />}
-              color="red"
-              variant="light"
-              role="alert"
-            >
+            <Alert icon={<IconAlertCircle size={16} />} color="red" variant="light" role="alert">
               {errorMessage}
             </Alert>
           )}
@@ -85,12 +80,7 @@ export function SignInForm({ redirectTo }: SignInFormProps) {
         />
 
         {/* Submit button — disabled and shows loading indicator while in flight (Requirement 1.11) */}
-        <Button
-          type="submit"
-          fullWidth
-          loading={isLoading}
-          disabled={isLoading}
-        >
+        <Button type="submit" fullWidth loading={isLoading} disabled={isLoading}>
           Sign in
         </Button>
       </Stack>

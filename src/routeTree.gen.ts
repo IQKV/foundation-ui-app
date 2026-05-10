@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from "./pages/__root"
+import { Route as UnauthorizedRouteImport } from "./pages/unauthorized"
 import { Route as SignInRouteImport } from "./pages/sign-in"
 import { Route as LoadingDemoRouteImport } from "./pages/loading-demo"
 import { Route as AdminRouteImport } from "./pages/admin"
@@ -18,6 +19,11 @@ import { Route as IndexRouteImport } from "./pages/index"
 import { Route as AdminIndexRouteImport } from "./pages/admin/index"
 import { Route as AdminUsersRouteImport } from "./pages/admin/users"
 
+const UnauthorizedRoute = UnauthorizedRouteImport.update({
+  id: "/unauthorized",
+  path: "/unauthorized",
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SignInRoute = SignInRouteImport.update({
   id: "/sign-in",
   path: "/sign-in",
@@ -66,6 +72,7 @@ export interface FileRoutesByFullPath {
   "/admin": typeof AdminRouteWithChildren
   "/loading-demo": typeof LoadingDemoRoute
   "/sign-in": typeof SignInRoute
+  "/unauthorized": typeof UnauthorizedRoute
   "/admin/users": typeof AdminUsersRoute
   "/admin/": typeof AdminIndexRoute
 }
@@ -75,6 +82,7 @@ export interface FileRoutesByTo {
   "/500": typeof R500Route
   "/loading-demo": typeof LoadingDemoRoute
   "/sign-in": typeof SignInRoute
+  "/unauthorized": typeof UnauthorizedRoute
   "/admin/users": typeof AdminUsersRoute
   "/admin": typeof AdminIndexRoute
 }
@@ -86,6 +94,7 @@ export interface FileRoutesById {
   "/admin": typeof AdminRouteWithChildren
   "/loading-demo": typeof LoadingDemoRoute
   "/sign-in": typeof SignInRoute
+  "/unauthorized": typeof UnauthorizedRoute
   "/admin/users": typeof AdminUsersRoute
   "/admin/": typeof AdminIndexRoute
 }
@@ -98,6 +107,7 @@ export interface FileRouteTypes {
     | "/admin"
     | "/loading-demo"
     | "/sign-in"
+    | "/unauthorized"
     | "/admin/users"
     | "/admin/"
   fileRoutesByTo: FileRoutesByTo
@@ -107,6 +117,7 @@ export interface FileRouteTypes {
     | "/500"
     | "/loading-demo"
     | "/sign-in"
+    | "/unauthorized"
     | "/admin/users"
     | "/admin"
   id:
@@ -117,6 +128,7 @@ export interface FileRouteTypes {
     | "/admin"
     | "/loading-demo"
     | "/sign-in"
+    | "/unauthorized"
     | "/admin/users"
     | "/admin/"
   fileRoutesById: FileRoutesById
@@ -128,10 +140,18 @@ export interface RootRouteChildren {
   AdminRoute: typeof AdminRouteWithChildren
   LoadingDemoRoute: typeof LoadingDemoRoute
   SignInRoute: typeof SignInRoute
+  UnauthorizedRoute: typeof UnauthorizedRoute
 }
 
 declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
+    "/unauthorized": {
+      id: "/unauthorized"
+      path: "/unauthorized"
+      fullPath: "/unauthorized"
+      preLoaderRoute: typeof UnauthorizedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     "/sign-in": {
       id: "/sign-in"
       path: "/sign-in"
@@ -210,6 +230,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminRoute: AdminRouteWithChildren,
   LoadingDemoRoute: LoadingDemoRoute,
   SignInRoute: SignInRoute,
+  UnauthorizedRoute: UnauthorizedRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

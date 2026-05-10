@@ -32,6 +32,5 @@ export const authApi = {
    * Revoke the server-side refresh token and terminate the session.
    * The Bearer token is attached automatically by the auth interceptor.
    */
-  signOut: (): Promise<void> =>
-    httpClient.post("/v1/iam/auth/signout").then(() => undefined),
+  signOut: (): Promise<void> => httpClient.post("/v1/iam/auth/signout").then(() => undefined),
 };
