@@ -20,7 +20,7 @@ export const Route = createFileRoute("/sign-in")({
   validateSearch: signInSearchSchema,
 
   /**
-   * If the operator is already authenticated with PLATFORM_ADMIN authority,
+   * If the admin is already authenticated with PLATFORM_ADMIN authority,
    * skip the sign-in page and go straight to /admin (Requirement 1.14).
    */
   beforeLoad: () => {

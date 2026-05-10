@@ -78,7 +78,7 @@ export const Route = createFileRoute("/admin")({
  * Wraps all /admin/* routes.
  *
  * Wires the inactivity timer here so it is active for the entire admin session
- * and is automatically torn down when the operator leaves /admin/* (Requirements
+ * and is automatically torn down when the admin leaves /admin/* (Requirements
  * 5.2–5.5).
  */
 function AdminLayoutRoute() {

@@ -4,7 +4,7 @@ Platform administration interface for the Key Value Platform. Provides comprehen
 
 ## About
 
-The admin UI is the operator surface of the platform:
+The admin UI is the admin surface of the platform:
 
 - **Dashboard & metrics** — real-time platform health, active users, organization counts, subscription KPIs, MRR/ARR, trial conversion, and growth trends
 - **User management** — paginated user list with advanced filtering, bulk actions, and a tabbed detail view covering profile, memberships, auth history, billing, activity log, and operator notes
