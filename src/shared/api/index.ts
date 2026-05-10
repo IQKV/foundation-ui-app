@@ -12,3 +12,5 @@ export type {
   PagedResponse,
   ListIamUsersParams,
 } from "./iam";
+export { authApi } from "./auth";
+export type { SignInRequest, SignInResponse } from "./auth";
