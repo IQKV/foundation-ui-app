@@ -41,7 +41,13 @@ const silentRefresh = (): Promise<string> => {
  */
 httpClient.interceptors.request.use((config: InternalAxiosRequestConfig) => {
   const token = getAccessToken();
-  if (token && config.url && !config.url.includes("/auth/refresh")) {
+  if (
+    token &&
+    config.url &&
+    !config.url.includes("/auth/refresh") &&
+    !config.url.includes("/auth/admin/signin") &&
+    !config.url.includes("/auth/signin")
+  ) {
     config.headers.Authorization = `Bearer ${token}`;
   }
   return config;
