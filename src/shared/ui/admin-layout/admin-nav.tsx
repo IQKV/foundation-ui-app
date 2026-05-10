@@ -10,6 +10,7 @@ import {
 } from "@tabler/icons-react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useState } from "react";
+import { Trans, useLingui } from "@lingui/react/macro";
 
 interface NavItem {
   label: string;
@@ -18,50 +19,38 @@ interface NavItem {
   disabled?: boolean;
 }
 
-const navItems: NavItem[] = [
-  {
-    label: "Dashboard",
-    icon: <IconDashboard size={16} />,
-    to: "/admin/",
-  },
-  {
-    label: "Users",
-    icon: <IconUsers size={16} />,
-    to: "/admin/users",
-  },
-  {
-    label: "Organizations",
-    icon: <IconBuilding size={16} />,
-    to: "/admin/organizations",
-    disabled: true,
-  },
-  {
-    label: "Subscriptions",
-    icon: <IconCreditCard size={16} />,
-    to: "/admin/subscriptions",
-    disabled: true,
-  },
-];
-
-const systemItems: NavItem[] = [
-  {
-    label: "Audit Log",
-    icon: <IconShieldCheck size={16} />,
-    to: "/admin/audit",
-    disabled: true,
-  },
-  {
-    label: "Settings",
-    icon: <IconSettings size={16} />,
-    to: "/admin/settings",
-    disabled: true,
-  },
-];
-
 export function AdminNav() {
+  const { t } = useLingui();
   const routerState = useRouterState();
   const currentPath = routerState.location.pathname;
   const [search, setSearch] = useState("");
+
+  const navItems: NavItem[] = [
+    { label: t`Dashboard`, icon: <IconDashboard size={16} />, to: "/admin/" },
+    { label: t`Users`, icon: <IconUsers size={16} />, to: "/admin/users" },
+    {
+      label: t`Organizations`,
+      icon: <IconBuilding size={16} />,
+      to: "/admin/organizations",
+      disabled: true,
+    },
+    {
+      label: t`Subscriptions`,
+      icon: <IconCreditCard size={16} />,
+      to: "/admin/subscriptions",
+      disabled: true,
+    },
+  ];
+
+  const systemItems: NavItem[] = [
+    {
+      label: t`Audit Log`,
+      icon: <IconShieldCheck size={16} />,
+      to: "/admin/audit",
+      disabled: true,
+    },
+    { label: t`Settings`, icon: <IconSettings size={16} />, to: "/admin/settings", disabled: true },
+  ];
 
   const allItems = [...navItems, ...systemItems];
   const filtered = search.trim()
@@ -103,7 +92,7 @@ export function AdminNav() {
       {/* Search */}
       <Box px="sm" pb="sm">
         <TextInput
-          placeholder="Search…"
+          placeholder={t`Search…`}
           size="xs"
           leftSection={<IconSearch size={13} />}
           value={search}
@@ -122,14 +111,14 @@ export function AdminNav() {
           filtered.map(renderItem)
         ) : (
           <Text size="xs" c="dimmed" px="md" py="xs">
-            No results
+            <Trans>No results</Trans>
           </Text>
         )
       ) : (
         <>
           <Box px="md" pb={4}>
             <Text size="xs" fw={600} c="dimmed" tt="uppercase" lts={1}>
-              Platform
+              <Trans>Platform</Trans>
             </Text>
           </Box>
 
@@ -139,7 +128,7 @@ export function AdminNav() {
 
           <Box px="md" pb={4}>
             <Text size="xs" fw={600} c="dimmed" tt="uppercase" lts={1}>
-              System
+              <Trans>System</Trans>
             </Text>
           </Box>
 

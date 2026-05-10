@@ -1,5 +1,6 @@
 import { Button } from "@mantine/core";
 import { IconLogout } from "@tabler/icons-react";
+import { Trans } from "@lingui/react/macro";
 import { useSignOut } from "../model/use-sign-out";
 
 /**
@@ -21,7 +22,7 @@ export function SignOutButton() {
       disabled={isLoading}
       onClick={() => void signOut()}
     >
-      Sign out
+      <Trans>Sign out</Trans>
     </Button>
   );
 }

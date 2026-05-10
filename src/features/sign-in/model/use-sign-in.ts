@@ -5,20 +5,30 @@ import { useNavigate } from "@tanstack/react-router";
 import { isAxiosError } from "axios";
 import { z } from "zod";
 import type { UseFormReturn } from "react-hook-form";
+import { t } from "@lingui/core/macro";
 import { authApi } from "@/shared/api/auth";
 import type { SignInResponse } from "@/shared/api/auth";
 import { setAccessToken } from "@/processes/session";
 
-// ─── Schema ───────────────────────────────────────────────────────────────────
+// ─── Schema factory ───────────────────────────────────────────────────────────
+// Schema is created inside the hook so that `t` is called at render time,
+// picking up the active locale rather than the module-load locale.
 
-const signInSchema = z.object({
-  email: z.string().min(1, "Email is required").email("Enter a valid email address"),
-  password: z.string().min(1, "Password is required"),
-});
+function buildSignInSchema() {
+  return z.object({
+    email: z
+      .string()
+      .min(1, t`Email is required`)
+      .email(t`Enter a valid email address`),
+    password: z.string().min(1, t`Password is required`),
+  });
+}
+
+type SignInSchema = ReturnType<typeof buildSignInSchema>;
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-export type SignInFormValues = z.infer<typeof signInSchema>;
+export type SignInFormValues = z.infer<SignInSchema>;
 
 export interface UseSignInReturn {
   form: UseFormReturn<SignInFormValues>;
@@ -44,13 +54,13 @@ async function runMfaStep(_response: SignInResponse): Promise<void> {
 function mapHttpErrorToMessage(status: number): string {
   switch (status) {
     case 401:
-      return "Invalid email or password";
+      return t`Invalid email or password`;
     case 403:
-      return "Your account does not have admin access";
+      return t`Your account does not have admin access`;
     case 429:
-      return "Too many sign-in attempts. Please try again later.";
+      return t`Too many sign-in attempts. Please try again later.`;
     default:
-      return "Sign-in failed. Please try again.";
+      return t`Sign-in failed. Please try again.`;
   }
 }
 
@@ -68,7 +78,7 @@ export function useSignIn(redirectTo?: string): UseSignInReturn {
   const navigate = useNavigate();
 
   const form = useForm<SignInFormValues>({
-    resolver: zodResolver(signInSchema),
+    resolver: zodResolver(buildSignInSchema()),
     defaultValues: {
       email: "",
       password: "",

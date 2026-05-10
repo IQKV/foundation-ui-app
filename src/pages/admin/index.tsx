@@ -11,6 +11,7 @@ import {
   Skeleton,
 } from "@mantine/core";
 import { IconUsers, IconBuilding, IconCreditCard, IconArrowRight } from "@tabler/icons-react";
+import { Trans } from "@lingui/react/macro";
 import { PageHeader } from "@/shared/ui";
 
 export const Route = createFileRoute("/admin/")({
@@ -20,7 +21,10 @@ export const Route = createFileRoute("/admin/")({
 function AdminDashboardPage() {
   return (
     <Container size="xl" py={0}>
-      <PageHeader title="Dashboard" breadcrumbs={[{ label: "Home" }, { label: "Dashboard" }]} />
+      <PageHeader
+        title={<Trans>Dashboard</Trans>}
+        breadcrumbs={[{ label: <Trans>Home</Trans> }, { label: <Trans>Dashboard</Trans> }]}
+      />
 
       <SimpleGrid cols={{ base: 1, sm: 2, lg: 3 }} spacing="md">
         <Card withBorder radius="md" p="lg">
@@ -35,7 +39,7 @@ function AdminDashboardPage() {
             </Text>
           </Skeleton>
           <Text size="sm" c="dimmed">
-            Total Users
+            <Trans>Total Users</Trans>
           </Text>
           <Button
             component={Link}
@@ -46,7 +50,7 @@ function AdminDashboardPage() {
             px={0}
             rightSection={<IconArrowRight size={14} />}
           >
-            Manage users
+            <Trans>Manage users</Trans>
           </Button>
         </Card>
 
@@ -60,10 +64,10 @@ function AdminDashboardPage() {
             —
           </Text>
           <Text size="sm" c="dimmed">
-            Organizations
+            <Trans>Organizations</Trans>
           </Text>
           <Text size="xs" c="dimmed" mt="md">
-            Coming soon
+            <Trans>Coming soon</Trans>
           </Text>
         </Card>
 
@@ -77,10 +81,10 @@ function AdminDashboardPage() {
             —
           </Text>
           <Text size="sm" c="dimmed">
-            Active Subscriptions
+            <Trans>Active Subscriptions</Trans>
           </Text>
           <Text size="xs" c="dimmed" mt="md">
-            Coming soon
+            <Trans>Coming soon</Trans>
           </Text>
         </Card>
       </SimpleGrid>

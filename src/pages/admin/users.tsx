@@ -27,6 +27,7 @@ import {
   IconDownload,
 } from "@tabler/icons-react";
 import dayjs from "dayjs";
+import { Trans, useLingui } from "@lingui/react/macro";
 import { iamApi } from "@/shared/api";
 import type { IamUser, IamUserSortField, SortDirection } from "@/shared/api";
 import { UserStatusBadge, PageHeader } from "@/shared/ui";
@@ -62,6 +63,7 @@ const SORT_FIELD_MAP: Record<string, IamUserSortField> = {
 };
 
 function AdminUsersPage() {
+  const { t } = useLingui();
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
   const [debouncedSearch] = useDebouncedValue(search, 300);
@@ -111,11 +113,15 @@ function AdminUsersPage() {
   return (
     <Container size="xl" py={0}>
       <PageHeader
-        title="Users"
-        breadcrumbs={[{ label: "Home", to: "/admin/" }, { label: "Platform" }, { label: "Users" }]}
+        title={<Trans>Users</Trans>}
+        breadcrumbs={[
+          { label: <Trans>Home</Trans>, to: "/admin/" },
+          { label: <Trans>Platform</Trans> },
+          { label: <Trans>Users</Trans> },
+        ]}
         toolbar={
           <Button variant="light" size="sm" leftSection={<IconDownload size={15} />} disabled>
-            Export
+            <Trans>Export</Trans>
           </Button>
         }
       />
@@ -124,13 +130,13 @@ function AdminUsersPage() {
         {isError && (
           <Alert
             icon={<IconAlertCircle size={16} />}
-            title="Failed to load users"
+            title={<Trans>Failed to load users</Trans>}
             color="red"
             variant="light"
           >
-            Could not fetch users from the API.{" "}
+            <Trans>Could not fetch users from the API.</Trans>{" "}
             <Button variant="subtle" color="red" size="xs" onClick={() => void refetch()}>
-              Retry
+              <Trans>Retry</Trans>
             </Button>
           </Alert>
         )}
@@ -146,7 +152,7 @@ function AdminUsersPage() {
           >
             <Group gap="xs">
               <Text fw={600} size="sm">
-                Users
+                <Trans>Users</Trans>
               </Text>
               {!isLoading && (
                 <Badge variant="light" color="gray" size="sm" radius="sm">
@@ -157,7 +163,7 @@ function AdminUsersPage() {
 
             <Group gap="xs">
               <TextInput
-                placeholder="Search users…"
+                placeholder={t`Search users…`}
                 leftSection={<IconSearch size={14} />}
                 value={search}
                 onChange={(e) => {
@@ -167,7 +173,7 @@ function AdminUsersPage() {
                 size="xs"
                 style={{ width: 220 }}
               />
-              <Tooltip label="Refresh" withArrow>
+              <Tooltip label={t`Refresh`} withArrow>
                 <ActionIcon
                   variant="subtle"
                   color="gray"
@@ -215,7 +221,7 @@ function AdminUsersPage() {
               onPageChange={setPage}
               fetching={isFetching && !isLoading}
               minHeight={300}
-              noRecordsText="No users found"
+              noRecordsText={t`No users found`}
               // ── Sorting ──────────────────────────────────────────────────
               sortStatus={sortStatus}
               onSortStatusChange={handleSortChange}
@@ -232,7 +238,7 @@ function AdminUsersPage() {
               columns={[
                 {
                   accessor: "firstName",
-                  title: "Member",
+                  title: t`Member`,
                   sortable: true,
                   render: (user) => (
                     <Group gap="sm" wrap="nowrap">
@@ -257,7 +263,7 @@ function AdminUsersPage() {
                 },
                 {
                   accessor: "email",
-                  title: "Email",
+                  title: t`Email`,
                   sortable: true,
                   // Hidden visually — only here to enable email sort.
                   // The email is already shown in the Member column above.
@@ -265,21 +271,21 @@ function AdminUsersPage() {
                 },
                 {
                   accessor: "status",
-                  title: "Status",
+                  title: t`Status`,
                   render: (user) => <UserStatusBadge status={user.status} />,
                 },
                 {
                   accessor: "emailVerified",
-                  title: "Email",
+                  title: t`Email`,
                   render: (user) => (
                     <Badge variant="dot" color={user.emailVerified ? "green" : "orange"} size="sm">
-                      {user.emailVerified ? "Verified" : "Unverified"}
+                      {user.emailVerified ? t`Verified` : t`Unverified`}
                     </Badge>
                   ),
                 },
                 {
                   accessor: "updatedAt",
-                  title: "Last updated",
+                  title: t`Last updated`,
                   sortable: true,
                   render: (user) => (
                     <Text size="sm" c="dimmed">
@@ -289,7 +295,7 @@ function AdminUsersPage() {
                 },
                 {
                   accessor: "createdAt",
-                  title: "Joined",
+                  title: t`Joined`,
                   sortable: true,
                   render: (user) => (
                     <Text size="sm" c="dimmed">
@@ -302,7 +308,7 @@ function AdminUsersPage() {
                   title: "",
                   textAlign: "right",
                   render: (user) => (
-                    <Tooltip label="Edit user" withArrow>
+                    <Tooltip label={t`Edit user`} withArrow>
                       <ActionIcon
                         variant="subtle"
                         color="blue"
@@ -324,7 +330,9 @@ function AdminUsersPage() {
 
         {!isLoading && totalElements > 0 && (
           <Text size="xs" c="dimmed">
-            Showing {rangeStart}–{rangeEnd} of {totalElements} users
+            <Trans>
+              Showing {rangeStart}–{rangeEnd} of {totalElements} users
+            </Trans>
           </Text>
         )}
       </Stack>

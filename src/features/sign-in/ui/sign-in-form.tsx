@@ -1,6 +1,7 @@
 import { Alert, Button, Stack, TextInput } from "@mantine/core";
 import { IconAlertCircle } from "@tabler/icons-react";
 import { Controller } from "react-hook-form";
+import { Trans, useLingui } from "@lingui/react/macro";
 import { useSignIn } from "../model/use-sign-in";
 import type { SignInFormValues } from "../model/use-sign-in";
 
@@ -18,6 +19,7 @@ interface SignInFormProps {
  * messages are rendered in an aria-live="polite" region (Requirement 8.5).
  */
 export function SignInForm({ redirectTo }: SignInFormProps) {
+  const { t } = useLingui();
   const { form, isLoading, errorMessage, onSubmit } = useSignIn(redirectTo);
 
   const {
@@ -48,9 +50,9 @@ export function SignInForm({ redirectTo }: SignInFormProps) {
             <TextInput
               {...field}
               id="sign-in-email"
-              label="Email"
+              label={t`Email`}
               type="email"
-              placeholder="you@example.com"
+              placeholder={t`you@example.com`}
               autoComplete="email"
               inputMode="email"
               error={errors.email?.message}
@@ -68,9 +70,9 @@ export function SignInForm({ redirectTo }: SignInFormProps) {
             <TextInput
               {...field}
               id="sign-in-password"
-              label="Password"
+              label={t`Password`}
               type="password"
-              placeholder="Your password"
+              placeholder={t`Your password`}
               autoComplete="current-password"
               error={errors.password?.message}
               disabled={isLoading}
@@ -81,7 +83,7 @@ export function SignInForm({ redirectTo }: SignInFormProps) {
 
         {/* Submit button — disabled and shows loading indicator while in flight (Requirement 1.11) */}
         <Button type="submit" fullWidth loading={isLoading} disabled={isLoading}>
-          Sign in
+          <Trans>Sign in</Trans>
         </Button>
       </Stack>
     </form>

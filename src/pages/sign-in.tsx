@@ -2,6 +2,7 @@ import { createFileRoute, redirect } from "@tanstack/react-router";
 import { Alert, Box, Center, Container, Stack, Text, Title } from "@mantine/core";
 import { IconAlertCircle, IconInfoCircle } from "@tabler/icons-react";
 import { z } from "zod";
+import { Trans } from "@lingui/react/macro";
 import { SignInForm } from "@/features/sign-in";
 import { decodeJwt, hasPlatformAdmin } from "@/shared/lib/jwt";
 import { getAccessToken } from "@/processes/session";
@@ -50,7 +51,7 @@ function SignInPage() {
               IQKV Admin
             </Title>
             <Text c="dimmed" size="sm" mt={4}>
-              Platform administration
+              <Trans>Platform administration</Trans>
             </Text>
           </Box>
 
@@ -63,7 +64,7 @@ function SignInPage() {
               aria-live="polite"
               aria-atomic="true"
             >
-              Your session expired due to inactivity.
+              <Trans>Your session expired due to inactivity.</Trans>
             </Alert>
           )}
 
@@ -75,7 +76,7 @@ function SignInPage() {
               aria-live="polite"
               aria-atomic="true"
             >
-              You do not have permission to access the admin area.
+              <Trans>You do not have permission to access the admin area.</Trans>
             </Alert>
           )}
 

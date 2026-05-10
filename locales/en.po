@@ -12,3 +12,366 @@ msgstr ""
 "Last-Translator: \n"
 "Language-Team: \n"
 "Plural-Forms: \n"
+
+#: src/pages/loading-demo.tsx
+msgid "1. Initial Page Load"
+msgstr "1. Initial Page Load"
+
+#: src/pages/loading-demo.tsx
+msgid "2. Page Transitions"
+msgstr "2. Page Transitions"
+
+#: src/pages/unauthorized.tsx
+msgid "Access Denied"
+msgstr "Access Denied"
+
+#: src/pages/loading-demo.tsx
+msgid "Accessible with proper keyboard handling"
+msgstr "Accessible with proper keyboard handling"
+
+#: src/features/edit-user/model/types.ts
+#: src/shared/ui/user-status-badge/user-status-badge.tsx
+msgid "Active"
+msgstr "Active"
+
+#: src/pages/admin/index.tsx
+msgid "Active Subscriptions"
+msgstr "Active Subscriptions"
+
+#: src/shared/ui/admin-layout/admin-nav.tsx
+msgid "Audit Log"
+msgstr "Audit Log"
+
+#: src/pages/loading-demo.tsx
+msgid "Automatic router integration via <0>router.subscribe()</0>"
+msgstr "Automatic router integration via <0>router.subscribe()</0>"
+
+#: src/features/edit-user/ui/edit-user-modal.tsx
+msgid "Cancel"
+msgstr "Cancel"
+
+#: src/pages/admin/index.tsx
+msgid "Coming soon"
+msgstr "Coming soon"
+
+#: src/pages/loading-demo.tsx
+msgid "Complete"
+msgstr "Complete"
+
+#: src/pages/admin/users.tsx
+msgid "Could not fetch users from the API."
+msgstr "Could not fetch users from the API."
+
+#: src/pages/admin/index.tsx
+#: src/shared/ui/admin-layout/admin-nav.tsx
+msgid "Dashboard"
+msgstr "Dashboard"
+
+#: src/shared/ui/user-status-badge/user-status-badge.tsx
+msgid "Deleted"
+msgstr "Deleted"
+
+#: src/pages/loading-demo.tsx
+msgid "Demo LoadingOverlay (2s)"
+msgstr "Demo LoadingOverlay (2s)"
+
+#: src/pages/loading-demo.tsx
+msgid "Demo Progress Bar"
+msgstr "Demo Progress Bar"
+
+#: src/pages/admin/users.tsx
+msgid "Edit user"
+msgstr "Edit user"
+
+#: src/features/edit-user/ui/edit-user-modal.tsx
+msgid "Edit User"
+msgstr "Edit User"
+
+#: src/features/edit-user/ui/edit-user-modal.tsx
+#: src/features/sign-in/ui/sign-in-form.tsx
+#: src/pages/admin/users.tsx
+msgid "Email"
+msgstr "Email"
+
+#: src/features/sign-in/model/use-sign-in.ts
+msgid "Email is required"
+msgstr "Email is required"
+
+#: src/features/edit-user/ui/edit-user-modal.tsx
+msgid "Email verified:"
+msgstr "Email verified:"
+
+#: src/features/sign-in/model/use-sign-in.ts
+msgid "Enter a valid email address"
+msgstr "Enter a valid email address"
+
+#: src/shared/ui/error-boundary.tsx
+msgid "Error Details (Development)"
+msgstr "Error Details (Development)"
+
+#: src/pages/admin/users.tsx
+msgid "Export"
+msgstr "Export"
+
+#: src/pages/admin/users.tsx
+msgid "Failed to load users"
+msgstr "Failed to load users"
+
+#: src/features/edit-user/ui/edit-user-modal.tsx
+msgid "First name"
+msgstr "First name"
+
+#: src/features/edit-user/ui/edit-user-modal.tsx
+msgid "First name is required"
+msgstr "First name is required"
+
+#: src/pages/loading-demo.tsx
+msgid "Full-screen centered loader shown on first app load (while locale initializes)."
+msgstr "Full-screen centered loader shown on first app load (while locale initializes)."
+
+#: src/pages/404.tsx
+#: src/pages/500.tsx
+msgid "Go home"
+msgstr "Go home"
+
+#: src/pages/unauthorized.tsx
+msgid "Go to Home"
+msgstr "Go to Home"
+
+#: src/pages/admin/index.tsx
+#: src/pages/admin/users.tsx
+msgid "Home"
+msgstr "Home"
+
+#. placeholder {0}: user.id
+#: src/features/edit-user/ui/edit-user-modal.tsx
+msgid "ID: {0}"
+msgstr "ID: {0}"
+
+#: src/pages/loading-demo.tsx
+msgid "Implementation Details"
+msgstr "Implementation Details"
+
+#: src/pages/500.tsx
+msgid "Internal server error."
+msgstr "Internal server error."
+
+#: src/features/sign-in/model/use-sign-in.ts
+msgid "Invalid email or password"
+msgstr "Invalid email or password"
+
+#: src/pages/admin/users.tsx
+msgid "Joined"
+msgstr "Joined"
+
+#: src/features/edit-user/ui/edit-user-modal.tsx
+msgid "Last name"
+msgstr "Last name"
+
+#: src/features/edit-user/ui/edit-user-modal.tsx
+msgid "Last name is required"
+msgstr "Last name is required"
+
+#: src/pages/admin/users.tsx
+msgid "Last updated"
+msgstr "Last updated"
+
+#: src/pages/loading-demo.tsx
+msgid "Loading States Demo"
+msgstr "Loading States Demo"
+
+#: src/shared/ui/loading-overlay/loading-overlay.tsx
+msgid "Loading..."
+msgstr "Loading..."
+
+#: src/features/edit-user/model/types.ts
+#: src/shared/ui/user-status-badge/user-status-badge.tsx
+msgid "Locked"
+msgstr "Locked"
+
+#: src/pages/admin/index.tsx
+msgid "Manage users"
+msgstr "Manage users"
+
+#: src/pages/admin/users.tsx
+msgid "Member"
+msgstr "Member"
+
+#: src/shared/ui/admin-layout/admin-nav.tsx
+msgid "No results"
+msgstr "No results"
+
+#: src/pages/admin/users.tsx
+msgid "No users found"
+msgstr "No users found"
+
+#: src/shared/ui/admin-layout/admin-header.tsx
+msgid "Notifications (coming soon)"
+msgstr "Notifications (coming soon)"
+
+#: src/pages/admin/index.tsx
+#: src/shared/ui/admin-layout/admin-nav.tsx
+msgid "Organizations"
+msgstr "Organizations"
+
+#: src/pages/404.tsx
+msgid "Page not found."
+msgstr "Page not found."
+
+#: src/features/sign-in/ui/sign-in-form.tsx
+msgid "Password"
+msgstr "Password"
+
+#: src/features/sign-in/model/use-sign-in.ts
+msgid "Password is required"
+msgstr "Password is required"
+
+#: src/pages/admin/users.tsx
+#: src/shared/ui/admin-layout/admin-nav.tsx
+msgid "Platform"
+msgstr "Platform"
+
+#: src/pages/sign-in.tsx
+msgid "Platform administration"
+msgstr "Platform administration"
+
+#: src/features/edit-user/ui/edit-user-modal.tsx
+msgid "read-only"
+msgstr "read-only"
+
+#: src/pages/admin/users.tsx
+msgid "Refresh"
+msgstr "Refresh"
+
+#: src/pages/admin/users.tsx
+msgid "Retry"
+msgstr "Retry"
+
+#: src/features/edit-user/ui/edit-user-modal.tsx
+msgid "Save changes"
+msgstr "Save changes"
+
+#: src/pages/admin/users.tsx
+msgid "Search users…"
+msgstr "Search users…"
+
+#: src/shared/ui/admin-layout/admin-nav.tsx
+msgid "Search…"
+msgstr "Search…"
+
+#: src/shared/ui/admin-layout/admin-nav.tsx
+msgid "Settings"
+msgstr "Settings"
+
+#: src/pages/admin/users.tsx
+msgid "Showing {rangeStart}–{rangeEnd} of {totalElements} users"
+msgstr "Showing {rangeStart}–{rangeEnd} of {totalElements} users"
+
+#: src/features/sign-in/ui/sign-in-form.tsx
+msgid "Sign in"
+msgstr "Sign in"
+
+#: src/features/sign-out/ui/sign-out-button.tsx
+msgid "Sign out"
+msgstr "Sign out"
+
+#: src/features/sign-in/model/use-sign-in.ts
+msgid "Sign-in failed. Please try again."
+msgstr "Sign-in failed. Please try again."
+
+#: src/pages/loading-demo.tsx
+msgid "Slim top progress bar for navigation between pages (automatic with router)."
+msgstr "Slim top progress bar for navigation between pages (automatic with router)."
+
+#: src/shared/ui/error-boundary.tsx
+msgid "Something went wrong"
+msgstr "Something went wrong"
+
+#: src/pages/loading-demo.tsx
+msgid "Start"
+msgstr "Start"
+
+#: src/features/edit-user/ui/edit-user-modal.tsx
+#: src/pages/admin/users.tsx
+msgid "Status"
+msgstr "Status"
+
+#: src/shared/ui/admin-layout/admin-nav.tsx
+msgid "Subscriptions"
+msgstr "Subscriptions"
+
+#: src/features/edit-user/model/types.ts
+#: src/shared/ui/user-status-badge/user-status-badge.tsx
+msgid "Suspended"
+msgstr "Suspended"
+
+#: src/shared/ui/admin-layout/admin-nav.tsx
+msgid "System"
+msgstr "System"
+
+#: src/pages/loading-demo.tsx
+msgid "Theme-aware (respects dark mode and color scheme)"
+msgstr "Theme-aware (respects dark mode and color scheme)"
+
+#: src/pages/loading-demo.tsx
+msgid "This template uses Mantine's official loading components for optimal UX."
+msgstr "This template uses Mantine's official loading components for optimal UX."
+
+#: src/features/sign-in/model/use-sign-in.ts
+msgid "Too many sign-in attempts. Please try again later."
+msgstr "Too many sign-in attempts. Please try again later."
+
+#: src/pages/admin/index.tsx
+msgid "Total Users"
+msgstr "Total Users"
+
+#: src/shared/ui/error-boundary.tsx
+msgid "Try Again"
+msgstr "Try Again"
+
+#: src/features/edit-user/ui/edit-user-modal.tsx
+#: src/pages/admin/users.tsx
+msgid "Unverified"
+msgstr "Unverified"
+
+#: src/pages/admin/users.tsx
+#: src/shared/ui/admin-layout/admin-nav.tsx
+msgid "Users"
+msgstr "Users"
+
+#: src/pages/loading-demo.tsx
+msgid "Uses <0>@mantine/nprogress</0> for top loading bar"
+msgstr "Uses <0>@mantine/nprogress</0> for top loading bar"
+
+#: src/pages/loading-demo.tsx
+msgid "Uses <0>LoadingOverlay</0> component for full-screen loading"
+msgstr "Uses <0>LoadingOverlay</0> component for full-screen loading"
+
+#: src/features/edit-user/ui/edit-user-modal.tsx
+#: src/pages/admin/users.tsx
+msgid "Verified"
+msgstr "Verified"
+
+#: src/pages/sign-in.tsx
+msgid "You do not have permission to access the admin area."
+msgstr "You do not have permission to access the admin area."
+
+#: src/pages/unauthorized.tsx
+msgid "You do not have the required <0>PLATFORM_ADMIN</0> authority to access this area. Please sign in with an account that has the appropriate permissions."
+msgstr "You do not have the required <0>PLATFORM_ADMIN</0> authority to access this area. Please sign in with an account that has the appropriate permissions."
+
+#: src/features/sign-in/ui/sign-in-form.tsx
+msgid "you@example.com"
+msgstr "you@example.com"
+
+#: src/features/sign-in/model/use-sign-in.ts
+msgid "Your account does not have admin access"
+msgstr "Your account does not have admin access"
+
+#: src/features/sign-in/ui/sign-in-form.tsx
+msgid "Your password"
+msgstr "Your password"
+
+#: src/pages/sign-in.tsx
+msgid "Your session expired due to inactivity."
+msgstr "Your session expired due to inactivity."

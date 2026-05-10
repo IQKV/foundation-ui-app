@@ -12,8 +12,9 @@ import {
   Badge,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
+import { Trans, useLingui } from "@lingui/react/macro";
 import type { IamUser } from "@/shared/api";
-import { useEditUser, STATUS_OPTIONS } from "../model";
+import { useEditUser, STATUS_OPTIONS, getStatusOptions } from "../model";
 import type { EditUserFormValues } from "../model";
 
 interface EditUserModalProps {
@@ -23,6 +24,8 @@ interface EditUserModalProps {
 }
 
 export function EditUserModal({ user, opened, onClose }: EditUserModalProps) {
+  const { t } = useLingui();
+
   const form = useForm<EditUserFormValues>({
     initialValues: {
       firstName: "",
@@ -30,8 +33,8 @@ export function EditUserModal({ user, opened, onClose }: EditUserModalProps) {
       status: "ACTIVE",
     },
     validate: {
-      firstName: (v) => (v.trim().length < 1 ? "First name is required" : null),
-      lastName: (v) => (v.trim().length < 1 ? "Last name is required" : null),
+      firstName: (v) => (v.trim().length < 1 ? t`First name is required` : null),
+      lastName: (v) => (v.trim().length < 1 ? t`Last name is required` : null),
     },
   });
 
@@ -69,11 +72,11 @@ export function EditUserModal({ user, opened, onClose }: EditUserModalProps) {
       title={
         <Stack gap={2}>
           <Text fw={600} size="md">
-            Edit User
+            <Trans>Edit User</Trans>
           </Text>
           {user && (
             <Text size="xs" c="dimmed">
-              ID: {user.id}
+              <Trans>ID: {user.id}</Trans>
             </Text>
           )}
         </Stack>
@@ -94,10 +97,10 @@ export function EditUserModal({ user, opened, onClose }: EditUserModalProps) {
             >
               <Group gap="xs">
                 <Text size="sm" c="dimmed">
-                  Email verified:
+                  <Trans>Email verified:</Trans>
                 </Text>
                 <Badge color={user.emailVerified ? "green" : "orange"} variant="light" size="xs">
-                  {user.emailVerified ? "Verified" : "Unverified"}
+                  {user.emailVerified ? <Trans>Verified</Trans> : <Trans>Unverified</Trans>}
                 </Badge>
               </Group>
             </Box>
@@ -105,19 +108,19 @@ export function EditUserModal({ user, opened, onClose }: EditUserModalProps) {
 
           <Group grow>
             <TextInput
-              label="First name"
-              placeholder="First name"
+              label={t`First name`}
+              placeholder={t`First name`}
               {...form.getInputProps("firstName")}
             />
             <TextInput
-              label="Last name"
-              placeholder="Last name"
+              label={t`Last name`}
+              placeholder={t`Last name`}
               {...form.getInputProps("lastName")}
             />
           </Group>
 
           <TextInput
-            label="Email"
+            label={t`Email`}
             value={user?.email ?? ""}
             readOnly
             styles={{
@@ -129,13 +132,13 @@ export function EditUserModal({ user, opened, onClose }: EditUserModalProps) {
             }}
             rightSection={
               <Text size="xs" c="dimmed" pr={4}>
-                read-only
+                <Trans>read-only</Trans>
               </Text>
             }
             rightSectionWidth={72}
           />
 
-          <Select label="Status" data={STATUS_OPTIONS} {...form.getInputProps("status")} />
+          <Select label={t`Status`} data={getStatusOptions()} {...form.getInputProps("status")} />
 
           <Divider />
 
@@ -146,10 +149,10 @@ export function EditUserModal({ user, opened, onClose }: EditUserModalProps) {
               onClick={handleClose}
               disabled={mutation.isPending}
             >
-              Cancel
+              <Trans>Cancel</Trans>
             </Button>
             <Button type="submit" loading={mutation.isPending}>
-              Save changes
+              <Trans>Save changes</Trans>
             </Button>
           </Group>
         </Stack>

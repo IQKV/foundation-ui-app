@@ -1,6 +1,8 @@
 import React, { Component, type ErrorInfo, type ReactNode } from "react";
 import { Container, Title, Text, Button, Stack, Alert, Code } from "@mantine/core";
 import { IconAlertTriangle, IconRefresh } from "@tabler/icons-react";
+import { t } from "@lingui/core/macro";
+import { Trans } from "@lingui/react/macro";
 
 interface ErrorBoundaryState {
   hasError: boolean;
@@ -50,20 +52,20 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
             <IconAlertTriangle size={64} color="var(--mantine-color-red-6)" />
             <Stack gap="sm" align="center">
               <Title order={2} ta="center">
-                Something went wrong
+                <Trans>Something went wrong</Trans>
               </Title>
               <Text size="lg" c="dimmed" ta="center">
                 {error.message}
               </Text>
             </Stack>
             <Button leftSection={<IconRefresh size="1rem" />} onClick={this.handleRetry}>
-              Try Again
+              <Trans>Try Again</Trans>
             </Button>
             {showErrorDetails && errorInfo && (
               <Alert variant="light" color="gray" style={{ width: "100%" }}>
                 <Stack gap="xs">
                   <Text size="sm" fw={500}>
-                    Error Details (Development)
+                    <Trans>Error Details (Development)</Trans>
                   </Text>
                   <Code block>{error.message}</Code>
                   <Code block style={{ fontSize: "0.75rem" }}>

@@ -5,6 +5,7 @@ import {
   Stack,
   Text,
 } from "@mantine/core";
+import { t } from "@lingui/core/macro";
 
 interface LoadingOverlayProps {
   visible: boolean;
@@ -12,11 +13,8 @@ interface LoadingOverlayProps {
   zIndex?: number;
 }
 
-export function LoadingOverlay({
-  visible,
-  message = "Loading...",
-  zIndex = 1000,
-}: LoadingOverlayProps) {
+export function LoadingOverlay({ visible, message, zIndex = 1000 }: LoadingOverlayProps) {
+  const resolvedMessage = message ?? t`Loading...`;
   if (!visible) {
     return null;
   }
@@ -31,9 +29,9 @@ export function LoadingOverlay({
           <Center>
             <Stack align="center" gap="md">
               <Loader size="lg" />
-              {message && (
+              {resolvedMessage && (
                 <Text size="sm" c="dimmed">
-                  {message}
+                  {resolvedMessage}
                 </Text>
               )}
             </Stack>

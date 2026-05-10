@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button, Center, Container, Stack, Text, Title } from "@mantine/core";
+import { Trans } from "@lingui/react/macro";
 import { SignOutButton } from "@/features/sign-out";
 
 // ─── Route ────────────────────────────────────────────────────────────────────
@@ -20,15 +21,19 @@ function UnauthorizedPage() {
       <Container size="sm">
         <Stack align="center" gap="md">
           {/* Requirement 4.2 — heading and explanatory message */}
-          <Title order={1}>Access Denied</Title>
+          <Title order={1}>
+            <Trans>Access Denied</Trans>
+          </Title>
           <Text c="dimmed" ta="center">
-            You do not have the required <strong>PLATFORM_ADMIN</strong> authority to access this
-            area. Please sign in with an account that has the appropriate permissions.
+            <Trans>
+              You do not have the required <strong>PLATFORM_ADMIN</strong> authority to access this
+              area. Please sign in with an account that has the appropriate permissions.
+            </Trans>
           </Text>
 
           {/* Requirement 4.4 — link back to application home */}
           <Button component={Link} to="/" variant="default">
-            Go to Home
+            <Trans>Go to Home</Trans>
           </Button>
 
           {/* Requirement 4.5 — sign-out action */}

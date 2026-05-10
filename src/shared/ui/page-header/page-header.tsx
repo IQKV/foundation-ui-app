@@ -1,14 +1,15 @@
 import { Group, Title, Breadcrumbs, Anchor, Text, Stack } from "@mantine/core";
 import { Link } from "@tanstack/react-router";
+import type { ReactNode } from "react";
 
 export interface BreadcrumbItem {
-  label: string;
+  label: ReactNode;
   /** If omitted the item renders as plain text (current page). */
   to?: string;
 }
 
 interface PageHeaderProps {
-  title: string;
+  title: ReactNode;
   breadcrumbs?: BreadcrumbItem[];
   /** Optional toolbar row rendered below the title/breadcrumb line. */
   toolbar?: React.ReactNode;
