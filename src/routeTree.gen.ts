@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from "./pages/__root"
+import { Route as SignInRouteImport } from "./pages/sign-in"
 import { Route as LoadingDemoRouteImport } from "./pages/loading-demo"
 import { Route as AdminRouteImport } from "./pages/admin"
 import { Route as R500RouteImport } from "./pages/500"
@@ -17,6 +18,11 @@ import { Route as IndexRouteImport } from "./pages/index"
 import { Route as AdminIndexRouteImport } from "./pages/admin/index"
 import { Route as AdminUsersRouteImport } from "./pages/admin/users"
 
+const SignInRoute = SignInRouteImport.update({
+  id: "/sign-in",
+  path: "/sign-in",
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LoadingDemoRoute = LoadingDemoRouteImport.update({
   id: "/loading-demo",
   path: "/loading-demo",
@@ -59,6 +65,7 @@ export interface FileRoutesByFullPath {
   "/500": typeof R500Route
   "/admin": typeof AdminRouteWithChildren
   "/loading-demo": typeof LoadingDemoRoute
+  "/sign-in": typeof SignInRoute
   "/admin/users": typeof AdminUsersRoute
   "/admin/": typeof AdminIndexRoute
 }
@@ -67,6 +74,7 @@ export interface FileRoutesByTo {
   "/404": typeof R404Route
   "/500": typeof R500Route
   "/loading-demo": typeof LoadingDemoRoute
+  "/sign-in": typeof SignInRoute
   "/admin/users": typeof AdminUsersRoute
   "/admin": typeof AdminIndexRoute
 }
@@ -77,6 +85,7 @@ export interface FileRoutesById {
   "/500": typeof R500Route
   "/admin": typeof AdminRouteWithChildren
   "/loading-demo": typeof LoadingDemoRoute
+  "/sign-in": typeof SignInRoute
   "/admin/users": typeof AdminUsersRoute
   "/admin/": typeof AdminIndexRoute
 }
@@ -88,10 +97,18 @@ export interface FileRouteTypes {
     | "/500"
     | "/admin"
     | "/loading-demo"
+    | "/sign-in"
     | "/admin/users"
     | "/admin/"
   fileRoutesByTo: FileRoutesByTo
-  to: "/" | "/404" | "/500" | "/loading-demo" | "/admin/users" | "/admin"
+  to:
+    | "/"
+    | "/404"
+    | "/500"
+    | "/loading-demo"
+    | "/sign-in"
+    | "/admin/users"
+    | "/admin"
   id:
     | "__root__"
     | "/"
@@ -99,6 +116,7 @@ export interface FileRouteTypes {
     | "/500"
     | "/admin"
     | "/loading-demo"
+    | "/sign-in"
     | "/admin/users"
     | "/admin/"
   fileRoutesById: FileRoutesById
@@ -109,10 +127,18 @@ export interface RootRouteChildren {
   R500Route: typeof R500Route
   AdminRoute: typeof AdminRouteWithChildren
   LoadingDemoRoute: typeof LoadingDemoRoute
+  SignInRoute: typeof SignInRoute
 }
 
 declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
+    "/sign-in": {
+      id: "/sign-in"
+      path: "/sign-in"
+      fullPath: "/sign-in"
+      preLoaderRoute: typeof SignInRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     "/loading-demo": {
       id: "/loading-demo"
       path: "/loading-demo"
@@ -183,6 +209,7 @@ const rootRouteChildren: RootRouteChildren = {
   R500Route: R500Route,
   AdminRoute: AdminRouteWithChildren,
   LoadingDemoRoute: LoadingDemoRoute,
+  SignInRoute: SignInRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
