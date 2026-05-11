@@ -1,6 +1,5 @@
-import { Group, Text, ActionIcon, Tooltip, Burger, Box, Divider } from "@mantine/core";
-import { IconBell, IconShieldHalf, IconChevronDown } from "@tabler/icons-react";
-import { Trans, useLingui } from "@lingui/react/macro";
+import { Group, Text, Burger, Box, Divider } from "@mantine/core";
+import { IconShieldHalf, IconChevronDown } from "@tabler/icons-react";
 import { SignOutButton } from "@/features/sign-out";
 
 interface AdminHeaderProps {
@@ -9,7 +8,6 @@ interface AdminHeaderProps {
 }
 
 export function AdminHeader({ opened, onToggle }: AdminHeaderProps) {
-  const { t } = useLingui();
   return (
     <Group h="100%" px={0} justify="space-between" gap={0}>
       {/* Brand block — same width as sidebar so content aligns */}
@@ -54,11 +52,6 @@ export function AdminHeader({ opened, onToggle }: AdminHeaderProps) {
 
       {/* Right side actions */}
       <Group gap="xs" px="md" ml="auto">
-        <Tooltip label={t`Notifications (coming soon)`} withArrow>
-          <ActionIcon variant="subtle" color="gray" size="lg" disabled>
-            <IconBell size={18} />
-          </ActionIcon>
-        </Tooltip>
         <SignOutButton />
       </Group>
     </Group>

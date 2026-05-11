@@ -1,11 +1,9 @@
-import { NavLink, Stack, Text, Box, Divider, TextInput } from "@mantine/core";
+import { NavLink, Stack, Text, Box, TextInput } from "@mantine/core";
 import {
   IconDashboard,
   IconUsers,
   IconBuilding,
   IconCreditCard,
-  IconSettings,
-  IconShieldCheck,
   IconSearch,
 } from "@tabler/icons-react";
 import { Link, useRouterState } from "@tanstack/react-router";
@@ -16,7 +14,6 @@ interface NavItem {
   label: string;
   icon: React.ReactNode;
   to: string;
-  disabled?: boolean;
 }
 
 export function AdminNav() {
@@ -40,19 +37,8 @@ export function AdminNav() {
     },
   ];
 
-  const systemItems: NavItem[] = [
-    {
-      label: t`Audit Log`,
-      icon: <IconShieldCheck size={16} />,
-      to: "/admin/audit",
-      disabled: true,
-    },
-    { label: t`Settings`, icon: <IconSettings size={16} />, to: "/admin/settings", disabled: true },
-  ];
-
-  const allItems = [...navItems, ...systemItems];
   const filtered = search.trim()
-    ? allItems.filter((item) => item.label.toLowerCase().includes(search.toLowerCase()))
+    ? navItems.filter((item) => item.label.toLowerCase().includes(search.toLowerCase()))
     : null;
 
   const renderItem = (item: NavItem) => {
@@ -60,28 +46,26 @@ export function AdminNav() {
       currentPath === item.to ||
       (item.to !== "/admin/" && item.to !== "/admin" && currentPath.startsWith(item.to));
 
-    const sharedProps = {
-      label: item.label,
-      leftSection: item.icon,
-      active: isActive,
-      disabled: item.disabled,
-      styles: {
-        root: {
-          borderRadius: "var(--mantine-radius-sm)",
-          marginInline: "var(--mantine-spacing-xs)",
-          fontSize: "var(--mantine-font-size-sm)",
-        },
-        label: {
-          fontSize: "var(--mantine-font-size-sm)",
-        },
-      },
-    };
-
-    if (item.disabled) {
-      return <NavLink key={item.to} {...sharedProps} component="button" />;
-    }
-
-    return <NavLink key={item.to} {...sharedProps} component={Link} to={item.to} />;
+    return (
+      <NavLink
+        key={item.to}
+        label={item.label}
+        leftSection={item.icon}
+        active={isActive}
+        component={Link}
+        to={item.to}
+        styles={{
+          root: {
+            borderRadius: "var(--mantine-radius-sm)",
+            marginInline: "var(--mantine-spacing-xs)",
+            fontSize: "var(--mantine-font-size-sm)",
+          },
+          label: {
+            fontSize: "var(--mantine-font-size-sm)",
+          },
+        }}
+      />
+    );
   };
 
   return (
@@ -102,7 +86,7 @@ export function AdminNav() {
         />
       </Box>
 
-      {/* Filtered results */}
+      {/* Nav items */}
       {filtered ? (
         filtered.length > 0 ? (
           filtered.map(renderItem)
@@ -120,16 +104,6 @@ export function AdminNav() {
           </Box>
 
           {navItems.map(renderItem)}
-
-          <Divider my="sm" mx="md" />
-
-          <Box px="md" pb={4}>
-            <Text size="xs" fw={600} c="dimmed" tt="uppercase" lts={1}>
-              <Trans>System</Trans>
-            </Text>
-          </Box>
-
-          {systemItems.map(renderItem)}
         </>
       )}
     </Stack>
