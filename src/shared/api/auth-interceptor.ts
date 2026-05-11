@@ -1,6 +1,6 @@
 import type { AxiosError, InternalAxiosRequestConfig } from "axios";
 import { httpClient } from "./http-client";
-import { getAccessToken, setAccessToken, clearSession } from "@/processes/session";
+import { getAccessToken, getRefreshToken, setTokens, clearSession } from "@/processes/session";
 
 /** Extend the Axios config type to carry a retry flag. */
 interface RetryableConfig extends InternalAxiosRequestConfig {
@@ -16,15 +16,23 @@ let refreshPromise: Promise<string> | null = null;
 const silentRefresh = (): Promise<string> => {
   if (refreshPromise) return refreshPromise;
 
+  const refreshToken = getRefreshToken();
+  if (!refreshToken) {
+    clearSession();
+    return Promise.reject(new Error("No refresh token available"));
+  }
+
   // Use the platform-admin-specific refresh endpoint — the regular /auth/refresh
   // requires an X-Tenant-ID header and a tenant-scoped token, neither of which
   // applies to platform admin sessions (tenant_id is null in the token).
   refreshPromise = httpClient
-    .post<{ accessToken: string }>("/v1/iam/auth/admin/refresh")
+    .post<{ accessToken: string; refreshToken: string }>("/v1/iam/auth/admin/refresh", {
+      refreshToken,
+    })
     .then((res) => {
-      const token = res.data.accessToken;
-      setAccessToken(token);
-      return token;
+      const { accessToken, refreshToken: newRefreshToken } = res.data;
+      setTokens(accessToken, newRefreshToken);
+      return accessToken;
     })
     .catch((err: unknown) => {
       clearSession();

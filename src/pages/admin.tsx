@@ -3,7 +3,7 @@ import { AdminLayout } from "@/shared/ui";
 import { httpClient } from "@/shared/api/http-client";
 import { decodeJwt, hasPlatformAdmin } from "@/shared/lib/jwt";
 import { authApi } from "@/shared/api/auth";
-import { clearSession, getAccessToken, setAccessToken } from "@/processes/session";
+import { clearSession, getAccessToken, getRefreshToken, setTokens } from "@/processes/session";
 import { useInactivityTimer } from "@/processes/inactivity-timer";
 
 // ─── Route ────────────────────────────────────────────────────────────────────
@@ -31,11 +31,18 @@ export const Route = createFileRoute("/admin")({
 
     if (!token) {
       // ── Path 1: no token — attempt silent refresh ──────────────────────────
+      const refreshToken = getRefreshToken();
+      if (!refreshToken) {
+        // No refresh token available — redirect to sign-in.
+        throw redirect({ to: "/sign-in", search: { redirect: location.href } });
+      }
+
       try {
-        const { data } = await httpClient.post<{ accessToken: string }>(
+        const { data } = await httpClient.post<{ accessToken: string; refreshToken: string }>(
           "/v1/iam/auth/admin/refresh",
+          { refreshToken },
         );
-        setAccessToken(data.accessToken);
+        setTokens(data.accessToken, data.refreshToken);
 
         const payload = decodeJwt(data.accessToken);
         if (!payload || !hasPlatformAdmin(payload)) {

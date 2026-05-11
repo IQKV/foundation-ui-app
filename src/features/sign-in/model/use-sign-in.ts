@@ -8,7 +8,7 @@ import type { UseFormReturn } from "react-hook-form";
 import { t } from "@lingui/core/macro";
 import { authApi } from "@/shared/api/auth";
 import type { SignInResponse } from "@/shared/api/auth";
-import { setAccessToken } from "@/processes/session";
+import { setTokens } from "@/processes/session";
 
 // ─── Schema factory ───────────────────────────────────────────────────────────
 // Schema is created inside the hook so that `t` is called at render time,
@@ -95,8 +95,8 @@ export function useSignIn(redirectTo?: string): UseSignInReturn {
       // MFA placeholder — no-op in this release (Requirement 1.15)
       await runMfaStep(response);
 
-      // Store the access token in memory only (Requirement 1.4, 7.1)
-      setAccessToken(response.accessToken);
+      // Store both tokens in memory only (Requirement 1.4, 7.1)
+      setTokens(response.accessToken, response.refreshToken);
 
       // Navigate to the redirect target or default admin route (Requirements 1.5, 1.6)
       void navigate({ to: redirectTo ?? "/admin" });
