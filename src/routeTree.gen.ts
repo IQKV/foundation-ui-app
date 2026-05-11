@@ -20,7 +20,9 @@ import { Route as AdminIndexRouteImport } from "./pages/admin/index"
 import { Route as AdminUsersRouteImport } from "./pages/admin/users"
 import { Route as AdminSubscriptionsRouteImport } from "./pages/admin/subscriptions"
 import { Route as AdminOrganizationsRouteImport } from "./pages/admin/organizations"
+import { Route as AdminUsersIndexRouteImport } from "./pages/admin/users.index"
 import { Route as AdminOrganizationsIndexRouteImport } from "./pages/admin/organizations.index"
+import { Route as AdminUsersUserIdRouteImport } from "./pages/admin/users.$userId"
 import { Route as AdminOrganizationsTenantKeyRouteImport } from "./pages/admin/organizations.$tenantKey"
 
 const UnauthorizedRoute = UnauthorizedRouteImport.update({
@@ -78,10 +80,20 @@ const AdminOrganizationsRoute = AdminOrganizationsRouteImport.update({
   path: "/organizations",
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminUsersIndexRoute = AdminUsersIndexRouteImport.update({
+  id: "/",
+  path: "/",
+  getParentRoute: () => AdminUsersRoute,
+} as any)
 const AdminOrganizationsIndexRoute = AdminOrganizationsIndexRouteImport.update({
   id: "/",
   path: "/",
   getParentRoute: () => AdminOrganizationsRoute,
+} as any)
+const AdminUsersUserIdRoute = AdminUsersUserIdRouteImport.update({
+  id: "/$userId",
+  path: "/$userId",
+  getParentRoute: () => AdminUsersRoute,
 } as any)
 const AdminOrganizationsTenantKeyRoute =
   AdminOrganizationsTenantKeyRouteImport.update({
@@ -100,10 +112,12 @@ export interface FileRoutesByFullPath {
   "/unauthorized": typeof UnauthorizedRoute
   "/admin/organizations": typeof AdminOrganizationsRouteWithChildren
   "/admin/subscriptions": typeof AdminSubscriptionsRoute
-  "/admin/users": typeof AdminUsersRoute
+  "/admin/users": typeof AdminUsersRouteWithChildren
   "/admin/": typeof AdminIndexRoute
   "/admin/organizations/$tenantKey": typeof AdminOrganizationsTenantKeyRoute
+  "/admin/users/$userId": typeof AdminUsersUserIdRoute
   "/admin/organizations/": typeof AdminOrganizationsIndexRoute
+  "/admin/users/": typeof AdminUsersIndexRoute
 }
 export interface FileRoutesByTo {
   "/": typeof IndexRoute
@@ -113,10 +127,11 @@ export interface FileRoutesByTo {
   "/sign-in": typeof SignInRoute
   "/unauthorized": typeof UnauthorizedRoute
   "/admin/subscriptions": typeof AdminSubscriptionsRoute
-  "/admin/users": typeof AdminUsersRoute
   "/admin": typeof AdminIndexRoute
   "/admin/organizations/$tenantKey": typeof AdminOrganizationsTenantKeyRoute
+  "/admin/users/$userId": typeof AdminUsersUserIdRoute
   "/admin/organizations": typeof AdminOrganizationsIndexRoute
+  "/admin/users": typeof AdminUsersIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -129,10 +144,12 @@ export interface FileRoutesById {
   "/unauthorized": typeof UnauthorizedRoute
   "/admin/organizations": typeof AdminOrganizationsRouteWithChildren
   "/admin/subscriptions": typeof AdminSubscriptionsRoute
-  "/admin/users": typeof AdminUsersRoute
+  "/admin/users": typeof AdminUsersRouteWithChildren
   "/admin/": typeof AdminIndexRoute
   "/admin/organizations/$tenantKey": typeof AdminOrganizationsTenantKeyRoute
+  "/admin/users/$userId": typeof AdminUsersUserIdRoute
   "/admin/organizations/": typeof AdminOrganizationsIndexRoute
+  "/admin/users/": typeof AdminUsersIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -149,7 +166,9 @@ export interface FileRouteTypes {
     | "/admin/users"
     | "/admin/"
     | "/admin/organizations/$tenantKey"
+    | "/admin/users/$userId"
     | "/admin/organizations/"
+    | "/admin/users/"
   fileRoutesByTo: FileRoutesByTo
   to:
     | "/"
@@ -159,10 +178,11 @@ export interface FileRouteTypes {
     | "/sign-in"
     | "/unauthorized"
     | "/admin/subscriptions"
-    | "/admin/users"
     | "/admin"
     | "/admin/organizations/$tenantKey"
+    | "/admin/users/$userId"
     | "/admin/organizations"
+    | "/admin/users"
   id:
     | "__root__"
     | "/"
@@ -177,7 +197,9 @@ export interface FileRouteTypes {
     | "/admin/users"
     | "/admin/"
     | "/admin/organizations/$tenantKey"
+    | "/admin/users/$userId"
     | "/admin/organizations/"
+    | "/admin/users/"
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -269,12 +291,26 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof AdminOrganizationsRouteImport
       parentRoute: typeof AdminRoute
     }
+    "/admin/users/": {
+      id: "/admin/users/"
+      path: "/"
+      fullPath: "/admin/users/"
+      preLoaderRoute: typeof AdminUsersIndexRouteImport
+      parentRoute: typeof AdminUsersRoute
+    }
     "/admin/organizations/": {
       id: "/admin/organizations/"
       path: "/"
       fullPath: "/admin/organizations/"
       preLoaderRoute: typeof AdminOrganizationsIndexRouteImport
       parentRoute: typeof AdminOrganizationsRoute
+    }
+    "/admin/users/$userId": {
+      id: "/admin/users/$userId"
+      path: "/$userId"
+      fullPath: "/admin/users/$userId"
+      preLoaderRoute: typeof AdminUsersUserIdRouteImport
+      parentRoute: typeof AdminUsersRoute
     }
     "/admin/organizations/$tenantKey": {
       id: "/admin/organizations/$tenantKey"
@@ -299,17 +335,31 @@ const AdminOrganizationsRouteChildren: AdminOrganizationsRouteChildren = {
 const AdminOrganizationsRouteWithChildren =
   AdminOrganizationsRoute._addFileChildren(AdminOrganizationsRouteChildren)
 
+interface AdminUsersRouteChildren {
+  AdminUsersUserIdRoute: typeof AdminUsersUserIdRoute
+  AdminUsersIndexRoute: typeof AdminUsersIndexRoute
+}
+
+const AdminUsersRouteChildren: AdminUsersRouteChildren = {
+  AdminUsersUserIdRoute: AdminUsersUserIdRoute,
+  AdminUsersIndexRoute: AdminUsersIndexRoute,
+}
+
+const AdminUsersRouteWithChildren = AdminUsersRoute._addFileChildren(
+  AdminUsersRouteChildren,
+)
+
 interface AdminRouteChildren {
   AdminOrganizationsRoute: typeof AdminOrganizationsRouteWithChildren
   AdminSubscriptionsRoute: typeof AdminSubscriptionsRoute
-  AdminUsersRoute: typeof AdminUsersRoute
+  AdminUsersRoute: typeof AdminUsersRouteWithChildren
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
   AdminOrganizationsRoute: AdminOrganizationsRouteWithChildren,
   AdminSubscriptionsRoute: AdminSubscriptionsRoute,
-  AdminUsersRoute: AdminUsersRoute,
+  AdminUsersRoute: AdminUsersRouteWithChildren,
   AdminIndexRoute: AdminIndexRoute,
 }
 
