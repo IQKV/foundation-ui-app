@@ -11,7 +11,7 @@ import {
   Skeleton,
 } from "@mantine/core";
 import { IconUsers, IconBuilding, IconCreditCard, IconArrowRight } from "@tabler/icons-react";
-import { Trans } from "@lingui/react/macro";
+import { Trans, useLingui } from "@lingui/react/macro";
 import { Helmet } from "@dr.pogodin/react-helmet";
 import { PageHeader } from "@/shared/ui";
 
@@ -20,10 +20,11 @@ export const Route = createFileRoute("/admin/")({
 });
 
 function AdminDashboardPage() {
+  const { t } = useLingui();
   return (
     <Container size="xl" py={0}>
       <Helmet>
-        <title>Dashboard | IQKV Admin</title>
+        <title>{t`Dashboard | IQKV Admin`}</title>
       </Helmet>
       <PageHeader
         title={<Trans>Dashboard</Trans>}

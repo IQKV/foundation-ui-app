@@ -2,7 +2,7 @@ import { createFileRoute, redirect } from "@tanstack/react-router";
 import { Alert, Box, Center, Container, Stack, Text, Title } from "@mantine/core";
 import { IconAlertCircle, IconInfoCircle } from "@tabler/icons-react";
 import { z } from "zod";
-import { Trans } from "@lingui/react/macro";
+import { Trans, useLingui } from "@lingui/react/macro";
 import { Helmet } from "@dr.pogodin/react-helmet";
 import { SignInForm } from "@/features/sign-in";
 import { decodeJwt, hasPlatformAdmin } from "@/shared/lib/jwt";
@@ -40,12 +40,13 @@ export const Route = createFileRoute("/sign-in")({
 // ─── Page component ───────────────────────────────────────────────────────────
 
 function SignInPage() {
+  const { t } = useLingui();
   const { redirect: redirectTo, reason } = Route.useSearch();
 
   return (
     <Center mih="100vh" bg="gray.0">
       <Helmet>
-        <title>Sign In | IQKV Admin</title>
+        <title>{t`Sign In | IQKV Admin`}</title>
       </Helmet>
       <Container size={420} w="100%">
         <Stack gap="xl">

@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button, Center, Container, Stack, Text, Title } from "@mantine/core";
-import { Trans } from "@lingui/react/macro";
+import { Trans, useLingui } from "@lingui/react/macro";
 import { Helmet } from "@dr.pogodin/react-helmet";
 import { SignOutButton } from "@/features/sign-out";
 
@@ -17,10 +17,11 @@ export const Route = createFileRoute("/unauthorized")({
 // ─── Page component ───────────────────────────────────────────────────────────
 
 function UnauthorizedPage() {
+  const { t } = useLingui();
   return (
     <Center mih="100vh" bg="gray.0">
       <Helmet>
-        <title>Access Denied | IQKV Admin</title>
+        <title>{t`Access Denied | IQKV Admin`}</title>
       </Helmet>
       <Container size="sm">
         <Stack align="center" gap="md">

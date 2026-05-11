@@ -114,7 +114,7 @@ function AdminUsersPage() {
   return (
     <Container size="xl" py={0}>
       <Helmet>
-        <title>Users | IQKV Admin</title>
+        <title>{t`Users | IQKV Admin`}</title>
       </Helmet>
       <PageHeader
         title={<Trans>Users</Trans>}

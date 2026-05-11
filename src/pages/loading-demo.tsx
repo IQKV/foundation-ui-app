@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Container, Title, Text, Stack, Button, Group, Code } from "@mantine/core";
 import { nprogress } from "@mantine/nprogress";
 import { useState } from "react";
-import { Trans } from "@lingui/react/macro";
+import { Trans, useLingui } from "@lingui/react/macro";
 import { Helmet } from "@dr.pogodin/react-helmet";
 import { LoadingOverlay } from "@/shared/ui";
 
@@ -11,6 +11,7 @@ export const Route = createFileRoute("/loading-demo")({
 });
 
 function LoadingDemoPage() {
+  const { t } = useLingui();
   const [showOverlay, setShowOverlay] = useState(false);
 
   const handleProgressDemo = () => {
@@ -36,7 +37,7 @@ function LoadingDemoPage() {
   return (
     <Container size="md" py="xl">
       <Helmet>
-        <title>Loading Demo | IQKV Admin</title>
+        <title>{t`Loading Demo | IQKV Admin`}</title>
       </Helmet>
       <Stack gap="xl">
         <div>
