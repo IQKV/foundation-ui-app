@@ -15,6 +15,7 @@ msgstr ""
 
 #. placeholder {0}: o.label
 #: src/pages/admin/organizations.tsx
+#: src/pages/admin/subscriptions.tsx
 #: src/pages/admin/users.tsx
 msgid "{0}"
 msgstr "{0}"
@@ -41,6 +42,7 @@ msgstr "Accessible with proper keyboard handling"
 
 #: src/features/edit-tenant/model/types.ts
 #: src/features/edit-user/model/types.ts
+#: src/pages/admin/subscriptions.tsx
 #: src/shared/ui/tenant-status-badge/tenant-status-badge.tsx
 #: src/shared/ui/user-status-badge/user-status-badge.tsx
 msgid "Active"
@@ -51,6 +53,7 @@ msgid "Active Subscriptions"
 msgstr "Active Subscriptions"
 
 #: src/pages/admin/organizations.tsx
+#: src/pages/admin/subscriptions.tsx
 #: src/pages/admin/users.tsx
 msgid "All statuses"
 msgstr "All statuses"
@@ -58,6 +61,10 @@ msgstr "All statuses"
 #: src/shared/ui/admin-layout/admin-nav.tsx
 msgid "Audit Log"
 msgstr "Audit Log"
+
+#: src/pages/admin/subscriptions.tsx
+msgid "Auto-Renew"
+msgstr "Auto-Renew"
 
 #: src/pages/loading-demo.tsx
 msgid "Automatic router integration via <0>router.subscribe()</0>"
@@ -68,12 +75,18 @@ msgstr "Automatic router integration via <0>router.subscribe()</0>"
 msgid "Cancel"
 msgstr "Cancel"
 
+#: src/pages/admin/subscriptions.tsx
+msgid "Canceling"
+msgstr "Canceling"
+
 #: src/pages/admin/organizations.tsx
+#: src/pages/admin/subscriptions.tsx
 #: src/pages/admin/users.tsx
 msgid "Clear"
 msgstr "Clear"
 
 #: src/pages/admin/organizations.tsx
+#: src/pages/admin/subscriptions.tsx
 #: src/pages/admin/users.tsx
 msgid "Clear filters"
 msgstr "Clear filters"
@@ -90,11 +103,16 @@ msgstr "Complete"
 msgid "Could not fetch organizations from the API."
 msgstr "Could not fetch organizations from the API."
 
+#: src/pages/admin/subscriptions.tsx
+msgid "Could not fetch subscriptions from the API."
+msgstr "Could not fetch subscriptions from the API."
+
 #: src/pages/admin/users.tsx
 msgid "Could not fetch users from the API."
 msgstr "Could not fetch users from the API."
 
 #: src/pages/admin/organizations.tsx
+#: src/pages/admin/subscriptions.tsx
 msgid "Created"
 msgstr "Created"
 
@@ -159,6 +177,7 @@ msgid "Error Details (Development)"
 msgstr "Error Details (Development)"
 
 #: src/pages/admin/organizations.tsx
+#: src/pages/admin/subscriptions.tsx
 #: src/pages/admin/users.tsx
 msgid "Export"
 msgstr "Export"
@@ -166,6 +185,10 @@ msgstr "Export"
 #: src/pages/admin/organizations.tsx
 msgid "Failed to load organizations"
 msgstr "Failed to load organizations"
+
+#: src/pages/admin/subscriptions.tsx
+msgid "Failed to load subscriptions"
+msgstr "Failed to load subscriptions"
 
 #: src/pages/admin/users.tsx
 msgid "Failed to load users"
@@ -194,6 +217,7 @@ msgstr "Go to Home"
 
 #: src/pages/admin/index.tsx
 #: src/pages/admin/organizations.tsx
+#: src/pages/admin/subscriptions.tsx
 #: src/pages/admin/users.tsx
 msgid "Home"
 msgstr "Home"
@@ -236,6 +260,7 @@ msgid "Last name is required"
 msgstr "Last name is required"
 
 #: src/pages/admin/organizations.tsx
+#: src/pages/admin/subscriptions.tsx
 #: src/pages/admin/users.tsx
 msgid "Last updated"
 msgstr "Last updated"
@@ -280,6 +305,14 @@ msgstr "No organizations match the current filters"
 #: src/shared/ui/admin-layout/admin-nav.tsx
 msgid "No results"
 msgstr "No results"
+
+#: src/pages/admin/subscriptions.tsx
+msgid "No subscriptions found"
+msgstr "No subscriptions found"
+
+#: src/pages/admin/subscriptions.tsx
+msgid "No subscriptions match the current filters"
+msgstr "No subscriptions match the current filters"
 
 #: src/pages/admin/users.tsx
 msgid "No users found"
@@ -332,7 +365,16 @@ msgstr "Password"
 msgid "Password is required"
 msgstr "Password is required"
 
+#: src/pages/admin/subscriptions.tsx
+msgid "Period End"
+msgstr "Period End"
+
+#: src/pages/admin/subscriptions.tsx
+msgid "Plan"
+msgstr "Plan"
+
 #: src/pages/admin/organizations.tsx
+#: src/pages/admin/subscriptions.tsx
 #: src/pages/admin/users.tsx
 #: src/shared/ui/admin-layout/admin-nav.tsx
 msgid "Platform"
@@ -348,11 +390,13 @@ msgid "read-only"
 msgstr "read-only"
 
 #: src/pages/admin/organizations.tsx
+#: src/pages/admin/subscriptions.tsx
 #: src/pages/admin/users.tsx
 msgid "Refresh"
 msgstr "Refresh"
 
 #: src/pages/admin/organizations.tsx
+#: src/pages/admin/subscriptions.tsx
 #: src/pages/admin/users.tsx
 msgid "Retry"
 msgstr "Retry"
@@ -369,6 +413,10 @@ msgstr "Search by name or email…"
 #: src/pages/admin/organizations.tsx
 msgid "Search by name or key…"
 msgstr "Search by name or key…"
+
+#: src/pages/admin/subscriptions.tsx
+msgid "Search by tenant or plan…"
+msgstr "Search by tenant or plan…"
 
 #: src/pages/admin/users.tsx
 #~ msgid "Search users…"
@@ -389,6 +437,10 @@ msgstr "Settings"
 #: src/pages/admin/organizations.tsx
 msgid "Showing {rangeStart}–{rangeEnd} of {totalElements} organizations"
 msgstr "Showing {rangeStart}–{rangeEnd} of {totalElements} organizations"
+
+#: src/pages/admin/subscriptions.tsx
+msgid "Showing {rangeStart}–{rangeEnd} of {totalElements} subscriptions"
+msgstr "Showing {rangeStart}–{rangeEnd} of {totalElements} subscriptions"
 
 #: src/pages/admin/users.tsx
 msgid "Showing {rangeStart}–{rangeEnd} of {totalElements} users"
@@ -425,13 +477,19 @@ msgstr "Start"
 #: src/features/edit-tenant/ui/edit-tenant-modal.tsx
 #: src/features/edit-user/ui/edit-user-modal.tsx
 #: src/pages/admin/organizations.tsx
+#: src/pages/admin/subscriptions.tsx
 #: src/pages/admin/users.tsx
 msgid "Status"
 msgstr "Status"
 
+#: src/pages/admin/subscriptions.tsx
 #: src/shared/ui/admin-layout/admin-nav.tsx
 msgid "Subscriptions"
 msgstr "Subscriptions"
+
+#: src/pages/admin/subscriptions.tsx
+msgid "Subscriptions | IQKV Admin"
+msgstr "Subscriptions | IQKV Admin"
 
 #: src/features/edit-tenant/model/types.ts
 #: src/features/edit-user/model/types.ts
@@ -443,6 +501,10 @@ msgstr "Suspended"
 #: src/shared/ui/admin-layout/admin-nav.tsx
 msgid "System"
 msgstr "System"
+
+#: src/pages/admin/subscriptions.tsx
+msgid "Tenant"
+msgstr "Tenant"
 
 #: src/features/edit-tenant/ui/edit-tenant-modal.tsx
 msgid "Tenant key"

@@ -18,3 +18,11 @@ export type {
 } from "./iam";
 export { authApi } from "./auth";
 export type { SignInRequest, SignInResponse } from "./auth";
+export { billingApi } from "./billing";
+export type {
+  Subscription,
+  SubscriptionStatus,
+  SubscriptionSortField,
+  ListSubscriptionsParams,
+  UpdateSubscriptionRequest,
+} from "./billing";

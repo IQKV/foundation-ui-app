@@ -37,7 +37,6 @@ export function AdminNav() {
       label: t`Subscriptions`,
       icon: <IconCreditCard size={16} />,
       to: "/admin/subscriptions",
-      disabled: true,
     },
   ];
 
