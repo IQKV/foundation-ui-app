@@ -8,9 +8,13 @@ export type {
   IamUser,
   IamUserStatus,
   IamUserSortField,
+  IamTenant,
+  IamTenantStatus,
+  IamTenantSortField,
   SortDirection,
   PagedResponse,
   ListIamUsersParams,
+  ListIamTenantsParams,
 } from "./iam";
 export { authApi } from "./auth";
 export type { SignInRequest, SignInResponse } from "./auth";

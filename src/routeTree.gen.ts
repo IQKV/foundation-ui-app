@@ -18,6 +18,7 @@ import { Route as R404RouteImport } from "./pages/404"
 import { Route as IndexRouteImport } from "./pages/index"
 import { Route as AdminIndexRouteImport } from "./pages/admin/index"
 import { Route as AdminUsersRouteImport } from "./pages/admin/users"
+import { Route as AdminOrganizationsRouteImport } from "./pages/admin/organizations"
 
 const UnauthorizedRoute = UnauthorizedRouteImport.update({
   id: "/unauthorized",
@@ -64,6 +65,11 @@ const AdminUsersRoute = AdminUsersRouteImport.update({
   path: "/users",
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminOrganizationsRoute = AdminOrganizationsRouteImport.update({
+  id: "/organizations",
+  path: "/organizations",
+  getParentRoute: () => AdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   "/": typeof IndexRoute
@@ -73,6 +79,7 @@ export interface FileRoutesByFullPath {
   "/loading-demo": typeof LoadingDemoRoute
   "/sign-in": typeof SignInRoute
   "/unauthorized": typeof UnauthorizedRoute
+  "/admin/organizations": typeof AdminOrganizationsRoute
   "/admin/users": typeof AdminUsersRoute
   "/admin/": typeof AdminIndexRoute
 }
@@ -83,6 +90,7 @@ export interface FileRoutesByTo {
   "/loading-demo": typeof LoadingDemoRoute
   "/sign-in": typeof SignInRoute
   "/unauthorized": typeof UnauthorizedRoute
+  "/admin/organizations": typeof AdminOrganizationsRoute
   "/admin/users": typeof AdminUsersRoute
   "/admin": typeof AdminIndexRoute
 }
@@ -95,6 +103,7 @@ export interface FileRoutesById {
   "/loading-demo": typeof LoadingDemoRoute
   "/sign-in": typeof SignInRoute
   "/unauthorized": typeof UnauthorizedRoute
+  "/admin/organizations": typeof AdminOrganizationsRoute
   "/admin/users": typeof AdminUsersRoute
   "/admin/": typeof AdminIndexRoute
 }
@@ -108,6 +117,7 @@ export interface FileRouteTypes {
     | "/loading-demo"
     | "/sign-in"
     | "/unauthorized"
+    | "/admin/organizations"
     | "/admin/users"
     | "/admin/"
   fileRoutesByTo: FileRoutesByTo
@@ -118,6 +128,7 @@ export interface FileRouteTypes {
     | "/loading-demo"
     | "/sign-in"
     | "/unauthorized"
+    | "/admin/organizations"
     | "/admin/users"
     | "/admin"
   id:
@@ -129,6 +140,7 @@ export interface FileRouteTypes {
     | "/loading-demo"
     | "/sign-in"
     | "/unauthorized"
+    | "/admin/organizations"
     | "/admin/users"
     | "/admin/"
   fileRoutesById: FileRoutesById
@@ -208,15 +220,24 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof AdminUsersRouteImport
       parentRoute: typeof AdminRoute
     }
+    "/admin/organizations": {
+      id: "/admin/organizations"
+      path: "/organizations"
+      fullPath: "/admin/organizations"
+      preLoaderRoute: typeof AdminOrganizationsRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
 
 interface AdminRouteChildren {
+  AdminOrganizationsRoute: typeof AdminOrganizationsRoute
   AdminUsersRoute: typeof AdminUsersRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminOrganizationsRoute: AdminOrganizationsRoute,
   AdminUsersRoute: AdminUsersRoute,
   AdminIndexRoute: AdminIndexRoute,
 }

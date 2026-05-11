@@ -32,7 +32,6 @@ export function AdminNav() {
       label: t`Organizations`,
       icon: <IconBuilding size={16} />,
       to: "/admin/organizations",
-      disabled: true,
     },
     {
       label: t`Subscriptions`,

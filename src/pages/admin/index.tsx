@@ -65,15 +65,25 @@ function AdminDashboardPage() {
               <IconBuilding size={20} />
             </ThemeIcon>
           </Group>
-          <Text size="xl" fw={700}>
-            —
-          </Text>
+          <Skeleton visible height={28} width={60} radius="sm" mb={4}>
+            <Text size="xl" fw={700}>
+              —
+            </Text>
+          </Skeleton>
           <Text size="sm" c="dimmed">
             <Trans>Organizations</Trans>
           </Text>
-          <Text size="xs" c="dimmed" mt="md">
-            <Trans>Coming soon</Trans>
-          </Text>
+          <Button
+            component={Link}
+            to="/admin/organizations"
+            variant="subtle"
+            size="xs"
+            mt="md"
+            px={0}
+            rightSection={<IconArrowRight size={14} />}
+          >
+            <Trans>Manage organizations</Trans>
+          </Button>
         </Card>
 
         <Card withBorder radius="md" p="lg">

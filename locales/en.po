@@ -13,6 +13,12 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+#. placeholder {0}: o.label
+#: src/pages/admin/organizations.tsx
+#: src/pages/admin/users.tsx
+msgid "{0}"
+msgstr "{0}"
+
 #: src/pages/loading-demo.tsx
 msgid "1. Initial Page Load"
 msgstr "1. Initial Page Load"
@@ -25,11 +31,16 @@ msgstr "2. Page Transitions"
 msgid "Access Denied"
 msgstr "Access Denied"
 
+#: src/pages/unauthorized.tsx
+msgid "Access Denied | IQKV Admin"
+msgstr "Access Denied | IQKV Admin"
+
 #: src/pages/loading-demo.tsx
 msgid "Accessible with proper keyboard handling"
 msgstr "Accessible with proper keyboard handling"
 
 #: src/features/edit-user/model/types.ts
+#: src/shared/ui/tenant-status-badge/tenant-status-badge.tsx
 #: src/shared/ui/user-status-badge/user-status-badge.tsx
 msgid "Active"
 msgstr "Active"
@@ -37,6 +48,11 @@ msgstr "Active"
 #: src/pages/admin/index.tsx
 msgid "Active Subscriptions"
 msgstr "Active Subscriptions"
+
+#: src/pages/admin/organizations.tsx
+#: src/pages/admin/users.tsx
+msgid "All statuses"
+msgstr "All statuses"
 
 #: src/shared/ui/admin-layout/admin-nav.tsx
 msgid "Audit Log"
@@ -50,6 +66,16 @@ msgstr "Automatic router integration via <0>router.subscribe()</0>"
 msgid "Cancel"
 msgstr "Cancel"
 
+#: src/pages/admin/organizations.tsx
+#: src/pages/admin/users.tsx
+msgid "Clear"
+msgstr "Clear"
+
+#: src/pages/admin/organizations.tsx
+#: src/pages/admin/users.tsx
+msgid "Clear filters"
+msgstr "Clear filters"
+
 #: src/pages/admin/index.tsx
 msgid "Coming soon"
 msgstr "Coming soon"
@@ -58,15 +84,28 @@ msgstr "Coming soon"
 msgid "Complete"
 msgstr "Complete"
 
+#: src/pages/admin/organizations.tsx
+msgid "Could not fetch organizations from the API."
+msgstr "Could not fetch organizations from the API."
+
 #: src/pages/admin/users.tsx
 msgid "Could not fetch users from the API."
 msgstr "Could not fetch users from the API."
+
+#: src/pages/admin/organizations.tsx
+msgid "Created"
+msgstr "Created"
 
 #: src/pages/admin/index.tsx
 #: src/shared/ui/admin-layout/admin-nav.tsx
 msgid "Dashboard"
 msgstr "Dashboard"
 
+#: src/pages/admin/index.tsx
+msgid "Dashboard | IQKV Admin"
+msgstr "Dashboard | IQKV Admin"
+
+#: src/shared/ui/tenant-status-badge/tenant-status-badge.tsx
 #: src/shared/ui/user-status-badge/user-status-badge.tsx
 msgid "Deleted"
 msgstr "Deleted"
@@ -78,6 +117,10 @@ msgstr "Demo LoadingOverlay (2s)"
 #: src/pages/loading-demo.tsx
 msgid "Demo Progress Bar"
 msgstr "Demo Progress Bar"
+
+#: src/pages/admin/organizations.tsx
+msgid "Edit organization"
+msgstr "Edit organization"
 
 #: src/pages/admin/users.tsx
 msgid "Edit user"
@@ -109,9 +152,14 @@ msgstr "Enter a valid email address"
 msgid "Error Details (Development)"
 msgstr "Error Details (Development)"
 
+#: src/pages/admin/organizations.tsx
 #: src/pages/admin/users.tsx
 msgid "Export"
 msgstr "Export"
+
+#: src/pages/admin/organizations.tsx
+msgid "Failed to load organizations"
+msgstr "Failed to load organizations"
 
 #: src/pages/admin/users.tsx
 msgid "Failed to load users"
@@ -139,6 +187,7 @@ msgid "Go to Home"
 msgstr "Go to Home"
 
 #: src/pages/admin/index.tsx
+#: src/pages/admin/organizations.tsx
 #: src/pages/admin/users.tsx
 msgid "Home"
 msgstr "Home"
@@ -164,6 +213,10 @@ msgstr "Invalid email or password"
 msgid "Joined"
 msgstr "Joined"
 
+#: src/pages/admin/organizations.tsx
+msgid "Key"
+msgstr "Key"
+
 #: src/features/edit-user/ui/edit-user-modal.tsx
 msgid "Last name"
 msgstr "Last name"
@@ -172,9 +225,14 @@ msgstr "Last name"
 msgid "Last name is required"
 msgstr "Last name is required"
 
+#: src/pages/admin/organizations.tsx
 #: src/pages/admin/users.tsx
 msgid "Last updated"
 msgstr "Last updated"
+
+#: src/pages/loading-demo.tsx
+msgid "Loading Demo | IQKV Admin"
+msgstr "Loading Demo | IQKV Admin"
 
 #: src/pages/loading-demo.tsx
 msgid "Loading States Demo"
@@ -190,12 +248,24 @@ msgid "Locked"
 msgstr "Locked"
 
 #: src/pages/admin/index.tsx
+msgid "Manage organizations"
+msgstr "Manage organizations"
+
+#: src/pages/admin/index.tsx
 msgid "Manage users"
 msgstr "Manage users"
 
 #: src/pages/admin/users.tsx
 msgid "Member"
 msgstr "Member"
+
+#: src/pages/admin/organizations.tsx
+msgid "No organizations found"
+msgstr "No organizations found"
+
+#: src/pages/admin/organizations.tsx
+msgid "No organizations match the current filters"
+msgstr "No organizations match the current filters"
 
 #: src/shared/ui/admin-layout/admin-nav.tsx
 msgid "No results"
@@ -205,14 +275,32 @@ msgstr "No results"
 msgid "No users found"
 msgstr "No users found"
 
+#: src/pages/admin/users.tsx
+msgid "No users match the current filters"
+msgstr "No users match the current filters"
+
 #: src/shared/ui/admin-layout/admin-header.tsx
 msgid "Notifications (coming soon)"
 msgstr "Notifications (coming soon)"
 
+#: src/pages/admin/organizations.tsx
+#: src/pages/admin/users.tsx
+msgid "Organization"
+msgstr "Organization"
+
 #: src/pages/admin/index.tsx
+#: src/pages/admin/organizations.tsx
 #: src/shared/ui/admin-layout/admin-nav.tsx
 msgid "Organizations"
 msgstr "Organizations"
+
+#: src/pages/admin/organizations.tsx
+msgid "Organizations | IQKV Admin"
+msgstr "Organizations | IQKV Admin"
+
+#: src/pages/404.tsx
+msgid "Page Not Found | IQKV Admin"
+msgstr "Page Not Found | IQKV Admin"
 
 #: src/pages/404.tsx
 msgid "Page not found."
@@ -226,6 +314,7 @@ msgstr "Password"
 msgid "Password is required"
 msgstr "Password is required"
 
+#: src/pages/admin/organizations.tsx
 #: src/pages/admin/users.tsx
 #: src/shared/ui/admin-layout/admin-nav.tsx
 msgid "Platform"
@@ -239,10 +328,12 @@ msgstr "Platform administration"
 msgid "read-only"
 msgstr "read-only"
 
+#: src/pages/admin/organizations.tsx
 #: src/pages/admin/users.tsx
 msgid "Refresh"
 msgstr "Refresh"
 
+#: src/pages/admin/organizations.tsx
 #: src/pages/admin/users.tsx
 msgid "Retry"
 msgstr "Retry"
@@ -252,16 +343,32 @@ msgid "Save changes"
 msgstr "Save changes"
 
 #: src/pages/admin/users.tsx
-msgid "Search users…"
-msgstr "Search users…"
+msgid "Search by name or email…"
+msgstr "Search by name or email…"
+
+#: src/pages/admin/organizations.tsx
+msgid "Search by name or key…"
+msgstr "Search by name or key…"
+
+#: src/pages/admin/users.tsx
+#~ msgid "Search users…"
+#~ msgstr "Search users…"
 
 #: src/shared/ui/admin-layout/admin-nav.tsx
 msgid "Search…"
 msgstr "Search…"
 
+#: src/pages/500.tsx
+msgid "Server Error | IQKV Admin"
+msgstr "Server Error | IQKV Admin"
+
 #: src/shared/ui/admin-layout/admin-nav.tsx
 msgid "Settings"
 msgstr "Settings"
+
+#: src/pages/admin/organizations.tsx
+msgid "Showing {rangeStart}–{rangeEnd} of {totalElements} organizations"
+msgstr "Showing {rangeStart}–{rangeEnd} of {totalElements} organizations"
 
 #: src/pages/admin/users.tsx
 msgid "Showing {rangeStart}–{rangeEnd} of {totalElements} users"
@@ -270,6 +377,10 @@ msgstr "Showing {rangeStart}–{rangeEnd} of {totalElements} users"
 #: src/features/sign-in/ui/sign-in-form.tsx
 msgid "Sign in"
 msgstr "Sign in"
+
+#: src/pages/sign-in.tsx
+msgid "Sign In | IQKV Admin"
+msgstr "Sign In | IQKV Admin"
 
 #: src/features/sign-out/ui/sign-out-button.tsx
 msgid "Sign out"
@@ -292,6 +403,7 @@ msgid "Start"
 msgstr "Start"
 
 #: src/features/edit-user/ui/edit-user-modal.tsx
+#: src/pages/admin/organizations.tsx
 #: src/pages/admin/users.tsx
 msgid "Status"
 msgstr "Status"
@@ -301,6 +413,7 @@ msgid "Subscriptions"
 msgstr "Subscriptions"
 
 #: src/features/edit-user/model/types.ts
+#: src/shared/ui/tenant-status-badge/tenant-status-badge.tsx
 #: src/shared/ui/user-status-badge/user-status-badge.tsx
 msgid "Suspended"
 msgstr "Suspended"
@@ -338,6 +451,10 @@ msgstr "Unverified"
 #: src/shared/ui/admin-layout/admin-nav.tsx
 msgid "Users"
 msgstr "Users"
+
+#: src/pages/admin/users.tsx
+msgid "Users | IQKV Admin"
+msgstr "Users | IQKV Admin"
 
 #: src/pages/loading-demo.tsx
 msgid "Uses <0>@mantine/nprogress</0> for top loading bar"
