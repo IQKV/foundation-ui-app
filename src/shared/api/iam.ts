@@ -70,7 +70,9 @@ export const iamApi = {
   deleteUser: (id: string) => httpClient.delete(`/v1/iam/admin/users/${id}`),
 
   listTenants: (params: ListIamTenantsParams = {}) =>
-    httpClient.get<PagedResponse<IamTenant>>("/v1/iam/admin/tenants", { params }).then((r) => r.data),
+    httpClient
+      .get<PagedResponse<IamTenant>>("/v1/iam/admin/tenants", { params })
+      .then((r) => r.data),
 
   getTenant: (tenantKey: string) =>
     httpClient.get<IamTenant>(`/v1/iam/admin/tenants/${tenantKey}`).then((r) => r.data),

@@ -62,7 +62,6 @@ export function AdminNav() {
       (item.to !== "/admin/" && item.to !== "/admin" && currentPath.startsWith(item.to));
 
     const sharedProps = {
-      key: item.to,
       label: item.label,
       leftSection: item.icon,
       active: isActive,
@@ -80,10 +79,10 @@ export function AdminNav() {
     };
 
     if (item.disabled) {
-      return <NavLink {...sharedProps} component="button" />;
+      return <NavLink key={item.to} {...sharedProps} component="button" />;
     }
 
-    return <NavLink {...sharedProps} component={Link} to={item.to} />;
+    return <NavLink key={item.to} {...sharedProps} component={Link} to={item.to} />;
   };
 
   return (
