@@ -17,6 +17,7 @@ import {
   Badge,
   Select,
   CloseButton,
+  Anchor,
 } from "@mantine/core";
 import { useDisclosure, useDebouncedValue } from "@mantine/hooks";
 import { useQuery } from "@tanstack/react-query";
@@ -205,9 +206,7 @@ function AdminUsersPage() {
                 size="xs"
                 style={{ width: 220 }}
                 rightSection={
-                  search ? (
-                    <CloseButton size="xs" onClick={() => handleSearchChange("")} />
-                  ) : null
+                  search ? <CloseButton size="xs" onClick={() => handleSearchChange("")} /> : null
                 }
               />
 
@@ -226,12 +225,7 @@ function AdminUsersPage() {
               {/* Clear all filters */}
               {hasActiveFilters && (
                 <Tooltip label={t`Clear filters`} withArrow>
-                  <Button
-                    variant="subtle"
-                    color="gray"
-                    size="xs"
-                    onClick={handleClearFilters}
-                  >
+                  <Button variant="subtle" color="gray" size="xs" onClick={handleClearFilters}>
                     <Trans>Clear</Trans>
                   </Button>
                 </Tooltip>
@@ -348,6 +342,36 @@ function AdminUsersPage() {
                       {user.emailVerified ? t`Verified` : t`Unverified`}
                     </Badge>
                   ),
+                },
+                {
+                  accessor: "organizations",
+                  title: t`Organization`,
+                  render: (user) => {
+                    if (!user.organizations || user.organizations.length === 0) {
+                      return (
+                        <Text size="sm" c="dimmed">
+                          —
+                        </Text>
+                      );
+                    }
+                    if (user.organizations.length === 1) {
+                      return (
+                        <Text size="sm" truncate="end" maw={180}>
+                          {user.organizations[0]}
+                        </Text>
+                      );
+                    }
+                    return (
+                      <Tooltip label={user.organizations.join(", ")} withArrow multiline maw={300}>
+                        <Anchor size="sm" underline="hover" component="span">
+                          {user.organizations[0]}{" "}
+                          <Text span size="xs" c="dimmed">
+                            +{user.organizations.length - 1}
+                          </Text>
+                        </Anchor>
+                      </Tooltip>
+                    );
+                  },
                 },
                 {
                   accessor: "updatedAt",

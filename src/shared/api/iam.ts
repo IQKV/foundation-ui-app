@@ -14,6 +14,7 @@ export interface IamUser {
   lastName: string;
   status: IamUserStatus;
   emailVerified: boolean;
+  organizations: string[];
   createdAt: string;
   updatedAt: string;
 }
