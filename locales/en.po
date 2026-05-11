@@ -39,6 +39,7 @@ msgstr "Access Denied | IQKV Admin"
 msgid "Accessible with proper keyboard handling"
 msgstr "Accessible with proper keyboard handling"
 
+#: src/features/edit-tenant/model/types.ts
 #: src/features/edit-user/model/types.ts
 #: src/shared/ui/tenant-status-badge/tenant-status-badge.tsx
 #: src/shared/ui/user-status-badge/user-status-badge.tsx
@@ -62,6 +63,7 @@ msgstr "Audit Log"
 msgid "Automatic router integration via <0>router.subscribe()</0>"
 msgstr "Automatic router integration via <0>router.subscribe()</0>"
 
+#: src/features/edit-tenant/ui/edit-tenant-modal.tsx
 #: src/features/edit-user/ui/edit-user-modal.tsx
 msgid "Cancel"
 msgstr "Cancel"
@@ -121,6 +123,10 @@ msgstr "Demo Progress Bar"
 #: src/pages/admin/organizations.tsx
 msgid "Edit organization"
 msgstr "Edit organization"
+
+#: src/features/edit-tenant/ui/edit-tenant-modal.tsx
+msgid "Edit Organization"
+msgstr "Edit Organization"
 
 #: src/pages/admin/users.tsx
 msgid "Edit user"
@@ -217,6 +223,10 @@ msgstr "Joined"
 msgid "Key"
 msgstr "Key"
 
+#: src/features/edit-tenant/ui/edit-tenant-modal.tsx
+msgid "Key:"
+msgstr "Key:"
+
 #: src/features/edit-user/ui/edit-user-modal.tsx
 msgid "Last name"
 msgstr "Last name"
@@ -288,6 +298,14 @@ msgstr "Notifications (coming soon)"
 msgid "Organization"
 msgstr "Organization"
 
+#: src/features/edit-tenant/ui/edit-tenant-modal.tsx
+msgid "Organization name"
+msgstr "Organization name"
+
+#: src/features/edit-tenant/ui/edit-tenant-modal.tsx
+msgid "Organization name is required"
+msgstr "Organization name is required"
+
 #: src/pages/admin/index.tsx
 #: src/pages/admin/organizations.tsx
 #: src/shared/ui/admin-layout/admin-nav.tsx
@@ -324,6 +342,7 @@ msgstr "Platform"
 msgid "Platform administration"
 msgstr "Platform administration"
 
+#: src/features/edit-tenant/ui/edit-tenant-modal.tsx
 #: src/features/edit-user/ui/edit-user-modal.tsx
 msgid "read-only"
 msgstr "read-only"
@@ -338,6 +357,7 @@ msgstr "Refresh"
 msgid "Retry"
 msgstr "Retry"
 
+#: src/features/edit-tenant/ui/edit-tenant-modal.tsx
 #: src/features/edit-user/ui/edit-user-modal.tsx
 msgid "Save changes"
 msgstr "Save changes"
@@ -402,6 +422,7 @@ msgstr "Something went wrong"
 msgid "Start"
 msgstr "Start"
 
+#: src/features/edit-tenant/ui/edit-tenant-modal.tsx
 #: src/features/edit-user/ui/edit-user-modal.tsx
 #: src/pages/admin/organizations.tsx
 #: src/pages/admin/users.tsx
@@ -412,6 +433,7 @@ msgstr "Status"
 msgid "Subscriptions"
 msgstr "Subscriptions"
 
+#: src/features/edit-tenant/model/types.ts
 #: src/features/edit-user/model/types.ts
 #: src/shared/ui/tenant-status-badge/tenant-status-badge.tsx
 #: src/shared/ui/user-status-badge/user-status-badge.tsx
@@ -421,6 +443,10 @@ msgstr "Suspended"
 #: src/shared/ui/admin-layout/admin-nav.tsx
 msgid "System"
 msgstr "System"
+
+#: src/features/edit-tenant/ui/edit-tenant-modal.tsx
+msgid "Tenant key"
+msgstr "Tenant key"
 
 #: src/pages/loading-demo.tsx
 msgid "Theme-aware (respects dark mode and color scheme)"

@@ -1,0 +1,1 @@
+export { EditTenantModal } from "./ui";

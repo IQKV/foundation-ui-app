@@ -36,6 +36,7 @@ import { Helmet } from "@dr.pogodin/react-helmet";
 import { iamApi } from "@/shared/api";
 import type { IamTenant, IamTenantSortField, IamTenantStatus, SortDirection } from "@/shared/api";
 import { TenantStatusBadge, PageHeader } from "@/shared/ui";
+import { EditTenantModal } from "@/features/edit-tenant";
 
 export const Route = createFileRoute("/admin/organizations")({
   component: AdminOrganizationsPage,
@@ -386,8 +387,7 @@ function AdminOrganizationsPage() {
         )}
       </Stack>
 
-      {/* TODO: Create EditTenantModal component similar to EditUserModal */}
-      {/* <EditTenantModal tenant={selectedTenant} opened={editModalOpened} onClose={handleCloseEdit} /> */}
+      <EditTenantModal tenant={selectedTenant} opened={editModalOpened} onClose={handleCloseEdit} />
     </Container>
   );
 }
