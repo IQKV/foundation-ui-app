@@ -9,6 +9,10 @@ export type IamUserSortField = "email" | "firstName" | "lastName" | "updatedAt" 
 export type IamTenantSortField = "name" | "tenantKey" | "updatedAt" | "createdAt";
 export type SortDirection = "asc" | "desc";
 
+export interface CountResponse {
+  total: number;
+}
+
 export interface IamUser {
   id: string;
   email: string;
@@ -59,6 +63,8 @@ export interface ListIamTenantsParams {
 // ─── API ──────────────────────────────────────────────────────────────────────
 
 export const iamApi = {
+  countUsers: () => httpClient.get<CountResponse>("/v1/iam/admin/users/count").then((r) => r.data),
+
   listUsers: (params: ListIamUsersParams = {}) =>
     httpClient.get<PagedResponse<IamUser>>("/v1/iam/admin/users", { params }).then((r) => r.data),
 
@@ -68,6 +74,9 @@ export const iamApi = {
     httpClient.patch<IamUser>(`/v1/iam/admin/users/${id}`, data).then((r) => r.data),
 
   deleteUser: (id: string) => httpClient.delete(`/v1/iam/admin/users/${id}`),
+
+  countTenants: () =>
+    httpClient.get<CountResponse>("/v1/iam/admin/tenants/count").then((r) => r.data),
 
   listTenants: (params: ListIamTenantsParams = {}) =>
     httpClient

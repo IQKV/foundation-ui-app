@@ -13,6 +13,7 @@ export type {
   IamTenantSortField,
   SortDirection,
   PagedResponse,
+  CountResponse,
   ListIamUsersParams,
   ListIamTenantsParams,
 } from "./iam";
@@ -26,3 +27,5 @@ export type {
   ListSubscriptionsParams,
   UpdateSubscriptionRequest,
 } from "./billing";
+export { useDashboardCounts } from "./use-dashboard-counts";
+export type { UseDashboardCountsResult, DashboardCountResult } from "./use-dashboard-counts";

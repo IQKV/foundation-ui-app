@@ -2,25 +2,59 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   Container,
   Text,
-  Stack,
   SimpleGrid,
   Card,
   Group,
   ThemeIcon,
   Button,
   Skeleton,
+  Tooltip,
 } from "@mantine/core";
-import { IconUsers, IconBuilding, IconCreditCard, IconArrowRight } from "@tabler/icons-react";
+import {
+  IconUsers,
+  IconBuilding,
+  IconCreditCard,
+  IconArrowRight,
+  IconAlertCircle,
+} from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Helmet } from "@dr.pogodin/react-helmet";
 import { PageHeader } from "@/shared/ui";
+import { useDashboardCounts } from "@/shared/api";
+import type { DashboardCountResult } from "@/shared/api";
 
 export const Route = createFileRoute("/admin/")({
   component: AdminDashboardPage,
 });
 
+// ─── Stat display ─────────────────────────────────────────────────────────────
+
+function StatValue({ count }: { count: DashboardCountResult }) {
+  if (count.isLoading) {
+    return <Skeleton height={28} width={60} radius="sm" mb={4} />;
+  }
+  if (count.isError) {
+    return (
+      <Tooltip label={<Trans>Failed to load</Trans>} withArrow>
+        <Text size="xl" fw={700} c="red" mb={4} style={{ cursor: "default" }}>
+          <IconAlertCircle size={20} style={{ verticalAlign: "middle" }} />
+        </Text>
+      </Tooltip>
+    );
+  }
+  return (
+    <Text size="xl" fw={700} mb={4}>
+      {count.value?.toLocaleString() ?? "—"}
+    </Text>
+  );
+}
+
+// ─── Page ─────────────────────────────────────────────────────────────────────
+
 function AdminDashboardPage() {
   const { t } = useLingui();
+  const counts = useDashboardCounts();
+
   return (
     <Container size="xl" py={0}>
       <Helmet>
@@ -38,11 +72,7 @@ function AdminDashboardPage() {
               <IconUsers size={20} />
             </ThemeIcon>
           </Group>
-          <Skeleton visible height={28} width={60} radius="sm" mb={4}>
-            <Text size="xl" fw={700}>
-              —
-            </Text>
-          </Skeleton>
+          <StatValue count={counts.users} />
           <Text size="sm" c="dimmed">
             <Trans>Total Users</Trans>
           </Text>
@@ -65,11 +95,7 @@ function AdminDashboardPage() {
               <IconBuilding size={20} />
             </ThemeIcon>
           </Group>
-          <Skeleton visible height={28} width={60} radius="sm" mb={4}>
-            <Text size="xl" fw={700}>
-              —
-            </Text>
-          </Skeleton>
+          <StatValue count={counts.tenants} />
           <Text size="sm" c="dimmed">
             <Trans>Organizations</Trans>
           </Text>
@@ -92,11 +118,7 @@ function AdminDashboardPage() {
               <IconCreditCard size={20} />
             </ThemeIcon>
           </Group>
-          <Skeleton visible height={28} width={60} radius="sm" mb={4}>
-            <Text size="xl" fw={700}>
-              —
-            </Text>
-          </Skeleton>
+          <StatValue count={counts.subscriptions} />
           <Text size="sm" c="dimmed">
             <Trans>Active Subscriptions</Trans>
           </Text>

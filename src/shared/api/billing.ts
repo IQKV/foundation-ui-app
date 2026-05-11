@@ -1,5 +1,5 @@
 import { httpClient } from "./http-client";
-import type { PagedResponse, SortDirection } from "./iam";
+import type { PagedResponse, SortDirection, CountResponse } from "./iam";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -42,6 +42,9 @@ export interface UpdateSubscriptionRequest {
 // ─── API ──────────────────────────────────────────────────────────────────────
 
 export const billingApi = {
+  countSubscriptions: () =>
+    httpClient.get<CountResponse>("/v1/billing/admin/subscriptions/count").then((r) => r.data),
+
   listSubscriptions: (params: ListSubscriptionsParams = {}) =>
     httpClient
       .get<PagedResponse<Subscription>>("/v1/billing/admin/subscriptions", { params })
