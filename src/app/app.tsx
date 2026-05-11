@@ -9,6 +9,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { createRouter, RouterProvider } from "@tanstack/react-router";
 import { I18nProvider } from "@lingui/react";
 import { i18n } from "@lingui/core";
+import { HelmetProvider } from "@dr.pogodin/react-helmet";
 
 import { routeTree } from "@/routeTree.gen";
 import { theme } from "./theme";
@@ -62,21 +63,23 @@ export function App() {
 
   return (
     <StrictMode>
-      <I18nProvider i18n={i18n}>
-        <ErrorBoundary>
-          <MantineProvider theme={theme}>
-            <ModalsProvider>
-              <NavigationProgress />
-              <Notifications />
-              <LoadingOverlay visible={isInitialLoading} />
-              <QueryClientProvider client={queryClient}>
-                <RouterProvider router={router} />
-                <ReactQueryDevtools initialIsOpen={false} />
-              </QueryClientProvider>
-            </ModalsProvider>
-          </MantineProvider>
-        </ErrorBoundary>
-      </I18nProvider>
+      <HelmetProvider>
+        <I18nProvider i18n={i18n}>
+          <ErrorBoundary>
+            <MantineProvider theme={theme}>
+              <ModalsProvider>
+                <NavigationProgress />
+                <Notifications />
+                <LoadingOverlay visible={isInitialLoading} />
+                <QueryClientProvider client={queryClient}>
+                  <RouterProvider router={router} />
+                  <ReactQueryDevtools initialIsOpen={false} />
+                </QueryClientProvider>
+              </ModalsProvider>
+            </MantineProvider>
+          </ErrorBoundary>
+        </I18nProvider>
+      </HelmetProvider>
     </StrictMode>
   );
 }

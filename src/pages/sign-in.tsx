@@ -3,6 +3,7 @@ import { Alert, Box, Center, Container, Stack, Text, Title } from "@mantine/core
 import { IconAlertCircle, IconInfoCircle } from "@tabler/icons-react";
 import { z } from "zod";
 import { Trans } from "@lingui/react/macro";
+import { Helmet } from "@dr.pogodin/react-helmet";
 import { SignInForm } from "@/features/sign-in";
 import { decodeJwt, hasPlatformAdmin } from "@/shared/lib/jwt";
 import { getAccessToken } from "@/processes/session";
@@ -43,6 +44,9 @@ function SignInPage() {
 
   return (
     <Center mih="100vh" bg="gray.0">
+      <Helmet>
+        <title>Sign In | IQKV Admin</title>
+      </Helmet>
       <Container size={420} w="100%">
         <Stack gap="xl">
           {/* Application name / branding — Requirement 8.6 */}

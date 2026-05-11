@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button, Center, Container, Stack, Text, Title } from "@mantine/core";
 import { Trans } from "@lingui/react/macro";
+import { Helmet } from "@dr.pogodin/react-helmet";
 import { SignOutButton } from "@/features/sign-out";
 
 // ─── Route ────────────────────────────────────────────────────────────────────
@@ -18,6 +19,9 @@ export const Route = createFileRoute("/unauthorized")({
 function UnauthorizedPage() {
   return (
     <Center mih="100vh" bg="gray.0">
+      <Helmet>
+        <title>Access Denied | IQKV Admin</title>
+      </Helmet>
       <Container size="sm">
         <Stack align="center" gap="md">
           {/* Requirement 4.2 — heading and explanatory message */}

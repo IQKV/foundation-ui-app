@@ -3,6 +3,7 @@ import { Container, Title, Text, Stack, Button, Group, Code } from "@mantine/cor
 import { nprogress } from "@mantine/nprogress";
 import { useState } from "react";
 import { Trans } from "@lingui/react/macro";
+import { Helmet } from "@dr.pogodin/react-helmet";
 import { LoadingOverlay } from "@/shared/ui";
 
 export const Route = createFileRoute("/loading-demo")({
@@ -34,6 +35,9 @@ function LoadingDemoPage() {
 
   return (
     <Container size="md" py="xl">
+      <Helmet>
+        <title>Loading Demo | IQKV Admin</title>
+      </Helmet>
       <Stack gap="xl">
         <div>
           <Title order={1} mb="md">

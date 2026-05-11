@@ -28,6 +28,7 @@ import {
 } from "@tabler/icons-react";
 import dayjs from "dayjs";
 import { Trans, useLingui } from "@lingui/react/macro";
+import { Helmet } from "@dr.pogodin/react-helmet";
 import { iamApi } from "@/shared/api";
 import type { IamUser, IamUserSortField, SortDirection } from "@/shared/api";
 import { UserStatusBadge, PageHeader } from "@/shared/ui";
@@ -112,6 +113,9 @@ function AdminUsersPage() {
 
   return (
     <Container size="xl" py={0}>
+      <Helmet>
+        <title>Users | IQKV Admin</title>
+      </Helmet>
       <PageHeader
         title={<Trans>Users</Trans>}
         breadcrumbs={[
