@@ -15,6 +15,8 @@ import {
   Alert,
   Avatar,
   Badge,
+  Select,
+  CloseButton,
 } from "@mantine/core";
 import { useDisclosure, useDebouncedValue } from "@mantine/hooks";
 import { useQuery } from "@tanstack/react-query";
@@ -25,12 +27,13 @@ import {
   IconRefresh,
   IconAlertCircle,
   IconDownload,
+  IconFilter,
 } from "@tabler/icons-react";
 import dayjs from "dayjs";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Helmet } from "@dr.pogodin/react-helmet";
 import { iamApi } from "@/shared/api";
-import type { IamUser, IamUserSortField, SortDirection } from "@/shared/api";
+import type { IamUser, IamUserSortField, IamUserStatus, SortDirection } from "@/shared/api";
 import { UserStatusBadge, PageHeader } from "@/shared/ui";
 import { EditUserModal } from "@/features/edit-user";
 
@@ -63,11 +66,19 @@ const SORT_FIELD_MAP: Record<string, IamUserSortField> = {
   createdAt: "createdAt",
 };
 
+const STATUS_OPTIONS: { value: IamUserStatus; label: string }[] = [
+  { value: "ACTIVE", label: "Active" },
+  { value: "LOCKED", label: "Locked" },
+  { value: "SUSPENDED", label: "Suspended" },
+  { value: "DELETED", label: "Deleted" },
+];
+
 function AdminUsersPage() {
   const { t } = useLingui();
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
   const [debouncedSearch] = useDebouncedValue(search, 300);
+  const [statusFilter, setStatusFilter] = useState<IamUserStatus | null>(null);
 
   const [sortStatus, setSortStatus] = useState<DataTableSortStatus<IamUser>>({
     columnAccessor: "createdAt",
@@ -80,8 +91,10 @@ function AdminUsersPage() {
   const sortBy = SORT_FIELD_MAP[sortStatus.columnAccessor] ?? "createdAt";
   const sortDir = sortStatus.direction as SortDirection;
 
+  const hasActiveFilters = debouncedSearch !== "" || statusFilter !== null;
+
   const { data, isLoading, isError, refetch, isFetching } = useQuery({
-    queryKey: ["admin", "users", page, debouncedSearch, sortBy, sortDir],
+    queryKey: ["admin", "users", page, debouncedSearch, statusFilter, sortBy, sortDir],
     queryFn: () =>
       iamApi.listUsers({
         page: page - 1,
@@ -89,12 +102,29 @@ function AdminUsersPage() {
         sortBy,
         sortDir,
         ...(debouncedSearch ? { search: debouncedSearch } : {}),
+        ...(statusFilter ? { status: statusFilter } : {}),
       }),
   });
 
   const handleSortChange = (next: DataTableSortStatus<IamUser>) => {
     setSortStatus(next);
-    setPage(1); // reset to page 1 on sort change
+    setPage(1);
+  };
+
+  const handleSearchChange = (value: string) => {
+    setSearch(value);
+    setPage(1);
+  };
+
+  const handleStatusChange = (value: string | null) => {
+    setStatusFilter(value as IamUserStatus | null);
+    setPage(1);
+  };
+
+  const handleClearFilters = () => {
+    setSearch("");
+    setStatusFilter(null);
+    setPage(1);
   };
 
   const handleEdit = (user: IamUser) => {
@@ -166,17 +196,47 @@ function AdminUsersPage() {
             </Group>
 
             <Group gap="xs">
+              {/* Search */}
               <TextInput
-                placeholder={t`Search users…`}
+                placeholder={t`Search by name or email…`}
                 leftSection={<IconSearch size={14} />}
                 value={search}
-                onChange={(e) => {
-                  setSearch(e.currentTarget.value);
-                  setPage(1);
-                }}
+                onChange={(e) => handleSearchChange(e.currentTarget.value)}
                 size="xs"
                 style={{ width: 220 }}
+                rightSection={
+                  search ? (
+                    <CloseButton size="xs" onClick={() => handleSearchChange("")} />
+                  ) : null
+                }
               />
+
+              {/* Status filter */}
+              <Select
+                placeholder={t`All statuses`}
+                leftSection={<IconFilter size={14} />}
+                data={STATUS_OPTIONS.map((o) => ({ value: o.value, label: t`${o.label}` }))}
+                value={statusFilter}
+                onChange={handleStatusChange}
+                clearable
+                size="xs"
+                style={{ width: 150 }}
+              />
+
+              {/* Clear all filters */}
+              {hasActiveFilters && (
+                <Tooltip label={t`Clear filters`} withArrow>
+                  <Button
+                    variant="subtle"
+                    color="gray"
+                    size="xs"
+                    onClick={handleClearFilters}
+                  >
+                    <Trans>Clear</Trans>
+                  </Button>
+                </Tooltip>
+              )}
+
               <Tooltip label={t`Refresh`} withArrow>
                 <ActionIcon
                   variant="subtle"
@@ -225,7 +285,9 @@ function AdminUsersPage() {
               onPageChange={setPage}
               fetching={isFetching && !isLoading}
               minHeight={300}
-              noRecordsText={t`No users found`}
+              noRecordsText={
+                hasActiveFilters ? t`No users match the current filters` : t`No users found`
+              }
               // ── Sorting ──────────────────────────────────────────────────
               sortStatus={sortStatus}
               onSortStatusChange={handleSortChange}

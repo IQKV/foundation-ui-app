@@ -30,6 +30,7 @@ export interface ListIamUsersParams {
   page?: number;
   size?: number;
   search?: string;
+  status?: IamUserStatus;
   sortBy?: IamUserSortField;
   sortDir?: SortDirection;
 }
