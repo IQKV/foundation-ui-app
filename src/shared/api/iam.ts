@@ -60,6 +60,15 @@ export interface ListIamTenantsParams {
   sortDir?: SortDirection;
 }
 
+export interface ListTenantMembersParams {
+  page?: number;
+  size?: number;
+  search?: string;
+  status?: IamUserStatus;
+  sortBy?: IamUserSortField;
+  sortDir?: SortDirection;
+}
+
 // ─── API ──────────────────────────────────────────────────────────────────────
 
 export const iamApi = {
@@ -85,6 +94,16 @@ export const iamApi = {
 
   getTenant: (tenantKey: string) =>
     httpClient.get<IamTenant>(`/v1/iam/admin/tenants/${tenantKey}`).then((r) => r.data),
+
+  countTenantMembers: (tenantKey: string) =>
+    httpClient
+      .get<CountResponse>(`/v1/iam/admin/tenants/${tenantKey}/members/count`)
+      .then((r) => r.data),
+
+  listTenantMembers: (tenantKey: string, params: ListTenantMembersParams = {}) =>
+    httpClient
+      .get<PagedResponse<IamUser>>(`/v1/iam/admin/tenants/${tenantKey}/members`, { params })
+      .then((r) => r.data),
 
   updateTenant: (tenantKey: string, data: Partial<Pick<IamTenant, "name" | "status">>) =>
     httpClient.patch<IamTenant>(`/v1/iam/admin/tenants/${tenantKey}`, data).then((r) => r.data),

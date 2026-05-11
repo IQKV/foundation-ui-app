@@ -1,5 +1,5 @@
 import { Group, Text, Burger, Box, Divider } from "@mantine/core";
-import { IconShieldHalf, IconChevronDown } from "@tabler/icons-react";
+import { IconShieldHalf } from "@tabler/icons-react";
 import { SignOutButton } from "@/features/sign-out";
 
 interface AdminHeaderProps {
@@ -43,8 +43,6 @@ export function AdminHeader({ opened, onToggle }: AdminHeaderProps) {
           <Text fw={700} size="sm" c="dark.8" style={{ letterSpacing: "-0.01em" }}>
             IQKV Admin
           </Text>
-
-          <IconChevronDown size={14} color="var(--mantine-color-gray-5)" />
         </Group>
       </Group>
 

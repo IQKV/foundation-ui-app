@@ -20,6 +20,8 @@ import { Route as AdminIndexRouteImport } from "./pages/admin/index"
 import { Route as AdminUsersRouteImport } from "./pages/admin/users"
 import { Route as AdminSubscriptionsRouteImport } from "./pages/admin/subscriptions"
 import { Route as AdminOrganizationsRouteImport } from "./pages/admin/organizations"
+import { Route as AdminOrganizationsIndexRouteImport } from "./pages/admin/organizations.index"
+import { Route as AdminOrganizationsTenantKeyRouteImport } from "./pages/admin/organizations.$tenantKey"
 
 const UnauthorizedRoute = UnauthorizedRouteImport.update({
   id: "/unauthorized",
@@ -76,6 +78,17 @@ const AdminOrganizationsRoute = AdminOrganizationsRouteImport.update({
   path: "/organizations",
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminOrganizationsIndexRoute = AdminOrganizationsIndexRouteImport.update({
+  id: "/",
+  path: "/",
+  getParentRoute: () => AdminOrganizationsRoute,
+} as any)
+const AdminOrganizationsTenantKeyRoute =
+  AdminOrganizationsTenantKeyRouteImport.update({
+    id: "/$tenantKey",
+    path: "/$tenantKey",
+    getParentRoute: () => AdminOrganizationsRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   "/": typeof IndexRoute
@@ -85,10 +98,12 @@ export interface FileRoutesByFullPath {
   "/loading-demo": typeof LoadingDemoRoute
   "/sign-in": typeof SignInRoute
   "/unauthorized": typeof UnauthorizedRoute
-  "/admin/organizations": typeof AdminOrganizationsRoute
+  "/admin/organizations": typeof AdminOrganizationsRouteWithChildren
   "/admin/subscriptions": typeof AdminSubscriptionsRoute
   "/admin/users": typeof AdminUsersRoute
   "/admin/": typeof AdminIndexRoute
+  "/admin/organizations/$tenantKey": typeof AdminOrganizationsTenantKeyRoute
+  "/admin/organizations/": typeof AdminOrganizationsIndexRoute
 }
 export interface FileRoutesByTo {
   "/": typeof IndexRoute
@@ -97,10 +112,11 @@ export interface FileRoutesByTo {
   "/loading-demo": typeof LoadingDemoRoute
   "/sign-in": typeof SignInRoute
   "/unauthorized": typeof UnauthorizedRoute
-  "/admin/organizations": typeof AdminOrganizationsRoute
   "/admin/subscriptions": typeof AdminSubscriptionsRoute
   "/admin/users": typeof AdminUsersRoute
   "/admin": typeof AdminIndexRoute
+  "/admin/organizations/$tenantKey": typeof AdminOrganizationsTenantKeyRoute
+  "/admin/organizations": typeof AdminOrganizationsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -111,10 +127,12 @@ export interface FileRoutesById {
   "/loading-demo": typeof LoadingDemoRoute
   "/sign-in": typeof SignInRoute
   "/unauthorized": typeof UnauthorizedRoute
-  "/admin/organizations": typeof AdminOrganizationsRoute
+  "/admin/organizations": typeof AdminOrganizationsRouteWithChildren
   "/admin/subscriptions": typeof AdminSubscriptionsRoute
   "/admin/users": typeof AdminUsersRoute
   "/admin/": typeof AdminIndexRoute
+  "/admin/organizations/$tenantKey": typeof AdminOrganizationsTenantKeyRoute
+  "/admin/organizations/": typeof AdminOrganizationsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -130,6 +148,8 @@ export interface FileRouteTypes {
     | "/admin/subscriptions"
     | "/admin/users"
     | "/admin/"
+    | "/admin/organizations/$tenantKey"
+    | "/admin/organizations/"
   fileRoutesByTo: FileRoutesByTo
   to:
     | "/"
@@ -138,10 +158,11 @@ export interface FileRouteTypes {
     | "/loading-demo"
     | "/sign-in"
     | "/unauthorized"
-    | "/admin/organizations"
     | "/admin/subscriptions"
     | "/admin/users"
     | "/admin"
+    | "/admin/organizations/$tenantKey"
+    | "/admin/organizations"
   id:
     | "__root__"
     | "/"
@@ -155,6 +176,8 @@ export interface FileRouteTypes {
     | "/admin/subscriptions"
     | "/admin/users"
     | "/admin/"
+    | "/admin/organizations/$tenantKey"
+    | "/admin/organizations/"
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -246,18 +269,45 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof AdminOrganizationsRouteImport
       parentRoute: typeof AdminRoute
     }
+    "/admin/organizations/": {
+      id: "/admin/organizations/"
+      path: "/"
+      fullPath: "/admin/organizations/"
+      preLoaderRoute: typeof AdminOrganizationsIndexRouteImport
+      parentRoute: typeof AdminOrganizationsRoute
+    }
+    "/admin/organizations/$tenantKey": {
+      id: "/admin/organizations/$tenantKey"
+      path: "/$tenantKey"
+      fullPath: "/admin/organizations/$tenantKey"
+      preLoaderRoute: typeof AdminOrganizationsTenantKeyRouteImport
+      parentRoute: typeof AdminOrganizationsRoute
+    }
   }
 }
 
+interface AdminOrganizationsRouteChildren {
+  AdminOrganizationsTenantKeyRoute: typeof AdminOrganizationsTenantKeyRoute
+  AdminOrganizationsIndexRoute: typeof AdminOrganizationsIndexRoute
+}
+
+const AdminOrganizationsRouteChildren: AdminOrganizationsRouteChildren = {
+  AdminOrganizationsTenantKeyRoute: AdminOrganizationsTenantKeyRoute,
+  AdminOrganizationsIndexRoute: AdminOrganizationsIndexRoute,
+}
+
+const AdminOrganizationsRouteWithChildren =
+  AdminOrganizationsRoute._addFileChildren(AdminOrganizationsRouteChildren)
+
 interface AdminRouteChildren {
-  AdminOrganizationsRoute: typeof AdminOrganizationsRoute
+  AdminOrganizationsRoute: typeof AdminOrganizationsRouteWithChildren
   AdminSubscriptionsRoute: typeof AdminSubscriptionsRoute
   AdminUsersRoute: typeof AdminUsersRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
-  AdminOrganizationsRoute: AdminOrganizationsRoute,
+  AdminOrganizationsRoute: AdminOrganizationsRouteWithChildren,
   AdminSubscriptionsRoute: AdminSubscriptionsRoute,
   AdminUsersRoute: AdminUsersRoute,
   AdminIndexRoute: AdminIndexRoute,

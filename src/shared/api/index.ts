@@ -16,6 +16,7 @@ export type {
   CountResponse,
   ListIamUsersParams,
   ListIamTenantsParams,
+  ListTenantMembersParams,
 } from "./iam";
 export { authApi } from "./auth";
 export type { SignInRequest, SignInResponse } from "./auth";

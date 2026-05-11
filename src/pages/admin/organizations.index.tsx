@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   Container,
   Text,
@@ -16,72 +16,61 @@ import {
   Badge,
   Select,
   CloseButton,
+  Code,
 } from "@mantine/core";
 import { useDisclosure, useDebouncedValue } from "@mantine/hooks";
 import { useQuery } from "@tanstack/react-query";
 import { DataTable, type DataTableSortStatus } from "mantine-datatable";
-import { IconSearch, IconRefresh, IconAlertCircle, IconFilter } from "@tabler/icons-react";
+import {
+  IconSearch,
+  IconEdit,
+  IconEye,
+  IconRefresh,
+  IconAlertCircle,
+  IconFilter,
+  IconBuilding,
+} from "@tabler/icons-react";
 import dayjs from "dayjs";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Helmet } from "@dr.pogodin/react-helmet";
-import { billingApi } from "@/shared/api";
-import type { Subscription, SubscriptionSortField, SortDirection } from "@/shared/api";
-import { PageHeader } from "@/shared/ui";
+import { iamApi } from "@/shared/api";
+import type { IamTenant, IamTenantSortField, IamTenantStatus, SortDirection } from "@/shared/api";
+import { TenantStatusBadge, PageHeader } from "@/shared/ui";
+import { EditTenantModal } from "@/features/edit-tenant";
 
-export const Route = createFileRoute("/admin/subscriptions")({
-  component: AdminSubscriptionsPage,
+export const Route = createFileRoute("/admin/organizations/")({
+  component: AdminOrganizationsPage,
 });
 
 const PAGE_SIZE = 20;
 
-/**
- * mantine-datatable uses the column `accessor` string as the sort key.
- * Map those accessor names to the backend field names the API expects.
- */
-const SORT_FIELD_MAP: Record<string, SubscriptionSortField> = {
+const SORT_FIELD_MAP: Record<string, IamTenantSortField> = {
+  name: "name",
   tenantKey: "tenantKey",
-  planId: "planId",
-  status: "status",
   updatedAt: "updatedAt",
   createdAt: "createdAt",
 };
 
-const STATUS_OPTIONS: { value: string; label: string }[] = [
-  { value: "active", label: "Active" },
-  { value: "trialing", label: "Trialing" },
-  { value: "past_due", label: "Past Due" },
-  { value: "canceled", label: "Canceled" },
-  { value: "unpaid", label: "Unpaid" },
+const STATUS_OPTIONS: { value: IamTenantStatus; label: string }[] = [
+  { value: "ACTIVE", label: "Active" },
+  { value: "SUSPENDED", label: "Suspended" },
+  { value: "DELETED", label: "Deleted" },
 ];
 
-function getStatusColor(status: string): string {
-  switch (status.toLowerCase()) {
-    case "active":
-      return "green";
-    case "trialing":
-      return "blue";
-    case "past_due":
-      return "orange";
-    case "canceled":
-      return "gray";
-    case "unpaid":
-      return "red";
-    default:
-      return "gray";
-  }
-}
-
-function AdminSubscriptionsPage() {
+function AdminOrganizationsPage() {
   const { t } = useLingui();
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
   const [debouncedSearch] = useDebouncedValue(search, 300);
-  const [statusFilter, setStatusFilter] = useState<string | null>(null);
+  const [statusFilter, setStatusFilter] = useState<IamTenantStatus | null>(null);
 
-  const [sortStatus, setSortStatus] = useState<DataTableSortStatus<Subscription>>({
+  const [sortStatus, setSortStatus] = useState<DataTableSortStatus<IamTenant>>({
     columnAccessor: "createdAt",
     direction: "desc",
   });
+
+  const [editModalOpened, { open: openEditModal, close: closeEditModal }] = useDisclosure(false);
+  const [selectedTenant, setSelectedTenant] = useState<IamTenant | null>(null);
 
   const sortBy = SORT_FIELD_MAP[sortStatus.columnAccessor] ?? "createdAt";
   const sortDir = sortStatus.direction as SortDirection;
@@ -89,9 +78,9 @@ function AdminSubscriptionsPage() {
   const hasActiveFilters = debouncedSearch !== "" || statusFilter !== null;
 
   const { data, isLoading, isError, refetch, isFetching } = useQuery({
-    queryKey: ["admin", "subscriptions", page, debouncedSearch, statusFilter, sortBy, sortDir],
+    queryKey: ["admin", "tenants", page, debouncedSearch, statusFilter, sortBy, sortDir],
     queryFn: () =>
-      billingApi.listSubscriptions({
+      iamApi.listTenants({
         page: page - 1,
         size: PAGE_SIZE,
         sortBy,
@@ -101,7 +90,7 @@ function AdminSubscriptionsPage() {
       }),
   });
 
-  const handleSortChange = (next: DataTableSortStatus<Subscription>) => {
+  const handleSortChange = (next: DataTableSortStatus<IamTenant>) => {
     setSortStatus(next);
     setPage(1);
   };
@@ -112,7 +101,7 @@ function AdminSubscriptionsPage() {
   };
 
   const handleStatusChange = (value: string | null) => {
-    setStatusFilter(value);
+    setStatusFilter(value as IamTenantStatus | null);
     setPage(1);
   };
 
@@ -122,6 +111,16 @@ function AdminSubscriptionsPage() {
     setPage(1);
   };
 
+  const handleEdit = (tenant: IamTenant) => {
+    setSelectedTenant(tenant);
+    openEditModal();
+  };
+
+  const handleCloseEdit = () => {
+    closeEditModal();
+    setTimeout(() => setSelectedTenant(null), 300);
+  };
+
   const totalElements = data?.totalElements ?? 0;
   const rangeStart = totalElements === 0 ? 0 : (page - 1) * PAGE_SIZE + 1;
   const rangeEnd = Math.min(page * PAGE_SIZE, totalElements);
@@ -129,14 +128,14 @@ function AdminSubscriptionsPage() {
   return (
     <Container size="xl" py={0}>
       <Helmet>
-        <title>{t`Subscriptions | IQKV Admin`}</title>
+        <title>{t`Organizations | IQKV Admin`}</title>
       </Helmet>
       <PageHeader
-        title={<Trans>Subscriptions</Trans>}
+        title={<Trans>Organizations</Trans>}
         breadcrumbs={[
           { label: <Trans>Home</Trans>, to: "/admin/" },
           { label: <Trans>Platform</Trans> },
-          { label: <Trans>Subscriptions</Trans> },
+          { label: <Trans>Organizations</Trans> },
         ]}
         toolbar={undefined}
       />
@@ -145,11 +144,11 @@ function AdminSubscriptionsPage() {
         {isError && (
           <Alert
             icon={<IconAlertCircle size={16} />}
-            title={<Trans>Failed to load subscriptions</Trans>}
+            title={<Trans>Failed to load organizations</Trans>}
             color="red"
             variant="light"
           >
-            <Trans>Could not fetch subscriptions from the API.</Trans>{" "}
+            <Trans>Could not fetch organizations from the API.</Trans>{" "}
             <Button variant="subtle" color="red" size="xs" onClick={() => void refetch()}>
               <Trans>Retry</Trans>
             </Button>
@@ -157,7 +156,6 @@ function AdminSubscriptionsPage() {
         )}
 
         <Paper withBorder radius="md" style={{ overflow: "hidden" }}>
-          {/* Card inner header */}
           <Group
             justify="space-between"
             align="center"
@@ -167,7 +165,7 @@ function AdminSubscriptionsPage() {
           >
             <Group gap="xs">
               <Text fw={600} size="sm">
-                <Trans>Subscriptions</Trans>
+                <Trans>Organizations</Trans>
               </Text>
               {!isLoading && (
                 <Badge variant="light" color="gray" size="sm" radius="sm">
@@ -177,9 +175,8 @@ function AdminSubscriptionsPage() {
             </Group>
 
             <Group gap="xs">
-              {/* Search */}
               <TextInput
-                placeholder={t`Search by tenant or plan…`}
+                placeholder={t`Search by name or key…`}
                 leftSection={<IconSearch size={14} />}
                 value={search}
                 onChange={(e) => handleSearchChange(e.currentTarget.value)}
@@ -190,7 +187,6 @@ function AdminSubscriptionsPage() {
                 }
               />
 
-              {/* Status filter */}
               <Select
                 placeholder={t`All statuses`}
                 leftSection={<IconFilter size={14} />}
@@ -202,7 +198,6 @@ function AdminSubscriptionsPage() {
                 style={{ width: 150 }}
               />
 
-              {/* Clear all filters */}
               {hasActiveFilters && (
                 <Tooltip label={t`Clear filters`} withArrow>
                   <Button variant="subtle" color="gray" size="xs" onClick={handleClearFilters}>
@@ -225,7 +220,6 @@ function AdminSubscriptionsPage() {
             </Group>
           </Group>
 
-          {/* Grid */}
           {isLoading ? (
             <Stack gap={0}>
               {Array.from({ length: 8 }).map((_, i) => (
@@ -236,12 +230,12 @@ function AdminSubscriptionsPage() {
                   style={{ borderBottom: "1px solid var(--mantine-color-gray-1)" }}
                 >
                   <Group gap="sm">
+                    <Skeleton circle height={36} width={36} />
                     <Stack gap={4} style={{ flex: 1 }}>
                       <Skeleton height={12} width="30%" radius="sm" />
                       <Skeleton height={10} width="20%" radius="sm" />
                     </Stack>
                     <Skeleton height={20} width={60} radius="xl" />
-                    <Skeleton height={20} width={80} radius="xl" />
                   </Group>
                 </Box>
               ))}
@@ -260,10 +254,9 @@ function AdminSubscriptionsPage() {
               minHeight={300}
               noRecordsText={
                 hasActiveFilters
-                  ? t`No subscriptions match the current filters`
-                  : t`No subscriptions found`
+                  ? t`No organizations match the current filters`
+                  : t`No organizations found`
               }
-              // ── Sorting ──────────────────────────────────────────────────
               sortStatus={sortStatus}
               onSortStatusChange={handleSortChange}
               styles={{
@@ -278,76 +271,74 @@ function AdminSubscriptionsPage() {
               }}
               columns={[
                 {
-                  accessor: "tenantKey",
-                  title: t`Tenant`,
+                  accessor: "name",
+                  title: t`Organization`,
                   sortable: true,
-                  render: (subscription) => (
-                    <Stack gap={1}>
-                      <Text size="sm" fw={500} style={{ lineHeight: 1.3 }}>
-                        {subscription.tenantKey}
-                      </Text>
-                      <Text size="xs" c="dimmed" style={{ lineHeight: 1.3 }}>
-                        {subscription.externalSubscriptionId}
-                      </Text>
-                    </Stack>
+                  render: (tenant) => (
+                    <Group gap="sm" wrap="nowrap">
+                      <Box
+                        style={{
+                          width: 36,
+                          height: 36,
+                          borderRadius: "50%",
+                          background: "var(--mantine-color-blue-1)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <IconBuilding size={18} color="var(--mantine-color-blue-6)" />
+                      </Box>
+                      <Stack gap={1}>
+                        <Text
+                          component={Link}
+                          to="/admin/organizations/$tenantKey"
+                          params={{ tenantKey: tenant.tenantKey }}
+                          size="sm"
+                          fw={500}
+                          style={{ lineHeight: 1.3, textDecoration: "none", color: "inherit" }}
+                          styles={{
+                            root: {
+                              "&:hover": {
+                                color: "var(--mantine-color-blue-6)",
+                                textDecoration: "underline",
+                              },
+                            },
+                          }}
+                        >
+                          {tenant.name}
+                        </Text>
+                        <Code
+                          style={{
+                            fontSize: "var(--mantine-font-size-xs)",
+                            lineHeight: 1.3,
+                            padding: "0 4px",
+                          }}
+                        >
+                          {tenant.tenantKey}
+                        </Code>
+                      </Stack>
+                    </Group>
                   ),
                 },
                 {
-                  accessor: "planId",
-                  title: t`Plan`,
+                  accessor: "tenantKey",
+                  title: t`Key`,
                   sortable: true,
-                  render: (subscription) => (
-                    <Text size="sm" truncate="end" maw={180}>
-                      {subscription.planId}
-                    </Text>
-                  ),
+                  hidden: true,
                 },
                 {
                   accessor: "status",
                   title: t`Status`,
-                  sortable: true,
-                  render: (subscription) => (
-                    <Badge
-                      variant="light"
-                      color={getStatusColor(subscription.status)}
-                      size="sm"
-                      radius="sm"
-                    >
-                      {subscription.status}
-                    </Badge>
-                  ),
-                },
-                {
-                  accessor: "currentPeriodEnd",
-                  title: t`Period End`,
-                  render: (subscription) => (
-                    <Text size="sm" c="dimmed">
-                      {dayjs(subscription.currentPeriodEnd).format("MMM D, YYYY")}
-                    </Text>
-                  ),
-                },
-                {
-                  accessor: "cancelAtPeriodEnd",
-                  title: t`Auto-Renew`,
-                  render: (subscription) => (
-                    <Badge
-                      variant="dot"
-                      color={subscription.cancelAtPeriodEnd ? "orange" : "green"}
-                      size="sm"
-                    >
-                      {subscription.cancelAtPeriodEnd ? t`Canceling` : t`Active`}
-                    </Badge>
-                  ),
+                  render: (tenant) => <TenantStatusBadge status={tenant.status} />,
                 },
                 {
                   accessor: "updatedAt",
                   title: t`Last updated`,
                   sortable: true,
-                  render: (subscription) => (
+                  render: (tenant) => (
                     <Text size="sm" c="dimmed">
-                      {subscription.updatedAt
-                        ? dayjs(subscription.updatedAt).format("MMM D, YYYY")
-                        : "—"}
+                      {tenant.updatedAt ? dayjs(tenant.updatedAt).format("MMM D, YYYY") : "—"}
                     </Text>
                   ),
                 },
@@ -355,10 +346,45 @@ function AdminSubscriptionsPage() {
                   accessor: "createdAt",
                   title: t`Created`,
                   sortable: true,
-                  render: (subscription) => (
+                  render: (tenant) => (
                     <Text size="sm" c="dimmed">
-                      {dayjs(subscription.createdAt).format("MMM D, YYYY")}
+                      {dayjs(tenant.createdAt).format("MMM D, YYYY")}
                     </Text>
+                  ),
+                },
+                {
+                  accessor: "actions",
+                  title: "",
+                  textAlign: "right",
+                  render: (tenant) => (
+                    <Group gap={4} justify="flex-end" wrap="nowrap">
+                      <Tooltip label={t`View organization`} withArrow>
+                        <ActionIcon
+                          variant="subtle"
+                          color="gray"
+                          size="sm"
+                          component={Link}
+                          to="/admin/organizations/$tenantKey"
+                          params={{ tenantKey: tenant.tenantKey }}
+                          onClick={(e: React.MouseEvent) => e.stopPropagation()}
+                        >
+                          <IconEye size={15} />
+                        </ActionIcon>
+                      </Tooltip>
+                      <Tooltip label={t`Edit organization`} withArrow>
+                        <ActionIcon
+                          variant="subtle"
+                          color="blue"
+                          size="sm"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleEdit(tenant);
+                          }}
+                        >
+                          <IconEdit size={15} />
+                        </ActionIcon>
+                      </Tooltip>
+                    </Group>
                   ),
                 },
               ]}
@@ -369,11 +395,13 @@ function AdminSubscriptionsPage() {
         {!isLoading && totalElements > 0 && (
           <Text size="xs" c="dimmed">
             <Trans>
-              Showing {rangeStart}–{rangeEnd} of {totalElements} subscriptions
+              Showing {rangeStart}–{rangeEnd} of {totalElements} organizations
             </Trans>
           </Text>
         )}
       </Stack>
+
+      <EditTenantModal tenant={selectedTenant} opened={editModalOpened} onClose={handleCloseEdit} />
     </Container>
   );
 }

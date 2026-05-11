@@ -27,7 +27,6 @@ import {
   IconEdit,
   IconRefresh,
   IconAlertCircle,
-  IconDownload,
   IconFilter,
 } from "@tabler/icons-react";
 import dayjs from "dayjs";
@@ -154,11 +153,7 @@ function AdminUsersPage() {
           { label: <Trans>Platform</Trans> },
           { label: <Trans>Users</Trans> },
         ]}
-        toolbar={
-          <Button variant="light" size="sm" leftSection={<IconDownload size={15} />} disabled>
-            <Trans>Export</Trans>
-          </Button>
-        }
+        toolbar={undefined}
       />
 
       <Stack gap="md">
