@@ -268,8 +268,8 @@ importers:
         specifier: ^3.3.0
         version: 3.3.0(@types/node@25.6.2)(typescript@6.0.3)
       gitzy:
-        specifier: 7.0.8
-        version: 7.0.8
+        specifier: 7.0.10
+        version: 7.0.10
       globals:
         specifier: ^17.6.0
         version: 17.6.0
@@ -4100,8 +4100,8 @@ packages:
   git-url-parse@16.1.0:
     resolution: {integrity: sha512-cPLz4HuK86wClEW7iDdeAKcCVlWXmrLpb2L+G9goW0Z1dtpNS6BXXSOckUTlJT/LDQViE1QZKstNORzHsLnobw==}
 
-  gitzy@7.0.8:
-    resolution: {integrity: sha512-7Ode2c7v90wEASc1IMaiSb6L0aL1ZrJHPrnAyf5NnpnuxUOpNartHNmV8GjS/GbPZpyRYnH+rlVffAdH5Fc0NA==}
+  gitzy@7.0.10:
+    resolution: {integrity: sha512-cRXykQz/ueG/zFJHwLKf9I/dRVpJPSto9sqIW8s0sUAzcDkRy3LlNtIkJ+ZMWWGQ5e3kUv357of6BDyi/hzIjQ==}
     engines: {node: ^22.13.0 || >=24}
     hasBin: true
 
@@ -4287,6 +4287,9 @@ packages:
 
   immer@11.1.7:
     resolution: {integrity: sha512-LFVFtAROHcDy1er5UI6nodRFnZ2SgdCXhfNSI+DpObO8N7Pur/muBGsjzH5wpnFHCYhYVQxZskCkV4koQ//3/Q==}
+
+  immer@11.1.8:
+    resolution: {integrity: sha512-/tbkHMW7y10Lx6i1crLjD4/OhNkRG+Fo7byZHtah0547nIeXYcpIXaUh0IAQY6gO5459qpGGYapcEOHtFXkIuA==}
 
   import-fresh@3.3.1:
     resolution: {integrity: sha512-TR3KfrTZTYLPB6jUjfx6MF9WcWrHL9su5TObK4ZkYgBdWKPOFoSoQIdEuTuR82pmtxH2spWG9h6etwfr1pLBqQ==}
@@ -7907,7 +7910,7 @@ snapshots:
     dependencies:
       '@standard-schema/spec': 1.1.0
       '@standard-schema/utils': 0.3.0
-      immer: 11.1.7
+      immer: 11.1.8
       redux: 5.0.1
       redux-thunk: 3.1.0(redux@5.0.1)
       reselect: 5.1.1
@@ -10050,7 +10053,7 @@ snapshots:
     dependencies:
       git-up: 8.1.1
 
-  gitzy@7.0.8: {}
+  gitzy@7.0.10: {}
 
   glob-parent@5.1.2:
     dependencies:
@@ -10240,6 +10243,8 @@ snapshots:
   immer@10.2.0: {}
 
   immer@11.1.7: {}
+
+  immer@11.1.8: {}
 
   import-fresh@3.3.1:
     dependencies:
