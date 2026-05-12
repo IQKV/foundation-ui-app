@@ -12,7 +12,7 @@ function NotFoundPage() {
   return (
     <Container size="sm" py="xl">
       <Helmet>
-        <title>{t`Page Not Found | IQKV Admin`}</title>
+        <title>{t`Page Not Found |Key Value Admin`}</title>
       </Helmet>
       <Stack align="center" gap="md">
         <Title>404</Title>

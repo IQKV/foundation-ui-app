@@ -37,7 +37,7 @@ function LoadingDemoPage() {
   return (
     <Container size="md" py="xl">
       <Helmet>
-        <title>{t`Loading Demo | IQKV Admin`}</title>
+        <title>{t`Loading Demo |Key Value Admin`}</title>
       </Helmet>
       <Stack gap="xl">
         <div>

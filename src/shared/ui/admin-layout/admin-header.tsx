@@ -41,7 +41,7 @@ export function AdminHeader({ opened, onToggle }: AdminHeaderProps) {
           </Box>
 
           <Text fw={700} size="sm" c="dark.8" style={{ letterSpacing: "-0.01em" }}>
-            IQKV Admin
+           Key Value Admin
           </Text>
         </Group>
       </Group>

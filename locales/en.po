@@ -22,16 +22,16 @@ msgstr "{0}"
 
 #. placeholder {0}: tenant?.name
 #: src/pages/admin/organizations.$tenantKey.tsx
-msgid "{0} | IQKV Admin"
-msgstr "{0} | IQKV Admin"
+msgid "{0} |Key Value Admin"
+msgstr "{0} |Key Value Admin"
 
 #: src/pages/admin/organizations.$tenantKey.tsx
 msgid "{activeSubscriptions} active subscription(s)"
 msgstr "{activeSubscriptions} active subscription(s)"
 
 #: src/pages/admin/users.$userId.tsx
-msgid "{displayName} | IQKV Admin"
-msgstr "{displayName} | IQKV Admin"
+msgid "{displayName} |Key Value Admin"
+msgstr "{displayName} |Key Value Admin"
 
 #: src/pages/loading-demo.tsx
 msgid "1. Initial Page Load"
@@ -46,8 +46,8 @@ msgid "Access Denied"
 msgstr "Access Denied"
 
 #: src/pages/unauthorized.tsx
-msgid "Access Denied | IQKV Admin"
-msgstr "Access Denied | IQKV Admin"
+msgid "Access Denied |Key Value Admin"
+msgstr "Access Denied |Key Value Admin"
 
 #: src/pages/loading-demo.tsx
 msgid "Accessible with proper keyboard handling"
@@ -148,8 +148,8 @@ msgid "Dashboard"
 msgstr "Dashboard"
 
 #: src/pages/admin/index.tsx
-msgid "Dashboard | IQKV Admin"
-msgstr "Dashboard | IQKV Admin"
+msgid "Dashboard |Key Value Admin"
+msgstr "Dashboard |Key Value Admin"
 
 #: src/shared/ui/tenant-status-badge/tenant-status-badge.tsx
 #: src/shared/ui/user-status-badge/user-status-badge.tsx
@@ -326,8 +326,8 @@ msgid "Last updated"
 msgstr "Last updated"
 
 #: src/pages/loading-demo.tsx
-msgid "Loading Demo | IQKV Admin"
-msgstr "Loading Demo | IQKV Admin"
+msgid "Loading Demo |Key Value Admin"
+msgstr "Loading Demo |Key Value Admin"
 
 #: src/pages/loading-demo.tsx
 msgid "Loading States Demo"
@@ -422,8 +422,8 @@ msgid "Organization"
 msgstr "Organization"
 
 #: src/pages/admin/organizations.$tenantKey.tsx
-msgid "Organization | IQKV Admin"
-msgstr "Organization | IQKV Admin"
+msgid "Organization |Key Value Admin"
+msgstr "Organization |Key Value Admin"
 
 #: src/features/edit-tenant/ui/edit-tenant-modal.tsx
 msgid "Organization name"
@@ -446,8 +446,8 @@ msgid "Organizations"
 msgstr "Organizations"
 
 #: src/pages/admin/organizations.index.tsx
-msgid "Organizations | IQKV Admin"
-msgstr "Organizations | IQKV Admin"
+msgid "Organizations |Key Value Admin"
+msgstr "Organizations |Key Value Admin"
 
 #: src/pages/admin/organizations.$tenantKey.tsx
 #: src/pages/admin/users.$userId.tsx
@@ -455,8 +455,8 @@ msgid "Overview"
 msgstr "Overview"
 
 #: src/pages/404.tsx
-msgid "Page Not Found | IQKV Admin"
-msgstr "Page Not Found | IQKV Admin"
+msgid "Page Not Found |Key Value Admin"
+msgstr "Page Not Found |Key Value Admin"
 
 #: src/pages/404.tsx
 msgid "Page not found."
@@ -541,8 +541,8 @@ msgid "Search…"
 msgstr "Search…"
 
 #: src/pages/500.tsx
-msgid "Server Error | IQKV Admin"
-msgstr "Server Error | IQKV Admin"
+msgid "Server Error |Key Value Admin"
+msgstr "Server Error |Key Value Admin"
 
 #: src/shared/ui/admin-layout/admin-nav.tsx
 #~ msgid "Settings"
@@ -571,8 +571,8 @@ msgid "Sign in"
 msgstr "Sign in"
 
 #: src/pages/sign-in.tsx
-msgid "Sign In | IQKV Admin"
-msgstr "Sign In | IQKV Admin"
+msgid "Sign In |Key Value Admin"
+msgstr "Sign In |Key Value Admin"
 
 #: src/features/sign-out/ui/sign-out-button.tsx
 msgid "Sign out"
@@ -610,8 +610,8 @@ msgid "Subscriptions"
 msgstr "Subscriptions"
 
 #: src/pages/admin/subscriptions.tsx
-msgid "Subscriptions | IQKV Admin"
-msgstr "Subscriptions | IQKV Admin"
+msgid "Subscriptions |Key Value Admin"
+msgstr "Subscriptions |Key Value Admin"
 
 #: src/features/edit-tenant/model/types.ts
 #: src/features/edit-user/model/types.ts
@@ -668,8 +668,8 @@ msgid "User"
 msgstr "User"
 
 #: src/pages/admin/users.$userId.tsx
-msgid "User | IQKV Admin"
-msgstr "User | IQKV Admin"
+msgid "User |Key Value Admin"
+msgstr "User |Key Value Admin"
 
 #: src/pages/admin/users.$userId.tsx
 #: src/pages/admin/users.index.tsx
@@ -678,8 +678,8 @@ msgid "Users"
 msgstr "Users"
 
 #: src/pages/admin/users.index.tsx
-msgid "Users | IQKV Admin"
-msgstr "Users | IQKV Admin"
+msgid "Users |Key Value Admin"
+msgstr "Users |Key Value Admin"
 
 #: src/pages/loading-demo.tsx
 msgid "Uses <0>@mantine/nprogress</0> for top loading bar"

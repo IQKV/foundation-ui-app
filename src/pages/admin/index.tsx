@@ -58,7 +58,7 @@ function AdminDashboardPage() {
   return (
     <Container size="xl" py={0}>
       <Helmet>
-        <title>{t`Dashboard | IQKV Admin`}</title>
+        <title>{t`Dashboard |Key Value Admin`}</title>
       </Helmet>
       <PageHeader
         title={<Trans>Dashboard</Trans>}

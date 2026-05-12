@@ -129,7 +129,7 @@ function AdminSubscriptionsPage() {
   return (
     <Container size="xl" py={0}>
       <Helmet>
-        <title>{t`Subscriptions | IQKV Admin`}</title>
+        <title>{t`Subscriptions |Key Value Admin`}</title>
       </Helmet>
       <PageHeader
         title={<Trans>Subscriptions</Trans>}

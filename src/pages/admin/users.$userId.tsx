@@ -266,7 +266,7 @@ function UserDetailPage() {
   return (
     <Container size="xl" py={0}>
       <Helmet>
-        <title>{isLoading ? t`User | IQKV Admin` : t`${displayName} | IQKV Admin`}</title>
+        <title>{isLoading ? t`User |Key Value Admin` : t`${displayName} |Key Value Admin`}</title>
       </Helmet>
 
       <PageHeader

@@ -522,7 +522,7 @@ function OrganizationDetailPage() {
   return (
     <Container size="xl" py={0}>
       <Helmet>
-        <title>{isLoading ? t`Organization | IQKV Admin` : t`${tenant?.name} | IQKV Admin`}</title>
+        <title>{isLoading ? t`Organization |Key Value Admin` : t`${tenant?.name} |Key Value Admin`}</title>
       </Helmet>
 
       <PageHeader

@@ -46,14 +46,14 @@ function SignInPage() {
   return (
     <Center mih="100vh" bg="gray.0">
       <Helmet>
-        <title>{t`Sign In | IQKV Admin`}</title>
+        <title>{t`Sign In |Key Value Admin`}</title>
       </Helmet>
       <Container size={420} w="100%">
         <Stack gap="xl">
           {/* Application name / branding — Requirement 8.6 */}
           <Box ta="center">
             <Title order={1} size="h2" fw={700}>
-              IQKV Admin
+             Key Value Admin
             </Title>
             <Text c="dimmed" size="sm" mt={4}>
               <Trans>Platform administration</Trans>

@@ -12,7 +12,7 @@ function InternalServerErrorPage() {
   return (
     <Container size="sm" py="xl">
       <Helmet>
-        <title>{t`Server Error | IQKV Admin`}</title>
+        <title>{t`Server Error |Key Value Admin`}</title>
       </Helmet>
       <Stack align="center" gap="md">
         <Title>500</Title>

@@ -21,7 +21,7 @@ function UnauthorizedPage() {
   return (
     <Center mih="100vh" bg="gray.0">
       <Helmet>
-        <title>{t`Access Denied | IQKV Admin`}</title>
+        <title>{t`Access Denied |Key Value Admin`}</title>
       </Helmet>
       <Container size="sm">
         <Stack align="center" gap="md">
