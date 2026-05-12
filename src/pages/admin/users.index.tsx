@@ -341,7 +341,11 @@ function AdminUsersPage() {
                   title: t`Organization`,
                   render: (user) => {
                     if (!user.organizations || user.organizations.length === 0) {
-                      return <Text size="sm" c="dimmed">—</Text>;
+                      return (
+                        <Text size="sm" c="dimmed">
+                          —
+                        </Text>
+                      );
                     }
                     if (user.organizations.length === 1) {
                       return (

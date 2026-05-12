@@ -128,11 +128,7 @@ function OverviewTab({ user, isLoading }: { user: IamUser | undefined; isLoading
 
       {/* Organizations list */}
       <Paper withBorder radius="md" style={{ overflow: "hidden" }}>
-        <Group
-          px="md"
-          py="sm"
-          style={{ borderBottom: "1px solid var(--mantine-color-gray-2)" }}
-        >
+        <Group px="md" py="sm" style={{ borderBottom: "1px solid var(--mantine-color-gray-2)" }}>
           <IconBuilding size={15} color="var(--mantine-color-gray-6)" />
           <Text fw={600} size="sm">
             <Trans>Organizations</Trans>
@@ -270,15 +266,11 @@ function UserDetailPage() {
   return (
     <Container size="xl" py={0}>
       <Helmet>
-        <title>
-          {isLoading ? t`User | IQKV Admin` : t`${displayName} | IQKV Admin`}
-        </title>
+        <title>{isLoading ? t`User | IQKV Admin` : t`${displayName} | IQKV Admin`}</title>
       </Helmet>
 
       <PageHeader
-        title={
-          isLoading ? <Skeleton height={24} width={160} radius="sm" /> : <>{displayName}</>
-        }
+        title={isLoading ? <Skeleton height={24} width={160} radius="sm" /> : <>{displayName}</>}
         breadcrumbs={[
           { label: <Trans>Home</Trans>, to: "/admin/" },
           { label: <Trans>Users</Trans>, to: "/admin/users" },
@@ -364,12 +356,12 @@ function UserDetailPage() {
               {isLoading ? (
                 <Skeleton height={14} width={80} radius="sm" />
               ) : (
-                <Badge
-                  variant="dot"
-                  color={user?.emailVerified ? "green" : "orange"}
-                  size="sm"
-                >
-                  {user?.emailVerified ? <Trans>Email verified</Trans> : <Trans>Email unverified</Trans>}
+                <Badge variant="dot" color={user?.emailVerified ? "green" : "orange"} size="sm">
+                  {user?.emailVerified ? (
+                    <Trans>Email verified</Trans>
+                  ) : (
+                    <Trans>Email unverified</Trans>
+                  )}
                 </Badge>
               )}
             </Group>
@@ -382,8 +374,7 @@ function UserDetailPage() {
                 <Skeleton height={14} width={100} radius="sm" />
               ) : (
                 <Text size="sm" c="dimmed">
-                  <Trans>Joined</Trans>{" "}
-                  {user ? dayjs(user.createdAt).format("MMM D, YYYY") : "—"}
+                  <Trans>Joined</Trans> {user ? dayjs(user.createdAt).format("MMM D, YYYY") : "—"}
                 </Text>
               )}
             </Group>
