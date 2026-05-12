@@ -1,6 +1,7 @@
 import { Group, Text, Burger, Box, Divider } from "@mantine/core";
 import { IconShieldHalf } from "@tabler/icons-react";
 import { SignOutButton } from "@/features/sign-out";
+import { APP_NAME } from "@/shared/lib/page-title";
 
 interface AdminHeaderProps {
   opened: boolean;
@@ -41,7 +42,7 @@ export function AdminHeader({ opened, onToggle }: AdminHeaderProps) {
           </Box>
 
           <Text fw={700} size="sm" c="dark.8" style={{ letterSpacing: "-0.01em" }}>
-           Key Value Admin
+            {APP_NAME}
           </Text>
         </Group>
       </Group>

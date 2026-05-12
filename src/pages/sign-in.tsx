@@ -4,6 +4,7 @@ import { IconAlertCircle, IconInfoCircle } from "@tabler/icons-react";
 import { z } from "zod";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Helmet } from "@dr.pogodin/react-helmet";
+import { pageTitle, APP_NAME } from "@/shared/lib/page-title";
 import { SignInForm } from "@/features/sign-in";
 import { decodeJwt, hasPlatformAdmin } from "@/shared/lib/jwt";
 import { getAccessToken } from "@/processes/session";
@@ -46,14 +47,14 @@ function SignInPage() {
   return (
     <Center mih="100vh" bg="gray.0">
       <Helmet>
-        <title>{t`Sign In |Key Value Admin`}</title>
+        <title>{pageTitle(t`Sign In`)}</title>
       </Helmet>
       <Container size={420} w="100%">
         <Stack gap="xl">
           {/* Application name / branding — Requirement 8.6 */}
           <Box ta="center">
             <Title order={1} size="h2" fw={700}>
-             Key Value Admin
+              {APP_NAME}
             </Title>
             <Text c="dimmed" size="sm" mt={4}>
               <Trans>Platform administration</Trans>

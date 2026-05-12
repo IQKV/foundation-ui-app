@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button, Center, Container, Stack, Text, Title } from "@mantine/core";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Helmet } from "@dr.pogodin/react-helmet";
+import { pageTitle } from "@/shared/lib/page-title";
 import { SignOutButton } from "@/features/sign-out";
 
 // ─── Route ────────────────────────────────────────────────────────────────────
@@ -21,7 +22,7 @@ function UnauthorizedPage() {
   return (
     <Center mih="100vh" bg="gray.0">
       <Helmet>
-        <title>{t`Access Denied |Key Value Admin`}</title>
+        <title>{pageTitle(t`Access Denied`)}</title>
       </Helmet>
       <Container size="sm">
         <Stack align="center" gap="md">

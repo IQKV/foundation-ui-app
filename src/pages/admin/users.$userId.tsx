@@ -32,6 +32,7 @@ import {
 import dayjs from "dayjs";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Helmet } from "@dr.pogodin/react-helmet";
+import { pageTitle } from "@/shared/lib/page-title";
 import { iamApi } from "@/shared/api";
 import { UserStatusBadge, PageHeader } from "@/shared/ui";
 import { useState } from "react";
@@ -266,7 +267,7 @@ function UserDetailPage() {
   return (
     <Container size="xl" py={0}>
       <Helmet>
-        <title>{isLoading ? t`User |Key Value Admin` : t`${displayName} |Key Value Admin`}</title>
+        <title>{pageTitle(isLoading ? t`User` : displayName)}</title>
       </Helmet>
 
       <PageHeader

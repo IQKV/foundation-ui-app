@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Container, Title, Text, Button, Stack } from "@mantine/core";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Helmet } from "@dr.pogodin/react-helmet";
+import { pageTitle } from "@/shared/lib/page-title";
 
 export const Route = createFileRoute("/500")({
   component: InternalServerErrorPage,
@@ -12,7 +13,7 @@ function InternalServerErrorPage() {
   return (
     <Container size="sm" py="xl">
       <Helmet>
-        <title>{t`Server Error |Key Value Admin`}</title>
+        <title>{pageTitle(t`Server Error`)}</title>
       </Helmet>
       <Stack align="center" gap="md">
         <Title>500</Title>

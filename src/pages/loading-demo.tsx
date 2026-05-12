@@ -4,6 +4,7 @@ import { nprogress } from "@mantine/nprogress";
 import { useState } from "react";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Helmet } from "@dr.pogodin/react-helmet";
+import { pageTitle } from "@/shared/lib/page-title";
 import { LoadingOverlay } from "@/shared/ui";
 
 export const Route = createFileRoute("/loading-demo")({
@@ -37,7 +38,7 @@ function LoadingDemoPage() {
   return (
     <Container size="md" py="xl">
       <Helmet>
-        <title>{t`Loading Demo |Key Value Admin`}</title>
+        <title>{pageTitle(t`Loading Demo`)}</title>
       </Helmet>
       <Stack gap="xl">
         <div>

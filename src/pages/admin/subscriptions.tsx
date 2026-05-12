@@ -24,6 +24,7 @@ import { IconSearch, IconRefresh, IconAlertCircle, IconFilter } from "@tabler/ic
 import dayjs from "dayjs";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Helmet } from "@dr.pogodin/react-helmet";
+import { pageTitle } from "@/shared/lib/page-title";
 import { billingApi } from "@/shared/api";
 import type { Subscription, SubscriptionSortField, SortDirection } from "@/shared/api";
 import { PageHeader } from "@/shared/ui";
@@ -129,7 +130,7 @@ function AdminSubscriptionsPage() {
   return (
     <Container size="xl" py={0}>
       <Helmet>
-        <title>{t`Subscriptions |Key Value Admin`}</title>
+        <title>{pageTitle(t`Subscriptions`)}</title>
       </Helmet>
       <PageHeader
         title={<Trans>Subscriptions</Trans>}

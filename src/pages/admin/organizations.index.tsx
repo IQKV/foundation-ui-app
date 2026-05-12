@@ -33,6 +33,7 @@ import {
 import dayjs from "dayjs";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Helmet } from "@dr.pogodin/react-helmet";
+import { pageTitle } from "@/shared/lib/page-title";
 import { iamApi } from "@/shared/api";
 import type { IamTenant, IamTenantSortField, IamTenantStatus, SortDirection } from "@/shared/api";
 import { TenantStatusBadge, PageHeader } from "@/shared/ui";
@@ -128,7 +129,7 @@ function AdminOrganizationsPage() {
   return (
     <Container size="xl" py={0}>
       <Helmet>
-        <title>{t`Organizations |Key Value Admin`}</title>
+        <title>{pageTitle(t`Organizations`)}</title>
       </Helmet>
       <PageHeader
         title={<Trans>Organizations</Trans>}

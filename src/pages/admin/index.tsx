@@ -19,6 +19,7 @@ import {
 } from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Helmet } from "@dr.pogodin/react-helmet";
+import { pageTitle } from "@/shared/lib/page-title";
 import { PageHeader } from "@/shared/ui";
 import { useDashboardCounts } from "@/shared/api";
 import type { DashboardCountResult } from "@/shared/api";
@@ -58,7 +59,7 @@ function AdminDashboardPage() {
   return (
     <Container size="xl" py={0}>
       <Helmet>
-        <title>{t`Dashboard |Key Value Admin`}</title>
+        <title>{pageTitle(t`Dashboard`)}</title>
       </Helmet>
       <PageHeader
         title={<Trans>Dashboard</Trans>}

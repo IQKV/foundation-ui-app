@@ -33,6 +33,7 @@ import {
 import dayjs from "dayjs";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Helmet } from "@dr.pogodin/react-helmet";
+import { pageTitle } from "@/shared/lib/page-title";
 import { iamApi } from "@/shared/api";
 import type { IamUser, IamUserSortField, IamUserStatus, SortDirection } from "@/shared/api";
 import { UserStatusBadge, PageHeader } from "@/shared/ui";
@@ -139,7 +140,7 @@ function AdminUsersPage() {
   return (
     <Container size="xl" py={0}>
       <Helmet>
-        <title>{t`Users |Key Value Admin`}</title>
+        <title>{pageTitle(t`Users`)}</title>
       </Helmet>
       <PageHeader
         title={<Trans>Users</Trans>}

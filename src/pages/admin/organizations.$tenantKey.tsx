@@ -37,6 +37,7 @@ import {
 import dayjs from "dayjs";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Helmet } from "@dr.pogodin/react-helmet";
+import { pageTitle } from "@/shared/lib/page-title";
 import { iamApi, billingApi } from "@/shared/api";
 import { TenantStatusBadge, PageHeader } from "@/shared/ui";
 import { useState } from "react";
@@ -522,7 +523,7 @@ function OrganizationDetailPage() {
   return (
     <Container size="xl" py={0}>
       <Helmet>
-        <title>{isLoading ? t`Organization |Key Value Admin` : t`${tenant?.name} |Key Value Admin`}</title>
+        <title>{pageTitle(isLoading ? t`Organization` : (tenant?.name ?? t`Organization`))}</title>
       </Helmet>
 
       <PageHeader
