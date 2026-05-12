@@ -290,22 +290,7 @@ function AdminOrganizationsPage() {
                         <IconBuilding size={18} color="var(--mantine-color-blue-6)" />
                       </Box>
                       <Stack gap={1}>
-                        <Text
-                          component={Link}
-                          to="/admin/organizations/$tenantKey"
-                          params={{ tenantKey: tenant.tenantKey }}
-                          size="sm"
-                          fw={500}
-                          style={{ lineHeight: 1.3, textDecoration: "none", color: "inherit" }}
-                          styles={{
-                            root: {
-                              "&:hover": {
-                                color: "var(--mantine-color-blue-6)",
-                                textDecoration: "underline",
-                              },
-                            },
-                          }}
-                        >
+                        <Text size="sm" fw={500} style={{ lineHeight: 1.3 }}>
                           {tenant.name}
                         </Text>
                         <Code
@@ -365,7 +350,7 @@ function AdminOrganizationsPage() {
                           size="sm"
                           component={Link}
                           to="/admin/organizations/$tenantKey"
-                          params={{ tenantKey: tenant.tenantKey }}
+                          params={{ tenantKey: tenant.tenantKey } as never}
                           onClick={(e: React.MouseEvent) => e.stopPropagation()}
                         >
                           <IconEye size={15} />
