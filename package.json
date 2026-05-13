@@ -146,7 +146,7 @@
     "msw": "^2.14.5",
     "nx": "^22.7.1",
     "oxfmt": "^0.48.0",
-    "oxlint": "^1.63.0",
+    "oxlint": "^1.64.0",
     "oxlint-tsgolint": "^0.22.1",
     "postcss": "^8.5.14",
     "postcss-preset-mantine": "1.18.0",
