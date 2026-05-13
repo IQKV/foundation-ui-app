@@ -1,29 +1,8 @@
 import { httpClient } from "./http-client";
 
-// ─── Types ────────────────────────────────────────────────────────────────────
+// ─── Shared types ─────────────────────────────────────────────────────────────
 
-export type IamUserStatus = "ACTIVE" | "LOCKED" | "SUSPENDED" | "DELETED";
-export type IamTenantStatus = "ACTIVE" | "SUSPENDED" | "DELETED";
-
-export type IamUserSortField = "email" | "firstName" | "lastName" | "updatedAt" | "createdAt";
-export type IamTenantSortField = "name" | "tenantKey" | "updatedAt" | "createdAt";
 export type SortDirection = "asc" | "desc";
-
-export interface CountResponse {
-  total: number;
-}
-
-export interface IamUser {
-  id: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  status: IamUserStatus;
-  emailVerified: boolean;
-  organizations: string[];
-  createdAt: string;
-  updatedAt: string;
-}
 
 export interface PagedResponse<T> {
   content: T[];
@@ -33,80 +12,114 @@ export interface PagedResponse<T> {
   totalPages: number;
 }
 
-export interface ListIamUsersParams {
-  page?: number;
-  size?: number;
-  search?: string;
-  status?: IamUserStatus;
-  sortBy?: IamUserSortField;
-  sortDir?: SortDirection;
-}
+// ─── User types ───────────────────────────────────────────────────────────────
 
-export interface IamTenant {
+export interface UserProfile {
   id: string;
-  tenantKey: string;
-  name: string;
-  status: IamTenantStatus;
+  email: string;
+  firstName: string;
+  lastName: string;
+  emailVerified: boolean;
   createdAt: string;
   updatedAt: string;
 }
 
-export interface ListIamTenantsParams {
+export interface UpdateProfileRequest {
+  firstName?: string;
+  lastName?: string;
+}
+
+// ─── Tenant types ─────────────────────────────────────────────────────────────
+
+export type TenantStatus = "ACTIVE" | "SUSPENDED" | "DELETED";
+
+export interface Tenant {
+  id: string;
+  tenantKey: string;
+  name: string;
+  status: TenantStatus;
+  createdAt: string;
+  updatedAt: string;
+}
+
+// ─── Member types ─────────────────────────────────────────────────────────────
+
+export type MemberStatus = "ACTIVE" | "SUSPENDED" | "REMOVED";
+
+export interface TenantMember {
+  id: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  emailVerified: boolean;
+  membershipStatus: MemberStatus;
+  authorities: string[];
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ListMembersParams {
   page?: number;
   size?: number;
   search?: string;
-  status?: IamTenantStatus;
-  sortBy?: IamTenantSortField;
+  sortBy?: "firstName" | "email" | "createdAt";
   sortDir?: SortDirection;
 }
 
-export interface ListTenantMembersParams {
-  page?: number;
-  size?: number;
-  search?: string;
-  status?: IamUserStatus;
-  sortBy?: IamUserSortField;
-  sortDir?: SortDirection;
+// ─── Invitation types ─────────────────────────────────────────────────────────
+
+export interface Invitation {
+  id: string;
+  email: string;
+  tenantKey: string;
+  status: string;
+  createdAt: string;
+  expiresAt: string;
+}
+
+export interface SendInvitationRequest {
+  email: string;
 }
 
 // ─── API ──────────────────────────────────────────────────────────────────────
 
 export const iamApi = {
-  countUsers: () => httpClient.get<CountResponse>("/v1/iam/admin/users/count").then((r) => r.data),
+  // ── Self-service user ──────────────────────────────────────────────────────
 
-  listUsers: (params: ListIamUsersParams = {}) =>
-    httpClient.get<PagedResponse<IamUser>>("/v1/iam/admin/users", { params }).then((r) => r.data),
+  /** Get the current user's own profile. */
+  getMe: () => httpClient.get<UserProfile>("/v1/iam/users/me").then((r) => r.data),
 
-  getUser: (id: string) => httpClient.get<IamUser>(`/v1/iam/admin/users/${id}`).then((r) => r.data),
+  /** Update the current user's own profile. */
+  updateMe: (data: UpdateProfileRequest) =>
+    httpClient.patch<UserProfile>("/v1/iam/users/me", data).then((r) => r.data),
 
-  updateUser: (id: string, data: Partial<Pick<IamUser, "firstName" | "lastName" | "status">>) =>
-    httpClient.patch<IamUser>(`/v1/iam/admin/users/${id}`, data).then((r) => r.data),
+  // ── Tenant (TENANT_OWNER only) ─────────────────────────────────────────────
 
-  deleteUser: (id: string) => httpClient.delete(`/v1/iam/admin/users/${id}`),
-
-  countTenants: () =>
-    httpClient.get<CountResponse>("/v1/iam/admin/tenants/count").then((r) => r.data),
-
-  listTenants: (params: ListIamTenantsParams = {}) =>
-    httpClient
-      .get<PagedResponse<IamTenant>>("/v1/iam/admin/tenants", { params })
-      .then((r) => r.data),
-
+  /** Get the current tenant's details. */
   getTenant: (tenantKey: string) =>
-    httpClient.get<IamTenant>(`/v1/iam/admin/tenants/${tenantKey}`).then((r) => r.data),
+    httpClient.get<Tenant>(`/v1/iam/tenants/${tenantKey}`).then((r) => r.data),
 
-  countTenantMembers: (tenantKey: string) =>
+  // ── Members (TENANT_OWNER / ADMIN) ────────────────────────────────────────
+
+  /** List members of the current tenant. */
+  listMembers: (tenantKey: string, params: ListMembersParams = {}) =>
     httpClient
-      .get<CountResponse>(`/v1/iam/admin/tenants/${tenantKey}/members/count`)
+      .get<PagedResponse<TenantMember>>(`/v1/iam/admin/tenants/${tenantKey}/members`, { params })
       .then((r) => r.data),
 
-  listTenantMembers: (tenantKey: string, params: ListTenantMembersParams = {}) =>
+  // ── Invitations (TENANT_OWNER / ADMIN) ────────────────────────────────────
+
+  /** List pending invitations for the current tenant. */
+  listInvitations: (tenantKey: string) =>
+    httpClient.get<Invitation[]>(`/v1/iam/tenants/${tenantKey}/invitations`).then((r) => r.data),
+
+  /** Send an invitation to a new member. */
+  sendInvitation: (tenantKey: string, data: SendInvitationRequest) =>
     httpClient
-      .get<PagedResponse<IamUser>>(`/v1/iam/admin/tenants/${tenantKey}/members`, { params })
+      .post<Invitation>(`/v1/iam/tenants/${tenantKey}/invitations`, data)
       .then((r) => r.data),
 
-  updateTenant: (tenantKey: string, data: Partial<Pick<IamTenant, "name" | "status">>) =>
-    httpClient.patch<IamTenant>(`/v1/iam/admin/tenants/${tenantKey}`, data).then((r) => r.data),
-
-  deleteTenant: (tenantKey: string) => httpClient.delete(`/v1/iam/admin/tenants/${tenantKey}`),
+  /** Revoke a pending invitation. */
+  revokeInvitation: (tenantKey: string, invitationId: string) =>
+    httpClient.delete(`/v1/iam/tenants/${tenantKey}/invitations/${invitationId}`),
 };

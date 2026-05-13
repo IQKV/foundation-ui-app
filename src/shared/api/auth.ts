@@ -10,30 +10,52 @@ export interface SignInRequest {
 export interface SignInResponse {
   accessToken: string;
   refreshToken: string;
+  tenantKey: string;
+}
+
+export interface TenantMembershipSummary {
+  tenantKey: string;
+  tenantName: string;
+  membershipStatus: string;
+  authorities: string[];
 }
 
 // ─── API ──────────────────────────────────────────────────────────────────────
 
 /**
- * Auth API wrappers for sign-in and sign-out.
+ * Auth API wrappers for tenant sign-in and sign-out.
  *
- * Uses the dedicated platform admin sign-in endpoint (`POST /v1/iam/auth/admin/signin`)
- * which requires no X-Tenant-ID header and loads authorities exclusively from
- * `platform_authorities`. Returns 403 if the user has no platform-level authortities.
+ * Uses the tenant sign-in endpoint (`POST /v1/iam/auth/signin`) which requires
+ * an `X-Tenant-ID` header (injected by the auth interceptor from the selected
+ * tenant context). Returns 403 if the user has no active membership in the
+ * requested tenant.
  *
- * The silent-refresh endpoint (`POST /v1/iam/auth/refresh`) is intentionally
- * excluded here — it is handled exclusively by `auth-interceptor.ts` to ensure
- * deduplication of concurrent refresh calls and correct retry behaviour.
+ * The silent-refresh endpoint (`POST /v1/iam/auth/refresh`) is handled
+ * exclusively by `auth-interceptor.ts` to ensure deduplication of concurrent
+ * refresh calls and correct retry behaviour.
  */
 export const authApi = {
   /**
-   * Authenticate with email and password credentials against the platform admin
-   * sign-in endpoint. No tenant context is required or sent.
-   * Returns the access token on success; throws on 401 (bad credentials) or
-   * 403 (no PLATFORM_ADMIN authority / account locked).
+   * Discover which tenants the user belongs to before sign-in.
+   * Used in the tenant-selection step of the sign-in flow.
+   * No JWT required — credentials are validated server-side.
    */
-  signIn: (body: SignInRequest): Promise<SignInResponse> =>
-    httpClient.post<SignInResponse>("/v1/iam/auth/admin/signin", body).then((r) => r.data),
+  listUserTenants: (email: string, password: string): Promise<TenantMembershipSummary[]> =>
+    httpClient
+      .post<TenantMembershipSummary[]>("/v1/iam/users/tenants", { email, password })
+      .then((r) => r.data),
+
+  /**
+   * Authenticate with email and password within a specific tenant context.
+   * The `X-Tenant-ID` header must be set on the httpClient before calling this
+   * (handled by the sign-in flow after tenant selection).
+   */
+  signIn: (body: SignInRequest, tenantKey: string): Promise<SignInResponse> =>
+    httpClient
+      .post<SignInResponse>("/v1/iam/auth/signin", body, {
+        headers: { "X-Tenant-ID": tenantKey },
+      })
+      .then((r) => r.data),
 
   /**
    * Revoke the server-side refresh token and terminate the session.

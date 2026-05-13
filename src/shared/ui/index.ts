@@ -1,5 +1,6 @@
 export { AppLayout } from "./app-layout";
-export { AdminLayout } from "./admin-layout";
+export { AuthLayout } from "./auth-layout";
+export type { AuthLayoutProps } from "./auth-layout";
 export { LoadingOverlay } from "./loading-overlay";
 export { ErrorBoundary } from "./error-boundary";
 export { UserStatusBadge } from "./user-status-badge";

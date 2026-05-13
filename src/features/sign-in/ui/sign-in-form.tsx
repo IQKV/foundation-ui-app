@@ -1,26 +1,24 @@
-import { Alert, Button, Stack, TextInput } from "@mantine/core";
-import { IconAlertCircle } from "@tabler/icons-react";
+import { Alert, Button, Card, Stack, Text, TextInput, UnstyledButton } from "@mantine/core";
+import { IconAlertCircle, IconBuilding } from "@tabler/icons-react";
 import { Controller } from "react-hook-form";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { useSignIn } from "../model/use-sign-in";
 import type { SignInFormValues } from "../model/use-sign-in";
 
 interface SignInFormProps {
-  /** Path to redirect to after successful sign-in. Defaults to "/admin". */
+  /** Path to redirect to after successful sign-in. Defaults to "/dashboard". */
   redirectTo?: string;
 }
 
 /**
- * Sign-in form component.
- *
- * Renders email input, password input, and a submit button using Mantine v8
- * components (Requirement 8.1). Each input has a visible label with a for/id
- * relationship for screen reader accessibility (Requirement 8.4). Error
- * messages are rendered in an aria-live="polite" region (Requirement 8.5).
+ * Two-step sign-in form:
+ * 1. Email + password → discovers tenant memberships
+ * 2. Tenant picker (only shown when user belongs to multiple tenants)
  */
 export function SignInForm({ redirectTo }: SignInFormProps) {
   const { t } = useLingui();
-  const { form, isLoading, errorMessage, onSubmit } = useSignIn(redirectTo);
+  const { form, step, tenants, isLoading, errorMessage, onSubmitCredentials, onSelectTenant } =
+    useSignIn(redirectTo);
 
   const {
     control,
@@ -28,12 +26,12 @@ export function SignInForm({ redirectTo }: SignInFormProps) {
     formState: { errors },
   } = form;
 
-  const handleFormSubmit = handleSubmit((values: SignInFormValues) => onSubmit(values));
+  const handleFormSubmit = handleSubmit((values: SignInFormValues) => onSubmitCredentials(values));
 
-  return (
-    <form onSubmit={(e) => void handleFormSubmit(e)} noValidate>
+  // ── Step 2: tenant picker ──────────────────────────────────────────────────
+  if (step === "tenant-select") {
+    return (
       <Stack gap="md">
-        {/* ARIA live region for server-side error messages (Requirement 8.5) */}
         <div aria-live="polite" aria-atomic="true">
           {errorMessage && (
             <Alert icon={<IconAlertCircle size={16} />} color="red" variant="light" role="alert">
@@ -42,7 +40,50 @@ export function SignInForm({ redirectTo }: SignInFormProps) {
           )}
         </div>
 
-        {/* Email field — label/id relationship satisfies Requirement 8.4 */}
+        <Text size="sm" c="dimmed" ta="center">
+          <Trans>Select the workspace you want to sign in to.</Trans>
+        </Text>
+
+        <Stack gap="xs">
+          {tenants.map((tenant) => (
+            <UnstyledButton
+              key={tenant.tenantKey}
+              onClick={() => void onSelectTenant(tenant.tenantKey)}
+              disabled={isLoading}
+              style={{ width: "100%" }}
+            >
+              <Card withBorder radius="md" p="md" style={{ cursor: "pointer" }}>
+                <Stack gap={4} style={{ flexDirection: "row", alignItems: "center", gap: 12 }}>
+                  <IconBuilding size={18} color="var(--mantine-color-blue-6)" />
+                  <Stack gap={2}>
+                    <Text size="sm" fw={500}>
+                      {tenant.tenantName}
+                    </Text>
+                    <Text size="xs" c="dimmed">
+                      {tenant.authorities.join(", ")}
+                    </Text>
+                  </Stack>
+                </Stack>
+              </Card>
+            </UnstyledButton>
+          ))}
+        </Stack>
+      </Stack>
+    );
+  }
+
+  // ── Step 1: credentials ────────────────────────────────────────────────────
+  return (
+    <form onSubmit={(e) => void handleFormSubmit(e)} noValidate>
+      <Stack gap="md">
+        <div aria-live="polite" aria-atomic="true">
+          {errorMessage && (
+            <Alert icon={<IconAlertCircle size={16} />} color="red" variant="light" role="alert">
+              {errorMessage}
+            </Alert>
+          )}
+        </div>
+
         <Controller
           name="email"
           control={control}
@@ -62,7 +103,6 @@ export function SignInForm({ redirectTo }: SignInFormProps) {
           )}
         />
 
-        {/* Password field — label/id relationship satisfies Requirement 8.4 */}
         <Controller
           name="password"
           control={control}
@@ -81,9 +121,8 @@ export function SignInForm({ redirectTo }: SignInFormProps) {
           )}
         />
 
-        {/* Submit button — disabled and shows loading indicator while in flight (Requirement 1.11) */}
         <Button type="submit" fullWidth loading={isLoading} disabled={isLoading}>
-          <Trans>Sign in</Trans>
+          <Trans>Continue</Trans>
         </Button>
       </Stack>
     </form>

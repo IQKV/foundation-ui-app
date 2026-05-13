@@ -7,12 +7,10 @@ import { z } from "zod";
 import type { UseFormReturn } from "react-hook-form";
 import { t } from "@lingui/core/macro";
 import { authApi } from "@/shared/api/auth";
-import type { SignInResponse } from "@/shared/api/auth";
+import type { TenantMembershipSummary } from "@/shared/api/auth";
 import { setTokens } from "@/processes/session";
 
 // ─── Schema factory ───────────────────────────────────────────────────────────
-// Schema is created inside the hook so that `t` is called at render time,
-// picking up the active locale rather than the module-load locale.
 
 function buildSignInSchema() {
   return z.object({
@@ -30,23 +28,19 @@ type SignInSchema = ReturnType<typeof buildSignInSchema>;
 
 export type SignInFormValues = z.infer<SignInSchema>;
 
+/** Sign-in flow has two steps: credentials → tenant selection (if multi-tenant). */
+export type SignInStep = "credentials" | "tenant-select";
+
 export interface UseSignInReturn {
   form: UseFormReturn<SignInFormValues>;
+  step: SignInStep;
+  tenants: TenantMembershipSummary[];
   isLoading: boolean;
   errorMessage: string | null;
-  onSubmit: (values: SignInFormValues) => Promise<void>;
-}
-
-// ─── MFA placeholder ──────────────────────────────────────────────────────────
-
-/**
- * Reserved MFA step — no-op in this release.
- *
- * Future MFA implementation replaces this function without restructuring the
- * sign-in sequence (Requirement 1.15).
- */
-async function runMfaStep(_response: SignInResponse): Promise<void> {
-  // no-op: MFA is not implemented in this release
+  /** Step 1: validate credentials and discover tenants. */
+  onSubmitCredentials: (values: SignInFormValues) => Promise<void>;
+  /** Step 2: complete sign-in for the selected tenant. */
+  onSelectTenant: (tenantKey: string) => Promise<void>;
 }
 
 // ─── Error mapping ────────────────────────────────────────────────────────────
@@ -56,7 +50,7 @@ function mapHttpErrorToMessage(status: number): string {
     case 401:
       return t`Invalid email or password`;
     case 403:
-      return t`Your account does not have admin access`;
+      return t`Your account is not active or has been suspended`;
     case 429:
       return t`Too many sign-in attempts. Please try again later.`;
     default:
@@ -67,45 +61,62 @@ function mapHttpErrorToMessage(status: number): string {
 // ─── Hook ─────────────────────────────────────────────────────────────────────
 
 /**
- * Encapsulates the sign-in form logic.
+ * Encapsulates the two-step tenant sign-in flow:
+ *
+ * 1. Credentials step — calls `POST /users/tenants` to discover which tenants
+ *    the user belongs to. If only one tenant, skips to step 2 automatically.
+ * 2. Tenant selection step — calls `POST /auth/signin` with the chosen tenant
+ *    key, stores the resulting tokens, and navigates to the app.
  *
  * @param redirectTo - Path to navigate to after successful sign-in.
- *                     Defaults to "/admin" if not provided (Requirement 1.6).
  */
 export function useSignIn(redirectTo?: string): UseSignInReturn {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [step, setStep] = useState<SignInStep>("credentials");
+  const [tenants, setTenants] = useState<TenantMembershipSummary[]>([]);
+  const [pendingCredentials, setPendingCredentials] = useState<SignInFormValues | null>(null);
   const navigate = useNavigate();
 
   const form = useForm<SignInFormValues>({
     resolver: zodResolver(buildSignInSchema()),
-    defaultValues: {
-      email: "",
-      password: "",
-    },
+    defaultValues: { email: "", password: "" },
   });
 
-  const onSubmit = async (values: SignInFormValues): Promise<void> => {
+  const completeSignIn = async (credentials: SignInFormValues, tenantKey: string) => {
+    const response = await authApi.signIn(
+      { email: credentials.email, password: credentials.password },
+      tenantKey,
+    );
+    setTokens(response.accessToken, response.refreshToken, response.tenantKey);
+    void navigate({ to: redirectTo ?? "/dashboard" });
+  };
+
+  const onSubmitCredentials = async (values: SignInFormValues): Promise<void> => {
     setIsLoading(true);
     setErrorMessage(null);
 
     try {
-      const response = await authApi.signIn({ email: values.email, password: values.password });
+      const memberships = await authApi.listUserTenants(values.email, values.password);
 
-      // MFA placeholder — no-op in this release (Requirement 1.15)
-      await runMfaStep(response);
+      if (memberships.length === 0) {
+        setErrorMessage(t`No active tenant memberships found for this account`);
+        return;
+      }
 
-      // Store both tokens in memory only (Requirement 1.4, 7.1)
-      setTokens(response.accessToken, response.refreshToken);
+      if (memberships.length === 1) {
+        // Single tenant — skip selection step and sign in directly.
+        await completeSignIn(values, memberships[0].tenantKey);
+        return;
+      }
 
-      // Navigate to the redirect target or default admin route (Requirements 1.5, 1.6)
-      void navigate({ to: redirectTo ?? "/admin" });
-    } catch (err) {
+      // Multiple tenants — show tenant picker.
+      setPendingCredentials(values);
+      setTenants(memberships);
+      setStep("tenant-select");
+    } catch (err: unknown) {
       const status = isAxiosError(err) ? (err.response?.status ?? 0) : 0;
-      const message = mapHttpErrorToMessage(status);
-      setErrorMessage(message);
-
-      // On 401: preserve email, clear only the password field (Requirement 1.7)
+      setErrorMessage(mapHttpErrorToMessage(status));
       if (status === 401) {
         form.resetField("password");
       }
@@ -114,5 +125,20 @@ export function useSignIn(redirectTo?: string): UseSignInReturn {
     }
   };
 
-  return { form, isLoading, errorMessage, onSubmit };
+  const onSelectTenant = async (tenantKey: string): Promise<void> => {
+    if (!pendingCredentials) return;
+    setIsLoading(true);
+    setErrorMessage(null);
+
+    try {
+      await completeSignIn(pendingCredentials, tenantKey);
+    } catch (err: unknown) {
+      const status = isAxiosError(err) ? (err.response?.status ?? 0) : 0;
+      setErrorMessage(mapHttpErrorToMessage(status));
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return { form, step, tenants, isLoading, errorMessage, onSubmitCredentials, onSelectTenant };
 }

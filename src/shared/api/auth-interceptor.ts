@@ -1,6 +1,12 @@
 import type { AxiosError, InternalAxiosRequestConfig } from "axios";
 import { httpClient } from "./http-client";
-import { getAccessToken, getRefreshToken, setTokens, clearSession } from "@/processes/session";
+import {
+  getAccessToken,
+  getRefreshToken,
+  getTenantKey,
+  setTokens,
+  clearSession,
+} from "@/processes/session";
 
 /** Extend the Axios config type to carry a retry flag. */
 interface RetryableConfig extends InternalAxiosRequestConfig {
@@ -17,18 +23,21 @@ const silentRefresh = (): Promise<string> => {
   if (refreshPromise) return refreshPromise;
 
   const refreshToken = getRefreshToken();
-  if (!refreshToken) {
+  const tenantKey = getTenantKey();
+
+  if (!refreshToken || !tenantKey) {
     clearSession();
-    return Promise.reject(new Error("No refresh token available"));
+    return Promise.reject(new Error("No refresh token or tenant context available"));
   }
 
-  // Use the platform-admin-specific refresh endpoint — the regular /auth/refresh
-  // requires an X-Tenant-ID header and a tenant-scoped token, neither of which
-  // applies to platform admin sessions (tenant_id is null in the token).
+  // Tenant-scoped refresh — requires X-Tenant-ID header and a tenant-scoped
+  // refresh token (tenant_id must match the header value server-side).
   refreshPromise = httpClient
-    .post<{ accessToken: string; refreshToken: string }>("/v1/iam/auth/admin/refresh", {
-      refreshToken,
-    })
+    .post<{ accessToken: string; refreshToken: string }>(
+      "/v1/iam/auth/refresh",
+      { refreshToken },
+      { headers: { "X-Tenant-ID": tenantKey } },
+    )
     .then((res) => {
       const { accessToken, refreshToken: newRefreshToken } = res.data;
       setTokens(accessToken, newRefreshToken);
@@ -47,28 +56,36 @@ const silentRefresh = (): Promise<string> => {
 };
 
 /**
- * REQUEST interceptor — attach the in-memory access token as a Bearer header.
- * Skips auth endpoints to avoid infinite loops.
+ * REQUEST interceptor — attach the in-memory access token as a Bearer header
+ * and the tenant context as X-Tenant-ID on every non-auth request.
  */
 httpClient.interceptors.request.use((config: InternalAxiosRequestConfig) => {
   const token = getAccessToken();
-  if (
-    token &&
-    config.url &&
-    !config.url.includes("/auth/refresh") &&
-    !config.url.includes("/auth/admin/signin") &&
-    !config.url.includes("/auth/signin")
-  ) {
+  const tenantKey = getTenantKey();
+
+  const isAuthEndpoint =
+    config.url?.includes("/auth/refresh") ||
+    config.url?.includes("/auth/signin") ||
+    config.url?.includes("/auth/signout") ||
+    config.url?.includes("/users/tenants");
+
+  if (token && !isAuthEndpoint) {
     config.headers.Authorization = `Bearer ${token}`;
   }
+
+  // Inject tenant context on all non-auth requests when a tenant session is active.
+  if (tenantKey && !isAuthEndpoint) {
+    config.headers["X-Tenant-ID"] = tenantKey;
+  }
+
   return config;
 });
 
 /**
  * RESPONSE interceptor:
  * - 401: attempt a silent token refresh once, then replay the original request.
- *        If the refresh also fails, clear the session so the router guard redirects to login.
- * - 403 on an admin endpoint: the user's PLATFORM_ADMIN authority was revoked server-side.
+ *        If the refresh also fails, clear the session so the router guard redirects to sign-in.
+ * - 403: the user's membership or authority was revoked server-side.
  *        Clear the session and redirect to /sign-in?reason=forbidden.
  */
 httpClient.interceptors.response.use(
@@ -88,14 +105,11 @@ httpClient.interceptors.response.use(
         originalConfig.headers.Authorization = `Bearer ${newToken}`;
         return httpClient(originalConfig);
       } catch {
-        // Refresh failed — session is gone, let the caller handle the rejection.
         return Promise.reject(error);
       }
     }
 
-    // 403 on an admin API call means the user's PLATFORM_ADMIN authority was revoked.
-    // Clear the session and redirect to the sign-in page with a contextual reason.
-    if (status === 403 && originalConfig?.url?.includes("/iam/admin/")) {
+    if (status === 403) {
       clearSession();
       window.location.href = "/sign-in?reason=forbidden";
       return Promise.reject(error);

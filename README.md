@@ -1,19 +1,18 @@
-# Foundation UI Platform Admin 🖥️
+# Foundation UI App 🖥️
 
-Platform administration interface for the Key Value Platform. Provides comprehensive oversight and control over users, organizations, subscriptions, and system health across all tenants. Admin UI and tenant UI surfaces share the same SPA, build, and API Gateway connection — route-level guards enforce `PLATFORM_ADMIN` authority.
+Tenant-facing application for the Key Value Platform. Provides workspace members with self-service access to their profile, team, and billing — scoped entirely to their own tenant.
 
 ## About
 
-The admin UI is the admin surface of the platform:
+This is the tenant surface of the platform — the app that end users interact with after signing up or accepting an invitation. It is intentionally separate from the platform admin console (`foundation-ui-platform-admin`), which is operator-only.
 
-- **Dashboard & metrics** — real-time platform health, active users, organization counts, subscription KPIs, MRR/ARR, trial conversion, and growth trends
-- **User management** — paginated user list with advanced filtering, bulk actions, and a tabbed detail view covering profile, memberships, auth history, billing, activity log, and operator notes
-- **Organization management** — cross-tenant grid with status-based highlighting, inline actions, and a tabbed detail view covering members, subscription & billing, usage limits, audit trail, and settings
-- **Subscription & billing** — global subscription list, plan catalog CRUD, billing settings, and subscription lifecycle actions (change plan, cancel, reactivate, apply discount)
-- **Platform actions** — ban/unban, account unlock, email verification, impersonation (with full audit trail), tenant suspend/unsuspend/delete, ownership transfer, GDPR data export
-- **System administration** — service health dashboard, background job monitoring, manual job triggers, platform rollout mode display, and global audit log
-- **Protected route group** — `/admin/*` routes require `PLATFORM_ADMIN` authority; completely separate layout and session store from the tenant surface
-- **Secure token strategy** — access token in memory only; refresh token in an httpOnly, Secure, SameSite=Strict cookie; XSS cannot steal long-lived credentials
+- **Sign-in with tenant discovery** — credentials are validated first, then the user selects their workspace if they belong to multiple tenants; single-tenant users are signed in directly
+- **Dashboard** — workspace overview: subscription status, team size, recent activity
+- **Team management** — member list, invite new members by email, revoke invitations, manage member roles
+- **Profile & settings** — update own profile (`/users/me`), change password, manage notification preferences
+- **Billing** — view active subscription, browse plan catalog, manage billing settings (TENANT_OWNER only)
+- **Tenant settings** — update workspace name and configuration (TENANT_OWNER only)
+- **Secure token strategy** — access token in memory only; refresh token in sessionStorage with tenant key; `X-Tenant-ID` header injected automatically on every API request
 - **Internationalization** — full i18n with Lingui; English as base language; runtime locale switching without rebuild
 
 ## Quick Links
@@ -24,16 +23,15 @@ The admin UI is the admin surface of the platform:
 
 ## Feature Status
 
-| Feature                        | Status         |
-| ------------------------------ | -------------- |
-| Dashboard & metrics            | 🚧 In progress |
-| User management                | 🚧 In progress |
-| Organization management        | 🚧 In progress |
-| Subscription & billing         | 📋 Planned     |
-| Platform actions (ban, unlock) | 📋 Planned     |
-| Impersonation                  | 📋 Planned     |
-| System administration          | 📋 Planned     |
-| Audit log                      | 📋 Planned     |
+| Feature                       | Status         |
+| ----------------------------- | -------------- |
+| Sign-in with tenant discovery | 🚧 In progress |
+| Dashboard                     | 📋 Planned     |
+| Team management               | 📋 Planned     |
+| Invitations                   | 📋 Planned     |
+| Profile & settings            | 📋 Planned     |
+| Billing self-service          | 📋 Planned     |
+| Tenant settings               | 📋 Planned     |
 
 ## Tech Stack
 
@@ -56,8 +54,8 @@ The admin UI is the admin surface of the platform:
 
 ```bash
 # Clone the repository
-git clone https://github.com/IQKV/foundation-ui-platform-admin.git
-cd foundation-ui-platform-admin
+git clone https://github.com/IQKV/foundation-ui-app.git
+cd foundation-ui-app
 
 # Install dependencies and git hooks
 pnpm install
@@ -68,7 +66,7 @@ cp .env.example .env.local
 
 # Start the dev server
 pnpm dev
-# → App: http://localhost:5173
+# → App: http://localhost:5174
 ```
 
 ## Environment Variables
@@ -76,7 +74,7 @@ pnpm dev
 | Variable            | Default                 | Description              |
 | ------------------- | ----------------------- | ------------------------ |
 | `VITE_API_BASE_URL` | `http://localhost:8080` | API Gateway base URL     |
-| `VITE_APP_NAME`     | `Platform Admin`        | Application display name |
+| `VITE_APP_NAME`     | `Key Value`             | Application display name |
 
 > Copy `.env.example` to `.env.local` / `.env.uat` / `.env.prd` and fill in values per environment. For runtime overrides without a rebuild, copy `public/config.js.example` to `public/config.js` and set values on `window.*`.
 
@@ -132,10 +130,10 @@ To add a new locale: add it to the `locales` array in `lingui.config.ts`, run `p
 src/
 ├── app/          # Providers, router, theme, runtime config bootstrap
 ├── processes/    # Cross-feature flows (session management, auth lifecycle)
-├── pages/        # Route components (/admin/*, /auth/*, tenant surface)
-├── widgets/      # Composed UI blocks (data grids, detail panels, dashboards)
-├── features/     # Business logic and user interactions (ban, invite, etc.)
-├── entities/     # Pure API methods and domain models (user, tenant, plan)
+├── pages/        # Route components (/dashboard, /team, /settings, /billing, etc.)
+├── widgets/      # Composed UI blocks (member tables, subscription cards, etc.)
+├── features/     # Business logic and user interactions (sign-in, invite, etc.)
+├── entities/     # Pure API methods and domain models (user, tenant, subscription)
 ├── shared/       # UI kit, utilities, Axios clients, MSW mocks, locales
 └── types/        # Global TypeScript declarations
 ```
@@ -143,13 +141,26 @@ src/
 ## Authorization Model
 
 ```
-PLATFORM_ADMIN  — full platform access, bypasses all tenant restrictions
-TENANT_OWNER    — full management within their tenant
-ADMIN           — user management and invitations within their tenant
-MEMBER          — basic access within their tenant
+TENANT_OWNER  — full management within their tenant (settings, billing, member roles)
+ADMIN         — user management and invitations within their tenant
+MEMBER        — basic access within their tenant
 ```
 
-`/admin/*` routes are guarded at the router level. Non-platform users are redirected to the tenant surface.
+All routes are guarded at the router level. Unauthenticated users are redirected to `/sign-in`. Users without an active tenant membership are redirected to `/unauthorized`.
+
+The session always carries a `tenant_id` claim — there is no cross-tenant access from this app. The `X-Tenant-ID` header is injected automatically on every API request by the auth interceptor.
+
+## Relationship to Platform Admin
+
+This app and `foundation-ui-platform-admin` are intentionally separate:
+
+|                  | `foundation-ui-app`                               | `foundation-ui-platform-admin`                           |
+| ---------------- | ------------------------------------------------- | -------------------------------------------------------- |
+| Audience         | Tenant members                                    | Platform operators                                       |
+| Token type       | Tenant-scoped (`tenant_id` = tenantKey)           | Platform-scoped (`tenant_id` = null)                     |
+| Sign-in endpoint | `POST /auth/signin` + `X-Tenant-ID`               | `POST /auth/admin/signin`                                |
+| API surface      | `/users/me`, `/tenants/:key`, `/subscriptions/me` | `/admin/users`, `/admin/tenants`, `/admin/subscriptions` |
+| Deployment       | Public-facing                                     | Internal / VPN-restricted                                |
 
 ## License
 
@@ -164,12 +175,11 @@ Please read our [Contributing Guidelines](.github/CONTRIBUTING.md) and [Code of 
 ## 🧩 Boilerplate Architecture
 
 - **FSD layers**: `app → processes → pages → widgets → features → entities → shared`; each layer exposes a public API barrel; cross-layer imports are enforced by architecture tests
-- **Routing**: TanStack Router with file-based route tree generation (`tsr.config.json`); `_operator` route group guards enforce `PLATFORM_ADMIN` authority; separate layouts for admin and tenant surfaces
-- **State**: Zustand for session (access token in memory, never persisted); TanStack Query for server state with smart cache invalidation; Immer for complex state mutations
+- **Routing**: TanStack Router with file-based route tree generation (`tsr.config.json`); route guards check for a valid tenant session (`tenant_id` non-null in JWT)
+- **State**: Zustand for session (access token in memory, tenant key + refresh token in sessionStorage); TanStack Query for server state with smart cache invalidation
 - **Forms**: React Hook Form + Zod schemas via `mantine-form-zod-resolver`; typed resolvers per entity
-- **Data grids**: `mantine-datatable` for paginated, sortable, filterable tables; `nuqs` for URL-synced filter state
-- **Token security**: access token lives in a Zustand store (memory only); refresh token in an httpOnly cookie; Axios interceptor silently refreshes on 401 before retrying the original request
-- **Mocking**: MSW 2.x for API mocking in development and tests; MirageJS available for in-memory scenarios
+- **Token security**: access token lives in a Zustand store (memory only); refresh token + tenant key in sessionStorage; Axios interceptor silently refreshes on 401 before retrying the original request; `X-Tenant-ID` header injected on every non-auth request
+- **Mocking**: MSW 2.x for API mocking in development and tests
 - **Observability**: structured error boundaries per route; TanStack Query Devtools and Router Devtools in development
 - **Quality tools**: OxLint (type-aware), OxFmt, Stylelint, Vitest (unit + arch), Playwright (E2E), Knip (dead code), commit convention enforcement
 
