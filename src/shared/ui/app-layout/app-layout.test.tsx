@@ -1,50 +1,81 @@
 import { describe, it, expect } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { act, render, screen, waitFor } from "@testing-library/react";
 import { MantineProvider } from "@mantine/core";
+import { I18nProvider } from "@lingui/react";
+import { i18n } from "@lingui/core";
+import {
+  createMemoryHistory,
+  createRootRoute,
+  createRouter,
+  RouterProvider,
+} from "@tanstack/react-router";
 import { AppLayout } from "./app-layout";
 
-const TestWrapper = ({ children }: { children: React.ReactNode }) => (
-  <MantineProvider>{children}</MantineProvider>
-);
+/**
+ * Renders a component inside a minimal TanStack Router + Lingui + Mantine
+ * context. The router is awaited so async route resolution completes before
+ * assertions run.
+ */
+async function renderWithProviders(ui: React.ReactNode) {
+  const rootRoute = createRootRoute({ component: () => <>{ui}</> });
+  const router = createRouter({
+    routeTree: rootRoute,
+    history: createMemoryHistory({ initialEntries: ["/"] }),
+  });
+
+  let result!: ReturnType<typeof render>;
+
+  await act(async () => {
+    result = render(
+      <I18nProvider i18n={i18n}>
+        <MantineProvider>
+          <RouterProvider router={router} />
+        </MantineProvider>
+      </I18nProvider>,
+    );
+    await router.load();
+  });
+
+  return result;
+}
 
 describe("AppLayout", () => {
-  it("renders children correctly", () => {
-    render(
-      <TestWrapper>
-        <AppLayout>
-          <div>Test Content</div>
-        </AppLayout>
-      </TestWrapper>,
+  it("renders children correctly", async () => {
+    await renderWithProviders(
+      <AppLayout>
+        <div>Test Content</div>
+      </AppLayout>,
     );
 
-    expect(screen.getByText("Test Content")).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText("Test Content")).toBeInTheDocument();
+    });
   });
 
-  it("renders multiple children", () => {
-    render(
-      <TestWrapper>
-        <AppLayout>
-          <div>First Child</div>
-          <div>Second Child</div>
-        </AppLayout>
-      </TestWrapper>,
+  it("renders multiple children", async () => {
+    await renderWithProviders(
+      <AppLayout>
+        <div>First Child</div>
+        <div>Second Child</div>
+      </AppLayout>,
     );
 
-    expect(screen.getByText("First Child")).toBeInTheDocument();
-    expect(screen.getByText("Second Child")).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText("First Child")).toBeInTheDocument();
+      expect(screen.getByText("Second Child")).toBeInTheDocument();
+    });
   });
 
-  it("applies AppShell structure", () => {
-    const { container } = render(
-      <TestWrapper>
-        <AppLayout>
-          <div>Content</div>
-        </AppLayout>
-      </TestWrapper>,
+  it("applies AppShell structure", async () => {
+    const { container } = await renderWithProviders(
+      <AppLayout>
+        <div>Content</div>
+      </AppLayout>,
     );
 
-    // Check that AppShell structure is present
-    const appShell = container.querySelector(".mantine-AppShell-root");
-    expect(appShell || container.firstChild).toBeInTheDocument();
+    await waitFor(() => {
+      const appShell = container.querySelector(".mantine-AppShell-root");
+      expect(appShell || container.firstChild).toBeInTheDocument();
+    });
   });
 });

@@ -9,9 +9,9 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from "./pages/__root"
-import { Route as UnauthorizedRouteImport } from "./pages/unauthorized"
 import { Route as VerifyEmailRouteImport } from "./pages/verify-email"
-import { Route as SignUpRouteImport } from "./pages/signup"
+import { Route as UnauthorizedRouteImport } from "./pages/unauthorized"
+import { Route as SignupRouteImport } from "./pages/signup"
 import { Route as SignInRouteImport } from "./pages/sign-in"
 import { Route as ResetPasswordRouteImport } from "./pages/reset-password"
 import { Route as LoadingDemoRouteImport } from "./pages/loading-demo"
@@ -21,17 +21,17 @@ import { Route as R500RouteImport } from "./pages/500"
 import { Route as R404RouteImport } from "./pages/404"
 import { Route as IndexRouteImport } from "./pages/index"
 
-const UnauthorizedRoute = UnauthorizedRouteImport.update({
-  id: "/unauthorized",
-  path: "/unauthorized",
-  getParentRoute: () => rootRouteImport,
-} as any)
 const VerifyEmailRoute = VerifyEmailRouteImport.update({
   id: "/verify-email",
   path: "/verify-email",
   getParentRoute: () => rootRouteImport,
 } as any)
-const SignUpRoute = SignUpRouteImport.update({
+const UnauthorizedRoute = UnauthorizedRouteImport.update({
+  id: "/unauthorized",
+  path: "/unauthorized",
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SignupRoute = SignupRouteImport.update({
   id: "/signup",
   path: "/signup",
   getParentRoute: () => rootRouteImport,
@@ -86,7 +86,7 @@ export interface FileRoutesByFullPath {
   "/loading-demo": typeof LoadingDemoRoute
   "/reset-password": typeof ResetPasswordRoute
   "/sign-in": typeof SignInRoute
-  "/signup": typeof SignUpRoute
+  "/signup": typeof SignupRoute
   "/unauthorized": typeof UnauthorizedRoute
   "/verify-email": typeof VerifyEmailRoute
 }
@@ -99,7 +99,7 @@ export interface FileRoutesByTo {
   "/loading-demo": typeof LoadingDemoRoute
   "/reset-password": typeof ResetPasswordRoute
   "/sign-in": typeof SignInRoute
-  "/signup": typeof SignUpRoute
+  "/signup": typeof SignupRoute
   "/unauthorized": typeof UnauthorizedRoute
   "/verify-email": typeof VerifyEmailRoute
 }
@@ -113,7 +113,7 @@ export interface FileRoutesById {
   "/loading-demo": typeof LoadingDemoRoute
   "/reset-password": typeof ResetPasswordRoute
   "/sign-in": typeof SignInRoute
-  "/signup": typeof SignUpRoute
+  "/signup": typeof SignupRoute
   "/unauthorized": typeof UnauthorizedRoute
   "/verify-email": typeof VerifyEmailRoute
 }
@@ -168,20 +168,13 @@ export interface RootRouteChildren {
   LoadingDemoRoute: typeof LoadingDemoRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   SignInRoute: typeof SignInRoute
-  SignUpRoute: typeof SignUpRoute
+  SignupRoute: typeof SignupRoute
   UnauthorizedRoute: typeof UnauthorizedRoute
   VerifyEmailRoute: typeof VerifyEmailRoute
 }
 
 declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
-    "/unauthorized": {
-      id: "/unauthorized"
-      path: "/unauthorized"
-      fullPath: "/unauthorized"
-      preLoaderRoute: typeof UnauthorizedRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     "/verify-email": {
       id: "/verify-email"
       path: "/verify-email"
@@ -189,11 +182,18 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof VerifyEmailRouteImport
       parentRoute: typeof rootRouteImport
     }
+    "/unauthorized": {
+      id: "/unauthorized"
+      path: "/unauthorized"
+      fullPath: "/unauthorized"
+      preLoaderRoute: typeof UnauthorizedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     "/signup": {
       id: "/signup"
       path: "/signup"
       fullPath: "/signup"
-      preLoaderRoute: typeof SignUpRouteImport
+      preLoaderRoute: typeof SignupRouteImport
       parentRoute: typeof rootRouteImport
     }
     "/sign-in": {
@@ -264,7 +264,7 @@ const rootRouteChildren: RootRouteChildren = {
   LoadingDemoRoute: LoadingDemoRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   SignInRoute: SignInRoute,
-  SignUpRoute: SignUpRoute,
+  SignupRoute: SignupRoute,
   UnauthorizedRoute: UnauthorizedRoute,
   VerifyEmailRoute: VerifyEmailRoute,
 }
