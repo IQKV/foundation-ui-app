@@ -66,7 +66,6 @@ httpClient.interceptors.request.use((config: InternalAxiosRequestConfig) => {
   const isAuthEndpoint =
     config.url?.includes("/auth/refresh") ||
     config.url?.includes("/auth/signin") ||
-    config.url?.includes("/auth/signout") ||
     config.url?.includes("/users/tenants");
 
   if (token && !isAuthEndpoint) {
@@ -94,10 +93,14 @@ httpClient.interceptors.response.use(
     const originalConfig = error.config as RetryableConfig | undefined;
 
     const status = error.response?.status;
-    const isRefreshEndpoint = originalConfig?.url?.includes("/auth/refresh");
+    const requestUrl = originalConfig?.url ?? "";
+    const isRefreshEndpoint = requestUrl.includes("/auth/refresh");
+    const isSignInEndpoint = requestUrl.includes("/auth/signin");
+    const isTenantDiscoveryEndpoint = requestUrl.includes("/users/tenants");
+    const isAuthenticationEndpoint =
+      isRefreshEndpoint || isSignInEndpoint || isTenantDiscoveryEndpoint;
     const alreadyRetried = originalConfig?._retry;
-
-    if (status === 401 && !isRefreshEndpoint && !alreadyRetried && originalConfig) {
+    if (status === 401 && !isAuthenticationEndpoint && !alreadyRetried && originalConfig) {
       originalConfig._retry = true;
 
       try {
@@ -109,7 +112,7 @@ httpClient.interceptors.response.use(
       }
     }
 
-    if (status === 403) {
+    if (status === 403 && !isSignInEndpoint && !isTenantDiscoveryEndpoint) {
       clearSession();
       window.location.href = "/sign-in?reason=forbidden";
       return Promise.reject(error);

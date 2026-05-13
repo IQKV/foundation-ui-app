@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from "./pages/__root"
 import { Route as UnauthorizedRouteImport } from "./pages/unauthorized"
 import { Route as SignInRouteImport } from "./pages/sign-in"
 import { Route as LoadingDemoRouteImport } from "./pages/loading-demo"
+import { Route as DashboardRouteImport } from "./pages/dashboard"
 import { Route as R500RouteImport } from "./pages/500"
 import { Route as R404RouteImport } from "./pages/404"
 import { Route as IndexRouteImport } from "./pages/index"
@@ -29,6 +30,11 @@ const SignInRoute = SignInRouteImport.update({
 const LoadingDemoRoute = LoadingDemoRouteImport.update({
   id: "/loading-demo",
   path: "/loading-demo",
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: "/dashboard",
+  path: "/dashboard",
   getParentRoute: () => rootRouteImport,
 } as any)
 const R500Route = R500RouteImport.update({
@@ -51,6 +57,7 @@ export interface FileRoutesByFullPath {
   "/": typeof IndexRoute
   "/404": typeof R404Route
   "/500": typeof R500Route
+  "/dashboard": typeof DashboardRoute
   "/loading-demo": typeof LoadingDemoRoute
   "/sign-in": typeof SignInRoute
   "/unauthorized": typeof UnauthorizedRoute
@@ -59,6 +66,7 @@ export interface FileRoutesByTo {
   "/": typeof IndexRoute
   "/404": typeof R404Route
   "/500": typeof R500Route
+  "/dashboard": typeof DashboardRoute
   "/loading-demo": typeof LoadingDemoRoute
   "/sign-in": typeof SignInRoute
   "/unauthorized": typeof UnauthorizedRoute
@@ -68,6 +76,7 @@ export interface FileRoutesById {
   "/": typeof IndexRoute
   "/404": typeof R404Route
   "/500": typeof R500Route
+  "/dashboard": typeof DashboardRoute
   "/loading-demo": typeof LoadingDemoRoute
   "/sign-in": typeof SignInRoute
   "/unauthorized": typeof UnauthorizedRoute
@@ -78,16 +87,25 @@ export interface FileRouteTypes {
     | "/"
     | "/404"
     | "/500"
+    | "/dashboard"
     | "/loading-demo"
     | "/sign-in"
     | "/unauthorized"
   fileRoutesByTo: FileRoutesByTo
-  to: "/" | "/404" | "/500" | "/loading-demo" | "/sign-in" | "/unauthorized"
+  to:
+    | "/"
+    | "/404"
+    | "/500"
+    | "/dashboard"
+    | "/loading-demo"
+    | "/sign-in"
+    | "/unauthorized"
   id:
     | "__root__"
     | "/"
     | "/404"
     | "/500"
+    | "/dashboard"
     | "/loading-demo"
     | "/sign-in"
     | "/unauthorized"
@@ -97,6 +115,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   R404Route: typeof R404Route
   R500Route: typeof R500Route
+  DashboardRoute: typeof DashboardRoute
   LoadingDemoRoute: typeof LoadingDemoRoute
   SignInRoute: typeof SignInRoute
   UnauthorizedRoute: typeof UnauthorizedRoute
@@ -123,6 +142,13 @@ declare module "@tanstack/react-router" {
       path: "/loading-demo"
       fullPath: "/loading-demo"
       preLoaderRoute: typeof LoadingDemoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    "/dashboard": {
+      id: "/dashboard"
+      path: "/dashboard"
+      fullPath: "/dashboard"
+      preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
     "/500": {
@@ -153,6 +179,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   R404Route: R404Route,
   R500Route: R500Route,
+  DashboardRoute: DashboardRoute,
   LoadingDemoRoute: LoadingDemoRoute,
   SignInRoute: SignInRoute,
   UnauthorizedRoute: UnauthorizedRoute,
