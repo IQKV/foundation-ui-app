@@ -4,6 +4,7 @@ import { IconAlertCircle, IconInfoCircle } from "@tabler/icons-react";
 import { z } from "zod";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Helmet } from "@dr.pogodin/react-helmet";
+import { Link } from "@tanstack/react-router";
 import { pageTitle } from "@/shared/lib/page-title";
 import { AuthLayout } from "@/shared/ui";
 import { SignInForm } from "@/features/sign-in";
@@ -88,15 +89,10 @@ function SignInPage() {
       {/* Footer */}
       <Text size="xs" c="dimmed" ta="center">
         <Trans>
-          By signing in you agree to our{" "}
-          <Text component="span" size="xs" c="blue.6" style={{ cursor: "pointer" }}>
-            Terms of Service
-          </Text>{" "}
-          and{" "}
-          <Text component="span" size="xs" c="blue.6" style={{ cursor: "pointer" }}>
-            Privacy Policy
+          Don't have an account?{" "}
+          <Text component={Link} to="/signup" size="xs" c="blue.6">
+            Create one
           </Text>
-          .
         </Trans>
       </Text>
     </AuthLayout>

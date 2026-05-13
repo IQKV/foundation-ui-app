@@ -10,6 +10,8 @@
 
 import { Route as rootRouteImport } from "./pages/__root"
 import { Route as UnauthorizedRouteImport } from "./pages/unauthorized"
+import { Route as VerifyEmailRouteImport } from "./pages/verify-email"
+import { Route as SignUpRouteImport } from "./pages/signup"
 import { Route as SignInRouteImport } from "./pages/sign-in"
 import { Route as ResetPasswordRouteImport } from "./pages/reset-password"
 import { Route as LoadingDemoRouteImport } from "./pages/loading-demo"
@@ -22,6 +24,16 @@ import { Route as IndexRouteImport } from "./pages/index"
 const UnauthorizedRoute = UnauthorizedRouteImport.update({
   id: "/unauthorized",
   path: "/unauthorized",
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VerifyEmailRoute = VerifyEmailRouteImport.update({
+  id: "/verify-email",
+  path: "/verify-email",
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SignUpRoute = SignUpRouteImport.update({
+  id: "/signup",
+  path: "/signup",
   getParentRoute: () => rootRouteImport,
 } as any)
 const SignInRoute = SignInRouteImport.update({
@@ -74,7 +86,9 @@ export interface FileRoutesByFullPath {
   "/loading-demo": typeof LoadingDemoRoute
   "/reset-password": typeof ResetPasswordRoute
   "/sign-in": typeof SignInRoute
+  "/signup": typeof SignUpRoute
   "/unauthorized": typeof UnauthorizedRoute
+  "/verify-email": typeof VerifyEmailRoute
 }
 export interface FileRoutesByTo {
   "/": typeof IndexRoute
@@ -85,7 +99,9 @@ export interface FileRoutesByTo {
   "/loading-demo": typeof LoadingDemoRoute
   "/reset-password": typeof ResetPasswordRoute
   "/sign-in": typeof SignInRoute
+  "/signup": typeof SignUpRoute
   "/unauthorized": typeof UnauthorizedRoute
+  "/verify-email": typeof VerifyEmailRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -97,7 +113,9 @@ export interface FileRoutesById {
   "/loading-demo": typeof LoadingDemoRoute
   "/reset-password": typeof ResetPasswordRoute
   "/sign-in": typeof SignInRoute
+  "/signup": typeof SignUpRoute
   "/unauthorized": typeof UnauthorizedRoute
+  "/verify-email": typeof VerifyEmailRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -110,7 +128,9 @@ export interface FileRouteTypes {
     | "/loading-demo"
     | "/reset-password"
     | "/sign-in"
+    | "/signup"
     | "/unauthorized"
+    | "/verify-email"
   fileRoutesByTo: FileRoutesByTo
   to:
     | "/"
@@ -121,7 +141,9 @@ export interface FileRouteTypes {
     | "/loading-demo"
     | "/reset-password"
     | "/sign-in"
+    | "/signup"
     | "/unauthorized"
+    | "/verify-email"
   id:
     | "__root__"
     | "/"
@@ -132,7 +154,9 @@ export interface FileRouteTypes {
     | "/loading-demo"
     | "/reset-password"
     | "/sign-in"
+    | "/signup"
     | "/unauthorized"
+    | "/verify-email"
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -144,7 +168,9 @@ export interface RootRouteChildren {
   LoadingDemoRoute: typeof LoadingDemoRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   SignInRoute: typeof SignInRoute
+  SignUpRoute: typeof SignUpRoute
   UnauthorizedRoute: typeof UnauthorizedRoute
+  VerifyEmailRoute: typeof VerifyEmailRoute
 }
 
 declare module "@tanstack/react-router" {
@@ -154,6 +180,20 @@ declare module "@tanstack/react-router" {
       path: "/unauthorized"
       fullPath: "/unauthorized"
       preLoaderRoute: typeof UnauthorizedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    "/verify-email": {
+      id: "/verify-email"
+      path: "/verify-email"
+      fullPath: "/verify-email"
+      preLoaderRoute: typeof VerifyEmailRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    "/signup": {
+      id: "/signup"
+      path: "/signup"
+      fullPath: "/signup"
+      preLoaderRoute: typeof SignUpRouteImport
       parentRoute: typeof rootRouteImport
     }
     "/sign-in": {
@@ -224,7 +264,9 @@ const rootRouteChildren: RootRouteChildren = {
   LoadingDemoRoute: LoadingDemoRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   SignInRoute: SignInRoute,
+  SignUpRoute: SignUpRoute,
   UnauthorizedRoute: UnauthorizedRoute,
+  VerifyEmailRoute: VerifyEmailRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
