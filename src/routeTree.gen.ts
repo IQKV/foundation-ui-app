@@ -11,7 +11,9 @@
 import { Route as rootRouteImport } from "./pages/__root"
 import { Route as UnauthorizedRouteImport } from "./pages/unauthorized"
 import { Route as SignInRouteImport } from "./pages/sign-in"
+import { Route as ResetPasswordRouteImport } from "./pages/reset-password"
 import { Route as LoadingDemoRouteImport } from "./pages/loading-demo"
+import { Route as ForgotPasswordRouteImport } from "./pages/forgot-password"
 import { Route as DashboardRouteImport } from "./pages/dashboard"
 import { Route as R500RouteImport } from "./pages/500"
 import { Route as R404RouteImport } from "./pages/404"
@@ -27,9 +29,19 @@ const SignInRoute = SignInRouteImport.update({
   path: "/sign-in",
   getParentRoute: () => rootRouteImport,
 } as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: "/reset-password",
+  path: "/reset-password",
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LoadingDemoRoute = LoadingDemoRouteImport.update({
   id: "/loading-demo",
   path: "/loading-demo",
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
+  id: "/forgot-password",
+  path: "/forgot-password",
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardRoute = DashboardRouteImport.update({
@@ -58,7 +70,9 @@ export interface FileRoutesByFullPath {
   "/404": typeof R404Route
   "/500": typeof R500Route
   "/dashboard": typeof DashboardRoute
+  "/forgot-password": typeof ForgotPasswordRoute
   "/loading-demo": typeof LoadingDemoRoute
+  "/reset-password": typeof ResetPasswordRoute
   "/sign-in": typeof SignInRoute
   "/unauthorized": typeof UnauthorizedRoute
 }
@@ -67,7 +81,9 @@ export interface FileRoutesByTo {
   "/404": typeof R404Route
   "/500": typeof R500Route
   "/dashboard": typeof DashboardRoute
+  "/forgot-password": typeof ForgotPasswordRoute
   "/loading-demo": typeof LoadingDemoRoute
+  "/reset-password": typeof ResetPasswordRoute
   "/sign-in": typeof SignInRoute
   "/unauthorized": typeof UnauthorizedRoute
 }
@@ -77,7 +93,9 @@ export interface FileRoutesById {
   "/404": typeof R404Route
   "/500": typeof R500Route
   "/dashboard": typeof DashboardRoute
+  "/forgot-password": typeof ForgotPasswordRoute
   "/loading-demo": typeof LoadingDemoRoute
+  "/reset-password": typeof ResetPasswordRoute
   "/sign-in": typeof SignInRoute
   "/unauthorized": typeof UnauthorizedRoute
 }
@@ -88,7 +106,9 @@ export interface FileRouteTypes {
     | "/404"
     | "/500"
     | "/dashboard"
+    | "/forgot-password"
     | "/loading-demo"
+    | "/reset-password"
     | "/sign-in"
     | "/unauthorized"
   fileRoutesByTo: FileRoutesByTo
@@ -97,7 +117,9 @@ export interface FileRouteTypes {
     | "/404"
     | "/500"
     | "/dashboard"
+    | "/forgot-password"
     | "/loading-demo"
+    | "/reset-password"
     | "/sign-in"
     | "/unauthorized"
   id:
@@ -106,7 +128,9 @@ export interface FileRouteTypes {
     | "/404"
     | "/500"
     | "/dashboard"
+    | "/forgot-password"
     | "/loading-demo"
+    | "/reset-password"
     | "/sign-in"
     | "/unauthorized"
   fileRoutesById: FileRoutesById
@@ -116,7 +140,9 @@ export interface RootRouteChildren {
   R404Route: typeof R404Route
   R500Route: typeof R500Route
   DashboardRoute: typeof DashboardRoute
+  ForgotPasswordRoute: typeof ForgotPasswordRoute
   LoadingDemoRoute: typeof LoadingDemoRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
   SignInRoute: typeof SignInRoute
   UnauthorizedRoute: typeof UnauthorizedRoute
 }
@@ -137,11 +163,25 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof SignInRouteImport
       parentRoute: typeof rootRouteImport
     }
+    "/reset-password": {
+      id: "/reset-password"
+      path: "/reset-password"
+      fullPath: "/reset-password"
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     "/loading-demo": {
       id: "/loading-demo"
       path: "/loading-demo"
       fullPath: "/loading-demo"
       preLoaderRoute: typeof LoadingDemoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    "/forgot-password": {
+      id: "/forgot-password"
+      path: "/forgot-password"
+      fullPath: "/forgot-password"
+      preLoaderRoute: typeof ForgotPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
     "/dashboard": {
@@ -180,7 +220,9 @@ const rootRouteChildren: RootRouteChildren = {
   R404Route: R404Route,
   R500Route: R500Route,
   DashboardRoute: DashboardRoute,
+  ForgotPasswordRoute: ForgotPasswordRoute,
   LoadingDemoRoute: LoadingDemoRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
   SignInRoute: SignInRoute,
   UnauthorizedRoute: UnauthorizedRoute,
 }

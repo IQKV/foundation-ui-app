@@ -1,7 +1,8 @@
-import { Alert, Button, Card, Stack, Text, TextInput, UnstyledButton } from "@mantine/core";
+import { Alert, Button, Card, Group, Stack, Text, TextInput, UnstyledButton } from "@mantine/core";
 import { IconAlertCircle, IconBuilding } from "@tabler/icons-react";
 import { Controller } from "react-hook-form";
 import { Trans, useLingui } from "@lingui/react/macro";
+import { Link } from "@tanstack/react-router";
 import { useSignIn } from "../model/use-sign-in";
 import type { SignInFormValues } from "../model/use-sign-in";
 
@@ -120,6 +121,13 @@ export function SignInForm({ redirectTo }: SignInFormProps) {
             />
           )}
         />
+
+        {/* Forgot password link */}
+        <Group justify="flex-end" mt={-8}>
+          <Text component={Link} to="/forgot-password" size="sm" c="blue.6">
+            <Trans>Forgot password?</Trans>
+          </Text>
+        </Group>
 
         <Button type="submit" fullWidth loading={isLoading} disabled={isLoading}>
           <Trans>Continue</Trans>

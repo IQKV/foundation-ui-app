@@ -21,3 +21,6 @@ export type {
 
 export { authApi } from "./auth";
 export type { SignInRequest, SignInResponse, TenantMembershipSummary } from "./auth";
+
+export { passwordResetApi } from "./password-reset";
+export type { ForgotPasswordRequest, ResetPasswordRequest } from "./password-reset";
