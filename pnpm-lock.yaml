@@ -75,8 +75,8 @@ importers:
         specifier: ^1.169.2
         version: 1.169.2(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@tiptap/extension-color':
-        specifier: ^3.23.1
-        version: 3.23.1(@tiptap/extension-text-style@3.22.5(@tiptap/core@3.23.1(@tiptap/pm@3.22.5)))
+        specifier: ^3.23.2
+        version: 3.23.2(@tiptap/extension-text-style@3.22.5(@tiptap/core@3.23.1(@tiptap/pm@3.22.5)))
       '@tiptap/extension-image':
         specifier: ^3.22.5
         version: 3.22.5(@tiptap/core@3.23.1(@tiptap/pm@3.22.5))
@@ -2402,10 +2402,10 @@ packages:
     peerDependencies:
       '@tiptap/core': 3.23.1
 
-  '@tiptap/extension-color@3.23.1':
-    resolution: {integrity: sha512-OYk/fT3h8Bz4B6GUVTQDvKGpPnpI5d6QHkuqjVhdFsgH3oo58PdLE1TdIGgeavuYPLaFxgBtEXmm3oTY9jPWxw==}
+  '@tiptap/extension-color@3.23.2':
+    resolution: {integrity: sha512-4G5ikeZUB27YyI3F1MpopD+liTJYKeIQMRDbHdSIxce6TbTqsOXY5tMzKIEkRk85dF/edFcen8QE/AKr+/zXhg==}
     peerDependencies:
-      '@tiptap/extension-text-style': 3.23.1
+      '@tiptap/extension-text-style': 3.23.2
 
   '@tiptap/extension-document@3.23.1':
     resolution: {integrity: sha512-NA5Rx59HRwG6Hb6LwLpC5lE7z6vCj6f90S7RNNsnE+CyiXNR/OhY2BcjuxiGnascHvsnsAbvxGU3ymKMDgvDVg==}
@@ -8160,7 +8160,7 @@ snapshots:
     dependencies:
       '@tiptap/core': 3.23.1(@tiptap/pm@3.23.1)
 
-  '@tiptap/extension-color@3.23.1(@tiptap/extension-text-style@3.22.5(@tiptap/core@3.23.1(@tiptap/pm@3.22.5)))':
+  '@tiptap/extension-color@3.23.2(@tiptap/extension-text-style@3.22.5(@tiptap/core@3.23.1(@tiptap/pm@3.22.5)))':
     dependencies:
       '@tiptap/extension-text-style': 3.22.5(@tiptap/core@3.23.1(@tiptap/pm@3.22.5))
 
