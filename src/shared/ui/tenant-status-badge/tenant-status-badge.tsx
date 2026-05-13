@@ -1,9 +1,9 @@
 import { Badge } from "@mantine/core";
 import { t } from "@lingui/core/macro";
-import type { IamTenantStatus } from "@/shared/api";
+import type { TenantStatus } from "@/shared/api";
 
-function getStatusConfig(status: IamTenantStatus): { color: string; label: string } {
-  const map: Record<IamTenantStatus, { color: string; label: string }> = {
+function getStatusConfig(status: TenantStatus): { color: string; label: string } {
+  const map: Record<TenantStatus, { color: string; label: string }> = {
     ACTIVE: { color: "green", label: t`Active` },
     SUSPENDED: { color: "red", label: t`Suspended` },
     DELETED: { color: "gray", label: t`Deleted` },
@@ -12,7 +12,7 @@ function getStatusConfig(status: IamTenantStatus): { color: string; label: strin
 }
 
 interface TenantStatusBadgeProps {
-  status: IamTenantStatus;
+  status: TenantStatus;
 }
 
 export function TenantStatusBadge({ status }: TenantStatusBadgeProps) {

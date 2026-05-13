@@ -27,7 +27,7 @@ export const Route = createFileRoute("/sign-in")({
     if (token) {
       const payload = decodeJwt(token);
       if (payload && isTenantSession(payload)) {
-        throw redirect({ to: "/dashboard" });
+        throw redirect({ to: "/" });
       }
     }
   },

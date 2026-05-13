@@ -40,7 +40,7 @@ const silentRefresh = (): Promise<string> => {
     )
     .then((res) => {
       const { accessToken, refreshToken: newRefreshToken } = res.data;
-      setTokens(accessToken, newRefreshToken);
+      setTokens(accessToken, newRefreshToken, tenantKey);
       return accessToken;
     })
     .catch((err: unknown) => {

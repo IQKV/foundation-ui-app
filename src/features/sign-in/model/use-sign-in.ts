@@ -89,7 +89,7 @@ export function useSignIn(redirectTo?: string): UseSignInReturn {
       tenantKey,
     );
     setTokens(response.accessToken, response.refreshToken, response.tenantKey);
-    void navigate({ to: redirectTo ?? "/dashboard" });
+    void navigate({ to: redirectTo ?? "/" });
   };
 
   const onSubmitCredentials = async (values: SignInFormValues): Promise<void> => {

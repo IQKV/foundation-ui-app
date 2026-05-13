@@ -13,25 +13,23 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#. placeholder {0}: o.label
 #: src/pages/admin/organizations.index.tsx
 #: src/pages/admin/subscriptions.tsx
 #: src/pages/admin/users.index.tsx
-msgid "{0}"
-msgstr "{0}"
-
-#. placeholder {0}: tenant?.name
-#: src/pages/admin/organizations.$tenantKey.tsx
-msgid "{0} |Key Value Admin"
-msgstr "{0} |Key Value Admin"
+#~ msgid "{0}"
+#~ msgstr "{0}"
 
 #: src/pages/admin/organizations.$tenantKey.tsx
-msgid "{activeSubscriptions} active subscription(s)"
-msgstr "{activeSubscriptions} active subscription(s)"
+#~ msgid "{0} |Key Value Admin"
+#~ msgstr "{0} |Key Value Admin"
+
+#: src/pages/admin/organizations.$tenantKey.tsx
+#~ msgid "{activeSubscriptions} active subscription(s)"
+#~ msgstr "{activeSubscriptions} active subscription(s)"
 
 #: src/pages/admin/users.$userId.tsx
-msgid "{displayName} |Key Value Admin"
-msgstr "{displayName} |Key Value Admin"
+#~ msgid "{displayName} |Key Value Admin"
+#~ msgstr "{displayName} |Key Value Admin"
 
 #: src/pages/loading-demo.tsx
 msgid "1. Initial Page Load"
@@ -46,63 +44,68 @@ msgid "Access Denied"
 msgstr "Access Denied"
 
 #: src/pages/unauthorized.tsx
-msgid "Access Denied |Key Value Admin"
-msgstr "Access Denied |Key Value Admin"
+#~ msgid "Access Denied |Key Value Admin"
+#~ msgstr "Access Denied |Key Value Admin"
 
 #: src/pages/loading-demo.tsx
 msgid "Accessible with proper keyboard handling"
 msgstr "Accessible with proper keyboard handling"
 
-#: src/features/edit-tenant/model/types.ts
-#: src/features/edit-user/model/types.ts
-#: src/pages/admin/subscriptions.tsx
 #: src/shared/ui/tenant-status-badge/tenant-status-badge.tsx
 #: src/shared/ui/user-status-badge/user-status-badge.tsx
 msgid "Active"
 msgstr "Active"
 
 #: src/pages/admin/index.tsx
-msgid "Active Subscriptions"
-msgstr "Active Subscriptions"
+#~ msgid "Active Subscriptions"
+#~ msgstr "Active Subscriptions"
 
 #: src/pages/admin/organizations.index.tsx
 #: src/pages/admin/subscriptions.tsx
 #: src/pages/admin/users.index.tsx
-msgid "All statuses"
-msgstr "All statuses"
+#~ msgid "All statuses"
+#~ msgstr "All statuses"
+
+#: src/shared/ui/auth-layout/auth-layout.tsx
+msgid "always in reach."
+msgstr "always in reach."
 
 #: src/shared/ui/admin-layout/admin-nav.tsx
 #~ msgid "Audit Log"
 #~ msgstr "Audit Log"
 
 #: src/pages/admin/subscriptions.tsx
-msgid "Auto-Renew"
-msgstr "Auto-Renew"
+#~ msgid "Auto-Renew"
+#~ msgstr "Auto-Renew"
 
 #: src/pages/loading-demo.tsx
 msgid "Automatic router integration via <0>router.subscribe()</0>"
 msgstr "Automatic router integration via <0>router.subscribe()</0>"
 
+#: src/pages/sign-in.tsx
+msgid "By signing in you agree to our <0>Terms of Service</0> and <1>Privacy Policy</1>."
+msgstr "By signing in you agree to our <0>Terms of Service</0> and <1>Privacy Policy</1>."
+
 #: src/features/edit-tenant/ui/edit-tenant-modal.tsx
 #: src/features/edit-user/ui/edit-user-modal.tsx
-msgid "Cancel"
-msgstr "Cancel"
+#~ msgid "Cancel"
+#~ msgstr "Cancel"
 
 #: src/pages/admin/subscriptions.tsx
-msgid "Canceling"
-msgstr "Canceling"
-
-#: src/pages/admin/organizations.index.tsx
-#: src/pages/admin/subscriptions.tsx
-#: src/pages/admin/users.index.tsx
-msgid "Clear"
-msgstr "Clear"
+#~ msgid "Canceling"
+#~ msgstr "Canceling"
 
 #: src/pages/admin/organizations.index.tsx
 #: src/pages/admin/subscriptions.tsx
 #: src/pages/admin/users.index.tsx
-msgid "Clear filters"
-msgstr "Clear filters"
+#~ msgid "Clear"
+#~ msgstr "Clear"
+
+#: src/pages/admin/organizations.index.tsx
+#: src/pages/admin/subscriptions.tsx
+#: src/pages/admin/users.index.tsx
+#~ msgid "Clear filters"
+#~ msgstr "Clear filters"
 
 #: src/pages/admin/index.tsx
 #~ msgid "Coming soon"
@@ -112,44 +115,48 @@ msgstr "Clear filters"
 msgid "Complete"
 msgstr "Complete"
 
-#: src/pages/admin/organizations.$tenantKey.tsx
-msgid "Could not fetch members."
-msgstr "Could not fetch members."
+#: src/features/sign-in/ui/sign-in-form.tsx
+msgid "Continue"
+msgstr "Continue"
 
 #: src/pages/admin/organizations.$tenantKey.tsx
-msgid "Could not fetch organization details."
-msgstr "Could not fetch organization details."
+#~ msgid "Could not fetch members."
+#~ msgstr "Could not fetch members."
+
+#: src/pages/admin/organizations.$tenantKey.tsx
+#~ msgid "Could not fetch organization details."
+#~ msgstr "Could not fetch organization details."
 
 #: src/pages/admin/organizations.index.tsx
-msgid "Could not fetch organizations from the API."
-msgstr "Could not fetch organizations from the API."
+#~ msgid "Could not fetch organizations from the API."
+#~ msgstr "Could not fetch organizations from the API."
 
 #: src/pages/admin/subscriptions.tsx
-msgid "Could not fetch subscriptions from the API."
-msgstr "Could not fetch subscriptions from the API."
+#~ msgid "Could not fetch subscriptions from the API."
+#~ msgstr "Could not fetch subscriptions from the API."
 
 #: src/pages/admin/users.$userId.tsx
-msgid "Could not fetch user details."
-msgstr "Could not fetch user details."
+#~ msgid "Could not fetch user details."
+#~ msgstr "Could not fetch user details."
 
 #: src/pages/admin/users.index.tsx
-msgid "Could not fetch users from the API."
-msgstr "Could not fetch users from the API."
+#~ msgid "Could not fetch users from the API."
+#~ msgstr "Could not fetch users from the API."
 
 #: src/pages/admin/organizations.$tenantKey.tsx
 #: src/pages/admin/organizations.index.tsx
 #: src/pages/admin/subscriptions.tsx
-msgid "Created"
-msgstr "Created"
+#~ msgid "Created"
+#~ msgstr "Created"
 
 #: src/pages/admin/index.tsx
 #: src/shared/ui/admin-layout/admin-nav.tsx
-msgid "Dashboard"
-msgstr "Dashboard"
+#~ msgid "Dashboard"
+#~ msgstr "Dashboard"
 
 #: src/pages/admin/index.tsx
-msgid "Dashboard |Key Value Admin"
-msgstr "Dashboard |Key Value Admin"
+#~ msgid "Dashboard |Key Value Admin"
+#~ msgstr "Dashboard |Key Value Admin"
 
 #: src/shared/ui/tenant-status-badge/tenant-status-badge.tsx
 #: src/shared/ui/user-status-badge/user-status-badge.tsx
@@ -166,27 +173,23 @@ msgstr "Demo Progress Bar"
 
 #: src/pages/admin/organizations.$tenantKey.tsx
 #: src/pages/admin/organizations.index.tsx
-msgid "Edit organization"
-msgstr "Edit organization"
+#~ msgid "Edit organization"
+#~ msgstr "Edit organization"
 
 #: src/features/edit-tenant/ui/edit-tenant-modal.tsx
-msgid "Edit Organization"
-msgstr "Edit Organization"
+#~ msgid "Edit Organization"
+#~ msgstr "Edit Organization"
 
 #: src/pages/admin/users.$userId.tsx
 #: src/pages/admin/users.index.tsx
-msgid "Edit user"
-msgstr "Edit user"
+#~ msgid "Edit user"
+#~ msgstr "Edit user"
 
 #: src/features/edit-user/ui/edit-user-modal.tsx
-msgid "Edit User"
-msgstr "Edit User"
+#~ msgid "Edit User"
+#~ msgstr "Edit User"
 
-#: src/features/edit-user/ui/edit-user-modal.tsx
 #: src/features/sign-in/ui/sign-in-form.tsx
-#: src/pages/admin/organizations.$tenantKey.tsx
-#: src/pages/admin/users.$userId.tsx
-#: src/pages/admin/users.index.tsx
 msgid "Email"
 msgstr "Email"
 
@@ -195,16 +198,16 @@ msgid "Email is required"
 msgstr "Email is required"
 
 #: src/pages/admin/users.$userId.tsx
-msgid "Email unverified"
-msgstr "Email unverified"
+#~ msgid "Email unverified"
+#~ msgstr "Email unverified"
 
 #: src/pages/admin/users.$userId.tsx
-msgid "Email verified"
-msgstr "Email verified"
+#~ msgid "Email verified"
+#~ msgstr "Email verified"
 
 #: src/features/edit-user/ui/edit-user-modal.tsx
-msgid "Email verified:"
-msgstr "Email verified:"
+#~ msgid "Email verified:"
+#~ msgstr "Email verified:"
 
 #: src/features/sign-in/model/use-sign-in.ts
 msgid "Enter a valid email address"
@@ -221,36 +224,36 @@ msgstr "Error Details (Development)"
 #~ msgstr "Export"
 
 #: src/pages/admin/index.tsx
-msgid "Failed to load"
-msgstr "Failed to load"
+#~ msgid "Failed to load"
+#~ msgstr "Failed to load"
 
 #: src/pages/admin/organizations.$tenantKey.tsx
-msgid "Failed to load organization"
-msgstr "Failed to load organization"
+#~ msgid "Failed to load organization"
+#~ msgstr "Failed to load organization"
 
 #: src/pages/admin/organizations.index.tsx
-msgid "Failed to load organizations"
-msgstr "Failed to load organizations"
+#~ msgid "Failed to load organizations"
+#~ msgstr "Failed to load organizations"
 
 #: src/pages/admin/subscriptions.tsx
-msgid "Failed to load subscriptions"
-msgstr "Failed to load subscriptions"
+#~ msgid "Failed to load subscriptions"
+#~ msgstr "Failed to load subscriptions"
 
 #: src/pages/admin/users.$userId.tsx
-msgid "Failed to load user"
-msgstr "Failed to load user"
+#~ msgid "Failed to load user"
+#~ msgstr "Failed to load user"
 
 #: src/pages/admin/users.index.tsx
-msgid "Failed to load users"
-msgstr "Failed to load users"
+#~ msgid "Failed to load users"
+#~ msgstr "Failed to load users"
 
 #: src/features/edit-user/ui/edit-user-modal.tsx
-msgid "First name"
-msgstr "First name"
+#~ msgid "First name"
+#~ msgstr "First name"
 
 #: src/features/edit-user/ui/edit-user-modal.tsx
-msgid "First name is required"
-msgstr "First name is required"
+#~ msgid "First name is required"
+#~ msgstr "First name is required"
 
 #: src/pages/loading-demo.tsx
 msgid "Full-screen centered loader shown on first app load (while locale initializes)."
@@ -271,13 +274,12 @@ msgstr "Go to Home"
 #: src/pages/admin/subscriptions.tsx
 #: src/pages/admin/users.$userId.tsx
 #: src/pages/admin/users.index.tsx
-msgid "Home"
-msgstr "Home"
+#~ msgid "Home"
+#~ msgstr "Home"
 
-#. placeholder {0}: user.id
 #: src/features/edit-user/ui/edit-user-modal.tsx
-msgid "ID: {0}"
-msgstr "ID: {0}"
+#~ msgid "ID: {0}"
+#~ msgstr "ID: {0}"
 
 #: src/pages/loading-demo.tsx
 msgid "Implementation Details"
@@ -294,40 +296,44 @@ msgstr "Invalid email or password"
 #: src/pages/admin/organizations.$tenantKey.tsx
 #: src/pages/admin/users.$userId.tsx
 #: src/pages/admin/users.index.tsx
-msgid "Joined"
-msgstr "Joined"
+#~ msgid "Joined"
+#~ msgstr "Joined"
 
 #: src/pages/admin/users.$userId.tsx
-msgid "Joined Organizations"
-msgstr "Joined Organizations"
+#~ msgid "Joined Organizations"
+#~ msgstr "Joined Organizations"
 
 #: src/pages/admin/organizations.index.tsx
-msgid "Key"
-msgstr "Key"
+#~ msgid "Key"
+#~ msgstr "Key"
 
 #: src/features/edit-tenant/ui/edit-tenant-modal.tsx
-msgid "Key:"
-msgstr "Key:"
+#~ msgid "Key:"
+#~ msgstr "Key:"
 
 #: src/features/edit-user/ui/edit-user-modal.tsx
-msgid "Last name"
-msgstr "Last name"
+#~ msgid "Last name"
+#~ msgstr "Last name"
 
 #: src/features/edit-user/ui/edit-user-modal.tsx
-msgid "Last name is required"
-msgstr "Last name is required"
+#~ msgid "Last name is required"
+#~ msgstr "Last name is required"
 
 #: src/pages/admin/organizations.$tenantKey.tsx
 #: src/pages/admin/organizations.index.tsx
 #: src/pages/admin/subscriptions.tsx
 #: src/pages/admin/users.$userId.tsx
 #: src/pages/admin/users.index.tsx
-msgid "Last updated"
-msgstr "Last updated"
+#~ msgid "Last updated"
+#~ msgstr "Last updated"
 
 #: src/pages/loading-demo.tsx
-msgid "Loading Demo |Key Value Admin"
-msgstr "Loading Demo |Key Value Admin"
+msgid "Loading Demo"
+msgstr "Loading Demo"
+
+#: src/pages/loading-demo.tsx
+#~ msgid "Loading Demo |Key Value Admin"
+#~ msgstr "Loading Demo |Key Value Admin"
 
 #: src/pages/loading-demo.tsx
 msgid "Loading States Demo"
@@ -337,79 +343,86 @@ msgstr "Loading States Demo"
 msgid "Loading..."
 msgstr "Loading..."
 
-#: src/features/edit-user/model/types.ts
 #: src/shared/ui/user-status-badge/user-status-badge.tsx
 msgid "Locked"
 msgstr "Locked"
 
 #: src/pages/admin/index.tsx
-msgid "Manage organizations"
-msgstr "Manage organizations"
+#~ msgid "Manage organizations"
+#~ msgstr "Manage organizations"
 
 #: src/pages/admin/index.tsx
-msgid "Manage subscriptions"
-msgstr "Manage subscriptions"
+#~ msgid "Manage subscriptions"
+#~ msgstr "Manage subscriptions"
 
 #: src/pages/admin/index.tsx
-msgid "Manage users"
-msgstr "Manage users"
+#~ msgid "Manage users"
+#~ msgstr "Manage users"
+
+#: src/shared/ui/auth-layout/auth-layout.tsx
+msgid "Manage your team, subscriptions, and settings — all from one place, secured by enterprise-grade authentication."
+msgstr "Manage your team, subscriptions, and settings — all from one place, secured by enterprise-grade authentication."
 
 #: src/pages/admin/organizations.$tenantKey.tsx
 #: src/pages/admin/users.index.tsx
-msgid "Member"
-msgstr "Member"
+#~ msgid "Member"
+#~ msgstr "Member"
 
 #: src/pages/admin/organizations.$tenantKey.tsx
-msgid "member(s)"
-msgstr "member(s)"
+#~ msgid "member(s)"
+#~ msgstr "member(s)"
 
 #: src/pages/admin/organizations.$tenantKey.tsx
-msgid "Members"
-msgstr "Members"
+#~ msgid "Members"
+#~ msgstr "Members"
 
 #: src/pages/admin/organizations.$tenantKey.tsx
-msgid "No active subscription"
-msgstr "No active subscription"
+#~ msgid "No active subscription"
+#~ msgstr "No active subscription"
+
+#: src/features/sign-in/model/use-sign-in.ts
+msgid "No active tenant memberships found for this account"
+msgstr "No active tenant memberships found for this account"
 
 #: src/pages/admin/organizations.$tenantKey.tsx
-msgid "No members found"
-msgstr "No members found"
+#~ msgid "No members found"
+#~ msgstr "No members found"
 
 #: src/pages/admin/organizations.$tenantKey.tsx
-msgid "No members match the search"
-msgstr "No members match the search"
+#~ msgid "No members match the search"
+#~ msgstr "No members match the search"
 
 #: src/pages/admin/organizations.index.tsx
-msgid "No organizations found"
-msgstr "No organizations found"
+#~ msgid "No organizations found"
+#~ msgstr "No organizations found"
 
 #: src/pages/admin/organizations.index.tsx
-msgid "No organizations match the current filters"
-msgstr "No organizations match the current filters"
+#~ msgid "No organizations match the current filters"
+#~ msgstr "No organizations match the current filters"
 
 #: src/shared/ui/admin-layout/admin-nav.tsx
-msgid "No results"
-msgstr "No results"
+#~ msgid "No results"
+#~ msgstr "No results"
 
 #: src/pages/admin/subscriptions.tsx
-msgid "No subscriptions found"
-msgstr "No subscriptions found"
+#~ msgid "No subscriptions found"
+#~ msgstr "No subscriptions found"
 
 #: src/pages/admin/organizations.$tenantKey.tsx
-msgid "No subscriptions found for this organization."
-msgstr "No subscriptions found for this organization."
+#~ msgid "No subscriptions found for this organization."
+#~ msgstr "No subscriptions found for this organization."
 
 #: src/pages/admin/subscriptions.tsx
-msgid "No subscriptions match the current filters"
-msgstr "No subscriptions match the current filters"
+#~ msgid "No subscriptions match the current filters"
+#~ msgstr "No subscriptions match the current filters"
 
 #: src/pages/admin/users.index.tsx
-msgid "No users found"
-msgstr "No users found"
+#~ msgid "No users found"
+#~ msgstr "No users found"
 
 #: src/pages/admin/users.index.tsx
-msgid "No users match the current filters"
-msgstr "No users match the current filters"
+#~ msgid "No users match the current filters"
+#~ msgstr "No users match the current filters"
 
 #: src/shared/ui/admin-layout/admin-header.tsx
 #~ msgid "Notifications (coming soon)"
@@ -418,45 +431,49 @@ msgstr "No users match the current filters"
 #: src/pages/admin/organizations.$tenantKey.tsx
 #: src/pages/admin/organizations.index.tsx
 #: src/pages/admin/users.index.tsx
-msgid "Organization"
-msgstr "Organization"
+#~ msgid "Organization"
+#~ msgstr "Organization"
 
 #: src/pages/admin/organizations.$tenantKey.tsx
-msgid "Organization |Key Value Admin"
-msgstr "Organization |Key Value Admin"
+#~ msgid "Organization |Key Value Admin"
+#~ msgstr "Organization |Key Value Admin"
 
 #: src/features/edit-tenant/ui/edit-tenant-modal.tsx
-msgid "Organization name"
-msgstr "Organization name"
+#~ msgid "Organization name"
+#~ msgstr "Organization name"
 
 #: src/features/edit-tenant/ui/edit-tenant-modal.tsx
-msgid "Organization name is required"
-msgstr "Organization name is required"
+#~ msgid "Organization name is required"
+#~ msgstr "Organization name is required"
 
 #: src/pages/admin/users.$userId.tsx
-msgid "organization(s)"
-msgstr "organization(s)"
+#~ msgid "organization(s)"
+#~ msgstr "organization(s)"
 
 #: src/pages/admin/index.tsx
 #: src/pages/admin/organizations.$tenantKey.tsx
 #: src/pages/admin/organizations.index.tsx
 #: src/pages/admin/users.$userId.tsx
 #: src/shared/ui/admin-layout/admin-nav.tsx
-msgid "Organizations"
-msgstr "Organizations"
+#~ msgid "Organizations"
+#~ msgstr "Organizations"
 
 #: src/pages/admin/organizations.index.tsx
-msgid "Organizations |Key Value Admin"
-msgstr "Organizations |Key Value Admin"
+#~ msgid "Organizations |Key Value Admin"
+#~ msgstr "Organizations |Key Value Admin"
 
 #: src/pages/admin/organizations.$tenantKey.tsx
 #: src/pages/admin/users.$userId.tsx
-msgid "Overview"
-msgstr "Overview"
+#~ msgid "Overview"
+#~ msgstr "Overview"
 
 #: src/pages/404.tsx
-msgid "Page Not Found |Key Value Admin"
-msgstr "Page Not Found |Key Value Admin"
+msgid "Page Not Found"
+msgstr "Page Not Found"
+
+#: src/pages/404.tsx
+#~ msgid "Page Not Found |Key Value Admin"
+#~ msgstr "Page Not Found |Key Value Admin"
 
 #: src/pages/404.tsx
 msgid "Page not found."
@@ -471,108 +488,122 @@ msgid "Password is required"
 msgstr "Password is required"
 
 #: src/pages/admin/subscriptions.tsx
-msgid "Period End"
-msgstr "Period End"
+#~ msgid "Period End"
+#~ msgstr "Period End"
 
 #: src/pages/admin/subscriptions.tsx
-msgid "Plan"
-msgstr "Plan"
+#~ msgid "Plan"
+#~ msgstr "Plan"
 
 #: src/pages/admin/organizations.index.tsx
 #: src/pages/admin/subscriptions.tsx
 #: src/pages/admin/users.index.tsx
 #: src/shared/ui/admin-layout/admin-nav.tsx
-msgid "Platform"
-msgstr "Platform"
+#~ msgid "Platform"
+#~ msgstr "Platform"
 
 #: src/pages/sign-in.tsx
-msgid "Platform administration"
-msgstr "Platform administration"
+#~ msgid "Platform administration"
+#~ msgstr "Platform administration"
 
 #: src/features/edit-tenant/ui/edit-tenant-modal.tsx
 #: src/features/edit-user/ui/edit-user-modal.tsx
-msgid "read-only"
-msgstr "read-only"
+#~ msgid "read-only"
+#~ msgstr "read-only"
 
 #: src/pages/admin/organizations.$tenantKey.tsx
 #: src/pages/admin/organizations.index.tsx
 #: src/pages/admin/subscriptions.tsx
 #: src/pages/admin/users.$userId.tsx
 #: src/pages/admin/users.index.tsx
-msgid "Refresh"
-msgstr "Refresh"
+#~ msgid "Refresh"
+#~ msgstr "Refresh"
 
 #: src/pages/admin/organizations.$tenantKey.tsx
-msgid "Renews"
-msgstr "Renews"
+#~ msgid "Renews"
+#~ msgstr "Renews"
 
 #: src/pages/admin/organizations.$tenantKey.tsx
 #: src/pages/admin/organizations.index.tsx
 #: src/pages/admin/subscriptions.tsx
 #: src/pages/admin/users.$userId.tsx
 #: src/pages/admin/users.index.tsx
-msgid "Retry"
-msgstr "Retry"
+#~ msgid "Retry"
+#~ msgstr "Retry"
 
 #: src/features/edit-tenant/ui/edit-tenant-modal.tsx
 #: src/features/edit-user/ui/edit-user-modal.tsx
-msgid "Save changes"
-msgstr "Save changes"
+#~ msgid "Save changes"
+#~ msgstr "Save changes"
 
 #: src/pages/admin/organizations.$tenantKey.tsx
 #: src/pages/admin/users.index.tsx
-msgid "Search by name or email…"
-msgstr "Search by name or email…"
+#~ msgid "Search by name or email…"
+#~ msgstr "Search by name or email…"
 
 #: src/pages/admin/organizations.index.tsx
-msgid "Search by name or key…"
-msgstr "Search by name or key…"
+#~ msgid "Search by name or key…"
+#~ msgstr "Search by name or key…"
 
 #: src/pages/admin/subscriptions.tsx
-msgid "Search by tenant or plan…"
-msgstr "Search by tenant or plan…"
+#~ msgid "Search by tenant or plan…"
+#~ msgstr "Search by tenant or plan…"
 
 #: src/pages/admin/users.tsx
 #~ msgid "Search users…"
 #~ msgstr "Search users…"
 
 #: src/shared/ui/admin-layout/admin-nav.tsx
-msgid "Search…"
-msgstr "Search…"
+#~ msgid "Search…"
+#~ msgstr "Search…"
+
+#: src/features/sign-in/ui/sign-in-form.tsx
+msgid "Select the workspace you want to sign in to."
+msgstr "Select the workspace you want to sign in to."
 
 #: src/pages/500.tsx
-msgid "Server Error |Key Value Admin"
-msgstr "Server Error |Key Value Admin"
+msgid "Server Error"
+msgstr "Server Error"
+
+#: src/pages/500.tsx
+#~ msgid "Server Error |Key Value Admin"
+#~ msgstr "Server Error |Key Value Admin"
 
 #: src/shared/ui/admin-layout/admin-nav.tsx
 #~ msgid "Settings"
 #~ msgstr "Settings"
 
-#. placeholder {0}: Math.min((page - 1) * PAGE_SIZE + 1, totalElements)
-#. placeholder {1}: Math.min(page * PAGE_SIZE, totalElements)
 #: src/pages/admin/organizations.$tenantKey.tsx
-msgid "Showing {0}–{1} of {totalElements} members"
-msgstr "Showing {0}–{1} of {totalElements} members"
+#~ msgid "Showing {0}–{1} of {totalElements} members"
+#~ msgstr "Showing {0}–{1} of {totalElements} members"
 
 #: src/pages/admin/organizations.index.tsx
-msgid "Showing {rangeStart}–{rangeEnd} of {totalElements} organizations"
-msgstr "Showing {rangeStart}–{rangeEnd} of {totalElements} organizations"
+#~ msgid "Showing {rangeStart}–{rangeEnd} of {totalElements} organizations"
+#~ msgstr "Showing {rangeStart}–{rangeEnd} of {totalElements} organizations"
 
 #: src/pages/admin/subscriptions.tsx
-msgid "Showing {rangeStart}–{rangeEnd} of {totalElements} subscriptions"
-msgstr "Showing {rangeStart}–{rangeEnd} of {totalElements} subscriptions"
+#~ msgid "Showing {rangeStart}–{rangeEnd} of {totalElements} subscriptions"
+#~ msgstr "Showing {rangeStart}–{rangeEnd} of {totalElements} subscriptions"
 
 #: src/pages/admin/users.index.tsx
-msgid "Showing {rangeStart}–{rangeEnd} of {totalElements} users"
-msgstr "Showing {rangeStart}–{rangeEnd} of {totalElements} users"
+#~ msgid "Showing {rangeStart}–{rangeEnd} of {totalElements} users"
+#~ msgstr "Showing {rangeStart}–{rangeEnd} of {totalElements} users"
 
 #: src/features/sign-in/ui/sign-in-form.tsx
-msgid "Sign in"
-msgstr "Sign in"
+#~ msgid "Sign in"
+#~ msgstr "Sign in"
 
 #: src/pages/sign-in.tsx
-msgid "Sign In |Key Value Admin"
-msgstr "Sign In |Key Value Admin"
+msgid "Sign In"
+msgstr "Sign In"
+
+#: src/pages/sign-in.tsx
+#~ msgid "Sign In |Key Value Admin"
+#~ msgstr "Sign In |Key Value Admin"
+
+#: src/pages/sign-in.tsx
+msgid "Sign in to your workspace to continue."
+msgstr "Sign in to your workspace to continue."
 
 #: src/features/sign-out/ui/sign-out-button.tsx
 msgid "Sign out"
@@ -600,21 +631,19 @@ msgstr "Start"
 #: src/pages/admin/organizations.index.tsx
 #: src/pages/admin/subscriptions.tsx
 #: src/pages/admin/users.index.tsx
-msgid "Status"
-msgstr "Status"
+#~ msgid "Status"
+#~ msgstr "Status"
 
 #: src/pages/admin/organizations.$tenantKey.tsx
 #: src/pages/admin/subscriptions.tsx
 #: src/shared/ui/admin-layout/admin-nav.tsx
-msgid "Subscriptions"
-msgstr "Subscriptions"
+#~ msgid "Subscriptions"
+#~ msgstr "Subscriptions"
 
 #: src/pages/admin/subscriptions.tsx
-msgid "Subscriptions |Key Value Admin"
-msgstr "Subscriptions |Key Value Admin"
+#~ msgid "Subscriptions |Key Value Admin"
+#~ msgstr "Subscriptions |Key Value Admin"
 
-#: src/features/edit-tenant/model/types.ts
-#: src/features/edit-user/model/types.ts
 #: src/shared/ui/tenant-status-badge/tenant-status-badge.tsx
 #: src/shared/ui/user-status-badge/user-status-badge.tsx
 msgid "Suspended"
@@ -625,12 +654,12 @@ msgstr "Suspended"
 #~ msgstr "System"
 
 #: src/pages/admin/subscriptions.tsx
-msgid "Tenant"
-msgstr "Tenant"
+#~ msgid "Tenant"
+#~ msgstr "Tenant"
 
 #: src/features/edit-tenant/ui/edit-tenant-modal.tsx
-msgid "Tenant key"
-msgstr "Tenant key"
+#~ msgid "Tenant key"
+#~ msgstr "Tenant key"
 
 #: src/pages/loading-demo.tsx
 msgid "Theme-aware (respects dark mode and color scheme)"
@@ -641,16 +670,20 @@ msgid "This template uses Mantine's official loading components for optimal UX."
 msgstr "This template uses Mantine's official loading components for optimal UX."
 
 #: src/pages/admin/users.$userId.tsx
-msgid "This user is not a member of any organization."
-msgstr "This user is not a member of any organization."
+#~ msgid "This user is not a member of any organization."
+#~ msgstr "This user is not a member of any organization."
 
 #: src/features/sign-in/model/use-sign-in.ts
 msgid "Too many sign-in attempts. Please try again later."
 msgstr "Too many sign-in attempts. Please try again later."
 
 #: src/pages/admin/index.tsx
-msgid "Total Users"
-msgstr "Total Users"
+#~ msgid "Total Users"
+#~ msgstr "Total Users"
+
+#: src/shared/ui/auth-layout/auth-layout.tsx
+msgid "Trusted by teams worldwide"
+msgstr "Trusted by teams worldwide"
 
 #: src/shared/ui/error-boundary.tsx
 msgid "Try Again"
@@ -660,26 +693,26 @@ msgstr "Try Again"
 #: src/pages/admin/organizations.$tenantKey.tsx
 #: src/pages/admin/users.$userId.tsx
 #: src/pages/admin/users.index.tsx
-msgid "Unverified"
-msgstr "Unverified"
+#~ msgid "Unverified"
+#~ msgstr "Unverified"
 
 #: src/pages/admin/users.$userId.tsx
-msgid "User"
-msgstr "User"
+#~ msgid "User"
+#~ msgstr "User"
 
 #: src/pages/admin/users.$userId.tsx
-msgid "User |Key Value Admin"
-msgstr "User |Key Value Admin"
+#~ msgid "User |Key Value Admin"
+#~ msgstr "User |Key Value Admin"
 
 #: src/pages/admin/users.$userId.tsx
 #: src/pages/admin/users.index.tsx
 #: src/shared/ui/admin-layout/admin-nav.tsx
-msgid "Users"
-msgstr "Users"
+#~ msgid "Users"
+#~ msgstr "Users"
 
 #: src/pages/admin/users.index.tsx
-msgid "Users |Key Value Admin"
-msgstr "Users |Key Value Admin"
+#~ msgid "Users |Key Value Admin"
+#~ msgstr "Users |Key Value Admin"
 
 #: src/pages/loading-demo.tsx
 msgid "Uses <0>@mantine/nprogress</0> for top loading bar"
@@ -693,32 +726,48 @@ msgstr "Uses <0>LoadingOverlay</0> component for full-screen loading"
 #: src/pages/admin/organizations.$tenantKey.tsx
 #: src/pages/admin/users.$userId.tsx
 #: src/pages/admin/users.index.tsx
-msgid "Verified"
-msgstr "Verified"
+#~ msgid "Verified"
+#~ msgstr "Verified"
 
 #: src/pages/admin/organizations.index.tsx
-msgid "View organization"
-msgstr "View organization"
+#~ msgid "View organization"
+#~ msgstr "View organization"
 
 #: src/pages/admin/users.index.tsx
-msgid "View user"
-msgstr "View user"
+#~ msgid "View user"
+#~ msgstr "View user"
 
 #: src/pages/sign-in.tsx
-msgid "You do not have permission to access the admin area."
-msgstr "You do not have permission to access the admin area."
+msgid "Welcome back"
+msgstr "Welcome back"
+
+#: src/pages/sign-in.tsx
+#~ msgid "You do not have permission to access the admin area."
+#~ msgstr "You do not have permission to access the admin area."
+
+#: src/pages/sign-in.tsx
+msgid "You do not have permission to access this area."
+msgstr "You do not have permission to access this area."
 
 #: src/pages/unauthorized.tsx
-msgid "You do not have the required <0>PLATFORM_ADMIN</0> authority to access this area. Please sign in with an account that has the appropriate permissions."
-msgstr "You do not have the required <0>PLATFORM_ADMIN</0> authority to access this area. Please sign in with an account that has the appropriate permissions."
+msgid "You do not have permission to access this area. Please sign in with an account that has the appropriate membership."
+msgstr "You do not have permission to access this area. Please sign in with an account that has the appropriate membership."
+
+#: src/pages/unauthorized.tsx
+#~ msgid "You do not have the required <0>PLATFORM_ADMIN</0> authority to access this area. Please sign in with an account that has the appropriate permissions."
+#~ msgstr "You do not have the required <0>PLATFORM_ADMIN</0> authority to access this area. Please sign in with an account that has the appropriate permissions."
 
 #: src/features/sign-in/ui/sign-in-form.tsx
 msgid "you@example.com"
 msgstr "you@example.com"
 
 #: src/features/sign-in/model/use-sign-in.ts
-msgid "Your account does not have admin access"
-msgstr "Your account does not have admin access"
+#~ msgid "Your account does not have admin access"
+#~ msgstr "Your account does not have admin access"
+
+#: src/features/sign-in/model/use-sign-in.ts
+msgid "Your account is not active or has been suspended"
+msgstr "Your account is not active or has been suspended"
 
 #: src/features/sign-in/ui/sign-in-form.tsx
 msgid "Your password"
@@ -727,3 +776,7 @@ msgstr "Your password"
 #: src/pages/sign-in.tsx
 msgid "Your session expired due to inactivity."
 msgstr "Your session expired due to inactivity."
+
+#: src/shared/ui/auth-layout/auth-layout.tsx
+msgid "Your workspace,"
+msgstr "Your workspace,"
