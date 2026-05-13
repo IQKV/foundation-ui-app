@@ -1,6 +1,6 @@
 # Foundation UI Platform Admin 🖥️
 
-Platform administration interface for the Key Value Platform. Provides comprehensive oversight and control over users, organizations, subscriptions, and system health across all tenants. Operator and tenant surfaces share the same SPA, build, and API Gateway connection — route-level guards enforce `PLATFORM_ADMIN` authority.
+Platform administration interface for the Key Value Platform. Provides comprehensive oversight and control over users, organizations, subscriptions, and system health across all tenants. Admin UI and tenant UI surfaces share the same SPA, build, and API Gateway connection — route-level guards enforce `PLATFORM_ADMIN` authority.
 
 ## About
 
