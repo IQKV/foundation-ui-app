@@ -172,10 +172,7 @@ function FormPanel({ children }: { children: ReactNode }) {
       }}
     >
       {/* Top-right utility bar — language + color scheme */}
-      <Group
-        gap={4}
-        style={{ position: "absolute", top: 16, right: 16, zIndex: 1 }}
-      >
+      <Group gap={4} style={{ position: "absolute", top: 16, right: 16, zIndex: 1 }}>
         <LocaleSwitcher />
         <ColorSchemeToggle />
       </Group>
