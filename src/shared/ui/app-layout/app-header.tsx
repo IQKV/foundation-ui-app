@@ -5,6 +5,7 @@ import { APP_NAME } from "@/shared/lib/page-title";
 import { useSignOut } from "@/features/sign-out";
 import { useSessionStore } from "@/processes/session";
 import { decodeJwt } from "@/shared/lib/jwt";
+import { ColorSchemeToggle } from "@/shared/ui/color-scheme-toggle/color-scheme-toggle";
 
 interface AppHeaderProps {
   opened: boolean;
@@ -95,6 +96,7 @@ export function AppHeader({ opened, onToggle }: AppHeaderProps) {
 
       {/* Right side — user menu */}
       <Group gap="xs" px="md" ml="auto">
+        <ColorSchemeToggle />
         <UserMenu />
       </Group>
     </Group>

@@ -1,6 +1,6 @@
 import { StrictMode, useEffect, useState } from "react";
 
-import { MantineProvider } from "@mantine/core";
+import { localStorageColorSchemeManager, MantineProvider } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
 import { ModalsProvider } from "@mantine/modals";
 import { NavigationProgress, nprogress } from "@mantine/nprogress";
@@ -28,6 +28,10 @@ const queryClient = new QueryClient({
 });
 
 const router = createRouter({ routeTree, defaultPreload: "intent" });
+
+// Persist color scheme preference in localStorage under the same key used by
+// the Zustand theme store so both stay in sync across page reloads.
+const colorSchemeManager = localStorageColorSchemeManager({ key: "iqkv_color_scheme" });
 
 // Router navigation progress integration
 router.subscribe("onBeforeLoad", () => {
@@ -66,7 +70,7 @@ export function App() {
       <HelmetProvider>
         <I18nProvider i18n={i18n}>
           <ErrorBoundary>
-            <MantineProvider theme={theme}>
+            <MantineProvider theme={theme} colorSchemeManager={colorSchemeManager}>
               <ModalsProvider>
                 <NavigationProgress />
                 <Notifications />

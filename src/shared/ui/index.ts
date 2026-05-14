@@ -7,3 +7,4 @@ export { UserStatusBadge } from "./user-status-badge";
 export { TenantStatusBadge } from "./tenant-status-badge";
 export { PageHeader } from "./page-header";
 export type { BreadcrumbItem } from "./page-header";
+export { ColorSchemeToggle } from "./color-scheme-toggle";
