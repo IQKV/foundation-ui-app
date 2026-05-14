@@ -188,19 +188,14 @@ function FormPanel({ children }: { children: ReactNode }) {
               width: 32,
               height: 32,
               borderRadius: 8,
-              background: isDark
-                ? "rgba(59,130,246,0.15)"
-                : "var(--mantine-color-blue-1)",
+              background: isDark ? "rgba(59,130,246,0.15)" : "var(--mantine-color-blue-1)",
               border: isDark ? "1px solid rgba(59,130,246,0.3)" : "none",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
             }}
           >
-            <IconShieldHalf
-              size={18}
-              color={isDark ? "#93c5fd" : "var(--mantine-color-blue-6)"}
-            />
+            <IconShieldHalf size={18} color={isDark ? "#93c5fd" : "var(--mantine-color-blue-6)"} />
           </Box>
           <Text fw={700} size="md" c={isDark ? "white" : "dark.8"}>
             {APP_NAME}
