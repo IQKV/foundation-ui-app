@@ -6,6 +6,7 @@ import { useSignOut } from "@/features/sign-out";
 import { useSessionStore } from "@/processes/session";
 import { decodeJwt } from "@/shared/lib/jwt";
 import { ColorSchemeToggle } from "@/shared/ui/color-scheme-toggle/color-scheme-toggle";
+import { LocaleSwitcher } from "@/shared/ui/locale-switcher/locale-switcher";
 
 interface AppHeaderProps {
   opened: boolean;
@@ -96,6 +97,7 @@ export function AppHeader({ opened, onToggle }: AppHeaderProps) {
 
       {/* Right side — user menu */}
       <Group gap="xs" px="md" ml="auto">
+        <LocaleSwitcher />
         <ColorSchemeToggle />
         <UserMenu />
       </Group>

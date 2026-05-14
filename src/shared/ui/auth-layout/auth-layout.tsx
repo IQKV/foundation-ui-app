@@ -1,8 +1,10 @@
 import type { ReactNode } from "react";
-import { Box, Flex, Stack, Text, Title } from "@mantine/core";
+import { Box, Flex, Group, Stack, Text, Title } from "@mantine/core";
 import { IconShieldHalf } from "@tabler/icons-react";
 import { Trans } from "@lingui/react/macro";
 import { APP_NAME } from "@/shared/lib/page-title";
+import { ColorSchemeToggle } from "@/shared/ui/color-scheme-toggle/color-scheme-toggle";
+import { LocaleSwitcher } from "@/shared/ui/locale-switcher/locale-switcher";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -166,8 +168,18 @@ function FormPanel({ children }: { children: ReactNode }) {
         alignItems: "center",
         justifyContent: "center",
         padding: "48px 32px",
+        position: "relative",
       }}
     >
+      {/* Top-right utility bar — language + color scheme */}
+      <Group
+        gap={4}
+        style={{ position: "absolute", top: 16, right: 16, zIndex: 1 }}
+      >
+        <LocaleSwitcher />
+        <ColorSchemeToggle />
+      </Group>
+
       <Box w="100%" maw={380}>
         {/* Mobile-only logo */}
         <Flex align="center" gap={10} hiddenFrom="md" mb="xl">

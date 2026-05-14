@@ -1,12 +1,13 @@
 import { i18n } from "@lingui/core";
+import { t } from "@lingui/core/macro";
 import { messages } from "../../../locales/en";
 
 i18n.load("en", messages);
 i18n.activate("en");
 
-export type SupportedLocales = "en" | "ru" | "it";
+export type SupportedLocales = "en";
 
-export const availableLocales = ["en", "ru", "it"];
+export const availableLocales = ["en"];
 
 export const getClientLocale = () => {
   if (typeof window !== "undefined") {
@@ -36,4 +37,17 @@ export const getSupportedLocale = (userLocale: string) => {
   if (availableLocales.includes(normalized)) return normalized;
   const main = normalized.split("-")[0];
   return availableLocales.find((l) => l.startsWith(main)) ?? "en";
+};
+
+export const localeToFlagEmojiMap: Record<SupportedLocales, string> = {
+  en: "🇬🇧",
+};
+
+export const localeToNameMap: Record<SupportedLocales, string> = {
+  en: "English",
+};
+
+export const getLocaleName = (locale: SupportedLocales) => {
+  // eslint-disable-next-line lingui/no-single-variables-to-translate,lingui/no-expression-in-message
+  return t`${localeToNameMap[locale]}`;
 };

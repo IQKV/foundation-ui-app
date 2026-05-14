@@ -8,3 +8,4 @@ export { TenantStatusBadge } from "./tenant-status-badge";
 export { PageHeader } from "./page-header";
 export type { BreadcrumbItem } from "./page-header";
 export { ColorSchemeToggle } from "./color-scheme-toggle";
+export { LocaleSwitcher } from "./locale-switcher";

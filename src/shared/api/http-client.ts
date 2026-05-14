@@ -1,4 +1,5 @@
 import axios from "axios";
+import { i18n } from "@lingui/core";
 import { getConfig } from "@/app/config";
 
 /**
@@ -47,4 +48,18 @@ export const httpClient = axios.create({
     Accept: "application/json",
   },
   timeout: 30_000,
+});
+
+/**
+ * Locale interceptor — injects the active Lingui locale as the standard
+ * Accept-Language header on every outgoing request.
+ *
+ * The backend (AcceptHeaderLocaleResolver) reads this header to localise
+ * error messages, email subjects, and validation responses. Falls back to
+ * "en" when no locale is active yet (e.g. during the initial locale load).
+ */
+httpClient.interceptors.request.use((config) => {
+  const locale = i18n.locale ?? "en";
+  config.headers["Accept-Language"] = locale;
+  return config;
 });
