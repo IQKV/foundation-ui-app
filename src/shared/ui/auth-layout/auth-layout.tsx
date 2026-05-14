@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Box, Flex, Group, Stack, Text, Title } from "@mantine/core";
+import { Box, Flex, Group, Stack, Text, Title, useMantineColorScheme } from "@mantine/core";
 import { IconShieldHalf } from "@tabler/icons-react";
 import { Trans } from "@lingui/react/macro";
 import { APP_NAME } from "@/shared/lib/page-title";
@@ -159,12 +159,15 @@ function BrandPanel({ headline, tagline }: BrandPanelProps) {
 // ─── Form panel (left) ────────────────────────────────────────────────────────
 
 function FormPanel({ children }: { children: ReactNode }) {
+  const { colorScheme } = useMantineColorScheme();
+  const isDark = colorScheme === "dark";
+
   return (
     <Flex
       style={{
         flex: 1,
         minHeight: "100vh",
-        background: "#ffffff",
+        background: isDark ? "var(--mantine-color-dark-7)" : "#ffffff",
         alignItems: "center",
         justifyContent: "center",
         padding: "48px 32px",
@@ -185,15 +188,21 @@ function FormPanel({ children }: { children: ReactNode }) {
               width: 32,
               height: 32,
               borderRadius: 8,
-              background: "var(--mantine-color-blue-1)",
+              background: isDark
+                ? "rgba(59,130,246,0.15)"
+                : "var(--mantine-color-blue-1)",
+              border: isDark ? "1px solid rgba(59,130,246,0.3)" : "none",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
             }}
           >
-            <IconShieldHalf size={18} color="var(--mantine-color-blue-6)" />
+            <IconShieldHalf
+              size={18}
+              color={isDark ? "#93c5fd" : "var(--mantine-color-blue-6)"}
+            />
           </Box>
-          <Text fw={700} size="md" c="dark.8">
+          <Text fw={700} size="md" c={isDark ? "white" : "dark.8"}>
             {APP_NAME}
           </Text>
         </Flex>
