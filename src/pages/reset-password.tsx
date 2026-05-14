@@ -76,7 +76,7 @@ function ResetPasswordPage() {
 
       {/* Heading */}
       <Box>
-        <Title order={2} fw={700} size="h3" c="dark.8" mb={6}>
+        <Title order={2} fw={700} size="h3" mb={6}>
           <Trans>Choose a new password</Trans>
         </Title>
         <Text c="dimmed" size="sm">

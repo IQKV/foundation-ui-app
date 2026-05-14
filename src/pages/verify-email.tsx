@@ -83,7 +83,7 @@ function VerifyEmailPage() {
       </Helmet>
 
       <Box>
-        <Title order={2} fw={700} size="h3" c="dark.8" mb={6}>
+        <Title order={2} fw={700} size="h3" mb={6}>
           <Trans>Email verification</Trans>
         </Title>
       </Box>

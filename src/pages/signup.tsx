@@ -76,7 +76,7 @@ function SignupPage() {
       {/* Heading — only shown on the form step */}
       {phase === "form" && (
         <Box>
-          <Title order={2} fw={700} size="h3" c="dark.8" mb={6}>
+          <Title order={2} fw={700} size="h3" mb={6}>
             <Trans>Create your account</Trans>
           </Title>
           <Text c="dimmed" size="sm">

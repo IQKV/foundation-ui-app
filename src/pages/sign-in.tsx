@@ -50,7 +50,7 @@ function SignInPage() {
 
       {/* Heading */}
       <Box>
-        <Title order={2} fw={700} size="h3" c="dark.8" mb={6}>
+        <Title order={2} fw={700} size="h3" mb={6}>
           <Trans>Welcome back</Trans>
         </Title>
         <Text c="dimmed" size="sm">
