@@ -23,8 +23,7 @@ export function AppLayout({ children }: AppLayoutProps) {
     >
       <AppShell.Header
         style={{
-          borderBottom: "1px solid var(--mantine-color-gray-2)",
-          background: "var(--mantine-color-white)",
+          borderBottom: "1px solid var(--mantine-color-default-border)",
         }}
       >
         <AppHeader opened={opened} onToggle={toggle} />
@@ -32,8 +31,7 @@ export function AppLayout({ children }: AppLayoutProps) {
 
       <AppShell.Navbar
         style={{
-          borderRight: "1px solid var(--mantine-color-gray-2)",
-          background: "var(--mantine-color-gray-0)",
+          borderRight: "1px solid var(--mantine-color-default-border)",
         }}
         data-testid="app-nav"
       >
@@ -44,7 +42,6 @@ export function AppLayout({ children }: AppLayoutProps) {
 
       <AppShell.Main
         style={{
-          background: "var(--mantine-color-gray-0)",
           minHeight: "calc(100vh - 56px)",
         }}
       >

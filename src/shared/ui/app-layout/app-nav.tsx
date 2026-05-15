@@ -69,7 +69,7 @@ export function AppNav() {
           leftSection={<IconSearch size={13} />}
           value={search}
           onChange={(e) => setSearch(e.currentTarget.value)}
-          styles={{ input: { background: "var(--mantine-color-white)" } }}
+          styles={{ input: { background: "var(--mantine-color-default)" } }}
         />
       </Box>
 
