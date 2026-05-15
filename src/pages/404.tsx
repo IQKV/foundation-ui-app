@@ -11,7 +11,7 @@ export const Route = createFileRoute("/404")({
 function NotFoundPage() {
   const { t } = useLingui();
   return (
-    <Container size="sm" py="xl">
+    <Container size="sm" py="xl" data-testid="page-404">
       <Helmet>
         <title>{pageTitle(t`Page Not Found`)}</title>
       </Helmet>
@@ -20,7 +20,7 @@ function NotFoundPage() {
         <Text c="dimmed">
           <Trans>Page not found.</Trans>
         </Text>
-        <Button component={Link} to="/">
+        <Button component={Link} to="/" data-testid="button--go-home">
           <Trans>Go home</Trans>
         </Button>
       </Stack>

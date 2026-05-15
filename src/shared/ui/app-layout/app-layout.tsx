@@ -19,6 +19,7 @@ export function AppLayout({ children }: AppLayoutProps) {
         collapsed: { mobile: !opened },
       }}
       padding="md"
+      data-testid="app-layout"
     >
       <AppShell.Header
         style={{
@@ -34,6 +35,7 @@ export function AppLayout({ children }: AppLayoutProps) {
           borderRight: "1px solid var(--mantine-color-gray-2)",
           background: "var(--mantine-color-gray-0)",
         }}
+        data-testid="app-nav"
       >
         <AppShell.Section grow component={ScrollArea}>
           <AppNav />

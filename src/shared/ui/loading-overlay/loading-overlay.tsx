@@ -38,6 +38,7 @@ export function LoadingOverlay({ visible, message, zIndex = 1000 }: LoadingOverl
           </Center>
         ),
       }}
+      data-testid="loading-overlay"
     />
   );
 }

@@ -1,4 +1,5 @@
-import { expect, type Page } from "@playwright/test";
+import { expect, type Page, type Locator } from "@playwright/test";
+import { TestSelectors, byTestId } from "./test-selectors";
 
 export class AppPage {
   constructor(private page: Page) {}
@@ -13,12 +14,43 @@ export class AppPage {
     await this.page.waitForLoadState("networkidle");
   }
 
+  async goToAdmin() {
+    await this.page.goto("/admin");
+    await this.page.waitForLoadState("networkidle");
+  }
+
   async expectHomePageVisible() {
     await expect(this.page.getByRole("heading", { name: "Welcome" })).toBeVisible();
   }
 
   async expect404PageVisible() {
+    await expect(this.page.locator(byTestId(TestSelectors.PAGE_404))).toBeVisible();
     await expect(this.page.getByRole("heading", { name: "404" })).toBeVisible();
+  }
+
+  async expectAdminLayoutVisible() {
+    await expect(this.page.locator(byTestId(TestSelectors.ADMIN_LAYOUT))).toBeVisible();
+    await expect(this.page.locator(byTestId(TestSelectors.ADMIN_HEADER))).toBeVisible();
+  }
+
+  async expectAppLayoutVisible() {
+    await expect(this.page.locator(byTestId(TestSelectors.APP_LAYOUT))).toBeVisible();
+    await expect(this.page.locator(byTestId(TestSelectors.APP_HEADER))).toBeVisible();
+  }
+
+  // Helper methods for common test operations
+  async getByTestId(testId: string): Promise<Locator> {
+    return this.page.locator(byTestId(testId));
+  }
+
+  async clickByTestId(testId: string) {
+    const element = await this.getByTestId(testId);
+    await element.click();
+  }
+
+  async waitForTestId(testId: string, options?: { state?: "attached" | "visible" | "hidden" }) {
+    const element = await this.getByTestId(testId);
+    await element.waitFor(options);
   }
 }
 
@@ -38,5 +70,20 @@ export const testUtils = {
       await page.setViewportSize(viewport);
       await testCallback(page);
     }
+  },
+
+  // Test ID utilities
+  byTestId,
+
+  async expectVisibleByTestId(page: Page, testId: string) {
+    await expect(page.locator(byTestId(testId))).toBeVisible();
+  },
+
+  async expectHiddenByTestId(page: Page, testId: string) {
+    await expect(page.locator(byTestId(testId))).toBeHidden();
+  },
+
+  async expectAttachedByTestId(page: Page, testId: string) {
+    await expect(page.locator(byTestId(testId))).toBeAttached();
   },
 };

@@ -31,6 +31,7 @@ export function ColorSchemeToggle() {
         color="gray"
         size="md"
         aria-label={isDark ? t`Switch to light mode` : t`Switch to dark mode`}
+        data-testid="header-color-scheme-toggle"
       >
         {isDark ? <IconSun size={18} /> : <IconMoon size={18} />}
       </ActionIcon>

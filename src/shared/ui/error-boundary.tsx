@@ -47,7 +47,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
       }
 
       return (
-        <Container size="sm" py="xl">
+        <Container size="sm" py="xl" data-testid="error-boundary">
           <Stack gap="lg" align="center">
             <IconAlertTriangle size={64} color="var(--mantine-color-red-6)" />
             <Stack gap="sm" align="center">
@@ -58,7 +58,11 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
                 {error.message}
               </Text>
             </Stack>
-            <Button leftSection={<IconRefresh size="1rem" />} onClick={this.handleRetry}>
+            <Button
+              leftSection={<IconRefresh size="1rem" />}
+              onClick={this.handleRetry}
+              data-testid="button--try-again"
+            >
               <Trans>Try Again</Trans>
             </Button>
             {showErrorDetails && errorInfo && (
