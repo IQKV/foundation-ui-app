@@ -14,19 +14,26 @@ export interface PagedResponse<T> {
 
 // ─── User types ───────────────────────────────────────────────────────────────
 
+export type UserStatus = "ACTIVE" | "LOCKED" | "SUSPENDED" | "DELETED";
+
 export interface UserProfile {
   id: string;
   email: string;
   firstName: string;
   lastName: string;
+  status: UserStatus;
   emailVerified: boolean;
+  /** Tenant names the user belongs to (aggregated server-side). */
+  organizations: string[];
+  /** Membership-level authorities across all tenants (e.g. TENANT_OWNER, ADMIN, MEMBER). */
+  membershipAuthorities: string[];
   createdAt: string;
   updatedAt: string;
 }
 
 export interface UpdateProfileRequest {
-  firstName?: string;
-  lastName?: string;
+  firstName: string;
+  lastName: string;
 }
 
 // ─── Tenant types ─────────────────────────────────────────────────────────────

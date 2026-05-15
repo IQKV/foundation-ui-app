@@ -1,4 +1,5 @@
 import { createFileRoute, isRedirect, Outlet, redirect, useNavigate } from "@tanstack/react-router";
+import { Center, Loader } from "@mantine/core";
 import { AppLayout } from "@/shared/ui";
 import { httpClient } from "@/shared/api/http-client";
 import { decodeJwt, isTenantSession } from "@/shared/lib/jwt";
@@ -9,6 +10,7 @@ import {
   getRefreshToken,
   getTenantKey,
   setTokens,
+  useSession,
 } from "@/processes/session";
 import { useInactivityTimer } from "@/processes/inactivity-timer";
 
@@ -86,9 +88,12 @@ export const Route = createFileRoute("/")({
 /**
  * Wraps all authenticated routes under `/`.
  * Mounts the inactivity timer for the entire tenant session.
+ * Shows a full-screen spinner while the silent-refresh is in flight to
+ * prevent flashing unauthorized content on page reload.
  */
 function AppLayoutRoute() {
   const navigate = useNavigate();
+  const { isLoading } = useSession();
 
   useInactivityTimer({
     onTimeout: () => {
@@ -97,6 +102,14 @@ function AppLayoutRoute() {
       void navigate({ to: "/sign-in", search: { reason: "timeout" } });
     },
   });
+
+  if (isLoading) {
+    return (
+      <Center mih="100vh" data-testid="app-auth-loading">
+        <Loader size="md" />
+      </Center>
+    );
+  }
 
   return (
     <AppLayout>

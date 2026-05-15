@@ -1,10 +1,11 @@
-import { NavLink, Stack, Text, Box, TextInput } from "@mantine/core";
+import { NavLink, Stack, Text, Box, TextInput, Divider } from "@mantine/core";
 import {
   IconDashboard,
   IconUsers,
   IconCreditCard,
   IconSettings,
   IconSearch,
+  IconUserCircle,
 } from "@tabler/icons-react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useState } from "react";
@@ -28,6 +29,12 @@ export function AppNav() {
     { label: t`Billing`, icon: <IconCreditCard size={16} />, to: "/billing" },
     { label: t`Settings`, icon: <IconSettings size={16} />, to: "/settings" },
   ];
+
+  const accountItem: NavItem = {
+    label: t`My Account`,
+    icon: <IconUserCircle size={16} />,
+    to: "/account",
+  };
 
   const filtered = search.trim()
     ? navItems.filter((item) => item.label.toLowerCase().includes(search.toLowerCase()))
@@ -90,6 +97,15 @@ export function AppNav() {
             </Text>
           </Box>
           {navItems.map(renderItem)}
+
+          <Divider mx="sm" my="xs" />
+
+          <Box px="md" pb={4}>
+            <Text size="xs" fw={600} c="dimmed" tt="uppercase" lts={1}>
+              <Trans>Account</Trans>
+            </Text>
+          </Box>
+          {renderItem(accountItem)}
         </>
       )}
     </Stack>

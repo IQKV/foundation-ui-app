@@ -7,6 +7,7 @@ export { httpClient } from "./http-client";
 export { iamApi } from "./iam";
 export type {
   UserProfile,
+  UserStatus,
   UpdateProfileRequest,
   Tenant,
   TenantStatus,

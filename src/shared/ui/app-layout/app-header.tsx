@@ -1,5 +1,6 @@
 import { Burger, Divider, Group, Text, Box, Avatar, Menu } from "@mantine/core";
 import { IconShieldHalf, IconLogout, IconUser } from "@tabler/icons-react";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { Trans } from "@lingui/react/macro";
 import { APP_NAME } from "@/shared/lib/page-title";
 import { useSignOut } from "@/features/sign-out";
@@ -15,6 +16,7 @@ interface AppHeaderProps {
 
 function UserMenu() {
   const { isLoading, signOut } = useSignOut();
+  const navigate = useNavigate();
   const accessToken = useSessionStore((s) => s.accessToken);
   const payload = accessToken ? decodeJwt(accessToken) : null;
 
@@ -46,8 +48,12 @@ function UserMenu() {
             <Menu.Divider />
           </>
         )}
-        <Menu.Item leftSection={<IconUser size={14} />} disabled data-testid="button--profile">
-          <Trans>Profile</Trans>
+        <Menu.Item
+          leftSection={<IconUser size={14} />}
+          onClick={() => void navigate({ to: "/account" })}
+          data-testid="button--profile"
+        >
+          <Trans>My Account</Trans>
         </Menu.Item>
         <Menu.Divider />
         <Menu.Item

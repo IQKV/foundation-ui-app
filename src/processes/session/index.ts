@@ -7,3 +7,6 @@ export {
   setAccessToken,
   clearSession,
 } from "./session.store";
+
+export { useSession } from "./use-session";
+export type { UseSessionResult } from "./use-session";
