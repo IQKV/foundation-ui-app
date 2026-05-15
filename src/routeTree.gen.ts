@@ -22,6 +22,7 @@ import { Route as AccountRouteImport } from "./pages/account"
 import { Route as R500RouteImport } from "./pages/500"
 import { Route as R404RouteImport } from "./pages/404"
 import { Route as IndexRouteImport } from "./pages/index"
+import { Route as InviteTokenRouteImport } from "./pages/invite.$token"
 
 const VerifyEmailRoute = VerifyEmailRouteImport.update({
   id: "/verify-email",
@@ -88,6 +89,11 @@ const IndexRoute = IndexRouteImport.update({
   path: "/",
   getParentRoute: () => rootRouteImport,
 } as any)
+const InviteTokenRoute = InviteTokenRouteImport.update({
+  id: "/invite/$token",
+  path: "/invite/$token",
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   "/": typeof IndexRoute
@@ -103,6 +109,7 @@ export interface FileRoutesByFullPath {
   "/team": typeof TeamRoute
   "/unauthorized": typeof UnauthorizedRoute
   "/verify-email": typeof VerifyEmailRoute
+  "/invite/$token": typeof InviteTokenRoute
 }
 export interface FileRoutesByTo {
   "/": typeof IndexRoute
@@ -118,6 +125,7 @@ export interface FileRoutesByTo {
   "/team": typeof TeamRoute
   "/unauthorized": typeof UnauthorizedRoute
   "/verify-email": typeof VerifyEmailRoute
+  "/invite/$token": typeof InviteTokenRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -134,6 +142,7 @@ export interface FileRoutesById {
   "/team": typeof TeamRoute
   "/unauthorized": typeof UnauthorizedRoute
   "/verify-email": typeof VerifyEmailRoute
+  "/invite/$token": typeof InviteTokenRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -151,6 +160,7 @@ export interface FileRouteTypes {
     | "/team"
     | "/unauthorized"
     | "/verify-email"
+    | "/invite/$token"
   fileRoutesByTo: FileRoutesByTo
   to:
     | "/"
@@ -166,6 +176,7 @@ export interface FileRouteTypes {
     | "/team"
     | "/unauthorized"
     | "/verify-email"
+    | "/invite/$token"
   id:
     | "__root__"
     | "/"
@@ -181,6 +192,7 @@ export interface FileRouteTypes {
     | "/team"
     | "/unauthorized"
     | "/verify-email"
+    | "/invite/$token"
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -197,6 +209,7 @@ export interface RootRouteChildren {
   TeamRoute: typeof TeamRoute
   UnauthorizedRoute: typeof UnauthorizedRoute
   VerifyEmailRoute: typeof VerifyEmailRoute
+  InviteTokenRoute: typeof InviteTokenRoute
 }
 
 declare module "@tanstack/react-router" {
@@ -292,6 +305,13 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    "/invite/$token": {
+      id: "/invite/$token"
+      path: "/invite/$token"
+      fullPath: "/invite/$token"
+      preLoaderRoute: typeof InviteTokenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -309,6 +329,7 @@ const rootRouteChildren: RootRouteChildren = {
   TeamRoute: TeamRoute,
   UnauthorizedRoute: UnauthorizedRoute,
   VerifyEmailRoute: VerifyEmailRoute,
+  InviteTokenRoute: InviteTokenRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
