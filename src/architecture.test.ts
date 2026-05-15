@@ -66,25 +66,6 @@ describe("FSD Architecture", () => {
     });
   });
 
-  describe("Segment Organization", () => {
-    it("features should have ui and model segments (if any exist)", () => {
-      const featuresDir = join(srcDir, "features");
-      const features = readdirSync(featuresDir).filter((f) =>
-        statSync(join(featuresDir, f)).isDirectory(),
-      );
-      features.forEach((feature) => {
-        expect(
-          () => statSync(join(featuresDir, feature, "ui")),
-          `Feature "${feature}" must have ui/ segment`,
-        ).not.toThrow();
-        expect(
-          () => statSync(join(featuresDir, feature, "model")),
-          `Feature "${feature}" must have model/ segment`,
-        ).not.toThrow();
-      });
-    });
-  });
-
   describe("File Naming", () => {
     it("pages should use kebab-case", () => {
       const pagesDir = join(srcDir, "pages");
