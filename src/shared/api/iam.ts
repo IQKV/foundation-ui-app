@@ -93,6 +93,32 @@ export interface SendInvitationRequest {
   authority?: InvitationAuthority;
 }
 
+// ─── Invitation accept flow (public — no auth required) ───────────────────────
+
+export interface InvitationPreview {
+  invitationId: string;
+  tenantName: string;
+  email: string;
+  authority: string;
+  expiresAt: string;
+  /** True when the invited email has no account yet — new user must provide name + password. */
+  requiresSignup: boolean;
+}
+
+export interface AcceptInvitationRequest {
+  password: string;
+  /** Required only when requiresSignup is true. */
+  firstName?: string;
+  /** Required only when requiresSignup is true. */
+  lastName?: string;
+}
+
+export interface AcceptInvitationResponse {
+  accessToken: string;
+  refreshToken: string;
+  tenantKey: string;
+}
+
 // ─── API ──────────────────────────────────────────────────────────────────────
 
 export const iamApi = {
@@ -134,4 +160,25 @@ export const iamApi = {
   /** Revoke a pending invitation. */
   revokeInvitation: (tenantKey: string, invitationId: string) =>
     httpClient.delete(`/v1/iam/tenants/${tenantKey}/invitations/${invitationId}`),
+
+  // ── Invitation accept flow (public — no JWT / X-Tenant-ID required) ────────
+
+  /**
+   * Preview an invitation by token.
+   * Returns tenant name, invited email, authority, expiry, and requiresSignup flag.
+   * 404 when the token is expired, revoked, or not found.
+   */
+  previewInvitation: (token: string) =>
+    httpClient.get<InvitationPreview>(`/v1/iam/invitations/${token}`).then((r) => r.data),
+
+  /**
+   * Accept an invitation.
+   * For new users (requiresSignup=true): firstName, lastName, and password required.
+   * For existing users (requiresSignup=false): only password required.
+   * Returns a token pair scoped to the invited tenant — user is immediately signed in.
+   */
+  acceptInvitation: (token: string, data: AcceptInvitationRequest) =>
+    httpClient
+      .post<AcceptInvitationResponse>(`/v1/iam/invitations/${token}/accept`, data)
+      .then((r) => r.data),
 };

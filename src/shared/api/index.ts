@@ -18,6 +18,9 @@ export type {
   InvitationStatus,
   InvitationAuthority,
   SendInvitationRequest,
+  InvitationPreview,
+  AcceptInvitationRequest,
+  AcceptInvitationResponse,
   SortDirection,
   PagedResponse,
 } from "./iam";
