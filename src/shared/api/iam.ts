@@ -75,17 +75,22 @@ export interface ListMembersParams {
 
 // ─── Invitation types ─────────────────────────────────────────────────────────
 
+export type InvitationStatus = "PENDING" | "ACCEPTED" | "REVOKED" | "EXPIRED";
+export type InvitationAuthority = "ADMIN" | "MEMBER";
+
 export interface Invitation {
-  id: string;
+  invitationId: string;
   email: string;
   tenantKey: string;
-  status: string;
-  createdAt: string;
+  authority: InvitationAuthority;
+  status: InvitationStatus;
   expiresAt: string;
+  createdAt: string;
 }
 
 export interface SendInvitationRequest {
   email: string;
+  authority?: InvitationAuthority;
 }
 
 // ─── API ──────────────────────────────────────────────────────────────────────

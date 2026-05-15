@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from "./pages/__root"
 import { Route as VerifyEmailRouteImport } from "./pages/verify-email"
 import { Route as UnauthorizedRouteImport } from "./pages/unauthorized"
+import { Route as TeamRouteImport } from "./pages/team"
 import { Route as SignupRouteImport } from "./pages/signup"
 import { Route as SignInRouteImport } from "./pages/sign-in"
 import { Route as ResetPasswordRouteImport } from "./pages/reset-password"
@@ -30,6 +31,11 @@ const VerifyEmailRoute = VerifyEmailRouteImport.update({
 const UnauthorizedRoute = UnauthorizedRouteImport.update({
   id: "/unauthorized",
   path: "/unauthorized",
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TeamRoute = TeamRouteImport.update({
+  id: "/team",
+  path: "/team",
   getParentRoute: () => rootRouteImport,
 } as any)
 const SignupRoute = SignupRouteImport.update({
@@ -94,6 +100,7 @@ export interface FileRoutesByFullPath {
   "/reset-password": typeof ResetPasswordRoute
   "/sign-in": typeof SignInRoute
   "/signup": typeof SignupRoute
+  "/team": typeof TeamRoute
   "/unauthorized": typeof UnauthorizedRoute
   "/verify-email": typeof VerifyEmailRoute
 }
@@ -108,6 +115,7 @@ export interface FileRoutesByTo {
   "/reset-password": typeof ResetPasswordRoute
   "/sign-in": typeof SignInRoute
   "/signup": typeof SignupRoute
+  "/team": typeof TeamRoute
   "/unauthorized": typeof UnauthorizedRoute
   "/verify-email": typeof VerifyEmailRoute
 }
@@ -123,6 +131,7 @@ export interface FileRoutesById {
   "/reset-password": typeof ResetPasswordRoute
   "/sign-in": typeof SignInRoute
   "/signup": typeof SignupRoute
+  "/team": typeof TeamRoute
   "/unauthorized": typeof UnauthorizedRoute
   "/verify-email": typeof VerifyEmailRoute
 }
@@ -139,6 +148,7 @@ export interface FileRouteTypes {
     | "/reset-password"
     | "/sign-in"
     | "/signup"
+    | "/team"
     | "/unauthorized"
     | "/verify-email"
   fileRoutesByTo: FileRoutesByTo
@@ -153,6 +163,7 @@ export interface FileRouteTypes {
     | "/reset-password"
     | "/sign-in"
     | "/signup"
+    | "/team"
     | "/unauthorized"
     | "/verify-email"
   id:
@@ -167,6 +178,7 @@ export interface FileRouteTypes {
     | "/reset-password"
     | "/sign-in"
     | "/signup"
+    | "/team"
     | "/unauthorized"
     | "/verify-email"
   fileRoutesById: FileRoutesById
@@ -182,6 +194,7 @@ export interface RootRouteChildren {
   ResetPasswordRoute: typeof ResetPasswordRoute
   SignInRoute: typeof SignInRoute
   SignupRoute: typeof SignupRoute
+  TeamRoute: typeof TeamRoute
   UnauthorizedRoute: typeof UnauthorizedRoute
   VerifyEmailRoute: typeof VerifyEmailRoute
 }
@@ -200,6 +213,13 @@ declare module "@tanstack/react-router" {
       path: "/unauthorized"
       fullPath: "/unauthorized"
       preLoaderRoute: typeof UnauthorizedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    "/team": {
+      id: "/team"
+      path: "/team"
+      fullPath: "/team"
+      preLoaderRoute: typeof TeamRouteImport
       parentRoute: typeof rootRouteImport
     }
     "/signup": {
@@ -286,6 +306,7 @@ const rootRouteChildren: RootRouteChildren = {
   ResetPasswordRoute: ResetPasswordRoute,
   SignInRoute: SignInRoute,
   SignupRoute: SignupRoute,
+  TeamRoute: TeamRoute,
   UnauthorizedRoute: UnauthorizedRoute,
   VerifyEmailRoute: VerifyEmailRoute,
 }

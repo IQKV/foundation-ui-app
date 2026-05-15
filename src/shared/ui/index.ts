@@ -7,6 +7,7 @@ export { LoadingOverlay } from "./loading-overlay";
 export { ErrorBoundary } from "./error-boundary";
 export { UserStatusBadge } from "./user-status-badge";
 export { TenantStatusBadge } from "./tenant-status-badge";
+export { InvitationStatusBadge } from "./invitation-status-badge";
 export { PageHeader } from "./page-header";
 export type { BreadcrumbItem } from "./page-header";
 export { ColorSchemeToggle } from "./color-scheme-toggle";

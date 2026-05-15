@@ -15,6 +15,8 @@ export type {
   MemberStatus,
   ListMembersParams,
   Invitation,
+  InvitationStatus,
+  InvitationAuthority,
   SendInvitationRequest,
   SortDirection,
   PagedResponse,
