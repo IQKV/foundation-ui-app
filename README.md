@@ -8,18 +8,18 @@ This is the tenant surface of the platform — separate from `foundation-ui-plat
 
 ### Implemented today
 
-| Area | What it does |
-| --- | --- |
-| **Sign-in** | Two-step flow: credentials → tenant discovery (`POST /v1/iam/users/tenants`); multi-tenant users pick a workspace; single-tenant users sign in directly (`POST /v1/iam/auth/signin`) |
-| **Sign-up** | Self-service registration with tenant creation; polls provisioning status until the tenant is `ACTIVE` |
-| **Password reset** | Forgot-password email flow and token-based reset (`/forgot-password`, `/reset-password`) |
-| **Email verification** | Token-based verification page (`/verify-email?token=…`) |
-| **Invitations** | Accept flow for new and existing users (`/invite/:token`); owners invite members, view pending invitations, revoke invitations |
-| **Dashboard** | Workspace name, welcome message, team member count |
-| **Team** | Searchable member list; pending invitations panel (TENANT_OWNER only); send invitation modal (ADMIN or MEMBER role) |
-| **My Account** | Profile view, edit name, change password, organizations and roles |
-| **Session security** | Access token in memory; refresh token + tenant key in `sessionStorage`; silent refresh on 401; 30-minute inactivity sign-out |
-| **UX** | Light/dark theme, Lingui i18n (English catalog), locale cookie, navigation progress, error boundaries |
+| Area                   | What it does                                                                                                                                                                         |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Sign-in**            | Two-step flow: credentials → tenant discovery (`POST /v1/iam/users/tenants`); multi-tenant users pick a workspace; single-tenant users sign in directly (`POST /v1/iam/auth/signin`) |
+| **Sign-up**            | Self-service registration with tenant creation; polls provisioning status until the tenant is `ACTIVE`                                                                               |
+| **Password reset**     | Forgot-password email flow and token-based reset (`/forgot-password`, `/reset-password`)                                                                                             |
+| **Email verification** | Token-based verification page (`/verify-email?token=…`)                                                                                                                              |
+| **Invitations**        | Accept flow for new and existing users (`/invite/:token`); owners invite members, view pending invitations, revoke invitations                                                       |
+| **Dashboard**          | Workspace name, welcome message, team member count                                                                                                                                   |
+| **Team**               | Searchable member list; pending invitations panel (TENANT_OWNER only); send invitation modal (ADMIN or MEMBER role)                                                                  |
+| **My Account**         | Profile view, edit name, change password, organizations and roles                                                                                                                    |
+| **Session security**   | Access token in memory; refresh token + tenant key in `sessionStorage`; silent refresh on 401; 30-minute inactivity sign-out                                                         |
+| **UX**                 | Light/dark theme, Lingui i18n (English catalog), locale cookie, navigation progress, error boundaries                                                                                |
 
 ### Not implemented yet
 
@@ -30,38 +30,38 @@ This is the tenant surface of the platform — separate from `foundation-ui-plat
 
 ## Routes
 
-| Path | Access | Description |
-| --- | --- | --- |
-| `/sign-in` | Public | Tenant sign-in with optional redirect |
-| `/signup` | Public | New user + tenant registration |
-| `/forgot-password` | Public | Request password reset email |
-| `/reset-password` | Public | Set new password from email token |
-| `/verify-email` | Public | Confirm email from link token |
-| `/invite/:token` | Public | Preview and accept workspace invitation |
-| `/` | Authenticated | Dashboard |
-| `/team` | Authenticated | Members and invitations |
-| `/account` | Authenticated | Profile and password |
-| `/unauthorized` | Public | Shown when JWT is not a tenant session |
-| `/404`, `/500` | Public | Error pages |
+| Path               | Access        | Description                             |
+| ------------------ | ------------- | --------------------------------------- |
+| `/sign-in`         | Public        | Tenant sign-in with optional redirect   |
+| `/signup`          | Public        | New user + tenant registration          |
+| `/forgot-password` | Public        | Request password reset email            |
+| `/reset-password`  | Public        | Set new password from email token       |
+| `/verify-email`    | Public        | Confirm email from link token           |
+| `/invite/:token`   | Public        | Preview and accept workspace invitation |
+| `/`                | Authenticated | Dashboard                               |
+| `/team`            | Authenticated | Members and invitations                 |
+| `/account`         | Authenticated | Profile and password                    |
+| `/unauthorized`    | Public        | Shown when JWT is not a tenant session  |
+| `/404`, `/500`     | Public        | Error pages                             |
 
 Authenticated routes live under the `/_app` layout, which enforces a valid tenant JWT (or silent refresh) before rendering.
 
 ## Feature status
 
-| Feature | Status |
-| --- | --- |
-| Sign-in with tenant discovery | Done |
-| Sign-up with tenant provisioning | Done |
-| Forgot / reset password | Done |
-| Email verification | Done |
-| Accept invitation | Done |
-| Dashboard | Done (basic stats) |
-| Team — member list | Done |
+| Feature                                 | Status              |
+| --------------------------------------- | ------------------- |
+| Sign-in with tenant discovery           | Done                |
+| Sign-up with tenant provisioning        | Done                |
+| Forgot / reset password                 | Done                |
+| Email verification                      | Done                |
+| Accept invitation                       | Done                |
+| Dashboard                               | Done (basic stats)  |
+| Team — member list                      | Done                |
 | Team — invitations (send, list, revoke) | Done (TENANT_OWNER) |
-| Profile & change password | Done |
-| Billing self-service | Planned |
-| Tenant settings | Planned |
-| Member role editing | Planned |
+| Profile & change password               | Done                |
+| Billing self-service                    | Planned             |
+| Tenant settings                         | Planned             |
+| Member role editing                     | Planned             |
 
 ## Tech stack
 
@@ -100,10 +100,10 @@ In development, the app uses `baseURL: /api` and Vite proxies to `VITE_API_SERVE
 
 ## Environment variables
 
-| Variable | Default (`.env.example`) | Description |
-| --- | --- | --- |
-| `VITE_API_SERVER_URL` | `https://api.iqkv.site/api` | API base URL (origin + path prefix) |
-| `VITE_LOG_LEVEL` | `info` | Client log level: `silent`, `info`, `debug` |
+| Variable              | Default (`.env.example`)    | Description                                 |
+| --------------------- | --------------------------- | ------------------------------------------- |
+| `VITE_API_SERVER_URL` | `https://api.iqkv.site/api` | API base URL (origin + path prefix)         |
+| `VITE_LOG_LEVEL`      | `info`                      | Client log level: `silent`, `info`, `debug` |
 
 Copy `.env.example` to `.env.local` for local overrides. For runtime overrides without a rebuild, copy `public/config.js.example` to `public/config.js` and set `window.VITE_*` values.
 
@@ -171,11 +171,11 @@ src/
 
 Roles are carried on the JWT (`authorities` claim) and enforced in the UI:
 
-| Role | Capabilities in this app |
-| --- | --- |
-| `TENANT_OWNER` | Invite members, view/revoke pending invitations |
-| `ADMIN` | (Invitable role; no extra UI beyond member list today) |
-| `MEMBER` | Dashboard, team member list, own account |
+| Role           | Capabilities in this app                               |
+| -------------- | ------------------------------------------------------ |
+| `TENANT_OWNER` | Invite members, view/revoke pending invitations        |
+| `ADMIN`        | (Invitable role; no extra UI beyond member list today) |
+| `MEMBER`       | Dashboard, team member list, own account               |
 
 `TenantOwnerOnly` / `AuthGuard` hide owner-only actions. The `/_app` route guard requires `tenant_id` to be non-null in the JWT; platform-scoped tokens redirect to `/unauthorized`.
 
@@ -189,13 +189,13 @@ Roles are carried on the JWT (`authorities` claim) and enforced in the UI:
 
 ## Relationship to platform admin
 
-| | `foundation-ui-app` | `foundation-ui-platform-admin` |
-| --- | --- | --- |
-| Audience | Tenant members | Platform operators |
-| JWT | `tenant_id` set (tenant session) | `tenant_id` null (platform session) |
-| Sign-in | `POST /v1/iam/auth/signin` + `X-Tenant-ID` | Admin sign-in endpoint |
-| Typical APIs | `/v1/iam/users/me`, `/v1/iam/tenants/:key`, tenant invitations | `/admin/*` operator APIs |
-| Deployment | Public-facing | Internal / restricted |
+|              | `foundation-ui-app`                                            | `foundation-ui-platform-admin`      |
+| ------------ | -------------------------------------------------------------- | ----------------------------------- |
+| Audience     | Tenant members                                                 | Platform operators                  |
+| JWT          | `tenant_id` set (tenant session)                               | `tenant_id` null (platform session) |
+| Sign-in      | `POST /v1/iam/auth/signin` + `X-Tenant-ID`                     | Admin sign-in endpoint              |
+| Typical APIs | `/v1/iam/users/me`, `/v1/iam/tenants/:key`, tenant invitations | `/admin/*` operator APIs            |
+| Deployment   | Public-facing                                                  | Internal / restricted               |
 
 ## Documentation
 
