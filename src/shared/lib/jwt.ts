@@ -27,10 +27,10 @@ export function decodeJwt(token: string): JwtPayload | null {
 
 /**
  * Return true if the decoded payload belongs to an authenticated tenant session
- * (non-null tenant_id and at least one authority).
+ * (non-null tenant_id).
  */
 export function isTenantSession(payload: JwtPayload): boolean {
-  return payload.tenant_id !== null && payload.authorities.length > 0;
+  return payload.tenant_id !== null;
 }
 
 /**

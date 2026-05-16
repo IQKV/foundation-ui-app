@@ -76,7 +76,8 @@ export const Route = createFileRoute("/_app")({
     }
 
     if (!isTenantSession(payload)) {
-      throw redirect({ to: "/unauthorized" });
+      clearSession();
+      throw redirect({ to: "/sign-in", search: { redirect: location.href } });
     }
   },
 

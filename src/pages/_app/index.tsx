@@ -7,8 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import { pageTitle } from "@/shared/lib/page-title";
 import { PageHeader } from "@/shared/ui";
 import { iamApi } from "@/shared/api";
-import { useSessionStore } from "@/processes/session";
-import { decodeJwt } from "@/shared/lib/jwt";
+import { useSession } from "@/processes/session";
 
 export const Route = createFileRoute("/_app/")({
   component: DashboardPage,
@@ -45,24 +44,23 @@ function StatCard({ icon, color, value, label }: StatCardProps) {
 
 function DashboardPage() {
   const { t } = useLingui();
-
-  // Derive tenant key and user name from the in-memory access token.
-  const accessToken = useSessionStore((s) => s.accessToken);
-  const tenantKey = useSessionStore((s) => s.tenantKey);
-  const payload = accessToken ? decodeJwt(accessToken) : null;
+  const { tenantKey, payload, isTenantOwner } = useSession();
   const firstName = payload?.firstName ?? "";
 
-  // Fetch tenant details and member count in parallel.
+  // Fetch tenant details — all members should be able to see this.
   const { data: tenant, isLoading: tenantLoading } = useQuery({
     queryKey: ["tenant", tenantKey],
     queryFn: () => iamApi.getTenant(tenantKey!),
     enabled: !!tenantKey,
+    retry: false, // Don't retry on 403
   });
 
+  // Fetch member count — might return 403 for some users.
   const { data: membersPage, isLoading: membersLoading } = useQuery({
     queryKey: ["tenant", tenantKey, "members"],
     queryFn: () => iamApi.listMembers(tenantKey!, { size: 1 }),
     enabled: !!tenantKey,
+    retry: false,
   });
 
   const memberCount = membersPage?.totalElements;

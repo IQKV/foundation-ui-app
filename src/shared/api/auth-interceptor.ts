@@ -114,12 +114,11 @@ httpClient.interceptors.response.use(
       }
     }
 
-    if (
-      status === 403 &&
-      !isSignInEndpoint &&
-      !isTenantDiscoveryEndpoint &&
-      !isInvitationEndpoint
-    ) {
+    // 403 Forbidden: the user's membership was revoked or they lack permission.
+    // We don't clear the session here anymore to allow the UI to handle
+    // permission errors gracefully (e.g. showing an "Access Denied" message
+    // instead of kicking the user out entirely).
+    if (status === 403 && isRefreshEndpoint) {
       clearSession();
       window.location.href = "/sign-in?reason=forbidden";
       return Promise.reject(error);
