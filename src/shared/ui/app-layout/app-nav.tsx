@@ -3,6 +3,7 @@ import { IconDashboard, IconUsers, IconSearch, IconUserCircle } from "@tabler/ic
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useState } from "react";
 import { Trans, useLingui } from "@lingui/react/macro";
+import { useSession } from "@/processes/session";
 
 interface NavItem {
   label: string;
@@ -12,13 +13,14 @@ interface NavItem {
 
 export function AppNav() {
   const { t } = useLingui();
+  const { isTenantOwner } = useSession();
   const routerState = useRouterState();
   const currentPath = routerState.location.pathname;
   const [search, setSearch] = useState("");
 
   const navItems: NavItem[] = [
     { label: t`Dashboard`, icon: <IconDashboard size={16} />, to: "/" },
-    { label: t`Team`, icon: <IconUsers size={16} />, to: "/team" },
+    ...(isTenantOwner ? [{ label: t`Team`, icon: <IconUsers size={16} />, to: "/team" }] : []),
   ];
 
   const accountItem: NavItem = {
