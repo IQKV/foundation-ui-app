@@ -1,186 +1,213 @@
-# Foundation UI App 🖥️
+# Foundation UI App
 
-Tenant-facing application for the Key Value Platform. Provides workspace members with self-service access to their profile, team, and billing — scoped entirely to their own tenant.
+Tenant-facing web application for the Key Value Platform. Workspace members use it to sign in, manage their team, and maintain their account — all scoped to a single tenant.
 
 ## About
 
-This is the tenant surface of the platform — the app that end users interact with after signing up or accepting an invitation. It is intentionally separate from the platform admin console (`foundation-ui-platform-admin`), which is operator-only.
+This is the tenant surface of the platform — separate from `foundation-ui-platform-admin`, which is operator-only. The app talks to the IAM API (`/v1/iam/*`) with tenant-scoped JWTs and an `X-Tenant-ID` header on authenticated requests.
 
-- **Sign-in with tenant discovery** — credentials are validated first, then the user selects their workspace if they belong to multiple tenants; single-tenant users are signed in directly
-- **Dashboard** — workspace overview: subscription status, team size, recent activity
-- **Team management** — member list, invite new members by email, revoke invitations, manage member roles
-- **Profile & settings** — update own profile (`/users/me`), change password, manage notification preferences
-- **Billing** — view active subscription, browse plan catalog, manage billing settings (TENANT_OWNER only)
-- **Tenant settings** — update workspace name and configuration (TENANT_OWNER only)
-- **Secure token strategy** — access token in memory only; refresh token in sessionStorage with tenant key; `X-Tenant-ID` header injected automatically on every API request
-- **Internationalization** — full i18n with Lingui; English as base language; runtime locale switching without rebuild
+### Implemented today
 
-## Quick Links
+| Area | What it does |
+| --- | --- |
+| **Sign-in** | Two-step flow: credentials → tenant discovery (`POST /v1/iam/users/tenants`); multi-tenant users pick a workspace; single-tenant users sign in directly (`POST /v1/iam/auth/signin`) |
+| **Sign-up** | Self-service registration with tenant creation; polls provisioning status until the tenant is `ACTIVE` |
+| **Password reset** | Forgot-password email flow and token-based reset (`/forgot-password`, `/reset-password`) |
+| **Email verification** | Token-based verification page (`/verify-email?token=…`) |
+| **Invitations** | Accept flow for new and existing users (`/invite/:token`); owners invite members, view pending invitations, revoke invitations |
+| **Dashboard** | Workspace name, welcome message, team member count |
+| **Team** | Searchable member list; pending invitations panel (TENANT_OWNER only); send invitation modal (ADMIN or MEMBER role) |
+| **My Account** | Profile view, edit name, change password, organizations and roles |
+| **Session security** | Access token in memory; refresh token + tenant key in `sessionStorage`; silent refresh on 401; 30-minute inactivity sign-out |
+| **UX** | Light/dark theme, Lingui i18n (English catalog), locale cookie, navigation progress, error boundaries |
 
-- [Architecture Overview](./docs/architecture/README.md)
-- [Deployment Guide](./docs/deployment/README.md)
-- [Contributing Guidelines](.github/CONTRIBUTING.md)
+### Not implemented yet
 
-## Feature Status
+- Billing and subscription self-service
+- Tenant/workspace settings (rename, configuration)
+- Member role management beyond invitation authority (ADMIN / MEMBER)
+- Additional locales (infrastructure is ready; only `en` is compiled today)
 
-| Feature                       | Status         |
-| ----------------------------- | -------------- |
-| Sign-in with tenant discovery | 🚧 In progress |
-| Dashboard                     | 📋 Planned     |
-| Team management               | 📋 Planned     |
-| Invitations                   | 📋 Planned     |
-| Profile & settings            | 📋 Planned     |
-| Billing self-service          | 📋 Planned     |
-| Tenant settings               | 📋 Planned     |
+## Routes
 
-## Tech Stack
+| Path | Access | Description |
+| --- | --- | --- |
+| `/sign-in` | Public | Tenant sign-in with optional redirect |
+| `/signup` | Public | New user + tenant registration |
+| `/forgot-password` | Public | Request password reset email |
+| `/reset-password` | Public | Set new password from email token |
+| `/verify-email` | Public | Confirm email from link token |
+| `/invite/:token` | Public | Preview and accept workspace invitation |
+| `/` | Authenticated | Dashboard |
+| `/team` | Authenticated | Members and invitations |
+| `/account` | Authenticated | Profile and password |
+| `/unauthorized` | Public | Shown when JWT is not a tenant session |
+| `/404`, `/500` | Public | Error pages |
 
-- React 19 + TypeScript
-- Mantine UI 8 + mantine-datatable
-- TanStack Router + TanStack Query
-- Zustand (session store)
-- Lingui i18n
-- Zod + React Hook Form
-- Vite 8 + SWC
-- Vitest + Playwright
-- OxLint / OxFmt
+Authenticated routes live under the `/_app` layout, which enforces a valid tenant JWT (or silent refresh) before rendering.
+
+## Feature status
+
+| Feature | Status |
+| --- | --- |
+| Sign-in with tenant discovery | Done |
+| Sign-up with tenant provisioning | Done |
+| Forgot / reset password | Done |
+| Email verification | Done |
+| Accept invitation | Done |
+| Dashboard | Done (basic stats) |
+| Team — member list | Done |
+| Team — invitations (send, list, revoke) | Done (TENANT_OWNER) |
+| Profile & change password | Done |
+| Billing self-service | Planned |
+| Tenant settings | Planned |
+| Member role editing | Planned |
+
+## Tech stack
+
+- React 19, TypeScript 6, Vite 8 (SWC)
+- Mantine UI 8, Tabler Icons, mantine-datatable
+- TanStack Router (file-based routes) + TanStack Query
+- Zustand (session + theme), React Hook Form + Zod
+- Lingui 6 (PO catalogs, lazy locale load)
+- Axios with request/response interceptors
+- Vitest + Testing Library, Playwright (E2E)
+- OxLint, OxFmt, Stylelint, Knip
+
+Architecture follows [Feature-Sliced Design](AGENTS.md) (`app` → `processes` → `pages` → `widgets` → `features` → `shared`) with automated boundary tests (`pnpm test:arch`).
 
 ## Prerequisites
 
-- Node.js >= 22.15.0
-- pnpm >= 10.33.2
+- Node.js 20.19+, 22.12+, or 24+ (see Vite 8 engine requirements)
+- pnpm 10.33.2 (`packageManager` in `package.json`)
 
-## Quick Start
+## Quick start
 
 ```bash
-# Clone the repository
 git clone https://github.com/IQKV/foundation-ui-app.git
 cd foundation-ui-app
 
-# Install dependencies and git hooks
 pnpm install
 
-# Copy environment variables
 cp .env.example .env.local
-# Edit .env.local — set VITE_API_BASE_URL to your gateway address
+# Optional: point VITE_API_SERVER_URL at your API gateway
 
-# Start the dev server
 pnpm dev
-# → App: http://localhost:5174
+# → http://localhost:5173 (API proxied via /api in development)
 ```
 
-## Environment Variables
+In development, the app uses `baseURL: /api` and Vite proxies to `VITE_API_SERVER_URL`, avoiding browser CORS. In production, set the full API URL via build env or `public/config.js`.
 
-| Variable            | Default                 | Description              |
-| ------------------- | ----------------------- | ------------------------ |
-| `VITE_API_BASE_URL` | `http://localhost:8080` | API Gateway base URL     |
-| `VITE_APP_NAME`     | `Key Value`             | Application display name |
+## Environment variables
 
-> Copy `.env.example` to `.env.local` / `.env.uat` / `.env.prd` and fill in values per environment. For runtime overrides without a rebuild, copy `public/config.js.example` to `public/config.js` and set values on `window.*`.
+| Variable | Default (`.env.example`) | Description |
+| --- | --- | --- |
+| `VITE_API_SERVER_URL` | `https://api.iqkv.site/api` | API base URL (origin + path prefix) |
+| `VITE_LOG_LEVEL` | `info` | Client log level: `silent`, `info`, `debug` |
 
-## Runtime Configuration
+Copy `.env.example` to `.env.local` for local overrides. For runtime overrides without a rebuild, copy `public/config.js.example` to `public/config.js` and set `window.VITE_*` values.
 
-Override build-time `VITE_*` variables at runtime without rebuilding:
+## Runtime configuration
 
 ```bash
 cp public/config.js.example public/config.js
-# Edit public/config.js with environment-specific values
+# Edit public/config.js for the target environment
 ```
 
-Values set on `window.*` in `public/config.js` take precedence over build-time variables. Do not commit secrets.
+`window.*` values in `public/config.js` override build-time `VITE_*` variables. Do not commit secrets. See `public/config.js.example` for NGINX cache, SPA fallback, and CORS notes.
 
-## pnpm Scripts
+## Scripts
 
 ```bash
 # Development
-pnpm dev                  # Start Vite dev server
+pnpm dev                  # Vite dev server
+pnpm preview              # Preview production build
 
 # Build
-pnpm build                # Type-check + extract/compile i18n + Vite build
+pnpm build                # tsc + i18n extract/compile + Vite build
+pnpm type-check           # TypeScript only
 
-# Lint & format
+# Quality
 pnpm lint                 # OxLint (type-aware)
-pnpm lint:fix             # OxLint --fix + OxFmt write
-pnpm formatter:check      # OxFmt check only
+pnpm lint:fix             # OxLint --fix + OxFmt
+pnpm formatter:check      # OxFmt check
+pnpm formatter:write      # OxFmt write
+pnpm knip                 # Unused exports / dependencies
 
 # Tests
-pnpm test                 # Vitest (single run)
-pnpm test:coverage        # Vitest with V8 coverage
-pnpm test:arch            # Architecture boundary tests
-
-# E2E
-pnpm e2e                  # Playwright (all tests)
+pnpm test                 # Vitest
+pnpm test:coverage        # Vitest + coverage
+pnpm test:arch            # FSD architecture tests
+pnpm e2e                  # Playwright (all projects)
 pnpm e2e:chrome           # Chromium only
-pnpm e2e:smoke            # Smoke suite, Chromium
+pnpm e2e:smoke            # Smoke suite (Chromium)
+pnpm playwright:install   # Install browsers (first time)
 
 # i18n
-pnpm messages:extract     # Extract translatable strings to .po files
-pnpm messages:compile     # Compile .po files to runtime catalogs
+pnpm messages:extract     # Extract strings to locales/*/messages.po
+pnpm messages:compile     # Compile PO catalogs for runtime
 ```
 
 ## Internationalization
 
-Supported locales are defined in `lingui.config.ts`. Default: `en`.
+[Lingui](https://lingui.dev/) drives all user-visible strings. The active catalog is **English** (`locales/en`). To add a locale: add it to `lingui.config.ts` and `src/shared/locales/index.ts`, run `pnpm messages:extract`, translate the `.po` file, then `pnpm messages:compile`.
 
-To add a new locale: add it to the `locales` array in `lingui.config.ts`, run `pnpm messages:extract`, translate the new `.po` file under `locales/`, then run `pnpm messages:compile`.
+The locale switcher persists choice in a `locale` cookie. API requests send `Accept-Language` from the active Lingui locale.
 
-## Project Structure
+## Project structure
 
 ```
 src/
-├── app/          # Providers, router, theme, runtime config bootstrap
-├── processes/    # Cross-feature flows (session management, auth lifecycle)
-├── pages/        # Route components (/dashboard, /team, /settings, /billing, etc.)
-├── widgets/      # Composed UI blocks (member tables, subscription cards, etc.)
-├── features/     # Business logic and user interactions (sign-in, invite, etc.)
-├── entities/     # Pure API methods and domain models (user, tenant, subscription)
-├── shared/       # UI kit, utilities, Axios clients, MSW mocks, locales
-└── types/        # Global TypeScript declarations
+├── app/           # Providers, theme, runtime config
+├── processes/     # Session store, inactivity timer, theme
+├── pages/         # File-based routes (TanStack Router)
+├── features/      # sign-in, signup, invite-member, edit-profile, …
+├── widgets/       # (reserved for composed blocks)
+├── shared/        # UI kit, API clients, locales, utilities
+└── architecture.test.ts
 ```
 
-## Authorization Model
+## Authorization
 
-```
-TENANT_OWNER  — full management within their tenant (settings, billing, member roles)
-ADMIN         — user management and invitations within their tenant
-MEMBER        — basic access within their tenant
-```
+Roles are carried on the JWT (`authorities` claim) and enforced in the UI:
 
-All routes are guarded at the router level. Unauthenticated users are redirected to `/sign-in`. Users without an active tenant membership are redirected to `/unauthorized`.
+| Role | Capabilities in this app |
+| --- | --- |
+| `TENANT_OWNER` | Invite members, view/revoke pending invitations |
+| `ADMIN` | (Invitable role; no extra UI beyond member list today) |
+| `MEMBER` | Dashboard, team member list, own account |
 
-The session always carries a `tenant_id` claim — there is no cross-tenant access from this app. The `X-Tenant-ID` header is injected automatically on every API request by the auth interceptor.
+`TenantOwnerOnly` / `AuthGuard` hide owner-only actions. The `/_app` route guard requires `tenant_id` to be non-null in the JWT; platform-scoped tokens redirect to `/unauthorized`.
 
-## Relationship to Platform Admin
+## Session and API auth
 
-This app and `foundation-ui-platform-admin` are intentionally separate:
+1. **Sign-in** stores `accessToken` (memory), `refreshToken` and `tenantKey` (`sessionStorage`).
+2. **Request interceptor** attaches `Authorization: Bearer …` and `X-Tenant-ID` (except public auth/invitation endpoints).
+3. **401 handling** deduplicates a single `POST /v1/iam/auth/refresh` and retries the original request.
+4. **Page reload** triggers silent refresh in the `/_app` `beforeLoad` guard when refresh + tenant key exist.
+5. **Inactivity** signs out after 30 minutes with no pointer/keyboard/scroll activity.
 
-|                  | `foundation-ui-app`                               | `foundation-ui-platform-admin`                           |
-| ---------------- | ------------------------------------------------- | -------------------------------------------------------- |
-| Audience         | Tenant members                                    | Platform operators                                       |
-| Token type       | Tenant-scoped (`tenant_id` = tenantKey)           | Platform-scoped (`tenant_id` = null)                     |
-| Sign-in endpoint | `POST /auth/signin` + `X-Tenant-ID`               | `POST /auth/admin/signin`                                |
-| API surface      | `/users/me`, `/tenants/:key`, `/subscriptions/me` | `/admin/users`, `/admin/tenants`, `/admin/subscriptions` |
-| Deployment       | Public-facing                                     | Internal / VPN-restricted                                |
+## Relationship to platform admin
+
+| | `foundation-ui-app` | `foundation-ui-platform-admin` |
+| --- | --- | --- |
+| Audience | Tenant members | Platform operators |
+| JWT | `tenant_id` set (tenant session) | `tenant_id` null (platform session) |
+| Sign-in | `POST /v1/iam/auth/signin` + `X-Tenant-ID` | Admin sign-in endpoint |
+| Typical APIs | `/v1/iam/users/me`, `/v1/iam/tenants/:key`, tenant invitations | `/admin/*` operator APIs |
+| Deployment | Public-facing | Internal / restricted |
+
+## Documentation
+
+- [Architecture](./docs/architecture/README.md)
+- [Deployment](./docs/deployment/README.md)
+- [API notes](./docs/api/README.md)
+- [Agent / FSD guide](./AGENTS.md)
 
 ## License
 
-This project is licensed under the Apache License. See the [LICENSE](LICENSE) file for details.
+Apache License — see [LICENSE](LICENSE).
 
 ## Contributing
 
-Please read our [Contributing Guidelines](.github/CONTRIBUTING.md) and [Code of Conduct](.github/CODE_OF_CONDUCT.md).
-
----
-
-## 🧩 Boilerplate Architecture
-
-- **FSD layers**: `app → processes → pages → widgets → features → entities → shared`; each layer exposes a public API barrel; cross-layer imports are enforced by architecture tests
-- **Routing**: TanStack Router with file-based route tree generation (`tsr.config.json`); route guards check for a valid tenant session (`tenant_id` non-null in JWT)
-- **State**: Zustand for session (access token in memory, tenant key + refresh token in sessionStorage); TanStack Query for server state with smart cache invalidation
-- **Forms**: React Hook Form + Zod schemas via `mantine-form-zod-resolver`; typed resolvers per entity
-- **Token security**: access token lives in a Zustand store (memory only); refresh token + tenant key in sessionStorage; Axios interceptor silently refreshes on 401 before retrying the original request; `X-Tenant-ID` header injected on every non-auth request
-- **Mocking**: MSW 2.x for API mocking in development and tests
-- **Observability**: structured error boundaries per route; TanStack Query Devtools and Router Devtools in development
-- **Quality tools**: OxLint (type-aware), OxFmt, Stylelint, Vitest (unit + arch), Playwright (E2E), Knip (dead code), commit convention enforcement
-
-> See [AGENTS.md](AGENTS.md) for FSD conventions, naming rules, and agent guidelines.
+See [Contributing Guidelines](.github/CONTRIBUTING.md) and [Code of Conduct](.github/CODE_OF_CONDUCT.md).
