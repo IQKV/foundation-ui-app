@@ -131,6 +131,10 @@ export const iamApi = {
   updateMe: (data: UpdateProfileRequest) =>
     httpClient.patch<UserProfile>("/v1/iam/users/me", data).then((r) => r.data),
 
+  /** Change the current user's own password (requires current password for re-authentication). */
+  changePassword: (data: { currentPassword: string; newPassword: string }): Promise<void> =>
+    httpClient.post("/v1/iam/users/me/password", data).then(() => undefined),
+
   // ── Tenant (TENANT_OWNER only) ─────────────────────────────────────────────
 
   /** Get the current tenant's details. */
