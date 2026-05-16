@@ -37,7 +37,7 @@ import { EditProfileModal } from "@/features/edit-profile";
 
 // ─── Route ────────────────────────────────────────────────────────────────────
 
-export const Route = createFileRoute("/account")({
+export const Route = createFileRoute("/_app/account")({
   component: AccountPage,
 });
 

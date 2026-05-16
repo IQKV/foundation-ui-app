@@ -1,15 +1,6 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import {
-  Container,
-  Text,
-  SimpleGrid,
-  Card,
-  Group,
-  ThemeIcon,
-  Button,
-  Skeleton,
-} from "@mantine/core";
-import { IconUsers, IconCreditCard, IconSettings, IconArrowRight } from "@tabler/icons-react";
+import { createFileRoute } from "@tanstack/react-router";
+import { Container, Text, SimpleGrid, Card, Group, ThemeIcon, Skeleton } from "@mantine/core";
+import { IconUsers } from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Helmet } from "@dr.pogodin/react-helmet";
 import { useQuery } from "@tanstack/react-query";
@@ -19,7 +10,7 @@ import { iamApi } from "@/shared/api";
 import { useSessionStore } from "@/processes/session";
 import { decodeJwt } from "@/shared/lib/jwt";
 
-export const Route = createFileRoute("/dashboard")({
+export const Route = createFileRoute("/_app/")({
   component: DashboardPage,
 });
 
@@ -30,10 +21,9 @@ interface StatCardProps {
   color: string;
   value: React.ReactNode;
   label: React.ReactNode;
-  action: React.ReactNode;
 }
 
-function StatCard({ icon, color, value, label, action }: StatCardProps) {
+function StatCard({ icon, color, value, label }: StatCardProps) {
   return (
     <Card withBorder radius="md" p="lg">
       <Group justify="space-between" mb="md">
@@ -47,9 +37,6 @@ function StatCard({ icon, color, value, label, action }: StatCardProps) {
       <Text size="sm" c="dimmed">
         {label}
       </Text>
-      <Button variant="subtle" size="xs" mt="md" px={0} rightSection={<IconArrowRight size={14} />}>
-        {action}
-      </Button>
     </Card>
   );
 }
@@ -118,64 +105,6 @@ function DashboardPage() {
             )
           }
           label={<Trans>Team members</Trans>}
-          action={
-            <Button
-              component={Link}
-              to="/team"
-              variant="subtle"
-              size="xs"
-              px={0}
-              rightSection={<IconArrowRight size={14} />}
-            >
-              <Trans>Manage team</Trans>
-            </Button>
-          }
-        />
-
-        {/* Billing */}
-        <StatCard
-          icon={<IconCreditCard size={20} />}
-          color="teal"
-          value="—"
-          label={<Trans>Active subscription</Trans>}
-          action={
-            <Button
-              component={Link}
-              to="/billing"
-              variant="subtle"
-              size="xs"
-              px={0}
-              rightSection={<IconArrowRight size={14} />}
-            >
-              <Trans>View billing</Trans>
-            </Button>
-          }
-        />
-
-        {/* Settings */}
-        <StatCard
-          icon={<IconSettings size={20} />}
-          color="violet"
-          value={
-            tenantLoading ? (
-              <Skeleton height={28} width={100} radius="sm" />
-            ) : (
-              (tenant?.tenantKey ?? "—")
-            )
-          }
-          label={<Trans>Workspace key</Trans>}
-          action={
-            <Button
-              component={Link}
-              to="/settings"
-              variant="subtle"
-              size="xs"
-              px={0}
-              rightSection={<IconArrowRight size={14} />}
-            >
-              <Trans>Workspace settings</Trans>
-            </Button>
-          }
         />
       </SimpleGrid>
     </Container>

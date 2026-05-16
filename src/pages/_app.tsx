@@ -16,9 +16,9 @@ import { useInactivityTimer } from "@/processes/inactivity-timer";
 
 // ─── Route ────────────────────────────────────────────────────────────────────
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/_app")({
   /**
-   * Route guard — runs before the root layout and all child routes render.
+   * Route guard — runs before the layout and all authenticated child routes render.
    *
    * Two paths through the guard:
    *
@@ -86,7 +86,7 @@ export const Route = createFileRoute("/")({
 // ─── Layout component ─────────────────────────────────────────────────────────
 
 /**
- * Wraps all authenticated routes under `/`.
+ * Wraps all authenticated routes.
  * Mounts the inactivity timer for the entire tenant session.
  * Shows a full-screen spinner while the silent-refresh is in flight to
  * prevent flashing unauthorized content on page reload.

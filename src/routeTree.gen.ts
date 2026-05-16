@@ -11,18 +11,18 @@
 import { Route as rootRouteImport } from "./pages/__root"
 import { Route as VerifyEmailRouteImport } from "./pages/verify-email"
 import { Route as UnauthorizedRouteImport } from "./pages/unauthorized"
-import { Route as TeamRouteImport } from "./pages/team"
 import { Route as SignupRouteImport } from "./pages/signup"
 import { Route as SignInRouteImport } from "./pages/sign-in"
 import { Route as ResetPasswordRouteImport } from "./pages/reset-password"
 import { Route as LoadingDemoRouteImport } from "./pages/loading-demo"
 import { Route as ForgotPasswordRouteImport } from "./pages/forgot-password"
-import { Route as DashboardRouteImport } from "./pages/dashboard"
-import { Route as AccountRouteImport } from "./pages/account"
+import { Route as AppRouteImport } from "./pages/_app"
 import { Route as R500RouteImport } from "./pages/500"
 import { Route as R404RouteImport } from "./pages/404"
-import { Route as IndexRouteImport } from "./pages/index"
+import { Route as AppIndexRouteImport } from "./pages/_app/index"
 import { Route as InviteTokenRouteImport } from "./pages/invite.$token"
+import { Route as AppTeamRouteImport } from "./pages/_app/team"
+import { Route as AppAccountRouteImport } from "./pages/_app/account"
 
 const VerifyEmailRoute = VerifyEmailRouteImport.update({
   id: "/verify-email",
@@ -32,11 +32,6 @@ const VerifyEmailRoute = VerifyEmailRouteImport.update({
 const UnauthorizedRoute = UnauthorizedRouteImport.update({
   id: "/unauthorized",
   path: "/unauthorized",
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TeamRoute = TeamRouteImport.update({
-  id: "/team",
-  path: "/team",
   getParentRoute: () => rootRouteImport,
 } as any)
 const SignupRoute = SignupRouteImport.update({
@@ -64,14 +59,8 @@ const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
   path: "/forgot-password",
   getParentRoute: () => rootRouteImport,
 } as any)
-const DashboardRoute = DashboardRouteImport.update({
-  id: "/dashboard",
-  path: "/dashboard",
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AccountRoute = AccountRouteImport.update({
-  id: "/account",
-  path: "/account",
+const AppRoute = AppRouteImport.update({
+  id: "/_app",
   getParentRoute: () => rootRouteImport,
 } as any)
 const R500Route = R500RouteImport.update({
@@ -84,129 +73,132 @@ const R404Route = R404RouteImport.update({
   path: "/404",
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
+const AppIndexRoute = AppIndexRouteImport.update({
   id: "/",
   path: "/",
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AppRoute,
 } as any)
 const InviteTokenRoute = InviteTokenRouteImport.update({
   id: "/invite/$token",
   path: "/invite/$token",
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppTeamRoute = AppTeamRouteImport.update({
+  id: "/team",
+  path: "/team",
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAccountRoute = AppAccountRouteImport.update({
+  id: "/account",
+  path: "/account",
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
-  "/": typeof IndexRoute
   "/404": typeof R404Route
   "/500": typeof R500Route
-  "/account": typeof AccountRoute
-  "/dashboard": typeof DashboardRoute
+  "/": typeof AppIndexRoute
   "/forgot-password": typeof ForgotPasswordRoute
   "/loading-demo": typeof LoadingDemoRoute
   "/reset-password": typeof ResetPasswordRoute
   "/sign-in": typeof SignInRoute
   "/signup": typeof SignupRoute
-  "/team": typeof TeamRoute
   "/unauthorized": typeof UnauthorizedRoute
   "/verify-email": typeof VerifyEmailRoute
+  "/account": typeof AppAccountRoute
+  "/team": typeof AppTeamRoute
   "/invite/$token": typeof InviteTokenRoute
 }
 export interface FileRoutesByTo {
-  "/": typeof IndexRoute
   "/404": typeof R404Route
   "/500": typeof R500Route
-  "/account": typeof AccountRoute
-  "/dashboard": typeof DashboardRoute
   "/forgot-password": typeof ForgotPasswordRoute
   "/loading-demo": typeof LoadingDemoRoute
   "/reset-password": typeof ResetPasswordRoute
   "/sign-in": typeof SignInRoute
   "/signup": typeof SignupRoute
-  "/team": typeof TeamRoute
   "/unauthorized": typeof UnauthorizedRoute
   "/verify-email": typeof VerifyEmailRoute
+  "/account": typeof AppAccountRoute
+  "/team": typeof AppTeamRoute
   "/invite/$token": typeof InviteTokenRoute
+  "/": typeof AppIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  "/": typeof IndexRoute
   "/404": typeof R404Route
   "/500": typeof R500Route
-  "/account": typeof AccountRoute
-  "/dashboard": typeof DashboardRoute
+  "/_app": typeof AppRouteWithChildren
   "/forgot-password": typeof ForgotPasswordRoute
   "/loading-demo": typeof LoadingDemoRoute
   "/reset-password": typeof ResetPasswordRoute
   "/sign-in": typeof SignInRoute
   "/signup": typeof SignupRoute
-  "/team": typeof TeamRoute
   "/unauthorized": typeof UnauthorizedRoute
   "/verify-email": typeof VerifyEmailRoute
+  "/_app/account": typeof AppAccountRoute
+  "/_app/team": typeof AppTeamRoute
   "/invite/$token": typeof InviteTokenRoute
+  "/_app/": typeof AppIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | "/"
     | "/404"
     | "/500"
-    | "/account"
-    | "/dashboard"
+    | "/"
     | "/forgot-password"
     | "/loading-demo"
     | "/reset-password"
     | "/sign-in"
     | "/signup"
-    | "/team"
     | "/unauthorized"
     | "/verify-email"
+    | "/account"
+    | "/team"
     | "/invite/$token"
   fileRoutesByTo: FileRoutesByTo
   to:
-    | "/"
     | "/404"
     | "/500"
-    | "/account"
-    | "/dashboard"
     | "/forgot-password"
     | "/loading-demo"
     | "/reset-password"
     | "/sign-in"
     | "/signup"
-    | "/team"
     | "/unauthorized"
     | "/verify-email"
+    | "/account"
+    | "/team"
     | "/invite/$token"
+    | "/"
   id:
     | "__root__"
-    | "/"
     | "/404"
     | "/500"
-    | "/account"
-    | "/dashboard"
+    | "/_app"
     | "/forgot-password"
     | "/loading-demo"
     | "/reset-password"
     | "/sign-in"
     | "/signup"
-    | "/team"
     | "/unauthorized"
     | "/verify-email"
+    | "/_app/account"
+    | "/_app/team"
     | "/invite/$token"
+    | "/_app/"
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
   R404Route: typeof R404Route
   R500Route: typeof R500Route
-  AccountRoute: typeof AccountRoute
-  DashboardRoute: typeof DashboardRoute
+  AppRoute: typeof AppRouteWithChildren
   ForgotPasswordRoute: typeof ForgotPasswordRoute
   LoadingDemoRoute: typeof LoadingDemoRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   SignInRoute: typeof SignInRoute
   SignupRoute: typeof SignupRoute
-  TeamRoute: typeof TeamRoute
   UnauthorizedRoute: typeof UnauthorizedRoute
   VerifyEmailRoute: typeof VerifyEmailRoute
   InviteTokenRoute: typeof InviteTokenRoute
@@ -226,13 +218,6 @@ declare module "@tanstack/react-router" {
       path: "/unauthorized"
       fullPath: "/unauthorized"
       preLoaderRoute: typeof UnauthorizedRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    "/team": {
-      id: "/team"
-      path: "/team"
-      fullPath: "/team"
-      preLoaderRoute: typeof TeamRouteImport
       parentRoute: typeof rootRouteImport
     }
     "/signup": {
@@ -270,18 +255,11 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof ForgotPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
-    "/dashboard": {
-      id: "/dashboard"
-      path: "/dashboard"
-      fullPath: "/dashboard"
-      preLoaderRoute: typeof DashboardRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    "/account": {
-      id: "/account"
-      path: "/account"
-      fullPath: "/account"
-      preLoaderRoute: typeof AccountRouteImport
+    "/_app": {
+      id: "/_app"
+      path: ""
+      fullPath: "/"
+      preLoaderRoute: typeof AppRouteImport
       parentRoute: typeof rootRouteImport
     }
     "/500": {
@@ -298,12 +276,12 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof R404RouteImport
       parentRoute: typeof rootRouteImport
     }
-    "/": {
-      id: "/"
+    "/_app/": {
+      id: "/_app/"
       path: "/"
       fullPath: "/"
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AppIndexRouteImport
+      parentRoute: typeof AppRoute
     }
     "/invite/$token": {
       id: "/invite/$token"
@@ -312,21 +290,46 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof InviteTokenRouteImport
       parentRoute: typeof rootRouteImport
     }
+    "/_app/team": {
+      id: "/_app/team"
+      path: "/team"
+      fullPath: "/team"
+      preLoaderRoute: typeof AppTeamRouteImport
+      parentRoute: typeof AppRoute
+    }
+    "/_app/account": {
+      id: "/_app/account"
+      path: "/account"
+      fullPath: "/account"
+      preLoaderRoute: typeof AppAccountRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
+interface AppRouteChildren {
+  AppAccountRoute: typeof AppAccountRoute
+  AppTeamRoute: typeof AppTeamRoute
+  AppIndexRoute: typeof AppIndexRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppAccountRoute: AppAccountRoute,
+  AppTeamRoute: AppTeamRoute,
+  AppIndexRoute: AppIndexRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
   R404Route: R404Route,
   R500Route: R500Route,
-  AccountRoute: AccountRoute,
-  DashboardRoute: DashboardRoute,
+  AppRoute: AppRouteWithChildren,
   ForgotPasswordRoute: ForgotPasswordRoute,
   LoadingDemoRoute: LoadingDemoRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   SignInRoute: SignInRoute,
   SignupRoute: SignupRoute,
-  TeamRoute: TeamRoute,
   UnauthorizedRoute: UnauthorizedRoute,
   VerifyEmailRoute: VerifyEmailRoute,
   InviteTokenRoute: InviteTokenRoute,

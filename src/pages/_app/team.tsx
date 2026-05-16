@@ -39,7 +39,7 @@ import { SendInvitationModal, InvitationDetailsModal } from "@/features/invite-m
 
 // ─── Route ────────────────────────────────────────────────────────────────────
 
-export const Route = createFileRoute("/team")({
+export const Route = createFileRoute("/_app/team")({
   component: TeamPage,
 });
 
