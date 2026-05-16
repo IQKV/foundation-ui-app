@@ -166,7 +166,7 @@ export function useAcceptInvitation(token: string): UseAcceptInvitationReturn {
 
       setTokens(result.accessToken, result.refreshToken, result.tenantKey);
       setPhase("success");
-      void navigate({ to: "/dashboard" });
+      void navigate({ to: "/" });
     } catch (err) {
       const status = isAxiosError(err) ? (err.response?.status ?? 0) : 0;
       setErrorMessage(mapAcceptError(status));

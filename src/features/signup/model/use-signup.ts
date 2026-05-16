@@ -232,7 +232,7 @@ export function useSignup(): UseSignupReturn {
         tenantKey,
       );
       setTokens(response.accessToken, response.refreshToken, response.tenantKey);
-      void navigate({ to: "/dashboard" });
+      void navigate({ to: "/" });
     } catch {
       // Sign-in failed — redirect to sign-in page with the email pre-filled
       void navigate({ to: "/sign-in" });
