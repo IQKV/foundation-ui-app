@@ -1,5 +1,5 @@
 import { test as base, expect, type Page } from "@playwright/test";
-import { TEST_CONFIG } from "../config/test-config";
+import { TEST_CONFIG } from "../config/test-config.js";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -21,7 +21,11 @@ export interface AuthFixtures {
  * Used by global-setup to pre-authenticate and persist browser storage state.
  */
 export async function signInAsTenantOwner(page: Page): Promise<void> {
-  const { email, password, tenantKey } = TEST_CONFIG.TENANT_OWNER;
+  const tenantOwner = TEST_CONFIG.TENANT_OWNER;
+  if (!tenantOwner) {
+    throw new Error("TEST_CONFIG.TENANT_OWNER is undefined");
+  }
+  const { email, password, tenantKey } = tenantOwner;
 
   await page.goto(TEST_CONFIG.ROUTES.SIGN_IN);
   await page.waitForLoadState("networkidle");

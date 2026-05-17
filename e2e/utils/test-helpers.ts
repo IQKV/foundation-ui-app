@@ -1,5 +1,5 @@
 import { expect, type Page, type Locator } from "@playwright/test";
-import { TestSelectors, byTestId } from "./test-selectors";
+import { TestSelectors, byTestId } from "./test-selectors.js";
 
 export class AppPage {
   constructor(private page: Page) {}

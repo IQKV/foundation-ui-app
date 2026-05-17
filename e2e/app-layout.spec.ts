@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { TestSelectors, byTestId } from "./utils/test-selectors";
+import { TestSelectors, byTestId } from "./utils/test-selectors.js";
 
 test.describe("App Layout E2E Tests", () => {
   test.beforeEach(async ({ page }) => {
