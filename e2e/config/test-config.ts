@@ -22,7 +22,7 @@ export const TEST_CONFIG = {
    */
   TENANT_OWNER: {
     email: process.env["E2E_TENANT_OWNER_EMAIL"] ?? "margaret.hayes@demo.iqkv.com",
-    password: process.env["E2E_TENANT_OWNER_PASSWORD"] ?? "TenantAdmin123!",
+    password: process.env["E2E_TENANT_OWNER_PASSWORD"] ?? "ChangeMePass123!",
     tenantKey: process.env["E2E_TENANT_KEY"] ?? "demo0001",
   },
 
