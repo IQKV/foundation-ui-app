@@ -8,12 +8,10 @@
 export const TestSelectors = {
   // Layout
   APP_ROOT: "app-root",
-  ADMIN_LAYOUT: "admin-layout",
   APP_LAYOUT: "app-layout",
   AUTH_LAYOUT: "auth-layout",
 
   // Header
-  ADMIN_HEADER: "admin-header",
   APP_HEADER: "app-header",
   HEADER_LOGO: "header-logo",
   HEADER_USER_MENU: "header-user-menu",
@@ -22,7 +20,6 @@ export const TestSelectors = {
   HEADER_MOBILE_MENU_TOGGLE: "header-mobile-menu-toggle",
 
   // Navigation
-  ADMIN_NAV: "admin-nav",
   APP_NAV: "app-nav",
   NAV_ITEM: (name: string) => `nav-item--${name}`,
   NAV_SUBMENU: (name: string) => `nav-submenu--${name}`,

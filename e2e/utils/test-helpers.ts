@@ -14,11 +14,6 @@ export class AppPage {
     await this.page.waitForLoadState("networkidle");
   }
 
-  async goToAdmin() {
-    await this.page.goto("/admin");
-    await this.page.waitForLoadState("networkidle");
-  }
-
   async expectHomePageVisible() {
     await expect(this.page.getByRole("heading", { name: "Welcome" })).toBeVisible();
   }
@@ -26,11 +21,6 @@ export class AppPage {
   async expect404PageVisible() {
     await expect(this.page.locator(byTestId(TestSelectors.PAGE_404))).toBeVisible();
     await expect(this.page.getByRole("heading", { name: "404" })).toBeVisible();
-  }
-
-  async expectAdminLayoutVisible() {
-    await expect(this.page.locator(byTestId(TestSelectors.ADMIN_LAYOUT))).toBeVisible();
-    await expect(this.page.locator(byTestId(TestSelectors.ADMIN_HEADER))).toBeVisible();
   }
 
   async expectAppLayoutVisible() {
