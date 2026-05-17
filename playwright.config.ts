@@ -35,11 +35,7 @@ export default defineConfig({
         ]
       : []),
   ],
-  reporter: [
-    ["html", { open: "never" }],
-    ["list"],
-    ...(isCI ? ([["github"]] as const) : []),
-  ],
+  reporter: [["html", { open: "never" }], ["list"], ...(isCI ? ([["github"]] as const) : [])],
   retries: isCI ? 2 : 1,
   testDir: "./e2e",
   outputDir: "./.playwright/test-results",
