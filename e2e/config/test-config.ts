@@ -10,7 +10,22 @@ export const TEST_CONFIG = {
 
   ROUTES: {
     HOME: "/",
+    SIGN_IN: "/sign-in",
+    DASHBOARD: "/dashboard",
     NOT_FOUND: "/404",
     UNKNOWN: "/this-page-does-not-exist",
   },
+
+  /**
+   * Tenant owner credentials — seeded by 20260517000004-demo-e2e-users.xml.
+   * Read from process.env so CI secrets override the .env.e2e defaults.
+   */
+  TENANT_OWNER: {
+    email: process.env["E2E_TENANT_OWNER_EMAIL"] ?? "margaret.hayes@demo.iqkv.com",
+    password: process.env["E2E_TENANT_OWNER_PASSWORD"] ?? "TenantAdmin123!",
+    tenantKey: process.env["E2E_TENANT_KEY"] ?? "demo0001",
+  },
+
+  /** Path where Playwright stores the authenticated browser state. */
+  STORAGE_STATE: ".playwright/auth/tenant-owner.json",
 } as const;
