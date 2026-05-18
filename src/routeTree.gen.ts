@@ -22,6 +22,7 @@ import { Route as R404RouteImport } from "./pages/404"
 import { Route as AppIndexRouteImport } from "./pages/_app/index"
 import { Route as InviteTokenRouteImport } from "./pages/invite.$token"
 import { Route as AppTeamRouteImport } from "./pages/_app/team"
+import { Route as AppBillingRouteImport } from "./pages/_app/billing"
 import { Route as AppAccountRouteImport } from "./pages/_app/account"
 
 const VerifyEmailRoute = VerifyEmailRouteImport.update({
@@ -88,6 +89,11 @@ const AppTeamRoute = AppTeamRouteImport.update({
   path: "/team",
   getParentRoute: () => AppRoute,
 } as any)
+const AppBillingRoute = AppBillingRouteImport.update({
+  id: "/billing",
+  path: "/billing",
+  getParentRoute: () => AppRoute,
+} as any)
 const AppAccountRoute = AppAccountRouteImport.update({
   id: "/account",
   path: "/account",
@@ -106,6 +112,7 @@ export interface FileRoutesByFullPath {
   "/unauthorized": typeof UnauthorizedRoute
   "/verify-email": typeof VerifyEmailRoute
   "/account": typeof AppAccountRoute
+  "/billing": typeof AppBillingRoute
   "/team": typeof AppTeamRoute
   "/invite/$token": typeof InviteTokenRoute
 }
@@ -120,6 +127,7 @@ export interface FileRoutesByTo {
   "/unauthorized": typeof UnauthorizedRoute
   "/verify-email": typeof VerifyEmailRoute
   "/account": typeof AppAccountRoute
+  "/billing": typeof AppBillingRoute
   "/team": typeof AppTeamRoute
   "/invite/$token": typeof InviteTokenRoute
   "/": typeof AppIndexRoute
@@ -137,6 +145,7 @@ export interface FileRoutesById {
   "/unauthorized": typeof UnauthorizedRoute
   "/verify-email": typeof VerifyEmailRoute
   "/_app/account": typeof AppAccountRoute
+  "/_app/billing": typeof AppBillingRoute
   "/_app/team": typeof AppTeamRoute
   "/invite/$token": typeof InviteTokenRoute
   "/_app/": typeof AppIndexRoute
@@ -155,6 +164,7 @@ export interface FileRouteTypes {
     | "/unauthorized"
     | "/verify-email"
     | "/account"
+    | "/billing"
     | "/team"
     | "/invite/$token"
   fileRoutesByTo: FileRoutesByTo
@@ -169,6 +179,7 @@ export interface FileRouteTypes {
     | "/unauthorized"
     | "/verify-email"
     | "/account"
+    | "/billing"
     | "/team"
     | "/invite/$token"
     | "/"
@@ -185,6 +196,7 @@ export interface FileRouteTypes {
     | "/unauthorized"
     | "/verify-email"
     | "/_app/account"
+    | "/_app/billing"
     | "/_app/team"
     | "/invite/$token"
     | "/_app/"
@@ -297,6 +309,13 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof AppTeamRouteImport
       parentRoute: typeof AppRoute
     }
+    "/_app/billing": {
+      id: "/_app/billing"
+      path: "/billing"
+      fullPath: "/billing"
+      preLoaderRoute: typeof AppBillingRouteImport
+      parentRoute: typeof AppRoute
+    }
     "/_app/account": {
       id: "/_app/account"
       path: "/account"
@@ -309,12 +328,14 @@ declare module "@tanstack/react-router" {
 
 interface AppRouteChildren {
   AppAccountRoute: typeof AppAccountRoute
+  AppBillingRoute: typeof AppBillingRoute
   AppTeamRoute: typeof AppTeamRoute
   AppIndexRoute: typeof AppIndexRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
   AppAccountRoute: AppAccountRoute,
+  AppBillingRoute: AppBillingRoute,
   AppTeamRoute: AppTeamRoute,
   AppIndexRoute: AppIndexRoute,
 }

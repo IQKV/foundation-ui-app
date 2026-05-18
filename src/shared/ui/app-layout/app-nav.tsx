@@ -1,5 +1,11 @@
 import { NavLink, Stack, Text, Box, TextInput, Divider } from "@mantine/core";
-import { IconDashboard, IconUsers, IconSearch, IconUserCircle } from "@tabler/icons-react";
+import {
+  IconDashboard,
+  IconUsers,
+  IconSearch,
+  IconUserCircle,
+  IconCreditCard,
+} from "@tabler/icons-react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useState } from "react";
 import { Trans, useLingui } from "@lingui/react/macro";
@@ -20,7 +26,12 @@ export function AppNav() {
 
   const navItems: NavItem[] = [
     { label: t`Dashboard`, icon: <IconDashboard size={16} />, to: "/" },
-    ...(isTenantOwner ? [{ label: t`Team`, icon: <IconUsers size={16} />, to: "/team" }] : []),
+    ...(isTenantOwner
+      ? [
+          { label: t`Team`, icon: <IconUsers size={16} />, to: "/team" },
+          { label: t`Billing`, icon: <IconCreditCard size={16} />, to: "/billing" },
+        ]
+      : []),
   ];
 
   const accountItem: NavItem = {

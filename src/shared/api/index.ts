@@ -38,3 +38,6 @@ export type {
   SignupStatusResponse,
   ProvisioningStatus,
 } from "./signup";
+
+export { billingApi } from "./billing";
+export type { PortalSessionResponse } from "./billing";
