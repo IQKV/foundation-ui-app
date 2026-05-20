@@ -24,6 +24,10 @@ export type {
   AcceptInvitationResponse,
   SortDirection,
   PagedResponse,
+  UpdateTenantRequest,
+  UpdateTenantStatusRequest,
+  UpdateMemberAuthoritiesRequest,
+  MemberAuthoritiesResponse,
 } from "./iam";
 
 export { authApi } from "./auth";

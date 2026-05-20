@@ -78,12 +78,17 @@ msgid "Account"
 msgstr "Account"
 
 #: src/features/manage-billing/ui/billing-info.tsx
+#: src/features/manage-organization/ui/organization-settings.tsx
 msgid "ACME Corp"
 msgstr "ACME Corp"
 
 #: src/features/signup/ui/signup-form.tsx
 msgid "Acme Inc. (optional)"
 msgstr "Acme Inc. (optional)"
+
+#: src/features/manage-organization/ui/member-actions.tsx
+msgid "Actions"
+msgstr "Actions"
 
 #: src/features/manage-billing/ui/plan-card.tsx
 #: src/shared/ui/tenant-status-badge/tenant-status-badge.tsx
@@ -100,6 +105,7 @@ msgstr "Active"
 #~ msgstr "Active Subscriptions"
 
 #: src/features/invite-member/model/types.ts
+#: src/features/manage-organization/ui/member-actions.tsx
 msgid "Admin"
 msgstr "Admin"
 
@@ -125,6 +131,12 @@ msgstr "Amount"
 #: src/features/signup/model/use-signup.ts
 msgid "An account with this email or organization name already exists."
 msgstr "An account with this email or organization name already exists."
+
+#. placeholder {0}: member.firstName
+#. placeholder {1}: member.lastName
+#: src/features/manage-organization/ui/member-actions.tsx
+msgid "Are you sure you want to remove <0>{0} {1}</0> from this organization? They will lose all access immediately."
+msgstr "Are you sure you want to remove <0>{0} {1}</0> from this organization? They will lose all access immediately."
 
 #: src/features/reset-password/ui/reset-password-form.tsx
 #: src/features/signup/ui/password-strength.tsx
@@ -182,6 +194,10 @@ msgstr "Billing Email"
 msgid "Billing Information"
 msgstr "Billing Information"
 
+#: src/features/manage-organization/ui/member-actions.tsx
+msgid "Billing Manager"
+msgstr "Billing Manager"
+
 #: src/pages/_app/billing.tsx
 msgid "Billing Portal"
 msgstr "Billing Portal"
@@ -190,9 +206,18 @@ msgstr "Billing Portal"
 #~ msgid "By signing in you agree to our <0>Terms of Service</0> and <1>Privacy Policy</1>."
 #~ msgstr "By signing in you agree to our <0>Terms of Service</0> and <1>Privacy Policy</1>."
 
+#: src/features/manage-organization/ui/member-actions.tsx
+msgid "Can manage members and invitations."
+msgstr "Can manage members and invitations."
+
+#: src/features/manage-organization/ui/member-actions.tsx
+msgid "Can manage subscriptions and billing settings."
+msgstr "Can manage subscriptions and billing settings."
+
 #: src/features/change-password/ui/change-password-modal.tsx
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 #: src/features/invite-member/ui/send-invitation-modal.tsx
+#: src/features/manage-organization/ui/member-actions.tsx
 msgid "Cancel"
 msgstr "Cancel"
 
@@ -437,6 +462,16 @@ msgstr "Edit profile"
 msgid "Edit Profile"
 msgstr "Edit Profile"
 
+#: src/features/manage-organization/ui/member-actions.tsx
+msgid "Edit Roles"
+msgstr "Edit Roles"
+
+#. placeholder {0}: member.firstName
+#. placeholder {1}: member.lastName
+#: src/features/manage-organization/ui/member-actions.tsx
+msgid "Edit Roles: {0} {1}"
+msgstr "Edit Roles: {0} {1}"
+
 #: src/pages/admin/users.$userId.tsx
 #: src/pages/admin/users.index.tsx
 #~ msgid "Edit user"
@@ -519,6 +554,7 @@ msgstr "Enter your workspace"
 #: src/features/manage-billing/ui/billing-info.tsx
 #: src/features/manage-billing/ui/plan-list.tsx
 #: src/features/manage-billing/ui/refund-list.tsx
+#: src/features/manage-organization/ui/organization-settings.tsx
 msgid "Error"
 msgstr "Error"
 
@@ -553,6 +589,10 @@ msgstr "Failed to load billing settings."
 #: src/pages/admin/organizations.$tenantKey.tsx
 #~ msgid "Failed to load organization"
 #~ msgstr "Failed to load organization"
+
+#: src/features/manage-organization/ui/organization-settings.tsx
+msgid "Failed to load organization settings."
+msgstr "Failed to load organization settings."
 
 #: src/pages/admin/organizations.index.tsx
 #~ msgid "Failed to load organizations"
@@ -812,6 +852,7 @@ msgid "Manage your team, subscriptions, and settings — all from one place, sec
 msgstr "Manage your team, subscriptions, and settings — all from one place, secured by enterprise-grade authentication."
 
 #: src/features/invite-member/model/types.ts
+#: src/features/manage-organization/ui/member-actions.tsx
 msgid "Member"
 msgstr "Member"
 
@@ -832,6 +873,10 @@ msgstr "Must be a valid email address"
 #: src/shared/ui/app-layout/app-nav.tsx
 msgid "My Account"
 msgstr "My Account"
+
+#: src/features/manage-organization/ui/organization-settings.tsx
+msgid "Name is too short"
+msgstr "Name is too short"
 
 #: src/features/change-password/ui/change-password-modal.tsx
 #: src/features/reset-password/ui/reset-password-form.tsx
@@ -946,9 +991,17 @@ msgstr "Organization"
 #~ msgid "Organization |Key Value Admin"
 #~ msgstr "Organization |Key Value Admin"
 
+#: src/features/manage-organization/ui/organization-settings.tsx
+msgid "Organization Key"
+msgstr "Organization Key"
+
 #: src/features/signup/ui/signup-form.tsx
 msgid "Organization name"
 msgstr "Organization name"
+
+#: src/features/manage-organization/ui/organization-settings.tsx
+msgid "Organization Name"
+msgstr "Organization Name"
 
 #: src/features/edit-tenant/ui/edit-tenant-modal.tsx
 #~ msgid "Organization name is required"
@@ -957,6 +1010,10 @@ msgstr "Organization name"
 #: src/features/signup/model/use-signup.ts
 msgid "Organization name is too long"
 msgstr "Organization name is too long"
+
+#: src/features/manage-organization/ui/organization-settings.tsx
+msgid "Organization Settings"
+msgstr "Organization Settings"
 
 #: src/pages/_app/account.tsx
 msgid "organization(s)"
@@ -1107,6 +1164,14 @@ msgstr "Refund History"
 msgid "Remember your password? <0>Sign in</0>"
 msgstr "Remember your password? <0>Sign in</0>"
 
+#: src/features/manage-organization/ui/member-actions.tsx
+msgid "Remove"
+msgstr "Remove"
+
+#: src/features/manage-organization/ui/member-actions.tsx
+msgid "Remove Member"
+msgstr "Remove Member"
+
 #: src/pages/admin/organizations.$tenantKey.tsx
 #~ msgid "Renews"
 #~ msgstr "Renews"
@@ -1144,6 +1209,10 @@ msgstr "Reset your password"
 msgid "Retry"
 msgstr "Retry"
 
+#: src/features/manage-organization/ui/organization-settings.tsx
+msgid "Retry Provisioning"
+msgstr "Retry Provisioning"
+
 #: src/features/invite-member/ui/invitation-details-modal.tsx
 msgid "Revoke"
 msgstr "Revoke"
@@ -1171,8 +1240,13 @@ msgid "Save changes"
 msgstr "Save changes"
 
 #: src/features/manage-billing/ui/billing-info.tsx
+#: src/features/manage-organization/ui/organization-settings.tsx
 msgid "Save Changes"
 msgstr "Save Changes"
+
+#: src/features/manage-organization/ui/member-actions.tsx
+msgid "Save Roles"
+msgstr "Save Roles"
 
 #: src/pages/_app/team.tsx
 msgid "Search by name or email…"
@@ -1197,6 +1271,10 @@ msgstr "Search organizations…"
 #: src/shared/ui/app-layout/app-nav.tsx
 msgid "Search…"
 msgstr "Search…"
+
+#: src/features/manage-organization/ui/member-actions.tsx
+msgid "Select authorities for this member"
+msgstr "Select authorities for this member"
 
 #: src/shared/ui/locale-switcher/locale-switcher.tsx
 msgid "Select language"
@@ -1331,6 +1409,10 @@ msgstr "Something went wrong. Please try again."
 msgid "Special character"
 msgstr "Special character"
 
+#: src/features/manage-organization/ui/member-actions.tsx
+msgid "Standard organization member."
+msgstr "Standard organization member."
+
 #: src/pages/loading-demo.tsx
 msgid "Start"
 msgstr "Start"
@@ -1416,6 +1498,10 @@ msgstr "Team members"
 #: src/features/invite-member/ui/send-invitation-modal.tsx
 msgid "TENANT_OWNER cannot be granted via invitation"
 msgstr "TENANT_OWNER cannot be granted via invitation"
+
+#: src/features/manage-organization/ui/organization-settings.tsx
+msgid "The unique identifier for your organization. This cannot be changed."
+msgstr "The unique identifier for your organization. This cannot be changed."
 
 #: src/pages/loading-demo.tsx
 msgid "Theme-aware (respects dark mode and color scheme)"

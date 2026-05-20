@@ -56,6 +56,14 @@ export interface Tenant {
   updatedAt: string;
 }
 
+export interface UpdateTenantRequest {
+  name: string;
+}
+
+export interface UpdateTenantStatusRequest {
+  status: TenantStatus;
+}
+
 // ─── Member types ─────────────────────────────────────────────────────────────
 
 export type MemberStatus = "ACTIVE" | "SUSPENDED" | "REMOVED";
@@ -78,6 +86,16 @@ export interface ListMembersParams {
   search?: string;
   sortBy?: "firstName" | "email" | "createdAt";
   sortDir?: SortDirection;
+}
+
+export interface UpdateMemberAuthoritiesRequest {
+  authorities: string[];
+}
+
+export interface MemberAuthoritiesResponse {
+  userId: string;
+  tenantKey: string;
+  authorities: string[];
 }
 
 // ─── Invitation types ─────────────────────────────────────────────────────────
@@ -152,6 +170,18 @@ export const iamApi = {
   getTenant: (tenantKey: string) =>
     httpClient.get<Tenant>(`/v1/iam/tenants/${tenantKey}`).then((r) => r.data),
 
+  /** Update the current tenant's name (rename). */
+  updateTenant: (tenantKey: string, data: UpdateTenantRequest) =>
+    httpClient.patch<Tenant>(`/v1/iam/tenants/${tenantKey}`, data).then((r) => r.data),
+
+  /** Update the current tenant's status. */
+  updateTenantStatus: (tenantKey: string, data: UpdateTenantStatusRequest) =>
+    httpClient.patch<Tenant>(`/v1/iam/tenants/${tenantKey}/status`, data).then((r) => r.data),
+
+  /** Retry tenant provisioning. */
+  retryProvisioning: (tenantKey: string) =>
+    httpClient.post<Tenant>(`/v1/iam/tenants/${tenantKey}/retry-provisioning`).then((r) => r.data),
+
   // ── Members (TENANT_OWNER / ADMIN) ────────────────────────────────────────
 
   /** List members of the current tenant. */
@@ -159,6 +189,23 @@ export const iamApi = {
     httpClient
       .get<PagedResponse<TenantMember>>(`/v1/iam/tenants/${tenantKey}/members`, { params })
       .then((r) => r.data),
+
+  /** Update a tenant member's authorities. */
+  updateMemberAuthorities: (
+    tenantKey: string,
+    userId: string,
+    data: UpdateMemberAuthoritiesRequest,
+  ) =>
+    httpClient
+      .put<MemberAuthoritiesResponse>(
+        `/v1/iam/tenants/${tenantKey}/members/${userId}/authorities`,
+        data,
+      )
+      .then((r) => r.data),
+
+  /** Remove a member from the tenant. */
+  removeMember: (tenantKey: string, userId: string) =>
+    httpClient.delete(`/v1/iam/tenants/${tenantKey}/members/${userId}`),
 
   // ── Invitations (TENANT_OWNER / ADMIN) ────────────────────────────────────
 

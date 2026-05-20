@@ -36,6 +36,7 @@ import type { Invitation, TenantMember } from "@/shared/api";
 import { InvitationStatusBadge, PageHeader, TenantOwnerOnly } from "@/shared/ui";
 import { useSession } from "@/processes/session";
 import { SendInvitationModal, InvitationDetailsModal } from "@/features/invite-member";
+import { OrganizationSettings, MemberActions } from "@/features/manage-organization";
 
 // ─── Route ────────────────────────────────────────────────────────────────────
 
@@ -64,6 +65,10 @@ interface MembersPanelProps {
 
 function MembersPanel({ tenantKey }: MembersPanelProps) {
   const { t } = useLingui();
+  const { isTenantOwner, payload } = useSession();
+  const userId = payload?.userId;
+  const authorities = payload?.authorities ?? [];
+  const isOwner = authorities.includes("TENANT_OWNER");
   const [search, setSearch] = useState("");
   const [debouncedSearch] = useDebouncedValue(search, 300);
 
@@ -197,6 +202,13 @@ function MembersPanel({ tenantKey }: MembersPanelProps) {
                   <Text size="xs" c="dimmed">
                     {dayjs(member.createdAt).format("MMM D, YYYY")}
                   </Text>
+                  {isOwner && (
+                    <MemberActions
+                      tenantKey={tenantKey}
+                      member={member}
+                      isSelf={member.id === userId}
+                    />
+                  )}
                 </Group>
               </Group>
             </Box>
@@ -400,6 +412,10 @@ function TeamPage() {
       />
 
       <Stack gap="md">
+        <TenantOwnerOnly>
+          {tenantKey && <OrganizationSettings tenantKey={tenantKey} />}
+        </TenantOwnerOnly>
+
         {/* Members list — visible to all authenticated users */}
         {tenantKey && <MembersPanel tenantKey={tenantKey} />}
 
