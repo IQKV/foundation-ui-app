@@ -7,6 +7,7 @@ import { AuthLayout } from "@/shared/ui";
 import { ProvisioningWait, SignupForm, VerifyEmailPrompt, useSignup } from "@/features/signup";
 import { decodeJwt, isTenantSession } from "@/shared/lib/jwt";
 import { getAccessToken } from "@/processes/session";
+import { isMultiTenantMode } from "@/app/config";
 
 // ─── Route ────────────────────────────────────────────────────────────────────
 
@@ -66,7 +67,13 @@ function SignupPage() {
         </>
       }
       tagline={
-        <Trans>Create your account and workspace in seconds. No credit card required.</Trans>
+        isMultiTenantMode ? (
+          <Trans>Create your account and workspace in seconds. No credit card required.</Trans>
+        ) : (
+          <Trans>
+            Create your account and join the platform in seconds. No credit card required.
+          </Trans>
+        )
       }
     >
       <Helmet>
@@ -80,7 +87,11 @@ function SignupPage() {
             <Trans>Create your account</Trans>
           </Title>
           <Text c="dimmed" size="sm">
-            <Trans>Set up your workspace in under a minute.</Trans>
+            {isMultiTenantMode ? (
+              <Trans>Set up your workspace in under a minute.</Trans>
+            ) : (
+              <Trans>Set up your account in under a minute.</Trans>
+            )}
           </Text>
         </Box>
       )}

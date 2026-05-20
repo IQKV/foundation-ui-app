@@ -4,6 +4,7 @@ import { Controller, useWatch } from "react-hook-form";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Link } from "@tanstack/react-router";
 import type { UseFormReturn } from "react-hook-form";
+import { isMultiTenantMode } from "@/app/config";
 import type { SignupFormValues } from "../model/use-signup";
 import { PasswordStrength } from "./password-strength";
 
@@ -123,24 +124,26 @@ export function SignupForm({ form, isLoading, errorMessage, onSubmit }: SignupFo
           )}
         />
 
-        {/* Organization name (optional) */}
-        <Controller
-          name="tenantName"
-          control={control}
-          render={({ field }) => (
-            <TextInput
-              {...field}
-              id="signup-tenant-name"
-              label={t`Organization name`}
-              placeholder={t`Acme Inc. (optional)`}
-              autoComplete="organization"
-              error={errors.tenantName?.message}
-              disabled={isLoading}
-              description={t`Leave blank to use your name`}
-              inputWrapperOrder={["label", "input", "description", "error"]}
-            />
-          )}
-        />
+        {/* Organization name (optional) - Only in Multi-Tenant mode */}
+        {isMultiTenantMode && (
+          <Controller
+            name="tenantName"
+            control={control}
+            render={({ field }) => (
+              <TextInput
+                {...field}
+                id="signup-tenant-name"
+                label={t`Organization name`}
+                placeholder={t`Acme Inc. (optional)`}
+                autoComplete="organization"
+                error={errors.tenantName?.message}
+                disabled={isLoading}
+                description={t`Leave blank to use your name`}
+                inputWrapperOrder={["label", "input", "description", "error"]}
+              />
+            )}
+          />
+        )}
 
         <Button type="submit" fullWidth loading={isLoading} disabled={isLoading} mt={4}>
           <Trans>Create account</Trans>

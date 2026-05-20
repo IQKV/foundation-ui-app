@@ -6,6 +6,7 @@ import { APP_NAME } from "@/shared/lib/page-title";
 import { useSignOut } from "@/features/sign-out";
 import { useSessionStore } from "@/processes/session";
 import { decodeJwt } from "@/shared/lib/jwt";
+import { isMultiTenantMode } from "@/app/config";
 import { ColorSchemeToggle } from "@/shared/ui/color-scheme-toggle/color-scheme-toggle";
 import { LocaleSwitcher } from "@/shared/ui/locale-switcher/locale-switcher";
 
@@ -55,13 +56,15 @@ function UserMenu() {
         >
           <Trans>My Account</Trans>
         </Menu.Item>
-        <Menu.Item
-          leftSection={<IconBuilding size={14} />}
-          onClick={() => void navigate({ to: "/organizations" })}
-          data-testid="button--organizations"
-        >
-          <Trans>Organizations</Trans>
-        </Menu.Item>
+        {isMultiTenantMode && (
+          <Menu.Item
+            leftSection={<IconBuilding size={14} />}
+            onClick={() => void navigate({ to: "/organizations" })}
+            data-testid="button--organizations"
+          >
+            <Trans>Organizations</Trans>
+          </Menu.Item>
+        )}
         <Menu.Divider />
         <Menu.Item
           color="red"

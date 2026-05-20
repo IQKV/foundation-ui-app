@@ -24,3 +24,4 @@
 
 window.VITE_API_SERVER_URL = "https://api.iqkv.site/api";
 window.VITE_LOG_LEVEL = "info";
+window.VITE_ROLLOUT_MODE = "MULTI_TENANT";

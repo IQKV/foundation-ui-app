@@ -11,6 +11,7 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { useState } from "react";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { useSession } from "@/processes/session";
+import { isMultiTenantMode } from "@/app/config";
 
 interface NavItem {
   label: string;
@@ -117,7 +118,7 @@ export function AppNav() {
             </Text>
           </Box>
           {renderItem(accountItem)}
-          {renderItem(organizationsItem)}
+          {isMultiTenantMode && renderItem(organizationsItem)}
         </>
       )}
     </Stack>
