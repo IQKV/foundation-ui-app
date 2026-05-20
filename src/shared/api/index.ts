@@ -9,6 +9,7 @@ export type {
   UserProfile,
   UserStatus,
   UpdateProfileRequest,
+  UserMembership,
   Tenant,
   TenantStatus,
   TenantMember,
@@ -26,7 +27,12 @@ export type {
 } from "./iam";
 
 export { authApi } from "./auth";
-export type { SignInRequest, SignInResponse, TenantMembershipSummary } from "./auth";
+export type {
+  SignInRequest,
+  SignInResponse,
+  TenantMembershipSummary,
+  TenantExchangeRequest,
+} from "./auth";
 
 export { passwordResetApi } from "./password-reset";
 export type { ForgotPasswordRequest, ResetPasswordRequest } from "./password-reset";

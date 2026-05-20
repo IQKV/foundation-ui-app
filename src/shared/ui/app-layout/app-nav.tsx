@@ -5,6 +5,7 @@ import {
   IconSearch,
   IconUserCircle,
   IconCreditCard,
+  IconBuilding,
 } from "@tabler/icons-react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useState } from "react";
@@ -38,6 +39,12 @@ export function AppNav() {
     label: t`My Account`,
     icon: <IconUserCircle size={16} />,
     to: "/account",
+  };
+
+  const organizationsItem: NavItem = {
+    label: t`Organizations`,
+    icon: <IconBuilding size={16} />,
+    to: "/organizations",
   };
 
   const filtered = search.trim()
@@ -110,6 +117,7 @@ export function AppNav() {
             </Text>
           </Box>
           {renderItem(accountItem)}
+          {renderItem(organizationsItem)}
         </>
       )}
     </Stack>

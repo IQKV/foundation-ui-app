@@ -1,5 +1,5 @@
 import { Burger, Divider, Group, Text, Box, Avatar, Menu } from "@mantine/core";
-import { IconShieldHalf, IconLogout, IconUser } from "@tabler/icons-react";
+import { IconShieldHalf, IconLogout, IconUser, IconBuilding } from "@tabler/icons-react";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { Trans } from "@lingui/react/macro";
 import { APP_NAME } from "@/shared/lib/page-title";
@@ -54,6 +54,13 @@ function UserMenu() {
           data-testid="button--profile"
         >
           <Trans>My Account</Trans>
+        </Menu.Item>
+        <Menu.Item
+          leftSection={<IconBuilding size={14} />}
+          onClick={() => void navigate({ to: "/organizations" })}
+          data-testid="button--organizations"
+        >
+          <Trans>Organizations</Trans>
         </Menu.Item>
         <Menu.Divider />
         <Menu.Item

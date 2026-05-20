@@ -36,6 +36,13 @@ export interface UpdateProfileRequest {
   lastName: string;
 }
 
+export interface UserMembership {
+  tenantKey: string;
+  tenantName: string;
+  status: string;
+  authorities: string[];
+}
+
 // ─── Tenant types ─────────────────────────────────────────────────────────────
 
 export type TenantStatus = "ACTIVE" | "SUSPENDED" | "DELETED";
@@ -127,6 +134,10 @@ export const iamApi = {
   /** Get the current user's own profile. */
   getMe: () => httpClient.get<UserProfile>("/v1/iam/users/me").then((r) => r.data),
 
+  /** List current user's tenant memberships across all tenants. */
+  listMyMemberships: () =>
+    httpClient.get<UserMembership[]>("/v1/iam/users/me/memberships").then((r) => r.data),
+
   /** Update the current user's own profile. */
   updateMe: (data: UpdateProfileRequest) =>
     httpClient.patch<UserProfile>("/v1/iam/users/me", data).then((r) => r.data),
@@ -146,7 +157,7 @@ export const iamApi = {
   /** List members of the current tenant. */
   listMembers: (tenantKey: string, params: ListMembersParams = {}) =>
     httpClient
-      .get<PagedResponse<TenantMember>>(`/v1/iam/admin/tenants/${tenantKey}/members`, { params })
+      .get<PagedResponse<TenantMember>>(`/v1/iam/tenants/${tenantKey}/members`, { params })
       .then((r) => r.data),
 
   // ── Invitations (TENANT_OWNER / ADMIN) ────────────────────────────────────

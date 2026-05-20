@@ -13,6 +13,10 @@ export interface SignInResponse {
   tenantKey: string;
 }
 
+export interface TenantExchangeRequest {
+  tenantKey: string;
+}
+
 export interface TenantMembershipSummary {
   tenantKey: string;
   tenantName: string;
@@ -55,6 +59,15 @@ export const authApi = {
       .post<SignInResponse>("/v1/iam/auth/signin", body, {
         headers: { "X-Tenant-ID": tenantKey },
       })
+      .then((r) => r.data),
+
+  /**
+   * Exchange the current access token for a new tenant-scoped token pair.
+   * Requires a valid Bearer access token.
+   */
+  exchangeTenant: (tenantKey: string): Promise<SignInResponse> =>
+    httpClient
+      .post<SignInResponse>("/v1/iam/auth/exchange", { tenantKey } satisfies TenantExchangeRequest)
       .then((r) => r.data),
 
   /**
