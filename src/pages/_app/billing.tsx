@@ -1,12 +1,21 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Container, Stack, Text, Paper, Group, ThemeIcon, Title } from "@mantine/core";
-import { IconCreditCard, IconInfoCircle } from "@tabler/icons-react";
+import { Container, Stack, Text, Paper, Group, ThemeIcon, Title, Divider } from "@mantine/core";
+import { IconCreditCard, IconInfoCircle, IconPackage } from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Helmet } from "@dr.pogodin/react-helmet";
 import { pageTitle } from "@/shared/lib/page-title";
 import { PageHeader, TenantOwnerOnly } from "@/shared/ui";
 import { useSession } from "@/processes/session";
-import { BillingPortalButton } from "@/features/manage-billing";
+import {
+  BillingPortalButton,
+  CurrentSubscription,
+  PlanList,
+  BillingInfo,
+  RefundList,
+  useActiveSubscription,
+  useCreateCheckoutSession,
+} from "@/features/manage-billing";
+import type { Plan } from "@/shared/api";
 
 // ─── Route ────────────────────────────────────────────────────────────────────
 
@@ -19,6 +28,17 @@ export const Route = createFileRoute("/_app/billing")({
 function BillingPage() {
   const { t } = useLingui();
   const { tenantKey } = useSession();
+  const { data: subscription } = useActiveSubscription(tenantKey);
+  const { mutate: createCheckout, isPending: isCreatingCheckout } =
+    useCreateCheckoutSession(tenantKey);
+
+  const handleSelectPlan = (plan: Plan) => {
+    createCheckout({
+      priceId: plan.planCode, // In this system, planCode is used as priceId for simplicity or mapped in backend
+      successUrl: window.location.href,
+      cancelUrl: window.location.href,
+    });
+  };
 
   return (
     <TenantOwnerOnly>
@@ -27,6 +47,30 @@ function BillingPage() {
         <PageHeader title={t`Billing`} />
 
         <Stack gap="xl">
+          {tenantKey && <CurrentSubscription tenantKey={tenantKey} />}
+
+          <Divider
+            label={
+              <Group gap="xs">
+                <IconPackage size={16} />
+                <Text fw={500}>
+                  <Trans>Available Plans</Trans>
+                </Text>
+              </Group>
+            }
+            labelPosition="left"
+          />
+
+          <PlanList
+            currentPlanId={subscription?.planId}
+            onSelect={handleSelectPlan}
+            selectingPlanId={isCreatingCheckout ? "all" : undefined} // Simplification
+          />
+
+          {tenantKey && <BillingInfo tenantKey={tenantKey} />}
+
+          {tenantKey && <RefundList tenantKey={tenantKey} />}
+
           <Paper withBorder p="xl" radius="md">
             <Group align="flex-start" wrap="nowrap" gap="lg">
               <ThemeIcon size={48} radius="md" variant="light" color="blue">
@@ -35,7 +79,7 @@ function BillingPage() {
 
               <Stack gap="xs" style={{ flex: 1 }}>
                 <Title order={3}>
-                  <Trans>Subscription & Invoices</Trans>
+                  <Trans>Billing Portal</Trans>
                 </Title>
                 <Text size="sm" c="dimmed">
                   <Trans>

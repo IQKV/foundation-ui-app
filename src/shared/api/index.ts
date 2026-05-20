@@ -46,4 +46,13 @@ export type {
 } from "./signup";
 
 export { billingApi } from "./billing";
-export type { PortalSessionResponse } from "./billing";
+export type {
+  PortalSessionResponse,
+  Plan,
+  SubscriptionResponse,
+  CreateCheckoutSessionRequest,
+  CheckoutSessionResponse,
+  BillingSettingsResponse,
+  UpdateBillingSettingsRequest,
+  RefundResponse,
+} from "./billing";
