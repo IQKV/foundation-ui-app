@@ -3,7 +3,12 @@ const readRuntimeEnv = (key: string): string | undefined => {
   return (w && w[key]) ?? (import.meta as any).env?.[key];
 };
 
-const ENV_KEYS = ["VITE_API_SERVER_URL", "VITE_LOG_LEVEL", "VITE_ROLLOUT_MODE"] as const;
+const ENV_KEYS = [
+  "VITE_API_SERVER_URL",
+  "VITE_LOG_LEVEL",
+  "VITE_ROLLOUT_MODE",
+  "VITE_DEMO_MODE",
+] as const;
 
 export const clientBuildEnv: Record<string, string | undefined> = Object.fromEntries(
   ENV_KEYS.map((k) => [k, readRuntimeEnv(k)]),
@@ -16,3 +21,5 @@ export const getConfig = (key: string, fallback?: string): string | undefined =>
 export const rolloutMode = getConfig("VITE_ROLLOUT_MODE", "MULTI_TENANT");
 export const isMultiTenantMode = rolloutMode === "MULTI_TENANT";
 export const isSingleTenantMode = rolloutMode === "SINGLE_TENANT";
+
+export const isDemoMode = getConfig("VITE_DEMO_MODE", "false") === "true";
