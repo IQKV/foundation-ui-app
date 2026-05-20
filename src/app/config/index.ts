@@ -1,1 +1,7 @@
-export { clientBuildEnv, getConfig, isMultiTenantMode, isSingleTenantMode, rolloutMode } from "./runtime-env";
+export {
+  clientBuildEnv,
+  getConfig,
+  isMultiTenantMode,
+  isSingleTenantMode,
+  rolloutMode,
+} from "./runtime-env";
