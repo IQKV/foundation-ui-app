@@ -75,7 +75,7 @@ export interface TenantMember {
   lastName: string;
   emailVerified: boolean;
   membershipStatus: MemberStatus;
-  authorities: string[];
+  tenantAuthorities: string[];
   createdAt: string;
   updatedAt: string;
 }

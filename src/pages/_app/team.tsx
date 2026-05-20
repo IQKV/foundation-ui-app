@@ -194,7 +194,7 @@ function MembersPanel({ tenantKey }: MembersPanelProps) {
                   </Stack>
                 </Group>
                 <Group gap="xs" wrap="nowrap">
-                  {member.authorities.map((auth) => (
+                  {(member.tenantAuthorities || []).map((auth) => (
                     <Badge key={auth} variant="light" color="violet" size="xs" radius="sm">
                       {auth}
                     </Badge>

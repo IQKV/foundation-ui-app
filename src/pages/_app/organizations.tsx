@@ -54,7 +54,7 @@ function OrganizationsPage() {
       return (
         m.tenantName.toLowerCase().includes(q) ||
         m.tenantKey.toLowerCase().includes(q) ||
-        m.authorities.some((a) => a.toLowerCase().includes(q))
+        (m.authorities || []).some((a) => a.toLowerCase().includes(q))
       );
     });
   }, [data, search]);
@@ -125,7 +125,7 @@ function OrganizationsPage() {
             {
               accessor: "authorities",
               title: t`Role`,
-              render: (m) => m.authorities.join(", "),
+              render: (m) => (m.authorities || []).join(", "),
             },
             {
               accessor: "actions",
@@ -133,7 +133,7 @@ function OrganizationsPage() {
               width: 64,
               textAlign: "right",
               render: (m) => {
-                const isOwner = m.authorities.includes("TENANT_OWNER");
+                const isOwner = (m.authorities || []).includes("TENANT_OWNER");
                 if (!isOwner) {
                   // <ActionIcon variant="subtle" aria-label={t`Leave`}>
                   //   <IconLogout size={16} />

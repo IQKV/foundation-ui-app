@@ -23,7 +23,7 @@ export function MemberActions({ tenantKey, member, isSelf }: MemberActionsProps)
   const [removeModalOpened, { open: openRemoveModal, close: closeRemoveModal }] =
     useDisclosure(false);
 
-  const [selectedRoles, setSelectedRoles] = useState<string[]>(member.authorities);
+  const [selectedRoles, setSelectedRoles] = useState<string[]>(member.tenantAuthorities || []);
 
   const updateAuthorities = useUpdateMemberAuthorities(tenantKey);
   const removeMember = useRemoveMember(tenantKey);
