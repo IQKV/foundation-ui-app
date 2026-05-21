@@ -101,11 +101,6 @@ export function MemberActions({ tenantKey, member, isSelf }: MemberActionsProps)
                 label={t`Member`}
                 description={t`Standard organization member.`}
               />
-              <Checkbox
-                value="BILLING_MANAGER"
-                label={t`Billing Manager`}
-                description={t`Can manage subscriptions and billing settings.`}
-              />
             </Stack>
           </Checkbox.Group>
           <Group justify="flex-end" mt="md">
