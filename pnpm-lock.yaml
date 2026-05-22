@@ -15,8 +15,8 @@ importers:
         specifier: ^5.2.2
         version: 5.2.2(react-hook-form@7.76.0(react@19.2.6))
       '@lingui/core':
-        specifier: ^6.0.1
-        version: 6.0.1
+        specifier: ^6.1.0
+        version: 6.1.0
       '@lingui/format-po':
         specifier: ^6.0.1
         version: 6.0.1
@@ -209,7 +209,7 @@ importers:
         version: 6.0.1
       '@lingui/swc-plugin':
         specifier: ^6.0.0
-        version: 6.0.0(@lingui/core@6.0.1)(@swc/core@1.15.33)
+        version: 6.0.0(@lingui/core@6.1.0)(@swc/core@1.15.33)
       '@lingui/vite-plugin':
         specifier: ^6.0.1
         version: 6.0.1(@babel/core@7.29.0)(@lingui/babel-plugin-lingui-macro@6.1.0)(rolldown@1.0.1)(vite@8.0.13(@types/node@25.9.1)(jiti@2.7.0)(sugarss@5.0.1(postcss@8.5.15))(yaml@2.9.0))
@@ -7331,9 +7331,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@lingui/swc-plugin@6.0.0(@lingui/core@6.0.1)(@swc/core@1.15.33)':
+  '@lingui/swc-plugin@6.0.0(@lingui/core@6.1.0)(@swc/core@1.15.33)':
     dependencies:
-      '@lingui/core': 6.0.1
+      '@lingui/core': 6.1.0
     optionalDependencies:
       '@swc/core': 1.15.33
 

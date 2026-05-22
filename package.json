@@ -48,7 +48,7 @@
   "dependencies": {
     "@dr.pogodin/react-helmet": "^3.1.1",
     "@hookform/resolvers": "^5.2.2",
-    "@lingui/core": "^6.0.1",
+    "@lingui/core": "^6.1.0",
     "@lingui/format-po": "^6.0.1",
     "@lingui/react": "^6.1.0",
     "@mantine/carousel": "^8.3.18",
