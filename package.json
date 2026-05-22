@@ -46,7 +46,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@dr.pogodin/react-helmet": "^3.1.1",
+    "@dr.pogodin/react-helmet": "^3.2.2",
     "@hookform/resolvers": "^5.2.2",
     "@lingui/core": "^6.1.0",
     "@lingui/format-po": "^6.0.1",

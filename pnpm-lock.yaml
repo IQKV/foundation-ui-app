@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@dr.pogodin/react-helmet':
-        specifier: ^3.1.1
-        version: 3.1.1(react@19.2.6)
+        specifier: ^3.2.2
+        version: 3.2.2(react@19.2.6)
       '@hookform/resolvers':
         specifier: ^5.2.2
         version: 5.2.2(react-hook-form@7.76.0(react@19.2.6))
@@ -654,8 +654,8 @@ packages:
     peerDependencies:
       postcss-selector-parser: ^7.1.1
 
-  '@dr.pogodin/react-helmet@3.1.1':
-    resolution: {integrity: sha512-+OvGxbL8s5DqG8Je2jPUnlKJJeRnqRAeLOzOoJctCj4EEKdjXmCrnJhRugT/Ma5skB77sItqqQcTaE5J6uGEaQ==}
+  '@dr.pogodin/react-helmet@3.2.2':
+    resolution: {integrity: sha512-ejHvL56wsjNRfzOWvBzBXZXKCls2beMIf63Cz1yEMi5OFfsdBQHEiy0ux6665qzPXXAqHws4tnnWRiA/fpaQBg==}
     peerDependencies:
       react: '19'
 
@@ -5356,6 +5356,11 @@ packages:
   rc9@3.0.1:
     resolution: {integrity: sha512-gMDyleLWVE+i6Sgtc0QbbY6pEKqYs97NGi6isHQPqYlLemPoO8dxQ3uGi0f4NiP98c+jMW6cG1Kx9dDwfvqARQ==}
 
+  react-compiler-runtime@1.0.0:
+    resolution: {integrity: sha512-rRfjYv66HlG8896yPUDONgKzG5BxZD1nV9U6rkm+7VCuvQc903C4MjcoZR4zPw53IKSOX9wMQVpA1IAbRtzQ7w==}
+    peerDependencies:
+      react: ^17.0.0 || ^18.0.0 || ^19.0.0 || ^0.0.0-experimental
+
   react-dom@19.2.6:
     resolution: {integrity: sha512-0prMI+hvBbPjsWnxDLxlCGyM8PN6UuWjEUCYmZhO67xIV9Xasa/r/vDnq+Xyq4Lo27g8QSbO5YzARu0D1Sps3g==}
     peerDependencies:
@@ -6843,10 +6848,11 @@ snapshots:
     dependencies:
       postcss-selector-parser: 7.1.1
 
-  '@dr.pogodin/react-helmet@3.1.1(react@19.2.6)':
+  '@dr.pogodin/react-helmet@3.2.2(react@19.2.6)':
     dependencies:
       '@babel/runtime': 7.29.2
       react: 19.2.6
+      react-compiler-runtime: 1.0.0(react@19.2.6)
 
   '@emnapi/core@1.10.0':
     dependencies:
@@ -11494,6 +11500,10 @@ snapshots:
     dependencies:
       defu: 6.1.7
       destr: 2.0.5
+
+  react-compiler-runtime@1.0.0(react@19.2.6):
+    dependencies:
+      react: 19.2.6
 
   react-dom@19.2.6(react@19.2.6):
     dependencies:
