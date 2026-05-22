@@ -208,8 +208,8 @@ importers:
         specifier: ^6.0.1
         version: 6.0.1
       '@lingui/swc-plugin':
-        specifier: ^6.0.0
-        version: 6.0.0(@lingui/core@6.1.0)(@swc/core@1.15.33)
+        specifier: ^6.2.0
+        version: 6.2.0(@lingui/core@6.1.0)(@swc/core@1.15.33)
       '@lingui/vite-plugin':
         specifier: ^6.0.1
         version: 6.0.1(@babel/core@7.29.0)(@lingui/babel-plugin-lingui-macro@6.1.0)(rolldown@1.0.1)(vite@8.0.13(@types/node@25.9.1)(jiti@2.7.0)(sugarss@5.0.1(postcss@8.5.15))(yaml@2.9.0))
@@ -1192,8 +1192,8 @@ packages:
       babel-plugin-macros:
         optional: true
 
-  '@lingui/swc-plugin@6.0.0':
-    resolution: {integrity: sha512-Jq9DKO/lKywWJafVYAvPeydetWV6eEi0nkLUmlsjo+fMkJIZqiOx5uQBxxfK33jtVB2kWzpAO6aoH9zt6H3R/A==}
+  '@lingui/swc-plugin@6.2.0':
+    resolution: {integrity: sha512-QBgJfLmnnIJ3CZMdqkCh0zAQEHZWJtPB78w2Gly5U5L/GT/2GqI+myO+tJK3yldTCd9SeIXEkDL5og7THg2tXA==}
     peerDependencies:
       '@lingui/core': 5 || 6
       '@swc/core': '*'
@@ -7337,8 +7337,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@lingui/swc-plugin@6.0.0(@lingui/core@6.1.0)(@swc/core@1.15.33)':
+  '@lingui/swc-plugin@6.2.0(@lingui/core@6.1.0)(@swc/core@1.15.33)':
     dependencies:
+      '@lingui/conf': 6.1.0
       '@lingui/core': 6.1.0
     optionalDependencies:
       '@swc/core': 1.15.33
