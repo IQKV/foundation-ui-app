@@ -114,7 +114,7 @@
     "@commitlint/cli": "^21.0.1",
     "@commitlint/config-conventional": "^21.0.1",
     "@lingui/cli": "^6.0.1",
-    "@lingui/swc-plugin": "^6.0.0",
+    "@lingui/swc-plugin": "^6.2.0",
     "@lingui/vite-plugin": "^6.0.1",
     "@playwright/test": "1.60.0",
     "@release-it/conventional-changelog": "^11.0.0",
