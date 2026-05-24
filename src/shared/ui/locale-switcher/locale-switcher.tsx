@@ -27,7 +27,7 @@ import {
  */
 export function LocaleSwitcher() {
   const { t } = useLingui();
-  const activeLocale = (i18n.locale ?? "en") as SupportedLocales;
+  const activeLocale = (i18n.locale ?? "en-US") as SupportedLocales;
   const activeFlag = localeToFlagEmojiMap[activeLocale] ?? "🌐";
 
   const handleSelect = async (locale: SupportedLocales) => {

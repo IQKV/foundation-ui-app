@@ -59,7 +59,7 @@ export const httpClient = axios.create({
  * "en" when no locale is active yet (e.g. during the initial locale load).
  */
 httpClient.interceptors.request.use((config) => {
-  const locale = i18n.locale ?? "en";
+  const locale = i18n.locale ?? "en-US";
   config.headers["Accept-Language"] = locale;
   return config;
 });
