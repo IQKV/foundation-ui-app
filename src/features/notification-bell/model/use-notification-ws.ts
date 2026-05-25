@@ -35,8 +35,12 @@ export function useNotificationWs() {
   const clientRef = useRef<Client | null>(null);
 
   useEffect(() => {
-    const wsUrl = resolveWsUrl();
     const token = getAccessToken();
+
+    // No token — unauthenticated context (tests, pre-login render). Skip connection.
+    if (!token) return;
+
+    const wsUrl = resolveWsUrl();
 
     const client = new Client({
       // SockJS factory — used instead of a raw WebSocket URL
