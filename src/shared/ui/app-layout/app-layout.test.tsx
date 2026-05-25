@@ -3,6 +3,7 @@ import { act, render, screen, waitFor } from "@testing-library/react";
 import { MantineProvider } from "@mantine/core";
 import { I18nProvider } from "@lingui/react";
 import { i18n } from "@lingui/core";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   createMemoryHistory,
   createRootRoute,
@@ -12,11 +13,15 @@ import {
 import { AppLayout } from "./app-layout";
 
 /**
- * Renders a component inside a minimal TanStack Router + Lingui + Mantine
- * context. The router is awaited so async route resolution completes before
- * assertions run.
+ * Renders a component inside a minimal TanStack Router + Lingui + Mantine +
+ * QueryClient context. The router is awaited so async route resolution
+ * completes before assertions run.
  */
 async function renderWithProviders(ui: React.ReactNode) {
+  const queryClient = new QueryClient({
+    defaultOptions: { queries: { retry: false } },
+  });
+
   const rootRoute = createRootRoute({ component: () => <>{ui}</> });
   const router = createRouter({
     routeTree: rootRoute,
@@ -27,11 +32,13 @@ async function renderWithProviders(ui: React.ReactNode) {
 
   await act(async () => {
     result = render(
-      <I18nProvider i18n={i18n}>
-        <MantineProvider>
-          <RouterProvider router={router} />
-        </MantineProvider>
-      </I18nProvider>,
+      <QueryClientProvider client={queryClient}>
+        <I18nProvider i18n={i18n}>
+          <MantineProvider>
+            <RouterProvider router={router} />
+          </MantineProvider>
+        </I18nProvider>
+      </QueryClientProvider>,
     );
     await router.load();
   });
