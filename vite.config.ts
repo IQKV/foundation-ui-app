@@ -18,6 +18,10 @@ export default defineConfig(({ mode }) => {
   const apiBasePath = url.pathname; // /api
 
   return {
+    define: {
+      global: "window",
+      "process.env": {},
+    },
     resolve: {
       alias: {
         "@": path.resolve(__dirname, "./src"),
