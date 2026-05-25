@@ -23,6 +23,8 @@ export interface UserProfile {
   lastName: string;
   status: UserStatus;
   emailVerified: boolean;
+  /** BCP 47 locale tag (e.g. "en-US"). Null when not yet set. */
+  locale: string | null;
   /** Tenant names the user belongs to (aggregated server-side). */
   organizations: string[];
   /** Membership-level authorities across all tenants (e.g. TENANT_OWNER, ADMIN, MEMBER). */
@@ -34,6 +36,8 @@ export interface UserProfile {
 export interface UpdateProfileRequest {
   firstName: string;
   lastName: string;
+  /** BCP 47 locale tag. Optional — omit to leave unchanged. */
+  locale?: string | null;
 }
 
 export interface UserMembership {
@@ -243,6 +247,20 @@ export const iamApi = {
     httpClient
       .post<AcceptInvitationResponse>(`/v1/iam/invitations/${token}/accept`, data)
       .then((r) => r.data),
+};
+
+// ─── Locales ──────────────────────────────────────────────────────────────────
+
+export interface IamLocale {
+  code: string;
+  name: string;
+  nativeName: string | null;
+  isDefault: boolean;
+}
+
+/** GET /v1/iam/locales — public, returns all active locales ordered by default first. */
+export const localesApi = {
+  list: () => httpClient.get<IamLocale[]>("/v1/iam/locales").then((r) => r.data),
 };
 
 // ─── Notification types ───────────────────────────────────────────────────────

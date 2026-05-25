@@ -30,6 +30,9 @@ export type {
   MemberAuthoritiesResponse,
 } from "./iam";
 
+export { localesApi } from "./iam";
+export type { IamLocale } from "./iam";
+
 export { authApi } from "./auth";
 export type {
   SignInRequest,

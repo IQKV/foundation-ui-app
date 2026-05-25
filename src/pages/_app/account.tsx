@@ -27,6 +27,7 @@ import {
   IconBuilding,
   IconShieldHalf,
   IconKey,
+  IconLanguage,
 } from "@tabler/icons-react";
 import dayjs from "dayjs";
 import { Trans, useLingui } from "@lingui/react/macro";
@@ -265,6 +266,19 @@ function AccountPage() {
               ) : (
                 <Text size="sm" c="dimmed">
                   {profile?.organizations?.length ?? 0} <Trans>organization(s)</Trans>
+                </Text>
+              )}
+            </Group>
+
+            <Group gap={6}>
+              <ThemeIcon size="xs" variant="transparent" color="gray">
+                <IconLanguage size={13} />
+              </ThemeIcon>
+              {isLoading ? (
+                <Skeleton height={14} width={60} radius="sm" />
+              ) : (
+                <Text size="sm" c="dimmed">
+                  {profile?.locale ?? "en-US"}
                 </Text>
               )}
             </Group>
