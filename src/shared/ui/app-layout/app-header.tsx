@@ -4,6 +4,7 @@ import { Link, useNavigate } from "@tanstack/react-router";
 import { Trans } from "@lingui/react/macro";
 import { APP_NAME } from "@/shared/lib/page-title";
 import { useSignOut } from "@/features/sign-out";
+import { NotificationBell } from "@/features/notification-bell";
 import { useSessionStore } from "@/processes/session";
 import { decodeJwt } from "@/shared/lib/jwt";
 import { isMultiTenantMode } from "@/app/config";
@@ -135,6 +136,7 @@ export function AppHeader({ opened, onToggle }: AppHeaderProps) {
       <Group gap="xs" px="md" ml="auto">
         <LocaleSwitcher />
         <ColorSchemeToggle />
+        <NotificationBell />
         <UserMenu />
       </Group>
     </Group>

@@ -244,3 +244,62 @@ export const iamApi = {
       .post<AcceptInvitationResponse>(`/v1/iam/invitations/${token}/accept`, data)
       .then((r) => r.data),
 };
+
+// ─── Notification types ───────────────────────────────────────────────────────
+
+export interface UserNotification {
+  id: string;
+  type: string;
+  severity: string;
+  title: string;
+  message: string | null;
+  /** Raw JSON string — use JSON.parse if you need the object. */
+  payload: string | null;
+  isRead: boolean;
+  createdAt: string;
+  readAt: string | null;
+}
+
+export interface UserNotificationListResponse {
+  items: UserNotification[];
+  totalElements: number;
+  unreadCount: number;
+}
+
+export interface UnreadCountResponse {
+  unreadCount: number;
+}
+
+export interface NotificationPatchRequest {
+  isRead: boolean;
+}
+
+// ─── Notification API ─────────────────────────────────────────────────────────
+
+export const notificationApi = {
+  /** GET /v1/iam/users/notifications — paginated list with optional isRead filter. */
+  list: (params: { limit?: number; offset?: number; isRead?: boolean } = {}) =>
+    httpClient
+      .get<UserNotificationListResponse>("/v1/iam/users/notifications", { params })
+      .then((r) => r.data),
+
+  /** GET /v1/iam/users/notifications/unread/count — badge count. */
+  unreadCount: () =>
+    httpClient
+      .get<UnreadCountResponse>("/v1/iam/users/notifications/unread/count")
+      .then((r) => r.data),
+
+  /** PATCH /v1/iam/users/notifications/{id} — mark single as read. */
+  patch: (id: string, data: NotificationPatchRequest) =>
+    httpClient.patch(`/v1/iam/users/notifications/${id}`, data),
+
+  /** PATCH /v1/iam/users/notifications — bulk update (mark all as read). */
+  patchAll: (data: NotificationPatchRequest) =>
+    httpClient.patch("/v1/iam/users/notifications", data),
+
+  /** DELETE /v1/iam/users/notifications/{id} — delete single. */
+  deleteOne: (id: string) => httpClient.delete(`/v1/iam/users/notifications/${id}`),
+
+  /** DELETE /v1/iam/users/notifications — delete all. */
+  deleteAll: () => httpClient.delete("/v1/iam/users/notifications"),
+};

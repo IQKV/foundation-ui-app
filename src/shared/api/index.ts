@@ -60,3 +60,11 @@ export type {
   UpdateBillingSettingsRequest,
   RefundResponse,
 } from "./billing";
+
+export { notificationApi } from "./iam";
+export type {
+  UserNotification,
+  UserNotificationListResponse,
+  UnreadCountResponse,
+  NotificationPatchRequest,
+} from "./iam";
