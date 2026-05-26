@@ -1,4 +1,4 @@
-import { NavLink, Stack, Text, Box, TextInput, Divider } from "@mantine/core";
+import { NavLink, Stack, Text, Box, TextInput, Divider, Collapse } from "@mantine/core";
 import {
   IconDashboard,
   IconUsers,
@@ -6,6 +6,9 @@ import {
   IconUserCircle,
   IconCreditCard,
   IconBuilding,
+  IconLock,
+  IconBell,
+  IconSettings,
 } from "@tabler/icons-react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useState } from "react";
@@ -25,32 +28,36 @@ export function AppNav() {
   const routerState = useRouterState();
   const currentPath = routerState.location.pathname;
   const [search, setSearch] = useState("");
+  const [accountOpened, setAccountOpened] = useState(currentPath.startsWith("/settings"));
 
   const navItems: NavItem[] = [
     { label: t`Dashboard`, icon: <IconDashboard size={16} />, to: "/" },
     { label: t`Billing`, icon: <IconCreditCard size={16} />, to: "/billing" },
-    ...(isTenantOwner
-      ? [{ label: t`Team`, icon: <IconUsers size={16} />, to: "/team" }]
+    ...(isTenantOwner ? [{ label: t`Team`, icon: <IconUsers size={16} />, to: "/team" }] : []),
+  ];
+
+  const accountSubItems: NavItem[] = [
+    { label: t`General`, icon: <IconUserCircle size={14} />, to: "/settings/general" },
+    { label: t`Security`, icon: <IconLock size={14} />, to: "/settings/security" },
+    { label: t`Notifications`, icon: <IconBell size={14} />, to: "/settings/notifications" },
+    ...(isMultiTenantMode
+      ? [
+          {
+            label: t`Organizations`,
+            icon: <IconBuilding size={14} />,
+            to: "/settings/organization",
+          },
+        ]
       : []),
   ];
 
-  const accountItem: NavItem = {
-    label: t`My Account`,
-    icon: <IconUserCircle size={16} />,
-    to: "/account",
-  };
-
-  const organizationsItem: NavItem = {
-    label: t`Organizations`,
-    icon: <IconBuilding size={16} />,
-    to: "/organizations",
-  };
-
   const filtered = search.trim()
-    ? navItems.filter((item) => item.label.toLowerCase().includes(search.toLowerCase()))
+    ? [...navItems, ...accountSubItems].filter((item) =>
+        item.label.toLowerCase().includes(search.toLowerCase()),
+      )
     : null;
 
-  const renderItem = (item: NavItem) => {
+  const renderItem = (item: NavItem, isSubItem = false) => {
     const isActive =
       item.to === "/"
         ? currentPath === "/"
@@ -68,9 +75,12 @@ export function AppNav() {
           root: {
             borderRadius: "var(--mantine-radius-sm)",
             marginInline: "var(--mantine-spacing-xs)",
-            fontSize: "var(--mantine-font-size-sm)",
+            fontSize: isSubItem ? "var(--mantine-font-size-xs)" : "var(--mantine-font-size-sm)",
+            paddingLeft: isSubItem ? "calc(var(--mantine-spacing-xl) * 1.5)" : undefined,
           },
-          label: { fontSize: "var(--mantine-font-size-sm)" },
+          label: {
+            fontSize: isSubItem ? "var(--mantine-font-size-xs)" : "var(--mantine-font-size-sm)",
+          },
         }}
       />
     );
@@ -93,7 +103,7 @@ export function AppNav() {
       {/* Nav items */}
       {filtered ? (
         filtered.length > 0 ? (
-          filtered.map(renderItem)
+          filtered.map((item) => renderItem(item))
         ) : (
           <Text size="xs" c="dimmed" px="md" py="xs">
             <Trans>No results</Trans>
@@ -106,17 +116,31 @@ export function AppNav() {
               <Trans>Workspace</Trans>
             </Text>
           </Box>
-          {navItems.map(renderItem)}
+          {navItems.map((item) => renderItem(item))}
 
           <Divider mx="sm" my="xs" />
 
           <Box px="md" pb={4}>
             <Text size="xs" fw={600} c="dimmed" tt="uppercase" lts={1}>
-              <Trans>Account</Trans>
+              <Trans>Account Settings</Trans>
             </Text>
           </Box>
-          {renderItem(accountItem)}
-          {isMultiTenantMode && renderItem(organizationsItem)}
+          <NavLink
+            label={t`Settings`}
+            leftSection={<IconSettings size={16} />}
+            opened={accountOpened}
+            onClick={() => setAccountOpened((o) => !o)}
+            styles={{
+              root: {
+                borderRadius: "var(--mantine-radius-sm)",
+                marginInline: "var(--mantine-spacing-xs)",
+                fontSize: "var(--mantine-font-size-sm)",
+              },
+              label: { fontSize: "var(--mantine-font-size-sm)" },
+            }}
+          >
+            {accountSubItems.map((item) => renderItem(item, true))}
+          </NavLink>
         </>
       )}
     </Stack>

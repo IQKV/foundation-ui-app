@@ -149,7 +149,7 @@ export function NotificationBell() {
             <Stack gap={0} p="xs">
               <Anchor
                 component={Link}
-                to="/notifications"
+                to="/settings/notifications"
                 size="xs"
                 ta="center"
                 py="xs"

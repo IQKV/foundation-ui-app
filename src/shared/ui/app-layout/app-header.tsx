@@ -52,7 +52,7 @@ function UserMenu() {
         )}
         <Menu.Item
           leftSection={<IconUser size={14} />}
-          onClick={() => void navigate({ to: "/account" })}
+          onClick={() => void navigate({ to: "/settings/general" })}
           data-testid="button--profile"
         >
           <Trans>My Account</Trans>
@@ -60,7 +60,7 @@ function UserMenu() {
         {isMultiTenantMode && (
           <Menu.Item
             leftSection={<IconBuilding size={14} />}
-            onClick={() => void navigate({ to: "/organizations" })}
+            onClick={() => void navigate({ to: "/settings/organization" })}
             data-testid="button--organizations"
           >
             <Trans>Organizations</Trans>

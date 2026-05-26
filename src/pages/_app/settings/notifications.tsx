@@ -31,7 +31,7 @@ const notificationsSearchSchema = z.object({
   page: z.number().catch(1),
 });
 
-export const Route = createFileRoute("/_app/notifications")({
+export const Route = createFileRoute("/_app/settings/notifications")({
   validateSearch: (search) => notificationsSearchSchema.parse(search),
   component: NotificationsPage,
 });
@@ -73,6 +73,7 @@ function NotificationsPage() {
         title={<Trans>Notifications</Trans>}
         breadcrumbs={[
           { label: <Trans>Home</Trans>, to: "/" },
+          { label: <Trans>Account Settings</Trans> },
           { label: <Trans>Notifications</Trans> },
         ]}
         rightSection={

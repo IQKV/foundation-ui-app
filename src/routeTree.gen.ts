@@ -22,10 +22,11 @@ import { Route as R404RouteImport } from "./pages/404"
 import { Route as AppIndexRouteImport } from "./pages/_app/index"
 import { Route as InviteTokenRouteImport } from "./pages/invite.$token"
 import { Route as AppTeamRouteImport } from "./pages/_app/team"
-import { Route as AppOrganizationsRouteImport } from "./pages/_app/organizations"
-import { Route as AppNotificationsRouteImport } from "./pages/_app/notifications"
 import { Route as AppBillingRouteImport } from "./pages/_app/billing"
-import { Route as AppAccountRouteImport } from "./pages/_app/account"
+import { Route as AppSettingsSecurityRouteImport } from "./pages/_app/settings/security"
+import { Route as AppSettingsOrganizationRouteImport } from "./pages/_app/settings/organization"
+import { Route as AppSettingsNotificationsRouteImport } from "./pages/_app/settings/notifications"
+import { Route as AppSettingsGeneralRouteImport } from "./pages/_app/settings/general"
 
 const VerifyEmailRoute = VerifyEmailRouteImport.update({
   id: "/verify-email",
@@ -91,24 +92,30 @@ const AppTeamRoute = AppTeamRouteImport.update({
   path: "/team",
   getParentRoute: () => AppRoute,
 } as any)
-const AppOrganizationsRoute = AppOrganizationsRouteImport.update({
-  id: "/organizations",
-  path: "/organizations",
-  getParentRoute: () => AppRoute,
-} as any)
-const AppNotificationsRoute = AppNotificationsRouteImport.update({
-  id: "/notifications",
-  path: "/notifications",
-  getParentRoute: () => AppRoute,
-} as any)
 const AppBillingRoute = AppBillingRouteImport.update({
   id: "/billing",
   path: "/billing",
   getParentRoute: () => AppRoute,
 } as any)
-const AppAccountRoute = AppAccountRouteImport.update({
-  id: "/account",
-  path: "/account",
+const AppSettingsSecurityRoute = AppSettingsSecurityRouteImport.update({
+  id: "/settings/security",
+  path: "/settings/security",
+  getParentRoute: () => AppRoute,
+} as any)
+const AppSettingsOrganizationRoute = AppSettingsOrganizationRouteImport.update({
+  id: "/settings/organization",
+  path: "/settings/organization",
+  getParentRoute: () => AppRoute,
+} as any)
+const AppSettingsNotificationsRoute =
+  AppSettingsNotificationsRouteImport.update({
+    id: "/settings/notifications",
+    path: "/settings/notifications",
+    getParentRoute: () => AppRoute,
+  } as any)
+const AppSettingsGeneralRoute = AppSettingsGeneralRouteImport.update({
+  id: "/settings/general",
+  path: "/settings/general",
   getParentRoute: () => AppRoute,
 } as any)
 
@@ -123,12 +130,13 @@ export interface FileRoutesByFullPath {
   "/signup": typeof SignupRoute
   "/unauthorized": typeof UnauthorizedRoute
   "/verify-email": typeof VerifyEmailRoute
-  "/account": typeof AppAccountRoute
   "/billing": typeof AppBillingRoute
-  "/notifications": typeof AppNotificationsRoute
-  "/organizations": typeof AppOrganizationsRoute
   "/team": typeof AppTeamRoute
   "/invite/$token": typeof InviteTokenRoute
+  "/settings/general": typeof AppSettingsGeneralRoute
+  "/settings/notifications": typeof AppSettingsNotificationsRoute
+  "/settings/organization": typeof AppSettingsOrganizationRoute
+  "/settings/security": typeof AppSettingsSecurityRoute
 }
 export interface FileRoutesByTo {
   "/404": typeof R404Route
@@ -140,13 +148,14 @@ export interface FileRoutesByTo {
   "/signup": typeof SignupRoute
   "/unauthorized": typeof UnauthorizedRoute
   "/verify-email": typeof VerifyEmailRoute
-  "/account": typeof AppAccountRoute
   "/billing": typeof AppBillingRoute
-  "/notifications": typeof AppNotificationsRoute
-  "/organizations": typeof AppOrganizationsRoute
   "/team": typeof AppTeamRoute
   "/invite/$token": typeof InviteTokenRoute
   "/": typeof AppIndexRoute
+  "/settings/general": typeof AppSettingsGeneralRoute
+  "/settings/notifications": typeof AppSettingsNotificationsRoute
+  "/settings/organization": typeof AppSettingsOrganizationRoute
+  "/settings/security": typeof AppSettingsSecurityRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -160,13 +169,14 @@ export interface FileRoutesById {
   "/signup": typeof SignupRoute
   "/unauthorized": typeof UnauthorizedRoute
   "/verify-email": typeof VerifyEmailRoute
-  "/_app/account": typeof AppAccountRoute
   "/_app/billing": typeof AppBillingRoute
-  "/_app/notifications": typeof AppNotificationsRoute
-  "/_app/organizations": typeof AppOrganizationsRoute
   "/_app/team": typeof AppTeamRoute
   "/invite/$token": typeof InviteTokenRoute
   "/_app/": typeof AppIndexRoute
+  "/_app/settings/general": typeof AppSettingsGeneralRoute
+  "/_app/settings/notifications": typeof AppSettingsNotificationsRoute
+  "/_app/settings/organization": typeof AppSettingsOrganizationRoute
+  "/_app/settings/security": typeof AppSettingsSecurityRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -181,12 +191,13 @@ export interface FileRouteTypes {
     | "/signup"
     | "/unauthorized"
     | "/verify-email"
-    | "/account"
     | "/billing"
-    | "/notifications"
-    | "/organizations"
     | "/team"
     | "/invite/$token"
+    | "/settings/general"
+    | "/settings/notifications"
+    | "/settings/organization"
+    | "/settings/security"
   fileRoutesByTo: FileRoutesByTo
   to:
     | "/404"
@@ -198,13 +209,14 @@ export interface FileRouteTypes {
     | "/signup"
     | "/unauthorized"
     | "/verify-email"
-    | "/account"
     | "/billing"
-    | "/notifications"
-    | "/organizations"
     | "/team"
     | "/invite/$token"
     | "/"
+    | "/settings/general"
+    | "/settings/notifications"
+    | "/settings/organization"
+    | "/settings/security"
   id:
     | "__root__"
     | "/404"
@@ -217,13 +229,14 @@ export interface FileRouteTypes {
     | "/signup"
     | "/unauthorized"
     | "/verify-email"
-    | "/_app/account"
     | "/_app/billing"
-    | "/_app/notifications"
-    | "/_app/organizations"
     | "/_app/team"
     | "/invite/$token"
     | "/_app/"
+    | "/_app/settings/general"
+    | "/_app/settings/notifications"
+    | "/_app/settings/organization"
+    | "/_app/settings/security"
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -333,20 +346,6 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof AppTeamRouteImport
       parentRoute: typeof AppRoute
     }
-    "/_app/organizations": {
-      id: "/_app/organizations"
-      path: "/organizations"
-      fullPath: "/organizations"
-      preLoaderRoute: typeof AppOrganizationsRouteImport
-      parentRoute: typeof AppRoute
-    }
-    "/_app/notifications": {
-      id: "/_app/notifications"
-      path: "/notifications"
-      fullPath: "/notifications"
-      preLoaderRoute: typeof AppNotificationsRouteImport
-      parentRoute: typeof AppRoute
-    }
     "/_app/billing": {
       id: "/_app/billing"
       path: "/billing"
@@ -354,32 +353,55 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof AppBillingRouteImport
       parentRoute: typeof AppRoute
     }
-    "/_app/account": {
-      id: "/_app/account"
-      path: "/account"
-      fullPath: "/account"
-      preLoaderRoute: typeof AppAccountRouteImport
+    "/_app/settings/security": {
+      id: "/_app/settings/security"
+      path: "/settings/security"
+      fullPath: "/settings/security"
+      preLoaderRoute: typeof AppSettingsSecurityRouteImport
+      parentRoute: typeof AppRoute
+    }
+    "/_app/settings/organization": {
+      id: "/_app/settings/organization"
+      path: "/settings/organization"
+      fullPath: "/settings/organization"
+      preLoaderRoute: typeof AppSettingsOrganizationRouteImport
+      parentRoute: typeof AppRoute
+    }
+    "/_app/settings/notifications": {
+      id: "/_app/settings/notifications"
+      path: "/settings/notifications"
+      fullPath: "/settings/notifications"
+      preLoaderRoute: typeof AppSettingsNotificationsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    "/_app/settings/general": {
+      id: "/_app/settings/general"
+      path: "/settings/general"
+      fullPath: "/settings/general"
+      preLoaderRoute: typeof AppSettingsGeneralRouteImport
       parentRoute: typeof AppRoute
     }
   }
 }
 
 interface AppRouteChildren {
-  AppAccountRoute: typeof AppAccountRoute
   AppBillingRoute: typeof AppBillingRoute
-  AppNotificationsRoute: typeof AppNotificationsRoute
-  AppOrganizationsRoute: typeof AppOrganizationsRoute
   AppTeamRoute: typeof AppTeamRoute
   AppIndexRoute: typeof AppIndexRoute
+  AppSettingsGeneralRoute: typeof AppSettingsGeneralRoute
+  AppSettingsNotificationsRoute: typeof AppSettingsNotificationsRoute
+  AppSettingsOrganizationRoute: typeof AppSettingsOrganizationRoute
+  AppSettingsSecurityRoute: typeof AppSettingsSecurityRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
-  AppAccountRoute: AppAccountRoute,
   AppBillingRoute: AppBillingRoute,
-  AppNotificationsRoute: AppNotificationsRoute,
-  AppOrganizationsRoute: AppOrganizationsRoute,
   AppTeamRoute: AppTeamRoute,
   AppIndexRoute: AppIndexRoute,
+  AppSettingsGeneralRoute: AppSettingsGeneralRoute,
+  AppSettingsNotificationsRoute: AppSettingsNotificationsRoute,
+  AppSettingsOrganizationRoute: AppSettingsOrganizationRoute,
+  AppSettingsSecurityRoute: AppSettingsSecurityRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)

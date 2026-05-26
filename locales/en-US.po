@@ -73,9 +73,16 @@ msgid "Accessible with proper keyboard handling"
 msgstr "Accessible with proper keyboard handling"
 
 #: src/pages/signup.tsx
-#: src/shared/ui/app-layout/app-nav.tsx
 msgid "Account"
 msgstr "Account"
+
+#: src/pages/_app/settings/general.tsx
+#: src/pages/_app/settings/notifications.tsx
+#: src/pages/_app/settings/organization.tsx
+#: src/pages/_app/settings/security.tsx
+#: src/shared/ui/app-layout/app-nav.tsx
+msgid "Account Settings"
+msgstr "Account Settings"
 
 #: src/features/manage-billing/ui/billing-info.tsx
 #: src/features/manage-organization/ui/organization-settings.tsx
@@ -145,14 +152,17 @@ msgid "At least 8 characters"
 msgstr "At least 8 characters"
 
 #: src/features/change-password/ui/change-password-modal.tsx
+#: src/pages/_app/settings/security.tsx
 msgid "At least 8 characters, at most 128"
 msgstr "At least 8 characters, at most 128"
 
 #: src/features/change-password/ui/change-password-modal.tsx
+#: src/pages/_app/settings/security.tsx
 msgid "At least one digit"
 msgstr "At least one digit"
 
 #: src/features/change-password/ui/change-password-modal.tsx
+#: src/pages/_app/settings/security.tsx
 msgid "At least one special character"
 msgstr "At least one special character"
 
@@ -195,8 +205,8 @@ msgid "Billing Information"
 msgstr "Billing Information"
 
 #: src/features/manage-organization/ui/member-actions.tsx
-msgid "Billing Manager"
-msgstr "Billing Manager"
+#~ msgid "Billing Manager"
+#~ msgstr "Billing Manager"
 
 #: src/pages/_app/billing.tsx
 msgid "Billing Portal"
@@ -211,8 +221,8 @@ msgid "Can manage members and invitations."
 msgstr "Can manage members and invitations."
 
 #: src/features/manage-organization/ui/member-actions.tsx
-msgid "Can manage subscriptions and billing settings."
-msgstr "Can manage subscriptions and billing settings."
+#~ msgid "Can manage subscriptions and billing settings."
+#~ msgstr "Can manage subscriptions and billing settings."
 
 #: src/features/change-password/ui/change-password-modal.tsx
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
@@ -230,11 +240,12 @@ msgid "Cancels on"
 msgstr "Cancels on"
 
 #: src/features/change-password/ui/change-password-modal.tsx
-#: src/pages/_app/account.tsx
+#: src/pages/_app/settings/security.tsx
 msgid "Change password"
 msgstr "Change password"
 
 #: src/features/change-password/ui/change-password-modal.tsx
+#: src/pages/_app/settings/security.tsx
 msgid "Change Password"
 msgstr "Change Password"
 
@@ -264,6 +275,11 @@ msgstr "Choose a strong password with at least 8 characters, including uppercase
 #: src/pages/admin/users.index.tsx
 #~ msgid "Clear"
 #~ msgstr "Clear"
+
+#: src/features/notification-bell/ui/notification-bell.tsx
+#: src/pages/_app/settings/notifications.tsx
+msgid "Clear all"
+msgstr "Clear all"
 
 #: src/pages/admin/organizations.index.tsx
 #: src/pages/admin/subscriptions.tsx
@@ -297,6 +313,7 @@ msgstr "Configuring settings"
 
 #: src/features/change-password/ui/change-password-modal.tsx
 #: src/features/reset-password/ui/reset-password-form.tsx
+#: src/pages/_app/settings/security.tsx
 msgid "Confirm new password"
 msgstr "Confirm new password"
 
@@ -336,7 +353,8 @@ msgstr "Could not create Stripe Customer Portal session."
 #~ msgid "Could not fetch users from the API."
 #~ msgstr "Could not fetch users from the API."
 
-#: src/pages/_app/account.tsx
+#: src/pages/_app/settings/general.tsx
+#: src/pages/_app/settings/security.tsx
 msgid "Could not fetch your account details."
 msgstr "Could not fetch your account details."
 
@@ -348,11 +366,11 @@ msgstr "Could not load invitations."
 msgid "Could not load members."
 msgstr "Could not load members."
 
-#: src/pages/_app/organizations.tsx
+#: src/pages/_app/settings/organization.tsx
 msgid "Could not load organizations."
 msgstr "Could not load organizations."
 
-#: src/pages/_app/organizations.tsx
+#: src/pages/_app/settings/organization.tsx
 msgid "Could not switch organization."
 msgstr "Could not switch organization."
 
@@ -368,6 +386,10 @@ msgstr "Create account and join"
 #: src/pages/signup.tsx
 msgid "Create your account"
 msgstr "Create your account"
+
+#: src/pages/signup.tsx
+msgid "Create your account and join the platform in seconds. No credit card required."
+msgstr "Create your account and join the platform in seconds. No credit card required."
 
 #: src/pages/signup.tsx
 msgid "Create your account and workspace in seconds. No credit card required."
@@ -392,10 +414,12 @@ msgid "Currency"
 msgstr "Currency"
 
 #: src/features/change-password/ui/change-password-modal.tsx
+#: src/pages/_app/settings/security.tsx
 msgid "Current password"
 msgstr "Current password"
 
 #: src/features/change-password/ui/change-password-modal.tsx
+#: src/pages/_app/settings/security.tsx
 msgid "Current password is required"
 msgstr "Current password is required"
 
@@ -441,7 +465,7 @@ msgstr "Didn't receive it? Check your spam folder or"
 msgid "Don't have an account? <0>Create one</0>"
 msgstr "Don't have an account? <0>Create one</0>"
 
-#: src/pages/_app/organizations.tsx
+#: src/pages/_app/settings/organization.tsx
 msgid "Edit"
 msgstr "Edit"
 
@@ -455,8 +479,8 @@ msgstr "Edit"
 #~ msgstr "Edit Organization"
 
 #: src/pages/_app/account.tsx
-msgid "Edit profile"
-msgstr "Edit profile"
+#~ msgid "Edit profile"
+#~ msgstr "Edit profile"
 
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 msgid "Edit Profile"
@@ -485,7 +509,7 @@ msgstr "Edit Roles: {0} {1}"
 #: src/features/forgot-password/ui/forgot-password-form.tsx
 #: src/features/invite-member/ui/invitation-details-modal.tsx
 #: src/features/sign-in/ui/sign-in-form.tsx
-#: src/pages/_app/account.tsx
+#: src/pages/_app/settings/general.tsx
 #: src/pages/invite.$token.tsx
 msgid "Email"
 msgstr "Email"
@@ -505,14 +529,13 @@ msgid "Email is required"
 msgstr "Email is required"
 
 #: src/pages/_app/account.tsx
-msgid "Email unverified"
-msgstr "Email unverified"
+#~ msgid "Email unverified"
+#~ msgstr "Email unverified"
 
 #: src/pages/verify-email.tsx
 msgid "Email verification"
 msgstr "Email verification"
 
-#: src/pages/_app/account.tsx
 #: src/pages/verify-email.tsx
 msgid "Email verified"
 msgstr "Email verified"
@@ -532,6 +555,7 @@ msgid "Enter a valid email address"
 msgstr "Enter a valid email address"
 
 #: src/features/change-password/ui/change-password-modal.tsx
+#: src/pages/_app/settings/security.tsx
 msgid "Enter new password"
 msgstr "Enter new password"
 
@@ -540,6 +564,7 @@ msgid "Enter the email address associated with your account and we'll send you a
 msgstr "Enter the email address associated with your account and we'll send you a link to reset your password."
 
 #: src/features/change-password/ui/change-password-modal.tsx
+#: src/pages/_app/settings/security.tsx
 msgid "Enter your current password"
 msgstr "Enter your current password"
 
@@ -602,7 +627,8 @@ msgstr "Failed to load organization settings."
 msgid "Failed to load plans. Please try again later."
 msgstr "Failed to load plans. Please try again later."
 
-#: src/pages/_app/account.tsx
+#: src/pages/_app/settings/general.tsx
+#: src/pages/_app/settings/security.tsx
 msgid "Failed to load profile"
 msgstr "Failed to load profile"
 
@@ -628,6 +654,7 @@ msgstr "Fair"
 
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 #: src/features/signup/ui/signup-form.tsx
+#: src/pages/_app/settings/general.tsx
 #: src/pages/invite.$token.tsx
 msgid "First name"
 msgstr "First name"
@@ -635,6 +662,7 @@ msgstr "First name"
 #: src/features/accept-invitation/model/use-accept-invitation.ts
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 #: src/features/signup/model/use-signup.ts
+#: src/pages/_app/settings/general.tsx
 msgid "First name is required"
 msgstr "First name is required"
 
@@ -658,6 +686,15 @@ msgstr "Forgot your"
 msgid "Full-screen centered loader shown on first app load (while locale initializes)."
 msgstr "Full-screen centered loader shown on first app load (while locale initializes)."
 
+#: src/pages/_app/settings/general.tsx
+#: src/shared/ui/app-layout/app-nav.tsx
+msgid "General"
+msgstr "General"
+
+#: src/pages/_app/settings/general.tsx
+msgid "General Settings"
+msgstr "General Settings"
+
 #: src/pages/404.tsx
 #: src/pages/500.tsx
 msgid "Go home"
@@ -671,9 +708,11 @@ msgstr "Go to Home"
 msgid "Good"
 msgstr "Good"
 
-#: src/pages/_app/account.tsx
 #: src/pages/_app/index.tsx
-#: src/pages/_app/organizations.tsx
+#: src/pages/_app/settings/general.tsx
+#: src/pages/_app/settings/notifications.tsx
+#: src/pages/_app/settings/organization.tsx
+#: src/pages/_app/settings/security.tsx
 #: src/pages/_app/team.tsx
 msgid "Home"
 msgstr "Home"
@@ -752,14 +791,14 @@ msgid "Join {0} and start collaborating with your team."
 msgstr "Join {0} and start collaborating with your team."
 
 #: src/pages/_app/account.tsx
-msgid "Joined"
-msgstr "Joined"
+#~ msgid "Joined"
+#~ msgstr "Joined"
 
 #: src/pages/admin/users.$userId.tsx
 #~ msgid "Joined Organizations"
 #~ msgstr "Joined Organizations"
 
-#: src/pages/_app/organizations.tsx
+#: src/pages/_app/settings/organization.tsx
 msgid "Key"
 msgstr "Key"
 
@@ -767,12 +806,15 @@ msgstr "Key"
 #~ msgid "Key:"
 #~ msgstr "Key:"
 
+#: src/features/edit-profile/ui/edit-profile-modal.tsx
+#: src/pages/_app/settings/general.tsx
 #: src/shared/ui/locale-switcher/locale-switcher.tsx
 msgid "Language"
 msgstr "Language"
 
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 #: src/features/signup/ui/signup-form.tsx
+#: src/pages/_app/settings/general.tsx
 #: src/pages/invite.$token.tsx
 msgid "Last name"
 msgstr "Last name"
@@ -780,6 +822,7 @@ msgstr "Last name"
 #: src/features/accept-invitation/model/use-accept-invitation.ts
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 #: src/features/signup/model/use-signup.ts
+#: src/pages/_app/settings/general.tsx
 msgid "Last name is required"
 msgstr "Last name is required"
 
@@ -788,8 +831,8 @@ msgid "Last name is too long"
 msgstr "Last name is too long"
 
 #: src/pages/_app/account.tsx
-msgid "Last updated"
-msgstr "Last updated"
+#~ msgid "Last updated"
+#~ msgstr "Last updated"
 
 #: src/features/signup/ui/signup-form.tsx
 msgid "Leave blank to use your name"
@@ -818,6 +861,11 @@ msgstr "Loading your invitation…"
 #: src/shared/ui/loading-overlay/loading-overlay.tsx
 msgid "Loading..."
 msgstr "Loading..."
+
+#: src/features/edit-profile/ui/edit-profile-modal.tsx
+#: src/pages/_app/settings/general.tsx
+msgid "Loading…"
+msgstr "Loading…"
 
 #: src/shared/ui/user-status-badge/user-status-badge.tsx
 msgid "Locked"
@@ -851,6 +899,11 @@ msgstr "Manage your billing information, view invoice history, and update your p
 msgid "Manage your team, subscriptions, and settings — all from one place, secured by enterprise-grade authentication."
 msgstr "Manage your team, subscriptions, and settings — all from one place, secured by enterprise-grade authentication."
 
+#: src/features/notification-bell/ui/notification-bell.tsx
+#: src/pages/_app/settings/notifications.tsx
+msgid "Mark all as read"
+msgstr "Mark all as read"
+
 #: src/features/invite-member/model/types.ts
 #: src/features/manage-organization/ui/member-actions.tsx
 msgid "Member"
@@ -868,9 +921,7 @@ msgstr "Members"
 msgid "Must be a valid email address"
 msgstr "Must be a valid email address"
 
-#: src/pages/_app/account.tsx
 #: src/shared/ui/app-layout/app-header.tsx
-#: src/shared/ui/app-layout/app-nav.tsx
 msgid "My Account"
 msgstr "My Account"
 
@@ -880,6 +931,7 @@ msgstr "Name is too short"
 
 #: src/features/change-password/ui/change-password-modal.tsx
 #: src/features/reset-password/ui/reset-password-form.tsx
+#: src/pages/_app/settings/security.tsx
 msgid "New password"
 msgstr "New password"
 
@@ -895,7 +947,7 @@ msgstr "Next Billing Date"
 msgid "No active tenant memberships found for this account"
 msgstr "No active tenant memberships found for this account"
 
-#: src/pages/_app/organizations.tsx
+#: src/pages/_app/settings/organization.tsx
 msgid "No matches."
 msgstr "No matches."
 
@@ -915,11 +967,16 @@ msgstr "No members found."
 msgid "No members match the search."
 msgstr "No members match the search."
 
+#: src/features/notification-bell/ui/notification-bell.tsx
+#: src/pages/_app/settings/notifications.tsx
+msgid "No notifications yet"
+msgstr "No notifications yet"
+
 #: src/pages/admin/organizations.index.tsx
 #~ msgid "No organizations found"
 #~ msgstr "No organizations found"
 
-#: src/pages/_app/organizations.tsx
+#: src/pages/_app/settings/organization.tsx
 msgid "No organizations found."
 msgstr "No organizations found."
 
@@ -939,7 +996,7 @@ msgstr "No plans available at the moment."
 msgid "No results"
 msgstr "No results"
 
-#: src/pages/_app/account.tsx
+#: src/pages/_app/settings/security.tsx
 msgid "No roles assigned."
 msgstr "No roles assigned."
 
@@ -967,9 +1024,20 @@ msgstr "No roles assigned."
 msgid "No worries — enter your email and we'll send you a secure link to reset it."
 msgstr "No worries — enter your email and we'll send you a secure link to reset it."
 
+#: src/features/notification-bell/ui/notification-bell.tsx
+#: src/pages/_app/settings/notifications.tsx
+#: src/shared/ui/app-layout/app-nav.tsx
+msgid "Notifications"
+msgstr "Notifications"
+
 #: src/shared/ui/admin-layout/admin-header.tsx
 #~ msgid "Notifications (coming soon)"
 #~ msgstr "Notifications (coming soon)"
+
+#. placeholder {0}: hasUnread ? `, ${unreadCount} unread` : ""
+#: src/features/notification-bell/ui/notification-bell.tsx
+msgid "Notifications{0}"
+msgstr "Notifications{0}"
 
 #: src/features/signup/ui/password-strength.tsx
 msgid "Number"
@@ -983,7 +1051,7 @@ msgstr "One click and you're all set."
 msgid "Open Billing Portal"
 msgstr "Open Billing Portal"
 
-#: src/pages/_app/organizations.tsx
+#: src/pages/_app/settings/organization.tsx
 msgid "Organization"
 msgstr "Organization"
 
@@ -1016,11 +1084,11 @@ msgid "Organization Settings"
 msgstr "Organization Settings"
 
 #: src/pages/_app/account.tsx
-msgid "organization(s)"
-msgstr "organization(s)"
+#~ msgid "organization(s)"
+#~ msgstr "organization(s)"
 
-#: src/pages/_app/account.tsx
-#: src/pages/_app/organizations.tsx
+#: src/pages/_app/settings/general.tsx
+#: src/pages/_app/settings/organization.tsx
 #: src/shared/ui/app-layout/app-header.tsx
 #: src/shared/ui/app-layout/app-nav.tsx
 msgid "Organizations"
@@ -1061,6 +1129,7 @@ msgstr "Password is required"
 #: src/features/change-password/ui/change-password-modal.tsx
 #: src/features/reset-password/model/use-reset-password.ts
 #: src/features/signup/model/use-signup.ts
+#: src/pages/_app/settings/security.tsx
 msgid "Password must be at least 8 characters"
 msgstr "Password must be at least 8 characters"
 
@@ -1068,6 +1137,7 @@ msgstr "Password must be at least 8 characters"
 #: src/features/change-password/ui/change-password-modal.tsx
 #: src/features/reset-password/model/use-reset-password.ts
 #: src/features/signup/model/use-signup.ts
+#: src/pages/_app/settings/security.tsx
 msgid "Password must be at most 128 characters"
 msgstr "Password must be at most 128 characters"
 
@@ -1077,10 +1147,12 @@ msgid "Password must contain uppercase, lowercase, a number, and a special chara
 msgstr "Password must contain uppercase, lowercase, a number, and a special character"
 
 #: src/features/change-password/ui/change-password-modal.tsx
+#: src/pages/_app/settings/security.tsx
 msgid "Password must contain uppercase, lowercase, digit, and special character"
 msgstr "Password must contain uppercase, lowercase, digit, and special character"
 
 #: src/features/change-password/ui/change-password-modal.tsx
+#: src/pages/_app/settings/security.tsx
 msgid "Password requirements:"
 msgstr "Password requirements:"
 
@@ -1098,6 +1170,7 @@ msgstr "password."
 
 #: src/features/change-password/ui/change-password-modal.tsx
 #: src/features/reset-password/model/use-reset-password.ts
+#: src/pages/_app/settings/security.tsx
 msgid "Passwords do not match"
 msgstr "Passwords do not match"
 
@@ -1140,17 +1213,21 @@ msgstr "Please confirm your password"
 msgid "Portal error"
 msgstr "Portal error"
 
+#: src/pages/_app/settings/general.tsx
+msgid "Profile Information"
+msgstr "Profile Information"
+
 #: src/features/signup/ui/provisioning-wait.tsx
 msgid "Provisioning workspace"
 msgstr "Provisioning workspace"
 
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
+#: src/pages/_app/settings/general.tsx
 #: src/pages/invite.$token.tsx
 msgid "read-only"
 msgstr "read-only"
 
-#: src/pages/_app/account.tsx
-#: src/pages/_app/organizations.tsx
+#: src/pages/_app/settings/organization.tsx
 #: src/pages/_app/team.tsx
 msgid "Refresh"
 msgstr "Refresh"
@@ -1177,6 +1254,7 @@ msgstr "Remove Member"
 #~ msgstr "Renews"
 
 #: src/features/change-password/ui/change-password-modal.tsx
+#: src/pages/_app/settings/security.tsx
 msgid "Repeat new password"
 msgstr "Repeat new password"
 
@@ -1204,7 +1282,8 @@ msgstr "Reset Password"
 msgid "Reset your password"
 msgstr "Reset your password"
 
-#: src/pages/_app/account.tsx
+#: src/pages/_app/settings/general.tsx
+#: src/pages/_app/settings/security.tsx
 #: src/pages/_app/team.tsx
 msgid "Retry"
 msgstr "Retry"
@@ -1227,15 +1306,16 @@ msgstr "Revoking this invitation will prevent the recipient from accepting it."
 
 #: src/features/invite-member/ui/invitation-details-modal.tsx
 #: src/features/invite-member/ui/send-invitation-modal.tsx
-#: src/pages/_app/organizations.tsx
+#: src/pages/_app/settings/organization.tsx
 msgid "Role"
 msgstr "Role"
 
-#: src/pages/_app/account.tsx
+#: src/pages/_app/settings/security.tsx
 msgid "Roles"
 msgstr "Roles"
 
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
+#: src/pages/_app/settings/general.tsx
 msgid "Save changes"
 msgstr "Save changes"
 
@@ -1260,7 +1340,7 @@ msgstr "Search by name or email…"
 #~ msgid "Search by tenant or plan…"
 #~ msgstr "Search by tenant or plan…"
 
-#: src/pages/_app/organizations.tsx
+#: src/pages/_app/settings/organization.tsx
 msgid "Search organizations…"
 msgstr "Search organizations…"
 
@@ -1272,10 +1352,25 @@ msgstr "Search organizations…"
 msgid "Search…"
 msgstr "Search…"
 
+#: src/pages/_app/settings/security.tsx
+#: src/shared/ui/app-layout/app-nav.tsx
+msgid "Security"
+msgstr "Security"
+
+#: src/pages/_app/settings/security.tsx
+msgid "Security Settings"
+msgstr "Security Settings"
+
+#: src/features/notification-bell/ui/notification-bell.tsx
+msgid "See all notifications"
+msgstr "See all notifications"
+
 #: src/features/manage-organization/ui/member-actions.tsx
 msgid "Select authorities for this member"
 msgstr "Select authorities for this member"
 
+#: src/features/edit-profile/ui/edit-profile-modal.tsx
+#: src/pages/_app/settings/general.tsx
 #: src/shared/ui/locale-switcher/locale-switcher.tsx
 msgid "Select language"
 msgstr "Select language"
@@ -1317,8 +1412,17 @@ msgid "Set new password"
 msgstr "Set new password"
 
 #: src/pages/signup.tsx
+msgid "Set up your account in under a minute."
+msgstr "Set up your account in under a minute."
+
+#: src/pages/signup.tsx
 msgid "Set up your workspace in under a minute."
 msgstr "Set up your workspace in under a minute."
+
+#: src/features/edit-profile/ui/edit-profile-modal.tsx
+#: src/pages/_app/settings/general.tsx
+msgid "Sets your preferred language for notifications and emails."
+msgstr "Sets your preferred language for notifications and emails."
 
 #: src/pages/signup.tsx
 msgid "Setting up"
@@ -1329,8 +1433,14 @@ msgid "Setting up your workspace"
 msgstr "Setting up your workspace"
 
 #: src/shared/ui/app-layout/app-nav.tsx
-#~ msgid "Settings"
-#~ msgstr "Settings"
+msgid "Settings"
+msgstr "Settings"
+
+#. placeholder {0}: notifications.length
+#. placeholder {1}: listData?.totalElements ?? 0
+#: src/features/notification-bell/ui/notification-bell.tsx
+msgid "Showing {0} of {1}"
+msgstr "Showing {0} of {1}"
 
 #: src/pages/admin/organizations.$tenantKey.tsx
 #~ msgid "Showing {0}–{1} of {totalElements} members"
@@ -1423,7 +1533,7 @@ msgstr "Start building"
 
 #: src/features/invite-member/ui/invitation-details-modal.tsx
 #: src/features/manage-billing/ui/refund-list.tsx
-#: src/pages/_app/organizations.tsx
+#: src/pages/_app/settings/organization.tsx
 msgid "Status"
 msgstr "Status"
 
@@ -1462,7 +1572,7 @@ msgstr "Strong"
 msgid "Suspended"
 msgstr "Suspended"
 
-#: src/pages/_app/organizations.tsx
+#: src/pages/_app/settings/organization.tsx
 msgid "Switch failed"
 msgstr "Switch failed"
 
@@ -1566,11 +1676,11 @@ msgid "Try Again"
 msgstr "Try Again"
 
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
-#: src/pages/_app/account.tsx
 msgid "Unverified"
 msgstr "Unverified"
 
 #: src/features/change-password/ui/change-password-modal.tsx
+#: src/pages/_app/settings/security.tsx
 msgid "Uppercase and lowercase letters"
 msgstr "Uppercase and lowercase letters"
 
@@ -1605,7 +1715,6 @@ msgid "Uses <0>LoadingOverlay</0> component for full-screen loading"
 msgstr "Uses <0>LoadingOverlay</0> component for full-screen loading"
 
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
-#: src/pages/_app/account.tsx
 msgid "Verified"
 msgstr "Verified"
 
@@ -1690,7 +1799,7 @@ msgstr "Workspace setup failed. Please try again or contact support."
 msgid "You are already a member of this organization."
 msgstr "You are already a member of this organization."
 
-#: src/pages/_app/account.tsx
+#: src/pages/_app/settings/general.tsx
 msgid "You are not a member of any organization."
 msgstr "You are not a member of any organization."
 

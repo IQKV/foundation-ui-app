@@ -12,7 +12,7 @@ import { iamApi, authApi, type UserMembership } from "@/shared/api";
 import { setTokens } from "@/processes/session";
 import { PageHeader } from "@/shared/ui";
 
-export const Route = createFileRoute("/_app/organizations")({
+export const Route = createFileRoute("/_app/settings/organization")({
   component: OrganizationsPage,
 });
 
@@ -66,6 +66,7 @@ function OrganizationsPage() {
         title={<Trans>Organizations</Trans>}
         breadcrumbs={[
           { label: <Trans>Home</Trans>, to: "/" },
+          { label: <Trans>Account Settings</Trans> },
           { label: <Trans>Organizations</Trans> },
         ]}
       />
