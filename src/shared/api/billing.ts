@@ -85,7 +85,7 @@ export const billingApi = {
 
   /**
    * Get active subscription for a tenant.
-   * Requires TENANT_OWNER authority.
+   * Requires TENANT_OWNER or MEMBER authority.
    */
   getActiveSubscription: (tenantKey: string) =>
     httpClient

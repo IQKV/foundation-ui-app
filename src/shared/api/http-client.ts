@@ -42,6 +42,7 @@ export const httpClient = axios.create({
   // withCredentials must be false when going through the Vite proxy (dev) because
   // the proxy response won't carry Access-Control-Allow-Credentials: true.
   // In production the real API server handles CORS correctly.
+  //withCredentials: !isDev,
   withCredentials: !isDev,
   headers: {
     "Content-Type": "application/json",
