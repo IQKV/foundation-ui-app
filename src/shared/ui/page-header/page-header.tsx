@@ -13,9 +13,11 @@ interface PageHeaderProps {
   breadcrumbs?: BreadcrumbItem[];
   /** Optional toolbar row rendered below the title/breadcrumb line. */
   toolbar?: React.ReactNode;
+  /** Optional element rendered on the right side of the title. */
+  rightSection?: React.ReactNode;
 }
 
-export function PageHeader({ title, breadcrumbs, toolbar }: PageHeaderProps) {
+export function PageHeader({ title, breadcrumbs, toolbar, rightSection }: PageHeaderProps) {
   return (
     <Stack gap={0} mb="lg">
       {/* Title row */}
@@ -27,9 +29,12 @@ export function PageHeader({ title, breadcrumbs, toolbar }: PageHeaderProps) {
           borderBottom: toolbar ? "none" : "1px solid var(--mantine-color-gray-2)",
         }}
       >
-        <Title order={2} fw={700} size="h3">
-          {title}
-        </Title>
+        <Group align="center" gap="md">
+          <Title order={2} fw={700} size="h3">
+            {title}
+          </Title>
+          {rightSection}
+        </Group>
 
         {breadcrumbs && breadcrumbs.length > 0 && (
           <Breadcrumbs

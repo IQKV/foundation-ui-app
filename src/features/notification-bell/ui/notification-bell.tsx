@@ -1,5 +1,8 @@
+import { useMemo } from "react";
+import { Link } from "@tanstack/react-router";
 import {
   ActionIcon,
+  Anchor,
   Badge,
   Box,
   Button,
@@ -16,6 +19,7 @@ import {
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { IconBell } from "@tabler/icons-react";
+import { t } from "@lingui/core/macro";
 import {
   useNotificationList,
   useUnreadCount,
@@ -34,7 +38,7 @@ export function NotificationBell() {
   useNotificationWs();
 
   const { data: unreadData } = useUnreadCount();
-  const { data: listData, isLoading } = useNotificationList(20);
+  const { data: listData, isLoading } = useNotificationList({ limit: 10 });
 
   const markAsRead = useMarkAsRead();
   const markAllAsRead = useMarkAllAsRead();
@@ -42,7 +46,11 @@ export function NotificationBell() {
   const deleteAll = useDeleteAllNotifications();
 
   const unreadCount = unreadData?.unreadCount ?? 0;
-  const notifications = listData?.items ?? [];
+  const notifications = useMemo(() => {
+    return [...(listData?.items ?? [])].sort(
+      (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+    );
+  }, [listData?.items]);
   const hasUnread = unreadCount > 0;
 
   return (
@@ -56,7 +64,7 @@ export function NotificationBell() {
       arrowPosition="side"
     >
       <Popover.Target>
-        <Tooltip label="Notifications" withArrow>
+        <Tooltip label={t`Notifications`} withArrow>
           <Indicator
             disabled={!hasUnread}
             color="red"
@@ -71,7 +79,7 @@ export function NotificationBell() {
               size="md"
               onClick={toggle}
               data-testid="notification-bell-button"
-              aria-label={`Notifications${hasUnread ? `, ${unreadCount} unread` : ""}`}
+              aria-label={t`Notifications${hasUnread ? `, ${unreadCount} unread` : ""}`}
             >
               <IconBell size={18} />
             </ActionIcon>
@@ -81,10 +89,10 @@ export function NotificationBell() {
 
       <Popover.Dropdown p={0} data-testid="notification-bell-dropdown">
         {/* Header */}
-        <Group px="sm" py="xs" justify="space-between">
+        <Group px="md" py="sm" justify="space-between">
           <Group gap="xs">
             <Text fw={600} size="sm">
-              Notifications
+              {t`Notifications`}
             </Text>
             {hasUnread && (
               <Badge size="xs" color="red" variant="filled">
@@ -92,32 +100,17 @@ export function NotificationBell() {
               </Badge>
             )}
           </Group>
-          <Group gap={4}>
-            {hasUnread && (
-              <Button
-                variant="subtle"
-                size="compact-xs"
-                color="gray"
-                onClick={() => markAllAsRead.mutate()}
-                loading={markAllAsRead.isPending}
-                data-testid="notification-mark-all-read"
-              >
-                Mark all read
-              </Button>
-            )}
-            {notifications.length > 0 && (
-              <Button
-                variant="subtle"
-                size="compact-xs"
-                color="red"
-                onClick={() => deleteAll.mutate()}
-                loading={deleteAll.isPending}
-                data-testid="notification-delete-all"
-              >
-                Clear all
-              </Button>
-            )}
-          </Group>
+          {hasUnread && (
+            <Anchor
+              component="button"
+              size="xs"
+              onClick={() => markAllAsRead.mutate()}
+              disabled={markAllAsRead.isPending}
+              data-testid="notification-mark-all-read"
+            >
+              {t`Mark all as read`}
+            </Anchor>
+          )}
         </Group>
 
         <Divider />
@@ -132,7 +125,7 @@ export function NotificationBell() {
             <Stack align="center" py="xl" gap="xs">
               <IconBell size={32} color="var(--mantine-color-dimmed)" />
               <Text size="sm" c="dimmed">
-                No notifications
+                {t`No notifications yet`}
               </Text>
             </Stack>
           ) : (
@@ -149,15 +142,45 @@ export function NotificationBell() {
           )}
         </ScrollArea.Autosize>
 
-        {/* Footer — total count hint */}
-        {(listData?.totalElements ?? 0) > notifications.length && (
+        {/* Footer — Clear all and count hint */}
+        {notifications.length > 0 && (
           <>
             <Divider />
-            <Box px="sm" py="xs">
-              <Text size="xs" c="dimmed" ta="center">
-                Showing {notifications.length} of {listData?.totalElements} notifications
-              </Text>
-            </Box>
+            <Stack gap={0} p="xs">
+              <Anchor
+                component={Link}
+                to="/notifications"
+                size="xs"
+                ta="center"
+                py="xs"
+                onClick={close}
+                data-testid="notification-see-all"
+              >
+                {t`See all notifications`}
+              </Anchor>
+
+              <Divider variant="dashed" />
+
+              <Group pt="xs" justify="space-between">
+                <Box>
+                  {(listData?.totalElements ?? 0) > notifications.length && (
+                    <Text size="xs" c="dimmed">
+                      {t`Showing ${notifications.length} of ${listData?.totalElements ?? 0}`}
+                    </Text>
+                  )}
+                </Box>
+                <Button
+                  variant="subtle"
+                  size="compact-xs"
+                  color="red"
+                  onClick={() => deleteAll.mutate()}
+                  loading={deleteAll.isPending}
+                  data-testid="notification-delete-all"
+                >
+                  {t`Clear all`}
+                </Button>
+              </Group>
+            </Stack>
           </>
         )}
       </Popover.Dropdown>

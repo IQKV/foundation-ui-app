@@ -8,15 +8,15 @@ export const UNREAD_COUNT_KEY = ["notifications", "unread-count"] as const;
 // ─── Queries ──────────────────────────────────────────────────────────────────
 
 /**
- * Fetches the first page of notifications (most recent 20).
+ * Fetches a page of notifications.
  * Re-fetches automatically when a WebSocket push arrives (pushSeq changes).
  */
-export function useNotificationList(limit = 20) {
+export function useNotificationList({ limit = 10, offset = 0 } = {}) {
   const pushSeq = useNotificationStore((s) => s.pushSeq);
 
   return useQuery({
-    queryKey: [...NOTIFICATIONS_KEY, { limit, pushSeq }],
-    queryFn: () => notificationApi.list({ limit, offset: 0 }),
+    queryKey: [...NOTIFICATIONS_KEY, { limit, offset, pushSeq }],
+    queryFn: () => notificationApi.list({ limit, offset }),
     staleTime: 30_000,
   });
 }
