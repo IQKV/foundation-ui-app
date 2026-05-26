@@ -28,11 +28,9 @@ export function AppNav() {
 
   const navItems: NavItem[] = [
     { label: t`Dashboard`, icon: <IconDashboard size={16} />, to: "/" },
+    { label: t`Billing`, icon: <IconCreditCard size={16} />, to: "/billing" },
     ...(isTenantOwner
-      ? [
-          { label: t`Team`, icon: <IconUsers size={16} />, to: "/team" },
-          { label: t`Billing`, icon: <IconCreditCard size={16} />, to: "/billing" },
-        ]
+      ? [{ label: t`Team`, icon: <IconUsers size={16} />, to: "/team" }]
       : []),
   ];
 
