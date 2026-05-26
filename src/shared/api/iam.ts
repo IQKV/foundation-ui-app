@@ -168,7 +168,7 @@ export const iamApi = {
   changePassword: (data: { currentPassword: string; newPassword: string }): Promise<void> =>
     httpClient.post("/v1/iam/users/me/password", data).then(() => undefined),
 
-  // ── Tenant (TENANT_OWNER only) ─────────────────────────────────────────────
+  // ── Tenant (TENANT_OWNER / ADMIN / MEMBER) ────────────────────────────────
 
   /** Get the current tenant's details. */
   getTenant: (tenantKey: string) =>
@@ -186,7 +186,7 @@ export const iamApi = {
   retryProvisioning: (tenantKey: string) =>
     httpClient.post<Tenant>(`/v1/iam/tenants/${tenantKey}/retry-provisioning`).then((r) => r.data),
 
-  // ── Members (TENANT_OWNER / ADMIN) ────────────────────────────────────────
+  // ── Members (TENANT_OWNER / ADMIN / MEMBER) ──────────────────────────────
 
   /** List members of the current tenant. */
   listMembers: (tenantKey: string, params: ListMembersParams = {}) =>
