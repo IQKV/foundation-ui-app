@@ -18,31 +18,37 @@ This is the tenant surface of the platform — separate from `foundation-ui-plat
 | **Dashboard**          | Workspace name, welcome message, team member count                                                                                                                                   |
 | **Team**               | Searchable member list; pending invitations panel (TENANT_OWNER only); send invitation modal (ADMIN or MEMBER role)                                                                  |
 | **My Account**         | Profile view, edit name, change password, organizations and roles                                                                                                                    |
+| **Billing**            | Billing portal access, current subscription view, plan catalog, billing info, refunds list                                                                                           |
+| **Tenant Settings**    | Organization metadata editing                                                                                                                                                        |
+| **Notifications**      | In-app notifications with WebSocket support; notification bell UI                                                                                                                    |
 | **Session security**   | Access token in memory; refresh token + tenant key in `sessionStorage`; silent refresh on 401; 30-minute inactivity sign-out                                                         |
 | **UX**                 | Light/dark theme, Lingui i18n (English catalog), locale cookie, navigation progress, error boundaries                                                                                |
 
 ### Not implemented yet
 
-- Billing and subscription self-service
-- Tenant/workspace settings (rename, configuration)
 - Member role management beyond invitation authority (ADMIN / MEMBER)
 - Additional locales (infrastructure is ready; only `en` is compiled today)
 
 ## Routes
 
-| Path               | Access        | Description                             |
-| ------------------ | ------------- | --------------------------------------- |
-| `/sign-in`         | Public        | Tenant sign-in with optional redirect   |
-| `/signup`          | Public        | New user + tenant registration          |
-| `/forgot-password` | Public        | Request password reset email            |
-| `/reset-password`  | Public        | Set new password from email token       |
-| `/verify-email`    | Public        | Confirm email from link token           |
-| `/invite/:token`   | Public        | Preview and accept workspace invitation |
-| `/`                | Authenticated | Dashboard                               |
-| `/team`            | Authenticated | Members and invitations                 |
-| `/account`         | Authenticated | Profile and password                    |
-| `/unauthorized`    | Public        | Shown when JWT is not a tenant session  |
-| `/404`, `/500`     | Public        | Error pages                             |
+| Path                              | Access        | Description                             |
+| --------------------------------- | ------------- | --------------------------------------- |
+| `/sign-in`                        | Public        | Tenant sign-in with optional redirect   |
+| `/signup`                         | Public        | New user + tenant registration          |
+| `/forgot-password`                | Public        | Request password reset email            |
+| `/reset-password`                 | Public        | Set new password from email token       |
+| `/verify-email`                   | Public        | Confirm email from link token           |
+| `/invite/:token`                  | Public        | Preview and accept workspace invitation |
+| `/create-organization`            | Authenticated | Create a new organization               |
+| `/`                               | Authenticated | Dashboard                               |
+| `/team`                           | Authenticated | Members and invitations                 |
+| `/billing`                        | Authenticated | Billing portal, plans, refunds          |
+| `/account/settings/general`       | Authenticated | General account settings                |
+| `/account/settings/organization`  | Authenticated | Organization settings                   |
+| `/account/settings/security`      | Authenticated | Security settings                       |
+| `/account/settings/notifications` | Authenticated | Notification settings                   |
+| `/unauthorized`                   | Public        | Shown when JWT is not a tenant session  |
+| `/404`, `/500`                    | Public        | Error pages                             |
 
 Authenticated routes live under the `/_app` layout, which enforces a valid tenant JWT (or silent refresh) before rendering.
 
@@ -59,8 +65,9 @@ Authenticated routes live under the `/_app` layout, which enforces a valid tenan
 | Team — member list                      | Done                |
 | Team — invitations (send, list, revoke) | Done (TENANT_OWNER) |
 | Profile & change password               | Done                |
-| Billing self-service                    | Planned             |
-| Tenant settings                         | Planned             |
+| Billing self-service                    | Done                |
+| Tenant settings                         | Done                |
+| Notifications                           | Done                |
 | Member role editing                     | Planned             |
 
 ## Tech stack
@@ -171,11 +178,11 @@ src/
 
 Roles are carried on the JWT (`authorities` claim) and enforced in the UI:
 
-| Role           | Capabilities in this app                               |
-| -------------- | ------------------------------------------------------ |
-| `TENANT_OWNER` | Invite members, view/revoke pending invitations        |
-| `ADMIN`        | (Invitable role; no extra UI beyond member list today) |
-| `MEMBER`       | Dashboard, team member list, own account               |
+| Role           | Capabilities in this app                                                    |
+| -------------- | --------------------------------------------------------------------------- |
+| `TENANT_OWNER` | Invite members, view/revoke pending invitations, edit organization settings |
+| `ADMIN`        | (Invitable role; no extra UI beyond member list today)                      |
+| `MEMBER`       | Dashboard, team member list, own account                                    |
 
 `TenantOwnerOnly` / `AuthGuard` hide owner-only actions. The `/_app` route guard requires `tenant_id` to be non-null in the JWT; platform-scoped tokens redirect to `/unauthorized`.
 
