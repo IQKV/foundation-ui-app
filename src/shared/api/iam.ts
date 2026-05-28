@@ -68,6 +68,19 @@ export interface UpdateTenantStatusRequest {
   status: TenantStatus;
 }
 
+export interface CreateTenantRequest {
+  name: string;
+}
+
+export interface CreateTenantResponse {
+  id: string;
+  tenantKey: string;
+  name: string;
+  status: TenantStatus;
+  createdAt: string;
+  updatedAt: string;
+}
+
 // ─── Member types ─────────────────────────────────────────────────────────────
 
 export type MemberStatus = "ACTIVE" | "SUSPENDED" | "REMOVED";
@@ -169,6 +182,10 @@ export const iamApi = {
     httpClient.post("/v1/iam/users/me/password", data).then(() => undefined),
 
   // ── Tenant (TENANT_OWNER / ADMIN / MEMBER) ────────────────────────────────
+
+  /** Create a new tenant. Requires authentication. */
+  createTenant: (data: CreateTenantRequest) =>
+    httpClient.post<CreateTenantResponse>("/v1/iam/tenants", data).then((r) => r.data),
 
   /** Get the current tenant's details. */
   getTenant: (tenantKey: string) =>

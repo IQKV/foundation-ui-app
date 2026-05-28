@@ -24,6 +24,13 @@ export interface TenantMembershipSummary {
   authorities: string[];
 }
 
+export interface SignupStatusResponse {
+  tenantKey: string;
+  tenantStatus: string;
+}
+
+export type ProvisioningStatus = "PROVISIONING" | "ACTIVE" | "PROVISIONING_FAILED";
+
 // ─── API ──────────────────────────────────────────────────────────────────────
 
 /**
@@ -47,6 +54,14 @@ export const authApi = {
   listUserTenants: (email: string, password: string): Promise<TenantMembershipSummary[]> =>
     httpClient
       .post<TenantMembershipSummary[]>("/v1/iam/users/tenants", { email, password })
+      .then((r) => r.data),
+
+  /**
+   * Poll tenant provisioning status after signup.
+   */
+  signupStatus: (tenantKey: string): Promise<SignupStatusResponse> =>
+    httpClient
+      .get<SignupStatusResponse>(`/v1/iam/auth/signup/status/${tenantKey}`)
       .then((r) => r.data),
 
   /**

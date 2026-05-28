@@ -73,8 +73,8 @@ msgid "Accessible with proper keyboard handling"
 msgstr "Accessible with proper keyboard handling"
 
 #: src/pages/signup.tsx
-msgid "Account"
-msgstr "Account"
+#~ msgid "Account"
+#~ msgstr "Account"
 
 #: src/pages/_app/settings/general.tsx
 #: src/pages/_app/settings/notifications.tsx
@@ -89,9 +89,13 @@ msgstr "Account Settings"
 msgid "ACME Corp"
 msgstr "ACME Corp"
 
+#: src/features/create-organization/ui/create-organization-form.tsx
+msgid "Acme Inc."
+msgstr "Acme Inc."
+
 #: src/features/signup/ui/signup-form.tsx
-msgid "Acme Inc. (optional)"
-msgstr "Acme Inc. (optional)"
+#~ msgid "Acme Inc. (optional)"
+#~ msgstr "Acme Inc. (optional)"
 
 #: src/features/manage-organization/ui/member-actions.tsx
 msgid "Actions"
@@ -136,8 +140,16 @@ msgid "Amount"
 msgstr "Amount"
 
 #: src/features/signup/model/use-signup.ts
-msgid "An account with this email or organization name already exists."
-msgstr "An account with this email or organization name already exists."
+msgid "An account with this email already exists."
+msgstr "An account with this email already exists."
+
+#: src/features/signup/model/use-signup.ts
+#~ msgid "An account with this email or organization name already exists."
+#~ msgstr "An account with this email or organization name already exists."
+
+#: src/features/create-organization/model/use-create-organization.ts
+msgid "An organization with this name already exists."
+msgstr "An organization with this name already exists."
 
 #. placeholder {0}: member.firstName
 #. placeholder {1}: member.lastName
@@ -250,8 +262,8 @@ msgid "Change Password"
 msgstr "Change Password"
 
 #: src/pages/signup.tsx
-msgid "Check email"
-msgstr "Check email"
+#~ msgid "Check email"
+#~ msgstr "Check email"
 
 #: src/features/forgot-password/ui/forgot-password-form.tsx
 #: src/features/signup/ui/verify-email-prompt.tsx
@@ -383,6 +395,15 @@ msgstr "Create account"
 msgid "Create account and join"
 msgstr "Create account and join"
 
+#: src/features/create-organization/ui/create-organization-form.tsx
+#: src/pages/create-organization.tsx
+msgid "Create organization"
+msgstr "Create organization"
+
+#: src/pages/create-organization.tsx
+msgid "Create your"
+msgstr "Create your"
+
 #: src/pages/signup.tsx
 msgid "Create your account"
 msgstr "Create your account"
@@ -392,12 +413,20 @@ msgid "Create your account and join the platform in seconds. No credit card requ
 msgstr "Create your account and join the platform in seconds. No credit card required."
 
 #: src/pages/signup.tsx
-msgid "Create your account and workspace in seconds. No credit card required."
-msgstr "Create your account and workspace in seconds. No credit card required."
+#~ msgid "Create your account and workspace in seconds. No credit card required."
+#~ msgstr "Create your account and workspace in seconds. No credit card required."
+
+#: src/pages/signup.tsx
+msgid "Create your account in seconds. No credit card required."
+msgstr "Create your account in seconds. No credit card required."
 
 #: src/pages/invite.$token.tsx
 msgid "Create your account to accept this invitation."
 msgstr "Create your account to accept this invitation."
+
+#: src/pages/create-organization.tsx
+msgid "Create your organization"
+msgstr "Create your organization"
 
 #: src/pages/admin/organizations.$tenantKey.tsx
 #: src/pages/admin/organizations.index.tsx
@@ -835,8 +864,8 @@ msgstr "Last name is too long"
 #~ msgstr "Last updated"
 
 #: src/features/signup/ui/signup-form.tsx
-msgid "Leave blank to use your name"
-msgstr "Leave blank to use your name"
+#~ msgid "Leave blank to use your name"
+#~ msgstr "Leave blank to use your name"
 
 #: src/pages/verify-email.tsx
 msgid "Link expired or invalid"
@@ -928,6 +957,10 @@ msgstr "My Account"
 #: src/features/manage-organization/ui/organization-settings.tsx
 msgid "Name is too short"
 msgstr "Name is too short"
+
+#: src/shared/ui/app-layout/app-header.tsx
+msgid "New Organization"
+msgstr "New Organization"
 
 #: src/features/change-password/ui/change-password-modal.tsx
 #: src/features/reset-password/ui/reset-password-form.tsx
@@ -1051,6 +1084,10 @@ msgstr "One click and you're all set."
 msgid "Open Billing Portal"
 msgstr "Open Billing Portal"
 
+#: src/pages/create-organization.tsx
+msgid "organization"
+msgstr "organization"
+
 #: src/pages/_app/settings/organization.tsx
 msgid "Organization"
 msgstr "Organization"
@@ -1063,7 +1100,7 @@ msgstr "Organization"
 msgid "Organization Key"
 msgstr "Organization Key"
 
-#: src/features/signup/ui/signup-form.tsx
+#: src/features/create-organization/ui/create-organization-form.tsx
 msgid "Organization name"
 msgstr "Organization name"
 
@@ -1071,11 +1108,11 @@ msgstr "Organization name"
 msgid "Organization Name"
 msgstr "Organization Name"
 
-#: src/features/edit-tenant/ui/edit-tenant-modal.tsx
-#~ msgid "Organization name is required"
-#~ msgstr "Organization name is required"
+#: src/features/create-organization/model/use-create-organization.ts
+msgid "Organization name is required"
+msgstr "Organization name is required"
 
-#: src/features/signup/model/use-signup.ts
+#: src/features/create-organization/model/use-create-organization.ts
 msgid "Organization name is too long"
 msgstr "Organization name is too long"
 
@@ -1415,7 +1452,7 @@ msgstr "Set new password"
 msgid "Set up your account in under a minute."
 msgstr "Set up your account in under a minute."
 
-#: src/pages/signup.tsx
+#: src/pages/create-organization.tsx
 msgid "Set up your workspace in under a minute."
 msgstr "Set up your workspace in under a minute."
 
@@ -1425,8 +1462,8 @@ msgid "Sets your preferred language for notifications and emails."
 msgstr "Sets your preferred language for notifications and emails."
 
 #: src/pages/signup.tsx
-msgid "Setting up"
-msgstr "Setting up"
+#~ msgid "Setting up"
+#~ msgstr "Setting up"
 
 #: src/features/signup/ui/provisioning-wait.tsx
 msgid "Setting up your workspace"
@@ -1509,6 +1546,7 @@ msgid "Something went wrong"
 msgstr "Something went wrong"
 
 #: src/features/accept-invitation/model/use-accept-invitation.ts
+#: src/features/create-organization/model/use-create-organization.ts
 #: src/features/forgot-password/model/use-forgot-password.ts
 #: src/features/reset-password/model/use-reset-password.ts
 #: src/features/signup/model/use-signup.ts
@@ -1538,16 +1576,16 @@ msgid "Status"
 msgstr "Status"
 
 #: src/pages/signup.tsx
-msgid "Step 1: Create account"
-msgstr "Step 1: Create account"
+#~ msgid "Step 1: Create account"
+#~ msgstr "Step 1: Create account"
 
 #: src/pages/signup.tsx
-msgid "Step 2: Workspace setup"
-msgstr "Step 2: Workspace setup"
+#~ msgid "Step 2: Workspace setup"
+#~ msgstr "Step 2: Workspace setup"
 
 #: src/pages/signup.tsx
-msgid "Step 3: Verify email"
-msgstr "Step 3: Verify email"
+#~ msgid "Step 3: Verify email"
+#~ msgstr "Step 3: Verify email"
 
 #: src/features/signup/ui/provisioning-wait.tsx
 msgid "Still setting up…"
@@ -1653,6 +1691,7 @@ msgstr "This template uses Mantine's official loading components for optimal UX.
 msgid "This verification link has expired or has already been used. Request a new one from your account settings."
 msgstr "This verification link has expired or has already been used. Request a new one from your account settings."
 
+#: src/features/create-organization/model/use-create-organization.ts
 #: src/features/forgot-password/model/use-forgot-password.ts
 #: src/features/reset-password/model/use-reset-password.ts
 #: src/features/signup/model/use-signup.ts
@@ -1719,8 +1758,8 @@ msgid "Verified"
 msgstr "Verified"
 
 #: src/pages/signup.tsx
-msgid "Verify"
-msgstr "Verify"
+#~ msgid "Verify"
+#~ msgstr "Verify"
 
 #: src/pages/verify-email.tsx
 msgid "Verify Email"
@@ -1778,7 +1817,6 @@ msgstr "Welcome back, {firstName}."
 msgid "Work email"
 msgstr "Work email"
 
-#: src/pages/signup.tsx
 #: src/shared/ui/app-layout/app-nav.tsx
 msgid "Workspace"
 msgstr "Workspace"
@@ -1792,8 +1830,8 @@ msgstr "Workspace"
 #~ msgstr "Workspace settings"
 
 #: src/features/signup/model/use-signup.ts
-msgid "Workspace setup failed. Please try again or contact support."
-msgstr "Workspace setup failed. Please try again or contact support."
+#~ msgid "Workspace setup failed. Please try again or contact support."
+#~ msgstr "Workspace setup failed. Please try again or contact support."
 
 #: src/features/accept-invitation/model/use-accept-invitation.ts
 msgid "You are already a member of this organization."
@@ -1849,8 +1887,8 @@ msgid "Your account is not active or has been suspended"
 msgstr "Your account is not active or has been suspended"
 
 #: src/pages/signup.tsx
-msgid "Your details"
-msgstr "Your details"
+#~ msgid "Your details"
+#~ msgstr "Your details"
 
 #: src/pages/verify-email.tsx
 msgid "Your email address has been confirmed. You're all set."

@@ -39,18 +39,15 @@ export type {
   SignInResponse,
   TenantMembershipSummary,
   TenantExchangeRequest,
+  SignupStatusResponse,
+  ProvisioningStatus,
 } from "./auth";
 
 export { passwordResetApi } from "./password-reset";
 export type { ForgotPasswordRequest, ResetPasswordRequest } from "./password-reset";
 
 export { signupApi } from "./signup";
-export type {
-  RegisterUserRequest,
-  SignupResponse,
-  SignupStatusResponse,
-  ProvisioningStatus,
-} from "./signup";
+export type { RegisterUserRequest, SignupResponse } from "./signup";
 
 export { billingApi } from "./billing";
 export type {

@@ -1,5 +1,5 @@
-import { Burger, Divider, Group, Text, Box, Avatar, Menu } from "@mantine/core";
-import { IconShieldHalf, IconLogout, IconUser, IconBuilding } from "@tabler/icons-react";
+import { Burger, Divider, Group, Text, Box, Avatar, Menu, Button } from "@mantine/core";
+import { IconShieldHalf, IconLogout, IconUser, IconBuilding, IconPlus } from "@tabler/icons-react";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { Trans } from "@lingui/react/macro";
 import { APP_NAME } from "@/shared/lib/page-title";
@@ -82,6 +82,8 @@ function UserMenu() {
 }
 
 export function AppHeader({ opened, onToggle }: AppHeaderProps) {
+  const navigate = useNavigate();
+
   return (
     <Group h="100%" px={0} justify="space-between" gap={0} data-testid="app-header">
       {/* Brand block — same width as sidebar */}
@@ -134,6 +136,16 @@ export function AppHeader({ opened, onToggle }: AppHeaderProps) {
 
       {/* Right side — user menu */}
       <Group gap="xs" px="md" ml="auto">
+        {isMultiTenantMode && (
+          <Button
+            variant="filled"
+            size="sm"
+            leftSection={<IconPlus size={14} />}
+            onClick={() => void navigate({ to: "/create-organization" })}
+          >
+            <Trans>New Organization</Trans>
+          </Button>
+        )}
         <LocaleSwitcher />
         <ColorSchemeToggle />
         <NotificationBell />

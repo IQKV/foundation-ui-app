@@ -4,7 +4,6 @@ import { Controller, useWatch } from "react-hook-form";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Link } from "@tanstack/react-router";
 import type { UseFormReturn } from "react-hook-form";
-import { isMultiTenantMode } from "@/app/config";
 import type { SignupFormValues } from "../model/use-signup";
 import { PasswordStrength } from "./password-strength";
 
@@ -19,7 +18,7 @@ interface SignupFormProps {
  * Step 1 — Account creation form.
  *
  * Single-screen form: first name, last name, email, password (with strength
- * meter), and optional organization name. Submits to `POST /auth/signup`.
+ * meter). Submits to `POST /auth/signup`.
  */
 export function SignupForm({ form, isLoading, errorMessage, onSubmit }: SignupFormProps) {
   const { t } = useLingui();
@@ -123,27 +122,6 @@ export function SignupForm({ form, isLoading, errorMessage, onSubmit }: SignupFo
             </Stack>
           )}
         />
-
-        {/* Organization name (optional) - Only in Multi-Tenant mode */}
-        {isMultiTenantMode && (
-          <Controller
-            name="tenantName"
-            control={control}
-            render={({ field }) => (
-              <TextInput
-                {...field}
-                id="signup-tenant-name"
-                label={t`Organization name`}
-                placeholder={t`Acme Inc. (optional)`}
-                autoComplete="organization"
-                error={errors.tenantName?.message}
-                disabled={isLoading}
-                description={t`Leave blank to use your name`}
-                inputWrapperOrder={["label", "input", "description", "error"]}
-              />
-            )}
-          />
-        )}
 
         <Button type="submit" fullWidth loading={isLoading} disabled={isLoading} mt={4}>
           <Trans>Create account</Trans>

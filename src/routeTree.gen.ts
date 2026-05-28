@@ -16,6 +16,7 @@ import { Route as SignInRouteImport } from "./pages/sign-in"
 import { Route as ResetPasswordRouteImport } from "./pages/reset-password"
 import { Route as LoadingDemoRouteImport } from "./pages/loading-demo"
 import { Route as ForgotPasswordRouteImport } from "./pages/forgot-password"
+import { Route as CreateOrganizationRouteImport } from "./pages/create-organization"
 import { Route as AppRouteImport } from "./pages/_app"
 import { Route as R500RouteImport } from "./pages/500"
 import { Route as R404RouteImport } from "./pages/404"
@@ -61,6 +62,11 @@ const LoadingDemoRoute = LoadingDemoRouteImport.update({
 const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
   id: "/forgot-password",
   path: "/forgot-password",
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CreateOrganizationRoute = CreateOrganizationRouteImport.update({
+  id: "/create-organization",
+  path: "/create-organization",
   getParentRoute: () => rootRouteImport,
 } as any)
 const AppRoute = AppRouteImport.update({
@@ -123,6 +129,7 @@ export interface FileRoutesByFullPath {
   "/404": typeof R404Route
   "/500": typeof R500Route
   "/": typeof AppIndexRoute
+  "/create-organization": typeof CreateOrganizationRoute
   "/forgot-password": typeof ForgotPasswordRoute
   "/loading-demo": typeof LoadingDemoRoute
   "/reset-password": typeof ResetPasswordRoute
@@ -141,6 +148,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   "/404": typeof R404Route
   "/500": typeof R500Route
+  "/create-organization": typeof CreateOrganizationRoute
   "/forgot-password": typeof ForgotPasswordRoute
   "/loading-demo": typeof LoadingDemoRoute
   "/reset-password": typeof ResetPasswordRoute
@@ -162,6 +170,7 @@ export interface FileRoutesById {
   "/404": typeof R404Route
   "/500": typeof R500Route
   "/_app": typeof AppRouteWithChildren
+  "/create-organization": typeof CreateOrganizationRoute
   "/forgot-password": typeof ForgotPasswordRoute
   "/loading-demo": typeof LoadingDemoRoute
   "/reset-password": typeof ResetPasswordRoute
@@ -184,6 +193,7 @@ export interface FileRouteTypes {
     | "/404"
     | "/500"
     | "/"
+    | "/create-organization"
     | "/forgot-password"
     | "/loading-demo"
     | "/reset-password"
@@ -202,6 +212,7 @@ export interface FileRouteTypes {
   to:
     | "/404"
     | "/500"
+    | "/create-organization"
     | "/forgot-password"
     | "/loading-demo"
     | "/reset-password"
@@ -222,6 +233,7 @@ export interface FileRouteTypes {
     | "/404"
     | "/500"
     | "/_app"
+    | "/create-organization"
     | "/forgot-password"
     | "/loading-demo"
     | "/reset-password"
@@ -243,6 +255,7 @@ export interface RootRouteChildren {
   R404Route: typeof R404Route
   R500Route: typeof R500Route
   AppRoute: typeof AppRouteWithChildren
+  CreateOrganizationRoute: typeof CreateOrganizationRoute
   ForgotPasswordRoute: typeof ForgotPasswordRoute
   LoadingDemoRoute: typeof LoadingDemoRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
@@ -302,6 +315,13 @@ declare module "@tanstack/react-router" {
       path: "/forgot-password"
       fullPath: "/forgot-password"
       preLoaderRoute: typeof ForgotPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    "/create-organization": {
+      id: "/create-organization"
+      path: "/create-organization"
+      fullPath: "/create-organization"
+      preLoaderRoute: typeof CreateOrganizationRouteImport
       parentRoute: typeof rootRouteImport
     }
     "/_app": {
@@ -410,6 +430,7 @@ const rootRouteChildren: RootRouteChildren = {
   R404Route: R404Route,
   R500Route: R500Route,
   AppRoute: AppRouteWithChildren,
+  CreateOrganizationRoute: CreateOrganizationRoute,
   ForgotPasswordRoute: ForgotPasswordRoute,
   LoadingDemoRoute: LoadingDemoRoute,
   ResetPasswordRoute: ResetPasswordRoute,
