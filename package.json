@@ -110,7 +110,7 @@
     "sockjs-client": "^1.6.1",
     "ts-pattern": "^5.9.0",
     "zod": "^4.4.3",
-    "zustand": "^5.0.13"
+    "zustand": "^5.0.14"
   },
   "devDependencies": {
     "@commitlint/cli": "^21.0.1",
