@@ -25,6 +25,7 @@ import { pageTitle } from "@/shared/lib/page-title";
 import { iamApi, localesApi } from "@/shared/api";
 import { PageHeader } from "@/shared/ui";
 import { useEditProfile, type EditProfileFormValues } from "@/features/edit-profile";
+import { AvatarUpload } from "@/features/avatar";
 
 export const Route = createFileRoute("/_app/settings/general")({
   component: GeneralSettingsPage,
@@ -126,6 +127,17 @@ function GeneralSettingsPage() {
       />
 
       <Stack gap="xl">
+        {/* Avatar Card */}
+        <Paper withBorder p="xl" radius="md">
+          <Group gap="md" mb="xl">
+            <IconUser size={20} color="var(--mantine-color-blue-6)" />
+            <Text fw={600}>
+              <Trans>Profile Picture</Trans>
+            </Text>
+          </Group>
+          {profile && <AvatarUpload profile={profile} />}
+        </Paper>
+
         {/* Profile Card */}
         <Paper withBorder p="xl" radius="md">
           <Group gap="md" mb="xl">

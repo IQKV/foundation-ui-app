@@ -25,12 +25,28 @@ export interface UserProfile {
   emailVerified: boolean;
   /** BCP 47 locale tag (e.g. "en-US"). Null when not yet set. */
   locale: string | null;
+  /** Public URL of the user's avatar image. Null when no avatar has been uploaded. */
+  avatarUrl: string | null;
   /** Tenant names the user belongs to (aggregated server-side). */
   organizations: string[];
   /** Membership-level authorities across all tenants (e.g. TENANT_OWNER, ADMIN, MEMBER). */
   membershipAuthorities: string[];
   createdAt: string;
   updatedAt: string;
+}
+
+export interface AvatarUploadInitResponse {
+  presignedUploadUrl: string;
+  objectKey: string;
+  expiresInMinutes: number;
+}
+
+export interface AvatarConfirmRequest {
+  objectKey: string;
+}
+
+export interface AvatarResponse {
+  avatarUrl: string;
 }
 
 export interface UpdateProfileRequest {
@@ -180,6 +196,18 @@ export const iamApi = {
   /** Change the current user's own password (requires current password for re-authentication). */
   changePassword: (data: { currentPassword: string; newPassword: string }): Promise<void> =>
     httpClient.post("/v1/iam/users/me/password", data).then(() => undefined),
+
+  /** Initiate avatar upload — get presigned PUT URL. */
+  initiateAvatarUpload: () =>
+    httpClient.post<AvatarUploadInitResponse>("/v1/iam/users/me/avatar").then((r) => r.data),
+
+  /** Confirm avatar upload after file is uploaded to S3. */
+  confirmAvatarUpload: (data: AvatarConfirmRequest) =>
+    httpClient.post<AvatarResponse>("/v1/iam/users/me/avatar/confirm", data).then((r) => r.data),
+
+  /** Delete user's avatar. */
+  deleteAvatar: (): Promise<void> =>
+    httpClient.delete("/v1/iam/users/me/avatar").then(() => undefined),
 
   // ── Tenant (TENANT_OWNER / ADMIN / MEMBER) ────────────────────────────────
 

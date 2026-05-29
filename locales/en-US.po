@@ -1254,6 +1254,10 @@ msgstr "Portal error"
 msgid "Profile Information"
 msgstr "Profile Information"
 
+#: src/pages/_app/settings/general.tsx
+msgid "Profile Picture"
+msgstr "Profile Picture"
+
 #: src/features/signup/ui/provisioning-wait.tsx
 msgid "Provisioning workspace"
 msgstr "Provisioning workspace"
@@ -1717,6 +1721,10 @@ msgstr "Try Again"
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 msgid "Unverified"
 msgstr "Unverified"
+
+#: src/features/avatar/ui/avatar-upload.tsx
+msgid "Upload avatar"
+msgstr "Upload avatar"
 
 #: src/features/change-password/ui/change-password-modal.tsx
 #: src/pages/_app/settings/security.tsx

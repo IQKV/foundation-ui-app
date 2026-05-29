@@ -10,6 +10,8 @@ import { decodeJwt } from "@/shared/lib/jwt";
 import { isMultiTenantMode } from "@/app/config";
 import { ColorSchemeToggle } from "@/shared/ui/color-scheme-toggle/color-scheme-toggle";
 import { LocaleSwitcher } from "@/shared/ui/locale-switcher/locale-switcher";
+import { useQuery } from "@tanstack/react-query";
+import { iamApi } from "@/shared/api";
 
 interface AppHeaderProps {
   opened: boolean;
@@ -22,6 +24,12 @@ function UserMenu() {
   const accessToken = useSessionStore((s) => s.accessToken);
   const payload = accessToken ? decodeJwt(accessToken) : null;
 
+  const { data: profile } = useQuery({
+    queryKey: ["me"],
+    queryFn: () => iamApi.getMe(),
+    enabled: !!accessToken,
+  });
+
   const initials = payload
     ? `${payload.firstName.charAt(0)}${payload.lastName.charAt(0)}`.toUpperCase()
     : "?";
@@ -32,6 +40,7 @@ function UserMenu() {
     <Menu shadow="md" width={200} position="bottom-end">
       <Menu.Target>
         <Avatar
+          src={profile?.avatarUrl}
           size={32}
           radius="xl"
           color="blue"
