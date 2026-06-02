@@ -284,6 +284,13 @@ export const iamApi = {
   /** Unban a member from the tenant (TENANT_OWNER only). */
   unbanMember: (tenantKey: string, userId: string) =>
     httpClient.post(`/v1/iam/tenants/${tenantKey}/members/${userId}/unban`),
+  /** Transfer tenant ownership to another member (TENANT_OWNER only). */
+  transferOwnership: (tenantKey: string, userId: string) =>
+    httpClient
+      .post<MemberAuthoritiesResponse>(
+        `/v1/iam/tenants/${tenantKey}/members/${userId}/transfer-ownership`,
+      )
+      .then((r) => r.data),
 
   // ── Invitations (TENANT_OWNER / ADMIN) ────────────────────────────────────
 

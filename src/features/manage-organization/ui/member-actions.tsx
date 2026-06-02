@@ -1,4 +1,4 @@
-import { ActionIcon, Menu, Modal, Checkbox, Stack, Button, Group } from "@mantine/core";
+import { ActionIcon, Menu, Modal, Stack, Button, Group } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import {
   IconDotsVertical,
@@ -6,12 +6,13 @@ import {
   IconShieldCheck,
   IconBan,
   IconUserCheck,
+  IconUserStar,
 } from "@tabler/icons-react";
-import { Trans, useLingui } from "@lingui/react/macro";
-import { useState } from "react";
-import { useUpdateMemberAuthorities, useRemoveMember } from "../model/use-members";
+import { Trans } from "@lingui/react/macro";
+import { useRemoveMember } from "../model/use-members";
 import type { TenantMember } from "@/shared/api";
 import { BanMemberModal, UnbanMemberModal } from "@/features/ban-user";
+import { UpdateMemberAuthoritiesModal, TransferOwnershipModal } from "@/features/member-role";
 
 interface MemberActionsProps {
   tenantKey: string;
@@ -20,29 +21,18 @@ interface MemberActionsProps {
 }
 
 export function MemberActions({ tenantKey, member, isSelf }: MemberActionsProps) {
-  const { t } = useLingui();
-  const [roleModalOpened, { open: openRoleModal, close: closeRoleModal }] = useDisclosure(false);
   const [removeModalOpened, { open: openRemoveModal, close: closeRemoveModal }] =
     useDisclosure(false);
   const [banModalOpened, { open: openBanModal, close: closeBanModal }] = useDisclosure(false);
   const [unbanModalOpened, { open: openUnbanModal, close: closeUnbanModal }] = useDisclosure(false);
+  const [updateRoleModalOpened, { open: openUpdateRoleModal, close: closeUpdateRoleModal }] =
+    useDisclosure(false);
+  const [
+    transferOwnershipModalOpened,
+    { open: openTransferOwnershipModal, close: closeTransferOwnershipModal },
+  ] = useDisclosure(false);
 
-  const [selectedRoles, setSelectedRoles] = useState<string[]>(member.tenantAuthorities || []);
-
-  const updateAuthorities = useUpdateMemberAuthorities(tenantKey);
   const removeMember = useRemoveMember(tenantKey);
-
-  const handleUpdateRoles = () => {
-    updateAuthorities.mutate(
-      {
-        userId: member.id,
-        data: { authorities: selectedRoles },
-      },
-      {
-        onSuccess: () => closeRoleModal(),
-      },
-    );
-  };
 
   const handleRemoveMember = () => {
     removeMember.mutate(member.id, {
@@ -54,7 +44,7 @@ export function MemberActions({ tenantKey, member, isSelf }: MemberActionsProps)
 
   return (
     <>
-      <Menu shadow="md" width={200} position="bottom-end">
+      <Menu shadow="md" width={220} position="bottom-end">
         <Menu.Target>
           <ActionIcon variant="subtle" color="gray">
             <IconDotsVertical size={16} />
@@ -65,8 +55,11 @@ export function MemberActions({ tenantKey, member, isSelf }: MemberActionsProps)
           <Menu.Label>
             <Trans>Actions</Trans>
           </Menu.Label>
-          <Menu.Item leftSection={<IconShieldCheck size={14} />} onClick={openRoleModal}>
-            <Trans>Edit Roles</Trans>
+          <Menu.Item leftSection={<IconShieldCheck size={14} />} onClick={openUpdateRoleModal}>
+            <Trans>Change Role</Trans>
+          </Menu.Item>
+          <Menu.Item leftSection={<IconUserStar size={14} />} onClick={openTransferOwnershipModal}>
+            <Trans>Transfer Ownership</Trans>
           </Menu.Item>
           <Menu.Divider />
           <Menu.Item color="red" leftSection={<IconBan size={14} />} onClick={openBanModal}>
@@ -89,45 +82,6 @@ export function MemberActions({ tenantKey, member, isSelf }: MemberActionsProps)
           </Menu.Item>
         </Menu.Dropdown>
       </Menu>
-
-      <Modal
-        opened={roleModalOpened}
-        onClose={closeRoleModal}
-        title={
-          <Trans>
-            Edit Roles: {member.firstName} {member.lastName}
-          </Trans>
-        }
-      >
-        <Stack gap="md">
-          <Checkbox.Group
-            value={selectedRoles}
-            onChange={setSelectedRoles}
-            label={<Trans>Select authorities for this member</Trans>}
-          >
-            <Stack mt="xs" gap="xs">
-              <Checkbox
-                value="ADMIN"
-                label={t`Admin`}
-                description={t`Can manage members and invitations.`}
-              />
-              <Checkbox
-                value="MEMBER"
-                label={t`Member`}
-                description={t`Standard organization member.`}
-              />
-            </Stack>
-          </Checkbox.Group>
-          <Group justify="flex-end" mt="md">
-            <Button variant="subtle" onClick={closeRoleModal}>
-              <Trans>Cancel</Trans>
-            </Button>
-            <Button onClick={handleUpdateRoles} loading={updateAuthorities.isPending}>
-              <Trans>Save Roles</Trans>
-            </Button>
-          </Group>
-        </Stack>
-      </Modal>
 
       <Modal
         opened={removeModalOpened}
@@ -165,6 +119,20 @@ export function MemberActions({ tenantKey, member, isSelf }: MemberActionsProps)
         tenantKey={tenantKey}
         opened={unbanModalOpened}
         onClose={closeUnbanModal}
+      />
+
+      <UpdateMemberAuthoritiesModal
+        member={member}
+        tenantKey={tenantKey}
+        opened={updateRoleModalOpened}
+        onClose={closeUpdateRoleModal}
+      />
+
+      <TransferOwnershipModal
+        member={member}
+        tenantKey={tenantKey}
+        opened={transferOwnershipModalOpened}
+        onClose={closeTransferOwnershipModal}
       />
     </>
   );

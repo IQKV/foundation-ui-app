@@ -116,7 +116,6 @@ msgstr "Active"
 #~ msgstr "Active Subscriptions"
 
 #: src/features/invite-member/model/types.ts
-#: src/features/manage-organization/ui/member-actions.tsx
 msgid "Admin"
 msgstr "Admin"
 
@@ -158,6 +157,7 @@ msgid "Are you sure you want to remove <0>{0} {1}</0> from this organization? Th
 msgstr "Are you sure you want to remove <0>{0} {1}</0> from this organization? They will lose all access immediately."
 
 #: src/features/ban-user/ui/ban-member-modal.tsx
+#: src/features/member-role/ui/transfer-ownership-modal.tsx
 msgid "Are you sure?"
 msgstr "Are you sure?"
 
@@ -246,8 +246,8 @@ msgstr "Billing Portal"
 #~ msgstr "By signing in you agree to our <0>Terms of Service</0> and <1>Privacy Policy</1>."
 
 #: src/features/manage-organization/ui/member-actions.tsx
-msgid "Can manage members and invitations."
-msgstr "Can manage members and invitations."
+#~ msgid "Can manage members and invitations."
+#~ msgstr "Can manage members and invitations."
 
 #: src/features/manage-organization/ui/member-actions.tsx
 #~ msgid "Can manage subscriptions and billing settings."
@@ -259,6 +259,8 @@ msgstr "Can manage members and invitations."
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 #: src/features/invite-member/ui/send-invitation-modal.tsx
 #: src/features/manage-organization/ui/member-actions.tsx
+#: src/features/member-role/ui/transfer-ownership-modal.tsx
+#: src/features/member-role/ui/update-member-authorities-modal.tsx
 msgid "Cancel"
 msgstr "Cancel"
 
@@ -270,6 +272,10 @@ msgstr "Cancel"
 msgid "Cancels on"
 msgstr "Cancels on"
 
+#: src/features/member-role/ui/update-member-authorities-modal.tsx
+msgid "Change Member Role"
+msgstr "Change Member Role"
+
 #: src/features/change-password/ui/change-password-modal.tsx
 #: src/pages/_app/settings/security.tsx
 msgid "Change password"
@@ -279,6 +285,10 @@ msgstr "Change password"
 #: src/pages/_app/settings/security.tsx
 msgid "Change Password"
 msgstr "Change Password"
+
+#: src/features/manage-organization/ui/member-actions.tsx
+msgid "Change Role"
+msgstr "Change Role"
 
 #: src/pages/signup.tsx
 #~ msgid "Check email"
@@ -535,14 +545,14 @@ msgid "Edit Profile"
 msgstr "Edit Profile"
 
 #: src/features/manage-organization/ui/member-actions.tsx
-msgid "Edit Roles"
-msgstr "Edit Roles"
+#~ msgid "Edit Roles"
+#~ msgstr "Edit Roles"
 
 #. placeholder {0}: member.firstName
 #. placeholder {1}: member.lastName
 #: src/features/manage-organization/ui/member-actions.tsx
-msgid "Edit Roles: {0} {1}"
-msgstr "Edit Roles: {0} {1}"
+#~ msgid "Edit Roles: {0} {1}"
+#~ msgstr "Edit Roles: {0} {1}"
 
 #: src/pages/admin/users.$userId.tsx
 #: src/pages/admin/users.index.tsx
@@ -957,7 +967,7 @@ msgid "Mark all as read"
 msgstr "Mark all as read"
 
 #: src/features/invite-member/model/types.ts
-#: src/features/manage-organization/ui/member-actions.tsx
+#: src/features/member-role/ui/update-member-authorities-modal.tsx
 msgid "Member"
 msgstr "Member"
 
@@ -1394,6 +1404,10 @@ msgstr "Role"
 msgid "Roles"
 msgstr "Roles"
 
+#: src/features/member-role/ui/update-member-authorities-modal.tsx
+msgid "Save"
+msgstr "Save"
+
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 #: src/pages/_app/settings/general.tsx
 msgid "Save changes"
@@ -1405,8 +1419,8 @@ msgid "Save Changes"
 msgstr "Save Changes"
 
 #: src/features/manage-organization/ui/member-actions.tsx
-msgid "Save Roles"
-msgstr "Save Roles"
+#~ msgid "Save Roles"
+#~ msgstr "Save Roles"
 
 #: src/pages/_app/team.tsx
 msgid "Search by name or email…"
@@ -1446,8 +1460,8 @@ msgid "See all notifications"
 msgstr "See all notifications"
 
 #: src/features/manage-organization/ui/member-actions.tsx
-msgid "Select authorities for this member"
-msgstr "Select authorities for this member"
+#~ msgid "Select authorities for this member"
+#~ msgstr "Select authorities for this member"
 
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 #: src/pages/_app/settings/general.tsx
@@ -1458,6 +1472,10 @@ msgstr "Select language"
 #: src/features/manage-billing/ui/plan-card.tsx
 msgid "Select Plan"
 msgstr "Select Plan"
+
+#: src/features/member-role/ui/update-member-authorities-modal.tsx
+msgid "Select role"
+msgstr "Select role"
 
 #: src/features/sign-in/ui/sign-in-form.tsx
 msgid "Select the workspace you want to sign in to."
@@ -1601,8 +1619,8 @@ msgid "Special character"
 msgstr "Special character"
 
 #: src/features/manage-organization/ui/member-actions.tsx
-msgid "Standard organization member."
-msgstr "Standard organization member."
+#~ msgid "Standard organization member."
+#~ msgstr "Standard organization member."
 
 #: src/pages/loading-demo.tsx
 msgid "Start"
@@ -1686,6 +1704,10 @@ msgstr "Team members"
 #~ msgid "Tenant key"
 #~ msgstr "Tenant key"
 
+#: src/features/member-role/ui/update-member-authorities-modal.tsx
+msgid "Tenant Owner"
+msgstr "Tenant Owner"
+
 #: src/features/invite-member/ui/send-invitation-modal.tsx
 msgid "TENANT_OWNER cannot be granted via invitation"
 msgstr "TENANT_OWNER cannot be granted via invitation"
@@ -1748,6 +1770,19 @@ msgstr "Too many sign-in attempts. Please try again later."
 #: src/pages/admin/index.tsx
 #~ msgid "Total Users"
 #~ msgstr "Total Users"
+
+#: src/features/member-role/ui/transfer-ownership-modal.tsx
+msgid "Transfer ownership"
+msgstr "Transfer ownership"
+
+#: src/features/manage-organization/ui/member-actions.tsx
+#: src/features/member-role/ui/transfer-ownership-modal.tsx
+msgid "Transfer Ownership"
+msgstr "Transfer Ownership"
+
+#: src/features/member-role/ui/transfer-ownership-modal.tsx
+msgid "Transferring ownership will make {displayName} the new Tenant Owner. You will become a Member of this tenant and lose all owner permissions. This action cannot be undone by you — only the new owner can transfer ownership back."
+msgstr "Transferring ownership will make {displayName} the new Tenant Owner. You will become a Member of this tenant and lose all owner permissions. This action cannot be undone by you — only the new owner can transfer ownership back."
 
 #: src/shared/ui/auth-layout/auth-layout.tsx
 msgid "Trusted by teams worldwide"

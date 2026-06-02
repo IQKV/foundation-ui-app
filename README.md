@@ -8,25 +8,24 @@ This is the tenant surface of the platform — separate from `foundation-ui-plat
 
 ### Implemented today
 
-| Area                   | What it does                                                                                                                                                                         |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Sign-in**            | Two-step flow: credentials → tenant discovery (`POST /v1/iam/users/tenants`); multi-tenant users pick a workspace; single-tenant users sign in directly (`POST /v1/iam/auth/signin`) |
-| **Sign-up**            | Self-service registration with tenant creation; polls provisioning status until the tenant is `ACTIVE`                                                                               |
-| **Password reset**     | Forgot-password email flow and token-based reset (`/forgot-password`, `/reset-password`)                                                                                             |
-| **Email verification** | Token-based verification page (`/verify-email?token=…`)                                                                                                                              |
-| **Invitations**        | Accept flow for new and existing users (`/invite/:token`); owners invite members, view pending invitations, revoke invitations                                                       |
-| **Dashboard**          | Workspace name, welcome message, team member count                                                                                                                                   |
-| **Team**               | Searchable member list; pending invitations panel (TENANT_OWNER only); send invitation modal (ADMIN or MEMBER role); ban/unban members (TENANT_OWNER only)                           |
-| **My Account**         | Profile view, edit name, change password, organizations and roles                                                                                                                    |
-| **Billing**            | Billing portal access, current subscription view, plan catalog, billing info, refunds list                                                                                           |
-| **Tenant Settings**    | Organization metadata editing                                                                                                                                                        |
-| **Notifications**      | In-app notifications with WebSocket support; notification bell UI                                                                                                                    |
-| **Session security**   | Access token in memory; refresh token + tenant key in `sessionStorage`; silent refresh on 401; 30-minute inactivity sign-out                                                         |
-| **UX**                 | Light/dark theme, Lingui i18n (English catalog), locale cookie, navigation progress, error boundaries                                                                                |
+| Area                   | What it does                                                                                                                                                                                                                               |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Sign-in**            | Two-step flow: credentials → tenant discovery (`POST /v1/iam/users/tenants`); multi-tenant users pick a workspace; single-tenant users sign in directly (`POST /v1/iam/auth/signin`)                                                       |
+| **Sign-up**            | Self-service registration with tenant creation; polls provisioning status until the tenant is `ACTIVE`                                                                                                                                     |
+| **Password reset**     | Forgot-password email flow and token-based reset (`/forgot-password`, `/reset-password`)                                                                                                                                                   |
+| **Email verification** | Token-based verification page (`/verify-email?token=…`)                                                                                                                                                                                    |
+| **Invitations**        | Accept flow for new and existing users (`/invite/:token`); owners invite members, view pending invitations, revoke invitations                                                                                                             |
+| **Dashboard**          | Workspace name, welcome message, team member count                                                                                                                                                                                         |
+| **Team**               | Searchable member list; pending invitations panel (TENANT_OWNER only); send invitation modal (ADMIN or MEMBER role); ban/unban members (TENANT_OWNER only); change member role (TENANT_OWNER only); transfer ownership (TENANT_OWNER only) |
+| **My Account**         | Profile view, edit name, change password, organizations and roles                                                                                                                                                                          |
+| **Billing**            | Billing portal access, current subscription view, plan catalog, billing info, refunds list                                                                                                                                                 |
+| **Tenant Settings**    | Organization metadata editing                                                                                                                                                                                                              |
+| **Notifications**      | In-app notifications with WebSocket support; notification bell UI                                                                                                                                                                          |
+| **Session security**   | Access token in memory; refresh token + tenant key in `sessionStorage`; silent refresh on 401; 30-minute inactivity sign-out                                                                                                               |
+| **UX**                 | Light/dark theme, Lingui i18n (English catalog), locale cookie, navigation progress, error boundaries                                                                                                                                      |
 
 ### Not implemented yet
 
-- Member role management beyond invitation authority (ADMIN / MEMBER)
 - Additional locales (infrastructure is ready; only `en` is compiled today)
 
 ## Routes
@@ -68,8 +67,9 @@ Authenticated routes live under the `/_app` layout, which enforces a valid tenan
 | Billing self-service                    | Done                |
 | Tenant settings                         | Done                |
 | Notifications                           | Done                |
-| Member role editing                     | Planned             |
+| Member role editing                     | Done (TENANT_OWNER) |
 | Member ban/unban                        | Done (TENANT_OWNER) |
+| Member transfer ownership               | Done (TENANT_OWNER) |
 
 ## Tech stack
 
@@ -179,11 +179,11 @@ src/
 
 Roles are carried on the JWT (`authorities` claim) and enforced in the UI:
 
-| Role           | Capabilities in this app                                                                       |
-| -------------- | ---------------------------------------------------------------------------------------------- |
-| `TENANT_OWNER` | Invite members, view/revoke pending invitations, edit organization settings, ban/unban members |
-| `ADMIN`        | (Invitable role; no extra UI beyond member list today)                                         |
-| `MEMBER`       | Dashboard, team member list, own account                                                       |
+| Role           | Capabilities in this app                                                                                                               |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `TENANT_OWNER` | Invite members, view/revoke pending invitations, edit organization settings, ban/unban members, change member role, transfer ownership |
+| `ADMIN`        | (Invitable role; no extra UI beyond member list today)                                                                                 |
+| `MEMBER`       | Dashboard, team member list, own account                                                                                               |
 
 `TenantOwnerOnly` / `AuthGuard` hide owner-only actions. The `/_app` route guard requires `tenant_id` to be non-null in the JWT; platform-scoped tokens redirect to `/unauthorized`.
 
