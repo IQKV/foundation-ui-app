@@ -28,6 +28,8 @@ export type {
   UpdateTenantStatusRequest,
   UpdateMemberAuthoritiesRequest,
   MemberAuthoritiesResponse,
+  BanUserRequest,
+  BanResponse,
 } from "./iam";
 
 export { localesApi } from "./iam";

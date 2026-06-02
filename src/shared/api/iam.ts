@@ -131,6 +131,25 @@ export interface MemberAuthoritiesResponse {
   authorities: string[];
 }
 
+// ─── Ban types ─────────────────────────────────────────────────────────────────
+
+export interface BanUserRequest {
+  reason?: string;
+  expiresAt?: string;
+}
+
+export interface BanResponse {
+  id: string;
+  userId: string;
+  initiatorId: string;
+  type: "PLATFORM" | "TENANT";
+  tenantKey?: string;
+  reason?: string;
+  expiresAt?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 // ─── Invitation types ─────────────────────────────────────────────────────────
 
 export type InvitationStatus = "PENDING" | "ACCEPTED" | "REVOKED" | "EXPIRED";
@@ -255,6 +274,16 @@ export const iamApi = {
   /** Remove a member from the tenant. */
   removeMember: (tenantKey: string, userId: string) =>
     httpClient.delete(`/v1/iam/tenants/${tenantKey}/members/${userId}`),
+
+  /** Ban a member from the tenant (TENANT_OWNER only). */
+  banMember: (tenantKey: string, userId: string, data: BanUserRequest = {}) =>
+    httpClient
+      .post<BanResponse>(`/v1/iam/tenants/${tenantKey}/members/${userId}/ban`, data)
+      .then((r) => r.data),
+
+  /** Unban a member from the tenant (TENANT_OWNER only). */
+  unbanMember: (tenantKey: string, userId: string) =>
+    httpClient.post(`/v1/iam/tenants/${tenantKey}/members/${userId}/unban`),
 
   // ── Invitations (TENANT_OWNER / ADMIN) ────────────────────────────────────
 

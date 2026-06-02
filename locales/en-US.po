@@ -157,6 +157,10 @@ msgstr "An organization with this name already exists."
 msgid "Are you sure you want to remove <0>{0} {1}</0> from this organization? They will lose all access immediately."
 msgstr "Are you sure you want to remove <0>{0} {1}</0> from this organization? They will lose all access immediately."
 
+#: src/features/ban-user/ui/ban-member-modal.tsx
+msgid "Are you sure?"
+msgstr "Are you sure?"
+
 #: src/features/reset-password/ui/reset-password-form.tsx
 #: src/features/signup/ui/password-strength.tsx
 #: src/features/signup/ui/signup-form.tsx
@@ -203,6 +207,19 @@ msgstr "Back to <0>Sign in</0>"
 msgid "Back to sign in"
 msgstr "Back to sign in"
 
+#: src/features/ban-user/ui/ban-member-modal.tsx
+msgid "Ban member"
+msgstr "Ban member"
+
+#: src/features/ban-user/ui/ban-member-modal.tsx
+#: src/features/manage-organization/ui/member-actions.tsx
+msgid "Ban Member"
+msgstr "Ban Member"
+
+#: src/features/ban-user/ui/ban-member-modal.tsx
+msgid "Banning this member will immediately invalidate all their active sessions, revoke their access to this tenant, and send them a notification email. They will not be able to access this tenant again until unbanned."
+msgstr "Banning this member will immediately invalidate all their active sessions, revoke their access to this tenant, and send them a notification email. They will not be able to access this tenant again until unbanned."
+
 #: src/pages/_app/billing.tsx
 #: src/shared/ui/app-layout/app-nav.tsx
 msgid "Billing"
@@ -236,6 +253,8 @@ msgstr "Can manage members and invitations."
 #~ msgid "Can manage subscriptions and billing settings."
 #~ msgstr "Can manage subscriptions and billing settings."
 
+#: src/features/ban-user/ui/ban-member-modal.tsx
+#: src/features/ban-user/ui/unban-member-modal.tsx
 #: src/features/change-password/ui/change-password-modal.tsx
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 #: src/features/invite-member/ui/send-invitation-modal.tsx
@@ -625,6 +644,10 @@ msgstr "Expired"
 #: src/pages/invite.$token.tsx
 msgid "Expires"
 msgstr "Expires"
+
+#: src/features/ban-user/ui/ban-member-modal.tsx
+msgid "Expires at (optional)"
+msgstr "Expires at (optional)"
 
 #: src/pages/admin/organizations.tsx
 #: src/pages/admin/subscriptions.tsx
@@ -1227,6 +1250,10 @@ msgstr "Pending invitations"
 #~ msgid "Period End"
 #~ msgstr "Period End"
 
+#: src/features/ban-user/ui/ban-member-modal.tsx
+msgid "Pick a date and time"
+msgstr "Pick a date and time"
+
 #: src/features/manage-billing/ui/current-subscription.tsx
 msgid "Plan"
 msgstr "Plan"
@@ -1258,6 +1285,10 @@ msgstr "Profile Information"
 msgid "Profile Picture"
 msgstr "Profile Picture"
 
+#: src/features/ban-user/ui/ban-member-modal.tsx
+msgid "Provide a reason for the ban…"
+msgstr "Provide a reason for the ban…"
+
 #: src/features/signup/ui/provisioning-wait.tsx
 msgid "Provisioning workspace"
 msgstr "Provisioning workspace"
@@ -1267,6 +1298,10 @@ msgstr "Provisioning workspace"
 #: src/pages/invite.$token.tsx
 msgid "read-only"
 msgstr "read-only"
+
+#: src/features/ban-user/ui/ban-member-modal.tsx
+msgid "Reason (optional)"
+msgstr "Reason (optional)"
 
 #: src/pages/_app/settings/organization.tsx
 #: src/pages/_app/team.tsx
@@ -1322,6 +1357,10 @@ msgstr "Reset Password"
 #: src/pages/forgot-password.tsx
 msgid "Reset your password"
 msgstr "Reset your password"
+
+#: src/features/ban-user/ui/unban-member-modal.tsx
+msgid "Restore access"
+msgstr "Restore access"
 
 #: src/pages/_app/settings/general.tsx
 #: src/pages/_app/settings/security.tsx
@@ -1717,6 +1756,19 @@ msgstr "Trusted by teams worldwide"
 #: src/shared/ui/error-boundary.tsx
 msgid "Try Again"
 msgstr "Try Again"
+
+#: src/features/ban-user/ui/unban-member-modal.tsx
+msgid "Unban member"
+msgstr "Unban member"
+
+#: src/features/ban-user/ui/unban-member-modal.tsx
+#: src/features/manage-organization/ui/member-actions.tsx
+msgid "Unban Member"
+msgstr "Unban Member"
+
+#: src/features/ban-user/ui/unban-member-modal.tsx
+msgid "Unbanning this member will restore their access to this tenant. They will be able to access this tenant again with their existing credentials."
+msgstr "Unbanning this member will restore their access to this tenant. They will be able to access this tenant again with their existing credentials."
 
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 msgid "Unverified"

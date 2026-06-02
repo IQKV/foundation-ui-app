@@ -2,14 +2,16 @@ import { ActionIcon, Menu, Modal, Checkbox, Stack, Button, Group } from "@mantin
 import { useDisclosure } from "@mantine/hooks";
 import {
   IconDotsVertical,
-  IconUserEdit,
   IconUserMinus,
   IconShieldCheck,
+  IconBan,
+  IconUserCheck,
 } from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { useState } from "react";
 import { useUpdateMemberAuthorities, useRemoveMember } from "../model/use-members";
 import type { TenantMember } from "@/shared/api";
+import { BanMemberModal, UnbanMemberModal } from "@/features/ban-user";
 
 interface MemberActionsProps {
   tenantKey: string;
@@ -22,6 +24,8 @@ export function MemberActions({ tenantKey, member, isSelf }: MemberActionsProps)
   const [roleModalOpened, { open: openRoleModal, close: closeRoleModal }] = useDisclosure(false);
   const [removeModalOpened, { open: openRemoveModal, close: closeRemoveModal }] =
     useDisclosure(false);
+  const [banModalOpened, { open: openBanModal, close: closeBanModal }] = useDisclosure(false);
+  const [unbanModalOpened, { open: openUnbanModal, close: closeUnbanModal }] = useDisclosure(false);
 
   const [selectedRoles, setSelectedRoles] = useState<string[]>(member.tenantAuthorities || []);
 
@@ -63,6 +67,17 @@ export function MemberActions({ tenantKey, member, isSelf }: MemberActionsProps)
           </Menu.Label>
           <Menu.Item leftSection={<IconShieldCheck size={14} />} onClick={openRoleModal}>
             <Trans>Edit Roles</Trans>
+          </Menu.Item>
+          <Menu.Divider />
+          <Menu.Item color="red" leftSection={<IconBan size={14} />} onClick={openBanModal}>
+            <Trans>Ban Member</Trans>
+          </Menu.Item>
+          <Menu.Item
+            color="green"
+            leftSection={<IconUserCheck size={14} />}
+            onClick={openUnbanModal}
+          >
+            <Trans>Unban Member</Trans>
           </Menu.Item>
           <Menu.Divider />
           <Menu.Item
@@ -137,6 +152,20 @@ export function MemberActions({ tenantKey, member, isSelf }: MemberActionsProps)
           </Group>
         </Stack>
       </Modal>
+
+      <BanMemberModal
+        member={member}
+        tenantKey={tenantKey}
+        opened={banModalOpened}
+        onClose={closeBanModal}
+      />
+
+      <UnbanMemberModal
+        member={member}
+        tenantKey={tenantKey}
+        opened={unbanModalOpened}
+        onClose={closeUnbanModal}
+      />
     </>
   );
 }
