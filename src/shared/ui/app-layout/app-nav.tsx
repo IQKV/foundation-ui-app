@@ -14,6 +14,7 @@ import { useState } from "react";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { useSession } from "@/processes/session";
 import { isMultiTenantMode } from "@/app/config";
+import { TenantSwitcher } from "@/features/tenant-switcher";
 
 interface NavItem {
   label: string;
@@ -96,6 +97,9 @@ export function AppNav() {
           styles={{ input: { background: "var(--mantine-color-default)" } }}
         />
       </Box>
+
+      {/* Tenant switcher — only when not searching and multi-tenant mode active */}
+      {!search.trim() && <TenantSwitcher />}
 
       {/* Nav items */}
       {filtered ? (

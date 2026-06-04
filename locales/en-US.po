@@ -153,8 +153,10 @@ msgstr "An organization with this name already exists."
 #. placeholder {0}: member.firstName
 #. placeholder {1}: member.lastName
 #: src/features/manage-organization/ui/member-actions.tsx
-msgid "Are you sure you want to remove <0>{0} {1}</0> from this organization? They will lose all access immediately."
-msgstr "Are you sure you want to remove <0>{0} {1}</0> from this organization? They will lose all access immediately."
+msgid "Are you sure you want to remove <0>{0} {1}</0> from this organization? "
+"They will lose all access immediately."
+msgstr "Are you sure you want to remove <0>{0} {1}</0> from this organization? "
+"They will lose all access immediately."
 
 #: src/features/ban-user/ui/ban-member-modal.tsx
 #: src/features/member-role/ui/transfer-ownership-modal.tsx
@@ -198,6 +200,10 @@ msgstr "Automatic router integration via <0>router.subscribe()</0>"
 msgid "Available Plans"
 msgstr "Available Plans"
 
+#: src/pages/create-organization.tsx
+msgid "Back"
+msgstr "Back"
+
 #: src/features/forgot-password/ui/forgot-password-form.tsx
 msgid "Back to <0>Sign in</0>"
 msgstr "Back to <0>Sign in</0>"
@@ -217,8 +223,14 @@ msgid "Ban Member"
 msgstr "Ban Member"
 
 #: src/features/ban-user/ui/ban-member-modal.tsx
-msgid "Banning this member will immediately invalidate all their active sessions, revoke their access to this tenant, and send them a notification email. They will not be able to access this tenant again until unbanned."
-msgstr "Banning this member will immediately invalidate all their active sessions, revoke their access to this tenant, and send them a notification email. They will not be able to access this tenant again until unbanned."
+msgid "Banning this member will immediately invalidate all their active "
+"sessions, revoke their access to this tenant, and send them a "
+"notification email. They will not be able to access this tenant again "
+"until unbanned."
+msgstr "Banning this member will immediately invalidate all their active "
+"sessions, revoke their access to this tenant, and send them a "
+"notification email. They will not be able to access this tenant again "
+"until unbanned."
 
 #: src/pages/_app/billing.tsx
 #: src/shared/ui/app-layout/app-nav.tsx
@@ -242,8 +254,10 @@ msgid "Billing Portal"
 msgstr "Billing Portal"
 
 #: src/pages/sign-in.tsx
-#~ msgid "By signing in you agree to our <0>Terms of Service</0> and <1>Privacy Policy</1>."
-#~ msgstr "By signing in you agree to our <0>Terms of Service</0> and <1>Privacy Policy</1>."
+#~ msgid "By signing in you agree to our <0>Terms of Service</0> and <1>Privacy "
+#~ "Policy</1>."
+#~ msgstr "By signing in you agree to our <0>Terms of Service</0> and <1>Privacy "
+#~ "Policy</1>."
 
 #: src/features/manage-organization/ui/member-actions.tsx
 #~ msgid "Can manage members and invitations."
@@ -308,8 +322,10 @@ msgid "Choose a password"
 msgstr "Choose a password"
 
 #: src/pages/reset-password.tsx
-msgid "Choose a strong password with at least 8 characters, including uppercase, lowercase, a number, and a special character."
-msgstr "Choose a strong password with at least 8 characters, including uppercase, lowercase, a number, and a special character."
+msgid "Choose a strong password with at least 8 characters, including "
+"uppercase, lowercase, a number, and a special character."
+msgstr "Choose a strong password with at least 8 characters, including "
+"uppercase, lowercase, a number, and a special character."
 
 #: src/pages/admin/organizations.index.tsx
 #: src/pages/admin/subscriptions.tsx
@@ -415,6 +431,10 @@ msgstr "Could not load organizations."
 msgid "Could not switch organization."
 msgstr "Could not switch organization."
 
+#: src/features/tenant-switcher/model/use-tenant-switcher.ts
+msgid "Could not switch organization. Please try again."
+msgstr "Could not switch organization. Please try again."
+
 #: src/features/signup/ui/signup-form.tsx
 #: src/pages/signup.tsx
 msgid "Create account"
@@ -438,8 +458,10 @@ msgid "Create your account"
 msgstr "Create your account"
 
 #: src/pages/signup.tsx
-msgid "Create your account and join the platform in seconds. No credit card required."
-msgstr "Create your account and join the platform in seconds. No credit card required."
+msgid "Create your account and join the platform in seconds. No credit card "
+"required."
+msgstr "Create your account and join the platform in seconds. No credit card "
+"required."
 
 #: src/pages/signup.tsx
 #~ msgid "Create your account and workspace in seconds. No credit card required."
@@ -470,6 +492,10 @@ msgstr "Creating your account"
 #: src/features/manage-billing/ui/billing-info.tsx
 msgid "Currency"
 msgstr "Currency"
+
+#: src/features/tenant-switcher/ui/tenant-switcher.tsx
+msgid "Current organization"
+msgstr "Current organization"
 
 #: src/features/change-password/ui/change-password-modal.tsx
 #: src/pages/_app/settings/security.tsx
@@ -618,8 +644,10 @@ msgid "Enter new password"
 msgstr "Enter new password"
 
 #: src/features/forgot-password/ui/forgot-password-form.tsx
-msgid "Enter the email address associated with your account and we'll send you a link to reset your password."
-msgstr "Enter the email address associated with your account and we'll send you a link to reset your password."
+msgid "Enter the email address associated with your account and we'll send you "
+"a link to reset your password."
+msgstr "Enter the email address associated with your account and we'll send you "
+"a link to reset your password."
 
 #: src/features/change-password/ui/change-password-modal.tsx
 #: src/pages/_app/settings/security.tsx
@@ -745,8 +773,10 @@ msgid "Forgot your"
 msgstr "Forgot your"
 
 #: src/pages/loading-demo.tsx
-msgid "Full-screen centered loader shown on first app load (while locale initializes)."
-msgstr "Full-screen centered loader shown on first app load (while locale initializes)."
+msgid "Full-screen centered loader shown on first app load (while locale "
+"initializes)."
+msgstr "Full-screen centered loader shown on first app load (while locale "
+"initializes)."
 
 #: src/pages/_app/settings/general.tsx
 #: src/shared/ui/app-layout/app-nav.tsx
@@ -785,8 +815,10 @@ msgstr "Home"
 
 #. placeholder {0}: getValues("email")
 #: src/features/forgot-password/ui/forgot-password-form.tsx
-msgid "If <0>{0}</0> is registered, you'll receive a password reset link shortly. Check your spam folder if you don't see it."
-msgstr "If <0>{0}</0> is registered, you'll receive a password reset link shortly. Check your spam folder if you don't see it."
+msgid "If <0>{0}</0> is registered, you'll receive a password reset link "
+"shortly. Check your spam folder if you don't see it."
+msgstr "If <0>{0}</0> is registered, you'll receive a password reset link "
+"shortly. Check your spam folder if you don't see it."
 
 #: src/pages/loading-demo.tsx
 msgid "Implementation Details"
@@ -954,12 +986,16 @@ msgstr "Lowercase letter"
 #~ msgstr "Manage users"
 
 #: src/pages/_app/billing.tsx
-msgid "Manage your billing information, view invoice history, and update your payment methods directly via our secure Stripe Customer Portal."
-msgstr "Manage your billing information, view invoice history, and update your payment methods directly via our secure Stripe Customer Portal."
+msgid "Manage your billing information, view invoice history, and update your "
+"payment methods directly via our secure Stripe Customer Portal."
+msgstr "Manage your billing information, view invoice history, and update your "
+"payment methods directly via our secure Stripe Customer Portal."
 
 #: src/shared/ui/auth-layout/auth-layout.tsx
-msgid "Manage your team, subscriptions, and settings — all from one place, secured by enterprise-grade authentication."
-msgstr "Manage your team, subscriptions, and settings — all from one place, secured by enterprise-grade authentication."
+msgid "Manage your team, subscriptions, and settings — all from one place, "
+"secured by enterprise-grade authentication."
+msgstr "Manage your team, subscriptions, and settings — all from one place, "
+"secured by enterprise-grade authentication."
 
 #: src/features/notification-bell/ui/notification-bell.tsx
 #: src/pages/_app/settings/notifications.tsx
@@ -991,6 +1027,7 @@ msgstr "My Account"
 msgid "Name is too short"
 msgstr "Name is too short"
 
+#: src/features/tenant-switcher/ui/tenant-switcher.tsx
 #: src/shared/ui/app-layout/app-header.tsx
 msgid "New Organization"
 msgstr "New Organization"
@@ -1087,8 +1124,10 @@ msgstr "No roles assigned."
 #~ msgstr "No users match the current filters"
 
 #: src/pages/forgot-password.tsx
-msgid "No worries — enter your email and we'll send you a secure link to reset it."
-msgstr "No worries — enter your email and we'll send you a secure link to reset it."
+msgid "No worries — enter your email and we'll send you a secure link to reset "
+"it."
+msgstr "No worries — enter your email and we'll send you a secure link to reset "
+"it."
 
 #: src/features/notification-bell/ui/notification-bell.tsx
 #: src/pages/_app/settings/notifications.tsx
@@ -1213,13 +1252,16 @@ msgstr "Password must be at most 128 characters"
 
 #: src/features/reset-password/model/use-reset-password.ts
 #: src/features/signup/model/use-signup.ts
-msgid "Password must contain uppercase, lowercase, a number, and a special character"
-msgstr "Password must contain uppercase, lowercase, a number, and a special character"
+msgid "Password must contain uppercase, lowercase, a number, and a special "
+"character"
+msgstr "Password must contain uppercase, lowercase, a number, and a special "
+"character"
 
 #: src/features/change-password/ui/change-password-modal.tsx
 #: src/pages/_app/settings/security.tsx
 msgid "Password must contain uppercase, lowercase, digit, and special character"
-msgstr "Password must contain uppercase, lowercase, digit, and special character"
+msgstr "Password must contain uppercase, lowercase, digit, and special "
+"character"
 
 #: src/features/change-password/ui/change-password-modal.tsx
 #: src/pages/_app/settings/security.tsx
@@ -1531,8 +1573,8 @@ msgid "Setting up your workspace"
 msgstr "Setting up your workspace"
 
 #: src/shared/ui/app-layout/app-nav.tsx
-msgid "Settings"
-msgstr "Settings"
+#~ msgid "Settings"
+#~ msgstr "Settings"
 
 #. placeholder {0}: notifications.length
 #. placeholder {1}: listData?.totalElements ?? 0
@@ -1590,8 +1632,10 @@ msgid "Signing you in…"
 msgstr "Signing you in…"
 
 #: src/pages/loading-demo.tsx
-msgid "Slim top progress bar for navigation between pages (automatic with router)."
-msgstr "Slim top progress bar for navigation between pages (automatic with router)."
+msgid "Slim top progress bar for navigation between pages (automatic with "
+"router)."
+msgstr "Slim top progress bar for navigation between pages (automatic with "
+"router)."
 
 #: src/features/signup/ui/signup-form.tsx
 #: src/pages/invite.$token.tsx
@@ -1675,6 +1719,10 @@ msgstr "Suspended"
 msgid "Switch failed"
 msgstr "Switch failed"
 
+#: src/features/tenant-switcher/ui/tenant-switcher.tsx
+msgid "Switch to"
+msgstr "Switch to"
+
 #: src/shared/ui/color-scheme-toggle/color-scheme-toggle.tsx
 msgid "Switch to dark mode"
 msgstr "Switch to dark mode"
@@ -1725,16 +1773,22 @@ msgid "This invitation link has expired or is no longer valid."
 msgstr "This invitation link has expired or is no longer valid."
 
 #: src/pages/invite.$token.tsx
-msgid "This invitation link has expired, been revoked, or doesn't exist. Contact the person who invited you to request a new one."
-msgstr "This invitation link has expired, been revoked, or doesn't exist. Contact the person who invited you to request a new one."
+msgid "This invitation link has expired, been revoked, or doesn't exist. "
+"Contact the person who invited you to request a new one."
+msgstr "This invitation link has expired, been revoked, or doesn't exist. "
+"Contact the person who invited you to request a new one."
 
 #: src/features/signup/ui/provisioning-wait.tsx
-msgid "This is taking a bit longer than usual. Hang tight — we're still working on it."
-msgstr "This is taking a bit longer than usual. Hang tight — we're still working on it."
+msgid "This is taking a bit longer than usual. Hang tight — we're still working "
+"on it."
+msgstr "This is taking a bit longer than usual. Hang tight — we're still "
+"working on it."
 
 #: src/pages/verify-email.tsx
-msgid "This link is missing a verification token. Please use the link from your email."
-msgstr "This link is missing a verification token. Please use the link from your email."
+msgid "This link is missing a verification token. Please use the link from your "
+"email."
+msgstr "This link is missing a verification token. Please use the link from "
+"your email."
 
 #: src/features/reset-password/ui/reset-password-form.tsx
 msgid "This password reset link is missing a token. Please request a new one."
@@ -1746,15 +1800,18 @@ msgstr "This reset link is invalid or has expired. Please request a new one."
 
 #: src/pages/loading-demo.tsx
 msgid "This template uses Mantine's official loading components for optimal UX."
-msgstr "This template uses Mantine's official loading components for optimal UX."
+msgstr "This template uses Mantine's official loading components for optimal "
+"UX."
 
 #: src/pages/admin/users.$userId.tsx
 #~ msgid "This user is not a member of any organization."
 #~ msgstr "This user is not a member of any organization."
 
 #: src/pages/verify-email.tsx
-msgid "This verification link has expired or has already been used. Request a new one from your account settings."
-msgstr "This verification link has expired or has already been used. Request a new one from your account settings."
+msgid "This verification link has expired or has already been used. Request a "
+"new one from your account settings."
+msgstr "This verification link has expired or has already been used. Request a "
+"new one from your account settings."
 
 #: src/features/create-organization/model/use-create-organization.ts
 #: src/features/forgot-password/model/use-forgot-password.ts
@@ -1781,8 +1838,14 @@ msgid "Transfer Ownership"
 msgstr "Transfer Ownership"
 
 #: src/features/member-role/ui/transfer-ownership-modal.tsx
-msgid "Transferring ownership will make {displayName} the new Tenant Owner. You will become a Member of this tenant and lose all owner permissions. This action cannot be undone by you — only the new owner can transfer ownership back."
-msgstr "Transferring ownership will make {displayName} the new Tenant Owner. You will become a Member of this tenant and lose all owner permissions. This action cannot be undone by you — only the new owner can transfer ownership back."
+msgid "Transferring ownership will make {displayName} the new Tenant Owner. You "
+"will become a Member of this tenant and lose all owner permissions. This "
+"action cannot be undone by you — only the new owner can transfer "
+"ownership back."
+msgstr "Transferring ownership will make {displayName} the new Tenant Owner. "
+"You will become a Member of this tenant and lose all owner permissions. "
+"This action cannot be undone by you — only the new owner can transfer "
+"ownership back."
 
 #: src/shared/ui/auth-layout/auth-layout.tsx
 msgid "Trusted by teams worldwide"
@@ -1802,8 +1865,12 @@ msgid "Unban Member"
 msgstr "Unban Member"
 
 #: src/features/ban-user/ui/unban-member-modal.tsx
-msgid "Unbanning this member will restore their access to this tenant. They will be able to access this tenant again with their existing credentials."
-msgstr "Unbanning this member will restore their access to this tenant. They will be able to access this tenant again with their existing credentials."
+msgid "Unbanning this member will restore their access to this tenant. They "
+"will be able to access this tenant again with their existing "
+"credentials."
+msgstr "Unbanning this member will restore their access to this tenant. They "
+"will be able to access this tenant again with their existing "
+"credentials."
 
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 msgid "Unverified"
@@ -1881,8 +1948,10 @@ msgstr "View details"
 #~ msgstr "View user"
 
 #: src/features/signup/ui/verify-email-prompt.tsx
-msgid "We sent a verification link to <0>{email}</0>. Click it to confirm your email address."
-msgstr "We sent a verification link to <0>{email}</0>. Click it to confirm your email address."
+msgid "We sent a verification link to <0>{email}</0>. Click it to confirm your "
+"email address."
+msgstr "We sent a verification link to <0>{email}</0>. Click it to confirm your "
+"email address."
 
 #: src/pages/forgot-password.tsx
 msgid "We'll send a reset link to your email address."
@@ -1945,16 +2014,28 @@ msgid "You do not have permission to access this area."
 msgstr "You do not have permission to access this area."
 
 #: src/pages/unauthorized.tsx
-msgid "You do not have permission to access this area. Please sign in with an account that has the appropriate membership."
-msgstr "You do not have permission to access this area. Please sign in with an account that has the appropriate membership."
+msgid "You do not have permission to access this area. Please sign in with an "
+"account that has the appropriate membership."
+msgstr "You do not have permission to access this area. Please sign in with an "
+"account that has the appropriate membership."
 
 #: src/pages/unauthorized.tsx
-#~ msgid "You do not have the required <0>PLATFORM_ADMIN</0> authority to access this area. Please sign in with an account that has the appropriate permissions."
-#~ msgstr "You do not have the required <0>PLATFORM_ADMIN</0> authority to access this area. Please sign in with an account that has the appropriate permissions."
+#~ msgid "You do not have the required <0>PLATFORM_ADMIN</0> authority to access "
+#~ "this area. Please sign in with an account that has the appropriate "
+#~ "permissions."
+#~ msgstr "You do not have the required <0>PLATFORM_ADMIN</0> authority to access "
+#~ "this area. Please sign in with an account that has the appropriate "
+#~ "permissions."
 
 #: src/features/manage-billing/ui/current-subscription.tsx
-msgid "You don't have an active subscription yet. Choose a plan below to get started."
-msgstr "You don't have an active subscription yet. Choose a plan below to get started."
+msgid "You don't have an active subscription yet. Choose a plan below to get "
+"started."
+msgstr "You don't have an active subscription yet. Choose a plan below to get "
+"started."
+
+#: src/features/tenant-switcher/model/use-tenant-switcher.ts
+msgid "You no longer have access to this organization."
+msgstr "You no longer have access to this organization."
 
 #: src/pages/invite.$token.tsx
 msgid "You've been"
@@ -2002,12 +2083,16 @@ msgid "Your password"
 msgstr "Your password"
 
 #: src/features/reset-password/ui/reset-password-form.tsx
-msgid "Your password has been changed successfully. You'll be redirected to sign in shortly."
-msgstr "Your password has been changed successfully. You'll be redirected to sign in shortly."
+msgid "Your password has been changed successfully. You'll be redirected to "
+"sign in shortly."
+msgstr "Your password has been changed successfully. You'll be redirected to "
+"sign in shortly."
 
 #: src/pages/_app/billing.tsx
-msgid "Your payment information is securely processed by Stripe. We do not store your credit card details on our servers."
-msgstr "Your payment information is securely processed by Stripe. We do not store your credit card details on our servers."
+msgid "Your payment information is securely processed by Stripe. We do not "
+"store your credit card details on our servers."
+msgstr "Your payment information is securely processed by Stripe. We do not "
+"store your credit card details on our servers."
 
 #: src/pages/sign-in.tsx
 msgid "Your session expired due to inactivity."
