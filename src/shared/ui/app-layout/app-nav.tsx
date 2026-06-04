@@ -1,4 +1,4 @@
-import { NavLink, Stack, Text, Box, TextInput, Divider, Collapse } from "@mantine/core";
+import { NavLink, Stack, Text, Box, TextInput, Divider } from "@mantine/core";
 import {
   IconDashboard,
   IconUsers,
@@ -8,7 +8,6 @@ import {
   IconBuilding,
   IconLock,
   IconBell,
-  IconSettings,
 } from "@tabler/icons-react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useState } from "react";
@@ -28,7 +27,6 @@ export function AppNav() {
   const routerState = useRouterState();
   const currentPath = routerState.location.pathname;
   const [search, setSearch] = useState("");
-  const [accountOpened, setAccountOpened] = useState(currentPath.startsWith("/settings"));
 
   const navItems: NavItem[] = [
     { label: t`Dashboard`, icon: <IconDashboard size={16} />, to: "/" },
@@ -57,7 +55,7 @@ export function AppNav() {
       )
     : null;
 
-  const renderItem = (item: NavItem, isSubItem = false) => {
+  const renderItem = (item: NavItem) => {
     const isActive =
       item.to === "/"
         ? currentPath === "/"
@@ -75,11 +73,10 @@ export function AppNav() {
           root: {
             borderRadius: "var(--mantine-radius-sm)",
             marginInline: "var(--mantine-spacing-xs)",
-            fontSize: isSubItem ? "var(--mantine-font-size-xs)" : "var(--mantine-font-size-sm)",
-            paddingLeft: isSubItem ? "calc(var(--mantine-spacing-xl) * 1.5)" : undefined,
+            fontSize: "var(--mantine-font-size-sm)",
           },
           label: {
-            fontSize: isSubItem ? "var(--mantine-font-size-xs)" : "var(--mantine-font-size-sm)",
+            fontSize: "var(--mantine-font-size-sm)",
           },
         }}
       />
@@ -125,22 +122,7 @@ export function AppNav() {
               <Trans>Account Settings</Trans>
             </Text>
           </Box>
-          <NavLink
-            label={t`Settings`}
-            leftSection={<IconSettings size={16} />}
-            opened={accountOpened}
-            onClick={() => setAccountOpened((o) => !o)}
-            styles={{
-              root: {
-                borderRadius: "var(--mantine-radius-sm)",
-                marginInline: "var(--mantine-spacing-xs)",
-                fontSize: "var(--mantine-font-size-sm)",
-              },
-              label: { fontSize: "var(--mantine-font-size-sm)" },
-            }}
-          >
-            {accountSubItems.map((item) => renderItem(item, true))}
-          </NavLink>
+          {accountSubItems.map((item) => renderItem(item))}
         </>
       )}
     </Stack>
