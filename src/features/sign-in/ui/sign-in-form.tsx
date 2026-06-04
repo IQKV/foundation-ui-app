@@ -1,5 +1,5 @@
 import { Alert, Button, Card, Group, Stack, Text, TextInput, UnstyledButton } from "@mantine/core";
-import { IconAlertCircle, IconBuilding } from "@tabler/icons-react";
+import { IconAlertCircle, IconBuilding, IconUser } from "@tabler/icons-react";
 import { Controller } from "react-hook-form";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Link } from "@tanstack/react-router";
@@ -46,7 +46,9 @@ export function SignInForm({ redirectTo }: SignInFormProps) {
         </Text>
 
         <Stack gap="xs">
-          {tenants.map((tenant) => (
+          {tenants.map((tenant) => {
+            const isPersonal = tenant.tenantKey === "platform";
+            return (
             <UnstyledButton
               key={tenant.tenantKey}
               onClick={() => void onSelectTenant(tenant.tenantKey)}
@@ -55,19 +57,25 @@ export function SignInForm({ redirectTo }: SignInFormProps) {
             >
               <Card withBorder radius="md" p="md" style={{ cursor: "pointer" }}>
                 <Stack gap={4} style={{ flexDirection: "row", alignItems: "center", gap: 12 }}>
-                  <IconBuilding size={18} color="var(--mantine-color-blue-6)" />
+                  {isPersonal ? (
+                    <IconUser size={18} color="var(--mantine-color-green-6)" />
+                  ) : (
+                    <IconBuilding size={18} color="var(--mantine-color-blue-6)" />
+                  )}
                   <Stack gap={2}>
                     <Text size="sm" fw={500}>
                       {tenant.tenantName}
                     </Text>
-                    <Text size="xs" c="dimmed">
-                      {tenant.authorities.join(", ")}
-                    </Text>
+                    {!isPersonal && (
+                      <Text size="xs" c="dimmed">
+                        {tenant.authorities.join(", ")}
+                      </Text>
+                    )}
                   </Stack>
                 </Stack>
               </Card>
             </UnstyledButton>
-          ))}
+          );})}
         </Stack>
       </Stack>
     );
