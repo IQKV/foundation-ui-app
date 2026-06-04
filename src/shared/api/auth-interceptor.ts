@@ -62,12 +62,16 @@ const silentRefresh = (): Promise<string> => {
 httpClient.interceptors.request.use((config: InternalAxiosRequestConfig) => {
   const token = getAccessToken();
   const tenantKey = getTenantKey();
+  console.log("[auth-interceptor] request config.url:", config.url);
+  console.log("[auth-interceptor] token:", !!token);
+  console.log("[auth-interceptor] tenantKey:", tenantKey);
 
   const isAuthEndpoint =
     config.url?.includes("/auth/refresh") ||
     config.url?.includes("/auth/signin") ||
     config.url?.includes("/users/tenants") ||
     config.url?.includes("/invitations/");
+  console.log("[auth-interceptor] isAuthEndpoint:", isAuthEndpoint);
 
   if (token && !isAuthEndpoint) {
     config.headers.Authorization = `Bearer ${token}`;
@@ -78,6 +82,7 @@ httpClient.interceptors.request.use((config: InternalAxiosRequestConfig) => {
     config.headers["X-Tenant-ID"] = tenantKey;
   }
 
+  console.log("[auth-interceptor] final config.headers:", config.headers);
   return config;
 });
 

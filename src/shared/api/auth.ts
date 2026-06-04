@@ -70,12 +70,18 @@ export const authApi = {
    * The `X-Tenant-ID` header must be set on the httpClient before calling this
    * (handled by the sign-in flow after tenant selection).
    */
-  signIn: (body: SignInRequest, tenantKey: string): Promise<SignInResponse> =>
-    httpClient
+  signIn: (body: SignInRequest, tenantKey: string): Promise<SignInResponse> => {
+    console.log("[authApi.signIn] called with tenantKey:", tenantKey);
+    console.log("[authApi.signIn] headers set:", { "X-Tenant-ID": tenantKey });
+    return httpClient
       .post<SignInResponse>("/v1/iam/auth/signin", body, {
         headers: { "X-Tenant-ID": tenantKey },
       })
-      .then((r) => r.data),
+      .then((r) => {
+        console.log("[authApi.signIn] response data:", r.data);
+        return r.data;
+      });
+  },
 
   /**
    * Exchange the current access token for a new tenant-scoped token pair.
