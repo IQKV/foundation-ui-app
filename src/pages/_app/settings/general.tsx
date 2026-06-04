@@ -26,6 +26,7 @@ import { iamApi, localesApi } from "@/shared/api";
 import { PageHeader } from "@/shared/ui";
 import { useEditProfile, type EditProfileFormValues } from "@/features/edit-profile";
 import { AvatarUpload } from "@/features/avatar";
+import { useSession } from "@/processes/session";
 
 export const Route = createFileRoute("/_app/settings/general")({
   component: GeneralSettingsPage,
@@ -33,6 +34,7 @@ export const Route = createFileRoute("/_app/settings/general")({
 
 function GeneralSettingsPage() {
   const { t } = useLingui();
+  const { isAuthenticated } = useSession();
 
   const {
     data: profile,
@@ -42,6 +44,7 @@ function GeneralSettingsPage() {
   } = useQuery({
     queryKey: ["me"],
     queryFn: () => iamApi.getMe(),
+    enabled: isAuthenticated,
   });
 
   const { data: locales, isLoading: localesLoading } = useQuery({

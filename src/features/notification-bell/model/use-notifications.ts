@@ -1,5 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { notificationApi } from "@/shared/api";
+import { useSession } from "@/processes/session";
 import { useNotificationStore } from "./notification.store";
 
 export const NOTIFICATIONS_KEY = ["notifications"] as const;
@@ -10,26 +11,35 @@ export const UNREAD_COUNT_KEY = ["notifications", "unread-count"] as const;
 /**
  * Fetches a page of notifications.
  * Re-fetches automatically when a WebSocket push arrives (pushSeq changes).
+ * Disabled while the session is loading (silent-refresh in flight) or when
+ * unauthenticated — prevents 400s from requests sent without a valid JWT.
  */
 export function useNotificationList({ limit = 10, offset = 0 } = {}) {
   const pushSeq = useNotificationStore((s) => s.pushSeq);
+  const { isAuthenticated } = useSession();
 
   return useQuery({
     queryKey: [...NOTIFICATIONS_KEY, { limit, offset, pushSeq }],
     queryFn: () => notificationApi.list({ limit, offset }),
     staleTime: 30_000,
+    enabled: isAuthenticated,
   });
 }
 
-/** Lightweight unread count — used for the badge. Polled every 60 s as fallback. */
+/**
+ * Lightweight unread count — used for the badge. Polled every 60 s as fallback.
+ * Disabled while the session is loading or when unauthenticated.
+ */
 export function useUnreadCount() {
   const pushSeq = useNotificationStore((s) => s.pushSeq);
+  const { isAuthenticated } = useSession();
 
   return useQuery({
     queryKey: [...UNREAD_COUNT_KEY, { pushSeq }],
     queryFn: () => notificationApi.unreadCount(),
     staleTime: 30_000,
     refetchInterval: 60_000,
+    enabled: isAuthenticated,
   });
 }
 
