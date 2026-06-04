@@ -33,7 +33,8 @@ export function UpdateMemberAuthoritiesModal({
         authority: isOwner ? "TENANT_OWNER" : "MEMBER",
       });
     }
-  }, [opened, member, form]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [opened, member]);
 
   const displayName = member ? `${member.firstName} ${member.lastName}`.trim() : "";
 
