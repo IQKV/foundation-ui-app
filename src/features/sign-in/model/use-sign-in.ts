@@ -123,7 +123,10 @@ export function useSignIn(redirectTo?: string): UseSignInReturn {
       console.error("[use-sign-in] onSubmitCredentials error:", err);
       const status = isAxiosError(err) ? (err.response?.status ?? 0) : 0;
       console.error("[use-sign-in] onSubmitCredentials error status:", status);
-      console.error("[use-sign-in] onSubmitCredentials error response:", isAxiosError(err) ? err.response : null);
+      console.error(
+        "[use-sign-in] onSubmitCredentials error response:",
+        isAxiosError(err) ? err.response : null,
+      );
       setErrorMessage(mapHttpErrorToMessage(status));
       if (status === 401) {
         form.resetField("password");
@@ -145,7 +148,10 @@ export function useSignIn(redirectTo?: string): UseSignInReturn {
       console.error("[use-sign-in] onSelectTenant error:", err);
       const status = isAxiosError(err) ? (err.response?.status ?? 0) : 0;
       console.error("[use-sign-in] onSelectTenant error status:", status);
-      console.error("[use-sign-in] onSelectTenant error response:", isAxiosError(err) ? err.response : null);
+      console.error(
+        "[use-sign-in] onSelectTenant error response:",
+        isAxiosError(err) ? err.response : null,
+      );
       setErrorMessage(mapHttpErrorToMessage(status));
     } finally {
       setIsLoading(false);
