@@ -22,6 +22,7 @@ export interface TenantMembershipSummary {
   tenantName: string;
   membershipStatus: string;
   authorities: string[];
+  isPersonal: boolean;
 }
 
 export interface SignupStatusResponse {

@@ -47,35 +47,36 @@ export function SignInForm({ redirectTo }: SignInFormProps) {
 
         <Stack gap="xs">
           {tenants.map((tenant) => {
-            const isPersonal = tenant.tenantKey === "platform";
+            const isPersonal = tenant.isPersonal;
             return (
-            <UnstyledButton
-              key={tenant.tenantKey}
-              onClick={() => void onSelectTenant(tenant.tenantKey)}
-              disabled={isLoading}
-              style={{ width: "100%" }}
-            >
-              <Card withBorder radius="md" p="md" style={{ cursor: "pointer" }}>
-                <Stack gap={4} style={{ flexDirection: "row", alignItems: "center", gap: 12 }}>
-                  {isPersonal ? (
-                    <IconUser size={18} color="var(--mantine-color-green-6)" />
-                  ) : (
-                    <IconBuilding size={18} color="var(--mantine-color-blue-6)" />
-                  )}
-                  <Stack gap={2}>
-                    <Text size="sm" fw={500}>
-                      {tenant.tenantName}
-                    </Text>
-                    {!isPersonal && (
-                      <Text size="xs" c="dimmed">
-                        {tenant.authorities.join(", ")}
-                      </Text>
+              <UnstyledButton
+                key={tenant.tenantKey}
+                onClick={() => void onSelectTenant(tenant.tenantKey)}
+                disabled={isLoading}
+                style={{ width: "100%" }}
+              >
+                <Card withBorder radius="md" p="md" style={{ cursor: "pointer" }}>
+                  <Stack gap={4} style={{ flexDirection: "row", alignItems: "center", gap: 12 }}>
+                    {isPersonal ? (
+                      <IconUser size={18} color="var(--mantine-color-green-6)" />
+                    ) : (
+                      <IconBuilding size={18} color="var(--mantine-color-blue-6)" />
                     )}
+                    <Stack gap={2}>
+                      <Text size="sm" fw={500}>
+                        {tenant.tenantName}
+                      </Text>
+                      {!isPersonal && (
+                        <Text size="xs" c="dimmed">
+                          {tenant.authorities.join(", ")}
+                        </Text>
+                      )}
+                    </Stack>
                   </Stack>
-                </Stack>
-              </Card>
-            </UnstyledButton>
-          );})}
+                </Card>
+              </UnstyledButton>
+            );
+          })}
         </Stack>
       </Stack>
     );
