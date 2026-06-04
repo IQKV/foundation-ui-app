@@ -1,12 +1,15 @@
-import { createFileRoute, redirect } from "@tanstack/react-router";
-import { Box, Text, Title } from "@mantine/core";
+import { createFileRoute, redirect, useRouter } from "@tanstack/react-router";
+import { Avatar, Box, Button, Divider, Group, Stack, Text, Title } from "@mantine/core";
+import { IconArrowLeft } from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
+import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "@dr.pogodin/react-helmet";
 import { pageTitle } from "@/shared/lib/page-title";
 import { AuthLayout } from "@/shared/ui";
 import { CreateOrganizationForm, useCreateOrganization } from "@/features/create-organization";
-import { decodeJwt, isTenantSession } from "@/shared/lib/jwt";
-import { getAccessToken } from "@/processes/session";
+import { decodeJwt } from "@/shared/lib/jwt";
+import { getAccessToken, useSessionStore } from "@/processes/session";
+import { iamApi } from "@/shared/api";
 
 // ─── Route ────────────────────────────────────────────────────────────────────
 
@@ -19,6 +22,55 @@ export const Route = createFileRoute("/create-organization")({
   },
   component: CreateOrganizationPage,
 });
+
+// ─── Owner card ───────────────────────────────────────────────────────────────
+
+function OwnerCard() {
+  const accessToken = useSessionStore((s) => s.accessToken);
+  const payload = accessToken ? decodeJwt(accessToken) : null;
+  const router = useRouter();
+
+  const { data: profile } = useQuery({
+    queryKey: ["me"],
+    queryFn: () => iamApi.getMe(),
+    enabled: !!accessToken,
+  });
+
+  if (!payload) return null;
+
+  const initials = `${payload.firstName.charAt(0)}${payload.lastName.charAt(0)}`.toUpperCase();
+  const displayName = `${payload.firstName} ${payload.lastName}`.trim();
+
+  return (
+    <Stack gap="xs">
+      <Group justify="space-between" align="center">
+        <Group gap="sm">
+          <Avatar src={profile?.avatarUrl} size={40} radius="xl" color="blue" variant="filled">
+            {initials}
+          </Avatar>
+          <Box>
+            <Text size="sm" fw={600} lh={1.3}>
+              {displayName}
+            </Text>
+            <Text size="xs" c="dimmed" lh={1.3}>
+              {payload.email}
+            </Text>
+          </Box>
+        </Group>
+        <Button
+          variant="subtle"
+          color="gray"
+          size="xs"
+          leftSection={<IconArrowLeft size={13} />}
+          onClick={() => router.history.back()}
+        >
+          <Trans>Back</Trans>
+        </Button>
+      </Group>
+      <Divider />
+    </Stack>
+  );
+}
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
@@ -50,6 +102,9 @@ function CreateOrganizationPage() {
       <Helmet>
         <title>{pageTitle(t`Create organization`)}</title>
       </Helmet>
+
+      {/* Owner card — shows who will own the new org */}
+      <OwnerCard />
 
       {/* Heading */}
       <Box>
