@@ -32,9 +32,25 @@ msgstr "{0}"
 #~ msgid "{displayName} |Key Value Admin"
 #~ msgstr "{displayName} |Key Value Admin"
 
+#: src/pages/_app/index.tsx
+msgid "<0>Configure notifications</0> to stay informed."
+msgstr "<0>Configure notifications</0> to stay informed."
+
+#: src/pages/_app/index.tsx
+msgid "<0>Create an organization</0> to collaborate with your team."
+msgstr "<0>Create an organization</0> to collaborate with your team."
+
+#: src/pages/_app/index.tsx
+msgid "<0>Secure your account</0> by changing your password."
+msgstr "<0>Secure your account</0> by changing your password."
+
 #: src/features/reset-password/ui/reset-password-form.tsx
 msgid "<0>Sign in now</0>"
 msgstr "<0>Sign in now</0>"
+
+#: src/pages/_app/index.tsx
+msgid "<0>Update your profile</0> with your name and avatar."
+msgstr "<0>Update your profile</0> with your name and avatar."
 
 #: src/pages/loading-demo.tsx
 msgid "1. Initial Page Load"
@@ -805,6 +821,10 @@ msgid "Good"
 msgstr "Good"
 
 #: src/pages/_app/index.tsx
+msgid "Here's what you can do from your personal workspace:"
+msgstr "Here's what you can do from your personal workspace:"
+
+#: src/pages/_app/index.tsx
 #: src/pages/_app/settings/general.tsx
 #: src/pages/_app/settings/notifications.tsx
 #: src/pages/_app/settings/organization.tsx
@@ -1306,6 +1326,10 @@ msgstr "Pending invitations"
 #~ msgid "Period End"
 #~ msgstr "Period End"
 
+#: src/pages/_app/index.tsx
+msgid "Personal Workspace"
+msgstr "Personal Workspace"
+
 #: src/features/ban-user/ui/ban-member-modal.tsx
 msgid "Pick a date and time"
 msgstr "Pick a date and time"
@@ -1719,6 +1743,12 @@ msgstr "Strong"
 msgid "Suspended"
 msgstr "Suspended"
 
+#: src/pages/_app/index.tsx
+msgid "Switch between workspaces anytime using the workspace switcher in the "
+"sidebar."
+msgstr "Switch between workspaces anytime using the workspace switcher in the "
+"sidebar."
+
 #: src/pages/_app/settings/organization.tsx
 msgid "Switch failed"
 msgstr "Switch failed"
@@ -1980,6 +2010,10 @@ msgstr "Welcome back"
 #: src/pages/_app/index.tsx
 msgid "Welcome back, {firstName}."
 msgstr "Welcome back, {firstName}."
+
+#: src/pages/_app/index.tsx
+msgid "Welcome, {firstName}!"
+msgstr "Welcome, {firstName}!"
 
 #: src/features/signup/ui/signup-form.tsx
 msgid "Work email"
