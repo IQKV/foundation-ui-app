@@ -133,7 +133,7 @@ export function TenantSwitcher() {
                     )
                   }
                   disabled={!!switchingTo}
-                  onClick={() => void switchTo(m.tenantKey)}
+                  onClick={() => void switchTo(m.tenantKey, m.isPersonal)}
                   data-testid={`tenant-switcher-option-${m.tenantKey}`}
                 >
                   <Group justify="space-between" gap="xs">

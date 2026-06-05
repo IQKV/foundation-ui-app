@@ -24,8 +24,8 @@ export interface UseTenantSwitcherReturn {
   isSwitching: boolean;
   /** The tenantKey currently being switched to (for per-item spinners). */
   switchingTo: string | null;
-  /** Trigger a tenant switch. */
-  switchTo: (tenantKey: string) => Promise<void>;
+  /** Trigger a tenant switch. isPersonal must be passed from the caller's membership data. */
+  switchTo: (tenantKey: string, isPersonal: boolean) => Promise<void>;
 }
 
 export function useTenantSwitcher(): UseTenantSwitcherReturn {
@@ -45,18 +45,15 @@ export function useTenantSwitcher(): UseTenantSwitcherReturn {
   const activeMembership = memberships.find((m) => m.tenantKey === tenantKey);
   const otherMemberships = memberships.filter((m) => m.tenantKey !== tenantKey);
 
-  const switchTo = async (targetTenantKey: string): Promise<void> => {
+  const switchTo = async (targetTenantKey: string, isPersonal: boolean): Promise<void> => {
     if (switchingTo) return;
     setSwitchingTo(targetTenantKey);
     try {
       const response = await authApi.exchangeTenant(targetTenantKey);
-      const targetMembership = memberships.find((m) => m.tenantKey === targetTenantKey);
-      const targetIsPersonal = targetMembership?.isPersonal ?? false;
-      setTokens(response.accessToken, response.refreshToken, response.tenantKey, targetIsPersonal);
-      // Remove all tenant-scoped cached data — it belongs to the previous tenant context.
-      // Using removeQueries (not invalidateQueries) prevents background refetches on stale
-      // entries that would immediately be discarded after navigation anyway.
-      // my-memberships is also removed so the active workspace name refetches fresh.
+      // isPersonal is passed explicitly from the UI — the exchange response
+      // does not carry workspace-type information.
+      setTokens(response.accessToken, response.refreshToken, response.tenantKey, isPersonal);
+      // Wipe the full query cache — all data belongs to the previous tenant context.
       queryClient.removeQueries();
       void navigate({ to: "/" });
     } catch (err) {

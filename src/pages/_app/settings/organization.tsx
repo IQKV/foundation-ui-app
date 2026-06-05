@@ -29,10 +29,10 @@ function OrganizationsPage() {
   });
 
   const exchangeMutation = useMutation({
-    mutationFn: (tenantKey: string) => authApi.exchangeTenant(tenantKey),
-    onSuccess: async (res, tenantKey) => {
-      const membership = data?.find((m) => m.tenantKey === tenantKey);
-      setTokens(res.accessToken, res.refreshToken, res.tenantKey, membership?.isPersonal ?? false);
+    mutationFn: ({ tenantKey }: { tenantKey: string; isPersonal: boolean }) =>
+      authApi.exchangeTenant(tenantKey),
+    onSuccess: async (res, { isPersonal }) => {
+      setTokens(res.accessToken, res.refreshToken, res.tenantKey, isPersonal);
       queryClient.removeQueries();
       void navigate({ to: "/team" });
     },
@@ -151,7 +151,10 @@ function OrganizationsPage() {
                       variant="subtle"
                       onClick={() => {
                         setSwitchingTenantKey(m.tenantKey);
-                        exchangeMutation.mutate(m.tenantKey);
+                        exchangeMutation.mutate({
+                          tenantKey: m.tenantKey,
+                          isPersonal: m.isPersonal,
+                        });
                       }}
                       loading={exchangeMutation.isPending && switchingTenantKey === m.tenantKey}
                       aria-label={t`Edit`}
