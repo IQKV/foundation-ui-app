@@ -4,6 +4,7 @@ import {
   getAccessToken,
   getRefreshToken,
   getTenantKey,
+  getIsPersonalWorkspace,
   setTokens,
   clearSession,
 } from "@/processes/session";
@@ -40,7 +41,8 @@ const silentRefresh = (): Promise<string> => {
     )
     .then((res) => {
       const { accessToken, refreshToken: newRefreshToken } = res.data;
-      setTokens(accessToken, newRefreshToken, tenantKey);
+      // Preserve the isPersonalWorkspace flag — it doesn't change on token refresh.
+      setTokens(accessToken, newRefreshToken, tenantKey, getIsPersonalWorkspace());
       return accessToken;
     })
     .catch((err: unknown) => {

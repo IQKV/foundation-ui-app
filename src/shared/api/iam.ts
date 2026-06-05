@@ -61,6 +61,8 @@ export interface UserMembership {
   tenantName: string;
   status: string;
   authorities: string[];
+  isPersonal: boolean;
+  isInternal: boolean;
 }
 
 // ─── Tenant types ─────────────────────────────────────────────────────────────
@@ -72,6 +74,10 @@ export interface Tenant {
   tenantKey: string;
   name: string;
   status: TenantStatus;
+  /** True when this is the user's personal workspace. */
+  isPersonal: boolean;
+  /** True when this is an internal platform workspace (e.g. the reserved platform tenant). */
+  isInternal: boolean;
   createdAt: string;
   updatedAt: string;
 }

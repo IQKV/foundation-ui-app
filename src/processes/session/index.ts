@@ -3,6 +3,7 @@ export {
   getAccessToken,
   getRefreshToken,
   getTenantKey,
+  getIsPersonalWorkspace,
   setTokens,
   setAccessToken,
   clearSession,

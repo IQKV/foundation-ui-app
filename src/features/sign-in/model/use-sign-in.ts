@@ -68,6 +68,10 @@ function mapHttpErrorToMessage(status: number): string {
  * 2. Tenant selection step — calls `POST /auth/signin` with the chosen tenant
  *    key, stores the resulting tokens, and navigates to the app.
  *
+ * `isPersonalWorkspace` is sourced from `TenantMembershipSummary.isPersonal`
+ * (set by the backend based on `Tenant.isInternal`) and persisted in the
+ * session store alongside the tokens.
+ *
  * @param redirectTo - Path to navigate to after successful sign-in.
  */
 export function useSignIn(redirectTo?: string): UseSignInReturn {
@@ -83,26 +87,29 @@ export function useSignIn(redirectTo?: string): UseSignInReturn {
     defaultValues: { email: "", password: "" },
   });
 
-  const completeSignIn = async (credentials: SignInFormValues, tenantKey: string) => {
-    console.log("[use-sign-in] completeSignIn called with tenantKey:", tenantKey);
+  const completeSignIn = async (
+    credentials: SignInFormValues,
+    membership: TenantMembershipSummary,
+  ) => {
     const response = await authApi.signIn(
       { email: credentials.email, password: credentials.password },
-      tenantKey,
+      membership.tenantKey,
     );
-    console.log("[use-sign-in] authApi.signIn response:", response);
-    setTokens(response.accessToken, response.refreshToken, response.tenantKey);
-    console.log("[use-sign-in] setTokens called with tenantKey:", response.tenantKey);
+    setTokens(
+      response.accessToken,
+      response.refreshToken,
+      response.tenantKey,
+      membership.isPersonal,
+    );
     void navigate({ to: redirectTo ?? "/" });
   };
 
   const onSubmitCredentials = async (values: SignInFormValues): Promise<void> => {
-    console.log("[use-sign-in] onSubmitCredentials called with values:", values);
     setIsLoading(true);
     setErrorMessage(null);
 
     try {
       const memberships = await authApi.listUserTenants(values.email, values.password);
-      console.log("[use-sign-in] listUserTenants returned:", memberships);
 
       if (memberships.length === 0) {
         setErrorMessage(t`No active tenant memberships found for this account`);
@@ -110,23 +117,17 @@ export function useSignIn(redirectTo?: string): UseSignInReturn {
       }
 
       if (memberships.length === 1) {
-        // Single tenant — skip selection step and sign in directly.
-        await completeSignIn(values, memberships[0].tenantKey);
+        // Single workspace — skip selection step and sign in directly.
+        await completeSignIn(values, memberships[0]);
         return;
       }
 
-      // Multiple tenants — show tenant picker.
+      // Multiple workspaces — show workspace picker.
       setPendingCredentials(values);
       setTenants(memberships);
       setStep("tenant-select");
     } catch (err: unknown) {
-      console.error("[use-sign-in] onSubmitCredentials error:", err);
       const status = isAxiosError(err) ? (err.response?.status ?? 0) : 0;
-      console.error("[use-sign-in] onSubmitCredentials error status:", status);
-      console.error(
-        "[use-sign-in] onSubmitCredentials error response:",
-        isAxiosError(err) ? err.response : null,
-      );
       setErrorMessage(mapHttpErrorToMessage(status));
       if (status === 401) {
         form.resetField("password");
@@ -137,21 +138,16 @@ export function useSignIn(redirectTo?: string): UseSignInReturn {
   };
 
   const onSelectTenant = async (tenantKey: string): Promise<void> => {
-    console.log("[use-sign-in] onSelectTenant called with tenantKey:", tenantKey);
     if (!pendingCredentials) return;
     setIsLoading(true);
     setErrorMessage(null);
 
     try {
-      await completeSignIn(pendingCredentials, tenantKey);
+      const membership = tenants.find((t) => t.tenantKey === tenantKey);
+      if (!membership) throw new Error("Selected tenant not found in membership list");
+      await completeSignIn(pendingCredentials, membership);
     } catch (err: unknown) {
-      console.error("[use-sign-in] onSelectTenant error:", err);
       const status = isAxiosError(err) ? (err.response?.status ?? 0) : 0;
-      console.error("[use-sign-in] onSelectTenant error status:", status);
-      console.error(
-        "[use-sign-in] onSelectTenant error response:",
-        isAxiosError(err) ? err.response : null,
-      );
       setErrorMessage(mapHttpErrorToMessage(status));
     } finally {
       setIsLoading(false);

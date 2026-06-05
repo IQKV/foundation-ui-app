@@ -161,7 +161,9 @@ export function useSignup(): UseSignupReturn {
         { email: creds.email, password: creds.password },
         tenantKey,
       );
-      setTokens(response.accessToken, response.refreshToken, response.tenantKey);
+      // After signup, the user is signed into their personal workspace
+      // (the backend creates an internal tenant — isPersonal = true).
+      setTokens(response.accessToken, response.refreshToken, response.tenantKey, true);
       void navigate({ to: "/" });
     } catch {
       // Sign-in failed — redirect to sign-in page with the email pre-filled

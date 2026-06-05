@@ -75,10 +75,10 @@ export function useCreateOrganization(): UseCreateOrganizationReturn {
         name: values.name,
       });
 
-      // Exchange the current token for one in the new tenant
+      // Exchange the current token for one in the new tenant.
+      // Newly created organizations are never personal workspaces.
       const response = await authApi.exchangeTenant(createdTenant.tenantKey);
-
-      setTokens(response.accessToken, response.refreshToken, response.tenantKey);
+      setTokens(response.accessToken, response.refreshToken, response.tenantKey, false);
       void navigate({ to: "/" });
     } catch (err) {
       const status = isAxiosError(err) ? (err.response?.status ?? 0) : 0;

@@ -494,8 +494,8 @@ msgid "Currency"
 msgstr "Currency"
 
 #: src/features/tenant-switcher/ui/tenant-switcher.tsx
-msgid "Current organization"
-msgstr "Current organization"
+#~ msgid "Current organization"
+#~ msgstr "Current organization"
 
 #: src/features/change-password/ui/change-password-modal.tsx
 #: src/pages/_app/settings/security.tsx
@@ -514,6 +514,10 @@ msgstr "Current Plan"
 #: src/features/manage-billing/ui/current-subscription.tsx
 msgid "Current Subscription"
 msgstr "Current Subscription"
+
+#: src/features/tenant-switcher/ui/tenant-switcher.tsx
+msgid "Current workspace"
+msgstr "Current workspace"
 
 #: src/pages/_app/index.tsx
 #: src/shared/ui/app-layout/app-nav.tsx

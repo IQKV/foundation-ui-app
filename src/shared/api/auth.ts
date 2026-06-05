@@ -23,6 +23,7 @@ export interface TenantMembershipSummary {
   membershipStatus: string;
   authorities: string[];
   isPersonal: boolean;
+  isInternal: boolean;
 }
 
 export interface SignupStatusResponse {

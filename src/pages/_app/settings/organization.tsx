@@ -29,8 +29,9 @@ function OrganizationsPage() {
 
   const exchangeMutation = useMutation({
     mutationFn: (tenantKey: string) => authApi.exchangeTenant(tenantKey),
-    onSuccess: (res) => {
-      setTokens(res.accessToken, res.refreshToken, res.tenantKey);
+    onSuccess: (res, tenantKey) => {
+      const membership = data?.find((m) => m.tenantKey === tenantKey);
+      setTokens(res.accessToken, res.refreshToken, res.tenantKey, membership?.isPersonal ?? false);
       void navigate({ to: "/team" });
     },
     onError: () => {

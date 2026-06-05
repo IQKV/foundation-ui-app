@@ -9,6 +9,7 @@ import {
   getAccessToken,
   getRefreshToken,
   getTenantKey,
+  getIsPersonalWorkspace,
   setTokens,
   useSession,
 } from "@/processes/session";
@@ -52,7 +53,7 @@ export const Route = createFileRoute("/_app")({
           tenantKey: string;
         }>("/v1/iam/auth/refresh", { refreshToken }, { headers: { "X-Tenant-ID": tenantKey } });
 
-        setTokens(data.accessToken, data.refreshToken, data.tenantKey);
+        setTokens(data.accessToken, data.refreshToken, data.tenantKey, getIsPersonalWorkspace());
 
         const payload = decodeJwt(data.accessToken);
         if (!payload || !isTenantSession(payload)) {

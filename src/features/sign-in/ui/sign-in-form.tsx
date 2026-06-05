@@ -1,5 +1,5 @@
 import { Alert, Button, Card, Group, Stack, Text, TextInput, UnstyledButton } from "@mantine/core";
-import { IconAlertCircle, IconBuilding, IconUser } from "@tabler/icons-react";
+import { IconAlertCircle, IconBuilding, IconUser, IconShieldHalf } from "@tabler/icons-react";
 import { Controller } from "react-hook-form";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Link } from "@tanstack/react-router";
@@ -47,7 +47,14 @@ export function SignInForm({ redirectTo }: SignInFormProps) {
 
         <Stack gap="xs">
           {tenants.map((tenant) => {
-            const isPersonal = tenant.isPersonal;
+            const { isPersonal, isInternal } = tenant;
+            const icon = isInternal ? (
+              <IconShieldHalf size={18} color="var(--mantine-color-red-6)" />
+            ) : isPersonal ? (
+              <IconUser size={18} color="var(--mantine-color-green-6)" />
+            ) : (
+              <IconBuilding size={18} color="var(--mantine-color-blue-6)" />
+            );
             return (
               <UnstyledButton
                 key={tenant.tenantKey}
@@ -57,16 +64,12 @@ export function SignInForm({ redirectTo }: SignInFormProps) {
               >
                 <Card withBorder radius="md" p="md" style={{ cursor: "pointer" }}>
                   <Stack gap={4} style={{ flexDirection: "row", alignItems: "center", gap: 12 }}>
-                    {isPersonal ? (
-                      <IconUser size={18} color="var(--mantine-color-green-6)" />
-                    ) : (
-                      <IconBuilding size={18} color="var(--mantine-color-blue-6)" />
-                    )}
+                    {icon}
                     <Stack gap={2}>
                       <Text size="sm" fw={500}>
                         {tenant.tenantName}
                       </Text>
-                      {!isPersonal && (
+                      {!isPersonal && !isInternal && (
                         <Text size="xs" c="dimmed">
                           {tenant.authorities.join(", ")}
                         </Text>

@@ -164,7 +164,9 @@ export function useAcceptInvitation(token: string): UseAcceptInvitationReturn {
           : {}),
       });
 
-      setTokens(result.accessToken, result.refreshToken, result.tenantKey);
+      // Accepting an invitation always scopes the session to a regular organization
+      // (invitations cannot be issued for personal workspaces).
+      setTokens(result.accessToken, result.refreshToken, result.tenantKey, false);
       setPhase("success");
       void navigate({ to: "/" });
     } catch (err) {

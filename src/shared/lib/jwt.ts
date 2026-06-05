@@ -6,6 +6,10 @@ export interface JwtPayload {
   email: string;
   firstName: string;
   lastName: string;
+  /**
+   * The active tenant key, or null for admin/platform-scoped tokens that
+   * carry no tenant context.
+   */
   tenant_id: string | null;
   authorities: string[];
   email_verified: boolean;

@@ -50,7 +50,13 @@ export function useTenantSwitcher(): UseTenantSwitcherReturn {
     setSwitchingTo(targetTenantKey);
     try {
       const response = await authApi.exchangeTenant(targetTenantKey);
-      setTokens(response.accessToken, response.refreshToken, response.tenantKey);
+      const targetMembership = memberships.find((m) => m.tenantKey === targetTenantKey);
+      setTokens(
+        response.accessToken,
+        response.refreshToken,
+        response.tenantKey,
+        targetMembership?.isPersonal ?? false,
+      );
       // Invalidate all cached data — it belongs to the previous tenant context.
       await queryClient.invalidateQueries();
       void navigate({ to: "/" });
