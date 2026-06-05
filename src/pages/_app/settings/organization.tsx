@@ -33,10 +33,7 @@ function OrganizationsPage() {
     onSuccess: async (res, tenantKey) => {
       const membership = data?.find((m) => m.tenantKey === tenantKey);
       setTokens(res.accessToken, res.refreshToken, res.tenantKey, membership?.isPersonal ?? false);
-      // Invalidate all tenant-scoped cache and remove the members entry for
-      // the target tenant so stale counts never bleed across workspace switches.
-      await queryClient.invalidateQueries();
-      queryClient.removeQueries({ queryKey: ["tenant", res.tenantKey, "members"] });
+      queryClient.removeQueries();
       void navigate({ to: "/team" });
     },
     onError: () => {

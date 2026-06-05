@@ -73,7 +73,11 @@ export function TenantSwitcher() {
           >
             <Group justify="space-between" gap="xs" wrap="nowrap">
               <Group gap="xs" wrap="nowrap" style={{ minWidth: 0 }}>
-                {activeMembership && <WorkspaceIcon membership={activeMembership} size={14} />}
+                {isLoading ? (
+                  <Skeleton height={14} width={14} radius="sm" style={{ flexShrink: 0 }} />
+                ) : (
+                  activeMembership && <WorkspaceIcon membership={activeMembership} size={14} />
+                )}
                 {isLoading ? (
                   <Skeleton height={12} width={100} radius="sm" />
                 ) : (
