@@ -1,7 +1,7 @@
 import { createElement, useMemo, useState } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { Container, Group, TextInput, Paper, ActionIcon, Tooltip, Text } from "@mantine/core";
-import { useQuery, useMutation } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { DataTable } from "mantine-datatable";
 import { notifications } from "@mantine/notifications";
 import { IconBuilding, IconPencil, IconRefresh, IconSearch, IconX } from "@tabler/icons-react";
@@ -19,6 +19,7 @@ export const Route = createFileRoute("/_app/settings/organization")({
 function OrganizationsPage() {
   const { t } = useLingui();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const [search, setSearch] = useState("");
   const [switchingTenantKey, setSwitchingTenantKey] = useState<string | null>(null);
 
@@ -29,9 +30,13 @@ function OrganizationsPage() {
 
   const exchangeMutation = useMutation({
     mutationFn: (tenantKey: string) => authApi.exchangeTenant(tenantKey),
-    onSuccess: (res, tenantKey) => {
+    onSuccess: async (res, tenantKey) => {
       const membership = data?.find((m) => m.tenantKey === tenantKey);
       setTokens(res.accessToken, res.refreshToken, res.tenantKey, membership?.isPersonal ?? false);
+      // Invalidate all tenant-scoped cache and remove the members entry for
+      // the target tenant so stale counts never bleed across workspace switches.
+      await queryClient.invalidateQueries();
+      queryClient.removeQueries({ queryKey: ["tenant", res.tenantKey, "members"] });
       void navigate({ to: "/team" });
     },
     onError: () => {

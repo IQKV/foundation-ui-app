@@ -51,14 +51,13 @@ export function useTenantSwitcher(): UseTenantSwitcherReturn {
     try {
       const response = await authApi.exchangeTenant(targetTenantKey);
       const targetMembership = memberships.find((m) => m.tenantKey === targetTenantKey);
-      setTokens(
-        response.accessToken,
-        response.refreshToken,
-        response.tenantKey,
-        targetMembership?.isPersonal ?? false,
-      );
+      const targetIsPersonal = targetMembership?.isPersonal ?? false;
+      setTokens(response.accessToken, response.refreshToken, response.tenantKey, targetIsPersonal);
       // Invalidate all cached data — it belongs to the previous tenant context.
+      // Also remove the members query for the target tenant so personal workspace
+      // never shows stale member counts from a previous visit to that tenant.
       await queryClient.invalidateQueries();
+      queryClient.removeQueries({ queryKey: ["tenant", response.tenantKey, "members"] });
       void navigate({ to: "/" });
     } catch (err) {
       const status = isAxiosError(err) ? (err.response?.status ?? 0) : 0;
