@@ -15,8 +15,8 @@ importers:
         specifier: ^5.4.0
         version: 5.4.0(react-hook-form@7.77.0(react@19.2.7))
       '@lingui/core':
-        specifier: ^6.2.0
-        version: 6.2.0
+        specifier: ^6.3.0
+        version: 6.3.0
       '@lingui/format-po':
         specifier: ^6.2.0
         version: 6.2.0
@@ -215,10 +215,10 @@ importers:
         version: 6.2.0
       '@lingui/swc-plugin':
         specifier: ^6.3.0
-        version: 6.3.0(@lingui/core@6.2.0)(@swc/core@1.15.40)
+        version: 6.3.0(@lingui/core@6.3.0)(@swc/core@1.15.40)
       '@lingui/vite-plugin':
         specifier: ^6.2.0
-        version: 6.2.0(@babel/core@7.29.7)(@lingui/babel-plugin-lingui-macro@6.2.0)(rolldown@1.1.0)(vite@8.0.16(@types/node@25.9.2)(jiti@2.7.0)(sugarss@5.0.1(postcss@8.5.15))(yaml@2.9.0))
+        version: 6.2.0(@babel/core@7.29.7)(@lingui/babel-plugin-lingui-macro@6.3.0)(rolldown@1.1.0)(vite@8.0.16(@types/node@25.9.2)(jiti@2.7.0)(sugarss@5.0.1(postcss@8.5.15))(yaml@2.9.0))
       '@playwright/test':
         specifier: 1.60.0
         version: 1.60.0
@@ -1139,6 +1139,10 @@ packages:
     resolution: {integrity: sha512-sZqrd+RFLOePcimYoyNWs7n8brfkD5MXKb9trYNaV+/obt3C02LEpLrdIqUvykpn5+NgeZY6H0x/HqaXTil5vA==}
     engines: {node: '>=22.19.0'}
 
+  '@lingui/babel-plugin-lingui-macro@6.3.0':
+    resolution: {integrity: sha512-cRPDXfvVP5T/sr+WJ353hv8QW2dsBHxwkrWKcLmwxSb2MioN6OPr6ejQUBVwMnCKDeP0jREhloBID5dC9sdwNA==}
+    engines: {node: '>=22.19.0'}
+
   '@lingui/cli@6.2.0':
     resolution: {integrity: sha512-47j2VnDCRAuxlwFnBshQqTGBmkiRvr2jUs7FzEHT0z/drCOhNwHoNCDDAGC/1SwsiK9kaeNZcObyZfrpe3z3PA==}
     engines: {node: '>=22.19.0'}
@@ -1148,8 +1152,21 @@ packages:
     resolution: {integrity: sha512-SVZlXH0MJgS6Cu9NFCtJeqT7VzbKp5VDQcd9j51x6lRCzknPJS4CjJ4GWzu0RHoTmtQyoADLzuQTPrzD0ommLA==}
     engines: {node: '>=22.19.0'}
 
+  '@lingui/conf@6.3.0':
+    resolution: {integrity: sha512-BoXPvdMbrn4Qrlf/McbXRVrV4sLmgw7YQ9Z6Z/xBDMhrGhPpAf2ma1/u+WwxdbQnIuhVPBzR2t9Sw6SoFXM2vA==}
+    engines: {node: '>=22.19.0'}
+
   '@lingui/core@6.2.0':
     resolution: {integrity: sha512-iNxDy9+GfwBGi9YVgAt7q0V7hA7kwt5t+akScFWvIyzII0KpMd4oLq0JyPsedsKloWVmL8V0PuvtThM0Ja4SWg==}
+    engines: {node: '>=22.19.0'}
+    peerDependencies:
+      babel-plugin-macros: 2 || 3
+    peerDependenciesMeta:
+      babel-plugin-macros:
+        optional: true
+
+  '@lingui/core@6.3.0':
+    resolution: {integrity: sha512-CQDe8rnuhpSoirvP+eONSUj1MSCoKgKiKLAwVKk/Q3T1AHz+hWMD6ba3si63r0ED4GVodsIKpH3aQhEzIvUxyg==}
     engines: {node: '>=22.19.0'}
     peerDependencies:
       babel-plugin-macros: 2 || 3
@@ -1163,6 +1180,10 @@ packages:
 
   '@lingui/message-utils@6.2.0':
     resolution: {integrity: sha512-oFmD6xYO40kC/7qBdxieEVekoYNI0KWtizCOanrlT6RXYPSwn5hH4Hf6u0mErEf23m/zNGDMO+D6YNQ4z7IxwQ==}
+    engines: {node: '>=22.19.0'}
+
+  '@lingui/message-utils@6.3.0':
+    resolution: {integrity: sha512-JxwW3DmispTG1XTvp1kZSWdqF2X1ipan7o/AMaFIknagk/6cARB2lVeG0socZNUs9fdDAZl4UCYsX1bf10KvBw==}
     engines: {node: '>=22.19.0'}
 
   '@lingui/react@6.2.0':
@@ -7383,6 +7404,15 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@lingui/babel-plugin-lingui-macro@6.3.0':
+    dependencies:
+      '@babel/core': 7.29.7
+      '@babel/types': 7.29.7
+      '@lingui/conf': 6.3.0
+      '@lingui/message-utils': 6.3.0
+    transitivePeerDependencies:
+      - supports-color
+
   '@lingui/cli@6.2.0':
     dependencies:
       '@babel/core': 7.29.7
@@ -7418,10 +7448,24 @@ snapshots:
       lilconfig: 3.1.3
       normalize-path: 3.0.0
 
+  '@lingui/conf@6.3.0':
+    dependencies:
+      jest-validate: 29.7.0
+      jiti: 2.7.0
+      lilconfig: 3.1.3
+      normalize-path: 3.0.0
+
   '@lingui/core@6.2.0':
     dependencies:
       '@lingui/babel-plugin-lingui-macro': 6.2.0
       '@lingui/message-utils': 6.2.0
+    transitivePeerDependencies:
+      - supports-color
+
+  '@lingui/core@6.3.0':
+    dependencies:
+      '@lingui/babel-plugin-lingui-macro': 6.3.0
+      '@lingui/message-utils': 6.3.0
     transitivePeerDependencies:
       - supports-color
 
@@ -7437,6 +7481,12 @@ snapshots:
       '@messageformat/parser': 5.1.1
       js-sha256: 0.10.1
 
+  '@lingui/message-utils@6.3.0':
+    dependencies:
+      '@messageformat/date-skeleton': 1.1.0
+      '@messageformat/parser': 5.1.1
+      js-sha256: 0.10.1
+
   '@lingui/react@6.2.0(react@19.2.7)':
     dependencies:
       '@lingui/babel-plugin-lingui-macro': 6.2.0
@@ -7445,21 +7495,21 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@lingui/swc-plugin@6.3.0(@lingui/core@6.2.0)(@swc/core@1.15.40)':
+  '@lingui/swc-plugin@6.3.0(@lingui/core@6.3.0)(@swc/core@1.15.40)':
     dependencies:
       '@lingui/conf': 6.2.0
-      '@lingui/core': 6.2.0
+      '@lingui/core': 6.3.0
     optionalDependencies:
       '@swc/core': 1.15.40
 
-  '@lingui/vite-plugin@6.2.0(@babel/core@7.29.7)(@lingui/babel-plugin-lingui-macro@6.2.0)(rolldown@1.1.0)(vite@8.0.16(@types/node@25.9.2)(jiti@2.7.0)(sugarss@5.0.1(postcss@8.5.15))(yaml@2.9.0))':
+  '@lingui/vite-plugin@6.2.0(@babel/core@7.29.7)(@lingui/babel-plugin-lingui-macro@6.3.0)(rolldown@1.1.0)(vite@8.0.16(@types/node@25.9.2)(jiti@2.7.0)(sugarss@5.0.1(postcss@8.5.15))(yaml@2.9.0))':
     dependencies:
       '@lingui/cli': 6.2.0
       '@lingui/conf': 6.2.0
       vite: 8.0.16(@types/node@25.9.2)(jiti@2.7.0)(sugarss@5.0.1(postcss@8.5.15))(yaml@2.9.0)
     optionalDependencies:
       '@babel/core': 7.29.7
-      '@lingui/babel-plugin-lingui-macro': 6.2.0
+      '@lingui/babel-plugin-lingui-macro': 6.3.0
       rolldown: 1.1.0
     transitivePeerDependencies:
       - babel-plugin-macros
@@ -8365,11 +8415,11 @@ snapshots:
     dependencies:
       '@tiptap/pm': 3.26.0
 
-  '@tiptap/extension-blockquote@3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.26.0))':
+  '@tiptap/extension-blockquote@3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.24.0))':
     dependencies:
       '@tiptap/core': 3.26.0(@tiptap/pm@3.26.0)
 
-  '@tiptap/extension-bold@3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.26.0))':
+  '@tiptap/extension-bold@3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.24.0))':
     dependencies:
       '@tiptap/core': 3.26.0(@tiptap/pm@3.26.0)
 
@@ -8384,12 +8434,12 @@ snapshots:
     dependencies:
       '@tiptap/extension-list': 3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.24.0))(@tiptap/pm@3.26.0)
 
-  '@tiptap/extension-code-block@3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.26.0))(@tiptap/pm@3.26.0)':
+  '@tiptap/extension-code-block@3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.24.0))(@tiptap/pm@3.26.0)':
     dependencies:
       '@tiptap/core': 3.26.0(@tiptap/pm@3.26.0)
       '@tiptap/pm': 3.26.0
 
-  '@tiptap/extension-code@3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.26.0))':
+  '@tiptap/extension-code@3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.24.0))':
     dependencies:
       '@tiptap/core': 3.26.0(@tiptap/pm@3.26.0)
 
@@ -8397,7 +8447,7 @@ snapshots:
     dependencies:
       '@tiptap/extension-text-style': 3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.24.0))
 
-  '@tiptap/extension-document@3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.26.0))':
+  '@tiptap/extension-document@3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.24.0))':
     dependencies:
       '@tiptap/core': 3.26.0(@tiptap/pm@3.26.0)
 
@@ -8416,15 +8466,15 @@ snapshots:
     dependencies:
       '@tiptap/extensions': 3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.24.0))(@tiptap/pm@3.26.0)
 
-  '@tiptap/extension-hard-break@3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.26.0))':
+  '@tiptap/extension-hard-break@3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.24.0))':
     dependencies:
       '@tiptap/core': 3.26.0(@tiptap/pm@3.26.0)
 
-  '@tiptap/extension-heading@3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.26.0))':
+  '@tiptap/extension-heading@3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.24.0))':
     dependencies:
       '@tiptap/core': 3.26.0(@tiptap/pm@3.26.0)
 
-  '@tiptap/extension-horizontal-rule@3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.26.0))(@tiptap/pm@3.26.0)':
+  '@tiptap/extension-horizontal-rule@3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.24.0))(@tiptap/pm@3.26.0)':
     dependencies:
       '@tiptap/core': 3.26.0(@tiptap/pm@3.26.0)
       '@tiptap/pm': 3.26.0
@@ -8433,7 +8483,7 @@ snapshots:
     dependencies:
       '@tiptap/core': 3.26.0(@tiptap/pm@3.26.0)
 
-  '@tiptap/extension-italic@3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.26.0))':
+  '@tiptap/extension-italic@3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.24.0))':
     dependencies:
       '@tiptap/core': 3.26.0(@tiptap/pm@3.26.0)
 
@@ -8466,11 +8516,11 @@ snapshots:
     dependencies:
       '@tiptap/extension-list': 3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.24.0))(@tiptap/pm@3.26.0)
 
-  '@tiptap/extension-paragraph@3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.26.0))':
+  '@tiptap/extension-paragraph@3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.24.0))':
     dependencies:
       '@tiptap/core': 3.26.0(@tiptap/pm@3.26.0)
 
-  '@tiptap/extension-strike@3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.26.0))':
+  '@tiptap/extension-strike@3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.24.0))':
     dependencies:
       '@tiptap/core': 3.26.0(@tiptap/pm@3.26.0)
 
@@ -8482,7 +8532,7 @@ snapshots:
     dependencies:
       '@tiptap/core': 3.26.0(@tiptap/pm@3.26.0)
 
-  '@tiptap/extension-text@3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.26.0))':
+  '@tiptap/extension-text@3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.24.0))':
     dependencies:
       '@tiptap/core': 3.26.0(@tiptap/pm@3.26.0)
 
@@ -8547,26 +8597,26 @@ snapshots:
   '@tiptap/starter-kit@3.26.0':
     dependencies:
       '@tiptap/core': 3.26.0(@tiptap/pm@3.26.0)
-      '@tiptap/extension-blockquote': 3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.26.0))
-      '@tiptap/extension-bold': 3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.26.0))
+      '@tiptap/extension-blockquote': 3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.24.0))
+      '@tiptap/extension-bold': 3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.24.0))
       '@tiptap/extension-bullet-list': 3.26.0(@tiptap/extension-list@3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.24.0))(@tiptap/pm@3.26.0))
-      '@tiptap/extension-code': 3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.26.0))
-      '@tiptap/extension-code-block': 3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.26.0))(@tiptap/pm@3.26.0)
-      '@tiptap/extension-document': 3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.26.0))
+      '@tiptap/extension-code': 3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.24.0))
+      '@tiptap/extension-code-block': 3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.24.0))(@tiptap/pm@3.26.0)
+      '@tiptap/extension-document': 3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.24.0))
       '@tiptap/extension-dropcursor': 3.26.0(@tiptap/extensions@3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.24.0))(@tiptap/pm@3.26.0))
       '@tiptap/extension-gapcursor': 3.26.0(@tiptap/extensions@3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.24.0))(@tiptap/pm@3.26.0))
-      '@tiptap/extension-hard-break': 3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.26.0))
-      '@tiptap/extension-heading': 3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.26.0))
-      '@tiptap/extension-horizontal-rule': 3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.26.0))(@tiptap/pm@3.26.0)
-      '@tiptap/extension-italic': 3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.26.0))
+      '@tiptap/extension-hard-break': 3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.24.0))
+      '@tiptap/extension-heading': 3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.24.0))
+      '@tiptap/extension-horizontal-rule': 3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.24.0))(@tiptap/pm@3.26.0)
+      '@tiptap/extension-italic': 3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.24.0))
       '@tiptap/extension-link': 3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.24.0))(@tiptap/pm@3.26.0)
       '@tiptap/extension-list': 3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.24.0))(@tiptap/pm@3.26.0)
       '@tiptap/extension-list-item': 3.26.0(@tiptap/extension-list@3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.24.0))(@tiptap/pm@3.26.0))
       '@tiptap/extension-list-keymap': 3.26.0(@tiptap/extension-list@3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.24.0))(@tiptap/pm@3.26.0))
       '@tiptap/extension-ordered-list': 3.26.0(@tiptap/extension-list@3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.24.0))(@tiptap/pm@3.26.0))
-      '@tiptap/extension-paragraph': 3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.26.0))
-      '@tiptap/extension-strike': 3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.26.0))
-      '@tiptap/extension-text': 3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.26.0))
+      '@tiptap/extension-paragraph': 3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.24.0))
+      '@tiptap/extension-strike': 3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.24.0))
+      '@tiptap/extension-text': 3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.24.0))
       '@tiptap/extension-underline': 3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.24.0))
       '@tiptap/extensions': 3.26.0(@tiptap/core@3.26.0(@tiptap/pm@3.24.0))(@tiptap/pm@3.26.0)
       '@tiptap/pm': 3.26.0
