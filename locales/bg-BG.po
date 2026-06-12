@@ -1,0 +1,1581 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2026-06-12 00:00+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: bg-BG\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. placeholder {0}: localeToNameMap[locale]
+#. placeholder {0}: tenant?.name ?? t`Dashboard`
+#: src/pages/_app/index.tsx
+#: src/shared/locales/index.ts
+msgid "{0}"
+msgstr "{0}"
+
+#: src/pages/_app/index.tsx
+msgid "<0>Configure notifications</0> to stay informed."
+msgstr "<0>Конфигурирайте известията</0>, за да сте информирани."
+
+#: src/pages/_app/index.tsx
+msgid "<0>Create an organization</0> to collaborate with your team."
+msgstr "<0>Създайте организация</0>, за да работите в екип."
+
+#: src/pages/_app/index.tsx
+msgid "<0>Secure your account</0> by changing your password."
+msgstr "<0>Защитете акаунта си</0>, като промените паролата."
+
+#: src/features/reset-password/ui/reset-password-form.tsx
+msgid "<0>Sign in now</0>"
+msgstr "<0>Влезте сега</0>"
+
+#: src/pages/_app/index.tsx
+msgid "<0>Update your profile</0> with your name and avatar."
+msgstr "<0>Актуализирайте профила си</0> с имe и аватар."
+
+#: src/pages/loading-demo.tsx
+msgid "1. Initial Page Load"
+msgstr "1. Начално зареждане на страницата"
+
+#: src/pages/loading-demo.tsx
+msgid "2. Page Transitions"
+msgstr "2. Преходи между страници"
+
+#: src/pages/invite.$token.tsx
+msgid "Accept invitation"
+msgstr "Приеми поканата"
+
+#: src/pages/invite.$token.tsx
+msgid "Accept Invitation"
+msgstr "Приеми поканата"
+
+#: src/pages/invite.$token.tsx
+msgid "Accept your invitation to join a workspace."
+msgstr "Приемете поканата си, за да се присъедините към работно пространство."
+
+#: src/shared/ui/invitation-status-badge/invitation-status-badge.tsx
+msgid "Accepted"
+msgstr "Прието"
+
+#: src/pages/unauthorized.tsx
+msgid "Access Denied"
+msgstr "Достъпът е отказан"
+
+#: src/pages/loading-demo.tsx
+msgid "Accessible with proper keyboard handling"
+msgstr "Достъпно с правилна клавиатурна обработка"
+
+#: src/pages/_app/settings/general.tsx
+#: src/pages/_app/settings/notifications.tsx
+#: src/pages/_app/settings/organization.tsx
+#: src/pages/_app/settings/security.tsx
+#: src/shared/ui/app-layout/app-nav.tsx
+msgid "Account Settings"
+msgstr "Настройки на акаунта"
+
+#: src/features/manage-billing/ui/billing-info.tsx
+#: src/features/manage-organization/ui/organization-settings.tsx
+msgid "ACME Corp"
+msgstr "ACME Corp"
+
+#: src/features/create-organization/ui/create-organization-form.tsx
+msgid "Acme Inc."
+msgstr "Acme Inc."
+
+#: src/features/manage-organization/ui/member-actions.tsx
+msgid "Actions"
+msgstr "Действия"
+
+#: src/features/manage-billing/ui/plan-card.tsx
+#: src/shared/ui/tenant-status-badge/tenant-status-badge.tsx
+#: src/shared/ui/user-status-badge/user-status-badge.tsx
+msgid "Active"
+msgstr "Активен"
+
+#: src/features/invite-member/model/types.ts
+msgid "Admin"
+msgstr "Администратор"
+
+#: src/features/signup/ui/signup-form.tsx
+#: src/pages/invite.$token.tsx
+msgid "Already have an account? <0>Sign in</0>"
+msgstr "Вече имате акаунт? <0>Влезте</0>"
+
+#: src/shared/ui/auth-layout/auth-layout.tsx
+msgid "always in reach."
+msgstr "винаги на разположение."
+
+#: src/features/manage-billing/ui/refund-list.tsx
+msgid "Amount"
+msgstr "Сума"
+
+#: src/features/signup/model/use-signup.ts
+msgid "An account with this email already exists."
+msgstr "Акаунт с този имейл вече съществува."
+
+#: src/features/create-organization/model/use-create-organization.ts
+msgid "An organization with this name already exists."
+msgstr "Организация с това наименование вече съществува."
+
+#. placeholder {0}: member.firstName
+#. placeholder {1}: member.lastName
+#: src/features/manage-organization/ui/member-actions.tsx
+msgid "Are you sure you want to remove <0>{0} {1}</0> from this organization? They will lose all access immediately."
+msgstr "Сигурни ли сте, че искате да премахнете <0>{0} {1}</0> от тази организация? Те ще загубят целия достъп незабавно."
+
+#: src/features/ban-user/ui/ban-member-modal.tsx
+#: src/features/member-role/ui/transfer-ownership-modal.tsx
+msgid "Are you sure?"
+msgstr "Сигурни ли сте?"
+
+#: src/features/reset-password/ui/reset-password-form.tsx
+#: src/features/signup/ui/password-strength.tsx
+#: src/features/signup/ui/signup-form.tsx
+msgid "At least 8 characters"
+msgstr "Поне 8 символа"
+
+#: src/features/change-password/ui/change-password-modal.tsx
+#: src/pages/_app/settings/security.tsx
+msgid "At least 8 characters, at most 128"
+msgstr "Поне 8 символа, най-много 128"
+
+#: src/features/change-password/ui/change-password-modal.tsx
+#: src/pages/_app/settings/security.tsx
+msgid "At least one digit"
+msgstr "Поне една цифра"
+
+#: src/features/change-password/ui/change-password-modal.tsx
+#: src/pages/_app/settings/security.tsx
+msgid "At least one special character"
+msgstr "Поне един специален символ"
+
+#: src/pages/loading-demo.tsx
+msgid "Automatic router integration via <0>router.subscribe()</0>"
+msgstr "Автоматична интеграция с рутер чрез <0>router.subscribe()</0>"
+
+#: src/pages/_app/billing.tsx
+msgid "Available Plans"
+msgstr "Налични планове"
+
+#: src/pages/create-organization.tsx
+msgid "Back"
+msgstr "Назад"
+
+#: src/features/forgot-password/ui/forgot-password-form.tsx
+msgid "Back to <0>Sign in</0>"
+msgstr "Обратно към <0>Вход</0>"
+
+#: src/pages/invite.$token.tsx
+#: src/pages/verify-email.tsx
+msgid "Back to sign in"
+msgstr "Обратно към вход"
+
+#: src/features/ban-user/ui/ban-member-modal.tsx
+msgid "Ban member"
+msgstr "Забрани член"
+
+#: src/features/ban-user/ui/ban-member-modal.tsx
+#: src/features/manage-organization/ui/member-actions.tsx
+msgid "Ban Member"
+msgstr "Забрани член"
+
+#: src/features/ban-user/ui/ban-member-modal.tsx
+msgid "Banning this member will immediately invalidate all their active sessions, revoke their access to this tenant, and send them a notification email. They will not be able to access this tenant again until unbanned."
+msgstr "Забраняването на този член незабавно ще анулира всички активни сесии, ще отмени достъпа им до наемателя и ще изпрати имейл с известие. Те няма да могат да достъпват наемателя отново, докато не бъдат разблокирани."
+
+#: src/pages/_app/billing.tsx
+#: src/shared/ui/app-layout/app-nav.tsx
+msgid "Billing"
+msgstr "Фактуриране"
+
+#: src/features/manage-billing/ui/billing-info.tsx
+msgid "Billing Email"
+msgstr "Имейл за фактуриране"
+
+#: src/features/manage-billing/ui/billing-info.tsx
+msgid "Billing Information"
+msgstr "Информация за фактуриране"
+
+#: src/pages/_app/billing.tsx
+msgid "Billing Portal"
+msgstr "Портал за фактуриране"
+
+#: src/features/ban-user/ui/ban-member-modal.tsx
+#: src/features/ban-user/ui/unban-member-modal.tsx
+#: src/features/change-password/ui/change-password-modal.tsx
+#: src/features/edit-profile/ui/edit-profile-modal.tsx
+#: src/features/invite-member/ui/send-invitation-modal.tsx
+#: src/features/manage-organization/ui/member-actions.tsx
+#: src/features/member-role/ui/transfer-ownership-modal.tsx
+#: src/features/member-role/ui/update-member-authorities-modal.tsx
+msgid "Cancel"
+msgstr "Отказ"
+
+#: src/features/manage-billing/ui/current-subscription.tsx
+msgid "Cancels on"
+msgstr "Отменя се на"
+
+#: src/features/member-role/ui/update-member-authorities-modal.tsx
+msgid "Change Member Role"
+msgstr "Промяна на ролята на члена"
+
+#: src/features/change-password/ui/change-password-modal.tsx
+#: src/pages/_app/settings/security.tsx
+msgid "Change password"
+msgstr "Промяна на парола"
+
+#: src/features/change-password/ui/change-password-modal.tsx
+#: src/pages/_app/settings/security.tsx
+msgid "Change Password"
+msgstr "Промяна на парола"
+
+#: src/features/manage-organization/ui/member-actions.tsx
+msgid "Change Role"
+msgstr "Промяна на роля"
+
+#: src/features/forgot-password/ui/forgot-password-form.tsx
+#: src/features/signup/ui/verify-email-prompt.tsx
+msgid "Check your inbox"
+msgstr "Проверете входящата си поща"
+
+#: src/pages/reset-password.tsx
+msgid "Choose a new password"
+msgstr "Изберете нова парола"
+
+#: src/pages/invite.$token.tsx
+msgid "Choose a password"
+msgstr "Изберете парола"
+
+#: src/pages/reset-password.tsx
+msgid "Choose a strong password with at least 8 characters, including uppercase, lowercase, a number, and a special character."
+msgstr "Изберете силна парола с поне 8 символа, включваща главна буква, малка буква, цифра и специален символ."
+
+#: src/features/notification-bell/ui/notification-bell.tsx
+#: src/pages/_app/settings/notifications.tsx
+msgid "Clear all"
+msgstr "Изчисти всички"
+
+#: src/features/invite-member/ui/invitation-details-modal.tsx
+msgid "Close"
+msgstr "Затвори"
+
+#: src/features/invite-member/ui/send-invitation-modal.tsx
+msgid "colleague@example.com"
+msgstr "колега@example.com"
+
+#: src/features/manage-billing/ui/billing-info.tsx
+msgid "Company Name"
+msgstr "Наименование на компанията"
+
+#: src/pages/loading-demo.tsx
+msgid "Complete"
+msgstr "Завършено"
+
+#: src/features/signup/ui/provisioning-wait.tsx
+msgid "Configuring settings"
+msgstr "Конфигуриране на настройките"
+
+#: src/features/change-password/ui/change-password-modal.tsx
+#: src/features/reset-password/ui/reset-password-form.tsx
+#: src/pages/_app/settings/security.tsx
+msgid "Confirm new password"
+msgstr "Потвърди новата парола"
+
+#: src/pages/verify-email.tsx
+msgid "Confirm your"
+msgstr "Потвърдете"
+
+#: src/features/sign-in/ui/sign-in-form.tsx
+msgid "Continue"
+msgstr "Продължи"
+
+#: src/features/manage-billing/model/use-billing-portal.ts
+msgid "Could not create Stripe Customer Portal session."
+msgstr "Не може да се създаде сесия на Stripe Customer Portal."
+
+#: src/pages/_app/settings/general.tsx
+#: src/pages/_app/settings/security.tsx
+msgid "Could not fetch your account details."
+msgstr "Не може да се извлекат детайлите на вашия акаунт."
+
+#: src/pages/_app/team.tsx
+msgid "Could not load invitations."
+msgstr "Не може да се заредят поканите."
+
+#: src/pages/_app/team.tsx
+msgid "Could not load members."
+msgstr "Не може да се заредят членовете."
+
+#: src/pages/_app/settings/organization.tsx
+msgid "Could not load organizations."
+msgstr "Не може да се заредят организациите."
+
+#: src/pages/_app/settings/organization.tsx
+msgid "Could not switch organization."
+msgstr "Не може да се смени организацията."
+
+#: src/features/tenant-switcher/model/use-tenant-switcher.ts
+msgid "Could not switch organization. Please try again."
+msgstr "Не може да се смени организацията. Моля, опитайте отново."
+
+#: src/features/signup/ui/signup-form.tsx
+#: src/pages/signup.tsx
+msgid "Create account"
+msgstr "Създай акаунт"
+
+#: src/pages/invite.$token.tsx
+msgid "Create account and join"
+msgstr "Създай акаунт и се присъедини"
+
+#: src/features/create-organization/ui/create-organization-form.tsx
+#: src/pages/create-organization.tsx
+msgid "Create organization"
+msgstr "Създай организация"
+
+#: src/pages/create-organization.tsx
+msgid "Create your"
+msgstr "Създайте"
+
+#: src/pages/signup.tsx
+msgid "Create your account"
+msgstr "Създайте акаунта си"
+
+#: src/pages/signup.tsx
+msgid "Create your account and join the platform in seconds. No credit card required."
+msgstr "Създайте акаунта си и се присъединете към платформата за секунди. Не се изисква кредитна карта."
+
+#: src/pages/signup.tsx
+msgid "Create your account in seconds. No credit card required."
+msgstr "Създайте акаунта си за секунди. Не се изисква кредитна карта."
+
+#: src/pages/invite.$token.tsx
+msgid "Create your account to accept this invitation."
+msgstr "Създайте акаунт, за да приемете тази покана."
+
+#: src/pages/create-organization.tsx
+msgid "Create your organization"
+msgstr "Създайте организацията си"
+
+#: src/features/signup/ui/provisioning-wait.tsx
+msgid "Creating your account"
+msgstr "Създаване на акаунта ви"
+
+#: src/features/manage-billing/ui/billing-info.tsx
+msgid "Currency"
+msgstr "Валута"
+
+#: src/features/change-password/ui/change-password-modal.tsx
+#: src/pages/_app/settings/security.tsx
+msgid "Current password"
+msgstr "Текуща парола"
+
+#: src/features/change-password/ui/change-password-modal.tsx
+#: src/pages/_app/settings/security.tsx
+msgid "Current password is required"
+msgstr "Текущата парола е задължителна"
+
+#: src/features/manage-billing/ui/plan-card.tsx
+msgid "Current Plan"
+msgstr "Текущ план"
+
+#: src/features/manage-billing/ui/current-subscription.tsx
+msgid "Current Subscription"
+msgstr "Текущ абонамент"
+
+#: src/features/tenant-switcher/ui/tenant-switcher.tsx
+msgid "Current workspace"
+msgstr "Текущо работно пространство"
+
+#: src/pages/_app/index.tsx
+#: src/shared/ui/app-layout/app-nav.tsx
+msgid "Dashboard"
+msgstr "Табло"
+
+#: src/features/manage-billing/ui/refund-list.tsx
+msgid "Date"
+msgstr "Дата"
+
+#: src/shared/ui/tenant-status-badge/tenant-status-badge.tsx
+#: src/shared/ui/user-status-badge/user-status-badge.tsx
+msgid "Deleted"
+msgstr "Изтрито"
+
+#: src/pages/loading-demo.tsx
+msgid "Demo LoadingOverlay (2s)"
+msgstr "Демо LoadingOverlay (2 сек)"
+
+#: src/pages/loading-demo.tsx
+msgid "Demo Progress Bar"
+msgstr "Демо лента за напредък"
+
+#: src/features/signup/ui/verify-email-prompt.tsx
+msgid "Didn't receive it? Check your spam folder or"
+msgstr "Не сте получили? Проверете папката за спам или"
+
+#: src/pages/sign-in.tsx
+msgid "Don't have an account? <0>Create one</0>"
+msgstr "Нямате акаунт? <0>Създайте</0>"
+
+#: src/pages/_app/settings/organization.tsx
+msgid "Edit"
+msgstr "Редактирай"
+
+#: src/features/edit-profile/ui/edit-profile-modal.tsx
+msgid "Edit Profile"
+msgstr "Редактирай профил"
+
+#: src/features/edit-profile/ui/edit-profile-modal.tsx
+#: src/features/forgot-password/ui/forgot-password-form.tsx
+#: src/features/invite-member/ui/invitation-details-modal.tsx
+#: src/features/sign-in/ui/sign-in-form.tsx
+#: src/pages/_app/settings/general.tsx
+#: src/pages/invite.$token.tsx
+msgid "Email"
+msgstr "Имейл"
+
+#: src/features/invite-member/ui/send-invitation-modal.tsx
+msgid "Email address"
+msgstr "Имейл адрес"
+
+#: src/pages/verify-email.tsx
+msgid "email address."
+msgstr "имейл адрес."
+
+#: src/features/forgot-password/model/use-forgot-password.ts
+#: src/features/sign-in/model/use-sign-in.ts
+#: src/features/signup/model/use-signup.ts
+msgid "Email is required"
+msgstr "Имейлът е задължителен"
+
+#: src/pages/verify-email.tsx
+msgid "Email verification"
+msgstr "Потвърждаване на имейл"
+
+#: src/pages/verify-email.tsx
+msgid "Email verified"
+msgstr "Имейлът е потвърден"
+
+#: src/features/edit-profile/ui/edit-profile-modal.tsx
+msgid "Email verified:"
+msgstr "Имейл потвърден:"
+
+#: src/features/manage-billing/ui/billing-info.tsx
+msgid "email@company.com"
+msgstr "имейл@компания.com"
+
+#: src/features/forgot-password/model/use-forgot-password.ts
+#: src/features/sign-in/model/use-sign-in.ts
+#: src/features/signup/model/use-signup.ts
+msgid "Enter a valid email address"
+msgstr "Въведете валиден имейл адрес"
+
+#: src/features/change-password/ui/change-password-modal.tsx
+#: src/pages/_app/settings/security.tsx
+msgid "Enter new password"
+msgstr "Въведете нова парола"
+
+#: src/features/forgot-password/ui/forgot-password-form.tsx
+msgid "Enter the email address associated with your account and we'll send you a link to reset your password."
+msgstr "Въведете имейл адреса, свързан с акаунта ви, и ще ви изпратим връзка за нулиране на паролата."
+
+#: src/features/change-password/ui/change-password-modal.tsx
+#: src/pages/_app/settings/security.tsx
+msgid "Enter your current password"
+msgstr "Въведете текущата си парола"
+
+#: src/pages/invite.$token.tsx
+msgid "Enter your password to confirm your identity and join."
+msgstr "Въведете паролата си, за да потвърдите самоличността си и да се присъедините."
+
+#: src/features/signup/ui/verify-email-prompt.tsx
+msgid "Enter your workspace"
+msgstr "Влезте в работното си пространство"
+
+#: src/features/manage-billing/ui/billing-info.tsx
+#: src/features/manage-billing/ui/plan-list.tsx
+#: src/features/manage-billing/ui/refund-list.tsx
+#: src/features/manage-organization/ui/organization-settings.tsx
+msgid "Error"
+msgstr "Грешка"
+
+#: src/shared/ui/error-boundary.tsx
+msgid "Error Details (Development)"
+msgstr "Детайли на грешката (разработка)"
+
+#: src/shared/ui/invitation-status-badge/invitation-status-badge.tsx
+msgid "Expired"
+msgstr "Изтекло"
+
+#: src/features/invite-member/ui/invitation-details-modal.tsx
+#: src/pages/_app/team.tsx
+#: src/pages/invite.$token.tsx
+msgid "Expires"
+msgstr "Изтича"
+
+#: src/features/ban-user/ui/ban-member-modal.tsx
+msgid "Expires at (optional)"
+msgstr "Изтича на (по избор)"
+
+#: src/features/manage-billing/ui/billing-info.tsx
+msgid "Failed to load billing settings."
+msgstr "Зареждането на настройките за фактуриране не успя."
+
+#: src/features/manage-organization/ui/organization-settings.tsx
+msgid "Failed to load organization settings."
+msgstr "Зареждането на настройките на организацията не успя."
+
+#: src/features/manage-billing/ui/plan-list.tsx
+msgid "Failed to load plans. Please try again later."
+msgstr "Зареждането на плановете не успя. Моля, опитайте отново по-късно."
+
+#: src/pages/_app/settings/general.tsx
+#: src/pages/_app/settings/security.tsx
+msgid "Failed to load profile"
+msgstr "Зареждането на профила не успя"
+
+#: src/features/manage-billing/ui/refund-list.tsx
+msgid "Failed to load refund history."
+msgstr "Зареждането на историята на възстановяванията не успя."
+
+#: src/features/signup/ui/password-strength.tsx
+msgid "Fair"
+msgstr "Задоволителна"
+
+#: src/features/edit-profile/ui/edit-profile-modal.tsx
+#: src/features/signup/ui/signup-form.tsx
+#: src/pages/_app/settings/general.tsx
+#: src/pages/invite.$token.tsx
+msgid "First name"
+msgstr "Собствено ime"
+
+#: src/features/accept-invitation/model/use-accept-invitation.ts
+#: src/features/edit-profile/ui/edit-profile-modal.tsx
+#: src/features/signup/model/use-signup.ts
+#: src/pages/_app/settings/general.tsx
+msgid "First name is required"
+msgstr "Собственото ime е задължително"
+
+#: src/features/signup/model/use-signup.ts
+msgid "First name is too long"
+msgstr "Собственото ime е твърде дълго"
+
+#: src/pages/forgot-password.tsx
+msgid "Forgot Password"
+msgstr "Забравена парола"
+
+#: src/features/sign-in/ui/sign-in-form.tsx
+msgid "Forgot password?"
+msgstr "Забравена парола?"
+
+#: src/pages/forgot-password.tsx
+msgid "Forgot your"
+msgstr "Забравихте"
+
+#: src/pages/loading-demo.tsx
+msgid "Full-screen centered loader shown on first app load (while locale initializes)."
+msgstr "Цялоекранен центриран индикатор при първото зареждане на приложението (докато локалът се инициализира)."
+
+#: src/pages/_app/settings/general.tsx
+#: src/shared/ui/app-layout/app-nav.tsx
+msgid "General"
+msgstr "Общи"
+
+#: src/pages/_app/settings/general.tsx
+msgid "General Settings"
+msgstr "Общи настройки"
+
+#: src/pages/404.tsx
+#: src/pages/500.tsx
+msgid "Go home"
+msgstr "Към началото"
+
+#: src/pages/unauthorized.tsx
+msgid "Go to Home"
+msgstr "Към началната страница"
+
+#: src/features/signup/ui/password-strength.tsx
+msgid "Good"
+msgstr "Добра"
+
+#: src/pages/_app/index.tsx
+msgid "Here's what you can do from your personal workspace:"
+msgstr "Ето какво можете да направите от личното си работно пространство:"
+
+#: src/pages/_app/index.tsx
+#: src/pages/_app/settings/general.tsx
+#: src/pages/_app/settings/notifications.tsx
+#: src/pages/_app/settings/organization.tsx
+#: src/pages/_app/settings/security.tsx
+#: src/pages/_app/team.tsx
+msgid "Home"
+msgstr "Начало"
+
+#. placeholder {0}: getValues("email")
+#: src/features/forgot-password/ui/forgot-password-form.tsx
+msgid "If <0>{0}</0> is registered, you'll receive a password reset link shortly. Check your spam folder if you don't see it."
+msgstr "Ако <0>{0}</0> е регистриран, скоро ще получите връзка за нулиране на паролата. Проверете папката за спам, ако не го виждате."
+
+#: src/pages/loading-demo.tsx
+msgid "Implementation Details"
+msgstr "Детайли на имплементацията"
+
+#: src/features/accept-invitation/model/use-accept-invitation.ts
+msgid "Incorrect password. Please try again."
+msgstr "Грешна парола. Моля, опитайте отново."
+
+#: src/pages/500.tsx
+msgid "Internal server error."
+msgstr "Вътрешна грешка на сървъра."
+
+#: src/features/manage-billing/ui/billing-info.tsx
+msgid "Invalid email"
+msgstr "Невалиден имейл"
+
+#: src/features/sign-in/model/use-sign-in.ts
+msgid "Invalid email or password"
+msgstr "Невалиден имейл или парола"
+
+#: src/features/accept-invitation/model/use-accept-invitation.ts
+msgid "Invalid request. Please check your details and try again."
+msgstr "Невалидна заявка. Моля, проверете данните си и опитайте отново."
+
+#: src/features/reset-password/ui/reset-password-form.tsx
+msgid "Invalid reset link"
+msgstr "Невалидна връзка за нулиране"
+
+#: src/pages/verify-email.tsx
+msgid "Invalid verification link"
+msgstr "Невалидна връзка за потвърждение"
+
+#: src/features/invite-member/ui/invitation-details-modal.tsx
+msgid "Invitation details"
+msgstr "Детайли на поканата"
+
+#: src/pages/invite.$token.tsx
+msgid "Invitation not found"
+msgstr "Поканата не е намерена"
+
+#: src/features/invite-member/ui/send-invitation-modal.tsx
+#: src/pages/_app/team.tsx
+msgid "Invite member"
+msgstr "Покани член"
+
+#: src/pages/invite.$token.tsx
+msgid "invited."
+msgstr "поканени."
+
+#: src/features/signup/ui/signup-form.tsx
+#: src/pages/invite.$token.tsx
+msgid "Jane"
+msgstr "Иван"
+
+#. placeholder {0}: preview.tenantName
+#: src/pages/invite.$token.tsx
+msgid "Join {0}"
+msgstr "Присъедини се към {0}"
+
+#. placeholder {0}: preview.tenantName
+#: src/pages/invite.$token.tsx
+msgid "Join {0} and start collaborating with your team."
+msgstr "Присъедини се към {0} и започни да работиш в екип."
+
+#: src/pages/_app/settings/organization.tsx
+msgid "Key"
+msgstr "Ключ"
+
+#: src/features/edit-profile/ui/edit-profile-modal.tsx
+#: src/pages/_app/settings/general.tsx
+#: src/shared/ui/locale-switcher/locale-switcher.tsx
+msgid "Language"
+msgstr "Език"
+
+#: src/features/edit-profile/ui/edit-profile-modal.tsx
+#: src/features/signup/ui/signup-form.tsx
+#: src/pages/_app/settings/general.tsx
+#: src/pages/invite.$token.tsx
+msgid "Last name"
+msgstr "Фамилно ime"
+
+#: src/features/accept-invitation/model/use-accept-invitation.ts
+#: src/features/edit-profile/ui/edit-profile-modal.tsx
+#: src/features/signup/model/use-signup.ts
+#: src/pages/_app/settings/general.tsx
+msgid "Last name is required"
+msgstr "Фамилното ime е задължително"
+
+#: src/features/signup/model/use-signup.ts
+msgid "Last name is too long"
+msgstr "Фамилното ime е твърде дълго"
+
+#: src/pages/verify-email.tsx
+msgid "Link expired or invalid"
+msgstr "Връзката е изтекла или невалидна"
+
+#: src/pages/loading-demo.tsx
+msgid "Loading Demo"
+msgstr "Демо на зареждане"
+
+#: src/pages/loading-demo.tsx
+msgid "Loading States Demo"
+msgstr "Демо на режимите на зареждане"
+
+#: src/pages/invite.$token.tsx
+msgid "Loading your invitation…"
+msgstr "Зареждане на поканата ви…"
+
+#: src/shared/ui/loading-overlay/loading-overlay.tsx
+msgid "Loading..."
+msgstr "Зареждане..."
+
+#: src/features/edit-profile/ui/edit-profile-modal.tsx
+#: src/pages/_app/settings/general.tsx
+msgid "Loading…"
+msgstr "Зареждане…"
+
+#: src/shared/ui/user-status-badge/user-status-badge.tsx
+msgid "Locked"
+msgstr "Заключен"
+
+#: src/features/signup/ui/password-strength.tsx
+msgid "Lowercase letter"
+msgstr "Малка буква"
+
+#: src/pages/_app/billing.tsx
+msgid "Manage your billing information, view invoice history, and update your payment methods directly via our secure Stripe Customer Portal."
+msgstr "Управлявайте информацията за фактуриране, преглеждайте историята на фактурите и актуализирайте методите за плащане директно чрез сигурния Stripe Customer Portal."
+
+#: src/shared/ui/auth-layout/auth-layout.tsx
+msgid "Manage your team, subscriptions, and settings — all from one place, secured by enterprise-grade authentication."
+msgstr "Управлявайте екипа, абонаментите и настройките — на едно място, защитено с корпоративно удостоверяване."
+
+#: src/features/notification-bell/ui/notification-bell.tsx
+#: src/pages/_app/settings/notifications.tsx
+msgid "Mark all as read"
+msgstr "Маркирай всички като прочетени"
+
+#: src/features/invite-member/model/types.ts
+#: src/features/member-role/ui/update-member-authorities-modal.tsx
+msgid "Member"
+msgstr "Член"
+
+#: src/pages/_app/team.tsx
+msgid "Members"
+msgstr "Членове"
+
+#: src/features/invite-member/ui/send-invitation-modal.tsx
+msgid "Must be a valid email address"
+msgstr "Трябва да е валиден имейл адрес"
+
+#: src/shared/ui/app-layout/app-header.tsx
+msgid "My Account"
+msgstr "Моят акаунт"
+
+#: src/features/manage-organization/ui/organization-settings.tsx
+msgid "Name is too short"
+msgstr "Наименованието е твърде кратко"
+
+#: src/features/tenant-switcher/ui/tenant-switcher.tsx
+#: src/shared/ui/app-layout/app-header.tsx
+msgid "New Organization"
+msgstr "Нова организация"
+
+#: src/features/change-password/ui/change-password-modal.tsx
+#: src/features/reset-password/ui/reset-password-form.tsx
+#: src/pages/_app/settings/security.tsx
+msgid "New password"
+msgstr "Нова парола"
+
+#: src/features/manage-billing/ui/current-subscription.tsx
+msgid "Next Billing Date"
+msgstr "Следваща дата за фактуриране"
+
+#: src/features/sign-in/model/use-sign-in.ts
+msgid "No active tenant memberships found for this account"
+msgstr "Не са намерени активни членства за наематели за този акаунт"
+
+#: src/pages/_app/settings/organization.tsx
+msgid "No matches."
+msgstr "Няма съвпадения."
+
+#: src/pages/_app/team.tsx
+msgid "No members found."
+msgstr "Не са намерени членове."
+
+#: src/pages/_app/team.tsx
+msgid "No members match the search."
+msgstr "Няма членове, съответстващи на търсенето."
+
+#: src/features/notification-bell/ui/notification-bell.tsx
+#: src/pages/_app/settings/notifications.tsx
+msgid "No notifications yet"
+msgstr "Все още няма известия"
+
+#: src/pages/_app/settings/organization.tsx
+msgid "No organizations found."
+msgstr "Не са намерени организации."
+
+#: src/pages/_app/team.tsx
+msgid "No pending invitations."
+msgstr "Няма изчакващи покани."
+
+#: src/features/manage-billing/ui/plan-list.tsx
+msgid "No plans available at the moment."
+msgstr "Няма налични планове в момента."
+
+#: src/shared/ui/app-layout/app-nav.tsx
+msgid "No results"
+msgstr "Няма резултати"
+
+#: src/pages/_app/settings/security.tsx
+msgid "No roles assigned."
+msgstr "Не са присвоени роли."
+
+#: src/pages/forgot-password.tsx
+msgid "No worries — enter your email and we'll send you a secure link to reset it."
+msgstr "Не се притеснявайте — въведете имейла си и ще ви изпратим сигурна връзка за нулиране."
+
+#: src/features/notification-bell/ui/notification-bell.tsx
+#: src/pages/_app/settings/notifications.tsx
+#: src/shared/ui/app-layout/app-nav.tsx
+msgid "Notifications"
+msgstr "Известия"
+
+#. placeholder {0}: hasUnread ? `, ${unreadCount} unread` : ""
+#: src/features/notification-bell/ui/notification-bell.tsx
+msgid "Notifications{0}"
+msgstr "Известия{0}"
+
+#: src/features/signup/ui/password-strength.tsx
+msgid "Number"
+msgstr "Цифра"
+
+#: src/pages/verify-email.tsx
+msgid "One click and you're all set."
+msgstr "Един клик и сте готови."
+
+#: src/features/manage-billing/ui/billing-portal-button.tsx
+msgid "Open Billing Portal"
+msgstr "Отвори портала за фактуриране"
+
+#: src/pages/create-organization.tsx
+msgid "organization"
+msgstr "организация"
+
+#: src/pages/_app/settings/organization.tsx
+msgid "Organization"
+msgstr "Организация"
+
+#: src/features/manage-organization/ui/organization-settings.tsx
+msgid "Organization Key"
+msgstr "Ключ на организацията"
+
+#: src/features/create-organization/ui/create-organization-form.tsx
+msgid "Organization name"
+msgstr "Наименование на организацията"
+
+#: src/features/manage-organization/ui/organization-settings.tsx
+msgid "Organization Name"
+msgstr "Наименование на организацията"
+
+#: src/features/create-organization/model/use-create-organization.ts
+msgid "Organization name is required"
+msgstr "Наименованието на организацията е задължително"
+
+#: src/features/create-organization/model/use-create-organization.ts
+msgid "Organization name is too long"
+msgstr "Наименованието на организацията е твърде дълго"
+
+#: src/features/manage-organization/ui/organization-settings.tsx
+msgid "Organization Settings"
+msgstr "Настройки на организацията"
+
+#: src/pages/_app/settings/general.tsx
+#: src/pages/_app/settings/organization.tsx
+#: src/shared/ui/app-layout/app-header.tsx
+#: src/shared/ui/app-layout/app-nav.tsx
+msgid "Organizations"
+msgstr "Организации"
+
+#: src/pages/404.tsx
+msgid "Page Not Found"
+msgstr "Страницата не е намерена"
+
+#: src/pages/404.tsx
+msgid "Page not found."
+msgstr "Страницата не е намерена."
+
+#: src/features/sign-in/ui/sign-in-form.tsx
+#: src/features/signup/ui/signup-form.tsx
+#: src/pages/invite.$token.tsx
+msgid "Password"
+msgstr "Парола"
+
+#: src/features/sign-in/model/use-sign-in.ts
+msgid "Password is required"
+msgstr "Паролата е задължителна"
+
+#: src/features/accept-invitation/model/use-accept-invitation.ts
+#: src/features/change-password/ui/change-password-modal.tsx
+#: src/features/reset-password/model/use-reset-password.ts
+#: src/features/signup/model/use-signup.ts
+#: src/pages/_app/settings/security.tsx
+msgid "Password must be at least 8 characters"
+msgstr "Паролата трябва да е поне 8 символа"
+
+#: src/features/accept-invitation/model/use-accept-invitation.ts
+#: src/features/change-password/ui/change-password-modal.tsx
+#: src/features/reset-password/model/use-reset-password.ts
+#: src/features/signup/model/use-signup.ts
+#: src/pages/_app/settings/security.tsx
+msgid "Password must be at most 128 characters"
+msgstr "Паролата трябва да е най-много 128 символа"
+
+#: src/features/reset-password/model/use-reset-password.ts
+#: src/features/signup/model/use-signup.ts
+msgid "Password must contain uppercase, lowercase, a number, and a special character"
+msgstr "Паролата трябва да съдържа главна буква, малка буква, цифра и специален символ"
+
+#: src/features/change-password/ui/change-password-modal.tsx
+#: src/pages/_app/settings/security.tsx
+msgid "Password must contain uppercase, lowercase, digit, and special character"
+msgstr "Паролата трябва да съдържа главна буква, малка буква, цифра и специален символ"
+
+#: src/features/change-password/ui/change-password-modal.tsx
+#: src/pages/_app/settings/security.tsx
+msgid "Password requirements:"
+msgstr "Изисквания за парола:"
+
+#: src/features/reset-password/ui/reset-password-form.tsx
+msgid "Password updated"
+msgstr "Паролата е актуализирана"
+
+#: src/pages/forgot-password.tsx
+msgid "password?"
+msgstr "парола?"
+
+#: src/pages/reset-password.tsx
+msgid "password."
+msgstr "парола."
+
+#: src/features/change-password/ui/change-password-modal.tsx
+#: src/features/reset-password/model/use-reset-password.ts
+#: src/pages/_app/settings/security.tsx
+msgid "Passwords do not match"
+msgstr "Паролите не съвпадат"
+
+#: src/features/manage-billing/ui/refund-list.tsx
+msgid "Payment ID"
+msgstr "ID на плащане"
+
+#: src/shared/ui/invitation-status-badge/invitation-status-badge.tsx
+msgid "Pending"
+msgstr "Изчакващо"
+
+#: src/pages/_app/team.tsx
+msgid "Pending invitations"
+msgstr "Изчакващи покани"
+
+#: src/pages/_app/index.tsx
+msgid "Personal Workspace"
+msgstr "Лично работно пространство"
+
+#: src/features/ban-user/ui/ban-member-modal.tsx
+msgid "Pick a date and time"
+msgstr "Изберете дата и час"
+
+#: src/features/manage-billing/ui/current-subscription.tsx
+msgid "Plan"
+msgstr "План"
+
+#: src/features/reset-password/model/use-reset-password.ts
+msgid "Please confirm your password"
+msgstr "Моля, потвърдете паролата си"
+
+#: src/features/manage-billing/model/use-billing-portal.ts
+msgid "Portal error"
+msgstr "Грешка на портала"
+
+#: src/pages/_app/settings/general.tsx
+msgid "Profile Information"
+msgstr "Информация за профила"
+
+#: src/pages/_app/settings/general.tsx
+msgid "Profile Picture"
+msgstr "Снимка на профила"
+
+#: src/features/ban-user/ui/ban-member-modal.tsx
+msgid "Provide a reason for the ban…"
+msgstr "Посочете причина за забраната…"
+
+#: src/features/signup/ui/provisioning-wait.tsx
+msgid "Provisioning workspace"
+msgstr "Подготвяне на работното пространство"
+
+#: src/features/edit-profile/ui/edit-profile-modal.tsx
+#: src/pages/_app/settings/general.tsx
+#: src/pages/invite.$token.tsx
+msgid "read-only"
+msgstr "само за четене"
+
+#: src/features/ban-user/ui/ban-member-modal.tsx
+msgid "Reason (optional)"
+msgstr "Причина (по избор)"
+
+#: src/pages/_app/settings/organization.tsx
+#: src/pages/_app/team.tsx
+msgid "Refresh"
+msgstr "Обнови"
+
+#: src/features/manage-billing/ui/refund-list.tsx
+msgid "Refund History"
+msgstr "История на възстановяванията"
+
+#: src/features/forgot-password/ui/forgot-password-form.tsx
+#: src/features/reset-password/ui/reset-password-form.tsx
+msgid "Remember your password? <0>Sign in</0>"
+msgstr "Помните ли паролата си? <0>Влезте</0>"
+
+#: src/features/manage-organization/ui/member-actions.tsx
+msgid "Remove"
+msgstr "Премахни"
+
+#: src/features/manage-organization/ui/member-actions.tsx
+msgid "Remove Member"
+msgstr "Премахни член"
+
+#: src/features/change-password/ui/change-password-modal.tsx
+#: src/pages/_app/settings/security.tsx
+msgid "Repeat new password"
+msgstr "Повторете новата парола"
+
+#: src/features/reset-password/ui/reset-password-form.tsx
+msgid "Repeat your new password"
+msgstr "Повторете новата си парола"
+
+#: src/features/reset-password/ui/reset-password-form.tsx
+msgid "Request a new reset link"
+msgstr "Поискайте нова връзка за нулиране"
+
+#: src/features/signup/ui/verify-email-prompt.tsx
+msgid "Resend in {resendCooldown}s"
+msgstr "Изпрати отново след {resendCooldown} сек"
+
+#: src/features/signup/ui/verify-email-prompt.tsx
+msgid "Resend verification email"
+msgstr "Изпрати отново имейл за потвърждение"
+
+#: src/pages/reset-password.tsx
+msgid "Reset Password"
+msgstr "Нулиране на парола"
+
+#: src/pages/forgot-password.tsx
+msgid "Reset your password"
+msgstr "Нулирайте паролата си"
+
+#: src/features/ban-user/ui/unban-member-modal.tsx
+msgid "Restore access"
+msgstr "Възстанови достъпа"
+
+#: src/pages/_app/settings/general.tsx
+#: src/pages/_app/settings/security.tsx
+#: src/pages/_app/team.tsx
+msgid "Retry"
+msgstr "Опитай отново"
+
+#: src/features/manage-organization/ui/organization-settings.tsx
+msgid "Retry Provisioning"
+msgstr "Повторен опит за подготовка"
+
+#: src/features/invite-member/ui/invitation-details-modal.tsx
+msgid "Revoke"
+msgstr "Отмени"
+
+#: src/shared/ui/invitation-status-badge/invitation-status-badge.tsx
+msgid "Revoked"
+msgstr "Отменено"
+
+#: src/features/invite-member/ui/invitation-details-modal.tsx
+msgid "Revoking this invitation will prevent the recipient from accepting it."
+msgstr "Отмяната на тази покана ще попречи на получателя да я приеме."
+
+#: src/features/invite-member/ui/invitation-details-modal.tsx
+#: src/features/invite-member/ui/send-invitation-modal.tsx
+#: src/pages/_app/settings/organization.tsx
+msgid "Role"
+msgstr "Роля"
+
+#: src/pages/_app/settings/security.tsx
+msgid "Roles"
+msgstr "Роли"
+
+#: src/features/member-role/ui/update-member-authorities-modal.tsx
+msgid "Save"
+msgstr "Запази"
+
+#: src/features/edit-profile/ui/edit-profile-modal.tsx
+#: src/pages/_app/settings/general.tsx
+msgid "Save changes"
+msgstr "Запази промените"
+
+#: src/features/manage-billing/ui/billing-info.tsx
+#: src/features/manage-organization/ui/organization-settings.tsx
+msgid "Save Changes"
+msgstr "Запази промените"
+
+#: src/pages/_app/team.tsx
+msgid "Search by name or email…"
+msgstr "Търсете по ime или имейл…"
+
+#: src/pages/_app/settings/organization.tsx
+msgid "Search organizations…"
+msgstr "Търсете организации…"
+
+#: src/shared/ui/app-layout/app-nav.tsx
+msgid "Search…"
+msgstr "Търсете…"
+
+#: src/pages/_app/settings/security.tsx
+#: src/shared/ui/app-layout/app-nav.tsx
+msgid "Security"
+msgstr "Сигурност"
+
+#: src/pages/_app/settings/security.tsx
+msgid "Security Settings"
+msgstr "Настройки за сигурност"
+
+#: src/features/notification-bell/ui/notification-bell.tsx
+msgid "See all notifications"
+msgstr "Вижте всички известия"
+
+#: src/features/edit-profile/ui/edit-profile-modal.tsx
+#: src/pages/_app/settings/general.tsx
+#: src/shared/ui/locale-switcher/locale-switcher.tsx
+msgid "Select language"
+msgstr "Изберете език"
+
+#: src/features/manage-billing/ui/plan-card.tsx
+msgid "Select Plan"
+msgstr "Изберете план"
+
+#: src/features/member-role/ui/update-member-authorities-modal.tsx
+msgid "Select role"
+msgstr "Изберете роля"
+
+#: src/features/sign-in/ui/sign-in-form.tsx
+msgid "Select the workspace you want to sign in to."
+msgstr "Изберете работното пространство, в което искате да влезете."
+
+#: src/features/invite-member/ui/send-invitation-modal.tsx
+msgid "Send invitation"
+msgstr "Изпрати покана"
+
+#: src/features/forgot-password/ui/forgot-password-form.tsx
+msgid "Send reset link"
+msgstr "Изпрати връзка за нулиране"
+
+#: src/features/invite-member/ui/invitation-details-modal.tsx
+msgid "Sent"
+msgstr "Изпратено"
+
+#: src/pages/500.tsx
+msgid "Server Error"
+msgstr "Сървърна грешка"
+
+#: src/pages/reset-password.tsx
+msgid "Set a new"
+msgstr "Задайте нова"
+
+#: src/features/reset-password/ui/reset-password-form.tsx
+msgid "Set new password"
+msgstr "Задайте нова парола"
+
+#: src/pages/signup.tsx
+msgid "Set up your account in under a minute."
+msgstr "Настройте акаунта си за по-малко от минута."
+
+#: src/pages/create-organization.tsx
+msgid "Set up your workspace in under a minute."
+msgstr "Настройте работното си пространство за по-малко от минута."
+
+#: src/features/edit-profile/ui/edit-profile-modal.tsx
+#: src/pages/_app/settings/general.tsx
+msgid "Sets your preferred language for notifications and emails."
+msgstr "Задава предпочитания от вас език за известия и имейли."
+
+#: src/features/signup/ui/provisioning-wait.tsx
+msgid "Setting up your workspace"
+msgstr "Настройване на работното ви пространство"
+
+#. placeholder {0}: notifications.length
+#. placeholder {1}: listData?.totalElements ?? 0
+#: src/features/notification-bell/ui/notification-bell.tsx
+msgid "Showing {0} of {1}"
+msgstr "Показване на {0} от {1}"
+
+#: src/pages/sign-in.tsx
+msgid "Sign In"
+msgstr "Вход"
+
+#: src/pages/verify-email.tsx
+msgid "Sign in to your workspace"
+msgstr "Влезте в работното си пространство"
+
+#: src/pages/sign-in.tsx
+msgid "Sign in to your workspace to continue."
+msgstr "Влезте в работното си пространство, за да продължите."
+
+#: src/features/sign-out/ui/sign-out-button.tsx
+#: src/shared/ui/app-layout/app-header.tsx
+msgid "Sign out"
+msgstr "Изход"
+
+#: src/features/sign-in/model/use-sign-in.ts
+msgid "Sign-in failed. Please try again."
+msgstr "Входът не успя. Моля, опитайте отново."
+
+#: src/pages/invite.$token.tsx
+msgid "Signing you in…"
+msgstr "Влизане…"
+
+#: src/pages/loading-demo.tsx
+msgid "Slim top progress bar for navigation between pages (automatic with router)."
+msgstr "Тясна горна лента за напредък при навигация между страници (автоматична с рутер)."
+
+#: src/features/signup/ui/signup-form.tsx
+#: src/pages/invite.$token.tsx
+msgid "Smith"
+msgstr "Иванов"
+
+#: src/pages/signup.tsx
+msgid "something great."
+msgstr "нещо страхотно."
+
+#: src/shared/ui/error-boundary.tsx
+msgid "Something went wrong"
+msgstr "Нещо се обърка"
+
+#: src/features/accept-invitation/model/use-accept-invitation.ts
+#: src/features/create-organization/model/use-create-organization.ts
+#: src/features/forgot-password/model/use-forgot-password.ts
+#: src/features/reset-password/model/use-reset-password.ts
+#: src/features/signup/model/use-signup.ts
+msgid "Something went wrong. Please try again."
+msgstr "Нещо се обърка. Моля, опитайте отново."
+
+#: src/features/signup/ui/password-strength.tsx
+msgid "Special character"
+msgstr "Специален символ"
+
+#: src/pages/loading-demo.tsx
+msgid "Start"
+msgstr "Начало"
+
+#: src/pages/signup.tsx
+msgid "Start building"
+msgstr "Започнете да изграждате"
+
+#: src/features/invite-member/ui/invitation-details-modal.tsx
+#: src/features/manage-billing/ui/refund-list.tsx
+#: src/pages/_app/settings/organization.tsx
+msgid "Status"
+msgstr "Статус"
+
+#: src/features/signup/ui/provisioning-wait.tsx
+msgid "Still setting up…"
+msgstr "Все още се настройва…"
+
+#: src/features/signup/ui/password-strength.tsx
+msgid "Strong"
+msgstr "Силна"
+
+#: src/shared/ui/tenant-status-badge/tenant-status-badge.tsx
+#: src/shared/ui/user-status-badge/user-status-badge.tsx
+msgid "Suspended"
+msgstr "Спрян"
+
+#: src/pages/_app/index.tsx
+msgid "Switch between workspaces anytime using the workspace switcher in the sidebar."
+msgstr "Превключвайте между работни пространства по всяко време с помощта на превключвателя в страничната лента."
+
+#: src/pages/_app/settings/organization.tsx
+msgid "Switch failed"
+msgstr "Превключването не успя"
+
+#: src/features/tenant-switcher/ui/tenant-switcher.tsx
+msgid "Switch to"
+msgstr "Превключи към"
+
+#: src/shared/ui/color-scheme-toggle/color-scheme-toggle.tsx
+msgid "Switch to dark mode"
+msgstr "Превключи към тъмен режим"
+
+#: src/shared/ui/color-scheme-toggle/color-scheme-toggle.tsx
+msgid "Switch to light mode"
+msgstr "Превключи към светъл режим"
+
+#: src/pages/_app/team.tsx
+#: src/shared/ui/app-layout/app-nav.tsx
+msgid "Team"
+msgstr "Екип"
+
+#: src/pages/_app/index.tsx
+msgid "Team members"
+msgstr "Членове на екипа"
+
+#: src/features/member-role/ui/update-member-authorities-modal.tsx
+msgid "Tenant Owner"
+msgstr "Собственик на наемателя"
+
+#: src/features/invite-member/ui/send-invitation-modal.tsx
+msgid "TENANT_OWNER cannot be granted via invitation"
+msgstr "TENANT_OWNER не може да бъде предоставен чрез покана"
+
+#: src/features/manage-organization/ui/organization-settings.tsx
+msgid "The unique identifier for your organization. This cannot be changed."
+msgstr "Уникалният идентификатор на организацията ви. Не може да бъде променян."
+
+#: src/pages/loading-demo.tsx
+msgid "Theme-aware (respects dark mode and color scheme)"
+msgstr "Отчита темата (поддържа тъмен режим и цветова схема)"
+
+#: src/features/accept-invitation/model/use-accept-invitation.ts
+msgid "This invitation link has expired or is no longer valid."
+msgstr "Тази връзка за покана е изтекла или вече не е валидна."
+
+#: src/pages/invite.$token.tsx
+msgid "This invitation link has expired, been revoked, or doesn't exist. Contact the person who invited you to request a new one."
+msgstr "Тази връзка за покана е изтекла, отменена или не съществува. Свържете се с лицето, което ви е поканило, за нова."
+
+#: src/features/signup/ui/provisioning-wait.tsx
+msgid "This is taking a bit longer than usual. Hang tight — we're still working on it."
+msgstr "Това отнема малко повече от обичайното. Изчакайте — все още работим по него."
+
+#: src/pages/verify-email.tsx
+msgid "This link is missing a verification token. Please use the link from your email."
+msgstr "В тази връзка липсва токен за потвърждение. Моля, използвайте връзката от имейла ви."
+
+#: src/features/reset-password/ui/reset-password-form.tsx
+msgid "This password reset link is missing a token. Please request a new one."
+msgstr "В тази връзка за нулиране на парола липсва токен. Моля, поискайте нова."
+
+#: src/features/reset-password/model/use-reset-password.ts
+msgid "This reset link is invalid or has expired. Please request a new one."
+msgstr "Тази връзка за нулиране е невалидна или е изтекла. Моля, поискайте нова."
+
+#: src/pages/loading-demo.tsx
+msgid "This template uses Mantine's official loading components for optimal UX."
+msgstr "Този шаблон използва официалните компоненти за зареждане на Mantine за оптимален UX."
+
+#: src/pages/verify-email.tsx
+msgid "This verification link has expired or has already been used. Request a new one from your account settings."
+msgstr "Тази връзка за потвърждение е изтекла или вече е използвана. Поискайте нова от настройките на акаунта ви."
+
+#: src/features/create-organization/model/use-create-organization.ts
+#: src/features/forgot-password/model/use-forgot-password.ts
+#: src/features/reset-password/model/use-reset-password.ts
+#: src/features/signup/model/use-signup.ts
+msgid "Too many requests. Please wait a moment before trying again."
+msgstr "Твърде много заявки. Моля, изчакайте малко, преди да опитате отново."
+
+#: src/features/sign-in/model/use-sign-in.ts
+msgid "Too many sign-in attempts. Please try again later."
+msgstr "Твърде много опити за вход. Моля, опитайте отново по-късно."
+
+#: src/features/member-role/ui/transfer-ownership-modal.tsx
+msgid "Transfer ownership"
+msgstr "Прехвърли собствеността"
+
+#: src/features/manage-organization/ui/member-actions.tsx
+#: src/features/member-role/ui/transfer-ownership-modal.tsx
+msgid "Transfer Ownership"
+msgstr "Прехвърли собствеността"
+
+#: src/features/member-role/ui/transfer-ownership-modal.tsx
+msgid "Transferring ownership will make {displayName} the new Tenant Owner. You will become a Member of this tenant and lose all owner permissions. This action cannot be undone by you — only the new owner can transfer ownership back."
+msgstr "Прехвърлянето на собствеността ще направи {displayName} новия собственик на наемателя. Вие ще станете член на наемателя и ще загубите всички права на собственик. Това действие не може да бъде отменено от вас — само новият собственик може да прехвърли собствеността обратно."
+
+#: src/shared/ui/auth-layout/auth-layout.tsx
+msgid "Trusted by teams worldwide"
+msgstr "Доверено от екипи по целия свят"
+
+#: src/shared/ui/error-boundary.tsx
+msgid "Try Again"
+msgstr "Опитай отново"
+
+#: src/features/ban-user/ui/unban-member-modal.tsx
+msgid "Unban member"
+msgstr "Разблокирай член"
+
+#: src/features/ban-user/ui/unban-member-modal.tsx
+#: src/features/manage-organization/ui/member-actions.tsx
+msgid "Unban Member"
+msgstr "Разблокирай член"
+
+#: src/features/ban-user/ui/unban-member-modal.tsx
+msgid "Unbanning this member will restore their access to this tenant. They will be able to access this tenant again with their existing credentials."
+msgstr "Разблокирането на този член ще възстанови достъпа им до наемателя. Те ще могат да достъпват наемателя отново с текущите си данни за достъп."
+
+#: src/features/edit-profile/ui/edit-profile-modal.tsx
+msgid "Unverified"
+msgstr "Непотвърден"
+
+#: src/features/avatar/ui/avatar-upload.tsx
+msgid "Upload avatar"
+msgstr "Качи аватар"
+
+#: src/features/change-password/ui/change-password-modal.tsx
+#: src/pages/_app/settings/security.tsx
+msgid "Uppercase and lowercase letters"
+msgstr "Главни и малки букви"
+
+#: src/features/signup/ui/password-strength.tsx
+msgid "Uppercase letter"
+msgstr "Главна буква"
+
+#: src/pages/loading-demo.tsx
+msgid "Uses <0>@mantine/nprogress</0> for top loading bar"
+msgstr "Използва <0>@mantine/nprogress</0> за горна лента за зареждане"
+
+#: src/pages/loading-demo.tsx
+msgid "Uses <0>LoadingOverlay</0> component for full-screen loading"
+msgstr "Използва компонента <0>LoadingOverlay</0> за цялоекранно зареждане"
+
+#: src/features/edit-profile/ui/edit-profile-modal.tsx
+msgid "Verified"
+msgstr "Потвърден"
+
+#: src/pages/verify-email.tsx
+msgid "Verify Email"
+msgstr "Потвърди имейл"
+
+#: src/pages/verify-email.tsx
+msgid "Verifying your email address…"
+msgstr "Потвърждаване на имейл адреса ви…"
+
+#: src/pages/_app/team.tsx
+msgid "View details"
+msgstr "Вижте детайлите"
+
+#: src/features/signup/ui/verify-email-prompt.tsx
+msgid "We sent a verification link to <0>{email}</0>. Click it to confirm your email address."
+msgstr "Изпратихме връзка за потвърждение на <0>{email}</0>. Кликнете върху нея, за да потвърдите имейл адреса си."
+
+#: src/pages/forgot-password.tsx
+msgid "We'll send a reset link to your email address."
+msgstr "Ще изпратим връзка за нулиране на вашия имейл адрес."
+
+#: src/features/signup/ui/provisioning-wait.tsx
+msgid "We're preparing your workspace. This usually takes just a few seconds."
+msgstr "Подготвяме работното ви пространство. Обикновено отнема само няколко секунди."
+
+#: src/features/signup/ui/password-strength.tsx
+msgid "Weak"
+msgstr "Слаба"
+
+#: src/pages/invite.$token.tsx
+msgid "Welcome aboard"
+msgstr "Добре дошли"
+
+#: src/pages/sign-in.tsx
+msgid "Welcome back"
+msgstr "Добре дошли отново"
+
+#: src/pages/_app/index.tsx
+msgid "Welcome back, {firstName}."
+msgstr "Добре дошли отново, {firstName}."
+
+#: src/pages/_app/index.tsx
+msgid "Welcome, {firstName}!"
+msgstr "Добре дошли, {firstName}!"
+
+#: src/features/signup/ui/signup-form.tsx
+msgid "Work email"
+msgstr "Служебен имейл"
+
+#: src/shared/ui/app-layout/app-nav.tsx
+msgid "Workspace"
+msgstr "Работно пространство"
+
+#: src/features/accept-invitation/model/use-accept-invitation.ts
+msgid "You are already a member of this organization."
+msgstr "Вече сте член на тази организация."
+
+#: src/pages/_app/settings/general.tsx
+msgid "You are not a member of any organization."
+msgstr "Не сте член на никоя организация."
+
+#: src/pages/sign-in.tsx
+msgid "You do not have permission to access this area."
+msgstr "Нямате разрешение за достъп до тази зона."
+
+#: src/pages/unauthorized.tsx
+msgid "You do not have permission to access this area. Please sign in with an account that has the appropriate membership."
+msgstr "Нямате разрешение за достъп до тази зона. Моля, влезте с акаунт с подходящото членство."
+
+#: src/features/manage-billing/ui/current-subscription.tsx
+msgid "You don't have an active subscription yet. Choose a plan below to get started."
+msgstr "Все още нямате активен абонамент. Изберете план по-долу, за да започнете."
+
+#: src/features/tenant-switcher/model/use-tenant-switcher.ts
+msgid "You no longer have access to this organization."
+msgstr "Вече нямате достъп до тази организация."
+
+#: src/pages/invite.$token.tsx
+msgid "You've been"
+msgstr "Вие бяхте"
+
+#: src/features/signup/ui/signup-form.tsx
+msgid "you@company.com"
+msgstr "you@company.com"
+
+#: src/features/forgot-password/ui/forgot-password-form.tsx
+#: src/features/sign-in/ui/sign-in-form.tsx
+msgid "you@example.com"
+msgstr "you@example.com"
+
+#: src/features/accept-invitation/model/use-accept-invitation.ts
+msgid "Your account is locked or suspended."
+msgstr "Акаунтът ви е заключен или спрян."
+
+#: src/features/sign-in/model/use-sign-in.ts
+msgid "Your account is not active or has been suspended"
+msgstr "Акаунтът ви не е активен или е спрян"
+
+#: src/pages/verify-email.tsx
+msgid "Your email address has been confirmed. You're all set."
+msgstr "Имейл адресът ви е потвърден. Готови сте."
+
+#: src/pages/invite.$token.tsx
+msgid "Your existing password"
+msgstr "Текущата ви парола"
+
+#: src/pages/reset-password.tsx
+msgid "Your new password must be different from your previous one."
+msgstr "Новата ви парола трябва да е различна от предишната."
+
+#: src/features/sign-in/ui/sign-in-form.tsx
+msgid "Your password"
+msgstr "Вашата парола"
+
+#: src/features/reset-password/ui/reset-password-form.tsx
+msgid "Your password has been changed successfully. You'll be redirected to sign in shortly."
+msgstr "Паролата ви е сменена успешно. Ще бъдете пренасочени към входа скоро."
+
+#: src/pages/_app/billing.tsx
+msgid "Your payment information is securely processed by Stripe. We do not store your credit card details on our servers."
+msgstr "Информацията за плащане се обработва сигурно от Stripe. Не съхраняваме данните на кредитната ви карта на нашите сървъри."
+
+#: src/pages/sign-in.tsx
+msgid "Your session expired due to inactivity."
+msgstr "Сесията ви изтече поради неактивност."
+
+#: src/shared/ui/auth-layout/auth-layout.tsx
+msgid "Your workspace,"
+msgstr "Вашето работно пространство,"

@@ -5,9 +5,9 @@ import { messages } from "../../../locales/en-US";
 i18n.load("en-US", messages);
 i18n.activate("en-US");
 
-export type SupportedLocales = "en-US";
+export type SupportedLocales = "en-US" | "bg-BG";
 
-export const availableLocales = ["en-US"];
+export const availableLocales = ["en-US", "bg-BG"];
 
 export const getClientLocale = () => {
   if (typeof window !== "undefined") {
@@ -41,10 +41,12 @@ export const getSupportedLocale = (userLocale: string) => {
 
 export const localeToFlagEmojiMap: Record<SupportedLocales, string> = {
   "en-US": "🇺🇸",
+  "bg-BG": "🇧🇬",
 };
 
 export const localeToNameMap: Record<SupportedLocales, string> = {
   "en-US": "English (US)",
+  "bg-BG": "Български (България)",
 };
 
 export const getLocaleName = (locale: SupportedLocales) => {
