@@ -137,7 +137,7 @@
     "@vitest/ui": "4.1.5",
     "autoprefixer": "^10.5.0",
     "cz-conventional-changelog": "^3.3.0",
-    "gitzy": "7.1.0",
+    "gitzy": "7.2.1",
     "globals": "^17.6.0",
     "happy-dom": "20.10.2",
     "husky": "^9.1.7",
