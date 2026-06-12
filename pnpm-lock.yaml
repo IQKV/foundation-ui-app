@@ -211,8 +211,8 @@ importers:
         specifier: ^21.0.2
         version: 21.0.2
       '@lingui/cli':
-        specifier: ^6.2.0
-        version: 6.2.0
+        specifier: ^6.3.0
+        version: 6.3.0
       '@lingui/swc-plugin':
         specifier: ^6.3.0
         version: 6.3.0(@lingui/core@6.3.0)(@swc/core@1.15.40)
@@ -1127,6 +1127,10 @@ packages:
     resolution: {integrity: sha512-/iPL0DSvq6oZQjxLSHXofaxq18joGKEYzJjaZUWw9jdyWpRp1kNFMHPQVPbemVBR2PSJUNS7jlOu1iph7qtkrQ==}
     engines: {node: '>=22.19.0'}
 
+  '@lingui/babel-plugin-extract-messages@6.3.0':
+    resolution: {integrity: sha512-vMMfS5MIGLbEVwIl2lpeHAJkeYga3QbwRwtTuzT8YProW35d5H9g5/zh7GjS3keSe1r6azfcCsKBZh2JHhjtjA==}
+    engines: {node: '>=22.19.0'}
+
   '@lingui/babel-plugin-lingui-macro@6.2.0':
     resolution: {integrity: sha512-sZqrd+RFLOePcimYoyNWs7n8brfkD5MXKb9trYNaV+/obt3C02LEpLrdIqUvykpn5+NgeZY6H0x/HqaXTil5vA==}
     engines: {node: '>=22.19.0'}
@@ -1137,6 +1141,11 @@ packages:
 
   '@lingui/cli@6.2.0':
     resolution: {integrity: sha512-47j2VnDCRAuxlwFnBshQqTGBmkiRvr2jUs7FzEHT0z/drCOhNwHoNCDDAGC/1SwsiK9kaeNZcObyZfrpe3z3PA==}
+    engines: {node: '>=22.19.0'}
+    hasBin: true
+
+  '@lingui/cli@6.3.0':
+    resolution: {integrity: sha512-G7sxjWpiYGnI36srHsIh64AxNcR2aGpaE9JTtf9ehs2ad32qDfMNDRkf05wQ9di6sVpbtq6DfUcp73QsIJ2eng==}
     engines: {node: '>=22.19.0'}
     hasBin: true
 
@@ -7389,6 +7398,8 @@ snapshots:
 
   '@lingui/babel-plugin-extract-messages@6.2.0': {}
 
+  '@lingui/babel-plugin-extract-messages@6.3.0': {}
+
   '@lingui/babel-plugin-lingui-macro@6.2.0':
     dependencies:
       '@babel/core': 7.29.7
@@ -7419,6 +7430,34 @@ snapshots:
       '@lingui/core': 6.2.0
       '@lingui/format-po': 6.2.0
       '@lingui/message-utils': 6.2.0
+      chokidar: 5.0.0
+      cli-table3: 0.6.5
+      commander: 14.0.3
+      esbuild: 0.25.12
+      jiti: 2.7.0
+      micromatch: 4.0.8
+      ms: 2.1.3
+      normalize-path: 3.0.0
+      ora: 9.4.0
+      pseudolocale: 2.2.0
+      source-map: 0.7.6
+      tinypool: 2.1.0
+    transitivePeerDependencies:
+      - babel-plugin-macros
+      - supports-color
+
+  '@lingui/cli@6.3.0':
+    dependencies:
+      '@babel/core': 7.29.7
+      '@babel/generator': 7.29.7
+      '@babel/parser': 7.29.7
+      '@babel/types': 7.29.7
+      '@lingui/babel-plugin-extract-messages': 6.3.0
+      '@lingui/babel-plugin-lingui-macro': 6.3.0
+      '@lingui/conf': 6.3.0
+      '@lingui/core': 6.3.0
+      '@lingui/format-po': 6.3.0
+      '@lingui/message-utils': 6.3.0
       chokidar: 5.0.0
       cli-table3: 0.6.5
       commander: 14.0.3
