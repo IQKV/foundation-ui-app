@@ -12,7 +12,7 @@ import { i18n } from "@lingui/core";
 import { HelmetProvider } from "@dr.pogodin/react-helmet";
 
 import { routeTree } from "@/routeTree.gen";
-import { theme } from "./theme";
+import { theme, cssVariablesResolver } from "./theme";
 import { ErrorBoundary, LoadingOverlay } from "@/shared/ui";
 
 import "@mantine/core/styles.css";
@@ -70,7 +70,11 @@ export function App() {
       <HelmetProvider>
         <I18nProvider i18n={i18n}>
           <ErrorBoundary>
-            <MantineProvider theme={theme} colorSchemeManager={colorSchemeManager}>
+            <MantineProvider
+              theme={theme}
+              colorSchemeManager={colorSchemeManager}
+              cssVariablesResolver={cssVariablesResolver}
+            >
               <ModalsProvider>
                 <NavigationProgress />
                 <Notifications />

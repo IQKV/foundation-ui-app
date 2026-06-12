@@ -1,8 +1,7 @@
-import { Burger, Divider, Group, Text, Box, Avatar, Menu, Button } from "@mantine/core";
-import { IconShieldHalf, IconLogout, IconUser, IconBuilding, IconPlus } from "@tabler/icons-react";
+import { Group, Burger, Avatar, Menu, Text } from "@mantine/core";
+import { IconLogout, IconUser, IconBuilding, IconPlus } from "@tabler/icons-react";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { Trans } from "@lingui/react/macro";
-import { APP_NAME } from "@/shared/lib/page-title";
 import { useSignOut } from "@/features/sign-out";
 import { NotificationBell } from "@/features/notification-bell";
 import { useSessionStore } from "@/processes/session";
@@ -12,6 +11,7 @@ import { ColorSchemeToggle } from "@/shared/ui/color-scheme-toggle/color-scheme-
 import { LocaleSwitcher } from "@/shared/ui/locale-switcher/locale-switcher";
 import { useQuery } from "@tanstack/react-query";
 import { iamApi } from "@/shared/api";
+import { Button } from "@mantine/core";
 
 interface AppHeaderProps {
   opened: boolean;
@@ -90,61 +90,30 @@ function UserMenu() {
   );
 }
 
+/**
+ * Top toolbar — right column only.
+ *
+ * The brand/logo has moved into AppNavLogo (inside the dark sidebar) so the
+ * sidebar reads as one unified column. This header owns only the right-side
+ * utility controls and, on mobile, the hamburger toggle.
+ */
 export function AppHeader({ opened, onToggle }: AppHeaderProps) {
   const navigate = useNavigate();
 
   return (
-    <Group h="100%" px={0} justify="space-between" gap={0} data-testid="app-header">
-      {/* Brand block — same width as sidebar */}
-      <Group
-        h="100%"
-        px="md"
-        gap="xs"
-        style={{
-          width: 220,
-          borderRight: "1px solid var(--mantine-color-default-border)",
-          flexShrink: 0,
-        }}
-      >
-        <Burger
-          opened={opened}
-          onClick={onToggle}
-          hiddenFrom="sm"
-          size="sm"
-          data-testid="header-mobile-menu-toggle"
-        />
+    <Group h="100%" px="md" justify="space-between" gap={0} data-testid="app-header">
+      {/* Mobile-only hamburger */}
+      <Burger
+        opened={opened}
+        onClick={onToggle}
+        hiddenFrom="sm"
+        size="sm"
+        data-testid="header-mobile-menu-toggle"
+        aria-label="Toggle navigation"
+      />
 
-        <Group gap={8} visibleFrom="sm" style={{ cursor: "default" }}>
-          <Box
-            style={{
-              width: 32,
-              height: 32,
-              borderRadius: "var(--mantine-radius-md)",
-              background: "var(--mantine-color-dark-8)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              flexShrink: 0,
-            }}
-            data-testid="header-logo"
-          >
-            <IconShieldHalf size={18} color="white" />
-          </Box>
-          <Text
-            fw={700}
-            size="sm"
-            c="var(--mantine-color-text)"
-            style={{ letterSpacing: "-0.01em" }}
-          >
-            {APP_NAME}
-          </Text>
-        </Group>
-      </Group>
-
-      <Divider orientation="vertical" />
-
-      {/* Right side — user menu */}
-      <Group gap="xs" px="md" ml="auto">
+      {/* Right-side utility strip */}
+      <Group gap="xs" ml="auto">
         {isMultiTenantMode && (
           <Button
             variant="filled"

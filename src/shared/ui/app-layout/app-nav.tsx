@@ -22,6 +22,28 @@ interface NavItem {
   to: string;
 }
 
+/** Uppercase section label styled for the dark sidebar */
+function SectionLabel({ children }: { children: React.ReactNode }) {
+  return (
+    <Text
+      size="xs"
+      fw={600}
+      tt="uppercase"
+      lts="0.06em"
+      px={14}
+      pt={12}
+      pb={4}
+      style={{
+        color: "var(--app-nav-section-label)",
+        userSelect: "none",
+        fontSize: "0.625rem",
+      }}
+    >
+      {children}
+    </Text>
+  );
+}
+
 export function AppNav() {
   const { t } = useLingui();
   const { isTenantOwner } = useSession();
@@ -72,12 +94,24 @@ export function AppNav() {
         to={item.to}
         styles={{
           root: {
-            borderRadius: "var(--mantine-radius-sm)",
-            marginInline: "var(--mantine-spacing-xs)",
-            fontSize: "var(--mantine-font-size-sm)",
+            borderRadius: "var(--mantine-radius-xs)",
+            marginInline: "8px",
+            paddingBlock: "7px",
+            paddingInline: "10px",
+            background: isActive ? "var(--app-nav-active-bg)" : "transparent",
+            "&:hover": {
+              background: isActive ? "var(--app-nav-active-bg)" : "var(--app-nav-hover-bg)",
+            },
           },
           label: {
             fontSize: "var(--mantine-font-size-sm)",
+            fontWeight: isActive ? 600 : 400,
+            color: isActive ? "var(--app-nav-text-active)" : "var(--app-nav-text)",
+          },
+          section: {
+            width: 20,
+            marginRight: 8,
+            color: isActive ? "var(--app-nav-icon-active)" : "var(--app-nav-icon)",
           },
         }}
       />
@@ -85,47 +119,50 @@ export function AppNav() {
   };
 
   return (
-    <Stack gap={0} py="sm">
+    <Stack gap={0} py={6}>
       {/* Search */}
-      <Box px="sm" pb="sm">
+      <Box px={10} pb={6}>
         <TextInput
           placeholder={t`Search…`}
           size="xs"
-          leftSection={<IconSearch size={13} />}
+          leftSection={<IconSearch size={13} color="var(--app-nav-search-placeholder)" />}
           value={search}
           onChange={(e) => setSearch(e.currentTarget.value)}
-          styles={{ input: { background: "var(--mantine-color-default)" } }}
+          styles={{
+            input: {
+              background: "var(--app-nav-search-bg)",
+              border: "1px solid var(--app-nav-search-border)",
+              color: "var(--app-nav-search-text)",
+              "&::placeholder": { color: "var(--app-nav-search-placeholder)" },
+            },
+          }}
         />
       </Box>
 
       {/* Tenant switcher — only when not searching and multi-tenant mode active */}
       {!search.trim() && <TenantSwitcher />}
 
-      {/* Nav items */}
+      {/* Results / full nav */}
       {filtered ? (
         filtered.length > 0 ? (
           filtered.map((item) => renderItem(item))
         ) : (
-          <Text size="xs" c="dimmed" px="md" py="xs">
+          <Text size="xs" px="md" py="xs" style={{ color: "var(--app-nav-section-label)" }}>
             <Trans>No results</Trans>
           </Text>
         )
       ) : (
         <>
-          <Box px="md" pb={4}>
-            <Text size="xs" fw={600} c="dimmed" tt="uppercase" lts={1}>
-              <Trans>Workspace</Trans>
-            </Text>
-          </Box>
+          <SectionLabel>
+            <Trans>Workspace</Trans>
+          </SectionLabel>
           {navItems.map((item) => renderItem(item))}
 
-          <Divider mx="sm" my="xs" />
+          <Divider mx={10} my={6} style={{ borderColor: "var(--app-nav-divider)" }} />
 
-          <Box px="md" pb={4}>
-            <Text size="xs" fw={600} c="dimmed" tt="uppercase" lts={1}>
-              <Trans>Account Settings</Trans>
-            </Text>
-          </Box>
+          <SectionLabel>
+            <Trans>Account Settings</Trans>
+          </SectionLabel>
           {accountSubItems.map((item) => renderItem(item))}
         </>
       )}
