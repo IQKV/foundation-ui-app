@@ -32,12 +32,18 @@ export function SignupForm({ form, isLoading, errorMessage, onSubmit }: SignupFo
   const handleFormSubmit = handleSubmit((values: SignupFormValues) => onSubmit(values));
 
   return (
-    <form onSubmit={(e) => void handleFormSubmit(e)} noValidate>
+    <form onSubmit={(e) => void handleFormSubmit(e)} noValidate data-testid="sign-up-form">
       <Stack gap="md">
         {/* Server-side error */}
         <div aria-live="polite" aria-atomic="true">
           {errorMessage && (
-            <Alert icon={<IconAlertCircle size={16} />} color="red" variant="light" role="alert">
+            <Alert
+              icon={<IconAlertCircle size={16} />}
+              color="red"
+              variant="light"
+              role="alert"
+              data-testid="sign-up-error-alert"
+            >
               {errorMessage}
             </Alert>
           )}
@@ -52,6 +58,7 @@ export function SignupForm({ form, isLoading, errorMessage, onSubmit }: SignupFo
               <TextInput
                 {...field}
                 id="signup-first-name"
+                data-testid="sign-up-first-name-input"
                 label={t`First name`}
                 placeholder={t`Jane`}
                 autoComplete="given-name"
@@ -69,6 +76,7 @@ export function SignupForm({ form, isLoading, errorMessage, onSubmit }: SignupFo
               <TextInput
                 {...field}
                 id="signup-last-name"
+                data-testid="sign-up-last-name-input"
                 label={t`Last name`}
                 placeholder={t`Smith`}
                 autoComplete="family-name"
@@ -89,6 +97,7 @@ export function SignupForm({ form, isLoading, errorMessage, onSubmit }: SignupFo
             <TextInput
               {...field}
               id="signup-email"
+              data-testid="sign-up-email-input"
               label={t`Work email`}
               type="email"
               placeholder={t`you@company.com`}
@@ -110,6 +119,7 @@ export function SignupForm({ form, isLoading, errorMessage, onSubmit }: SignupFo
               <TextInput
                 {...field}
                 id="signup-password"
+                data-testid="sign-up-password-input"
                 label={t`Password`}
                 type="password"
                 placeholder={t`At least 8 characters`}
@@ -118,19 +128,32 @@ export function SignupForm({ form, isLoading, errorMessage, onSubmit }: SignupFo
                 disabled={isLoading}
                 inputWrapperOrder={["label", "input", "error"]}
               />
-              <PasswordStrength password={password ?? ""} />
+              <PasswordStrength password={password ?? ""} data-testid="sign-up-password-strength" />
             </Stack>
           )}
         />
 
-        <Button type="submit" fullWidth loading={isLoading} disabled={isLoading} mt={4}>
+        <Button
+          type="submit"
+          fullWidth
+          loading={isLoading}
+          disabled={isLoading}
+          mt={4}
+          data-testid="sign-up-submit-button"
+        >
           <Trans>Create account</Trans>
         </Button>
 
         <Text size="sm" c="dimmed" ta="center">
           <Trans>
             Already have an account?{" "}
-            <Text component={Link} to="/sign-in" size="sm" c="blue.6">
+            <Text
+              component={Link}
+              to="/sign-in"
+              size="sm"
+              c="blue.6"
+              data-testid="sign-up-sign-in-link"
+            >
               Sign in
             </Text>
           </Trans>

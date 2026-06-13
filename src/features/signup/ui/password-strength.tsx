@@ -49,7 +49,10 @@ function getLabel(strength: number): React.ReactNode {
  * Password strength meter — shows a progress bar and per-requirement checklist.
  * Only renders when the password field has content.
  */
-export function PasswordStrength({ password }: PasswordStrengthProps) {
+export function PasswordStrength({
+  password,
+  "data-testid": testId,
+}: PasswordStrengthProps & { "data-testid"?: string }) {
   if (!password) return null;
 
   const requirements = getRequirements(password);
@@ -57,7 +60,7 @@ export function PasswordStrength({ password }: PasswordStrengthProps) {
   const color = getColor(strength);
 
   return (
-    <Box mt={4}>
+    <Box mt={4} data-testid={testId}>
       {/* Strength bar */}
       <Box style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
         <Progress
@@ -66,6 +69,7 @@ export function PasswordStrength({ password }: PasswordStrengthProps) {
           size="xs"
           style={{ flex: 1 }}
           aria-label="Password strength"
+          data-testid={testId ? `${testId}-progress` : undefined}
         />
         <Text size="xs" c={color} fw={500} style={{ minWidth: 36, textAlign: "right" }}>
           {getLabel(strength)}
@@ -80,6 +84,7 @@ export function PasswordStrength({ password }: PasswordStrengthProps) {
             size="xs"
             c={req.met ? "green.6" : "dimmed"}
             style={{ display: "flex", alignItems: "center", gap: 4 }}
+            data-testid={testId ? `${testId}-req-${i}` : undefined}
           >
             <span aria-hidden="true">{req.met ? "✓" : "○"}</span>
             {req.label}

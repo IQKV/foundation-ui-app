@@ -453,6 +453,10 @@ msgstr "Create account and join"
 msgid "Create organization"
 msgstr "Create organization"
 
+#: src/pages/_app/settings/organization.tsx
+msgid "Create Organization"
+msgstr "Create Organization"
+
 #: src/pages/create-organization.tsx
 msgid "Create your"
 msgstr "Create your"
@@ -1050,6 +1054,10 @@ msgstr "Next Billing Date"
 msgid "No active tenant memberships found for this account"
 msgstr "No active tenant memberships found for this account"
 
+#: src/features/manage-billing/ui/billing-info.tsx
+msgid "No billing information has been configured yet. Fill in the details below to get started."
+msgstr "No billing information has been configured yet. Fill in the details below to get started."
+
 #: src/pages/_app/settings/organization.tsx
 msgid "No matches."
 msgstr "No matches."
@@ -1086,6 +1094,10 @@ msgstr "No organizations found."
 #: src/pages/admin/organizations.index.tsx
 #~ msgid "No organizations match the current filters"
 #~ msgstr "No organizations match the current filters"
+
+#: src/pages/_app/settings/organization.tsx
+msgid "No organizations yet"
+msgstr "No organizations yet"
 
 #: src/pages/_app/team.tsx
 msgid "No pending invitations."
@@ -1449,6 +1461,10 @@ msgstr "Roles"
 msgid "Save"
 msgstr "Save"
 
+#: src/features/manage-billing/ui/billing-info.tsx
+msgid "Save Billing Information"
+msgstr "Save Billing Information"
+
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 #: src/pages/_app/settings/general.tsx
 msgid "Save changes"
@@ -1549,6 +1565,10 @@ msgstr "Set a new"
 #: src/features/reset-password/ui/reset-password-form.tsx
 msgid "Set new password"
 msgstr "Set new password"
+
+#: src/features/manage-billing/ui/billing-info.tsx
+msgid "Set Up Billing Information"
+msgstr "Set Up Billing Information"
 
 #: src/pages/signup.tsx
 msgid "Set up your account in under a minute."
@@ -2012,6 +2032,10 @@ msgstr "You don't have an active subscription yet. Choose a plan below to get st
 #: src/features/tenant-switcher/model/use-tenant-switcher.ts
 msgid "You no longer have access to this organization."
 msgstr "You no longer have access to this organization."
+
+#: src/pages/_app/settings/organization.tsx
+msgid "You're currently using your personal workspace. Create an organization to collaborate with others, manage members, and share resources."
+msgstr "You're currently using your personal workspace. Create an organization to collaborate with others, manage members, and share resources."
 
 #: src/pages/invite.$token.tsx
 msgid "You've been"

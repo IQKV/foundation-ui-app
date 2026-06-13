@@ -34,7 +34,7 @@ export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
   // ── No token provided ──────────────────────────────────────────────────────
   if (!token) {
     return (
-      <Stack gap="md" align="center" ta="center">
+      <Stack gap="md" align="center" ta="center" data-testid="reset-password-no-token">
         <ThemeIcon size={56} radius="xl" color="orange" variant="light">
           <IconAlertTriangle size={28} />
         </ThemeIcon>
@@ -47,7 +47,13 @@ export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
           </Text>
         </Box>
         <Text size="sm">
-          <Text component={Link} to="/forgot-password" size="sm" c="blue.6">
+          <Text
+            component={Link}
+            to="/forgot-password"
+            size="sm"
+            c="blue.6"
+            data-testid="reset-password-no-token-new-link"
+          >
             <Trans>Request a new reset link</Trans>
           </Text>
         </Text>
@@ -58,7 +64,7 @@ export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
   // ── Success state ──────────────────────────────────────────────────────────
   if (isSuccess) {
     return (
-      <Stack gap="md" align="center" ta="center">
+      <Stack gap="md" align="center" ta="center" data-testid="reset-password-success">
         <ThemeIcon size={56} radius="xl" color="green" variant="light">
           <IconCircleCheck size={28} />
         </ThemeIcon>
@@ -74,7 +80,13 @@ export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
         </Box>
         <Text size="sm" c="dimmed">
           <Trans>
-            <Text component={Link} to="/sign-in" size="sm" c="blue.6">
+            <Text
+              component={Link}
+              to="/sign-in"
+              size="sm"
+              c="blue.6"
+              data-testid="reset-password-success-sign-in-link"
+            >
               Sign in now
             </Text>
           </Trans>
@@ -85,12 +97,18 @@ export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
 
   // ── Form ───────────────────────────────────────────────────────────────────
   return (
-    <form onSubmit={(e) => void handleFormSubmit(e)} noValidate>
+    <form onSubmit={(e) => void handleFormSubmit(e)} noValidate data-testid="reset-password-form">
       <Stack gap="md">
         {/* ARIA live region for server-side errors */}
         <div aria-live="polite" aria-atomic="true">
           {errorMessage && (
-            <Alert icon={<IconAlertCircle size={16} />} color="red" variant="light" role="alert">
+            <Alert
+              icon={<IconAlertCircle size={16} />}
+              color="red"
+              variant="light"
+              role="alert"
+              data-testid="reset-password-error-alert"
+            >
               <Stack gap={4}>
                 <Text size="sm">{errorMessage}</Text>
                 <Text
@@ -99,6 +117,7 @@ export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
                   size="sm"
                   c="blue.6"
                   style={{ display: "inline" }}
+                  data-testid="reset-password-error-new-link"
                 >
                   <Trans>Request a new reset link</Trans>
                 </Text>
@@ -114,6 +133,7 @@ export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
             <TextInput
               {...field}
               id="reset-password-new"
+              data-testid="reset-password-new-password-input"
               label={t`New password`}
               type="password"
               placeholder={t`At least 8 characters`}
@@ -132,6 +152,7 @@ export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
             <TextInput
               {...field}
               id="reset-password-confirm"
+              data-testid="reset-password-confirm-password-input"
               label={t`Confirm new password`}
               type="password"
               placeholder={t`Repeat your new password`}
@@ -143,14 +164,26 @@ export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
           )}
         />
 
-        <Button type="submit" fullWidth loading={isLoading} disabled={isLoading}>
+        <Button
+          type="submit"
+          fullWidth
+          loading={isLoading}
+          disabled={isLoading}
+          data-testid="reset-password-submit-button"
+        >
           <Trans>Set new password</Trans>
         </Button>
 
         <Text size="sm" c="dimmed" ta="center">
           <Trans>
             Remember your password?{" "}
-            <Text component={Link} to="/sign-in" size="sm" c="blue.6">
+            <Text
+              component={Link}
+              to="/sign-in"
+              size="sm"
+              c="blue.6"
+              data-testid="reset-password-sign-in-link"
+            >
               Sign in
             </Text>
           </Trans>

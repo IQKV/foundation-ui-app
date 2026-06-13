@@ -6,6 +6,18 @@
  */
 
 import React from "react";
+import { act, render, RenderResult } from "@testing-library/react";
+import { MantineProvider } from "@mantine/core";
+import { I18nProvider } from "@lingui/react";
+import { i18n } from "@lingui/core";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import {
+  createMemoryHistory,
+  createRootRoute,
+  createRouter,
+  RouterProvider,
+} from "@tanstack/react-router";
+export { TestSelectors, testId, byTestId } from "@/shared/lib/test-selectors";
 
 /**
  * Props interface for components that support data-testid
@@ -100,6 +112,55 @@ export const layoutTestId = (name: string) => createTestId("layout", name);
 export const headerTestId = (name: string) => createTestId("header", name);
 
 /**
+ * Options for renderWithProviders
+ */
+export interface RenderWithProvidersOptions {
+  initialEntries?: string[];
+  queryClient?: QueryClient;
+}
+
+/**
+ * Renders a component inside a minimal TanStack Router + Lingui + Mantine +
+ * QueryClient context. The router is awaited so async route resolution
+ * completes before assertions run.
+ */
+export async function renderWithProviders(
+  ui: React.ReactNode,
+  options: RenderWithProvidersOptions = {},
+): Promise<RenderResult & { queryClient: QueryClient }> {
+  const { initialEntries = ["/"], queryClient: customQueryClient } = options;
+
+  const queryClient =
+    customQueryClient ||
+    new QueryClient({
+      defaultOptions: { queries: { retry: false } },
+    });
+
+  const rootRoute = createRootRoute({ component: () => <>{ui}</> });
+  const router = createRouter({
+    routeTree: rootRoute,
+    history: createMemoryHistory({ initialEntries }),
+  });
+
+  let result!: ReturnType<typeof render>;
+
+  await act(async () => {
+    result = render(
+      <QueryClientProvider client={queryClient}>
+        <I18nProvider i18n={i18n}>
+          <MantineProvider>
+            <RouterProvider router={router} />
+          </MantineProvider>
+        </I18nProvider>
+      </QueryClientProvider>,
+    );
+    await router.load();
+  });
+
+  return { ...result, queryClient };
+}
+
+/**
  * Example usage in components:
  *
  * ```tsx
@@ -114,5 +175,16 @@ export const headerTestId = (name: string) => createTestId("header", name);
  *     </Button>
  *   );
  * }
+ * ```
+ *
+ * Example usage in tests:
+ *
+ * ```tsx
+ * import { renderWithProviders, TestSelectors } from '@/shared/ui/test-utils';
+ *
+ * it('renders the form', async () => {
+ *   await renderWithProviders(<MyForm />);
+ *   expect(screen.getByTestId(TestSelectors.MY_FORM)).toBeInTheDocument();
+ * });
  * ```
  */

@@ -30,7 +30,7 @@ export function ForgotPasswordForm() {
   // ── Success state ──────────────────────────────────────────────────────────
   if (isSubmitted) {
     return (
-      <Stack gap="md" align="center" ta="center">
+      <Stack gap="md" align="center" ta="center" data-testid="forgot-password-success">
         <ThemeIcon size={56} radius="xl" color="green" variant="light">
           <IconMailCheck size={28} />
         </ThemeIcon>
@@ -50,7 +50,13 @@ export function ForgotPasswordForm() {
         <Text size="sm" c="dimmed">
           <Trans>
             Back to{" "}
-            <Text component={Link} to="/sign-in" size="sm" c="blue.6">
+            <Text
+              component={Link}
+              to="/sign-in"
+              size="sm"
+              c="blue.6"
+              data-testid="forgot-password-success-sign-in-link"
+            >
               Sign in
             </Text>
           </Trans>
@@ -61,12 +67,18 @@ export function ForgotPasswordForm() {
 
   // ── Form ───────────────────────────────────────────────────────────────────
   return (
-    <form onSubmit={(e) => void handleFormSubmit(e)} noValidate>
+    <form onSubmit={(e) => void handleFormSubmit(e)} noValidate data-testid="forgot-password-form">
       <Stack gap="md">
         {/* ARIA live region for server-side errors */}
         <div aria-live="polite" aria-atomic="true">
           {errorMessage && (
-            <Alert icon={<IconAlertCircle size={16} />} color="red" variant="light" role="alert">
+            <Alert
+              icon={<IconAlertCircle size={16} />}
+              color="red"
+              variant="light"
+              role="alert"
+              data-testid="forgot-password-error-alert"
+            >
               {errorMessage}
             </Alert>
           )}
@@ -86,6 +98,7 @@ export function ForgotPasswordForm() {
             <TextInput
               {...field}
               id="forgot-password-email"
+              data-testid="forgot-password-email-input"
               label={t`Email`}
               type="email"
               placeholder={t`you@example.com`}
@@ -98,14 +111,26 @@ export function ForgotPasswordForm() {
           )}
         />
 
-        <Button type="submit" fullWidth loading={isLoading} disabled={isLoading}>
+        <Button
+          type="submit"
+          fullWidth
+          loading={isLoading}
+          disabled={isLoading}
+          data-testid="forgot-password-submit-button"
+        >
           <Trans>Send reset link</Trans>
         </Button>
 
         <Text size="sm" c="dimmed" ta="center">
           <Trans>
             Remember your password?{" "}
-            <Text component={Link} to="/sign-in" size="sm" c="blue.6">
+            <Text
+              component={Link}
+              to="/sign-in"
+              size="sm"
+              c="blue.6"
+              data-testid="forgot-password-sign-in-link"
+            >
               Sign in
             </Text>
           </Trans>

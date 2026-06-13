@@ -31,12 +31,22 @@ export function CreateOrganizationForm({
   const handleFormSubmit = handleSubmit((values: CreateOrganizationFormValues) => onSubmit(values));
 
   return (
-    <form onSubmit={(e) => void handleFormSubmit(e)} noValidate>
+    <form
+      onSubmit={(e) => void handleFormSubmit(e)}
+      noValidate
+      data-testid="create-organization-form"
+    >
       <Stack gap="md">
         {/* Server-side error */}
         <div aria-live="polite" aria-atomic="true">
           {errorMessage && (
-            <Alert icon={<IconAlertCircle size={16} />} color="red" variant="light" role="alert">
+            <Alert
+              icon={<IconAlertCircle size={16} />}
+              color="red"
+              variant="light"
+              role="alert"
+              data-testid="create-organization-error-alert"
+            >
               {errorMessage}
             </Alert>
           )}
@@ -50,6 +60,7 @@ export function CreateOrganizationForm({
             <TextInput
               {...field}
               id="create-organization-name"
+              data-testid="create-organization-name-input"
               label={t`Organization name`}
               placeholder={t`Acme Inc.`}
               autoComplete="organization"
@@ -60,7 +71,14 @@ export function CreateOrganizationForm({
           )}
         />
 
-        <Button type="submit" fullWidth loading={isLoading} disabled={isLoading} mt={4}>
+        <Button
+          type="submit"
+          fullWidth
+          loading={isLoading}
+          disabled={isLoading}
+          mt={4}
+          data-testid="create-organization-submit-button"
+        >
           <Trans>Create organization</Trans>
         </Button>
       </Stack>

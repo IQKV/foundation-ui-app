@@ -339,6 +339,10 @@ msgstr "Създай акаунт и се присъедини"
 msgid "Create organization"
 msgstr "Създай организация"
 
+#: src/pages/_app/settings/organization.tsx
+msgid "Create Organization"
+msgstr ""
+
 #: src/pages/create-organization.tsx
 msgid "Create your"
 msgstr "Създайте"
@@ -800,6 +804,10 @@ msgstr "Следваща дата за фактуриране"
 msgid "No active tenant memberships found for this account"
 msgstr "Не са намерени активни членства за наематели за този акаунт"
 
+#: src/features/manage-billing/ui/billing-info.tsx
+msgid "No billing information has been configured yet. Fill in the details below to get started."
+msgstr ""
+
 #: src/pages/_app/settings/organization.tsx
 msgid "No matches."
 msgstr "Няма съвпадения."
@@ -820,6 +828,10 @@ msgstr "Все още няма известия"
 #: src/pages/_app/settings/organization.tsx
 msgid "No organizations found."
 msgstr "Не са намерени организации."
+
+#: src/pages/_app/settings/organization.tsx
+msgid "No organizations yet"
+msgstr ""
 
 #: src/pages/_app/team.tsx
 msgid "No pending invitations."
@@ -1119,6 +1131,10 @@ msgstr "Роли"
 msgid "Save"
 msgstr "Запази"
 
+#: src/features/manage-billing/ui/billing-info.tsx
+msgid "Save Billing Information"
+msgstr ""
+
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 #: src/pages/_app/settings/general.tsx
 msgid "Save changes"
@@ -1195,6 +1211,10 @@ msgstr "Задайте нова"
 #: src/features/reset-password/ui/reset-password-form.tsx
 msgid "Set new password"
 msgstr "Задайте нова парола"
+
+#: src/features/manage-billing/ui/billing-info.tsx
+msgid "Set Up Billing Information"
+msgstr ""
 
 #: src/pages/signup.tsx
 msgid "Set up your account in under a minute."
@@ -1526,6 +1546,10 @@ msgstr "Все още нямате активен абонамент. Избер
 #: src/features/tenant-switcher/model/use-tenant-switcher.ts
 msgid "You no longer have access to this organization."
 msgstr "Вече нямате достъп до тази организация."
+
+#: src/pages/_app/settings/organization.tsx
+msgid "You're currently using your personal workspace. Create an organization to collaborate with others, manage members, and share resources."
+msgstr ""
 
 #: src/pages/invite.$token.tsx
 msgid "You've been"
