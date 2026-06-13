@@ -57,6 +57,15 @@ export interface BillingSettingsResponse {
   updatedAt: string;
 }
 
+export interface CreateBillingSettingsRequest {
+  billingEmail: string;
+  companyName?: string;
+  billingAddress?: string;
+  taxId?: string;
+  taxIdType?: string;
+  currency: string;
+}
+
 export interface UpdateBillingSettingsRequest {
   billingEmail?: string;
   companyName?: string;
@@ -110,6 +119,18 @@ export const billingApi = {
   getBillingSettings: (tenantKey: string) =>
     httpClient
       .get<BillingSettingsResponse>(`/v1/billing/settings/${encodeURIComponent(tenantKey)}`)
+      .then((r) => r.data),
+
+  /**
+   * Create billing settings for a tenant (tenant self-service, first-time setup).
+   * Requires TENANT_OWNER authority.
+   */
+  createBillingSettings: (tenantKey: string, request: CreateBillingSettingsRequest) =>
+    httpClient
+      .post<BillingSettingsResponse>(
+        `/v1/billing/settings/${encodeURIComponent(tenantKey)}`,
+        request,
+      )
       .then((r) => r.data),
 
   /**

@@ -7,5 +7,9 @@ export { RefundList } from "./ui/refund-list";
 export { useBillingPortal } from "./model/use-billing-portal";
 export { usePlans } from "./model/use-plans";
 export { useActiveSubscription, useCreateCheckoutSession } from "./model/use-subscription";
-export { useBillingSettings, useUpdateBillingSettings } from "./model/use-billing-settings";
+export {
+  useBillingSettings,
+  useCreateBillingSettings,
+  useUpdateBillingSettings,
+} from "./model/use-billing-settings";
 export { useRefunds } from "./model/use-refunds";

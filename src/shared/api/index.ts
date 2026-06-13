@@ -59,6 +59,7 @@ export type {
   CreateCheckoutSessionRequest,
   CheckoutSessionResponse,
   BillingSettingsResponse,
+  CreateBillingSettingsRequest,
   UpdateBillingSettingsRequest,
   RefundResponse,
 } from "./billing";
