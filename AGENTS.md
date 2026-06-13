@@ -1465,6 +1465,27 @@ describe("SampleFormFeature", () => {
 });
 ```
 
+### E2E Testing Best Practices
+
+By following these guidelines, you can create a well-structured and maintainable Playwright test suite:
+
+1. **Organized Folder Structure:** Separate tests based on their context (logged-in vs. logged-out) and per feature. For example:
+
+   ```
+   e2e/
+   ├── auth/
+   │   ├── login.spec.ts
+   │   └── signup.spec.ts
+   └── features/
+       └── dashboard.spec.ts
+   ```
+
+2. **Using Hooks and Describe Blocks:** Improve readability and set up common prerequisites with `beforeAll`, `beforeEach`, `afterAll`, `afterEach` and organize tests into logical groups.
+
+3. **Step Definition:** Use `test.step` to break down complex test cases into smaller, readable steps.
+
+4. **Leveraging Annotations and Tags:** Use annotations and tags to mark failing or incomplete tests, link issues, and categorize your tests for better filtering and reporting.
+
 ### Test Setup Configuration
 
 ```tsx
