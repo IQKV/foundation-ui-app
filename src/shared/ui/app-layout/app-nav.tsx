@@ -46,14 +46,16 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 
 export function AppNav() {
   const { t } = useLingui();
-  const { isTenantOwner } = useSession();
+  const { isTenantOwner, isPersonalWorkspace } = useSession();
   const routerState = useRouterState();
   const currentPath = routerState.location.pathname;
   const [search, setSearch] = useState("");
 
   const navItems: NavItem[] = [
     { label: t`Dashboard`, icon: <IconDashboard size={16} />, to: "/" },
-    { label: t`Billing`, icon: <IconCreditCard size={16} />, to: "/billing" },
+    ...(!isMultiTenantMode || !isPersonalWorkspace
+      ? [{ label: t`Billing`, icon: <IconCreditCard size={16} />, to: "/billing" }]
+      : []),
     ...(isTenantOwner ? [{ label: t`Team`, icon: <IconUsers size={16} />, to: "/team" }] : []),
   ];
 
