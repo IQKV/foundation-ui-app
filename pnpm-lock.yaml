@@ -277,8 +277,8 @@ importers:
         specifier: ^3.3.0
         version: 3.3.0(@types/node@25.9.3)(typescript@6.0.3)
       gitzy:
-        specifier: 7.1.0
-        version: 7.1.0
+        specifier: 7.2.1
+        version: 7.2.1
       globals:
         specifier: ^17.6.0
         version: 17.6.0
@@ -4110,8 +4110,8 @@ packages:
   git-url-parse@16.1.0:
     resolution: {integrity: sha512-cPLz4HuK86wClEW7iDdeAKcCVlWXmrLpb2L+G9goW0Z1dtpNS6BXXSOckUTlJT/LDQViE1QZKstNORzHsLnobw==}
 
-  gitzy@7.1.0:
-    resolution: {integrity: sha512-oxBhjZ2L1niaS002SqoTeApSmKSqd6jKumLI+mYEmEPUV+ELa4KcG6c9iScUyMMLGeaXfwIugu44XNFLvtHUDQ==}
+  gitzy@7.2.1:
+    resolution: {integrity: sha512-YXi7f610a06EuvBIXauaAZtPjchV1TqWIVOZ0qizaboxURnwdUfelOqKhRULHIMorbrwNw3ubA6+BUL/Zgy34g==}
     engines: {node: ^22.13.0 || >=24}
     hasBin: true
 
@@ -10123,7 +10123,7 @@ snapshots:
     dependencies:
       git-up: 8.1.1
 
-  gitzy@7.1.0: {}
+  gitzy@7.2.1: {}
 
   glob-parent@5.1.2:
     dependencies:
