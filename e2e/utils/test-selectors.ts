@@ -13,7 +13,7 @@ export const TestSelectors = {
 
   // Header
   APP_HEADER: "app-header",
-  HEADER_LOGO: "header-logo",
+  HEADER_LOGO: "app-nav-logo",
   HEADER_USER_MENU: "header-user-menu",
   HEADER_USER_MENU_BUTTON: "header-user-menu-button",
   HEADER_COLOR_SCHEME_TOGGLE: "header-color-scheme-toggle",

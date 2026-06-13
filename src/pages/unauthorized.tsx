@@ -12,7 +12,7 @@ export const Route = createFileRoute("/unauthorized")({
 function UnauthorizedPage() {
   const { t } = useLingui();
   return (
-    <Center mih="100vh" bg="gray.0">
+    <Center mih="100vh" bg="gray.0" data-testid="page-unauthorized">
       <Helmet>
         <title>{pageTitle(t`Access Denied`)}</title>
       </Helmet>

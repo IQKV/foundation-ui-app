@@ -1,158 +1,145 @@
-import { test, expect } from "@playwright/test";
+import { expect } from "@playwright/test";
+import { test } from "./fixtures/index.js";
 import { TestSelectors, byTestId } from "./utils/test-selectors.js";
+import { restoreTenantSession } from "./fixtures/auth.fixture.js";
 
+/**
+ * Authenticated layout tests.
+ *
+ * All tests use the `tenantPage` fixture (tenant owner signed in).
+ * `restoreTenantSession` is called in beforeEach so the page is always
+ * on the dashboard with the app shell visible before each test.
+ *
+ * The dashboard lives at "/" (TanStack route /_app/), NOT "/dashboard".
+ */
 test.describe("App Layout E2E Tests", () => {
-  test.beforeEach(async ({ page }) => {
-    // Note: In a real test, you would need to authenticate first
-    // For this example, we'll assume we're already authenticated
-    await page.goto("/dashboard");
-    await page.waitForLoadState("networkidle");
+  test.beforeEach(async ({ tenantPage }) => {
+    await restoreTenantSession(tenantPage);
   });
 
-  test("app layout loads with all key elements", async ({ page }) => {
-    // Check main layout elements
-    await expect(page.locator(byTestId(TestSelectors.APP_LAYOUT))).toBeVisible();
-    await expect(page.locator(byTestId(TestSelectors.APP_HEADER))).toBeVisible();
-    await expect(page.locator(byTestId(TestSelectors.APP_NAV))).toBeVisible();
+  test("app layout loads with all key elements", async ({ tenantPage }) => {
+    await expect(tenantPage.locator(byTestId(TestSelectors.APP_LAYOUT))).toBeVisible();
+    await expect(tenantPage.locator(byTestId(TestSelectors.APP_HEADER))).toBeVisible();
+    await expect(tenantPage.locator(byTestId(TestSelectors.APP_NAV))).toBeVisible();
 
-    // Check header elements
-    await expect(page.locator(byTestId(TestSelectors.HEADER_LOGO))).toBeVisible();
-    await expect(page.locator(byTestId(TestSelectors.HEADER_COLOR_SCHEME_TOGGLE))).toBeVisible();
-    await expect(page.locator(byTestId(TestSelectors.HEADER_USER_MENU_BUTTON))).toBeVisible();
+    // Sidebar logo
+    await expect(tenantPage.locator(byTestId(TestSelectors.HEADER_LOGO))).toBeVisible();
 
-    // Check mobile menu toggle (hidden on desktop)
-    await expect(page.locator(byTestId(TestSelectors.HEADER_MOBILE_MENU_TOGGLE))).toBeHidden();
+    // Header utility controls
+    await expect(tenantPage.locator(byTestId(TestSelectors.LOCALE_SWITCHER))).toBeVisible();
+    await expect(
+      tenantPage.locator(byTestId(TestSelectors.HEADER_COLOR_SCHEME_TOGGLE)),
+    ).toBeVisible();
+    await expect(tenantPage.locator(byTestId(TestSelectors.HEADER_USER_MENU_BUTTON))).toBeVisible();
+
+    // Mobile hamburger is hidden on desktop viewport
+    await expect(
+      tenantPage.locator(byTestId(TestSelectors.HEADER_MOBILE_MENU_TOGGLE)),
+    ).toBeHidden();
   });
 
-  test("color scheme toggle works", async ({ page }) => {
-    const toggle = page.locator(byTestId(TestSelectors.HEADER_COLOR_SCHEME_TOGGLE));
-
-    // Check initial state
+  test("color scheme toggle works", async ({ tenantPage }) => {
+    const toggle = tenantPage.locator(byTestId(TestSelectors.HEADER_COLOR_SCHEME_TOGGLE));
     await expect(toggle).toBeVisible();
-
-    // Click the toggle
     await toggle.click();
-
-    // Wait for any theme change animations
-    await page.waitForTimeout(500);
-
-    // Verify toggle is still visible after click
+    await tenantPage.waitForTimeout(300);
     await expect(toggle).toBeVisible();
   });
 
-  test("user menu opens and displays options", async ({ page }) => {
-    const userMenuButton = page.locator(byTestId(TestSelectors.HEADER_USER_MENU_BUTTON));
+  test("user menu opens and displays options", async ({ tenantPage }) => {
+    await tenantPage.locator(byTestId(TestSelectors.HEADER_USER_MENU_BUTTON)).click();
+    // Mantine menu animates in
+    await tenantPage
+      .locator(byTestId(TestSelectors.HEADER_USER_MENU))
+      .waitFor({ state: "visible" });
 
-    // Click to open user menu
-    await userMenuButton.click();
-
-    // Wait for menu to appear
-    await page.waitForTimeout(300);
-
-    // Check menu items
-    await expect(page.locator(byTestId(TestSelectors.BUTTON("profile")))).toBeVisible();
-    await expect(page.locator(byTestId(TestSelectors.BUTTON("sign-out")))).toBeVisible();
+    await expect(tenantPage.locator(byTestId(TestSelectors.BUTTON("profile")))).toBeVisible();
+    await expect(tenantPage.locator(byTestId(TestSelectors.BUTTON("sign-out")))).toBeVisible();
   });
 
-  test("mobile menu toggle appears on small screens", async ({ page }) => {
-    // Set mobile viewport
-    await page.setViewportSize({ width: 375, height: 667 });
+  test("sign out button is visible and enabled", async ({ tenantPage }) => {
+    await tenantPage.locator(byTestId(TestSelectors.HEADER_USER_MENU_BUTTON)).click();
+    await tenantPage
+      .locator(byTestId(TestSelectors.HEADER_USER_MENU))
+      .waitFor({ state: "visible" });
 
-    // Mobile menu toggle should be visible on mobile
-    await expect(page.locator(byTestId(TestSelectors.HEADER_MOBILE_MENU_TOGGLE))).toBeVisible();
-
-    // Click mobile menu toggle
-    const mobileToggle = page.locator(byTestId(TestSelectors.HEADER_MOBILE_MENU_TOGGLE));
-    await mobileToggle.click();
-
-    // Navigation should be visible after toggle
-    await expect(page.locator(byTestId(TestSelectors.APP_NAV))).toBeVisible();
+    const signOutButton = tenantPage.locator(byTestId(TestSelectors.BUTTON("sign-out")));
+    await expect(signOutButton).toBeVisible();
+    await expect(signOutButton).toBeEnabled();
   });
 
-  test("error boundary displays correctly", async ({ page }) => {
-    // Navigate to a non-existent route to trigger 404
-    await page.goto("/non-existent-route");
-    await page.waitForLoadState("networkidle");
+  test("mobile menu toggle appears on small screens", async ({ tenantPage }) => {
+    // Mantine uses CSS media queries — resize is enough; no reload required
+    await tenantPage.setViewportSize({ width: 375, height: 667 });
+    await expect(
+      tenantPage.locator(byTestId(TestSelectors.HEADER_MOBILE_MENU_TOGGLE)),
+    ).toBeVisible();
 
-    // Check 404 page
-    await expect(page.locator(byTestId(TestSelectors.PAGE_404))).toBeVisible();
-    await expect(page.locator(byTestId(TestSelectors.BUTTON("go-home")))).toBeVisible();
+    await tenantPage.locator(byTestId(TestSelectors.HEADER_MOBILE_MENU_TOGGLE)).click();
+    await expect(tenantPage.locator(byTestId(TestSelectors.APP_NAV))).toBeVisible();
   });
 
-  test("loading overlay appears during navigation", async ({ page }) => {
-    // This test would require mocking a slow-loading route
-    // For now, we'll just verify the selector pattern works
-    const loadingOverlay = page.locator(byTestId(TestSelectors.LOADING_OVERLAY));
-
-    // Initially should not be visible
-    await expect(loadingOverlay).toBeHidden();
+  test("error boundary is hidden by default", async ({ tenantPage }) => {
+    await expect(tenantPage.locator(byTestId(TestSelectors.ERROR_BOUNDARY))).toBeHidden();
   });
 
-  test("app is accessible with keyboard navigation", async ({ page }) => {
-    // Test tab navigation through header
-    await page.keyboard.press("Tab");
-
-    // Focus should move to first focusable element
-    // We can't predict exact order, but we can verify focus moves
-    const focusedElement = page.locator("*:focus");
-    await expect(focusedElement).toBeAttached();
+  test("loading overlay is hidden after page loads", async ({ tenantPage }) => {
+    await expect(tenantPage.locator(byTestId(TestSelectors.LOADING_OVERLAY))).toBeHidden();
   });
 
-  test("responsive design works across breakpoints", async ({ page }) => {
+  test("app is accessible with keyboard navigation", async ({ tenantPage }) => {
+    await tenantPage.locator("body").click();
+    await tenantPage.keyboard.press("Tab");
+
+    const hasFocus = await tenantPage.evaluate(
+      () => document.activeElement !== null && document.activeElement !== document.body,
+    );
+    expect(hasFocus).toBe(true);
+  });
+
+  test("responsive layout across breakpoints", async ({ tenantPage }) => {
     const viewports = [
-      { width: 375, height: 667, name: "mobile" },
-      { width: 768, height: 1024, name: "tablet" },
-      { width: 1024, height: 768, name: "desktop" },
-      { width: 1920, height: 1080, name: "large" },
+      { width: 375, height: 667, mobile: true },
+      { width: 768, height: 1024, mobile: false },
+      { width: 1024, height: 768, mobile: false },
+      { width: 1920, height: 1080, mobile: false },
     ];
 
-    for (const viewport of viewports) {
-      await page.setViewportSize(viewport);
+    for (const { width, height, mobile } of viewports) {
+      await tenantPage.setViewportSize({ width, height });
+      await tenantPage.waitForTimeout(150);
 
-      // Verify layout is visible at all breakpoints
-      await expect(page.locator(byTestId(TestSelectors.APP_LAYOUT))).toBeVisible();
-      await expect(page.locator(byTestId(TestSelectors.APP_HEADER))).toBeVisible();
+      await expect(tenantPage.locator(byTestId(TestSelectors.APP_LAYOUT))).toBeVisible();
+      await expect(tenantPage.locator(byTestId(TestSelectors.APP_HEADER))).toBeVisible();
 
-      // Mobile menu toggle visibility depends on viewport
-      const mobileToggle = page.locator(byTestId(TestSelectors.HEADER_MOBILE_MENU_TOGGLE));
-      if (viewport.width < 768) {
+      const mobileToggle = tenantPage.locator(byTestId(TestSelectors.HEADER_MOBILE_MENU_TOGGLE));
+      if (mobile) {
         await expect(mobileToggle).toBeVisible();
       } else {
         await expect(mobileToggle).toBeHidden();
       }
     }
   });
-
-  test("sign out button works", async ({ page }) => {
-    // Open user menu
-    const userMenuButton = page.locator(byTestId(TestSelectors.HEADER_USER_MENU_BUTTON));
-    await userMenuButton.click();
-
-    // Wait for menu to appear
-    await page.waitForTimeout(300);
-
-    // Click sign out button
-    const signOutButton = page.locator(byTestId(TestSelectors.BUTTON("sign-out")));
-    await expect(signOutButton).toBeVisible();
-
-    // Note: In a real test, you would verify the sign out action
-    // For now, we just verify the button is clickable
-    await expect(signOutButton).toBeEnabled();
-  });
 });
 
-test.describe("Error Handling", () => {
-  test("error boundary displays retry button", async ({ page }) => {
-    // Simulate an error by navigating to a broken route
-    // In a real app, you might have a route that throws an error
-    await page.goto("/");
-    await page.waitForLoadState("networkidle");
+test.describe("Error Pages", () => {
+  test("404 page renders with correct testids", async ({ tenantPage }) => {
+    await tenantPage.goto("/404");
+    await tenantPage.waitForLoadState("networkidle");
 
-    // We can't easily trigger the error boundary without a specific error route
-    // But we can verify the pattern for future error boundary tests
-    const errorBoundary = page.locator(byTestId(TestSelectors.ERROR_BOUNDARY));
+    await expect(tenantPage.locator(byTestId(TestSelectors.PAGE_404))).toBeVisible();
+    await expect(tenantPage.locator(byTestId(TestSelectors.BUTTON("go-home")))).toBeVisible();
+  });
 
-    // Should not be visible unless there's an error
-    await expect(errorBoundary).toBeHidden();
+  test("500 page renders with correct testids", async ({ tenantPage }) => {
+    await tenantPage.goto("/500");
+    await tenantPage.waitForLoadState("networkidle");
+
+    await expect(tenantPage.locator(byTestId(TestSelectors.PAGE_500))).toBeVisible();
+    await expect(tenantPage.locator(byTestId(TestSelectors.BUTTON("go-home")))).toBeVisible();
+  });
+
+  test("error boundary is hidden when no render error has occurred", async ({ tenantPage }) => {
+    await expect(tenantPage.locator(byTestId(TestSelectors.ERROR_BOUNDARY))).toBeHidden();
   });
 });

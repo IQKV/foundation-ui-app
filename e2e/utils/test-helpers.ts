@@ -15,7 +15,9 @@ export class AppPage {
   }
 
   async expectHomePageVisible() {
-    await expect(this.page.getByRole("heading", { name: "Welcome" })).toBeVisible();
+    // Unauthenticated navigation to "/" redirects to sign-in.
+    // Verify the auth page rendered correctly.
+    await expect(this.page.getByRole("heading", { name: /welcome/i })).toBeVisible();
   }
 
   async expect404PageVisible() {

@@ -43,7 +43,13 @@ export function LocaleSwitcher() {
     <Menu shadow="md" width={160} position="bottom-end" withinPortal>
       <Menu.Target>
         <Tooltip label={t`Language`} withArrow>
-          <ActionIcon variant="subtle" color="gray" size="md" aria-label={t`Select language`}>
+          <ActionIcon
+            variant="subtle"
+            color="gray"
+            size="md"
+            aria-label={t`Select language`}
+            data-testid="locale-switcher"
+          >
             <Text size="sm" lh={1} style={{ lineHeight: 1 }}>
               {activeFlag}
             </Text>

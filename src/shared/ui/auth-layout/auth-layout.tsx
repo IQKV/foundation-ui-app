@@ -262,7 +262,7 @@ function DefaultTagline() {
  */
 export function AuthLayout({ children, headline, tagline }: AuthLayoutProps) {
   return (
-    <Box style={{ minHeight: "100vh", display: "flex" }}>
+    <Box data-testid="auth-layout" style={{ minHeight: "100vh", display: "flex" }}>
       <FormPanel>{children}</FormPanel>
       <BrandPanel
         headline={headline ?? <DefaultHeadline />}

@@ -11,12 +11,12 @@ export interface AuthFixtures {
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
 /**
- * Signs in via the UI form and waits until the app home page is visible.
+ * Signs in via the UI form and waits until the authenticated app shell is visible.
  *
  * The tenant sign-in is two-step:
  * 1. Fill email + password → click "Continue"
- * 2. If the user belongs to a single tenant the app signs in automatically.
- *    If multiple tenants appear, click the matching tenant card.
+ * 2. If multiple tenants appear, click the matching tenant card
+ *    (identified by data-testid="tenant-picker-{tenantKey}").
  *
  * Used by global-setup to pre-authenticate and persist browser storage state.
  */
@@ -36,10 +36,10 @@ export async function signInAsTenantOwner(page: Page): Promise<void> {
   await page.getByRole("button", { name: /continue/i }).click();
 
   // Step 2 — tenant picker (only shown when user belongs to multiple tenants).
-  // Wait briefly; if a tenant card for our tenant appears, click it.
-  const tenantCard = page.getByText(tenantKey, { exact: false });
+  // Each workspace card has data-testid="tenant-picker-{tenantKey}".
+  const tenantCard = page.locator(`[data-testid="tenant-picker-${tenantKey}"]`);
   const hasPicker = await tenantCard
-    .waitFor({ state: "visible", timeout: 3_000 })
+    .waitFor({ state: "visible", timeout: 5_000 })
     .then(() => true)
     .catch(() => false);
 
@@ -47,12 +47,15 @@ export async function signInAsTenantOwner(page: Page): Promise<void> {
     await tenantCard.click();
   }
 
-  // Wait for successful navigation to the app home
-  await page.waitForURL(`**${TEST_CONFIG.ROUTES.HOME}**`, {
+  // Wait for a URL that is NOT the sign-in page — this ensures we don't match
+  // prematurely while still on the credentials or tenant-picker step
+  // (the old "**/**" pattern matched /sign-in too since it contains "/").
+  await page.waitForURL((url) => !url.pathname.startsWith("/sign-in"), {
     timeout: TEST_CONFIG.NAVIGATION_TIMEOUT,
   });
 
-  await expect(page.locator("#root")).toBeVisible({
+  // Confirm the authenticated app shell has rendered
+  await expect(page.locator("[data-testid='app-layout']")).toBeVisible({
     timeout: TEST_CONFIG.DEFAULT_TIMEOUT,
   });
 }
@@ -60,6 +63,9 @@ export async function signInAsTenantOwner(page: Page): Promise<void> {
 /**
  * Navigates to / and falls back to a fresh sign-in if the stored session
  * has expired (route guard redirects to /sign-in).
+ *
+ * After this call the page is guaranteed to be on the dashboard with
+ * the app-layout visible.
  */
 export async function restoreTenantSession(page: Page): Promise<void> {
   await page.goto(TEST_CONFIG.ROUTES.HOME);
@@ -67,7 +73,13 @@ export async function restoreTenantSession(page: Page): Promise<void> {
 
   if (page.url().includes(TEST_CONFIG.ROUTES.SIGN_IN)) {
     await signInAsTenantOwner(page);
+    return;
   }
+
+  // Session still valid — confirm the app shell is visible
+  await expect(page.locator("[data-testid='app-layout']")).toBeVisible({
+    timeout: TEST_CONFIG.DEFAULT_TIMEOUT,
+  });
 }
 
 // ─── Extended test fixture ────────────────────────────────────────────────────
@@ -77,7 +89,10 @@ export async function restoreTenantSession(page: Page): Promise<void> {
  *
  * Reuses the storage state saved by global-setup so no per-test sign-in
  * network call is needed. Falls back to a fresh sign-in if the session
- * has expired.
+ * has expired (tokens are in sessionStorage which is not saved in the
+ * storage state file — global-setup calls signInAsTenantOwner and saves
+ * localStorage/cookies; the refresh token in sessionStorage requires a
+ * fresh sign-in on each new browser context).
  *
  * Usage:
  * ```ts

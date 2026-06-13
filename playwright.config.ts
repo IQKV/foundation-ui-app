@@ -38,6 +38,7 @@ export default defineConfig({
   reporter: [["html", { open: "never" }], ["list"], ...(isCI ? ([["github"]] as const) : [])],
   retries: isCI ? 2 : 1,
   testDir: "./e2e",
+  testMatch: "**/*.spec.ts",
   outputDir: "./.playwright/test-results",
   snapshotDir: "./.playwright/snapshots",
   use: {

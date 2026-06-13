@@ -32,7 +32,7 @@ export function SignInForm({ redirectTo }: SignInFormProps) {
   // ── Step 2: tenant picker ──────────────────────────────────────────────────
   if (step === "tenant-select") {
     return (
-      <Stack gap="md">
+      <Stack gap="md" data-testid="sign-in-tenant-picker">
         <div aria-live="polite" aria-atomic="true">
           {errorMessage && (
             <Alert icon={<IconAlertCircle size={16} />} color="red" variant="light" role="alert">
@@ -60,6 +60,7 @@ export function SignInForm({ redirectTo }: SignInFormProps) {
                 key={tenant.tenantKey}
                 onClick={() => void onSelectTenant(tenant.tenantKey)}
                 disabled={isLoading}
+                data-testid={`tenant-picker-${tenant.tenantKey}`}
                 style={{ width: "100%" }}
               >
                 <Card withBorder radius="md" p="md" style={{ cursor: "pointer" }}>
@@ -87,7 +88,7 @@ export function SignInForm({ redirectTo }: SignInFormProps) {
 
   // ── Step 1: credentials ────────────────────────────────────────────────────
   return (
-    <form onSubmit={(e) => void handleFormSubmit(e)} noValidate>
+    <form onSubmit={(e) => void handleFormSubmit(e)} noValidate data-testid="sign-in-form">
       <Stack gap="md">
         <div aria-live="polite" aria-atomic="true">
           {errorMessage && (
@@ -104,6 +105,7 @@ export function SignInForm({ redirectTo }: SignInFormProps) {
             <TextInput
               {...field}
               id="sign-in-email"
+              data-testid="sign-in-email-input"
               label={t`Email`}
               type="email"
               placeholder={t`you@example.com`}
@@ -123,6 +125,7 @@ export function SignInForm({ redirectTo }: SignInFormProps) {
             <TextInput
               {...field}
               id="sign-in-password"
+              data-testid="sign-in-password-input"
               label={t`Password`}
               type="password"
               placeholder={t`Your password`}
@@ -141,7 +144,13 @@ export function SignInForm({ redirectTo }: SignInFormProps) {
           </Text>
         </Group>
 
-        <Button type="submit" fullWidth loading={isLoading} disabled={isLoading}>
+        <Button
+          type="submit"
+          fullWidth
+          loading={isLoading}
+          disabled={isLoading}
+          data-testid="sign-in-submit-button"
+        >
           <Trans>Continue</Trans>
         </Button>
       </Stack>
