@@ -6,4 +6,4 @@
  */
 
 // Re-export from shared library to avoid duplication
-export { TestSelectors, testId, byTestId } from "@/shared/lib/test-selectors";
+export { TestSelectors, testId, byTestId } from "../../src/shared/lib/test-selectors.js";
