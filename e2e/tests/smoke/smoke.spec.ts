@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
-import { AppPage, testUtils } from "./utils/test-helpers.js";
-import { TestSelectors, byTestId } from "./utils/test-selectors.js";
+import { AppPage } from "../../pages/index.js";
+import { testUtils } from "../../lib/test-helpers.js";
+import { TestSelectors, byTestId } from "../../lib/test-selectors.js";
 
 /**
  * Unauthenticated smoke tests — these use a plain `{ page }` with no stored

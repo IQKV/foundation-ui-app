@@ -1,7 +1,7 @@
 import { expect } from "@playwright/test";
-import { test } from "./fixtures/index.js";
-import { TestSelectors, byTestId } from "./utils/test-selectors.js";
-import { restoreTenantSession } from "./fixtures/auth.fixture.js";
+import { test } from "../../fixtures/index.js";
+import { TestSelectors, byTestId } from "../../lib/test-selectors.js";
+import { restoreTenantSession } from "../../fixtures/auth.fixture.js";
 
 /**
  * Authenticated layout tests.
