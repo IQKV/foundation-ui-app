@@ -19,6 +19,7 @@ import {
   useUpdateBillingSettings,
   isBillingSettingsNotFound,
 } from "../model/use-billing-settings";
+import { TestSelectors } from "@/shared/lib/test-selectors";
 
 interface BillingInfoProps {
   tenantKey: string;
@@ -54,13 +55,13 @@ export function BillingInfo({ tenantKey }: BillingInfoProps) {
   }, [settings]);
 
   if (isLoading) {
-    return <Skeleton height={200} radius="md" />;
+    return <Skeleton height={200} radius="md" data-testid={TestSelectors.BILLING_INFO_LOADING} />;
   }
 
   // 404 — settings have not been created yet; let the tenant owner set them up.
   if (isNotFound) {
     return (
-      <Paper withBorder p="xl" radius="md">
+      <Paper withBorder p="xl" radius="md" data-testid={TestSelectors.BILLING_INFO_SETUP}>
         <Stack gap="md">
           <Group gap="xs">
             <IconCreditCard size={20} />
@@ -82,23 +83,27 @@ export function BillingInfo({ tenantKey }: BillingInfoProps) {
                 currency: values.currency,
               }),
             )}
+            data-testid={TestSelectors.BILLING_INFO_SETUP_FORM}
           >
             <Stack gap="sm">
               <TextInput
                 label={t`Billing Email`}
                 placeholder={t`email@company.com`}
                 required
+                data-testid={TestSelectors.BILLING_INFO_EMAIL_INPUT}
                 {...form.getInputProps("billingEmail")}
               />
               <TextInput
                 label={t`Company Name`}
                 placeholder={t`ACME Corp`}
+                data-testid={TestSelectors.BILLING_INFO_COMPANY_INPUT}
                 {...form.getInputProps("companyName")}
               />
               <TextInput
                 label={t`Currency`}
                 placeholder="USD"
                 disabled
+                data-testid={TestSelectors.BILLING_INFO_CURRENCY_INPUT}
                 {...form.getInputProps("currency")}
               />
               <Group justify="flex-end" mt="md">
@@ -106,6 +111,7 @@ export function BillingInfo({ tenantKey }: BillingInfoProps) {
                   type="submit"
                   loading={isCreating}
                   leftSection={<IconDeviceFloppy size={16} />}
+                  data-testid={TestSelectors.BILLING_INFO_SAVE_BUTTON}
                 >
                   <Trans>Save Billing Information</Trans>
                 </Button>
@@ -120,34 +126,45 @@ export function BillingInfo({ tenantKey }: BillingInfoProps) {
   // Any other error (network failure, 5xx, etc.)
   if (isError) {
     return (
-      <Alert icon={<IconAlertCircle size={16} />} title={<Trans>Error</Trans>} color="red">
+      <Alert
+        icon={<IconAlertCircle size={16} />}
+        title={<Trans>Error</Trans>}
+        color="red"
+        data-testid={TestSelectors.BILLING_INFO_ERROR}
+      >
         <Trans>Failed to load billing settings.</Trans>
       </Alert>
     );
   }
 
   return (
-    <Paper withBorder p="xl" radius="md">
+    <Paper withBorder p="xl" radius="md" data-testid={TestSelectors.BILLING_INFO}>
       <Stack gap="md">
         <Title order={3}>
           <Trans>Billing Information</Trans>
         </Title>
-        <form onSubmit={form.onSubmit((values) => updateSettings(values))}>
+        <form
+          onSubmit={form.onSubmit((values) => updateSettings(values))}
+          data-testid={TestSelectors.BILLING_INFO_FORM}
+        >
           <Stack gap="sm">
             <TextInput
               label={t`Billing Email`}
               placeholder={t`email@company.com`}
+              data-testid={TestSelectors.BILLING_INFO_EMAIL_INPUT}
               {...form.getInputProps("billingEmail")}
             />
             <TextInput
               label={t`Company Name`}
               placeholder={t`ACME Corp`}
+              data-testid={TestSelectors.BILLING_INFO_COMPANY_INPUT}
               {...form.getInputProps("companyName")}
             />
             <TextInput
               label={t`Currency`}
               placeholder="USD"
               disabled
+              data-testid={TestSelectors.BILLING_INFO_CURRENCY_INPUT}
               {...form.getInputProps("currency")}
             />
             <Group justify="flex-end" mt="md">
@@ -155,6 +172,7 @@ export function BillingInfo({ tenantKey }: BillingInfoProps) {
                 type="submit"
                 loading={isUpdating}
                 leftSection={<IconDeviceFloppy size={16} />}
+                data-testid={TestSelectors.BILLING_INFO_SAVE_BUTTON}
               >
                 <Trans>Save Changes</Trans>
               </Button>

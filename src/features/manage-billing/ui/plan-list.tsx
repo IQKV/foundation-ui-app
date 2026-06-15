@@ -4,6 +4,7 @@ import { Trans } from "@lingui/react/macro";
 import { usePlans } from "../model/use-plans";
 import { PlanCard } from "./plan-card";
 import type { Plan } from "@/shared/api";
+import { TestSelectors } from "@/shared/lib/test-selectors";
 
 interface PlanListProps {
   currentPlanId?: string;
@@ -16,7 +17,11 @@ export function PlanList({ currentPlanId, onSelect, selectingPlanId }: PlanListP
 
   if (isLoading) {
     return (
-      <SimpleGrid cols={{ base: 1, sm: 2, lg: 3 }} spacing="lg">
+      <SimpleGrid
+        cols={{ base: 1, sm: 2, lg: 3 }}
+        spacing="lg"
+        data-testid={TestSelectors.PLAN_LIST_LOADING}
+      >
         {[1, 2, 3].map((i) => (
           <Skeleton key={i} height={400} radius="md" />
         ))}
@@ -26,7 +31,12 @@ export function PlanList({ currentPlanId, onSelect, selectingPlanId }: PlanListP
 
   if (isError) {
     return (
-      <Alert icon={<IconAlertCircle size={16} />} title={<Trans>Error</Trans>} color="red">
+      <Alert
+        icon={<IconAlertCircle size={16} />}
+        title={<Trans>Error</Trans>}
+        color="red"
+        data-testid={TestSelectors.PLAN_LIST_ERROR}
+      >
         <Trans>Failed to load plans. Please try again later.</Trans>
       </Alert>
     );
@@ -34,14 +44,14 @@ export function PlanList({ currentPlanId, onSelect, selectingPlanId }: PlanListP
 
   if (!plans || plans.length === 0) {
     return (
-      <Text c="dimmed" ta="center" py="xl">
+      <Text c="dimmed" ta="center" py="xl" data-testid={TestSelectors.PLAN_LIST_EMPTY}>
         <Trans>No plans available at the moment.</Trans>
       </Text>
     );
   }
 
   return (
-    <SimpleGrid cols={{ base: 1, sm: 2, lg: 3 }} spacing="lg">
+    <SimpleGrid cols={{ base: 1, sm: 2, lg: 3 }} spacing="lg" data-testid={TestSelectors.PLAN_LIST}>
       {plans.map((plan) => (
         <PlanCard
           key={plan.id}

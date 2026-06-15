@@ -2,6 +2,7 @@ import { Paper, Text, Title, Button, List, ThemeIcon, Stack, Group, Badge } from
 import { IconCheck } from "@tabler/icons-react";
 import { Trans } from "@lingui/react/macro";
 import type { Plan } from "@/shared/api";
+import { TestSelectors } from "@/shared/lib/test-selectors";
 
 interface PlanCardProps {
   plan: Plan;
@@ -19,13 +20,18 @@ export function PlanCard({ plan, isCurrent, onSelect, loading }: PlanCardProps) 
       p="xl"
       radius="md"
       style={{ display: "flex", flexDirection: "column", height: "100%" }}
+      data-testid={TestSelectors.PLAN_CARD(plan.planCode)}
     >
       <Stack justify="space-between" style={{ flex: 1 }}>
         <Stack gap="xs">
           <Group justify="space-between" align="flex-start">
             <Title order={3}>{plan.displayName}</Title>
             {isCurrent && (
-              <Badge variant="filled" color="blue">
+              <Badge
+                variant="filled"
+                color="blue"
+                data-testid={TestSelectors.PLAN_CARD_CURRENT_BADGE(plan.planCode)}
+              >
                 <Trans>Current Plan</Trans>
               </Badge>
             )}
@@ -51,7 +57,12 @@ export function PlanCard({ plan, isCurrent, onSelect, loading }: PlanCardProps) 
             }
           >
             {features.map((feature: string, index: number) => (
-              <List.Item key={index}>{feature}</List.Item>
+              <List.Item
+                key={index}
+                data-testid={TestSelectors.PLAN_CARD_FEATURE(plan.planCode, index)}
+              >
+                {feature}
+              </List.Item>
             ))}
           </List>
         </Stack>
@@ -63,6 +74,7 @@ export function PlanCard({ plan, isCurrent, onSelect, loading }: PlanCardProps) 
           disabled={isCurrent}
           onClick={() => onSelect?.(plan)}
           loading={loading}
+          data-testid={TestSelectors.PLAN_CARD_BUTTON(plan.planCode)}
         >
           {isCurrent ? <Trans>Active</Trans> : <Trans>Select Plan</Trans>}
         </Button>

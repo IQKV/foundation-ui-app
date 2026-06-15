@@ -3,6 +3,7 @@ import { IconAlertCircle, IconReceiptRefund } from "@tabler/icons-react";
 import { Trans } from "@lingui/react/macro";
 import dayjs from "dayjs";
 import { useRefunds } from "../model/use-refunds";
+import { TestSelectors } from "@/shared/lib/test-selectors";
 
 interface RefundListProps {
   tenantKey: string;
@@ -12,12 +13,17 @@ export function RefundList({ tenantKey }: RefundListProps) {
   const { data: refunds, isLoading, isError } = useRefunds(tenantKey);
 
   if (isLoading) {
-    return <Skeleton height={200} radius="md" />;
+    return <Skeleton height={200} radius="md" data-testid={TestSelectors.REFUND_LIST_LOADING} />;
   }
 
   if (isError) {
     return (
-      <Alert icon={<IconAlertCircle size={16} />} title={<Trans>Error</Trans>} color="red">
+      <Alert
+        icon={<IconAlertCircle size={16} />}
+        title={<Trans>Error</Trans>}
+        color="red"
+        data-testid={TestSelectors.REFUND_LIST_ERROR}
+      >
         <Trans>Failed to load refund history.</Trans>
       </Alert>
     );
@@ -28,7 +34,7 @@ export function RefundList({ tenantKey }: RefundListProps) {
   }
 
   return (
-    <Paper withBorder p="xl" radius="md">
+    <Paper withBorder p="xl" radius="md" data-testid={TestSelectors.REFUND_LIST}>
       <Stack gap="md">
         <Group gap="xs">
           <IconReceiptRefund size={20} />
@@ -37,7 +43,7 @@ export function RefundList({ tenantKey }: RefundListProps) {
           </Title>
         </Group>
 
-        <Table verticalSpacing="sm">
+        <Table verticalSpacing="sm" data-testid={TestSelectors.REFUND_LIST_TABLE}>
           <Table.Thead>
             <Table.Tr>
               <Table.Th>
@@ -56,19 +62,25 @@ export function RefundList({ tenantKey }: RefundListProps) {
           </Table.Thead>
           <Table.Tbody>
             {refunds.map((refund) => (
-              <Table.Tr key={refund.id}>
-                <Table.Td>{dayjs(refund.occurredAt).format("MMM D, YYYY")}</Table.Td>
-                <Table.Td>
+              <Table.Tr key={refund.id} data-testid={TestSelectors.REFUND_LIST_ROW(refund.id)}>
+                <Table.Td data-testid={TestSelectors.REFUND_LIST_ROW_DATE(refund.id)}>
+                  {dayjs(refund.occurredAt).format("MMM D, YYYY")}
+                </Table.Td>
+                <Table.Td data-testid={TestSelectors.REFUND_LIST_ROW_AMOUNT(refund.id)}>
                   <Text fw={500}>
                     ${(refund.amount / 100).toFixed(2)} {refund.currency.toUpperCase()}
                   </Text>
                 </Table.Td>
                 <Table.Td>
-                  <Badge variant="light" color={refund.status === "succeeded" ? "green" : "orange"}>
+                  <Badge
+                    variant="light"
+                    color={refund.status === "succeeded" ? "green" : "orange"}
+                    data-testid={TestSelectors.REFUND_LIST_ROW_STATUS_BADGE(refund.id)}
+                  >
                     {refund.status.toUpperCase()}
                   </Badge>
                 </Table.Td>
-                <Table.Td>
+                <Table.Td data-testid={TestSelectors.REFUND_LIST_ROW_PAYMENT_ID(refund.id)}>
                   <Text size="xs" c="dimmed">
                     {refund.externalPaymentId}
                   </Text>

@@ -16,6 +16,7 @@ import {
   useCreateCheckoutSession,
 } from "@/features/manage-billing";
 import type { Plan } from "@/shared/api";
+import { TestSelectors } from "@/shared/lib/test-selectors";
 
 // ─── Route ────────────────────────────────────────────────────────────────────
 
@@ -43,7 +44,7 @@ function BillingPage() {
   };
 
   return (
-    <Container size="md">
+    <Container size="md" data-testid={TestSelectors.PAGE("billing")}>
       <Helmet title={pageTitle(t`Billing`)} />
       <PageHeader title={t`Billing`} />
 
