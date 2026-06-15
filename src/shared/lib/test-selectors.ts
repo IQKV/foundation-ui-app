@@ -9,15 +9,19 @@ export const TestSelectors = {
   // Layout
   APP_ROOT: "app-root",
   APP_LAYOUT: "app-layout",
+  APP_HEADER_BAR: "app-header-bar",
   AUTH_LAYOUT: "auth-layout",
+  APP_AUTH_LOADING: "app-auth-loading",
 
   // Header
   APP_HEADER: "app-header",
   HEADER_LOGO: "app-nav-logo",
+  HEADER_LOGO_MARK: "sidebar-logo-mark",
   HEADER_USER_MENU: "header-user-menu",
   HEADER_USER_MENU_BUTTON: "header-user-menu-button",
   HEADER_COLOR_SCHEME_TOGGLE: "header-color-scheme-toggle",
   HEADER_MOBILE_MENU_TOGGLE: "header-mobile-menu-toggle",
+  SIDEBAR_MOBILE_MENU_TOGGLE: "sidebar-mobile-menu-toggle",
 
   // Navigation
   APP_NAV: "app-nav",
@@ -33,6 +37,7 @@ export const TestSelectors = {
   ALERT: (name: string) => `alert--${name}`,
   LOADING_OVERLAY: "loading-overlay",
   ERROR_BOUNDARY: "error-boundary",
+  AUTH_GUARD_LOADER: "auth-guard-loader",
 
   // Pages
   PAGE: (name: string) => `page--${name}`,
@@ -94,6 +99,15 @@ export const TestSelectors = {
   VERIFY_EMAIL_PROMPT_DESCRIPTION: "verify-email-prompt-description",
   VERIFY_EMAIL_PROMPT_ENTER_WORKSPACE_BUTTON: "verify-email-prompt-enter-workspace-button",
   VERIFY_EMAIL_PROMPT_RESEND_BUTTON: "verify-email-prompt-resend-button",
+
+  // Notification Bell
+  NOTIFICATION_BELL_BUTTON: "notification-bell-button",
+  NOTIFICATION_BELL_DROPDOWN: "notification-bell-dropdown",
+  NOTIFICATION_MARK_ALL_READ: "notification-mark-all-read",
+  NOTIFICATION_SEE_ALL: "notification-see-all",
+  NOTIFICATION_DELETE_ALL: "notification-delete-all",
+  NOTIFICATION_ITEM: (id: string) => `notification-item-${id}`,
+  NOTIFICATION_DELETE: (id: string) => `notification-delete-${id}`,
 
   // Billing
   BILLING_INFO: "billing-info",
