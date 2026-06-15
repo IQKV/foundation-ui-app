@@ -24,6 +24,7 @@ import { pageTitle } from "@/shared/lib/page-title";
 import { iamApi } from "@/shared/api";
 import { PageHeader } from "@/shared/ui";
 import { useChangePassword } from "@/features/change-password";
+import { TestSelectors } from "@/shared/lib/test-selectors";
 
 export const Route = createFileRoute("/_app/settings/security")({
   component: SecuritySettingsPage,
@@ -102,7 +103,7 @@ function SecuritySettingsPage() {
   }
 
   return (
-    <Container size="md">
+    <Container size="md" data-testid={TestSelectors.SECURITY_SETTINGS_PAGE}>
       <Helmet title={pageTitle(t`Security Settings`)} />
       <PageHeader
         title={t`Security Settings`}
@@ -115,7 +116,12 @@ function SecuritySettingsPage() {
 
       <Stack gap="xl">
         {/* Roles Card */}
-        <Paper withBorder radius="md" style={{ overflow: "hidden" }}>
+        <Paper
+          withBorder
+          radius="md"
+          style={{ overflow: "hidden" }}
+          data-testid={TestSelectors.SECURITY_SETTINGS_ROLES_SECTION}
+        >
           <Group px="md" py="sm" style={{ borderBottom: "1px solid var(--mantine-color-gray-2)" }}>
             <IconShieldHalf size={15} color="var(--mantine-color-gray-6)" />
             <Text fw={600} size="sm">
@@ -153,6 +159,7 @@ function SecuritySettingsPage() {
                   px="md"
                   py="sm"
                   style={{ borderBottom: "1px solid var(--mantine-color-gray-1)" }}
+                  data-testid={TestSelectors.SECURITY_SETTINGS_ROLE_ITEM(authority)}
                 >
                   <Group gap="sm">
                     <Box
@@ -180,7 +187,12 @@ function SecuritySettingsPage() {
         </Paper>
 
         {/* Password Card */}
-        <Paper withBorder p="xl" radius="md">
+        <Paper
+          withBorder
+          p="xl"
+          radius="md"
+          data-testid={TestSelectors.SECURITY_SETTINGS_PASSWORD_SECTION}
+        >
           <Group gap="md" mb="xl">
             <IconKey size={20} color="var(--mantine-color-orange-6)" />
             <Text fw={600}>
@@ -193,18 +205,21 @@ function SecuritySettingsPage() {
               <PasswordInput
                 label={t`Current password`}
                 placeholder={t`Enter your current password`}
+                data-testid={TestSelectors.SECURITY_SETTINGS_CURRENT_PASSWORD_INPUT}
                 {...form.getInputProps("currentPassword")}
               />
 
               <PasswordInput
                 label={t`New password`}
                 placeholder={t`Enter new password`}
+                data-testid={TestSelectors.SECURITY_SETTINGS_NEW_PASSWORD_INPUT}
                 {...form.getInputProps("newPassword")}
               />
 
               <PasswordInput
                 label={t`Confirm new password`}
                 placeholder={t`Repeat new password`}
+                data-testid={TestSelectors.SECURITY_SETTINGS_CONFIRM_PASSWORD_INPUT}
                 {...form.getInputProps("confirmPassword")}
               />
 
@@ -240,7 +255,12 @@ function SecuritySettingsPage() {
               <Divider />
 
               <Group justify="flex-end">
-                <Button type="submit" color="orange" loading={mutation.isPending}>
+                <Button
+                  type="submit"
+                  color="orange"
+                  loading={mutation.isPending}
+                  data-testid={TestSelectors.SECURITY_SETTINGS_CHANGE_PASSWORD_BUTTON}
+                >
                   <Trans>Change password</Trans>
                 </Button>
               </Group>

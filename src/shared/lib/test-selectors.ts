@@ -239,6 +239,40 @@ export const TestSelectors = {
   // Notifications
   NOTIFICATION: (type: string) => `notification--${type}`,
   NOTIFICATION_CONTAINER: "notifications-container",
+  NOTIFICATION_PAGE: "notification-page",
+  NOTIFICATION_PAGE_MARK_ALL_READ_BUTTON: "notification-page-mark-all-read-button",
+  NOTIFICATION_PAGE_CLEAR_ALL_BUTTON: "notification-page-clear-all-button",
+  NOTIFICATION_PAGE_PAGINATION: "notification-page-pagination",
+
+  // General Settings
+  GENERAL_SETTINGS_PAGE: "general-settings-page",
+  GENERAL_SETTINGS_AVATAR_SECTION: "general-settings-avatar-section",
+  GENERAL_SETTINGS_PROFILE_SECTION: "general-settings-profile-section",
+  GENERAL_SETTINGS_FIRST_NAME_INPUT: "general-settings-first-name-input",
+  GENERAL_SETTINGS_LAST_NAME_INPUT: "general-settings-last-name-input",
+  GENERAL_SETTINGS_EMAIL_INPUT: "general-settings-email-input",
+  GENERAL_SETTINGS_LOCALE_SELECT: "general-settings-locale-select",
+  GENERAL_SETTINGS_SAVE_BUTTON: "general-settings-save-button",
+  GENERAL_SETTINGS_ORGANIZATIONS_SECTION: "general-settings-organizations-section",
+  GENERAL_SETTINGS_ORGANIZATION_ITEM: (orgName: string) =>
+    `general-settings-organization-item-${orgName}`,
+
+  // Security Settings
+  SECURITY_SETTINGS_PAGE: "security-settings-page",
+  SECURITY_SETTINGS_ROLES_SECTION: "security-settings-roles-section",
+  SECURITY_SETTINGS_ROLE_ITEM: (role: string) => `security-settings-role-item-${role}`,
+  SECURITY_SETTINGS_PASSWORD_SECTION: "security-settings-password-section",
+  SECURITY_SETTINGS_CURRENT_PASSWORD_INPUT: "security-settings-current-password-input",
+  SECURITY_SETTINGS_NEW_PASSWORD_INPUT: "security-settings-new-password-input",
+  SECURITY_SETTINGS_CONFIRM_PASSWORD_INPUT: "security-settings-confirm-password-input",
+  SECURITY_SETTINGS_CHANGE_PASSWORD_BUTTON: "security-settings-change-password-button",
+
+  // Organization Settings Page
+  ORGANIZATION_SETTINGS_PAGE: "organization-settings-page",
+  ORGANIZATION_SETTINGS_PAGE_SEARCH_INPUT: "organization-settings-page-search-input",
+  ORGANIZATION_SETTINGS_PAGE_REFRESH_BUTTON: "organization-settings-page-refresh-button",
+  ORGANIZATION_SETTINGS_PAGE_TABLE: "organization-settings-page-table",
+  ORGANIZATION_SETTINGS_PAGE_CREATE_ORG_BUTTON: "organization-settings-page-create-org-button",
 
   // Modals
   MODAL_CONTAINER: "modals-container",

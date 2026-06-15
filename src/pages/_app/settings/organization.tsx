@@ -30,6 +30,7 @@ import { pageTitle } from "@/shared/lib/page-title";
 import { iamApi, authApi, type UserMembership } from "@/shared/api";
 import { setTokens } from "@/processes/session";
 import { PageHeader } from "@/shared/ui";
+import { TestSelectors } from "@/shared/lib/test-selectors";
 
 export const Route = createFileRoute("/_app/settings/organization")({
   component: OrganizationsPage,
@@ -89,7 +90,7 @@ function OrganizationsPage() {
   }, [orgMemberships, search]);
 
   return (
-    <Container size="xl" py={0}>
+    <Container size="xl" py={0} data-testid={TestSelectors.ORGANIZATION_SETTINGS_PAGE}>
       <Helmet title={pageTitle(t`Organizations`)} />
       <PageHeader
         title={<Trans>Organizations</Trans>}
@@ -121,6 +122,7 @@ function OrganizationsPage() {
             <Button
               leftSection={<IconPlus size={16} />}
               onClick={() => void navigate({ to: "/create-organization" })}
+              data-testid={TestSelectors.ORGANIZATION_SETTINGS_PAGE_CREATE_ORG_BUTTON}
             >
               <Trans>Create Organization</Trans>
             </Button>
@@ -135,6 +137,7 @@ function OrganizationsPage() {
               value={search}
               onChange={(e) => setSearch(e.currentTarget.value)}
               style={{ width: 320 }}
+              data-testid={TestSelectors.ORGANIZATION_SETTINGS_PAGE_SEARCH_INPUT}
             />
 
             <Tooltip label={t`Refresh`} withArrow>
@@ -143,6 +146,7 @@ function OrganizationsPage() {
                 color="gray"
                 onClick={() => void refetch()}
                 loading={isFetching}
+                data-testid={TestSelectors.ORGANIZATION_SETTINGS_PAGE_REFRESH_BUTTON}
               >
                 <IconRefresh size={16} />
               </ActionIcon>
@@ -164,6 +168,7 @@ function OrganizationsPage() {
                   ? t`No matches.`
                   : t`No organizations found.`
             }
+            data-testid={TestSelectors.ORGANIZATION_SETTINGS_PAGE_TABLE}
             columns={[
               {
                 accessor: "tenantName",

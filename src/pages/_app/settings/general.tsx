@@ -27,6 +27,7 @@ import { PageHeader } from "@/shared/ui";
 import { useEditProfile, type EditProfileFormValues } from "@/features/edit-profile";
 import { AvatarUpload } from "@/features/avatar";
 import { useSession } from "@/processes/session";
+import { TestSelectors } from "@/shared/lib/test-selectors";
 
 export const Route = createFileRoute("/_app/settings/general")({
   component: GeneralSettingsPage,
@@ -118,7 +119,7 @@ function GeneralSettingsPage() {
   }
 
   return (
-    <Container size="md">
+    <Container size="md" data-testid={TestSelectors.GENERAL_SETTINGS_PAGE}>
       <Helmet title={pageTitle(t`General Settings`)} />
       <PageHeader
         title={t`General Settings`}
@@ -131,7 +132,12 @@ function GeneralSettingsPage() {
 
       <Stack gap="xl">
         {/* Avatar Card */}
-        <Paper withBorder p="xl" radius="md">
+        <Paper
+          withBorder
+          p="xl"
+          radius="md"
+          data-testid={TestSelectors.GENERAL_SETTINGS_AVATAR_SECTION}
+        >
           <Group gap="md" mb="xl">
             <IconUser size={20} color="var(--mantine-color-blue-6)" />
             <Text fw={600}>
@@ -142,7 +148,12 @@ function GeneralSettingsPage() {
         </Paper>
 
         {/* Profile Card */}
-        <Paper withBorder p="xl" radius="md">
+        <Paper
+          withBorder
+          p="xl"
+          radius="md"
+          data-testid={TestSelectors.GENERAL_SETTINGS_PROFILE_SECTION}
+        >
           <Group gap="md" mb="xl">
             <IconUser size={20} color="var(--mantine-color-blue-6)" />
             <Text fw={600}>
@@ -157,12 +168,14 @@ function GeneralSettingsPage() {
                   label={t`First name`}
                   placeholder={t`First name`}
                   disabled={profileLoading}
+                  data-testid={TestSelectors.GENERAL_SETTINGS_FIRST_NAME_INPUT}
                   {...form.getInputProps("firstName")}
                 />
                 <TextInput
                   label={t`Last name`}
                   placeholder={t`Last name`}
                   disabled={profileLoading}
+                  data-testid={TestSelectors.GENERAL_SETTINGS_LAST_NAME_INPUT}
                   {...form.getInputProps("lastName")}
                 />
               </Group>
@@ -184,6 +197,7 @@ function GeneralSettingsPage() {
                   </Text>
                 }
                 rightSectionWidth={72}
+                data-testid={TestSelectors.GENERAL_SETTINGS_EMAIL_INPUT}
               />
 
               <Select
@@ -195,6 +209,7 @@ function GeneralSettingsPage() {
                 disabled={localesLoading || profileLoading}
                 clearable
                 searchable
+                data-testid={TestSelectors.GENERAL_SETTINGS_LOCALE_SELECT}
                 {...form.getInputProps("locale")}
               />
 
@@ -205,6 +220,7 @@ function GeneralSettingsPage() {
                   type="submit"
                   loading={mutation.isPending}
                   disabled={profileLoading || !form.isDirty()}
+                  data-testid={TestSelectors.GENERAL_SETTINGS_SAVE_BUTTON}
                 >
                   <Trans>Save changes</Trans>
                 </Button>
@@ -214,7 +230,12 @@ function GeneralSettingsPage() {
         </Paper>
 
         {/* Organizations Card */}
-        <Paper withBorder radius="md" style={{ overflow: "hidden" }}>
+        <Paper
+          withBorder
+          radius="md"
+          style={{ overflow: "hidden" }}
+          data-testid={TestSelectors.GENERAL_SETTINGS_ORGANIZATIONS_SECTION}
+        >
           <Group px="md" py="sm" style={{ borderBottom: "1px solid var(--mantine-color-gray-2)" }}>
             <IconBuilding size={15} color="var(--mantine-color-gray-6)" />
             <Text fw={600} size="sm">
@@ -255,6 +276,7 @@ function GeneralSettingsPage() {
                   px="md"
                   py="sm"
                   style={{ borderBottom: "1px solid var(--mantine-color-gray-1)" }}
+                  data-testid={TestSelectors.GENERAL_SETTINGS_ORGANIZATION_ITEM(orgName)}
                 >
                   <Group gap="sm">
                     <Box

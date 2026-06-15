@@ -24,6 +24,7 @@ import {
   NotificationItem,
 } from "@/features/notification-bell";
 import { z } from "zod";
+import { TestSelectors } from "@/shared/lib/test-selectors";
 
 const PAGE_SIZE = 20;
 
@@ -64,7 +65,7 @@ function NotificationsPage() {
   };
 
   return (
-    <Container size="md" py={0}>
+    <Container size="md" py={0} data-testid={TestSelectors.NOTIFICATION_PAGE}>
       <Helmet>
         <title>{pageTitle(t`Notifications`)}</title>
       </Helmet>
@@ -85,6 +86,7 @@ function NotificationsPage() {
                 size="xs"
                 onClick={() => markAllAsRead.mutate()}
                 loading={markAllAsRead.isPending}
+                data-testid={TestSelectors.NOTIFICATION_PAGE_MARK_ALL_READ_BUTTON}
               >
                 <Trans>Mark all as read</Trans>
               </Button>
@@ -94,6 +96,7 @@ function NotificationsPage() {
                 size="xs"
                 onClick={() => deleteAll.mutate()}
                 loading={deleteAll.isPending}
+                data-testid={TestSelectors.NOTIFICATION_PAGE_CLEAR_ALL_BUTTON}
               >
                 <Trans>Clear all</Trans>
               </Button>
@@ -131,7 +134,13 @@ function NotificationsPage() {
 
       {totalPages > 1 && (
         <Group justify="center" mt="xl">
-          <Pagination total={totalPages} value={page} onChange={handlePageChange} withEdges />
+          <Pagination
+            total={totalPages}
+            value={page}
+            onChange={handlePageChange}
+            withEdges
+            data-testid={TestSelectors.NOTIFICATION_PAGE_PAGINATION}
+          />
         </Group>
       )}
     </Container>
