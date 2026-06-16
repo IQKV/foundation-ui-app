@@ -32,7 +32,7 @@ export interface SubscriptionResponse {
 }
 
 export interface CreateCheckoutSessionRequest {
-  priceId: string;
+  planCode: string;
   successUrl: string;
   cancelUrl: string;
   trialPeriodDays?: number;

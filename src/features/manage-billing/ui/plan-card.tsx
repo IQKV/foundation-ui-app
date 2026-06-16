@@ -1,7 +1,7 @@
 import { Paper, Text, Title, Button, List, ThemeIcon, Stack, Group, Badge } from "@mantine/core";
 import { IconCheck } from "@tabler/icons-react";
 import { Trans } from "@lingui/react/macro";
-import type { Plan } from "@/shared/api";
+import type { Plan, PlanFeatures as PlanFeaturesType } from "@/shared/api";
 import { TestSelectors } from "@/shared/lib/test-selectors";
 
 interface PlanCardProps {
@@ -11,8 +11,22 @@ interface PlanCardProps {
   loading?: boolean;
 }
 
+function getDisplayFeatures(features: PlanFeaturesType): string[] {
+  const display: string[] = [];
+  display.push(`Max users: ${features.maxUsers === 0 ? "Unlimited" : features.maxUsers}`);
+  display.push(`Max projects: ${features.maxProjects === 0 ? "Unlimited" : features.maxProjects}`);
+  if (features.prioritySupport) {
+    display.push("Priority support");
+  }
+  return display;
+}
+
 export function PlanCard({ plan, isCurrent, onSelect, loading }: PlanCardProps) {
-  const features = (plan.featureSet ? JSON.parse(plan.featureSet) : []) as string[];
+  const features = plan.featureSet 
+    ? (JSON.parse(plan.featureSet) as PlanFeaturesType) 
+    : { prioritySupport: false, maxUsers: 1, maxProjects: 1 };
+  
+  const displayFeatures = getDisplayFeatures(features);
 
   return (
     <Paper
@@ -56,7 +70,7 @@ export function PlanCard({ plan, isCurrent, onSelect, loading }: PlanCardProps) 
               </ThemeIcon>
             }
           >
-            {features.map((feature: string, index: number) => (
+            {displayFeatures.map((feature, index) => (
               <List.Item
                 key={index}
                 data-testid={TestSelectors.PLAN_CARD_FEATURE(plan.planCode, index)}

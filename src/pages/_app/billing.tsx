@@ -37,7 +37,7 @@ function BillingPage() {
     if (!isTenantOwner) return;
 
     createCheckout({
-      priceId: plan.planCode, // In this system, planCode is used as priceId for simplicity or mapped in backend
+      planCode: plan.planCode,
       successUrl: window.location.href,
       cancelUrl: window.location.href,
     });
