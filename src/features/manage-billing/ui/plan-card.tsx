@@ -22,10 +22,10 @@ function getDisplayFeatures(features: PlanFeaturesType): string[] {
 }
 
 export function PlanCard({ plan, isCurrent, onSelect, loading }: PlanCardProps) {
-  const features = plan.featureSet 
-    ? (JSON.parse(plan.featureSet) as PlanFeaturesType) 
+  const features = plan.featureSet
+    ? (JSON.parse(plan.featureSet) as PlanFeaturesType)
     : { prioritySupport: false, maxUsers: 1, maxProjects: 1 };
-  
+
   const displayFeatures = getDisplayFeatures(features);
 
   return (
