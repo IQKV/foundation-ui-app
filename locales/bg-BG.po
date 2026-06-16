@@ -103,6 +103,10 @@ msgstr "Активен"
 msgid "Admin"
 msgstr "Администратор"
 
+#: src/pages/billing-example.tsx
+msgid "Advanced Projects (Upgrade Required)"
+msgstr ""
+
 #: src/features/signup/ui/signup-form.tsx
 #: src/pages/invite.$token.tsx
 msgid "Already have an account? <0>Sign in</0>"
@@ -203,6 +207,10 @@ msgstr "Имейл за фактуриране"
 msgid "Billing Information"
 msgstr "Информация за фактуриране"
 
+#: src/pages/billing-example.tsx
+msgid "Billing Integration Example"
+msgstr ""
+
 #: src/pages/_app/billing.tsx
 msgid "Billing Portal"
 msgstr "Портал за фактуриране"
@@ -292,6 +300,10 @@ msgstr "Потвърди новата парола"
 msgid "Confirm your"
 msgstr "Потвърдете"
 
+#: src/pages/billing-example.tsx
+msgid "Contact Support"
+msgstr ""
+
 #: src/features/sign-in/ui/sign-in-form.tsx
 msgid "Continue"
 msgstr "Продължи"
@@ -343,6 +355,10 @@ msgstr "Създай организация"
 msgid "Create Organization"
 msgstr ""
 
+#: src/pages/billing-example.tsx
+msgid "Create Project"
+msgstr ""
+
 #: src/pages/create-organization.tsx
 msgid "Create your"
 msgstr "Създайте"
@@ -385,9 +401,14 @@ msgstr "Текуща парола"
 msgid "Current password is required"
 msgstr "Текущата парола е задължителна"
 
+#: src/features/manage-billing/ui/entitlements-card.tsx
 #: src/features/manage-billing/ui/plan-card.tsx
 msgid "Current Plan"
 msgstr "Текущ план"
+
+#: src/pages/billing-example.tsx
+msgid "Current plan limits:"
+msgstr ""
 
 #: src/features/manage-billing/ui/current-subscription.tsx
 msgid "Current Subscription"
@@ -552,6 +573,14 @@ msgstr "Зареждането на историята на възстановя
 msgid "Fair"
 msgstr "Задоволителна"
 
+#: src/pages/billing-example.tsx
+msgid "Feature Gate Examples"
+msgstr ""
+
+#: src/pages/billing-example.tsx
+msgid "Feature Usage Examples"
+msgstr ""
+
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 #: src/features/signup/ui/signup-form.tsx
 #: src/pages/_app/settings/general.tsx
@@ -671,6 +700,10 @@ msgstr "Поканата не е намерена"
 msgid "Invite member"
 msgstr "Покани член"
 
+#: src/pages/billing-example.tsx
+msgid "Invite Members"
+msgstr ""
+
 #: src/pages/invite.$token.tsx
 msgid "invited."
 msgstr "поканени."
@@ -764,6 +797,14 @@ msgstr "Управлявайте екипа, абонаментите и нас�
 msgid "Mark all as read"
 msgstr "Маркирай всички като прочетени"
 
+#: src/pages/billing-example.tsx
+msgid "Max Projects:"
+msgstr ""
+
+#: src/pages/billing-example.tsx
+msgid "Max Users:"
+msgstr ""
+
 #: src/features/invite-member/model/types.ts
 #: src/features/member-role/ui/update-member-authorities-modal.tsx
 msgid "Member"
@@ -799,6 +840,10 @@ msgstr "Нова парола"
 #: src/features/manage-billing/ui/current-subscription.tsx
 msgid "Next Billing Date"
 msgstr "Следваща дата за фактуриране"
+
+#: src/features/manage-billing/ui/entitlements-card.tsx
+msgid "No active subscription found. Subscribe to a plan to access platform features."
+msgstr ""
 
 #: src/features/sign-in/model/use-sign-in.ts
 msgid "No active tenant memberships found for this account"
@@ -1003,8 +1048,13 @@ msgid "Pick a date and time"
 msgstr "Изберете дата и час"
 
 #: src/features/manage-billing/ui/current-subscription.tsx
+#: src/features/manage-billing/ui/entitlements-card.tsx
 msgid "Plan"
 msgstr "План"
+
+#: src/features/manage-billing/ui/plan-features.tsx
+msgid "Plan Features"
+msgstr ""
 
 #: src/features/reset-password/model/use-reset-password.ts
 msgid "Please confirm your password"
@@ -1014,6 +1064,22 @@ msgstr "Моля, потвърдете паролата си"
 msgid "Portal error"
 msgstr "Грешка на портала"
 
+#: src/features/manage-billing/ui/plan-features.tsx
+msgid "Priority Support"
+msgstr ""
+
+#: src/pages/billing-example.tsx
+msgid "Priority Support (Upgrade Required)"
+msgstr ""
+
+#: src/pages/billing-example.tsx
+msgid "Priority Support Available"
+msgstr ""
+
+#: src/pages/billing-example.tsx
+msgid "Priority Support:"
+msgstr ""
+
 #: src/pages/_app/settings/general.tsx
 msgid "Profile Information"
 msgstr "Информация за профила"
@@ -1021,6 +1087,14 @@ msgstr "Информация за профила"
 #: src/pages/_app/settings/general.tsx
 msgid "Profile Picture"
 msgstr "Снимка на профила"
+
+#: src/pages/billing-example.tsx
+msgid "Project Management"
+msgstr ""
+
+#: src/features/manage-billing/ui/plan-features.tsx
+msgid "Projects"
+msgstr ""
 
 #: src/features/ban-user/ui/ban-member-modal.tsx
 msgid "Provide a reason for the ban…"
@@ -1061,6 +1135,10 @@ msgstr "Премахни"
 #: src/features/manage-organization/ui/member-actions.tsx
 msgid "Remove Member"
 msgstr "Премахни член"
+
+#: src/features/manage-billing/ui/entitlements-card.tsx
+msgid "Renews On"
+msgstr ""
 
 #: src/features/change-password/ui/change-password-modal.tsx
 #: src/pages/_app/settings/security.tsx
@@ -1345,9 +1423,21 @@ msgstr "Превключи към светъл режим"
 msgid "Team"
 msgstr "Екип"
 
+#: src/pages/billing-example.tsx
+msgid "Team Management"
+msgstr ""
+
+#: src/pages/billing-example.tsx
+msgid "Team Management (Upgrade Required)"
+msgstr ""
+
 #: src/pages/_app/index.tsx
 msgid "Team members"
 msgstr "Членове на екипа"
+
+#: src/features/manage-billing/ui/plan-features.tsx
+msgid "Team Members"
+msgstr ""
 
 #: src/features/member-role/ui/update-member-authorities-modal.tsx
 msgid "Tenant Owner"
@@ -1365,6 +1455,10 @@ msgstr "Уникалният идентификатор на организац�
 msgid "Theme-aware (respects dark mode and color scheme)"
 msgstr "Отчита темата (поддържа тъмен режим и цветова схема)"
 
+#: src/features/manage-billing/ui/feature-gate.tsx
+msgid "This feature requires an active subscription. Please upgrade your plan to access this functionality."
+msgstr ""
+
 #: src/features/accept-invitation/model/use-accept-invitation.ts
 msgid "This invitation link has expired or is no longer valid."
 msgstr "Тази връзка за покана е изтекла или вече не е валидна."
@@ -1380,6 +1474,10 @@ msgstr "Това отнема малко повече от обичайното.
 #: src/pages/verify-email.tsx
 msgid "This link is missing a verification token. Please use the link from your email."
 msgstr "В тази връзка липсва токен за потвърждение. Моля, използвайте връзката от имейла ви."
+
+#: src/pages/billing-example.tsx
+msgid "This page demonstrates how to integrate the billing entitlements API for plan-based feature access control in your React application."
+msgstr ""
 
 #: src/features/reset-password/ui/reset-password-form.tsx
 msgid "This password reset link is missing a token. Please request a new one."
@@ -1429,6 +1527,10 @@ msgstr "Доверено от екипи по целия свят"
 msgid "Try Again"
 msgstr "Опитай отново"
 
+#: src/features/manage-billing/ui/entitlements-card.tsx
+msgid "Unable to load subscription information. Please try again later."
+msgstr ""
+
 #: src/features/ban-user/ui/unban-member-modal.tsx
 msgid "Unban member"
 msgstr "Разблокирай член"
@@ -1441,6 +1543,10 @@ msgstr "Разблокирай член"
 #: src/features/ban-user/ui/unban-member-modal.tsx
 msgid "Unbanning this member will restore their access to this tenant. They will be able to access this tenant again with their existing credentials."
 msgstr "Разблокирането на този член ще възстанови достъпа им до наемателя. Те ще могат да достъпват наемателя отново с текущите си данни за достъп."
+
+#: src/features/manage-billing/ui/plan-features.tsx
+msgid "Unlimited"
+msgstr ""
 
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 msgid "Unverified"

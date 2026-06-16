@@ -136,6 +136,21 @@ export const TestSelectors = {
   CURRENT_SUBSCRIPTION_PLAN: "current-subscription-plan",
   CURRENT_SUBSCRIPTION_NEXT_BILLING_DATE: "current-subscription-next-billing-date",
   CURRENT_SUBSCRIPTION_CANCEL_INFO: "current-subscription-cancel-info",
+
+  // Entitlements
+  ENTITLEMENTS_LOADING: "entitlements-loading",
+  ENTITLEMENTS_ERROR: "entitlements-error",
+  ENTITLEMENTS_NO_SUBSCRIPTION: "entitlements-no-subscription",
+  ENTITLEMENTS_CARD: "entitlements-card",
+  ENTITLEMENTS_STATUS_BADGE: "entitlements-status-badge",
+  ENTITLEMENTS_PLAN_CODE: "entitlements-plan-code",
+  ENTITLEMENTS_PERIOD_END: "entitlements-period-end",
+
+  // Plan Features
+  PLAN_FEATURES: "plan-features",
+  PLAN_FEATURE_PRIORITY_SUPPORT: "plan-feature-priority-support",
+  PLAN_FEATURE_MAX_USERS: "plan-feature-max-users",
+  PLAN_FEATURE_MAX_PROJECTS: "plan-feature-max-projects",
   REFUND_LIST: "refund-list",
   REFUND_LIST_LOADING: "refund-list-loading",
   REFUND_LIST_ERROR: "refund-list-error",

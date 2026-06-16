@@ -62,6 +62,8 @@ export type {
   CreateBillingSettingsRequest,
   UpdateBillingSettingsRequest,
   RefundResponse,
+  PlanFeatures,
+  EntitlementsResponse,
 } from "./billing";
 
 export { notificationApi } from "./iam";

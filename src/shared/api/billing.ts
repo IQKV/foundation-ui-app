@@ -86,6 +86,19 @@ export interface RefundResponse {
   occurredAt: string;
 }
 
+export interface PlanFeatures {
+  prioritySupport: boolean;
+  maxUsers: number;
+  maxProjects: number;
+}
+
+export interface EntitlementsResponse {
+  planCode: string;
+  status: "active" | "canceled" | "incomplete" | "incomplete_expired" | "past_due" | "unpaid";
+  currentPeriodEnd: string;
+  features: PlanFeatures;
+}
+
 export const billingApi = {
   /**
    * List all active plans in the catalog.
@@ -172,4 +185,12 @@ export const billingApi = {
    */
   createUserPortalSession: () =>
     httpClient.post<PortalSessionResponse>("/v1/billing/user-settings/portal").then((r) => r.data),
+
+  /**
+   * Get entitlements for the current user/tenant.
+   * Returns active plan, subscription status, and typed features.
+   * Requires TENANT_OWNER or MEMBER authority.
+   */
+  getEntitlements: () =>
+    httpClient.get<EntitlementsResponse>("/v1/billing/entitlements/me").then((r) => r.data),
 };

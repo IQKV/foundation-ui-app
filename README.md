@@ -18,7 +18,7 @@ This is the tenant surface of the platform — separate from `foundation-ui-plat
 | **Dashboard**          | Workspace name, welcome message, team member count                                                                                                                                                                                         |
 | **Team**               | Searchable member list; pending invitations panel (TENANT_OWNER only); send invitation modal (ADMIN or MEMBER role); ban/unban members (TENANT_OWNER only); change member role (TENANT_OWNER only); transfer ownership (TENANT_OWNER only) |
 | **My Account**         | Profile view, edit name, change password, organizations and roles                                                                                                                                                                          |
-| **Billing**            | Billing portal access, current subscription view, plan catalog, billing info, refunds list                                                                                                                                                 |
+| **Billing**            | Billing portal access, current subscription view, plan catalog, billing info, refunds list; **plan-based feature access control** with entitlements API integration                                                                        |
 | **Tenant Settings**    | Organization metadata editing                                                                                                                                                                                                              |
 | **Notifications**      | In-app notifications with WebSocket support; notification bell UI                                                                                                                                                                          |
 | **Session security**   | Access token in memory; refresh token + tenant key in `sessionStorage`; silent refresh on 401; 30-minute inactivity sign-out                                                                                                               |
@@ -65,6 +65,7 @@ Authenticated routes live under the `/_app` layout, which enforces a valid tenan
 | Team — invitations (send, list, revoke) | Done (TENANT_OWNER) |
 | Profile & change password               | Done                |
 | Billing self-service                    | Done                |
+| Plan-based feature access control       | Done                |
 | Tenant settings                         | Done                |
 | Notifications                           | Done                |
 | Member role editing                     | Done (TENANT_OWNER) |

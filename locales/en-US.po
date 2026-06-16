@@ -135,6 +135,10 @@ msgstr "Active"
 msgid "Admin"
 msgstr "Admin"
 
+#: src/pages/billing-example.tsx
+msgid "Advanced Projects (Upgrade Required)"
+msgstr "Advanced Projects (Upgrade Required)"
+
 #: src/pages/admin/organizations.index.tsx
 #: src/pages/admin/subscriptions.tsx
 #: src/pages/admin/users.index.tsx
@@ -252,6 +256,10 @@ msgstr "Billing Email"
 #: src/features/manage-billing/ui/billing-info.tsx
 msgid "Billing Information"
 msgstr "Billing Information"
+
+#: src/pages/billing-example.tsx
+msgid "Billing Integration Example"
+msgstr "Billing Integration Example"
 
 #: src/features/manage-organization/ui/member-actions.tsx
 #~ msgid "Billing Manager"
@@ -382,6 +390,10 @@ msgstr "Confirm new password"
 msgid "Confirm your"
 msgstr "Confirm your"
 
+#: src/pages/billing-example.tsx
+msgid "Contact Support"
+msgstr "Contact Support"
+
 #: src/features/sign-in/ui/sign-in-form.tsx
 msgid "Continue"
 msgstr "Continue"
@@ -457,6 +469,10 @@ msgstr "Create organization"
 msgid "Create Organization"
 msgstr "Create Organization"
 
+#: src/pages/billing-example.tsx
+msgid "Create Project"
+msgstr "Create Project"
+
 #: src/pages/create-organization.tsx
 msgid "Create your"
 msgstr "Create your"
@@ -513,9 +529,14 @@ msgstr "Current password"
 msgid "Current password is required"
 msgstr "Current password is required"
 
+#: src/features/manage-billing/ui/entitlements-card.tsx
 #: src/features/manage-billing/ui/plan-card.tsx
 msgid "Current Plan"
 msgstr "Current Plan"
+
+#: src/pages/billing-example.tsx
+msgid "Current plan limits:"
+msgstr "Current plan limits:"
 
 #: src/features/manage-billing/ui/current-subscription.tsx
 msgid "Current Subscription"
@@ -750,6 +771,14 @@ msgstr "Failed to load refund history."
 msgid "Fair"
 msgstr "Fair"
 
+#: src/pages/billing-example.tsx
+msgid "Feature Gate Examples"
+msgstr "Feature Gate Examples"
+
+#: src/pages/billing-example.tsx
+msgid "Feature Usage Examples"
+msgstr "Feature Usage Examples"
+
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 #: src/features/signup/ui/signup-form.tsx
 #: src/pages/_app/settings/general.tsx
@@ -872,6 +901,10 @@ msgstr "Invitation not found"
 #: src/pages/_app/team.tsx
 msgid "Invite member"
 msgstr "Invite member"
+
+#: src/pages/billing-example.tsx
+msgid "Invite Members"
+msgstr "Invite Members"
 
 #: src/pages/invite.$token.tsx
 msgid "invited."
@@ -1006,6 +1039,14 @@ msgstr "Manage your team, subscriptions, and settings — all from one place, se
 msgid "Mark all as read"
 msgstr "Mark all as read"
 
+#: src/pages/billing-example.tsx
+msgid "Max Projects:"
+msgstr "Max Projects:"
+
+#: src/pages/billing-example.tsx
+msgid "Max Users:"
+msgstr "Max Users:"
+
 #: src/features/invite-member/model/types.ts
 #: src/features/member-role/ui/update-member-authorities-modal.tsx
 msgid "Member"
@@ -1049,6 +1090,10 @@ msgstr "Next Billing Date"
 #: src/pages/admin/organizations.$tenantKey.tsx
 #~ msgid "No active subscription"
 #~ msgstr "No active subscription"
+
+#: src/features/manage-billing/ui/entitlements-card.tsx
+msgid "No active subscription found. Subscribe to a plan to access platform features."
+msgstr "No active subscription found. Subscribe to a plan to access platform features."
 
 #: src/features/sign-in/model/use-sign-in.ts
 msgid "No active tenant memberships found for this account"
@@ -1318,8 +1363,13 @@ msgid "Pick a date and time"
 msgstr "Pick a date and time"
 
 #: src/features/manage-billing/ui/current-subscription.tsx
+#: src/features/manage-billing/ui/entitlements-card.tsx
 msgid "Plan"
 msgstr "Plan"
+
+#: src/features/manage-billing/ui/plan-features.tsx
+msgid "Plan Features"
+msgstr "Plan Features"
 
 #: src/pages/admin/organizations.index.tsx
 #: src/pages/admin/subscriptions.tsx
@@ -1340,6 +1390,22 @@ msgstr "Please confirm your password"
 msgid "Portal error"
 msgstr "Portal error"
 
+#: src/features/manage-billing/ui/plan-features.tsx
+msgid "Priority Support"
+msgstr "Priority Support"
+
+#: src/pages/billing-example.tsx
+msgid "Priority Support (Upgrade Required)"
+msgstr "Priority Support (Upgrade Required)"
+
+#: src/pages/billing-example.tsx
+msgid "Priority Support Available"
+msgstr "Priority Support Available"
+
+#: src/pages/billing-example.tsx
+msgid "Priority Support:"
+msgstr "Priority Support:"
+
 #: src/pages/_app/settings/general.tsx
 msgid "Profile Information"
 msgstr "Profile Information"
@@ -1347,6 +1413,14 @@ msgstr "Profile Information"
 #: src/pages/_app/settings/general.tsx
 msgid "Profile Picture"
 msgstr "Profile Picture"
+
+#: src/pages/billing-example.tsx
+msgid "Project Management"
+msgstr "Project Management"
+
+#: src/features/manage-billing/ui/plan-features.tsx
+msgid "Projects"
+msgstr "Projects"
 
 #: src/features/ban-user/ui/ban-member-modal.tsx
 msgid "Provide a reason for the ban…"
@@ -1391,6 +1465,10 @@ msgstr "Remove Member"
 #: src/pages/admin/organizations.$tenantKey.tsx
 #~ msgid "Renews"
 #~ msgstr "Renews"
+
+#: src/features/manage-billing/ui/entitlements-card.tsx
+msgid "Renews On"
+msgstr "Renews On"
 
 #: src/features/change-password/ui/change-password-modal.tsx
 #: src/pages/_app/settings/security.tsx
@@ -1761,9 +1839,21 @@ msgstr "Switch to light mode"
 msgid "Team"
 msgstr "Team"
 
+#: src/pages/billing-example.tsx
+msgid "Team Management"
+msgstr "Team Management"
+
+#: src/pages/billing-example.tsx
+msgid "Team Management (Upgrade Required)"
+msgstr "Team Management (Upgrade Required)"
+
 #: src/pages/_app/index.tsx
 msgid "Team members"
 msgstr "Team members"
+
+#: src/features/manage-billing/ui/plan-features.tsx
+msgid "Team Members"
+msgstr "Team Members"
 
 #: src/pages/admin/subscriptions.tsx
 #~ msgid "Tenant"
@@ -1789,6 +1879,10 @@ msgstr "The unique identifier for your organization. This cannot be changed."
 msgid "Theme-aware (respects dark mode and color scheme)"
 msgstr "Theme-aware (respects dark mode and color scheme)"
 
+#: src/features/manage-billing/ui/feature-gate.tsx
+msgid "This feature requires an active subscription. Please upgrade your plan to access this functionality."
+msgstr "This feature requires an active subscription. Please upgrade your plan to access this functionality."
+
 #: src/features/accept-invitation/model/use-accept-invitation.ts
 msgid "This invitation link has expired or is no longer valid."
 msgstr "This invitation link has expired or is no longer valid."
@@ -1804,6 +1898,10 @@ msgstr "This is taking a bit longer than usual. Hang tight — we're still worki
 #: src/pages/verify-email.tsx
 msgid "This link is missing a verification token. Please use the link from your email."
 msgstr "This link is missing a verification token. Please use the link from your email."
+
+#: src/pages/billing-example.tsx
+msgid "This page demonstrates how to integrate the billing entitlements API for plan-based feature access control in your React application."
+msgstr "This page demonstrates how to integrate the billing entitlements API for plan-based feature access control in your React application."
 
 #: src/features/reset-password/ui/reset-password-form.tsx
 msgid "This password reset link is missing a token. Please request a new one."
@@ -1861,6 +1959,10 @@ msgstr "Trusted by teams worldwide"
 msgid "Try Again"
 msgstr "Try Again"
 
+#: src/features/manage-billing/ui/entitlements-card.tsx
+msgid "Unable to load subscription information. Please try again later."
+msgstr "Unable to load subscription information. Please try again later."
+
 #: src/features/ban-user/ui/unban-member-modal.tsx
 msgid "Unban member"
 msgstr "Unban member"
@@ -1873,6 +1975,10 @@ msgstr "Unban Member"
 #: src/features/ban-user/ui/unban-member-modal.tsx
 msgid "Unbanning this member will restore their access to this tenant. They will be able to access this tenant again with their existing credentials."
 msgstr "Unbanning this member will restore their access to this tenant. They will be able to access this tenant again with their existing credentials."
+
+#: src/features/manage-billing/ui/plan-features.tsx
+msgid "Unlimited"
+msgstr "Unlimited"
 
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 msgid "Unverified"
