@@ -21,12 +21,13 @@ import { TestSelectors } from "@/shared/lib/test-selectors";
 
 export function EntitlementsCard() {
   const { data: entitlements, isLoading, isError, error } = useEntitlements();
-  const { isPersonalWorkspace, isActive, planCode, getFeatureValue } = useEntitlementsContext();
+  const { isPersonalWorkspace } = useSession();
+  const { hasFeature, getFeatureValue } = useEntitlementsContext();
 
   if (isPersonalWorkspace) {
     // Personal workspace always has entitlements
     const features = {
-      prioritySupport: getFeatureValue("prioritySupport"),
+      prioritySupport: hasFeature("prioritySupport"),
       maxUsers: getFeatureValue("maxUsers"),
       maxProjects: getFeatureValue("maxProjects"),
     };

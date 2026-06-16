@@ -99,6 +99,10 @@ msgstr "Действия"
 msgid "Active"
 msgstr "Активен"
 
+#: src/features/manage-billing/ui/entitlements-card.tsx
+msgid "ACTIVE"
+msgstr ""
+
 #: src/features/invite-member/model/types.ts
 msgid "Admin"
 msgstr "Администратор"
@@ -308,6 +312,14 @@ msgstr ""
 msgid "Continue"
 msgstr "Продължи"
 
+#: src/features/sign-in/ui/demo-credentials-hint.tsx
+msgid "Copied!"
+msgstr ""
+
+#: src/features/sign-in/ui/demo-credentials-hint.tsx
+msgid "Copy"
+msgstr ""
+
 #: src/features/manage-billing/model/use-billing-portal.ts
 msgid "Could not create Stripe Customer Portal session."
 msgstr "Не може да се създаде сесия на Stripe Customer Portal."
@@ -431,6 +443,10 @@ msgstr "Дата"
 #: src/shared/ui/user-status-badge/user-status-badge.tsx
 msgid "Deleted"
 msgstr "Изтрито"
+
+#: src/features/sign-in/ui/demo-credentials-hint.tsx
+msgid "Demo environment"
+msgstr ""
 
 #: src/pages/loading-demo.tsx
 msgid "Demo LoadingOverlay (2s)"
@@ -1039,6 +1055,8 @@ msgstr "Изчакващо"
 msgid "Pending invitations"
 msgstr "Изчакващи покани"
 
+#: src/features/manage-billing/ui/entitlements-card.tsx
+#: src/pages/_app/billing.tsx
 #: src/pages/_app/index.tsx
 msgid "Personal Workspace"
 msgstr "Лично работно пространство"
@@ -1701,6 +1719,10 @@ msgstr "Паролата ви е сменена успешно. Ще бъдет�
 #: src/pages/_app/billing.tsx
 msgid "Your payment information is securely processed by Stripe. We do not store your credit card details on our servers."
 msgstr "Информацията за плащане се обработва сигурно от Stripe. Не съхраняваме данните на кредитната ви карта на нашите сървъри."
+
+#: src/pages/_app/billing.tsx
+msgid "Your personal workspace doesn't require a subscription. Upgrade to an organization workspace to access additional features and team collaboration."
+msgstr ""
 
 #: src/pages/sign-in.tsx
 msgid "Your session expired due to inactivity."

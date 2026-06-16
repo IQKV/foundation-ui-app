@@ -1,14 +1,17 @@
 import { createContext, useContext, ReactNode } from "react";
 import type { UseQueryResult } from "@tanstack/react-query";
-import type { EntitlementsResponse } from "@/shared/api";
+import type { EntitlementsResponse, PlanFeatures } from "@/shared/api";
 import { useEntitlements } from "./use-entitlements";
 import { useSession } from "@/processes/session/use-session";
 import { DEFAULT_PERSONAL_WORKSPACE_FEATURES } from "@/app/config";
 
 interface EntitlementsContextType {
   entitlements: UseQueryResult<EntitlementsResponse, Error>;
-  hasFeature: (feature: keyof EntitlementsResponse["features"]) => boolean;
-  getFeatureValue: (feature: keyof EntitlementsResponse["features"]) => boolean | number;
+  hasFeature: (feature: keyof PlanFeatures) => boolean;
+  getFeatureValue: {
+    (feature: "prioritySupport"): boolean;
+    (feature: "maxUsers" | "maxProjects"): number;
+  };
   isActive: boolean;
   planCode: string | null;
 }
@@ -23,7 +26,7 @@ export function EntitlementsProvider({ children }: EntitlementsProviderProps) {
   const entitlements = useEntitlements();
   const { isPersonalWorkspace } = useSession();
 
-  const hasFeature = (feature: keyof EntitlementsResponse["features"]): boolean => {
+  const hasFeature = (feature: keyof PlanFeatures): boolean => {
     if (isPersonalWorkspace) {
       const value = DEFAULT_PERSONAL_WORKSPACE_FEATURES[feature];
       return typeof value === "boolean" ? value : value > 0;
@@ -33,12 +36,12 @@ export function EntitlementsProvider({ children }: EntitlementsProviderProps) {
     return typeof value === "boolean" ? value : value > 0;
   };
 
-  const getFeatureValue = (feature: keyof EntitlementsResponse["features"]): boolean | number => {
+  const getFeatureValue = (feature: keyof PlanFeatures): any => {
     if (isPersonalWorkspace) {
       return DEFAULT_PERSONAL_WORKSPACE_FEATURES[feature];
     }
     if (!entitlements.data?.features) {
-      return typeof entitlements.data?.features?.[feature] === "boolean" ? false : 0;
+      return feature === "prioritySupport" ? false : 0;
     }
     return entitlements.data.features[feature];
   };
@@ -69,7 +72,7 @@ export function useEntitlementsContext(): EntitlementsContextType {
  * Hook to check if a specific feature is available.
  * Returns false if no subscription or feature is not available.
  */
-export function useHasFeature(feature: keyof EntitlementsResponse["features"]): boolean {
+export function useHasFeature(feature: keyof PlanFeatures): boolean {
   const { hasFeature } = useEntitlementsContext();
   return hasFeature(feature);
 }
@@ -78,7 +81,9 @@ export function useHasFeature(feature: keyof EntitlementsResponse["features"]): 
  * Hook to get the value of a specific feature.
  * Returns the feature value or default (false for boolean, 0 for number).
  */
-export function useFeatureValue(feature: keyof EntitlementsResponse["features"]): boolean | number {
+export function useFeatureValue(feature: "prioritySupport"): boolean;
+export function useFeatureValue(feature: "maxUsers" | "maxProjects"): number;
+export function useFeatureValue(feature: keyof PlanFeatures): any {
   const { getFeatureValue } = useEntitlementsContext();
-  return getFeatureValue(feature);
+  return getFeatureValue(feature as any);
 }
