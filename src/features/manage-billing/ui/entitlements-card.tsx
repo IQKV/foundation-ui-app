@@ -10,15 +10,71 @@ import {
   Alert,
   Divider,
 } from "@mantine/core";
-import { IconCrown, IconAlertCircle, IconCalendar, IconInfoCircle } from "@tabler/icons-react";
+import { IconUser, IconAlertCircle, IconInfoCircle } from "@tabler/icons-react";
 import { Trans } from "@lingui/react/macro";
 import dayjs from "dayjs";
 import { useEntitlements } from "../model/use-entitlements";
+import { useEntitlementsContext } from "../model/entitlements-context";
+import { useSession } from "@/processes/session/use-session";
 import { PlanFeatures } from "./plan-features";
 import { TestSelectors } from "@/shared/lib/test-selectors";
 
 export function EntitlementsCard() {
   const { data: entitlements, isLoading, isError, error } = useEntitlements();
+  const { isPersonalWorkspace, isActive, planCode, getFeatureValue } = useEntitlementsContext();
+
+  if (isPersonalWorkspace) {
+    // Personal workspace always has entitlements
+    const features = {
+      prioritySupport: getFeatureValue("prioritySupport"),
+      maxUsers: getFeatureValue("maxUsers"),
+      maxProjects: getFeatureValue("maxProjects"),
+    };
+
+    return (
+      <Paper withBorder p="xl" radius="md" data-testid={TestSelectors.ENTITLEMENTS_CARD}>
+        <Stack gap="lg">
+          {/* Header */}
+          <Group align="flex-start" wrap="nowrap" gap="lg">
+            <ThemeIcon size={48} radius="md" variant="light" color="green">
+              <IconUser size={28} />
+            </ThemeIcon>
+
+            <Stack gap="xs" style={{ flex: 1 }}>
+              <Group justify="space-between">
+                <Title order={3}>
+                  <Trans>Personal Workspace</Trans>
+                </Title>
+                <Badge
+                  color="green"
+                  variant="light"
+                  data-testid={TestSelectors.ENTITLEMENTS_STATUS_BADGE}
+                >
+                  <Trans>ACTIVE</Trans>
+                </Badge>
+              </Group>
+
+              <Group gap="xl">
+                <Stack gap={0}>
+                  <Text size="sm" c="dimmed">
+                    <Trans>Plan</Trans>
+                  </Text>
+                  <Text fw={500} data-testid={TestSelectors.ENTITLEMENTS_PLAN_CODE}>
+                    Personal
+                  </Text>
+                </Stack>
+              </Group>
+            </Stack>
+          </Group>
+
+          <Divider />
+
+          {/* Features */}
+          <PlanFeatures features={features} showTitle={false} />
+        </Stack>
+      </Paper>
+    );
+  }
 
   if (isLoading) {
     return <Skeleton height={200} radius="md" data-testid={TestSelectors.ENTITLEMENTS_LOADING} />;
@@ -59,7 +115,7 @@ export function EntitlementsCard() {
   }
 
   const statusColor = entitlements.status === "active" ? "green" : "orange";
-  const isActive = entitlements.status === "active";
+  const isEntitlementsActive = entitlements.status === "active";
 
   return (
     <Paper withBorder p="xl" radius="md" data-testid={TestSelectors.ENTITLEMENTS_CARD}>
@@ -67,7 +123,7 @@ export function EntitlementsCard() {
         {/* Header */}
         <Group align="flex-start" wrap="nowrap" gap="lg">
           <ThemeIcon size={48} radius="md" variant="light" color="violet">
-            <IconCrown size={28} />
+            <IconUser size={28} />
           </ThemeIcon>
 
           <Stack gap="xs" style={{ flex: 1 }}>
@@ -94,13 +150,13 @@ export function EntitlementsCard() {
                 </Text>
               </Stack>
 
-              {isActive && (
+              {isEntitlementsActive && (
                 <Stack gap={0}>
                   <Text size="sm" c="dimmed">
                     <Trans>Renews On</Trans>
                   </Text>
                   <Group gap="xs">
-                    <IconCalendar size={14} />
+                    <IconUser size={14} />
                     <Text fw={500} data-testid={TestSelectors.ENTITLEMENTS_PERIOD_END}>
                       {dayjs(entitlements.currentPeriodEnd).format("MMMM D, YYYY")}
                     </Text>

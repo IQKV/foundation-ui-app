@@ -28,7 +28,7 @@ export const Route = createFileRoute("/_app/billing")({
 
 function BillingPage() {
   const { t } = useLingui();
-  const { tenantKey, isTenantOwner } = useSession();
+  const { tenantKey, isTenantOwner, isPersonalWorkspace } = useSession();
   const { data: subscription } = useActiveSubscription(tenantKey);
   const { mutate: createCheckout, isPending: isCreatingCheckout } =
     useCreateCheckoutSession(tenantKey);
@@ -42,6 +42,30 @@ function BillingPage() {
       cancelUrl: window.location.href,
     });
   };
+
+  if (isPersonalWorkspace) {
+    return (
+      <Container size="md" data-testid={TestSelectors.PAGE("billing")}>
+        <Helmet title={pageTitle(t`Billing`)} />
+        <PageHeader title={t`Billing`} />
+        <Stack gap="xl">
+          <Paper withBorder p="xl" radius="md">
+            <Stack gap="md">
+              <Title order={3}>
+                <Trans>Personal Workspace</Trans>
+              </Title>
+              <Text size="sm" c="dimmed">
+                <Trans>
+                  Your personal workspace doesn't require a subscription. Upgrade to an organization
+                  workspace to access additional features and team collaboration.
+                </Trans>
+              </Text>
+            </Stack>
+          </Paper>
+        </Stack>
+      </Container>
+    );
+  }
 
   return (
     <Container size="md" data-testid={TestSelectors.PAGE("billing")}>

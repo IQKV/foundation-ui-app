@@ -2,6 +2,14 @@ import { createContext, useContext, ReactNode } from "react";
 import type { UseQueryResult } from "@tanstack/react-query";
 import type { EntitlementsResponse } from "@/shared/api";
 import { useEntitlements } from "./use-entitlements";
+import { useSession } from "@/processes/session/use-session";
+
+// Default features for personal workspace
+const DEFAULT_PERSONAL_FEATURES: EntitlementsResponse["features"] = {
+  prioritySupport: false,
+  maxUsers: 1,
+  maxProjects: 0, // 0 means unlimited
+};
 
 interface EntitlementsContextType {
   entitlements: UseQueryResult<EntitlementsResponse, Error>;
@@ -19,22 +27,30 @@ interface EntitlementsProviderProps {
 
 export function EntitlementsProvider({ children }: EntitlementsProviderProps) {
   const entitlements = useEntitlements();
+  const { isPersonalWorkspace } = useSession();
 
   const hasFeature = (feature: keyof EntitlementsResponse["features"]): boolean => {
+    if (isPersonalWorkspace) {
+      const value = DEFAULT_PERSONAL_FEATURES[feature];
+      return typeof value === "boolean" ? value : value > 0;
+    }
     if (!entitlements.data?.features) return false;
     const value = entitlements.data.features[feature];
     return typeof value === "boolean" ? value : value > 0;
   };
 
   const getFeatureValue = (feature: keyof EntitlementsResponse["features"]): boolean | number => {
+    if (isPersonalWorkspace) {
+      return DEFAULT_PERSONAL_FEATURES[feature];
+    }
     if (!entitlements.data?.features) {
       return typeof entitlements.data?.features?.[feature] === "boolean" ? false : 0;
     }
     return entitlements.data.features[feature];
   };
 
-  const isActive = entitlements.data?.status === "active";
-  const planCode = entitlements.data?.planCode || null;
+  const isActive = isPersonalWorkspace || entitlements.data?.status === "active";
+  const planCode = isPersonalWorkspace ? "personal" : entitlements.data?.planCode || null;
 
   const value: EntitlementsContextType = {
     entitlements,
