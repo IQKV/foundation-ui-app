@@ -3,13 +3,7 @@ import type { UseQueryResult } from "@tanstack/react-query";
 import type { EntitlementsResponse } from "@/shared/api";
 import { useEntitlements } from "./use-entitlements";
 import { useSession } from "@/processes/session/use-session";
-
-// Default features for personal workspace
-const DEFAULT_PERSONAL_FEATURES: EntitlementsResponse["features"] = {
-  prioritySupport: false,
-  maxUsers: 1,
-  maxProjects: 0, // 0 means unlimited
-};
+import { DEFAULT_PERSONAL_WORKSPACE_FEATURES } from "@/app/config";
 
 interface EntitlementsContextType {
   entitlements: UseQueryResult<EntitlementsResponse, Error>;
@@ -31,7 +25,7 @@ export function EntitlementsProvider({ children }: EntitlementsProviderProps) {
 
   const hasFeature = (feature: keyof EntitlementsResponse["features"]): boolean => {
     if (isPersonalWorkspace) {
-      const value = DEFAULT_PERSONAL_FEATURES[feature];
+      const value = DEFAULT_PERSONAL_WORKSPACE_FEATURES[feature];
       return typeof value === "boolean" ? value : value > 0;
     }
     if (!entitlements.data?.features) return false;
@@ -41,7 +35,7 @@ export function EntitlementsProvider({ children }: EntitlementsProviderProps) {
 
   const getFeatureValue = (feature: keyof EntitlementsResponse["features"]): boolean | number => {
     if (isPersonalWorkspace) {
-      return DEFAULT_PERSONAL_FEATURES[feature];
+      return DEFAULT_PERSONAL_WORKSPACE_FEATURES[feature];
     }
     if (!entitlements.data?.features) {
       return typeof entitlements.data?.features?.[feature] === "boolean" ? false : 0;
