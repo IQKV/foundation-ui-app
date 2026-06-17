@@ -115,7 +115,7 @@
   "devDependencies": {
     "@commitlint/cli": "^21.0.2",
     "@commitlint/config-conventional": "^21.0.2",
-    "@lingui/cli": "^6.3.0",
+    "@lingui/cli": "^6.4.0",
     "@lingui/swc-plugin": "^6.4.0",
     "@lingui/vite-plugin": "^6.3.0",
     "@playwright/test": "1.60.0",
