@@ -8,6 +8,7 @@ export interface Plan {
   id: string;
   planCode: string;
   displayName: string;
+  description?: string;
   billingPeriod: "MONTHLY" | "ANNUAL";
   priceMinor: number;
   currency: string;

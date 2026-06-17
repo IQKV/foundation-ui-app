@@ -1,5 +1,5 @@
-import { Paper, Group, Stack, Title, Text, ThemeIcon, Badge, Skeleton, Alert } from "@mantine/core";
-import { IconCreditCard, IconAlertCircle, IconCalendar } from "@tabler/icons-react";
+import { Paper, Group, Stack, Title, Text, ThemeIcon, Badge, Skeleton, List } from "@mantine/core";
+import { IconCreditCard, IconCalendar, IconCheck } from "@tabler/icons-react";
 import { Trans } from "@lingui/react/macro";
 import dayjs from "dayjs";
 import { useActiveSubscription } from "../model/use-subscription";
@@ -19,17 +19,52 @@ export function CurrentSubscription({ tenantKey }: CurrentSubscriptionProps) {
   }
 
   if (isError || !subscription) {
+    // Show Free plan when no active subscription
     return (
-      <Alert
-        icon={<IconAlertCircle size={16} />}
-        color="blue"
-        variant="light"
-        data-testid={TestSelectors.CURRENT_SUBSCRIPTION_NO_SUBSCRIPTION}
-      >
-        <Trans>
-          You don't have an active subscription yet. Choose a plan below to get started.
-        </Trans>
-      </Alert>
+      <Paper withBorder p="xl" radius="md" data-testid={TestSelectors.CURRENT_SUBSCRIPTION}>
+        <Group align="flex-start" wrap="nowrap" gap="lg">
+          <ThemeIcon size={48} radius="md" variant="light" color="blue">
+            <IconCreditCard size={28} />
+          </ThemeIcon>
+
+          <Stack gap="xs" style={{ flex: 1 }}>
+            <Group justify="space-between">
+              <Title order={3}>
+                <Trans>Current Subscription</Trans>
+              </Title>
+              <Badge
+                color="green"
+                variant="light"
+                data-testid={TestSelectors.CURRENT_SUBSCRIPTION_STATUS_BADGE}
+              >
+                <Trans>ACTIVE</Trans>
+              </Badge>
+            </Group>
+
+            <Group gap="xl">
+              <Stack gap={0}>
+                <Text size="sm" c="dimmed">
+                  <Trans>Plan</Trans>
+                </Text>
+                <Text fw={500} data-testid={TestSelectors.CURRENT_SUBSCRIPTION_PLAN}>
+                  <Trans>Free</Trans>
+                </Text>
+              </Stack>
+
+              <Stack gap={0}>
+                <Text size="sm" c="dimmed">
+                  <Trans>Features</Trans>
+                </Text>
+                <List spacing="xs" size="sm" center icon={<IconCheck size={12} />}>
+                  <List.Item>
+                    <Trans>Limited support</Trans>
+                  </List.Item>
+                </List>
+              </Stack>
+            </Group>
+          </Stack>
+        </Group>
+      </Paper>
     );
   }
 

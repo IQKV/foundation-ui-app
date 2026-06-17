@@ -3,7 +3,7 @@ import type { UseQueryResult } from "@tanstack/react-query";
 import type { EntitlementsResponse, PlanFeatures } from "@/shared/api";
 import { useEntitlements } from "./use-entitlements";
 import { useSession } from "@/processes/session/use-session";
-import { DEFAULT_PERSONAL_WORKSPACE_FEATURES } from "@/app/config";
+import { DEFAULT_PERSONAL_WORKSPACE_FEATURES, DEFAULT_FREE_TENANT_FEATURES } from "@/app/config";
 
 interface EntitlementsContextType {
   entitlements: UseQueryResult<EntitlementsResponse, Error>;
@@ -31,8 +31,8 @@ export function EntitlementsProvider({ children }: EntitlementsProviderProps) {
       const value = DEFAULT_PERSONAL_WORKSPACE_FEATURES[feature];
       return typeof value === "boolean" ? value : value > 0;
     }
-    if (!entitlements.data?.features) return false;
-    const value = entitlements.data.features[feature];
+    const features = entitlements.data?.features || DEFAULT_FREE_TENANT_FEATURES;
+    const value = features[feature];
     return typeof value === "boolean" ? value : value > 0;
   };
 
@@ -40,14 +40,12 @@ export function EntitlementsProvider({ children }: EntitlementsProviderProps) {
     if (isPersonalWorkspace) {
       return DEFAULT_PERSONAL_WORKSPACE_FEATURES[feature];
     }
-    if (!entitlements.data?.features) {
-      return feature === "prioritySupport" ? false : 0;
-    }
-    return entitlements.data.features[feature];
+    const features = entitlements.data?.features || DEFAULT_FREE_TENANT_FEATURES;
+    return features[feature];
   };
 
-  const isActive = isPersonalWorkspace || entitlements.data?.status === "active";
-  const planCode = isPersonalWorkspace ? "personal" : entitlements.data?.planCode || null;
+  const isActive = true; // Free plan is always active
+  const planCode = isPersonalWorkspace ? "personal" : entitlements.data?.planCode || "free";
 
   const value: EntitlementsContextType = {
     entitlements,

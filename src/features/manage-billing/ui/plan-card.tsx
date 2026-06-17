@@ -39,7 +39,14 @@ export function PlanCard({ plan, isCurrent, onSelect, loading }: PlanCardProps) 
       <Stack justify="space-between" style={{ flex: 1 }}>
         <Stack gap="xs">
           <Group justify="space-between" align="flex-start">
-            <Title order={3}>{plan.displayName}</Title>
+            <Stack gap="xs">
+              <Title order={3}>{plan.displayName}</Title>
+              {plan.description && (
+                <Text size="sm" c="dimmed">
+                  {plan.description}
+                </Text>
+              )}
+            </Stack>
             {isCurrent && (
               <Badge
                 variant="filled"

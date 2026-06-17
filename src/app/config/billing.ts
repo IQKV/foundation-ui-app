@@ -17,3 +17,10 @@ export const DEFAULT_PERSONAL_WORKSPACE_FEATURES: EntitlementsResponse["features
   [BILLING_FEATURES.MAX_USERS]: 1,
   [BILLING_FEATURES.MAX_PROJECTS]: 0, // 0 means unlimited
 };
+
+// Default features for free tenant plan
+export const DEFAULT_FREE_TENANT_FEATURES: EntitlementsResponse["features"] = {
+  [BILLING_FEATURES.PRIORITY_SUPPORT]: false,
+  [BILLING_FEATURES.MAX_USERS]: 1,
+  [BILLING_FEATURES.MAX_PROJECTS]: 1,
+};
