@@ -157,5 +157,3 @@ export function BillingExamplePage() {
     </EntitlementsProvider>
   );
 }
-
-
