@@ -15,7 +15,8 @@ function getDisplayFeatures(features: PlanFeaturesType): string[] {
   const display: string[] = [];
   display.push(`Max users: ${features.maxUsers === 0 ? "Unlimited" : features.maxUsers}`);
   display.push(`Max projects: ${features.maxProjects === 0 ? "Unlimited" : features.maxProjects}`);
-  if (features.prioritySupport) {
+  const prioritySupport = features.features["priority_support"];
+  if (prioritySupport && prioritySupport.value.toLowerCase() === "true") {
     display.push("Priority support");
   }
   return display;
@@ -24,7 +25,7 @@ function getDisplayFeatures(features: PlanFeaturesType): string[] {
 export function PlanCard({ plan, isCurrent, onSelect, loading }: PlanCardProps) {
   const features = plan.featureSet
     ? (JSON.parse(plan.featureSet) as PlanFeaturesType)
-    : { prioritySupport: false, maxUsers: 1, maxProjects: 1 };
+    : { maxUsers: 1, maxProjects: 1, features: {} };
 
   const displayFeatures = getDisplayFeatures(features);
 
