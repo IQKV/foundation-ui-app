@@ -6,14 +6,15 @@ import {
   EntitlementsCard,
   FeatureGate,
   useHasFeature,
-  useFeatureValue,
+  useQuota,
 } from "@/features/manage-billing";
+import { BILLING_FEATURES } from "@/app/config";
 
 // Example component showing how to use feature checks
 function ExampleFeatureUsage() {
-  const hasPrioritySupport = useHasFeature("prioritySupport");
-  const maxUsers = useFeatureValue("maxUsers") as number;
-  const maxProjects = useFeatureValue("maxProjects") as number;
+  const hasPrioritySupport = useHasFeature(BILLING_FEATURES.PRIORITY_SUPPORT);
+  const maxUsers = useQuota("maxUsers");
+  const maxProjects = useQuota("maxProjects");
 
   return (
     <Card withBorder p="md">
@@ -50,9 +51,9 @@ function ExampleFeatureGates() {
         <Trans>Feature Gate Examples</Trans>
       </Title>
 
-      {/* Priority Support Feature Gate */}
+      {/* Priority Support Feature Gate — checks features map by code */}
       <FeatureGate
-        feature="prioritySupport"
+        feature={BILLING_FEATURES.PRIORITY_SUPPORT}
         showUpgradePrompt
         fallback={
           <Card withBorder p="md" style={{ opacity: 0.6 }}>
@@ -78,66 +79,82 @@ function ExampleFeatureGates() {
         </Card>
       </FeatureGate>
 
-      {/* User Management Feature Gate */}
-      <FeatureGate
-        feature="maxUsers"
-        showUpgradePrompt
-        fallback={
-          <Card withBorder p="md" style={{ opacity: 0.6 }}>
-            <Group>
-              <IconUsers size={20} />
-              <Text c="dimmed">
-                <Trans>Team Management (Upgrade Required)</Trans>
-              </Text>
-            </Group>
-          </Card>
-        }
-      >
-        <Card withBorder p="md">
-          <Group justify="space-between">
-            <Group>
-              <IconUsers size={20} />
-              <Text>
-                <Trans>Team Management</Trans>
-              </Text>
-            </Group>
-            <Button size="xs" variant="outline">
-              <Trans>Invite Members</Trans>
-            </Button>
+      {/* User Management — quota check via useQuota, not FeatureGate */}
+      <Card withBorder p="md">
+        <Group justify="space-between">
+          <Group>
+            <IconUsers size={20} />
+            <Text>
+              <Trans>Team Management</Trans>
+            </Text>
           </Group>
-        </Card>
-      </FeatureGate>
+          <Button size="xs" variant="outline">
+            <Trans>Invite Members</Trans>
+          </Button>
+        </Group>
+      </Card>
 
-      {/* Project Management Feature Gate */}
-      <FeatureGate
-        feature="maxProjects"
-        showUpgradePrompt
-        fallback={
-          <Card withBorder p="md" style={{ opacity: 0.6 }}>
-            <Group>
-              <IconFolder size={20} />
-              <Text c="dimmed">
-                <Trans>Advanced Projects (Upgrade Required)</Trans>
-              </Text>
-            </Group>
-          </Card>
-        }
-      >
-        <Card withBorder p="md">
-          <Group justify="space-between">
-            <Group>
-              <IconFolder size={20} />
-              <Text>
-                <Trans>Project Management</Trans>
-              </Text>
-            </Group>
-            <Button size="xs" variant="outline">
-              <Trans>Create Project</Trans>
-            </Button>
+      {/* Project Management — quota check via useQuota, not FeatureGate */}
+      <Card withBorder p="md">
+        <Group justify="space-between">
+          <Group>
+            <IconFolder size={20} />
+            <Text>
+              <Trans>Project Management</Trans>
+            </Text>
           </Group>
-        </Card>
-      </FeatureGate>
+          <Button size="xs" variant="outline">
+            <Trans>Create Project</Trans>
+          </Button>
+        </Group>
+      </Card>
     </Stack>
+  );
+}
+
+/**
+ * Example page demonstrating billing entitlements integration.
+ *
+ * This shows how to:
+ * 1. Wrap your app/routes with EntitlementsProvider
+ * 2. Display current plan information with EntitlementsCard
+ * 3. Use FeatureGate to conditionally render UI behind a feature-map code
+ * 4. Use useHasFeature(code) for boolean feature-map checks
+ * 5. Use useQuota(field) for typed quota fields (maxUsers, maxProjects)
+ */
+export function BillingExamplePage() {
+  return (
+    <EntitlementsProvider>
+      <Container size="lg" py="xl">
+        <Stack gap="xl">
+          <div>
+            <Title order={2} mb="md">
+              <Trans>Billing Integration Example</Trans>
+            </Title>
+            <Text c="dimmed">
+              <Trans>
+                This page demonstrates how to integrate the billing entitlements API for plan-based
+                feature access control in your React application.
+              </Trans>
+            </Text>
+          </div>
+
+          <Grid>
+            <Grid.Col span={12}>
+              <EntitlementsCard />
+            </Grid.Col>
+
+            <Grid.Col span={{ base: 12, md: 6 }}>
+              <ExampleFeatureUsage />
+            </Grid.Col>
+
+            <Grid.Col span={{ base: 12, md: 6 }}>
+              <ExampleFeatureGates />
+            </Grid.Col>
+          </Grid>
+        </Stack>
+      </Container>
+    </EntitlementsProvider>
   );
 }
 

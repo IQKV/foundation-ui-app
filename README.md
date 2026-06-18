@@ -72,6 +72,105 @@ Authenticated routes live under the `/_app` layout, which enforces a valid tenan
 | Member ban/unban                        | Done (TENANT_OWNER) |
 | Member transfer ownership               | Done (TENANT_OWNER) |
 
+## Billing & Entitlements
+
+Plan-based feature access control is implemented end-to-end across the UI.
+
+### PlanFeatures shape
+
+The billing service returns the following structure from `GET /v1/billing/entitlements/me`:
+
+```json
+{
+  "planCode": "pro-monthly",
+  "status": "active",
+  "currentPeriodEnd": "2026-07-15T00:00:00Z",
+  "features": {
+    "maxUsers": 50,
+    "maxProjects": 0,
+    "features": {
+      "priority_support": {
+        "code": "priority_support",
+        "title": "Priority Support",
+        "value": "true",
+        "description": "Access to priority support channel"
+      }
+    }
+  }
+}
+```
+
+`maxUsers` and `maxProjects` are typed quota fields (0 = unlimited). `features` is an open map keyed by feature code (snake_case, matches YAML). Boolean features are stored as `value: "true"` / `"false"` strings so new features require only a YAML change in the billing service — no UI code change.
+
+### Default fallbacks
+
+Defined in `src/app/config/billing.ts`:
+
+| Context              | maxUsers | maxProjects | features |
+| -------------------- | -------- | ----------- | -------- |
+| Personal workspace   | 1        | 0 (∞)       | `{}`     |
+| Free tenant (no sub) | 1        | 1           | `{}`     |
+
+### Feature codes (`BILLING_FEATURES`)
+
+| Constant           | Code               | Meaning                    |
+| ------------------ | ------------------ | -------------------------- |
+| `PRIORITY_SUPPORT` | `priority_support` | Access to priority support |
+
+### `EntitlementsProvider`
+
+Wrap any subtree that needs plan data. Provides:
+
+- `hasFeature(code)` — looks up `features[code].value === "true"`. Use for boolean feature-map entries.
+- `getQuota(field)` — returns `maxUsers` or `maxProjects` as a number.
+- `isActive` — always `true` (free plan is active by definition).
+- `planCode` — resolved plan code or `"free"`.
+
+### Hooks
+
+```tsx
+import { useHasFeature, useQuota } from "@/features/manage-billing";
+import { BILLING_FEATURES } from "@/app/config";
+
+const hasPrioritySupport = useHasFeature(BILLING_FEATURES.PRIORITY_SUPPORT);
+const maxUsers = useQuota("maxUsers"); // 0 = unlimited
+const maxProjects = useQuota("maxProjects");
+```
+
+### `FeatureGate`
+
+Conditionally renders children when a feature-map code is enabled:
+
+```tsx
+<FeatureGate feature={BILLING_FEATURES.PRIORITY_SUPPORT} showUpgradePrompt>
+  <PriorityContactButton />
+</FeatureGate>
+```
+
+`showUpgradePrompt` shows a default locked-state `Alert` when the feature is absent or there is no active subscription. Pass `fallback` for a custom locked state. For quota checks (`maxUsers`, `maxProjects`) use `useQuota()` directly — those are enforced by the IAM service at write time, not gated in the UI.
+
+### UI components (`features/manage-billing`)
+
+| Component / Hook           | Purpose                                                     |
+| -------------------------- | ----------------------------------------------------------- |
+| `EntitlementsCard`         | Current plan, status, renewal date, and feature list card   |
+| `PlanFeatures`             | Feature list display (quota badges + boolean icons)         |
+| `PlanCard`                 | Single plan tile with price, features, and select action    |
+| `PlanList`                 | Grid of `PlanCard` components from catalog                  |
+| `CurrentSubscription`      | Active subscription summary                                 |
+| `BillingInfo`              | Billing settings form                                       |
+| `RefundList`               | Refund history table                                        |
+| `BillingPortalButton`      | Opens Stripe Customer Portal                                |
+| `FeatureGate`              | Conditional render by feature code                          |
+| `useEntitlements`          | TanStack Query hook — fetches `/v1/billing/entitlements/me` |
+| `useHasFeature(code)`      | Boolean check against features map                          |
+| `useQuota(field)`          | Returns typed quota value                                   |
+| `useEntitlementsContext()` | Raw context access                                          |
+
+A working integration example lives at `src/pages/billing-example.tsx`.
+
+---
+
 ## Tech stack
 
 - React 19, TypeScript 6, Vite 8 (SWC)
