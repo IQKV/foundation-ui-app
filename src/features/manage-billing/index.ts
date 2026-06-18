@@ -21,5 +21,6 @@ export {
   EntitlementsProvider,
   useEntitlementsContext,
   useHasFeature,
+  useQuota,
   useFeatureValue,
 } from "./model/entitlements-context";

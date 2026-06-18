@@ -158,47 +158,4 @@ export function BillingExamplePage() {
   );
 }
 
-/**
- * Example page demonstrating billing entitlements integration.
- *
- * This shows how to:
- * 1. Wrap your app/routes with EntitlementsProvider
- * 2. Display current plan information with EntitlementsCard
- * 3. Use feature gates to conditionally render UI
- * 4. Check individual feature values programmatically
- */
-export function BillingExamplePage() {
-  return (
-    <EntitlementsProvider>
-      <Container size="lg" py="xl">
-        <Stack gap="xl">
-          <div>
-            <Title order={2} mb="md">
-              <Trans>Billing Integration Example</Trans>
-            </Title>
-            <Text c="dimmed">
-              <Trans>
-                This page demonstrates how to integrate the billing entitlements API for plan-based
-                feature access control in your React application.
-              </Trans>
-            </Text>
-          </div>
 
-          <Grid>
-            <Grid.Col span={12}>
-              <EntitlementsCard />
-            </Grid.Col>
-
-            <Grid.Col span={{ base: 12, md: 6 }}>
-              <ExampleFeatureUsage />
-            </Grid.Col>
-
-            <Grid.Col span={{ base: 12, md: 6 }}>
-              <ExampleFeatureGates />
-            </Grid.Col>
-          </Grid>
-        </Stack>
-      </Container>
-    </EntitlementsProvider>
-  );
-}
