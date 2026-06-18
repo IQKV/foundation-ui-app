@@ -2,11 +2,11 @@ import { ReactNode } from "react";
 import { Alert } from "@mantine/core";
 import { IconLock } from "@tabler/icons-react";
 import { Trans } from "@lingui/react/macro";
-import type { EntitlementsResponse } from "@/shared/api";
 import { useEntitlementsContext } from "../model/entitlements-context";
 
 interface FeatureGateProps {
-  feature: keyof EntitlementsResponse["features"];
+  /** Feature code to check — must match a key in PlanFeatures.features map (e.g. "priority_support") */
+  feature: string;
   children: ReactNode;
   fallback?: ReactNode;
   showUpgradePrompt?: boolean;
@@ -15,7 +15,7 @@ interface FeatureGateProps {
 /**
  * Feature gate component that conditionally renders children based on plan entitlements.
  *
- * @param feature - The feature to check (prioritySupport, maxUsers, maxProjects)
+ * @param feature - The feature code to check (e.g. "priority_support")
  * @param children - Content to render when feature is available
  * @param fallback - Custom fallback content when feature is not available
  * @param showUpgradePrompt - Whether to show default upgrade prompt as fallback

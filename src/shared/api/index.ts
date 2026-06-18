@@ -62,6 +62,7 @@ export type {
   CreateBillingSettingsRequest,
   UpdateBillingSettingsRequest,
   RefundResponse,
+  PlanFeature,
   PlanFeatures,
   EntitlementsResponse,
 } from "./billing";

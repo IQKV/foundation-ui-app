@@ -1,26 +1,24 @@
 // Billing-related constants for UI
-import type { EntitlementsResponse } from "@/shared/api";
+import type { PlanFeatures } from "@/shared/api";
 
-// List of all possible billing features (source of truth for UI checks)
+// Feature codes — these are the map keys in PlanFeatures.features (snake_case, matches YAML)
 export const BILLING_FEATURES = {
-  PRIORITY_SUPPORT: "prioritySupport",
-  MAX_USERS: "maxUsers",
-  MAX_PROJECTS: "maxProjects",
+  PRIORITY_SUPPORT: "priority_support",
 } as const;
 
-// Type helper for feature keys
-export type BillingFeature = (typeof BILLING_FEATURES)[keyof typeof BILLING_FEATURES];
+// Type helper for feature map keys
+export type BillingFeatureCode = (typeof BILLING_FEATURES)[keyof typeof BILLING_FEATURES];
 
 // Default features for personal workspace
-export const DEFAULT_PERSONAL_WORKSPACE_FEATURES: EntitlementsResponse["features"] = {
-  [BILLING_FEATURES.PRIORITY_SUPPORT]: false,
-  [BILLING_FEATURES.MAX_USERS]: 1,
-  [BILLING_FEATURES.MAX_PROJECTS]: 0, // 0 means unlimited
+export const DEFAULT_PERSONAL_WORKSPACE_FEATURES: PlanFeatures = {
+  maxUsers: 1,
+  maxProjects: 0, // 0 means unlimited
+  features: {},
 };
 
 // Default features for free tenant plan
-export const DEFAULT_FREE_TENANT_FEATURES: EntitlementsResponse["features"] = {
-  [BILLING_FEATURES.PRIORITY_SUPPORT]: false,
-  [BILLING_FEATURES.MAX_USERS]: 1,
-  [BILLING_FEATURES.MAX_PROJECTS]: 1,
+export const DEFAULT_FREE_TENANT_FEATURES: PlanFeatures = {
+  maxUsers: 1,
+  maxProjects: 1,
+  features: {},
 };

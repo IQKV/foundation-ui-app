@@ -10,4 +10,4 @@ export {
   DEFAULT_PERSONAL_WORKSPACE_FEATURES,
   DEFAULT_FREE_TENANT_FEATURES,
 } from "./billing";
-export type { BillingFeature } from "./billing";
+export type { BillingFeatureCode } from "./billing";

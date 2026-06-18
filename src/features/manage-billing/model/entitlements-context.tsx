@@ -7,11 +7,17 @@ import { DEFAULT_PERSONAL_WORKSPACE_FEATURES, DEFAULT_FREE_TENANT_FEATURES } fro
 
 interface EntitlementsContextType {
   entitlements: UseQueryResult<EntitlementsResponse, Error>;
-  hasFeature: (feature: keyof PlanFeatures) => boolean;
-  getFeatureValue: {
-    (feature: "prioritySupport"): boolean;
-    (feature: "maxUsers" | "maxProjects"): number;
-  };
+  /**
+   * Returns true if the named feature code exists in the features map with value "true".
+   * For quota fields (maxUsers, maxProjects) use getQuota() instead.
+   */
+  hasFeature: (featureCode: string) => boolean;
+  /**
+   * Returns the value of a typed quota field.
+   */
+  getQuota: (field: "maxUsers" | "maxProjects") => number;
+  /** @deprecated use hasFeature / getQuota */
+  getFeatureValue: (feature: "maxUsers" | "maxProjects") => number;
   isActive: boolean;
   planCode: string | null;
 }
@@ -26,23 +32,23 @@ export function EntitlementsProvider({ children }: EntitlementsProviderProps) {
   const entitlements = useEntitlements();
   const { isPersonalWorkspace } = useSession();
 
-  const hasFeature = (feature: keyof PlanFeatures): boolean => {
-    if (isPersonalWorkspace) {
-      const value = DEFAULT_PERSONAL_WORKSPACE_FEATURES[feature];
-      return typeof value === "boolean" ? value : value > 0;
-    }
-    const features = entitlements.data?.features || DEFAULT_FREE_TENANT_FEATURES;
-    const value = features[feature];
-    return typeof value === "boolean" ? value : value > 0;
+  const resolvedFeatures = (): PlanFeatures => {
+    if (isPersonalWorkspace) return DEFAULT_PERSONAL_WORKSPACE_FEATURES;
+    return entitlements.data?.features || DEFAULT_FREE_TENANT_FEATURES;
   };
 
-  const getFeatureValue = (feature: keyof PlanFeatures): any => {
-    if (isPersonalWorkspace) {
-      return DEFAULT_PERSONAL_WORKSPACE_FEATURES[feature];
-    }
-    const features = entitlements.data?.features || DEFAULT_FREE_TENANT_FEATURES;
-    return features[feature];
+  const hasFeature = (featureCode: string): boolean => {
+    const f = resolvedFeatures();
+    const entry = f.features[featureCode];
+    return entry !== undefined && entry.value.toLowerCase() === "true";
   };
+
+  const getQuota = (field: "maxUsers" | "maxProjects"): number => {
+    return resolvedFeatures()[field];
+  };
+
+  // kept for backwards compatibility
+  const getFeatureValue = (feature: "maxUsers" | "maxProjects"): number => getQuota(feature);
 
   const isActive = true; // Free plan is always active
   const planCode = isPersonalWorkspace ? "personal" : entitlements.data?.planCode || "free";
@@ -50,6 +56,7 @@ export function EntitlementsProvider({ children }: EntitlementsProviderProps) {
   const value: EntitlementsContextType = {
     entitlements,
     hasFeature,
+    getQuota,
     getFeatureValue,
     isActive,
     planCode,
@@ -67,21 +74,23 @@ export function useEntitlementsContext(): EntitlementsContextType {
 }
 
 /**
- * Hook to check if a specific feature is available.
- * Returns false if no subscription or feature is not available.
+ * Hook to check if a specific feature code is available (enabled in the features map).
  */
-export function useHasFeature(feature: keyof PlanFeatures): boolean {
+export function useHasFeature(featureCode: string): boolean {
   const { hasFeature } = useEntitlementsContext();
-  return hasFeature(feature);
+  return hasFeature(featureCode);
 }
 
 /**
- * Hook to get the value of a specific feature.
- * Returns the feature value or default (false for boolean, 0 for number).
+ * Hook to get the value of a quota field (maxUsers or maxProjects).
  */
-export function useFeatureValue(feature: "prioritySupport"): boolean;
-export function useFeatureValue(feature: "maxUsers" | "maxProjects"): number;
-export function useFeatureValue(feature: keyof PlanFeatures): any {
-  const { getFeatureValue } = useEntitlementsContext();
-  return getFeatureValue(feature as any);
+export function useQuota(field: "maxUsers" | "maxProjects"): number {
+  const { getQuota } = useEntitlementsContext();
+  return getQuota(field);
+}
+
+/** @deprecated use useHasFeature / useQuota */
+export function useFeatureValue(feature: "maxUsers" | "maxProjects"): number {
+  const { getQuota } = useEntitlementsContext();
+  return getQuota(feature);
 }

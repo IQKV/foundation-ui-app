@@ -87,10 +87,17 @@ export interface RefundResponse {
   occurredAt: string;
 }
 
+export interface PlanFeature {
+  code: string;
+  title: string;
+  value: string;
+  description?: string;
+}
+
 export interface PlanFeatures {
-  prioritySupport: boolean;
   maxUsers: number;
   maxProjects: number;
+  features: Record<string, PlanFeature>;
 }
 
 export interface EntitlementsResponse {
