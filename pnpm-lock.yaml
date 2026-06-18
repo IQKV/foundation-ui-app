@@ -283,8 +283,8 @@ importers:
         specifier: ^17.6.0
         version: 17.6.0
       happy-dom:
-        specifier: 20.10.3
-        version: 20.10.3
+        specifier: 20.10.5
+        version: 20.10.5
       husky:
         specifier: ^9.1.7
         version: 9.1.7
@@ -374,7 +374,7 @@ importers:
         version: 2.2.0
       vitest:
         specifier: 4.1.5
-        version: 4.1.5(@types/node@25.9.3)(@vitest/coverage-v8@4.1.5)(@vitest/ui@4.1.5)(happy-dom@20.10.3)(jsdom@29.1.1)(msw@2.14.6(@types/node@25.9.3)(typescript@6.0.3))(vite@8.0.16(@types/node@25.9.3)(jiti@2.7.0)(sugarss@5.0.1(postcss@8.5.15))(yaml@2.9.0))
+        version: 4.1.5(@types/node@25.9.3)(@vitest/coverage-v8@4.1.5)(@vitest/ui@4.1.5)(happy-dom@20.10.5)(jsdom@29.1.1)(msw@2.14.6(@types/node@25.9.3)(typescript@6.0.3))(vite@8.0.16(@types/node@25.9.3)(jiti@2.7.0)(sugarss@5.0.1(postcss@8.5.15))(yaml@2.9.0))
 
 packages:
 
@@ -4172,8 +4172,8 @@ packages:
     engines: {node: '>=0.4.7'}
     hasBin: true
 
-  happy-dom@20.10.3:
-    resolution: {integrity: sha512-Hjdiy8RziuCcn5z04QI/rlsNuQoG8P0xxjgvsSMpi89cvIXIOcucQtiHS1yHSShxoBcSCeYqAskINmTiy/mlfw==}
+  happy-dom@20.10.5:
+    resolution: {integrity: sha512-0aA6BQoMnpcRE/c1E8ZyF2jXnET7MJskereWOXher4CJuYjrI5esN0Az/1NPMD4KeWUbampBGw2MGqabMPFIbg==}
     engines: {node: '>=20.0.0'}
 
   harmony-reflect@1.6.2:
@@ -8692,7 +8692,7 @@ snapshots:
       obug: 2.1.3
       std-env: 4.1.0
       tinyrainbow: 3.1.0
-      vitest: 4.1.5(@types/node@25.9.3)(@vitest/coverage-v8@4.1.5)(@vitest/ui@4.1.5)(happy-dom@20.10.3)(jsdom@29.1.1)(msw@2.14.6(@types/node@25.9.3)(typescript@6.0.3))(vite@8.0.16(@types/node@25.9.3)(jiti@2.7.0)(sugarss@5.0.1(postcss@8.5.15))(yaml@2.9.0))
+      vitest: 4.1.5(@types/node@25.9.3)(@vitest/coverage-v8@4.1.5)(@vitest/ui@4.1.5)(happy-dom@20.10.5)(jsdom@29.1.1)(msw@2.14.6(@types/node@25.9.3)(typescript@6.0.3))(vite@8.0.16(@types/node@25.9.3)(jiti@2.7.0)(sugarss@5.0.1(postcss@8.5.15))(yaml@2.9.0))
 
   '@vitest/expect@4.1.5':
     dependencies:
@@ -8739,7 +8739,7 @@ snapshots:
       sirv: 3.0.2
       tinyglobby: 0.2.17
       tinyrainbow: 3.1.0
-      vitest: 4.1.5(@types/node@25.9.3)(@vitest/coverage-v8@4.1.5)(@vitest/ui@4.1.5)(happy-dom@20.10.3)(jsdom@29.1.1)(msw@2.14.6(@types/node@25.9.3)(typescript@6.0.3))(vite@8.0.16(@types/node@25.9.3)(jiti@2.7.0)(sugarss@5.0.1(postcss@8.5.15))(yaml@2.9.0))
+      vitest: 4.1.5(@types/node@25.9.3)(@vitest/coverage-v8@4.1.5)(@vitest/ui@4.1.5)(happy-dom@20.10.5)(jsdom@29.1.1)(msw@2.14.6(@types/node@25.9.3)(typescript@6.0.3))(vite@8.0.16(@types/node@25.9.3)(jiti@2.7.0)(sugarss@5.0.1(postcss@8.5.15))(yaml@2.9.0))
 
   '@vitest/utils@4.1.5':
     dependencies:
@@ -10142,7 +10142,7 @@ snapshots:
     optionalDependencies:
       uglify-js: 3.19.3
 
-  happy-dom@20.10.3:
+  happy-dom@20.10.5:
     dependencies:
       '@types/node': 25.9.3
       '@types/whatwg-mimetype': 3.0.2
@@ -12417,7 +12417,7 @@ snapshots:
       sugarss: 5.0.1(postcss@8.5.15)
       yaml: 2.9.0
 
-  vitest@4.1.5(@types/node@25.9.3)(@vitest/coverage-v8@4.1.5)(@vitest/ui@4.1.5)(happy-dom@20.10.3)(jsdom@29.1.1)(msw@2.14.6(@types/node@25.9.3)(typescript@6.0.3))(vite@8.0.16(@types/node@25.9.3)(jiti@2.7.0)(sugarss@5.0.1(postcss@8.5.15))(yaml@2.9.0)):
+  vitest@4.1.5(@types/node@25.9.3)(@vitest/coverage-v8@4.1.5)(@vitest/ui@4.1.5)(happy-dom@20.10.5)(jsdom@29.1.1)(msw@2.14.6(@types/node@25.9.3)(typescript@6.0.3))(vite@8.0.16(@types/node@25.9.3)(jiti@2.7.0)(sugarss@5.0.1(postcss@8.5.15))(yaml@2.9.0)):
     dependencies:
       '@vitest/expect': 4.1.5
       '@vitest/mocker': 4.1.5(msw@2.14.6(@types/node@25.9.3)(typescript@6.0.3))(vite@8.0.16(@types/node@25.9.3)(jiti@2.7.0)(sugarss@5.0.1(postcss@8.5.15))(yaml@2.9.0))
@@ -12443,7 +12443,7 @@ snapshots:
       '@types/node': 25.9.3
       '@vitest/coverage-v8': 4.1.5(vitest@4.1.5)
       '@vitest/ui': 4.1.5(vitest@4.1.5)
-      happy-dom: 20.10.3
+      happy-dom: 20.10.5
       jsdom: 29.1.1
     transitivePeerDependencies:
       - msw
