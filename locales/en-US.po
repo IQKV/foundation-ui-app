@@ -289,6 +289,10 @@ msgstr "Billing Integration Example"
 msgid "Billing Portal"
 msgstr "Billing Portal"
 
+#: src/pages/_app/billing.tsx
+msgid "Billing Portal Unavailable"
+msgstr "Billing Portal Unavailable"
+
 #: src/pages/sign-in.tsx
 #~ msgid "By signing in you agree to our <0>Terms of Service</0> and <1>Privacy Policy</1>."
 #~ msgstr "By signing in you agree to our <0>Terms of Service</0> and <1>Privacy Policy</1>."
@@ -1025,6 +1029,10 @@ msgstr "Limited support"
 #: src/pages/verify-email.tsx
 msgid "Link expired or invalid"
 msgstr "Link expired or invalid"
+
+#: src/pages/_app/billing.tsx
+msgid "Loading billing information…"
+msgstr "Loading billing information…"
 
 #: src/pages/loading-demo.tsx
 msgid "Loading Demo"
@@ -1992,6 +2000,14 @@ msgstr "This template uses Mantine's official loading components for optimal UX.
 #: src/pages/verify-email.tsx
 msgid "This verification link has expired or has already been used. Request a new one from your account settings."
 msgstr "This verification link has expired or has already been used. Request a new one from your account settings."
+
+#: src/pages/_app/billing.tsx
+msgid "To access the billing portal, please complete your billing settings setup."
+msgstr "To access the billing portal, please complete your billing settings setup."
+
+#: src/pages/_app/billing.tsx
+#~ msgid "To access the billing portal, please complete your subscription setup by selecting a plan."
+#~ msgstr "To access the billing portal, please complete your subscription setup by selecting a plan."
 
 #: src/features/create-organization/model/use-create-organization.ts
 #: src/features/forgot-password/model/use-forgot-password.ts

@@ -235,6 +235,10 @@ msgstr ""
 msgid "Billing Portal"
 msgstr "Портал за фактуриране"
 
+#: src/pages/_app/billing.tsx
+msgid "Billing Portal Unavailable"
+msgstr ""
+
 #: src/features/ban-user/ui/ban-member-modal.tsx
 #: src/features/ban-user/ui/unban-member-modal.tsx
 #: src/features/change-password/ui/change-password-modal.tsx
@@ -803,6 +807,10 @@ msgstr ""
 #: src/pages/verify-email.tsx
 msgid "Link expired or invalid"
 msgstr "Връзката е изтекла или невалидна"
+
+#: src/pages/_app/billing.tsx
+msgid "Loading billing information…"
+msgstr ""
 
 #: src/pages/loading-demo.tsx
 msgid "Loading Demo"
@@ -1564,6 +1572,14 @@ msgstr "Този шаблон използва официалните компо
 #: src/pages/verify-email.tsx
 msgid "This verification link has expired or has already been used. Request a new one from your account settings."
 msgstr "Тази връзка за потвърждение е изтекла или вече е използвана. Поискайте нова от настройките на акаунта ви."
+
+#: src/pages/_app/billing.tsx
+msgid "To access the billing portal, please complete your billing settings setup."
+msgstr ""
+
+#: src/pages/_app/billing.tsx
+#~ msgid "To access the billing portal, please complete your subscription setup by selecting a plan."
+#~ msgstr ""
 
 #: src/features/create-organization/model/use-create-organization.ts
 #: src/features/forgot-password/model/use-forgot-password.ts
