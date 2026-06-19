@@ -202,6 +202,32 @@ export interface AcceptInvitationResponse {
   tenantKey: string;
 }
 
+// ─── Tenant user stats types ──────────────────────────────────────────────────
+
+export interface UserSignupSeriesPoint {
+  period: string;
+  signups: number;
+}
+
+export interface TenantUserStatsResponse {
+  tenantKey: string;
+  totalMembers: number;
+  activeMembers: number;
+  lockedMembers: number;
+  suspendedMembers: number;
+  emailVerifiedCount: number;
+  signupSeries: UserSignupSeriesPoint[];
+  periodFrom: string;
+  periodTo: string;
+  granularity: "day" | "month";
+}
+
+export interface TenantUserStatsParams {
+  from?: string;
+  to?: string;
+  granularity?: "day" | "month";
+}
+
 // ─── API ──────────────────────────────────────────────────────────────────────
 
 export const iamApi = {
@@ -290,12 +316,25 @@ export const iamApi = {
   /** Unban a member from the tenant (TENANT_OWNER only). */
   unbanMember: (tenantKey: string, userId: string) =>
     httpClient.post(`/v1/iam/tenants/${tenantKey}/members/${userId}/unban`),
+
   /** Transfer tenant ownership to another member (TENANT_OWNER only). */
   transferOwnership: (tenantKey: string, userId: string) =>
     httpClient
       .post<MemberAuthoritiesResponse>(
         `/v1/iam/tenants/${tenantKey}/members/${userId}/transfer-ownership`,
       )
+      .then((r) => r.data),
+
+  // ── Tenant user stats (TENANT_OWNER / ADMIN) ──────────────────────────────
+
+  /**
+   * Returns aggregated user statistics for a tenant: member counts by status,
+   * email-verified count, and a time-bucketed signup series for the dashboard chart.
+   * Requires TENANT_OWNER or ADMIN authority.
+   */
+  getTenantUserStats: (tenantKey: string, params: TenantUserStatsParams = {}) =>
+    httpClient
+      .get<TenantUserStatsResponse>(`/v1/iam/tenants/${tenantKey}/members/stats`, { params })
       .then((r) => r.data),
 
   // ── Invitations (TENANT_OWNER / ADMIN) ────────────────────────────────────

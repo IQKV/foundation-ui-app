@@ -14,7 +14,10 @@ import {
   Avatar,
   Paper,
   Divider,
+  SegmentedControl,
+  Box,
 } from "@mantine/core";
+import { AreaChart } from "@mantine/charts";
 import {
   IconUsers,
   IconUser,
@@ -22,14 +25,19 @@ import {
   IconSettings,
   IconBell,
   IconArrowRight,
+  IconUserCheck,
+  IconUserX,
+  IconChartLine,
 } from "@tabler/icons-react";
 import { Link } from "@tanstack/react-router";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Helmet } from "@dr.pogodin/react-helmet";
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 import { pageTitle } from "@/shared/lib/page-title";
 import { PageHeader } from "@/shared/ui";
 import { iamApi } from "@/shared/api";
+import type { TenantUserStatsParams } from "@/shared/api/iam";
 import { useSession } from "@/processes/session";
 
 export const Route = createFileRoute("/_app/")({
@@ -60,6 +68,166 @@ function StatCard({ icon, color, value, label }: StatCardProps) {
         {label}
       </Text>
     </Card>
+  );
+}
+
+// ─── Signup trend chart card (TENANT_OWNER only) ──────────────────────────────
+
+interface SignupChartCardProps {
+  tenantKey: string;
+  activeMembers: number | undefined;
+  lockedMembers: number | undefined;
+  suspendedMembers: number | undefined;
+  statsLoading: boolean;
+}
+
+function SignupChartCard({
+  tenantKey,
+  activeMembers,
+  lockedMembers,
+  suspendedMembers,
+  statsLoading,
+}: SignupChartCardProps) {
+  const { t } = useLingui();
+  const [granularity, setGranularity] = useState<"day" | "month">("day");
+
+  // Derive the `from` date from the selected granularity:
+  //   day   → last 30 days
+  //   month → last 12 months
+  const from = (() => {
+    const d = new Date();
+    if (granularity === "month") {
+      d.setMonth(d.getMonth() - 11);
+      d.setDate(1);
+    } else {
+      d.setDate(d.getDate() - 29);
+    }
+    return d.toISOString().slice(0, 10);
+  })();
+
+  const params: TenantUserStatsParams = { from, granularity };
+
+  const {
+    data,
+    isLoading: seriesLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["tenant", tenantKey, "stats", granularity],
+    queryFn: () => iamApi.getTenantUserStats(tenantKey, params),
+    staleTime: 5 * 60 * 1000, // 5 min
+    retry: false,
+  });
+
+  const isLoading = statsLoading || seriesLoading;
+
+  return (
+    <Paper withBorder radius="md" p="lg">
+      <Group justify="space-between" mb="md" wrap="nowrap">
+        <Group gap="sm">
+          <ThemeIcon size="lg" radius="md" variant="light" color="violet">
+            <IconChartLine size={18} />
+          </ThemeIcon>
+          <Box>
+            <Text fw={600} size="sm">
+              <Trans>Member Signups</Trans>
+            </Text>
+            <Text size="xs" c="dimmed">
+              {isLoading ? (
+                <Skeleton height={12} width={120} radius="sm" display="inline-block" />
+              ) : data ? (
+                <Trans>
+                  {data.periodFrom} – {data.periodTo}
+                </Trans>
+              ) : null}
+            </Text>
+          </Box>
+        </Group>
+
+        <SegmentedControl
+          size="xs"
+          value={granularity}
+          onChange={(v) => setGranularity(v as "day" | "month")}
+          data={[
+            { label: t`Daily`, value: "day" },
+            { label: t`Monthly`, value: "month" },
+          ]}
+        />
+      </Group>
+
+      {isError ? (
+        <Text size="sm" c="dimmed" ta="center" py="xl">
+          <Trans>Unable to load signup data.</Trans>
+        </Text>
+      ) : isLoading ? (
+        <Skeleton height={220} radius="sm" />
+      ) : (
+        <AreaChart
+          h={220}
+          data={data!.signupSeries}
+          dataKey="period"
+          series={[{ name: "signups", color: "violet.6", label: t`New signups` }]}
+          curveType="monotone"
+          withTooltip
+          withXAxis
+          withYAxis
+          yAxisProps={{ allowDecimals: false }}
+          tooltipAnimationDuration={150}
+          gridAxis="y"
+        />
+      )}
+
+      {/* Summary row below chart */}
+      <Group gap="xl" mt="md" justify="center">
+        <Box ta="center">
+          <Text size="xs" c="dimmed">
+            <Trans>Active</Trans>
+          </Text>
+          {statsLoading ? (
+            <Skeleton height={18} width={32} radius="sm" mx="auto" mt={2} />
+          ) : (
+            <Text size="sm" fw={600} c="green">
+              {activeMembers?.toLocaleString() ?? "—"}
+            </Text>
+          )}
+        </Box>
+        <Box ta="center">
+          <Text size="xs" c="dimmed">
+            <Trans>Locked</Trans>
+          </Text>
+          {statsLoading ? (
+            <Skeleton height={18} width={32} radius="sm" mx="auto" mt={2} />
+          ) : (
+            <Text size="sm" fw={600} c="orange">
+              {lockedMembers?.toLocaleString() ?? "—"}
+            </Text>
+          )}
+        </Box>
+        <Box ta="center">
+          <Text size="xs" c="dimmed">
+            <Trans>Suspended</Trans>
+          </Text>
+          {statsLoading ? (
+            <Skeleton height={18} width={32} radius="sm" mx="auto" mt={2} />
+          ) : (
+            <Text size="sm" fw={600} c="red">
+              {suspendedMembers?.toLocaleString() ?? "—"}
+            </Text>
+          )}
+        </Box>
+        <Box ta="center">
+          <Text size="xs" c="dimmed">
+            <Trans>Email verified</Trans>
+          </Text>
+          {isLoading ? (
+            <Skeleton height={18} width={32} radius="sm" mx="auto" mt={2} />
+          ) : (
+            <Text size="sm" fw={600} c="blue">
+              {data?.emailVerifiedCount?.toLocaleString() ?? "—"}
+            </Text>
+          )}
+        </Box>
+      </Group>
+    </Paper>
   );
 }
 
@@ -191,7 +359,7 @@ function PersonalWelcome({ firstName, lastName, email }: PersonalWelcomeProps) {
 
 function DashboardPage() {
   const { t } = useLingui();
-  const { tenantKey, payload, isPersonalWorkspace } = useSession();
+  const { tenantKey, payload, isPersonalWorkspace, isTenantOwner } = useSession();
   const firstName = payload?.firstName ?? "";
   const lastName = payload?.lastName ?? "";
   const email = payload?.email ?? "";
@@ -209,6 +377,23 @@ function DashboardPage() {
     queryKey: ["tenant", tenantKey, "members"],
     queryFn: () => iamApi.listMembers(tenantKey!, { size: 1 }),
     enabled: !!tenantKey && !isPersonalWorkspace,
+    retry: false,
+  });
+
+  // Fetch aggregate stats snapshot (counts only, no series) — TENANT_OWNER only.
+  // Uses the same query key root as SignupChartCard so TanStack Query deduplicates
+  // requests when both run with the same granularity.
+  const { data: statsSnapshot, isLoading: statsLoading } = useQuery({
+    queryKey: ["tenant", tenantKey, "stats", "snapshot"],
+    queryFn: () =>
+      iamApi.getTenantUserStats(tenantKey!, {
+        // One-day window on today: we only need the counts, not the series.
+        // The chart card issues its own query with the proper date range.
+        from: new Date().toISOString().slice(0, 10),
+        granularity: "day",
+      }),
+    enabled: !!tenantKey && isTenantOwner && !isPersonalWorkspace,
+    staleTime: 5 * 60 * 1000,
     retry: false,
   });
 
@@ -235,16 +420,16 @@ function DashboardPage() {
         /* Personal workspace — welcome card with user info and getting-started guide */
         <PersonalWelcome firstName={firstName} lastName={lastName} email={email} />
       ) : (
-        <>
+        <Stack gap="md">
           {/* Greeting */}
           {firstName && (
-            <Text c="dimmed" size="sm" mb="lg">
+            <Text c="dimmed" size="sm">
               <Trans>Welcome back, {firstName}.</Trans>
             </Text>
           )}
 
           {/* Stat cards */}
-          <SimpleGrid cols={{ base: 1, sm: 2, lg: 3 }} spacing="md">
+          <SimpleGrid cols={{ base: 1, sm: 2, lg: isTenantOwner ? 3 : 1 }} spacing="md">
             <StatCard
               icon={<IconUsers size={20} />}
               color="blue"
@@ -257,8 +442,53 @@ function DashboardPage() {
               }
               label={<Trans>Team members</Trans>}
             />
+
+            {/* Additional stat cards visible to TENANT_OWNER */}
+            {isTenantOwner && (
+              <>
+                <StatCard
+                  icon={<IconUserCheck size={20} />}
+                  color="green"
+                  value={
+                    statsLoading ? (
+                      <Skeleton height={28} width={48} radius="sm" />
+                    ) : (
+                      (statsSnapshot?.activeMembers.toLocaleString() ?? "—")
+                    )
+                  }
+                  label={<Trans>Active members</Trans>}
+                />
+                <StatCard
+                  icon={<IconUserX size={20} />}
+                  color="orange"
+                  value={
+                    statsLoading ? (
+                      <Skeleton height={28} width={48} radius="sm" />
+                    ) : statsSnapshot != null ? (
+                      (
+                        statsSnapshot.lockedMembers + statsSnapshot.suspendedMembers
+                      ).toLocaleString()
+                    ) : (
+                      "—"
+                    )
+                  }
+                  label={<Trans>Locked / Suspended</Trans>}
+                />
+              </>
+            )}
           </SimpleGrid>
-        </>
+
+          {/* Signup trend chart — TENANT_OWNER only */}
+          {isTenantOwner && tenantKey && (
+            <SignupChartCard
+              tenantKey={tenantKey}
+              activeMembers={statsSnapshot?.activeMembers}
+              lockedMembers={statsSnapshot?.lockedMembers}
+              suspendedMembers={statsSnapshot?.suspendedMembers}
+              statsLoading={statsLoading}
+            />
+          )}
+        </Stack>
       )}
     </Container>
   );
