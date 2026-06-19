@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useForm } from "@mantine/form";
-import { zodResolver } from "mantine-form-zod-resolver";
 import { useNavigate } from "@tanstack/react-router";
 import { isAxiosError } from "axios";
 import { z } from "zod";
 import type { UseFormReturnType } from "@mantine/form";
 import { t } from "@lingui/core/macro";
 import { passwordResetApi } from "@/shared/api/password-reset";
+import { validateWithZod } from "@/shared/lib/zod-form-validation";
 
 // ─── Schema factory ───────────────────────────────────────────────────────────
 
@@ -76,7 +76,7 @@ export function useResetPassword(token: string): UseResetPasswordReturn {
   const navigate = useNavigate();
 
   const form = useForm<ResetPasswordFormValues>({
-    validate: zodResolver(buildResetPasswordSchema()),
+    validate: (values) => validateWithZod(buildResetPasswordSchema(), values),
     initialValues: { newPassword: "", confirmPassword: "" },
   });
 

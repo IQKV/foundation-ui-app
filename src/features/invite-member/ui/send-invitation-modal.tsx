@@ -1,9 +1,9 @@
 import { Modal, Stack, TextInput, Select, Group, Button, Text } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { zodResolver } from "mantine-form-zod-resolver";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { getAuthorityOptions, useSendInvitation, buildSendInvitationSchema } from "../model";
 import type { SendInvitationFormValues } from "../model";
+import { validateWithZod } from "@/shared/lib/zod-form-validation";
 
 interface SendInvitationModalProps {
   tenantKey: string;
@@ -16,7 +16,7 @@ export function SendInvitationModal({ tenantKey, opened, onClose }: SendInvitati
 
   const form = useForm<SendInvitationFormValues>({
     initialValues: { email: "", authority: "MEMBER" },
-    validate: zodResolver(buildSendInvitationSchema()),
+    validate: (values) => validateWithZod(buildSendInvitationSchema(), values),
   });
 
   const mutation = useSendInvitation({ tenantKey, onSuccess: handleClose });

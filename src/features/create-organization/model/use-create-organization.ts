@@ -1,6 +1,5 @@
 import { useCallback, useState } from "react";
 import { useForm } from "@mantine/form";
-import { zodResolver } from "mantine-form-zod-resolver";
 import { useNavigate } from "@tanstack/react-router";
 import { isAxiosError } from "axios";
 import { z } from "zod";
@@ -9,6 +8,7 @@ import { t } from "@lingui/core/macro";
 import { iamApi } from "@/shared/api/iam";
 import { authApi } from "@/shared/api/auth";
 import { setTokens } from "@/processes/session";
+import { validateWithZod } from "@/shared/lib/zod-form-validation";
 
 // ─── Schema factory ───────────────────────────────────────────────────────────
 
@@ -58,7 +58,7 @@ export function useCreateOrganization(): UseCreateOrganizationReturn {
   const navigate = useNavigate();
 
   const form = useForm<CreateOrganizationFormValues>({
-    validate: zodResolver(buildCreateOrganizationSchema()),
+    validate: (values) => validateWithZod(buildCreateOrganizationSchema(), values),
     initialValues: {
       name: "",
     },

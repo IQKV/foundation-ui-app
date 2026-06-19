@@ -13,13 +13,13 @@ import {
   Loader,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { zodResolver } from "mantine-form-zod-resolver";
 import { useQuery } from "@tanstack/react-query";
 import { Trans, useLingui } from "@lingui/react/macro";
 import type { UserProfile } from "@/shared/api";
 import { localesApi } from "@/shared/api";
 import { useEditProfile, buildEditProfileSchema } from "../model";
 import type { EditProfileFormValues } from "../model";
+import { validateWithZod } from "@/shared/lib/zod-form-validation";
 
 interface EditProfileModalProps {
   profile: UserProfile | null;
@@ -49,7 +49,7 @@ export function EditProfileModal({ profile, opened, onClose }: EditProfileModalP
       lastName: "",
       locale: null,
     },
-    validate: zodResolver(buildEditProfileSchema()),
+    validate: (values) => validateWithZod(buildEditProfileSchema(), values),
   });
 
   useEffect(() => {

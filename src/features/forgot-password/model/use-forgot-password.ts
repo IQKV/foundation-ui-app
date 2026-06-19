@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useForm } from "@mantine/form";
-import { zodResolver } from "mantine-form-zod-resolver";
 import { isAxiosError } from "axios";
 import { z } from "zod";
 import type { UseFormReturnType } from "@mantine/form";
 import { t } from "@lingui/core/macro";
 import { passwordResetApi } from "@/shared/api/password-reset";
+import { validateWithZod } from "@/shared/lib/zod-form-validation";
 
 // ─── Schema factory ───────────────────────────────────────────────────────────
 
@@ -58,7 +58,7 @@ export function useForgotPassword(): UseForgotPasswordReturn {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const form = useForm<ForgotPasswordFormValues>({
-    validate: zodResolver(buildForgotPasswordSchema()),
+    validate: (values) => validateWithZod(buildForgotPasswordSchema(), values),
     initialValues: { email: "" },
   });
 

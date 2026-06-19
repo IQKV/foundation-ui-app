@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useForm } from "@mantine/form";
-import { zodResolver } from "mantine-form-zod-resolver";
 import { useNavigate } from "@tanstack/react-router";
 import { isAxiosError } from "axios";
 import { z } from "zod";
@@ -9,6 +8,7 @@ import { t } from "@lingui/core/macro";
 import { authApi } from "@/shared/api/auth";
 import type { TenantMembershipSummary } from "@/shared/api/auth";
 import { setTokens } from "@/processes/session";
+import { validateWithZod } from "@/shared/lib/zod-form-validation";
 
 // ─── Schema factory ───────────────────────────────────────────────────────────
 
@@ -22,11 +22,9 @@ function buildSignInSchema() {
   });
 }
 
-type SignInSchema = ReturnType<typeof buildSignInSchema>;
-
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-export type SignInFormValues = z.infer<SignInSchema>;
+export type SignInFormValues = z.infer<ReturnType<typeof buildSignInSchema>>;
 
 /** Sign-in flow has two steps: credentials → tenant selection (if multi-tenant). */
 export type SignInStep = "credentials" | "tenant-select";
@@ -84,7 +82,7 @@ export function useSignIn(redirectTo?: string): UseSignInReturn {
 
   const form = useForm<SignInFormValues>({
     initialValues: { email: "", password: "" },
-    validate: zodResolver(buildSignInSchema()),
+    validate: (values) => validateWithZod(buildSignInSchema(), values),
   });
 
   const completeSignIn = async (
