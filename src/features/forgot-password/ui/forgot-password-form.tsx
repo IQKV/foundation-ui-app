@@ -1,6 +1,5 @@
 import { Alert, Box, Button, Stack, Text, TextInput, ThemeIcon } from "@mantine/core";
 import { IconAlertCircle, IconMailCheck } from "@tabler/icons-react";
-import { Controller } from "react-hook-form";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Link } from "@tanstack/react-router";
 import { useForgotPassword } from "../model/use-forgot-password";
@@ -18,14 +17,7 @@ export function ForgotPasswordForm() {
   const { t } = useLingui();
   const { form, isLoading, isSubmitted, errorMessage, onSubmit } = useForgotPassword();
 
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-    getValues,
-  } = form;
-
-  const handleFormSubmit = handleSubmit((values: ForgotPasswordFormValues) => onSubmit(values));
+  const handleFormSubmit = form.onSubmit((values: ForgotPasswordFormValues) => onSubmit(values));
 
   // ── Success state ──────────────────────────────────────────────────────────
   if (isSubmitted) {
@@ -41,8 +33,8 @@ export function ForgotPasswordForm() {
           </Text>
           <Text size="sm" c="dimmed">
             <Trans>
-              If <strong>{getValues("email")}</strong> is registered, you'll receive a password
-              reset link shortly. Check your spam folder if you don't see it.
+              If <strong>{form.values.email}</strong> is registered, you'll receive a password reset
+              link shortly. Check your spam folder if you don't see it.
             </Trans>
           </Text>
         </Box>
@@ -67,7 +59,7 @@ export function ForgotPasswordForm() {
 
   // ── Form ───────────────────────────────────────────────────────────────────
   return (
-    <form onSubmit={(e) => void handleFormSubmit(e)} noValidate data-testid="forgot-password-form">
+    <form onSubmit={handleFormSubmit} noValidate data-testid="forgot-password-form">
       <Stack gap="md">
         {/* ARIA live region for server-side errors */}
         <div aria-live="polite" aria-atomic="true">
@@ -91,24 +83,17 @@ export function ForgotPasswordForm() {
           </Trans>
         </Text>
 
-        <Controller
-          name="email"
-          control={control}
-          render={({ field }) => (
-            <TextInput
-              {...field}
-              id="forgot-password-email"
-              data-testid="forgot-password-email-input"
-              label={t`Email`}
-              type="email"
-              placeholder={t`you@example.com`}
-              autoComplete="email"
-              inputMode="email"
-              error={errors.email?.message}
-              disabled={isLoading}
-              inputWrapperOrder={["label", "input", "error"]}
-            />
-          )}
+        <TextInput
+          id="forgot-password-email"
+          data-testid="forgot-password-email-input"
+          label={t`Email`}
+          type="email"
+          placeholder={t`you@example.com`}
+          autoComplete="email"
+          inputMode="email"
+          disabled={isLoading}
+          inputWrapperOrder={["label", "input", "error"]}
+          {...form.getInputProps("email")}
         />
 
         <Button

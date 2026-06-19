@@ -1,10 +1,10 @@
 import { useCallback, useRef, useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "@mantine/form";
+import { zodResolver } from "mantine-form-zod-resolver";
 import { useNavigate } from "@tanstack/react-router";
 import { isAxiosError } from "axios";
 import { z } from "zod";
-import type { UseFormReturn } from "react-hook-form";
+import type { UseFormReturnType } from "@mantine/form";
 import { t } from "@lingui/core/macro";
 import { signupApi } from "@/shared/api/signup";
 import { authApi } from "@/shared/api/auth";
@@ -51,7 +51,7 @@ export type SignupFormValues = z.infer<SignupSchema>;
 export type SignupPhase = "form" | "verify-email";
 
 export interface UseSignupReturn {
-  form: UseFormReturn<SignupFormValues>;
+  form: UseFormReturnType<SignupFormValues>;
   phase: SignupPhase;
   isLoading: boolean;
   errorMessage: string | null;
@@ -110,8 +110,8 @@ export function useSignup(): UseSignupReturn {
   const navigate = useNavigate();
 
   const form = useForm<SignupFormValues>({
-    resolver: zodResolver(buildSignupSchema()),
-    defaultValues: {
+    validate: zodResolver(buildSignupSchema()),
+    initialValues: {
       firstName: "",
       lastName: "",
       email: "",

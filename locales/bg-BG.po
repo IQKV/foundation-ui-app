@@ -20,6 +20,12 @@ msgstr ""
 msgid "{0}"
 msgstr "{0}"
 
+#. placeholder {0}: data.periodFrom
+#. placeholder {1}: data.periodTo
+#: src/pages/_app/index.tsx
+msgid "{0} – {1}"
+msgstr ""
+
 #: src/pages/_app/index.tsx
 msgid "<0>Configure notifications</0> to stay informed."
 msgstr "<0>Конфигурирайте известията</0>, за да сте информирани."
@@ -94,22 +100,32 @@ msgid "Actions"
 msgstr "Действия"
 
 #: src/features/manage-billing/ui/plan-card.tsx
+#: src/pages/_app/index.tsx
 #: src/shared/ui/tenant-status-badge/tenant-status-badge.tsx
 #: src/shared/ui/user-status-badge/user-status-badge.tsx
 msgid "Active"
 msgstr "Активен"
 
+#: src/features/manage-billing/ui/current-subscription.tsx
 #: src/features/manage-billing/ui/entitlements-card.tsx
 msgid "ACTIVE"
+msgstr ""
+
+#: src/pages/_app/index.tsx
+msgid "Active members"
 msgstr ""
 
 #: src/features/invite-member/model/types.ts
 msgid "Admin"
 msgstr "Администратор"
 
-#: src/pages/billing-example.tsx
-msgid "Advanced Projects (Upgrade Required)"
+#: src/features/manage-billing/ui/plan-features.tsx
+msgid "Advanced Analytics"
 msgstr ""
+
+#: src/pages/billing-example.tsx
+#~ msgid "Advanced Projects (Upgrade Required)"
+#~ msgstr ""
 
 #: src/features/signup/ui/signup-form.tsx
 #: src/pages/invite.$token.tsx
@@ -408,7 +424,7 @@ msgstr "Валута"
 msgid "Current password"
 msgstr "Текуща парола"
 
-#: src/features/change-password/ui/change-password-modal.tsx
+#: src/features/change-password/model/types.ts
 #: src/pages/_app/settings/security.tsx
 msgid "Current password is required"
 msgstr "Текущата парола е задължителна"
@@ -429,6 +445,10 @@ msgstr "Текущ абонамент"
 #: src/features/tenant-switcher/ui/tenant-switcher.tsx
 msgid "Current workspace"
 msgstr "Текущо работно пространство"
+
+#: src/pages/_app/index.tsx
+msgid "Daily"
+msgstr ""
 
 #: src/pages/_app/index.tsx
 #: src/shared/ui/app-layout/app-nav.tsx
@@ -499,6 +519,7 @@ msgstr "Имейлът е задължителен"
 msgid "Email verification"
 msgstr "Потвърждаване на имейл"
 
+#: src/pages/_app/index.tsx
 #: src/pages/verify-email.tsx
 msgid "Email verified"
 msgstr "Имейлът е потвърден"
@@ -597,6 +618,10 @@ msgstr ""
 msgid "Feature Usage Examples"
 msgstr ""
 
+#: src/features/manage-billing/ui/current-subscription.tsx
+msgid "Features"
+msgstr ""
+
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 #: src/features/signup/ui/signup-form.tsx
 #: src/pages/_app/settings/general.tsx
@@ -605,7 +630,7 @@ msgid "First name"
 msgstr "Собствено ime"
 
 #: src/features/accept-invitation/model/use-accept-invitation.ts
-#: src/features/edit-profile/ui/edit-profile-modal.tsx
+#: src/features/edit-profile/model/types.ts
 #: src/features/signup/model/use-signup.ts
 #: src/pages/_app/settings/general.tsx
 msgid "First name is required"
@@ -626,6 +651,10 @@ msgstr "Забравена парола?"
 #: src/pages/forgot-password.tsx
 msgid "Forgot your"
 msgstr "Забравихте"
+
+#: src/features/manage-billing/ui/current-subscription.tsx
+msgid "Free"
+msgstr ""
 
 #: src/pages/loading-demo.tsx
 msgid "Full-screen centered loader shown on first app load (while locale initializes)."
@@ -666,7 +695,7 @@ msgstr "Ето какво можете да направите от личнот
 msgid "Home"
 msgstr "Начало"
 
-#. placeholder {0}: getValues("email")
+#. placeholder {0}: form.values.email
 #: src/features/forgot-password/ui/forgot-password-form.tsx
 msgid "If <0>{0}</0> is registered, you'll receive a password reset link shortly. Check your spam folder if you don't see it."
 msgstr "Ако <0>{0}</0> е регистриран, скоро ще получите връзка за нулиране на паролата. Проверете папката за спам, ако не го виждате."
@@ -757,7 +786,7 @@ msgid "Last name"
 msgstr "Фамилно ime"
 
 #: src/features/accept-invitation/model/use-accept-invitation.ts
-#: src/features/edit-profile/ui/edit-profile-modal.tsx
+#: src/features/edit-profile/model/types.ts
 #: src/features/signup/model/use-signup.ts
 #: src/pages/_app/settings/general.tsx
 msgid "Last name is required"
@@ -766,6 +795,10 @@ msgstr "Фамилното ime е задължително"
 #: src/features/signup/model/use-signup.ts
 msgid "Last name is too long"
 msgstr "Фамилното ime е твърде дълго"
+
+#: src/features/manage-billing/ui/current-subscription.tsx
+msgid "Limited support"
+msgstr ""
 
 #: src/pages/verify-email.tsx
 msgid "Link expired or invalid"
@@ -792,9 +825,14 @@ msgstr "Зареждане..."
 msgid "Loading…"
 msgstr "Зареждане…"
 
+#: src/pages/_app/index.tsx
 #: src/shared/ui/user-status-badge/user-status-badge.tsx
 msgid "Locked"
 msgstr "Заключен"
+
+#: src/pages/_app/index.tsx
+msgid "Locked / Suspended"
+msgstr ""
 
 #: src/features/signup/ui/password-strength.tsx
 msgid "Lowercase letter"
@@ -826,11 +864,20 @@ msgstr ""
 msgid "Member"
 msgstr "Член"
 
+#: src/pages/_app/index.tsx
+msgid "Member Signups"
+msgstr ""
+
 #: src/pages/_app/team.tsx
 msgid "Members"
 msgstr "Членове"
 
-#: src/features/invite-member/ui/send-invitation-modal.tsx
+#: src/features/manage-billing/ui/plan-list.tsx
+#: src/pages/_app/index.tsx
+msgid "Monthly"
+msgstr ""
+
+#: src/features/invite-member/model/types.ts
 msgid "Must be a valid email address"
 msgstr "Трябва да е валиден имейл адрес"
 
@@ -852,6 +899,10 @@ msgstr "Нова организация"
 #: src/pages/_app/settings/security.tsx
 msgid "New password"
 msgstr "Нова парола"
+
+#: src/pages/_app/index.tsx
+msgid "New signups"
+msgstr ""
 
 #: src/features/manage-billing/ui/current-subscription.tsx
 msgid "Next Billing Date"
@@ -995,7 +1046,7 @@ msgid "Password is required"
 msgstr "Паролата е задължителна"
 
 #: src/features/accept-invitation/model/use-accept-invitation.ts
-#: src/features/change-password/ui/change-password-modal.tsx
+#: src/features/change-password/model/types.ts
 #: src/features/reset-password/model/use-reset-password.ts
 #: src/features/signup/model/use-signup.ts
 #: src/pages/_app/settings/security.tsx
@@ -1003,7 +1054,7 @@ msgid "Password must be at least 8 characters"
 msgstr "Паролата трябва да е поне 8 символа"
 
 #: src/features/accept-invitation/model/use-accept-invitation.ts
-#: src/features/change-password/ui/change-password-modal.tsx
+#: src/features/change-password/model/types.ts
 #: src/features/reset-password/model/use-reset-password.ts
 #: src/features/signup/model/use-signup.ts
 #: src/pages/_app/settings/security.tsx
@@ -1015,7 +1066,7 @@ msgstr "Паролата трябва да е най-много 128 символ
 msgid "Password must contain uppercase, lowercase, a number, and a special character"
 msgstr "Паролата трябва да съдържа главна буква, малка буква, цифра и специален символ"
 
-#: src/features/change-password/ui/change-password-modal.tsx
+#: src/features/change-password/model/types.ts
 #: src/pages/_app/settings/security.tsx
 msgid "Password must contain uppercase, lowercase, digit, and special character"
 msgstr "Паролата трябва да съдържа главна буква, малка буква, цифра и специален символ"
@@ -1037,7 +1088,7 @@ msgstr "парола?"
 msgid "password."
 msgstr "парола."
 
-#: src/features/change-password/ui/change-password-modal.tsx
+#: src/features/change-password/model/types.ts
 #: src/features/reset-password/model/use-reset-password.ts
 #: src/pages/_app/settings/security.tsx
 msgid "Passwords do not match"
@@ -1411,6 +1462,7 @@ msgstr "Все още се настройва…"
 msgid "Strong"
 msgstr "Силна"
 
+#: src/pages/_app/index.tsx
 #: src/shared/ui/tenant-status-badge/tenant-status-badge.tsx
 #: src/shared/ui/user-status-badge/user-status-badge.tsx
 msgid "Suspended"
@@ -1446,8 +1498,8 @@ msgid "Team Management"
 msgstr ""
 
 #: src/pages/billing-example.tsx
-msgid "Team Management (Upgrade Required)"
-msgstr ""
+#~ msgid "Team Management (Upgrade Required)"
+#~ msgstr ""
 
 #: src/pages/_app/index.tsx
 msgid "Team members"
@@ -1544,6 +1596,10 @@ msgstr "Доверено от екипи по целия свят"
 #: src/shared/ui/error-boundary.tsx
 msgid "Try Again"
 msgstr "Опитай отново"
+
+#: src/pages/_app/index.tsx
+msgid "Unable to load signup data."
+msgstr ""
 
 #: src/features/manage-billing/ui/entitlements-card.tsx
 msgid "Unable to load subscription information. Please try again later."
@@ -1647,6 +1703,10 @@ msgstr "Служебен имейл"
 msgid "Workspace"
 msgstr "Работно пространство"
 
+#: src/features/manage-billing/ui/plan-list.tsx
+msgid "Yearly"
+msgstr ""
+
 #: src/features/accept-invitation/model/use-accept-invitation.ts
 msgid "You are already a member of this organization."
 msgstr "Вече сте член на тази организация."
@@ -1664,8 +1724,8 @@ msgid "You do not have permission to access this area. Please sign in with an ac
 msgstr "Нямате разрешение за достъп до тази зона. Моля, влезте с акаунт с подходящото членство."
 
 #: src/features/manage-billing/ui/current-subscription.tsx
-msgid "You don't have an active subscription yet. Choose a plan below to get started."
-msgstr "Все още нямате активен абонамент. Изберете план по-долу, за да започнете."
+#~ msgid "You don't have an active subscription yet. Choose a plan below to get started."
+#~ msgstr "Все още нямате активен абонамент. Изберете план по-долу, за да започнете."
 
 #: src/features/tenant-switcher/model/use-tenant-switcher.ts
 msgid "You no longer have access to this organization."

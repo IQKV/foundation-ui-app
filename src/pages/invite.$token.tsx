@@ -22,7 +22,6 @@ import {
   IconMail,
   IconShieldHalf,
 } from "@tabler/icons-react";
-import { Controller } from "react-hook-form";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Helmet } from "@dr.pogodin/react-helmet";
 import { Link } from "@tanstack/react-router";
@@ -57,11 +56,7 @@ function InvitePage() {
 
   const { phase, preview, form, isSubmitting, errorMessage, onSubmit } = useAcceptInvitation(token);
 
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = form;
+  const handleFormSubmit = form.onSubmit(onSubmit);
 
   return (
     <AuthLayout
@@ -196,7 +191,7 @@ function InvitePage() {
           </Paper>
 
           {/* Accept form */}
-          <form onSubmit={(e) => void handleSubmit(onSubmit)(e)} noValidate>
+          <form onSubmit={handleFormSubmit} noValidate>
             <Stack gap="md">
               {/* Server-side error */}
               <div aria-live="polite" aria-atomic="true">
@@ -215,33 +210,19 @@ function InvitePage() {
               {/* Name fields — only for new users */}
               {preview.requiresSignup && (
                 <Group grow>
-                  <Controller
-                    name="firstName"
-                    control={control}
-                    render={({ field }) => (
-                      <TextInput
-                        {...field}
-                        label={t`First name`}
-                        placeholder={t`Jane`}
-                        autoComplete="given-name"
-                        error={errors.firstName?.message}
-                        disabled={isSubmitting}
-                      />
-                    )}
+                  <TextInput
+                    label={t`First name`}
+                    placeholder={t`Jane`}
+                    autoComplete="given-name"
+                    disabled={isSubmitting}
+                    {...form.getInputProps("firstName")}
                   />
-                  <Controller
-                    name="lastName"
-                    control={control}
-                    render={({ field }) => (
-                      <TextInput
-                        {...field}
-                        label={t`Last name`}
-                        placeholder={t`Smith`}
-                        autoComplete="family-name"
-                        error={errors.lastName?.message}
-                        disabled={isSubmitting}
-                      />
-                    )}
+                  <TextInput
+                    label={t`Last name`}
+                    placeholder={t`Smith`}
+                    autoComplete="family-name"
+                    disabled={isSubmitting}
+                    {...form.getInputProps("lastName")}
                   />
                 </Group>
               )}
@@ -266,21 +247,14 @@ function InvitePage() {
                 rightSectionWidth={72}
               />
 
-              <Controller
-                name="password"
-                control={control}
-                render={({ field }) => (
-                  <PasswordInput
-                    {...field}
-                    label={t`Password`}
-                    placeholder={
-                      preview.requiresSignup ? t`Choose a password` : t`Your existing password`
-                    }
-                    autoComplete={preview.requiresSignup ? "new-password" : "current-password"}
-                    error={errors.password?.message}
-                    disabled={isSubmitting}
-                  />
-                )}
+              <PasswordInput
+                label={t`Password`}
+                placeholder={
+                  preview.requiresSignup ? t`Choose a password` : t`Your existing password`
+                }
+                autoComplete={preview.requiresSignup ? "new-password" : "current-password"}
+                disabled={isSubmitting}
+                {...form.getInputProps("password")}
               />
 
               <Button

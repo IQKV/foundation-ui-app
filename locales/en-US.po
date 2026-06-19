@@ -20,6 +20,12 @@ msgstr ""
 msgid "{0}"
 msgstr "{0}"
 
+#. placeholder {0}: data.periodFrom
+#. placeholder {1}: data.periodTo
+#: src/pages/_app/index.tsx
+msgid "{0} – {1}"
+msgstr "{0} – {1}"
+
 #: src/pages/admin/organizations.$tenantKey.tsx
 #~ msgid "{0} |Key Value Admin"
 #~ msgstr "{0} |Key Value Admin"
@@ -118,14 +124,20 @@ msgid "Actions"
 msgstr "Actions"
 
 #: src/features/manage-billing/ui/plan-card.tsx
+#: src/pages/_app/index.tsx
 #: src/shared/ui/tenant-status-badge/tenant-status-badge.tsx
 #: src/shared/ui/user-status-badge/user-status-badge.tsx
 msgid "Active"
 msgstr "Active"
 
+#: src/features/manage-billing/ui/current-subscription.tsx
 #: src/features/manage-billing/ui/entitlements-card.tsx
 msgid "ACTIVE"
 msgstr "ACTIVE"
+
+#: src/pages/_app/index.tsx
+msgid "Active members"
+msgstr "Active members"
 
 #: src/pages/dashboard.tsx
 #~ msgid "Active subscription"
@@ -139,9 +151,13 @@ msgstr "ACTIVE"
 msgid "Admin"
 msgstr "Admin"
 
+#: src/features/manage-billing/ui/plan-features.tsx
+msgid "Advanced Analytics"
+msgstr "Advanced Analytics"
+
 #: src/pages/billing-example.tsx
-msgid "Advanced Projects (Upgrade Required)"
-msgstr "Advanced Projects (Upgrade Required)"
+#~ msgid "Advanced Projects (Upgrade Required)"
+#~ msgstr "Advanced Projects (Upgrade Required)"
 
 #: src/pages/admin/organizations.index.tsx
 #: src/pages/admin/subscriptions.tsx
@@ -536,7 +552,7 @@ msgstr "Currency"
 msgid "Current password"
 msgstr "Current password"
 
-#: src/features/change-password/ui/change-password-modal.tsx
+#: src/features/change-password/model/types.ts
 #: src/pages/_app/settings/security.tsx
 msgid "Current password is required"
 msgstr "Current password is required"
@@ -557,6 +573,10 @@ msgstr "Current Subscription"
 #: src/features/tenant-switcher/ui/tenant-switcher.tsx
 msgid "Current workspace"
 msgstr "Current workspace"
+
+#: src/pages/_app/index.tsx
+msgid "Daily"
+msgstr "Daily"
 
 #: src/pages/_app/index.tsx
 #: src/shared/ui/app-layout/app-nav.tsx
@@ -667,6 +687,7 @@ msgstr "Email is required"
 msgid "Email verification"
 msgstr "Email verification"
 
+#: src/pages/_app/index.tsx
 #: src/pages/verify-email.tsx
 msgid "Email verified"
 msgstr "Email verified"
@@ -795,6 +816,10 @@ msgstr "Feature Gate Examples"
 msgid "Feature Usage Examples"
 msgstr "Feature Usage Examples"
 
+#: src/features/manage-billing/ui/current-subscription.tsx
+msgid "Features"
+msgstr "Features"
+
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 #: src/features/signup/ui/signup-form.tsx
 #: src/pages/_app/settings/general.tsx
@@ -803,7 +828,7 @@ msgid "First name"
 msgstr "First name"
 
 #: src/features/accept-invitation/model/use-accept-invitation.ts
-#: src/features/edit-profile/ui/edit-profile-modal.tsx
+#: src/features/edit-profile/model/types.ts
 #: src/features/signup/model/use-signup.ts
 #: src/pages/_app/settings/general.tsx
 msgid "First name is required"
@@ -824,6 +849,10 @@ msgstr "Forgot password?"
 #: src/pages/forgot-password.tsx
 msgid "Forgot your"
 msgstr "Forgot your"
+
+#: src/features/manage-billing/ui/current-subscription.tsx
+msgid "Free"
+msgstr "Free"
 
 #: src/pages/loading-demo.tsx
 msgid "Full-screen centered loader shown on first app load (while locale initializes)."
@@ -868,7 +897,7 @@ msgstr "Home"
 #~ msgid "ID: {0}"
 #~ msgstr "ID: {0}"
 
-#. placeholder {0}: getValues("email")
+#. placeholder {0}: form.values.email
 #: src/features/forgot-password/ui/forgot-password-form.tsx
 msgid "If <0>{0}</0> is registered, you'll receive a password reset link shortly. Check your spam folder if you don't see it."
 msgstr "If <0>{0}</0> is registered, you'll receive a password reset link shortly. Check your spam folder if you don't see it."
@@ -971,7 +1000,7 @@ msgid "Last name"
 msgstr "Last name"
 
 #: src/features/accept-invitation/model/use-accept-invitation.ts
-#: src/features/edit-profile/ui/edit-profile-modal.tsx
+#: src/features/edit-profile/model/types.ts
 #: src/features/signup/model/use-signup.ts
 #: src/pages/_app/settings/general.tsx
 msgid "Last name is required"
@@ -988,6 +1017,10 @@ msgstr "Last name is too long"
 #: src/features/signup/ui/signup-form.tsx
 #~ msgid "Leave blank to use your name"
 #~ msgstr "Leave blank to use your name"
+
+#: src/features/manage-billing/ui/current-subscription.tsx
+msgid "Limited support"
+msgstr "Limited support"
 
 #: src/pages/verify-email.tsx
 msgid "Link expired or invalid"
@@ -1018,9 +1051,14 @@ msgstr "Loading..."
 msgid "Loading…"
 msgstr "Loading…"
 
+#: src/pages/_app/index.tsx
 #: src/shared/ui/user-status-badge/user-status-badge.tsx
 msgid "Locked"
 msgstr "Locked"
+
+#: src/pages/_app/index.tsx
+msgid "Locked / Suspended"
+msgstr "Locked / Suspended"
 
 #: src/features/signup/ui/password-strength.tsx
 msgid "Lowercase letter"
@@ -1068,6 +1106,10 @@ msgstr "Max Users:"
 msgid "Member"
 msgstr "Member"
 
+#: src/pages/_app/index.tsx
+msgid "Member Signups"
+msgstr "Member Signups"
+
 #: src/pages/admin/organizations.$tenantKey.tsx
 #~ msgid "member(s)"
 #~ msgstr "member(s)"
@@ -1076,7 +1118,12 @@ msgstr "Member"
 msgid "Members"
 msgstr "Members"
 
-#: src/features/invite-member/ui/send-invitation-modal.tsx
+#: src/features/manage-billing/ui/plan-list.tsx
+#: src/pages/_app/index.tsx
+msgid "Monthly"
+msgstr "Monthly"
+
+#: src/features/invite-member/model/types.ts
 msgid "Must be a valid email address"
 msgstr "Must be a valid email address"
 
@@ -1098,6 +1145,10 @@ msgstr "New Organization"
 #: src/pages/_app/settings/security.tsx
 msgid "New password"
 msgstr "New password"
+
+#: src/pages/_app/index.tsx
+msgid "New signups"
+msgstr "New signups"
 
 #: src/features/manage-billing/ui/current-subscription.tsx
 msgid "Next Billing Date"
@@ -1306,7 +1357,7 @@ msgid "Password is required"
 msgstr "Password is required"
 
 #: src/features/accept-invitation/model/use-accept-invitation.ts
-#: src/features/change-password/ui/change-password-modal.tsx
+#: src/features/change-password/model/types.ts
 #: src/features/reset-password/model/use-reset-password.ts
 #: src/features/signup/model/use-signup.ts
 #: src/pages/_app/settings/security.tsx
@@ -1314,7 +1365,7 @@ msgid "Password must be at least 8 characters"
 msgstr "Password must be at least 8 characters"
 
 #: src/features/accept-invitation/model/use-accept-invitation.ts
-#: src/features/change-password/ui/change-password-modal.tsx
+#: src/features/change-password/model/types.ts
 #: src/features/reset-password/model/use-reset-password.ts
 #: src/features/signup/model/use-signup.ts
 #: src/pages/_app/settings/security.tsx
@@ -1326,7 +1377,7 @@ msgstr "Password must be at most 128 characters"
 msgid "Password must contain uppercase, lowercase, a number, and a special character"
 msgstr "Password must contain uppercase, lowercase, a number, and a special character"
 
-#: src/features/change-password/ui/change-password-modal.tsx
+#: src/features/change-password/model/types.ts
 #: src/pages/_app/settings/security.tsx
 msgid "Password must contain uppercase, lowercase, digit, and special character"
 msgstr "Password must contain uppercase, lowercase, digit, and special character"
@@ -1348,7 +1399,7 @@ msgstr "password?"
 msgid "password."
 msgstr "password."
 
-#: src/features/change-password/ui/change-password-modal.tsx
+#: src/features/change-password/model/types.ts
 #: src/features/reset-password/model/use-reset-password.ts
 #: src/pages/_app/settings/security.tsx
 msgid "Passwords do not match"
@@ -1823,6 +1874,7 @@ msgstr "Strong"
 #~ msgid "Subscriptions |Key Value Admin"
 #~ msgstr "Subscriptions |Key Value Admin"
 
+#: src/pages/_app/index.tsx
 #: src/shared/ui/tenant-status-badge/tenant-status-badge.tsx
 #: src/shared/ui/user-status-badge/user-status-badge.tsx
 msgid "Suspended"
@@ -1862,8 +1914,8 @@ msgid "Team Management"
 msgstr "Team Management"
 
 #: src/pages/billing-example.tsx
-msgid "Team Management (Upgrade Required)"
-msgstr "Team Management (Upgrade Required)"
+#~ msgid "Team Management (Upgrade Required)"
+#~ msgstr "Team Management (Upgrade Required)"
 
 #: src/pages/_app/index.tsx
 msgid "Team members"
@@ -1976,6 +2028,10 @@ msgstr "Trusted by teams worldwide"
 #: src/shared/ui/error-boundary.tsx
 msgid "Try Again"
 msgstr "Try Again"
+
+#: src/pages/_app/index.tsx
+msgid "Unable to load signup data."
+msgstr "Unable to load signup data."
 
 #: src/features/manage-billing/ui/entitlements-card.tsx
 msgid "Unable to load subscription information. Please try again later."
@@ -2125,6 +2181,10 @@ msgstr "Workspace"
 #~ msgid "Workspace setup failed. Please try again or contact support."
 #~ msgstr "Workspace setup failed. Please try again or contact support."
 
+#: src/features/manage-billing/ui/plan-list.tsx
+msgid "Yearly"
+msgstr "Yearly"
+
 #: src/features/accept-invitation/model/use-accept-invitation.ts
 msgid "You are already a member of this organization."
 msgstr "You are already a member of this organization."
@@ -2150,8 +2210,8 @@ msgstr "You do not have permission to access this area. Please sign in with an a
 #~ msgstr "You do not have the required <0>PLATFORM_ADMIN</0> authority to access this area. Please sign in with an account that has the appropriate permissions."
 
 #: src/features/manage-billing/ui/current-subscription.tsx
-msgid "You don't have an active subscription yet. Choose a plan below to get started."
-msgstr "You don't have an active subscription yet. Choose a plan below to get started."
+#~ msgid "You don't have an active subscription yet. Choose a plan below to get started."
+#~ msgstr "You don't have an active subscription yet. Choose a plan below to get started."
 
 #: src/features/tenant-switcher/model/use-tenant-switcher.ts
 msgid "You no longer have access to this organization."

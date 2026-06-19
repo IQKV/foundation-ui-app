@@ -1,6 +1,5 @@
-import { Alert, Box, Button, Stack, Text, TextInput, ThemeIcon } from "@mantine/core";
+import { Alert, Box, Button, Stack, Text, PasswordInput, ThemeIcon } from "@mantine/core";
 import { IconAlertCircle, IconAlertTriangle, IconCircleCheck } from "@tabler/icons-react";
-import { Controller } from "react-hook-form";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Link } from "@tanstack/react-router";
 import { useResetPassword } from "../model/use-reset-password";
@@ -23,13 +22,7 @@ export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
   const { t } = useLingui();
   const { form, isLoading, isSuccess, errorMessage, onSubmit } = useResetPassword(token);
 
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = form;
-
-  const handleFormSubmit = handleSubmit((values: ResetPasswordFormValues) => onSubmit(values));
+  const handleFormSubmit = form.onSubmit((values: ResetPasswordFormValues) => onSubmit(values));
 
   // ── No token provided ──────────────────────────────────────────────────────
   if (!token) {
@@ -97,7 +90,7 @@ export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
 
   // ── Form ───────────────────────────────────────────────────────────────────
   return (
-    <form onSubmit={(e) => void handleFormSubmit(e)} noValidate data-testid="reset-password-form">
+    <form onSubmit={handleFormSubmit} noValidate data-testid="reset-password-form">
       <Stack gap="md">
         {/* ARIA live region for server-side errors */}
         <div aria-live="polite" aria-atomic="true">
@@ -126,42 +119,26 @@ export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
           )}
         </div>
 
-        <Controller
-          name="newPassword"
-          control={control}
-          render={({ field }) => (
-            <TextInput
-              {...field}
-              id="reset-password-new"
-              data-testid="reset-password-new-password-input"
-              label={t`New password`}
-              type="password"
-              placeholder={t`At least 8 characters`}
-              autoComplete="new-password"
-              error={errors.newPassword?.message}
-              disabled={isLoading}
-              inputWrapperOrder={["label", "input", "error"]}
-            />
-          )}
+        <PasswordInput
+          id="reset-password-new"
+          data-testid="reset-password-new-password-input"
+          label={t`New password`}
+          placeholder={t`At least 8 characters`}
+          autoComplete="new-password"
+          disabled={isLoading}
+          inputWrapperOrder={["label", "input", "error"]}
+          {...form.getInputProps("newPassword")}
         />
 
-        <Controller
-          name="confirmPassword"
-          control={control}
-          render={({ field }) => (
-            <TextInput
-              {...field}
-              id="reset-password-confirm"
-              data-testid="reset-password-confirm-password-input"
-              label={t`Confirm new password`}
-              type="password"
-              placeholder={t`Repeat your new password`}
-              autoComplete="new-password"
-              error={errors.confirmPassword?.message}
-              disabled={isLoading}
-              inputWrapperOrder={["label", "input", "error"]}
-            />
-          )}
+        <PasswordInput
+          id="reset-password-confirm"
+          data-testid="reset-password-confirm-password-input"
+          label={t`Confirm new password`}
+          placeholder={t`Repeat your new password`}
+          autoComplete="new-password"
+          disabled={isLoading}
+          inputWrapperOrder={["label", "input", "error"]}
+          {...form.getInputProps("confirmPassword")}
         />
 
         <Button

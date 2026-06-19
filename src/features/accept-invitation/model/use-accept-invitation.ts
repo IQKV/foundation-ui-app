@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "@mantine/form";
+import { zodResolver } from "mantine-form-zod-resolver";
 import { isAxiosError } from "axios";
 import { z } from "zod";
 import { t } from "@lingui/core/macro";
-import type { UseFormReturn } from "react-hook-form";
+import type { UseFormReturnType } from "@mantine/form";
 import { iamApi } from "@/shared/api";
 import type { InvitationPreview } from "@/shared/api";
 import { setTokens } from "@/processes/session";
@@ -22,24 +22,7 @@ export type AcceptPhase = "preview" | "invalid" | "accept" | "success";
 
 // ─── Form schema ──────────────────────────────────────────────────────────────
 
-function buildAcceptSchema(requiresSignup: boolean) {
-  if (requiresSignup) {
-    return z.object({
-      firstName: z
-        .string()
-        .min(1, t`First name is required`)
-        .max(100),
-      lastName: z
-        .string()
-        .min(1, t`Last name is required`)
-        .max(100),
-      password: z
-        .string()
-        .min(8, t`Password must be at least 8 characters`)
-        .max(128, t`Password must be at most 128 characters`),
-    });
-  }
-
+function buildAcceptSchema() {
   return z.object({
     firstName: z.string().optional(),
     lastName: z.string().optional(),
@@ -50,11 +33,7 @@ function buildAcceptSchema(requiresSignup: boolean) {
   });
 }
 
-export interface AcceptFormValues {
-  firstName?: string;
-  lastName?: string;
-  password: string;
-}
+export type AcceptFormValues = z.infer<ReturnType<typeof buildAcceptSchema>>;
 
 // ─── Error mapping ────────────────────────────────────────────────────────────
 
@@ -80,7 +59,7 @@ function mapAcceptError(status: number): string {
 export interface UseAcceptInvitationReturn {
   phase: AcceptPhase;
   preview: InvitationPreview | null;
-  form: UseFormReturn<AcceptFormValues>;
+  form: UseFormReturnType<AcceptFormValues>;
   isSubmitting: boolean;
   errorMessage: string | null;
   onSubmit: (values: AcceptFormValues) => Promise<void>;
@@ -112,8 +91,31 @@ export function useAcceptInvitation(token: string): UseAcceptInvitationReturn {
   const [requiresSignup, setRequiresSignup] = useState(false);
 
   const form = useForm<AcceptFormValues>({
-    resolver: zodResolver(buildAcceptSchema(requiresSignup)),
-    defaultValues: { firstName: "", lastName: "", password: "" },
+    initialValues: { firstName: "", lastName: "", password: "" },
+    validate: (values) => {
+      const errors: Record<string, string> = {};
+
+      // Validate using Zod schema first
+      const zodResult = buildAcceptSchema().safeParse(values);
+      if (!zodResult.success) {
+        zodResult.error.issues.forEach((issue) => {
+          const path = issue.path.join(".");
+          errors[path] = issue.message;
+        });
+      }
+
+      // Conditionally validate first and last name if requiresSignup is true
+      if (requiresSignup) {
+        if (!values.firstName || values.firstName.trim().length < 1) {
+          errors.firstName = t`First name is required`;
+        }
+        if (!values.lastName || values.lastName.trim().length < 1) {
+          errors.lastName = t`Last name is required`;
+        }
+      }
+
+      return errors;
+    },
   });
 
   // ── Phase 1: fetch preview ─────────────────────────────────────────────────
@@ -132,7 +134,7 @@ export function useAcceptInvitation(token: string): UseAcceptInvitationReturn {
         if (cancelled) return;
         setPreview(data);
         setRequiresSignup(data.requiresSignup);
-        form.reset({ firstName: "", lastName: "", password: "" });
+        form.setValues({ firstName: "", lastName: "", password: "" });
         setPhase("accept");
       })
       .catch(() => {
@@ -144,11 +146,6 @@ export function useAcceptInvitation(token: string): UseAcceptInvitationReturn {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
-
-  // Update form resolver when requiresSignup changes
-  useEffect(() => {
-    form.clearErrors();
-  }, [requiresSignup, form]);
 
   // ── Phase 2: submit accept form ────────────────────────────────────────────
 

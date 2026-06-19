@@ -1,12 +1,11 @@
 import { Alert, Button, Stack, Text, TextInput } from "@mantine/core";
 import { IconAlertCircle } from "@tabler/icons-react";
-import { Controller } from "react-hook-form";
 import { Trans, useLingui } from "@lingui/react/macro";
-import type { UseFormReturn } from "react-hook-form";
+import type { UseFormReturnType } from "@mantine/form";
 import type { CreateOrganizationFormValues } from "../model/use-create-organization";
 
 interface CreateOrganizationFormProps {
-  form: UseFormReturn<CreateOrganizationFormValues>;
+  form: UseFormReturnType<CreateOrganizationFormValues>;
   isLoading: boolean;
   errorMessage: string | null;
   onSubmit: (values: CreateOrganizationFormValues) => Promise<void>;
@@ -22,20 +21,13 @@ export function CreateOrganizationForm({
   onSubmit,
 }: CreateOrganizationFormProps) {
   const { t } = useLingui();
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = form;
 
-  const handleFormSubmit = handleSubmit((values: CreateOrganizationFormValues) => onSubmit(values));
+  const handleFormSubmit = form.onSubmit((values: CreateOrganizationFormValues) =>
+    onSubmit(values),
+  );
 
   return (
-    <form
-      onSubmit={(e) => void handleFormSubmit(e)}
-      noValidate
-      data-testid="create-organization-form"
-    >
+    <form onSubmit={handleFormSubmit} noValidate data-testid="create-organization-form">
       <Stack gap="md">
         {/* Server-side error */}
         <div aria-live="polite" aria-atomic="true">
@@ -53,22 +45,15 @@ export function CreateOrganizationForm({
         </div>
 
         {/* Organization name */}
-        <Controller
-          name="name"
-          control={control}
-          render={({ field }) => (
-            <TextInput
-              {...field}
-              id="create-organization-name"
-              data-testid="create-organization-name-input"
-              label={t`Organization name`}
-              placeholder={t`Acme Inc.`}
-              autoComplete="organization"
-              error={errors.name?.message}
-              disabled={isLoading}
-              inputWrapperOrder={["label", "input", "error"]}
-            />
-          )}
+        <TextInput
+          id="create-organization-name"
+          data-testid="create-organization-name-input"
+          label={t`Organization name`}
+          placeholder={t`Acme Inc.`}
+          autoComplete="organization"
+          disabled={isLoading}
+          inputWrapperOrder={["label", "input", "error"]}
+          {...form.getInputProps("name")}
         />
 
         <Button

@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "@mantine/form";
+import { zodResolver } from "mantine-form-zod-resolver";
 import { isAxiosError } from "axios";
 import { z } from "zod";
-import type { UseFormReturn } from "react-hook-form";
+import type { UseFormReturnType } from "@mantine/form";
 import { t } from "@lingui/core/macro";
 import { passwordResetApi } from "@/shared/api/password-reset";
 
@@ -25,7 +25,7 @@ type ForgotPasswordSchema = ReturnType<typeof buildForgotPasswordSchema>;
 export type ForgotPasswordFormValues = z.infer<ForgotPasswordSchema>;
 
 export interface UseForgotPasswordReturn {
-  form: UseFormReturn<ForgotPasswordFormValues>;
+  form: UseFormReturnType<ForgotPasswordFormValues>;
   isLoading: boolean;
   isSubmitted: boolean;
   errorMessage: string | null;
@@ -58,8 +58,8 @@ export function useForgotPassword(): UseForgotPasswordReturn {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const form = useForm<ForgotPasswordFormValues>({
-    resolver: zodResolver(buildForgotPasswordSchema()),
-    defaultValues: { email: "" },
+    validate: zodResolver(buildForgotPasswordSchema()),
+    initialValues: { email: "" },
   });
 
   const onSubmit = async (values: ForgotPasswordFormValues): Promise<void> => {

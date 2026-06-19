@@ -1,10 +1,10 @@
 import { useCallback, useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "@mantine/form";
+import { zodResolver } from "mantine-form-zod-resolver";
 import { useNavigate } from "@tanstack/react-router";
 import { isAxiosError } from "axios";
 import { z } from "zod";
-import type { UseFormReturn } from "react-hook-form";
+import type { UseFormReturnType } from "@mantine/form";
 import { t } from "@lingui/core/macro";
 import { iamApi } from "@/shared/api/iam";
 import { authApi } from "@/shared/api/auth";
@@ -28,7 +28,7 @@ type CreateOrganizationSchema = ReturnType<typeof buildCreateOrganizationSchema>
 export type CreateOrganizationFormValues = z.infer<CreateOrganizationSchema>;
 
 export interface UseCreateOrganizationReturn {
-  form: UseFormReturn<CreateOrganizationFormValues>;
+  form: UseFormReturnType<CreateOrganizationFormValues>;
   isLoading: boolean;
   errorMessage: string | null;
   onSubmit: (values: CreateOrganizationFormValues) => Promise<void>;
@@ -58,8 +58,8 @@ export function useCreateOrganization(): UseCreateOrganizationReturn {
   const navigate = useNavigate();
 
   const form = useForm<CreateOrganizationFormValues>({
-    resolver: zodResolver(buildCreateOrganizationSchema()),
-    defaultValues: {
+    validate: zodResolver(buildCreateOrganizationSchema()),
+    initialValues: {
       name: "",
     },
   });

@@ -1,6 +1,15 @@
-import { Alert, Button, Card, Group, Stack, Text, TextInput, UnstyledButton } from "@mantine/core";
+import {
+  Alert,
+  Button,
+  Card,
+  Group,
+  Stack,
+  Text,
+  TextInput,
+  PasswordInput,
+  UnstyledButton,
+} from "@mantine/core";
 import { IconAlertCircle, IconBuilding, IconUser, IconShieldHalf } from "@tabler/icons-react";
-import { Controller } from "react-hook-form";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Link } from "@tanstack/react-router";
 import { isDemoMode } from "@/app/config/runtime-env";
@@ -23,13 +32,7 @@ export function SignInForm({ redirectTo }: SignInFormProps) {
   const { form, step, tenants, isLoading, errorMessage, onSubmitCredentials, onSelectTenant } =
     useSignIn(redirectTo);
 
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = form;
-
-  const handleFormSubmit = handleSubmit((values: SignInFormValues) => onSubmitCredentials(values));
+  const handleFormSubmit = form.onSubmit((values: SignInFormValues) => onSubmitCredentials(values));
 
   // ── Step 2: tenant picker ──────────────────────────────────────────────────
   if (step === "tenant-select") {
@@ -90,7 +93,7 @@ export function SignInForm({ redirectTo }: SignInFormProps) {
 
   // ── Step 1: credentials ────────────────────────────────────────────────────
   return (
-    <form onSubmit={(e) => void handleFormSubmit(e)} noValidate data-testid="sign-in-form">
+    <form onSubmit={handleFormSubmit} noValidate data-testid="sign-in-form">
       <Stack gap="md">
         {/* Demo credentials hint — visible only in demo environments */}
         {isDemoMode && <DemoCredentialsHint />}
@@ -103,43 +106,28 @@ export function SignInForm({ redirectTo }: SignInFormProps) {
           )}
         </div>
 
-        <Controller
-          name="email"
-          control={control}
-          render={({ field }) => (
-            <TextInput
-              {...field}
-              id="sign-in-email"
-              data-testid="sign-in-email-input"
-              label={t`Email`}
-              type="email"
-              placeholder={t`you@example.com`}
-              autoComplete="email"
-              inputMode="email"
-              error={errors.email?.message}
-              disabled={isLoading}
-              inputWrapperOrder={["label", "input", "error"]}
-            />
-          )}
+        <TextInput
+          id="sign-in-email"
+          data-testid="sign-in-email-input"
+          label={t`Email`}
+          type="email"
+          placeholder={t`you@example.com`}
+          autoComplete="email"
+          inputMode="email"
+          disabled={isLoading}
+          inputWrapperOrder={["label", "input", "error"]}
+          {...form.getInputProps("email")}
         />
 
-        <Controller
-          name="password"
-          control={control}
-          render={({ field }) => (
-            <TextInput
-              {...field}
-              id="sign-in-password"
-              data-testid="sign-in-password-input"
-              label={t`Password`}
-              type="password"
-              placeholder={t`Your password`}
-              autoComplete="current-password"
-              error={errors.password?.message}
-              disabled={isLoading}
-              inputWrapperOrder={["label", "input", "error"]}
-            />
-          )}
+        <PasswordInput
+          id="sign-in-password"
+          data-testid="sign-in-password-input"
+          label={t`Password`}
+          placeholder={t`Your password`}
+          autoComplete="current-password"
+          disabled={isLoading}
+          inputWrapperOrder={["label", "input", "error"]}
+          {...form.getInputProps("password")}
         />
 
         {/* Forgot password link */}

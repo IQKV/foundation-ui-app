@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "@mantine/form";
+import { zodResolver } from "mantine-form-zod-resolver";
 import { useNavigate } from "@tanstack/react-router";
 import { isAxiosError } from "axios";
 import { z } from "zod";
-import type { UseFormReturn } from "react-hook-form";
+import type { UseFormReturnType } from "@mantine/form";
 import { t } from "@lingui/core/macro";
 import { passwordResetApi } from "@/shared/api/password-reset";
 
@@ -36,7 +36,7 @@ type ResetPasswordSchema = ReturnType<typeof buildResetPasswordSchema>;
 export type ResetPasswordFormValues = z.infer<ResetPasswordSchema>;
 
 export interface UseResetPasswordReturn {
-  form: UseFormReturn<ResetPasswordFormValues>;
+  form: UseFormReturnType<ResetPasswordFormValues>;
   isLoading: boolean;
   isSuccess: boolean;
   errorMessage: string | null;
@@ -76,8 +76,8 @@ export function useResetPassword(token: string): UseResetPasswordReturn {
   const navigate = useNavigate();
 
   const form = useForm<ResetPasswordFormValues>({
-    resolver: zodResolver(buildResetPasswordSchema()),
-    defaultValues: { newPassword: "", confirmPassword: "" },
+    validate: zodResolver(buildResetPasswordSchema()),
+    initialValues: { newPassword: "", confirmPassword: "" },
   });
 
   const onSubmit = async (values: ResetPasswordFormValues): Promise<void> => {

@@ -11,22 +11,16 @@ import {
   ThemeIcon,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
+import { zodResolver } from "mantine-form-zod-resolver";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { IconCircleCheck } from "@tabler/icons-react";
-import { useChangePassword } from "../model";
+import { useChangePassword, buildChangePasswordSchema } from "../model";
+import type { ChangePasswordFormValues } from "../model";
 
 interface ChangePasswordModalProps {
   opened: boolean;
   onClose: () => void;
 }
-
-interface ChangePasswordFormValues {
-  currentPassword: string;
-  newPassword: string;
-  confirmPassword: string;
-}
-
-const PASSWORD_PATTERN = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z0-9]).+$/;
 
 export function ChangePasswordModal({ opened, onClose }: ChangePasswordModalProps) {
   const { t } = useLingui();
@@ -37,17 +31,7 @@ export function ChangePasswordModal({ opened, onClose }: ChangePasswordModalProp
       newPassword: "",
       confirmPassword: "",
     },
-    validate: {
-      currentPassword: (v) => (v.length < 1 ? t`Current password is required` : null),
-      newPassword: (v) => {
-        if (v.length < 8) return t`Password must be at least 8 characters`;
-        if (v.length > 128) return t`Password must be at most 128 characters`;
-        if (!PASSWORD_PATTERN.test(v))
-          return t`Password must contain uppercase, lowercase, digit, and special character`;
-        return null;
-      },
-      confirmPassword: (v, values) => (v !== values.newPassword ? t`Passwords do not match` : null),
-    },
+    validate: zodResolver(buildChangePasswordSchema()),
   });
 
   // Reset form whenever the modal opens
