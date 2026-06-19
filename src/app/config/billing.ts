@@ -4,6 +4,7 @@ import type { PlanFeatures } from "@/shared/api";
 // Feature codes — these are the map keys in PlanFeatures.features (snake_case, matches YAML)
 export const BILLING_FEATURES = {
   PRIORITY_SUPPORT: "priority_support",
+  ADVANCED_ANALYTICS: "advanced_analytics",
 } as const;
 
 // Type helper for feature map keys

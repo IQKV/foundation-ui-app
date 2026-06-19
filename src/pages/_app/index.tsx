@@ -39,6 +39,8 @@ import { PageHeader } from "@/shared/ui";
 import { iamApi } from "@/shared/api";
 import type { TenantUserStatsParams } from "@/shared/api/iam";
 import { useSession } from "@/processes/session";
+import { FeatureGate } from "@/features/manage-billing";
+import { BILLING_FEATURES } from "@/app/config";
 
 export const Route = createFileRoute("/_app/")({
   component: DashboardPage,
@@ -478,15 +480,17 @@ function DashboardPage() {
             )}
           </SimpleGrid>
 
-          {/* Signup trend chart — TENANT_OWNER only */}
+          {/* Signup trend chart — TENANT_OWNER only, requires advanced_analytics feature */}
           {isTenantOwner && tenantKey && (
-            <SignupChartCard
-              tenantKey={tenantKey}
-              activeMembers={statsSnapshot?.activeMembers}
-              lockedMembers={statsSnapshot?.lockedMembers}
-              suspendedMembers={statsSnapshot?.suspendedMembers}
-              statsLoading={statsLoading}
-            />
+            <FeatureGate feature={BILLING_FEATURES.ADVANCED_ANALYTICS} showUpgradePrompt>
+              <SignupChartCard
+                tenantKey={tenantKey}
+                activeMembers={statsSnapshot?.activeMembers}
+                lockedMembers={statsSnapshot?.lockedMembers}
+                suspendedMembers={statsSnapshot?.suspendedMembers}
+                statsLoading={statsLoading}
+              />
+            </FeatureGate>
           )}
         </Stack>
       )}
