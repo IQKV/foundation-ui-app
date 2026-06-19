@@ -28,6 +28,7 @@ import { useEditProfile, type EditProfileFormValues } from "@/features/edit-prof
 import { AvatarUpload } from "@/features/avatar";
 import { useSession } from "@/processes/session";
 import { TestSelectors } from "@/shared/lib/test-selectors";
+import { isMultiTenantMode, isSingleTenantMode } from "@/app/config";
 
 export const Route = createFileRoute("/_app/settings/general")({
   component: GeneralSettingsPage,
@@ -53,6 +54,25 @@ function GeneralSettingsPage() {
     queryFn: () => localesApi.list(),
     staleTime: Infinity,
   });
+
+  // Fetch memberships only in multi-tenant mode — used to filter out the
+  // personal workspace from the organizations list.
+  const { data: memberships, isLoading: membershipsLoading } = useQuery({
+    queryKey: ["me", "memberships"],
+    queryFn: () => iamApi.listMyMemberships(),
+    enabled: isAuthenticated && isMultiTenantMode,
+    staleTime: 5 * 60_000,
+  });
+
+  // Org names to display — excludes personal workspace in multi-tenant mode.
+  const orgNames: string[] = (() => {
+    if (isMultiTenantMode && memberships) {
+      return memberships.filter((m) => !m.isPersonal).map((m) => m.tenantName);
+    }
+    // Single-tenant: card is hidden entirely, but fall back to profile list
+    // as a safety net in case the card ever renders (e.g. during SSR/testing).
+    return profile?.organizations ?? [];
+  })();
 
   const localeOptions =
     locales?.map((l) => ({
@@ -117,6 +137,10 @@ function GeneralSettingsPage() {
       </Container>
     );
   }
+
+  // Loading state for the organizations list — profile in single-tenant,
+  // memberships in multi-tenant.
+  const orgsLoading = isMultiTenantMode ? membershipsLoading : profileLoading;
 
   return (
     <Container size="md" data-testid={TestSelectors.GENERAL_SETTINGS_PAGE}>
@@ -229,79 +253,85 @@ function GeneralSettingsPage() {
           </form>
         </Paper>
 
-        {/* Organizations Card */}
-        <Paper
-          withBorder
-          radius="md"
-          style={{ overflow: "hidden" }}
-          data-testid={TestSelectors.GENERAL_SETTINGS_ORGANIZATIONS_SECTION}
-        >
-          <Group px="md" py="sm" style={{ borderBottom: "1px solid var(--mantine-color-gray-2)" }}>
-            <IconBuilding size={15} color="var(--mantine-color-gray-6)" />
-            <Text fw={600} size="sm">
-              <Trans>Organizations</Trans>
-            </Text>
-            {!profileLoading && (
-              <Badge variant="light" color="gray" size="sm" radius="sm" ml="auto">
-                {profile?.organizations?.length ?? 0}
-              </Badge>
-            )}
-          </Group>
+        {/* Organizations Card — hidden in single-tenant mode */}
+        {isMultiTenantMode && (
+          <Paper
+            withBorder
+            radius="md"
+            style={{ overflow: "hidden" }}
+            data-testid={TestSelectors.GENERAL_SETTINGS_ORGANIZATIONS_SECTION}
+          >
+            <Group
+              px="md"
+              py="sm"
+              style={{ borderBottom: "1px solid var(--mantine-color-gray-2)" }}
+            >
+              <IconBuilding size={15} color="var(--mantine-color-gray-6)" />
+              <Text fw={600} size="sm">
+                <Trans>Organizations</Trans>
+              </Text>
+              {!orgsLoading && (
+                <Badge variant="light" color="gray" size="sm" radius="sm" ml="auto">
+                  {orgNames.length}
+                </Badge>
+              )}
+            </Group>
 
-          {profileLoading ? (
-            <Stack gap={0}>
-              {Array.from({ length: 2 }).map((_, i) => (
-                <Box
-                  key={i}
-                  px="md"
-                  py="sm"
-                  style={{ borderBottom: "1px solid var(--mantine-color-gray-1)" }}
-                >
-                  <Group gap="sm">
-                    <Skeleton circle height={32} width={32} />
-                    <Skeleton height={12} width="40%" radius="sm" />
-                  </Group>
-                </Box>
-              ))}
-            </Stack>
-          ) : !profile?.organizations || profile.organizations.length === 0 ? (
-            <Text size="sm" c="dimmed" px="md" py="lg" ta="center">
-              <Trans>You are not a member of any organization.</Trans>
-            </Text>
-          ) : (
-            <Stack gap={0}>
-              {profile.organizations.map((orgName) => (
-                <Box
-                  key={orgName}
-                  px="md"
-                  py="sm"
-                  style={{ borderBottom: "1px solid var(--mantine-color-gray-1)" }}
-                  data-testid={TestSelectors.GENERAL_SETTINGS_ORGANIZATION_ITEM(orgName)}
-                >
-                  <Group gap="sm">
-                    <Box
-                      style={{
-                        width: 32,
-                        height: 32,
-                        borderRadius: "50%",
-                        background: "var(--mantine-color-blue-1)",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        flexShrink: 0,
-                      }}
-                    >
-                      <IconBuilding size={16} color="var(--mantine-color-blue-6)" />
-                    </Box>
-                    <Text size="sm" fw={500}>
-                      {orgName}
-                    </Text>
-                  </Group>
-                </Box>
-              ))}
-            </Stack>
-          )}
-        </Paper>
+            {orgsLoading ? (
+              <Stack gap={0}>
+                {Array.from({ length: 2 }).map((_, i) => (
+                  <Box
+                    key={i}
+                    px="md"
+                    py="sm"
+                    style={{ borderBottom: "1px solid var(--mantine-color-gray-1)" }}
+                  >
+                    <Group gap="sm">
+                      <Skeleton circle height={32} width={32} />
+                      <Skeleton height={12} width="40%" radius="sm" />
+                    </Group>
+                  </Box>
+                ))}
+              </Stack>
+            ) : orgNames.length === 0 ? (
+              <Text size="sm" c="dimmed" px="md" py="lg" ta="center">
+                <Trans>You are not a member of any organization.</Trans>
+              </Text>
+            ) : (
+              <Stack gap={0}>
+                {orgNames.map((orgName) => (
+                  <Box
+                    key={orgName}
+                    px="md"
+                    py="sm"
+                    style={{ borderBottom: "1px solid var(--mantine-color-gray-1)" }}
+                    data-testid={TestSelectors.GENERAL_SETTINGS_ORGANIZATION_ITEM(orgName)}
+                  >
+                    <Group gap="sm">
+                      <Box
+                        style={{
+                          width: 32,
+                          height: 32,
+                          borderRadius: "50%",
+                          background: "var(--mantine-color-blue-1)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <IconBuilding size={16} color="var(--mantine-color-blue-6)" />
+                      </Box>
+                      <Text size="sm" fw={500}>
+                        {orgName}
+                      </Text>
+                    </Group>
+                  </Box>
+                ))}
+              </Stack>
+            )}
+          </Paper>
+        )}
       </Stack>
     </Container>
   );
