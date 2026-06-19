@@ -14,13 +14,5 @@ export function useEntitlements() {
     queryKey: ["billing", "entitlements", "me"],
     queryFn: () => billingApi.getEntitlements(),
     staleTime: 1000 * 60 * 5, // 5 minutes - entitlements change rarely
-    retry: (failureCount, error: any) => {
-      // Don't retry on 404 - no active subscription is a valid state
-      if (error?.response?.status === 404) {
-        return false;
-      }
-      // Standard retry for other errors
-      return failureCount < 3;
-    },
   });
 }
