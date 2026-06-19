@@ -170,7 +170,7 @@ A working integration example lives at `src/pages/billing-example.tsx`.
 ## Tech stack
 
 - React 19, TypeScript 6, Vite 8 (SWC)
-- Mantine UI 8, Tabler Icons, mantine-datatable
+- Mantine UI 9, Tabler Icons, mantine-datatable
 - TanStack Router (file-based routes) + TanStack Query
 - Zustand (session + theme), React Hook Form + Zod
 - Lingui 6 (PO catalogs, lazy locale load)
