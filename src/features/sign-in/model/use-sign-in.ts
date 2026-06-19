@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "@mantine/form";
+import { zodResolver } from "mantine-form-zod-resolver";
 import { useNavigate } from "@tanstack/react-router";
 import { isAxiosError } from "axios";
 import { z } from "zod";
-import type { UseFormReturn } from "react-hook-form";
+import type { UseFormReturnType } from "@mantine/form";
 import { t } from "@lingui/core/macro";
 import { authApi } from "@/shared/api/auth";
 import type { TenantMembershipSummary } from "@/shared/api/auth";
@@ -32,7 +32,7 @@ export type SignInFormValues = z.infer<SignInSchema>;
 export type SignInStep = "credentials" | "tenant-select";
 
 export interface UseSignInReturn {
-  form: UseFormReturn<SignInFormValues>;
+  form: UseFormReturnType<SignInFormValues>;
   step: SignInStep;
   tenants: TenantMembershipSummary[];
   isLoading: boolean;
@@ -83,8 +83,8 @@ export function useSignIn(redirectTo?: string): UseSignInReturn {
   const navigate = useNavigate();
 
   const form = useForm<SignInFormValues>({
-    resolver: zodResolver(buildSignInSchema()),
-    defaultValues: { email: "", password: "" },
+    initialValues: { email: "", password: "" },
+    validate: zodResolver(buildSignInSchema()),
   });
 
   const completeSignIn = async (
@@ -130,7 +130,7 @@ export function useSignIn(redirectTo?: string): UseSignInReturn {
       const status = isAxiosError(err) ? (err.response?.status ?? 0) : 0;
       setErrorMessage(mapHttpErrorToMessage(status));
       if (status === 401) {
-        form.resetField("password");
+        form.setFieldValue("password", "");
       }
     } finally {
       setIsLoading(false);

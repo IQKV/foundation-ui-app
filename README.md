@@ -24,10 +24,6 @@ This is the tenant surface of the platform — separate from `foundation-ui-plat
 | **Session security**   | Access token in memory; refresh token + tenant key in `sessionStorage`; silent refresh on 401; 30-minute inactivity sign-out                                                                                                               |
 | **UX**                 | Light/dark theme, Lingui i18n (English catalog), locale cookie, navigation progress, error boundaries                                                                                                                                      |
 
-### Not implemented yet
-
-- Additional locales (infrastructure is ready; only `en` is compiled today)
-
 ## Routes
 
 | Path                              | Access        | Description                             |
