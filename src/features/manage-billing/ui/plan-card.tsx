@@ -2,6 +2,7 @@ import { Paper, Text, Title, Button, List, ThemeIcon, Stack, Group, Badge } from
 import { IconCheck } from "@tabler/icons-react";
 import { Trans } from "@lingui/react/macro";
 import type { Plan, PlanFeatures as PlanFeaturesType } from "@/shared/api";
+import { BILLING_FEATURES } from "@/app/config";
 import { TestSelectors } from "@/shared/lib/test-selectors";
 
 interface PlanCardProps {
@@ -15,9 +16,13 @@ function getDisplayFeatures(features: PlanFeaturesType): string[] {
   const display: string[] = [];
   display.push(`Max users: ${features.maxUsers === 0 ? "Unlimited" : features.maxUsers}`);
   display.push(`Max projects: ${features.maxProjects === 0 ? "Unlimited" : features.maxProjects}`);
-  const prioritySupport = features.features["priority_support"];
+  const prioritySupport = features.features[BILLING_FEATURES.PRIORITY_SUPPORT];
   if (prioritySupport && prioritySupport.value.toLowerCase() === "true") {
     display.push("Priority support");
+  }
+  const advancedAnalytics = features.features[BILLING_FEATURES.ADVANCED_ANALYTICS];
+  if (advancedAnalytics && advancedAnalytics.value.toLowerCase() === "true") {
+    display.push("Advanced analytics");
   }
   return display;
 }

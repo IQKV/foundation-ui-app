@@ -149,6 +149,7 @@ export const TestSelectors = {
   // Plan Features
   PLAN_FEATURES: "plan-features",
   PLAN_FEATURE_PRIORITY_SUPPORT: "plan-feature-priority-support",
+  PLAN_FEATURE_ADVANCED_ANALYTICS: "plan-feature-advanced-analytics",
   PLAN_FEATURE_MAX_USERS: "plan-feature-max-users",
   PLAN_FEATURE_MAX_PROJECTS: "plan-feature-max-projects",
   REFUND_LIST: "refund-list",

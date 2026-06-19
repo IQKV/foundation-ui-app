@@ -1,5 +1,12 @@
 import { Stack, Group, Text, ThemeIcon, Badge } from "@mantine/core";
-import { IconCheck, IconX, IconUsers, IconFolder, IconHeadset } from "@tabler/icons-react";
+import {
+  IconCheck,
+  IconX,
+  IconUsers,
+  IconFolder,
+  IconHeadset,
+  IconChartBar,
+} from "@tabler/icons-react";
 import { Trans } from "@lingui/react/macro";
 import type { PlanFeatures as PlanFeaturesType } from "@/shared/api";
 import { BILLING_FEATURES } from "@/app/config";
@@ -66,6 +73,10 @@ export function PlanFeatures({ features, showTitle = true }: PlanFeaturesProps) 
   const hasPrioritySupport =
     prioritySupportEntry !== undefined && prioritySupportEntry.value.toLowerCase() === "true";
 
+  const advancedAnalyticsEntry = features.features[BILLING_FEATURES.ADVANCED_ANALYTICS];
+  const hasAdvancedAnalytics =
+    advancedAnalyticsEntry !== undefined && advancedAnalyticsEntry.value.toLowerCase() === "true";
+
   return (
     <Stack gap="md" data-testid={TestSelectors.PLAN_FEATURES}>
       {showTitle && (
@@ -80,6 +91,13 @@ export function PlanFeatures({ features, showTitle = true }: PlanFeaturesProps) 
           label={<Trans>Priority Support</Trans>}
           value={hasPrioritySupport}
           testId={TestSelectors.PLAN_FEATURE_PRIORITY_SUPPORT}
+        />
+
+        <FeatureItem
+          icon={<IconChartBar size={14} />}
+          label={<Trans>Advanced Analytics</Trans>}
+          value={hasAdvancedAnalytics}
+          testId={TestSelectors.PLAN_FEATURE_ADVANCED_ANALYTICS}
         />
 
         <FeatureItem
