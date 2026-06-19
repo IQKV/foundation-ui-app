@@ -14,6 +14,7 @@ import {
   useSession,
 } from "@/processes/session";
 import { useInactivityTimer } from "@/processes/inactivity-timer";
+import { EntitlementsProvider } from "@/features/manage-billing";
 
 // ─── Route ────────────────────────────────────────────────────────────────────
 
@@ -114,8 +115,10 @@ function AppLayoutRoute() {
   }
 
   return (
-    <AppLayout>
-      <Outlet />
-    </AppLayout>
+    <EntitlementsProvider>
+      <AppLayout>
+        <Outlet />
+      </AppLayout>
+    </EntitlementsProvider>
   );
 }
