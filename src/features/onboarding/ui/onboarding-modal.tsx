@@ -3,9 +3,6 @@ import { IconCheck } from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { useMutation } from "@tanstack/react-query";
 import { iamApi } from "@/shared/api";
-import { useSession } from "@/processes/session/use-session";
-import { useSessionStore, setAccessToken } from "@/processes/session/session.store";
-import { decodeJwt } from "@/shared/lib/jwt";
 
 interface OnboardingModalProps {
   opened: boolean;
@@ -14,18 +11,11 @@ interface OnboardingModalProps {
 
 export function OnboardingModal({ opened, onClose }: OnboardingModalProps) {
   const { t } = useLingui();
-  const { payload } = useSession();
-  const accessToken = useSessionStore((s) => s.accessToken);
 
   const completeOnboardingMutation = useMutation({
     mutationFn: () => iamApi.completeOnboarding(),
     onSuccess: () => {
-      if (accessToken) {
-        const decoded = decodeJwt(accessToken);
-        if (decoded) {
-          onClose();
-        }
-      }
+      onClose();
     },
   });
 
