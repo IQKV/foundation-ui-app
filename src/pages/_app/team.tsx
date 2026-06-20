@@ -26,6 +26,7 @@ import {
   IconMail,
   IconPlus,
   IconEye,
+  IconLock,
 } from "@tabler/icons-react";
 import dayjs from "dayjs";
 import { Trans, useLingui } from "@lingui/react/macro";
@@ -37,6 +38,7 @@ import { InvitationStatusBadge, PageHeader, TenantOwnerOnly } from "@/shared/ui"
 import { useSession } from "@/processes/session";
 import { SendInvitationModal, InvitationDetailsModal } from "@/features/invite-member";
 import { OrganizationSettings, MemberActions } from "@/features/manage-organization";
+import { useQuota } from "@/features/manage-billing";
 
 // ─── Route ────────────────────────────────────────────────────────────────────
 
@@ -393,6 +395,17 @@ function TeamPage() {
 
   const [inviteOpened, { open: openInvite, close: closeInvite }] = useDisclosure(false);
 
+  const maxUsers = useQuota("maxUsers");
+  const { data: memberCount } = useQuery({
+    queryKey: ["memberCount", tenantKey],
+    queryFn: () =>
+      tenantKey ? iamApi.countMembers(tenantKey) : Promise.resolve({ tenantKey: "", count: 0 }),
+    enabled: !!tenantKey,
+  });
+
+  const isAtLimit =
+    maxUsers > 0 && memberCount?.count !== undefined && memberCount.count >= maxUsers;
+
   return (
     <Container size="xl" py={0}>
       <Helmet>
@@ -404,9 +417,24 @@ function TeamPage() {
         breadcrumbs={[{ label: <Trans>Home</Trans>, to: "/" }, { label: <Trans>Team</Trans> }]}
         toolbar={
           <TenantOwnerOnly>
-            <Button leftSection={<IconPlus size={16} />} size="sm" onClick={openInvite}>
-              <Trans>Invite member</Trans>
-            </Button>
+            <Tooltip
+              label={
+                isAtLimit
+                  ? t`You've reached the maximum number of members for your plan. Please upgrade to invite more members.`
+                  : undefined
+              }
+              withArrow
+              disabled={!isAtLimit}
+            >
+              <Button
+                leftSection={isAtLimit ? <IconLock size={16} /> : <IconPlus size={16} />}
+                size="sm"
+                onClick={openInvite}
+                disabled={isAtLimit}
+              >
+                <Trans>Invite member</Trans>
+              </Button>
+            </Tooltip>
           </TenantOwnerOnly>
         }
       />

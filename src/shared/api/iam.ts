@@ -311,6 +311,12 @@ export const iamApi = {
   removeMember: (tenantKey: string, userId: string) =>
     httpClient.delete(`/v1/iam/tenants/${tenantKey}/members/${userId}`),
 
+  /** Get member count for the current tenant. */
+  countMembers: (tenantKey: string) =>
+    httpClient
+      .get<{ tenantKey: string; count: number }>(`/v1/iam/tenants/${tenantKey}/members/count`)
+      .then((r) => r.data),
+
   /** Ban a member from the tenant (TENANT_OWNER only). */
   banMember: (tenantKey: string, userId: string, data: BanUserRequest = {}) =>
     httpClient
