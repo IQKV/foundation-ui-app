@@ -310,6 +310,10 @@ msgstr "Наименование на компанията"
 msgid "Complete"
 msgstr "Завършено"
 
+#: src/features/onboarding/ui/onboarding-modal.tsx
+msgid "Complete your <0>profile</0> with your name and avatar"
+msgstr ""
+
 #: src/features/signup/ui/provisioning-wait.tsx
 msgid "Configuring settings"
 msgstr "Конфигуриране на настройките"
@@ -410,6 +414,10 @@ msgstr "Създайте акаунта си за секунди. Не се из
 #: src/pages/invite.$token.tsx
 msgid "Create your account to accept this invitation."
 msgstr "Създайте акаунт, за да приемете тази покана."
+
+#: src/features/onboarding/ui/onboarding-modal.tsx
+msgid "Create your first <0>organization</0> to collaborate with your team"
+msgstr ""
 
 #: src/pages/create-organization.tsx
 msgid "Create your organization"
@@ -589,6 +597,10 @@ msgstr "Изтича"
 msgid "Expires at (optional)"
 msgstr "Изтича на (по избор)"
 
+#: src/features/onboarding/ui/onboarding-modal.tsx
+msgid "Explore your <0>settings</0> to customize your experience"
+msgstr ""
+
 #: src/features/manage-billing/ui/billing-info.tsx
 msgid "Failed to load billing settings."
 msgstr "Зареждането на настройките за фактуриране не успя."
@@ -672,6 +684,10 @@ msgstr "Общи"
 #: src/pages/_app/settings/general.tsx
 msgid "General Settings"
 msgstr "Общи настройки"
+
+#: src/features/onboarding/ui/onboarding-modal.tsx
+msgid "Get Started"
+msgstr ""
 
 #: src/pages/404.tsx
 #: src/pages/500.tsx
@@ -799,6 +815,10 @@ msgstr "Фамилното ime е задължително"
 #: src/features/signup/model/use-signup.ts
 msgid "Last name is too long"
 msgstr "Фамилното ime е твърде дълго"
+
+#: src/features/onboarding/ui/onboarding-modal.tsx
+msgid "Let's get you up and running with a quick guide."
+msgstr ""
 
 #: src/features/manage-billing/ui/current-subscription.tsx
 msgid "Limited support"
@@ -1706,6 +1726,10 @@ msgstr "Добре дошли отново"
 #: src/pages/_app/index.tsx
 msgid "Welcome back, {firstName}."
 msgstr "Добре дошли отново, {firstName}."
+
+#: src/features/onboarding/ui/onboarding-modal.tsx
+msgid "Welcome to IQKV!"
+msgstr ""
 
 #: src/pages/_app/index.tsx
 msgid "Welcome, {firstName}!"

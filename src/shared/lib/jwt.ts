@@ -13,6 +13,7 @@ export interface JwtPayload {
   tenant_id: string | null;
   authorities: string[];
   email_verified: boolean;
+  onboarding_completed: boolean;
   exp: number;
   iat: number;
 }

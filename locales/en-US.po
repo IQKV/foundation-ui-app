@@ -400,6 +400,10 @@ msgstr "Company Name"
 msgid "Complete"
 msgstr "Complete"
 
+#: src/features/onboarding/ui/onboarding-modal.tsx
+msgid "Complete your <0>profile</0> with your name and avatar"
+msgstr "Complete your <0>profile</0> with your name and avatar"
+
 #: src/features/signup/ui/provisioning-wait.tsx
 msgid "Configuring settings"
 msgstr "Configuring settings"
@@ -528,6 +532,10 @@ msgstr "Create your account in seconds. No credit card required."
 #: src/pages/invite.$token.tsx
 msgid "Create your account to accept this invitation."
 msgstr "Create your account to accept this invitation."
+
+#: src/features/onboarding/ui/onboarding-modal.tsx
+msgid "Create your first <0>organization</0> to collaborate with your team"
+msgstr "Create your first <0>organization</0> to collaborate with your team"
 
 #: src/pages/create-organization.tsx
 msgid "Create your organization"
@@ -757,6 +765,10 @@ msgstr "Expires"
 msgid "Expires at (optional)"
 msgstr "Expires at (optional)"
 
+#: src/features/onboarding/ui/onboarding-modal.tsx
+msgid "Explore your <0>settings</0> to customize your experience"
+msgstr "Explore your <0>settings</0> to customize your experience"
+
 #: src/pages/admin/organizations.tsx
 #: src/pages/admin/subscriptions.tsx
 #: src/pages/admin/users.tsx
@@ -870,6 +882,10 @@ msgstr "General"
 #: src/pages/_app/settings/general.tsx
 msgid "General Settings"
 msgstr "General Settings"
+
+#: src/features/onboarding/ui/onboarding-modal.tsx
+msgid "Get Started"
+msgstr "Get Started"
 
 #: src/pages/404.tsx
 #: src/pages/500.tsx
@@ -1021,6 +1037,10 @@ msgstr "Last name is too long"
 #: src/features/signup/ui/signup-form.tsx
 #~ msgid "Leave blank to use your name"
 #~ msgstr "Leave blank to use your name"
+
+#: src/features/onboarding/ui/onboarding-modal.tsx
+msgid "Let's get you up and running with a quick guide."
+msgstr "Let's get you up and running with a quick guide."
 
 #: src/features/manage-billing/ui/current-subscription.tsx
 msgid "Limited support"
@@ -2172,6 +2192,10 @@ msgstr "Welcome back"
 #: src/pages/_app/index.tsx
 msgid "Welcome back, {firstName}."
 msgstr "Welcome back, {firstName}."
+
+#: src/features/onboarding/ui/onboarding-modal.tsx
+msgid "Welcome to IQKV!"
+msgstr "Welcome to IQKV!"
 
 #: src/pages/_app/index.tsx
 msgid "Welcome, {firstName}!"

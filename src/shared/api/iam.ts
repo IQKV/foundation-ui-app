@@ -260,6 +260,10 @@ export const iamApi = {
   deleteAvatar: (): Promise<void> =>
     httpClient.delete("/v1/iam/users/me/avatar").then(() => undefined),
 
+  /** Mark onboarding as completed. */
+  completeOnboarding: (): Promise<void> =>
+    httpClient.post("/v1/iam/users/me/onboarding/complete").then(() => undefined),
+
   // ── Tenant (TENANT_OWNER / ADMIN / MEMBER) ────────────────────────────────
 
   /** Create a new tenant. Requires authentication. */
