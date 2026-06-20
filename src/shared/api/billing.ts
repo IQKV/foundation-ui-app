@@ -15,6 +15,7 @@ export interface Plan {
   featureSet: string;
   scope: "TENANT" | "USER";
   active: boolean;
+  trialPeriodDays?: number;
 }
 
 export interface SubscriptionResponse {
@@ -26,6 +27,8 @@ export interface SubscriptionResponse {
   quantity: number;
   trialStart: string | null;
   trialEnd: string | null;
+  isInTrial: boolean;
+  trialDaysLeft: number | null;
   currentPeriodStart: string;
   currentPeriodEnd: string;
   cancelAtPeriodEnd: boolean;

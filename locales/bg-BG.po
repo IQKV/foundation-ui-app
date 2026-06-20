@@ -26,6 +26,28 @@ msgstr "{0}"
 msgid "{0} – {1}"
 msgstr ""
 
+#. placeholder {0}: plan.trialPeriodDays
+#: src/features/manage-billing/ui/plan-card.tsx
+msgid "{0} Days Free Trial"
+msgstr ""
+
+#. placeholder {0}: subscription.trialDaysLeft
+#: src/features/manage-billing/ui/current-subscription.tsx
+msgid "{0} Days Left"
+msgstr ""
+
+#: src/features/onboarding/ui/onboarding-modal.tsx
+msgid "• Focus on your product value — let the platform handle complexity."
+msgstr ""
+
+#: src/features/onboarding/ui/onboarding-modal.tsx
+msgid "• Invite your team, create your first steps take just a click away!"
+msgstr ""
+
+#: src/features/onboarding/ui/onboarding-modal.tsx
+msgid "• No technical background needed — our intuitive UI is designed for everyone."
+msgstr ""
+
 #: src/pages/_app/index.tsx
 msgid "<0>Configure notifications</0> to stay informed."
 msgstr "<0>Конфигурирайте известията</0>, за да сте информирани."
@@ -126,6 +148,10 @@ msgstr ""
 #: src/pages/billing-example.tsx
 #~ msgid "Advanced Projects (Upgrade Required)"
 #~ msgstr ""
+
+#: src/features/onboarding/ui/onboarding-modal.tsx
+msgid "All the boring stuff is already done — focus on your idea!"
+msgstr ""
 
 #: src/features/signup/ui/signup-form.tsx
 #: src/pages/invite.$token.tsx
@@ -311,8 +337,8 @@ msgid "Complete"
 msgstr "Завършено"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
-msgid "Complete your <0>profile</0> with your name and avatar"
-msgstr ""
+#~ msgid "Complete your <0>profile</0> with your name and avatar"
+#~ msgstr ""
 
 #: src/features/signup/ui/provisioning-wait.tsx
 msgid "Configuring settings"
@@ -416,12 +442,16 @@ msgid "Create your account to accept this invitation."
 msgstr "Създайте акаунт, за да приемете тази покана."
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
-msgid "Create your first <0>organization</0> to collaborate with your team"
-msgstr ""
+#~ msgid "Create your first <0>organization</0> to collaborate with your team"
+#~ msgstr ""
 
 #: src/pages/create-organization.tsx
 msgid "Create your organization"
 msgstr "Създайте организацията си"
+
+#: src/features/onboarding/ui/onboarding-modal.tsx
+msgid "Create, manage & invite teams to your workspace"
+msgstr ""
 
 #: src/features/signup/ui/provisioning-wait.tsx
 msgid "Creating your account"
@@ -598,8 +628,8 @@ msgid "Expires at (optional)"
 msgstr "Изтича на (по избор)"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
-msgid "Explore your <0>settings</0> to customize your experience"
-msgstr ""
+#~ msgid "Explore your <0>settings</0> to customize your experience"
+#~ msgstr ""
 
 #: src/features/manage-billing/ui/billing-info.tsx
 msgid "Failed to load billing settings."
@@ -817,8 +847,8 @@ msgid "Last name is too long"
 msgstr "Фамилното ime е твърде дълго"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
-msgid "Let's get you up and running with a quick guide."
-msgstr ""
+#~ msgid "Let's get you up and running with a quick guide."
+#~ msgstr ""
 
 #: src/features/manage-billing/ui/current-subscription.tsx
 msgid "Limited support"
@@ -865,6 +895,10 @@ msgstr ""
 #: src/features/signup/ui/password-strength.tsx
 msgid "Lowercase letter"
 msgstr "Малка буква"
+
+#: src/features/onboarding/ui/onboarding-modal.tsx
+msgid "Manage user roles, permissions & access"
+msgstr ""
 
 #: src/pages/_app/billing.tsx
 msgid "Manage your billing information, view invoice history, and update your payment methods directly via our secure Stripe Customer Portal."
@@ -1153,6 +1187,10 @@ msgstr "План"
 msgid "Plan Features"
 msgstr ""
 
+#: src/features/onboarding/ui/onboarding-modal.tsx
+msgid "Platform Highlights"
+msgstr ""
+
 #: src/features/reset-password/model/use-reset-password.ts
 msgid "Please confirm your password"
 msgstr "Моля, потвърдете паролата си"
@@ -1363,6 +1401,10 @@ msgstr "Изберете роля"
 msgid "Select the workspace you want to sign in to."
 msgstr "Изберете работното пространство, в което искате да влезете."
 
+#: src/features/onboarding/ui/onboarding-modal.tsx
+msgid "Send email verifications, password resets & invitations"
+msgstr ""
+
 #: src/features/invite-member/ui/send-invitation-modal.tsx
 msgid "Send invitation"
 msgstr "Изпрати покана"
@@ -1389,6 +1431,10 @@ msgstr "Задайте нова парола"
 
 #: src/features/manage-billing/ui/billing-info.tsx
 msgid "Set Up Billing Information"
+msgstr ""
+
+#: src/features/onboarding/ui/onboarding-modal.tsx
+msgid "Set up subscriptions & billing instantly"
 msgstr ""
 
 #: src/pages/signup.tsx
@@ -1593,6 +1639,10 @@ msgstr "Този шаблон използва официалните компо
 msgid "This verification link has expired or has already been used. Request a new one from your account settings."
 msgstr "Тази връзка за потвърждение е изтекла или вече е използвана. Поискайте нова от настройките на акаунта ви."
 
+#: src/features/onboarding/ui/onboarding-modal.tsx
+msgid "Tips"
+msgstr ""
+
 #: src/pages/_app/billing.tsx
 msgid "To access the billing portal, please complete your billing settings setup."
 msgstr ""
@@ -1612,6 +1662,10 @@ msgstr "Твърде много заявки. Моля, изчакайте ма�
 msgid "Too many sign-in attempts. Please try again later."
 msgstr "Твърде много опити за вход. Моля, опитайте отново по-късно."
 
+#: src/features/onboarding/ui/onboarding-modal.tsx
+msgid "Track all activity with built-in audit trails"
+msgstr ""
+
 #: src/features/member-role/ui/transfer-ownership-modal.tsx
 msgid "Transfer ownership"
 msgstr "Прехвърли собствеността"
@@ -1624,6 +1678,14 @@ msgstr "Прехвърли собствеността"
 #: src/features/member-role/ui/transfer-ownership-modal.tsx
 msgid "Transferring ownership will make {displayName} the new Tenant Owner. You will become a Member of this tenant and lose all owner permissions. This action cannot be undone by you — only the new owner can transfer ownership back."
 msgstr "Прехвърлянето на собствеността ще направи {displayName} новия собственик на наемателя. Вие ще станете член на наемателя и ще загубите всички права на собственик. Това действие не може да бъде отменено от вас — само новият собственик може да прехвърли собствеността обратно."
+
+#: src/features/manage-billing/ui/current-subscription.tsx
+msgid "Trial Active"
+msgstr ""
+
+#: src/features/manage-billing/ui/current-subscription.tsx
+msgid "Trial Status"
+msgstr ""
 
 #: src/shared/ui/auth-layout/auth-layout.tsx
 msgid "Trusted by teams worldwide"
@@ -1779,6 +1841,10 @@ msgstr ""
 msgid "You've been"
 msgstr "Вие бяхте"
 
+#: src/pages/_app/team.tsx
+msgid "You've reached the maximum number of members for your plan. Please upgrade to invite more members."
+msgstr ""
+
 #: src/features/signup/ui/signup-form.tsx
 msgid "you@company.com"
 msgstr "you@company.com"
@@ -1799,6 +1865,10 @@ msgstr "Акаунтът ви не е активен или е спрян"
 #: src/pages/verify-email.tsx
 msgid "Your email address has been confirmed. You're all set."
 msgstr "Имейл адресът ви е потвърден. Готови сте."
+
+#: src/features/onboarding/ui/onboarding-modal.tsx
+msgid "Your enterprise-ready microservices foundation for scalable SaaS products."
+msgstr ""
 
 #: src/pages/invite.$token.tsx
 msgid "Your existing password"

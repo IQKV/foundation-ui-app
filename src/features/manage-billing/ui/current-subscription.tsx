@@ -102,6 +102,21 @@ export function CurrentSubscription({ tenantKey }: CurrentSubscriptionProps) {
               </Text>
             </Stack>
 
+            {subscription.isInTrial && (
+              <Stack gap={0}>
+                <Text size="sm" c="dimmed">
+                  <Trans>Trial Status</Trans>
+                </Text>
+                <Badge variant="light" color="teal">
+                  {subscription.trialDaysLeft !== null && subscription.trialDaysLeft > 0 ? (
+                    <Trans>{subscription.trialDaysLeft} Days Left</Trans>
+                  ) : (
+                    <Trans>Trial Active</Trans>
+                  )}
+                </Badge>
+              </Stack>
+            )}
+
             <Stack gap={0}>
               <Text size="sm" c="dimmed">
                 <Trans>Next Billing Date</Trans>

@@ -52,6 +52,11 @@ export function PlanCard({ plan, isCurrent, onSelect, loading }: PlanCardProps) 
                   {plan.description}
                 </Text>
               )}
+              {plan.trialPeriodDays && plan.trialPeriodDays > 0 && (
+                <Badge variant="light" color="teal">
+                  <Trans>{plan.trialPeriodDays} Days Free Trial</Trans>
+                </Badge>
+              )}
             </Stack>
             {isCurrent && (
               <Badge

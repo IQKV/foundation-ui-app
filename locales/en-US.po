@@ -30,6 +30,16 @@ msgstr "{0} – {1}"
 #~ msgid "{0} |Key Value Admin"
 #~ msgstr "{0} |Key Value Admin"
 
+#. placeholder {0}: plan.trialPeriodDays
+#: src/features/manage-billing/ui/plan-card.tsx
+msgid "{0} Days Free Trial"
+msgstr "{0} Days Free Trial"
+
+#. placeholder {0}: subscription.trialDaysLeft
+#: src/features/manage-billing/ui/current-subscription.tsx
+msgid "{0} Days Left"
+msgstr "{0} Days Left"
+
 #: src/pages/admin/organizations.$tenantKey.tsx
 #~ msgid "{activeSubscriptions} active subscription(s)"
 #~ msgstr "{activeSubscriptions} active subscription(s)"
@@ -37,6 +47,18 @@ msgstr "{0} – {1}"
 #: src/pages/admin/users.$userId.tsx
 #~ msgid "{displayName} |Key Value Admin"
 #~ msgstr "{displayName} |Key Value Admin"
+
+#: src/features/onboarding/ui/onboarding-modal.tsx
+msgid "• Focus on your product value — let the platform handle complexity."
+msgstr "• Focus on your product value — let the platform handle complexity."
+
+#: src/features/onboarding/ui/onboarding-modal.tsx
+msgid "• Invite your team, create your first steps take just a click away!"
+msgstr "• Invite your team, create your first steps take just a click away!"
+
+#: src/features/onboarding/ui/onboarding-modal.tsx
+msgid "• No technical background needed — our intuitive UI is designed for everyone."
+msgstr "• No technical background needed — our intuitive UI is designed for everyone."
 
 #: src/pages/_app/index.tsx
 msgid "<0>Configure notifications</0> to stay informed."
@@ -164,6 +186,10 @@ msgstr "Advanced Analytics"
 #: src/pages/admin/users.index.tsx
 #~ msgid "All statuses"
 #~ msgstr "All statuses"
+
+#: src/features/onboarding/ui/onboarding-modal.tsx
+msgid "All the boring stuff is already done — focus on your idea!"
+msgstr "All the boring stuff is already done — focus on your idea!"
 
 #: src/features/signup/ui/signup-form.tsx
 #: src/pages/invite.$token.tsx
@@ -401,8 +427,8 @@ msgid "Complete"
 msgstr "Complete"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
-msgid "Complete your <0>profile</0> with your name and avatar"
-msgstr "Complete your <0>profile</0> with your name and avatar"
+#~ msgid "Complete your <0>profile</0> with your name and avatar"
+#~ msgstr "Complete your <0>profile</0> with your name and avatar"
 
 #: src/features/signup/ui/provisioning-wait.tsx
 msgid "Configuring settings"
@@ -534,12 +560,16 @@ msgid "Create your account to accept this invitation."
 msgstr "Create your account to accept this invitation."
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
-msgid "Create your first <0>organization</0> to collaborate with your team"
-msgstr "Create your first <0>organization</0> to collaborate with your team"
+#~ msgid "Create your first <0>organization</0> to collaborate with your team"
+#~ msgstr "Create your first <0>organization</0> to collaborate with your team"
 
 #: src/pages/create-organization.tsx
 msgid "Create your organization"
 msgstr "Create your organization"
+
+#: src/features/onboarding/ui/onboarding-modal.tsx
+msgid "Create, manage & invite teams to your workspace"
+msgstr "Create, manage & invite teams to your workspace"
 
 #: src/pages/admin/organizations.$tenantKey.tsx
 #: src/pages/admin/organizations.index.tsx
@@ -766,8 +796,8 @@ msgid "Expires at (optional)"
 msgstr "Expires at (optional)"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
-msgid "Explore your <0>settings</0> to customize your experience"
-msgstr "Explore your <0>settings</0> to customize your experience"
+#~ msgid "Explore your <0>settings</0> to customize your experience"
+#~ msgstr "Explore your <0>settings</0> to customize your experience"
 
 #: src/pages/admin/organizations.tsx
 #: src/pages/admin/subscriptions.tsx
@@ -1039,8 +1069,8 @@ msgstr "Last name is too long"
 #~ msgstr "Leave blank to use your name"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
-msgid "Let's get you up and running with a quick guide."
-msgstr "Let's get you up and running with a quick guide."
+#~ msgid "Let's get you up and running with a quick guide."
+#~ msgstr "Let's get you up and running with a quick guide."
 
 #: src/features/manage-billing/ui/current-subscription.tsx
 msgid "Limited support"
@@ -1103,6 +1133,10 @@ msgstr "Lowercase letter"
 #: src/pages/dashboard.tsx
 #~ msgid "Manage team"
 #~ msgstr "Manage team"
+
+#: src/features/onboarding/ui/onboarding-modal.tsx
+msgid "Manage user roles, permissions & access"
+msgstr "Manage user roles, permissions & access"
 
 #: src/pages/admin/index.tsx
 #~ msgid "Manage users"
@@ -1479,6 +1513,10 @@ msgstr "Plan Features"
 #~ msgid "Platform administration"
 #~ msgstr "Platform administration"
 
+#: src/features/onboarding/ui/onboarding-modal.tsx
+msgid "Platform Highlights"
+msgstr "Platform Highlights"
+
 #: src/features/reset-password/model/use-reset-password.ts
 msgid "Please confirm your password"
 msgstr "Please confirm your password"
@@ -1713,6 +1751,10 @@ msgstr "Select role"
 msgid "Select the workspace you want to sign in to."
 msgstr "Select the workspace you want to sign in to."
 
+#: src/features/onboarding/ui/onboarding-modal.tsx
+msgid "Send email verifications, password resets & invitations"
+msgstr "Send email verifications, password resets & invitations"
+
 #: src/features/invite-member/ui/send-invitation-modal.tsx
 msgid "Send invitation"
 msgstr "Send invitation"
@@ -1744,6 +1786,10 @@ msgstr "Set new password"
 #: src/features/manage-billing/ui/billing-info.tsx
 msgid "Set Up Billing Information"
 msgstr "Set Up Billing Information"
+
+#: src/features/onboarding/ui/onboarding-modal.tsx
+msgid "Set up subscriptions & billing instantly"
+msgstr "Set up subscriptions & billing instantly"
 
 #: src/pages/signup.tsx
 msgid "Set up your account in under a minute."
@@ -2021,6 +2067,10 @@ msgstr "This template uses Mantine's official loading components for optimal UX.
 msgid "This verification link has expired or has already been used. Request a new one from your account settings."
 msgstr "This verification link has expired or has already been used. Request a new one from your account settings."
 
+#: src/features/onboarding/ui/onboarding-modal.tsx
+msgid "Tips"
+msgstr "Tips"
+
 #: src/pages/_app/billing.tsx
 msgid "To access the billing portal, please complete your billing settings setup."
 msgstr "To access the billing portal, please complete your billing settings setup."
@@ -2044,6 +2094,10 @@ msgstr "Too many sign-in attempts. Please try again later."
 #~ msgid "Total Users"
 #~ msgstr "Total Users"
 
+#: src/features/onboarding/ui/onboarding-modal.tsx
+msgid "Track all activity with built-in audit trails"
+msgstr "Track all activity with built-in audit trails"
+
 #: src/features/member-role/ui/transfer-ownership-modal.tsx
 msgid "Transfer ownership"
 msgstr "Transfer ownership"
@@ -2056,6 +2110,14 @@ msgstr "Transfer Ownership"
 #: src/features/member-role/ui/transfer-ownership-modal.tsx
 msgid "Transferring ownership will make {displayName} the new Tenant Owner. You will become a Member of this tenant and lose all owner permissions. This action cannot be undone by you — only the new owner can transfer ownership back."
 msgstr "Transferring ownership will make {displayName} the new Tenant Owner. You will become a Member of this tenant and lose all owner permissions. This action cannot be undone by you — only the new owner can transfer ownership back."
+
+#: src/features/manage-billing/ui/current-subscription.tsx
+msgid "Trial Active"
+msgstr "Trial Active"
+
+#: src/features/manage-billing/ui/current-subscription.tsx
+msgid "Trial Status"
+msgstr "Trial Status"
 
 #: src/shared/ui/auth-layout/auth-layout.tsx
 msgid "Trusted by teams worldwide"
@@ -2265,6 +2327,10 @@ msgstr "You're currently using your personal workspace. Create an organization t
 msgid "You've been"
 msgstr "You've been"
 
+#: src/pages/_app/team.tsx
+msgid "You've reached the maximum number of members for your plan. Please upgrade to invite more members."
+msgstr "You've reached the maximum number of members for your plan. Please upgrade to invite more members."
+
 #: src/features/signup/ui/signup-form.tsx
 msgid "you@company.com"
 msgstr "you@company.com"
@@ -2293,6 +2359,10 @@ msgstr "Your account is not active or has been suspended"
 #: src/pages/verify-email.tsx
 msgid "Your email address has been confirmed. You're all set."
 msgstr "Your email address has been confirmed. You're all set."
+
+#: src/features/onboarding/ui/onboarding-modal.tsx
+msgid "Your enterprise-ready microservices foundation for scalable SaaS products."
+msgstr "Your enterprise-ready microservices foundation for scalable SaaS products."
 
 #: src/pages/invite.$token.tsx
 msgid "Your existing password"
