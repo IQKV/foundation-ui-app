@@ -110,7 +110,7 @@ export function OnboardingModal({ opened, onClose }: OnboardingModalProps) {
               </List.Item>
               <List.Item>
                 <Text>
-                  <Trans>All the boring stuff is already done—focus on your idea!</Trans>
+                  <Trans>All the boring stuff is already done — focus on your idea!</Trans>
                 </Text>
               </List.Item>
             </List>
@@ -126,7 +126,7 @@ export function OnboardingModal({ opened, onClose }: OnboardingModalProps) {
             </Text>
             <Text size="sm" c="dimmed">
               <Trans>
-                • No technical background needed—our intuitive UI is designed for everyone.
+                • No technical background needed — our intuitive UI is designed for everyone.
               </Trans>
             </Text>
 
