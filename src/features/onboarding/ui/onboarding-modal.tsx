@@ -1,5 +1,15 @@
-import { Modal, Title, Text, Button, List, ThemeIcon, Group, Stack } from "@mantine/core";
-import { IconCheck, IconBuilding, IconUser, IconSettings } from "@tabler/icons-react";
+import {
+  Modal,
+  Title,
+  Text,
+  Button,
+  List,
+  ThemeIcon,
+  Group,
+  Stack,
+  SimpleGrid,
+} from "@mantine/core";
+import { IconCheck } from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { useMutation } from "@tanstack/react-query";
 import { iamApi } from "@/shared/api";
@@ -20,12 +30,9 @@ export function OnboardingModal({ opened, onClose }: OnboardingModalProps) {
   const completeOnboardingMutation = useMutation({
     mutationFn: () => iamApi.completeOnboarding(),
     onSuccess: () => {
-      // Update the access token in the store to reflect the new onboarding status
       if (accessToken) {
         const decoded = decodeJwt(accessToken);
         if (decoded) {
-          // We need to refresh the token or update it, but for now let's just close the modal
-          // In a real app, we'd refresh the token or update the payload
           onClose();
         }
       }
@@ -41,74 +48,103 @@ export function OnboardingModal({ opened, onClose }: OnboardingModalProps) {
       opened={opened}
       onClose={onClose}
       title={
-        <Title order={2}>
-          <Trans>Welcome to IQKV!</Trans>
+        <Title order={2} ta="center">
+          <Trans>Welcome to Key Value Platform!</Trans>
         </Title>
       }
-      size="lg"
+      size="xl"
       centered
       withCloseButton={false}
+      padding="xl"
     >
-      <Stack gap="lg">
-        <Text size="lg">
-          <Trans>Let's get you up and running with a quick guide.</Trans>
-        </Text>
+      <SimpleGrid cols={2} spacing="xl" verticalSpacing="xl">
+        <div>
+          <img
+            src="/teamwork-innovation.png"
+            alt="Teamwork and innovation"
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              borderRadius: "16px",
+            }}
+          />
+        </div>
+        <Stack gap="lg">
+          <Text size="lg">
+            <Trans>
+              Your enterprise-ready microservices foundation for scalable SaaS products.
+            </Trans>
+          </Text>
 
-        <List
-          spacing="md"
-          size="md"
-          center
-          icon={
-            <ThemeIcon color="teal" size={24} radius="xl">
-              <IconCheck size={16} />
-            </ThemeIcon>
-          }
-        >
-          <List.Item>
-            <Text>
-              <Trans>
-                Create your first{" "}
-                <Text component="span" fw={700}>
-                  organization
-                </Text>{" "}
-                to collaborate with your team
-              </Trans>
-            </Text>
-          </List.Item>
-          <List.Item>
-            <Text>
-              <Trans>
-                Complete your{" "}
-                <Text component="span" fw={700}>
-                  profile
-                </Text>{" "}
-                with your name and avatar
-              </Trans>
-            </Text>
-          </List.Item>
-          <List.Item>
-            <Text>
-              <Trans>
-                Explore your{" "}
-                <Text component="span" fw={700}>
-                  settings
-                </Text>{" "}
-                to customize your experience
-              </Trans>
-            </Text>
-          </List.Item>
-        </List>
-
-        <Group justify="flex-end" mt="xl">
-          <Button
-            size="lg"
-            onClick={handleGetStarted}
-            loading={completeOnboardingMutation.isPending}
+          <Title order={4}>
+            <Trans>Platform Highlights</Trans>
+          </Title>
+          <List
+            spacing="sm"
+            size="sm"
+            icon={
+              <ThemeIcon color="teal" size={20} radius="xl">
+                <IconCheck size={14} />
+              </ThemeIcon>
+            }
           >
-            <Trans>Get Started</Trans>
-          </Button>
-        </Group>
-      </Stack>
+            <List.Item>
+              <Text>
+                <Trans>Create, manage & invite teams to your workspace</Trans>
+              </Text>
+            </List.Item>
+            <List.Item>
+              <Text>
+                <Trans>Set up subscriptions & billing instantly</Trans>
+              </Text>
+            </List.Item>
+            <List.Item>
+              <Text>
+                <Trans>Send email verifications, password resets & invitations</Trans>
+              </Text>
+            </List.Item>
+            <List.Item>
+              <Text>
+                <Trans>Track all activity with built-in audit trails</Trans>
+              </Text>
+            </List.Item>
+            <List.Item>
+              <Text>
+                <Trans>Manage user roles, permissions & access</Trans>
+              </Text>
+            </List.Item>
+            <List.Item>
+              <Text>
+                <Trans>All the boring stuff is already done—focus on your idea!</Trans>
+              </Text>
+            </List.Item>
+          </List>
+
+          <Title order={4} mt="md">
+            <Trans>Inspiration & Tips</Trans>
+          </Title>
+          <Text size="sm" c="dimmed">
+            <Trans>• Focus on your product value—let the platform handle complexity.</Trans>
+          </Text>
+          <Text size="sm" c="dimmed">
+            <Trans>• Invite your team, create your first steps take just a click away!</Trans>
+          </Text>
+          <Text size="sm" c="dimmed">
+            <Trans>• No technical or not—the UI is intuitive for everyone.</Trans>
+          </Text>
+
+          <Group justify="flex-end" mt="xl">
+            <Button
+              size="lg"
+              onClick={handleGetStarted}
+              loading={completeOnboardingMutation.isPending}
+            >
+              <Trans>Get Started</Trans>
+            </Button>
+          </Group>
+        </Stack>
+      </SimpleGrid>
     </Modal>
   );
 }
