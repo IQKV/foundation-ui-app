@@ -49,24 +49,27 @@ export function OnboardingModal({ opened, onClose }: OnboardingModalProps) {
       onClose={onClose}
       title={
         <Title order={2} ta="center">
-          <Trans>Welcome to Key Value Platform!</Trans>
+          <Trans>Welcome to Key Value!</Trans>
         </Title>
       }
-      size="xl"
+      size="90%"
       centered
       withCloseButton={false}
       padding="xl"
     >
-      <SimpleGrid cols={2} spacing="xl" verticalSpacing="xl">
+      <SimpleGrid cols={{ base: 1, md: 2 }} spacing="xl" verticalSpacing="xl">
         <div>
           <img
             src="/teamwork-innovation.png"
             alt="Teamwork and innovation"
             style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
+              width: "80%",
+              maxWidth: "400px",
+              height: "auto",
+              objectFit: "contain",
               borderRadius: "16px",
+              margin: "0 auto",
+              display: "block",
             }}
           />
         </div>
@@ -122,16 +125,18 @@ export function OnboardingModal({ opened, onClose }: OnboardingModalProps) {
           </List>
 
           <Title order={4} mt="md">
-            <Trans>Inspiration & Tips</Trans>
+            <Trans>Tips</Trans>
           </Title>
           <Text size="sm" c="dimmed">
-            <Trans>• Focus on your product value—let the platform handle complexity.</Trans>
+            <Trans>• Focus on your product value — let the platform handle complexity.</Trans>
           </Text>
           <Text size="sm" c="dimmed">
             <Trans>• Invite your team, create your first steps take just a click away!</Trans>
           </Text>
           <Text size="sm" c="dimmed">
-            <Trans>• No technical or not—the UI is intuitive for everyone.</Trans>
+            <Trans>
+              • No technical background needed — our intuitive UI is designed for everyone.
+            </Trans>
           </Text>
 
           <Group justify="flex-end" mt="xl">
