@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { AppHeader } from "./app-header";
 import { AppNav } from "./app-nav";
 import { AppNavLogo } from "./app-nav-logo";
-import { OnboardingModal } from "@/features/onboarding/ui/onboarding-modal";
+import { OnboardingModal } from "@/features/onboarding";
 import { useSession } from "@/processes/session/use-session";
 import classes from "./app-layout.module.css";
 
@@ -16,7 +16,7 @@ interface AppLayoutProps {
  * Two-column full-viewport layout:
  *
  *  ┌──────────┬──────────────────────────────────┐
- *  │          │  toolbar (AppHeader)              │
+ *  │          │  toolbar (AppHeader)             │
  *  │ sidebar  ├──────────────────────────────────┤
  *  │ (dark,   │                                  │
  *  │  full    │  page content                    │
