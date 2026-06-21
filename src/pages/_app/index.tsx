@@ -39,7 +39,7 @@ import { PageHeader } from "@/shared/ui";
 import { iamApi } from "@/shared/api";
 import type { TenantUserStatsParams } from "@/shared/api/iam";
 import { useSession } from "@/processes/session";
-import { FeatureGate } from "@/features/manage-billing";
+import { FeatureGate, useEntitlementsContext } from "@/features/manage-billing";
 import { BILLING_FEATURES } from "@/app/config";
 
 export const Route = createFileRoute("/_app/")({
@@ -362,6 +362,7 @@ function PersonalWelcome({ firstName, lastName, email }: PersonalWelcomeProps) {
 function DashboardPage() {
   const { t } = useLingui();
   const { tenantKey, payload, isPersonalWorkspace, isTenantOwner } = useSession();
+  const { hasFeature } = useEntitlementsContext();
   const firstName = payload?.firstName ?? "";
   const lastName = payload?.lastName ?? "";
   const email = payload?.email ?? "";
@@ -382,7 +383,7 @@ function DashboardPage() {
     retry: false,
   });
 
-  // Fetch aggregate stats snapshot (counts only, no series) — TENANT_OWNER only.
+  // Fetch aggregate stats snapshot (counts only, no series) — TENANT_OWNER only, requires advanced_analytics.
   // Uses the same query key root as SignupChartCard so TanStack Query deduplicates
   // requests when both run with the same granularity.
   const { data: statsSnapshot, isLoading: statsLoading } = useQuery({
@@ -394,7 +395,11 @@ function DashboardPage() {
         from: new Date().toISOString().slice(0, 10),
         granularity: "day",
       }),
-    enabled: !!tenantKey && isTenantOwner && !isPersonalWorkspace,
+    enabled:
+      !!tenantKey &&
+      isTenantOwner &&
+      !isPersonalWorkspace &&
+      hasFeature(BILLING_FEATURES.ADVANCED_ANALYTICS),
     staleTime: 5 * 60 * 1000,
     retry: false,
   });
@@ -445,38 +450,40 @@ function DashboardPage() {
               label={<Trans>Team members</Trans>}
             />
 
-            {/* Additional stat cards visible to TENANT_OWNER */}
-            {isTenantOwner && (
-              <>
-                <StatCard
-                  icon={<IconUserCheck size={20} />}
-                  color="green"
-                  value={
-                    statsLoading ? (
-                      <Skeleton height={28} width={48} radius="sm" />
-                    ) : (
-                      (statsSnapshot?.activeMembers.toLocaleString() ?? "—")
-                    )
-                  }
-                  label={<Trans>Active members</Trans>}
-                />
-                <StatCard
-                  icon={<IconUserX size={20} />}
-                  color="orange"
-                  value={
-                    statsLoading ? (
-                      <Skeleton height={28} width={48} radius="sm" />
-                    ) : statsSnapshot != null ? (
-                      (
-                        statsSnapshot.lockedMembers + statsSnapshot.suspendedMembers
-                      ).toLocaleString()
-                    ) : (
-                      "—"
-                    )
-                  }
-                  label={<Trans>Locked / Suspended</Trans>}
-                />
-              </>
+            {/* Additional stat cards visible to TENANT_OWNER, requires advanced_analytics feature */}
+            {isTenantOwner && tenantKey && (
+              <FeatureGate feature={BILLING_FEATURES.ADVANCED_ANALYTICS}>
+                <>
+                  <StatCard
+                    icon={<IconUserCheck size={20} />}
+                    color="green"
+                    value={
+                      statsLoading ? (
+                        <Skeleton height={28} width={48} radius="sm" />
+                      ) : (
+                        (statsSnapshot?.activeMembers.toLocaleString() ?? "—")
+                      )
+                    }
+                    label={<Trans>Active members</Trans>}
+                  />
+                  <StatCard
+                    icon={<IconUserX size={20} />}
+                    color="orange"
+                    value={
+                      statsLoading ? (
+                        <Skeleton height={28} width={48} radius="sm" />
+                      ) : statsSnapshot != null ? (
+                        (
+                          statsSnapshot.lockedMembers + statsSnapshot.suspendedMembers
+                        ).toLocaleString()
+                      ) : (
+                        "—"
+                      )
+                    }
+                    label={<Trans>Locked / Suspended</Trans>}
+                  />
+                </>
+              </FeatureGate>
             )}
           </SimpleGrid>
 
