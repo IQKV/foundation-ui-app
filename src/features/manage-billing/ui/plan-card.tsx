@@ -52,11 +52,14 @@ export function PlanCard({ plan, isCurrent, onSelect, loading }: PlanCardProps) 
                   {plan.description}
                 </Text>
               )}
-              {plan.trialPeriodDays && plan.trialPeriodDays > 0 && (
-                <Badge variant="light" color="teal">
-                  <Trans>{plan.trialPeriodDays} Days Free Trial</Trans>
-                </Badge>
-              )}
+              {(() => {
+                const trialDays = Number(plan.trialPeriodDays);
+                return !isNaN(trialDays) && trialDays > 0 ? (
+                  <Badge variant="light" color="teal">
+                    <Trans>{trialDays} Days Free Trial</Trans>
+                  </Badge>
+                ) : null;
+              })()}
             </Stack>
             {isCurrent && (
               <Badge
