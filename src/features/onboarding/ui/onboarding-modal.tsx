@@ -2,7 +2,8 @@ import { Modal, Title, Text, Button, List, ThemeIcon, Group, Stack, Grid } from 
 import { IconCheck } from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { useMutation } from "@tanstack/react-query";
-import { iamApi } from "@/shared/api";
+import { iamApi, authApi } from "@/shared/api";
+import { setTokens, getIsPersonalWorkspace, useSession } from "@/processes/session";
 
 interface OnboardingModalProps {
   opened: boolean;
@@ -11,9 +12,16 @@ interface OnboardingModalProps {
 
 export function OnboardingModal({ opened, onClose }: OnboardingModalProps) {
   const { t } = useLingui();
+  const { tenantKey } = useSession();
 
   const completeOnboardingMutation = useMutation({
-    mutationFn: () => iamApi.completeOnboarding(),
+    mutationFn: async () => {
+      await iamApi.completeOnboarding();
+      // Exchange for a fresh token so the JWT reflects onboarding_completed: true,
+      // preventing the AppLayout useEffect from re-opening the modal.
+      const fresh = await authApi.exchangeTenant(tenantKey!);
+      setTokens(fresh.accessToken, fresh.refreshToken, fresh.tenantKey, getIsPersonalWorkspace());
+    },
     onSuccess: () => {
       onClose();
     },
@@ -29,7 +37,7 @@ export function OnboardingModal({ opened, onClose }: OnboardingModalProps) {
       onClose={onClose}
       title={
         <Title order={2} ta="center">
-          <Trans>Welcome to IQKV!</Trans>
+          <Trans>Welcome to Key Value Platform!</Trans>
         </Title>
       }
       size="75%"
