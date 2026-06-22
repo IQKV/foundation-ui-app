@@ -35,6 +35,20 @@ export type {
 export { localesApi } from "./iam";
 export type { IamLocale } from "./iam";
 
+export { cmsApi } from "./cms";
+export type {
+  CmsPage,
+  CmsPageSummary,
+  CmsPageSummaryListResponse,
+  CmsPageStatus,
+  CmsPageTranslation,
+  CmsPageTranslationRequest,
+  CreateCmsPageRequest,
+  UpdateCmsPageRequest,
+  ListCmsPageParams,
+  CmsPageHierarchyItem,
+} from "./cms";
+
 export { authApi } from "./auth";
 export type {
   SignInRequest,

@@ -23,7 +23,9 @@ import { Route as R404RouteImport } from "./pages/404"
 import { Route as AppIndexRouteImport } from "./pages/_app/index"
 import { Route as InviteTokenRouteImport } from "./pages/invite.$token"
 import { Route as AppTeamRouteImport } from "./pages/_app/team"
+import { Route as AppCmsPagesRouteImport } from "./pages/_app/cms-pages"
 import { Route as AppBillingRouteImport } from "./pages/_app/billing"
+import { Route as AppCmsPagesIndexRouteImport } from "./pages/_app/cms-pages.index"
 import { Route as AppSettingsSecurityRouteImport } from "./pages/_app/settings/security"
 import { Route as AppSettingsOrganizationRouteImport } from "./pages/_app/settings/organization"
 import { Route as AppSettingsNotificationsRouteImport } from "./pages/_app/settings/notifications"
@@ -98,10 +100,20 @@ const AppTeamRoute = AppTeamRouteImport.update({
   path: "/team",
   getParentRoute: () => AppRoute,
 } as any)
+const AppCmsPagesRoute = AppCmsPagesRouteImport.update({
+  id: "/cms-pages",
+  path: "/cms-pages",
+  getParentRoute: () => AppRoute,
+} as any)
 const AppBillingRoute = AppBillingRouteImport.update({
   id: "/billing",
   path: "/billing",
   getParentRoute: () => AppRoute,
+} as any)
+const AppCmsPagesIndexRoute = AppCmsPagesIndexRouteImport.update({
+  id: "/",
+  path: "/",
+  getParentRoute: () => AppCmsPagesRoute,
 } as any)
 const AppSettingsSecurityRoute = AppSettingsSecurityRouteImport.update({
   id: "/settings/security",
@@ -138,12 +150,14 @@ export interface FileRoutesByFullPath {
   "/unauthorized": typeof UnauthorizedRoute
   "/verify-email": typeof VerifyEmailRoute
   "/billing": typeof AppBillingRoute
+  "/cms-pages": typeof AppCmsPagesRouteWithChildren
   "/team": typeof AppTeamRoute
   "/invite/$token": typeof InviteTokenRoute
   "/settings/general": typeof AppSettingsGeneralRoute
   "/settings/notifications": typeof AppSettingsNotificationsRoute
   "/settings/organization": typeof AppSettingsOrganizationRoute
   "/settings/security": typeof AppSettingsSecurityRoute
+  "/cms-pages/": typeof AppCmsPagesIndexRoute
 }
 export interface FileRoutesByTo {
   "/404": typeof R404Route
@@ -164,6 +178,7 @@ export interface FileRoutesByTo {
   "/settings/notifications": typeof AppSettingsNotificationsRoute
   "/settings/organization": typeof AppSettingsOrganizationRoute
   "/settings/security": typeof AppSettingsSecurityRoute
+  "/cms-pages": typeof AppCmsPagesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -179,6 +194,7 @@ export interface FileRoutesById {
   "/unauthorized": typeof UnauthorizedRoute
   "/verify-email": typeof VerifyEmailRoute
   "/_app/billing": typeof AppBillingRoute
+  "/_app/cms-pages": typeof AppCmsPagesRouteWithChildren
   "/_app/team": typeof AppTeamRoute
   "/invite/$token": typeof InviteTokenRoute
   "/_app/": typeof AppIndexRoute
@@ -186,6 +202,7 @@ export interface FileRoutesById {
   "/_app/settings/notifications": typeof AppSettingsNotificationsRoute
   "/_app/settings/organization": typeof AppSettingsOrganizationRoute
   "/_app/settings/security": typeof AppSettingsSecurityRoute
+  "/_app/cms-pages/": typeof AppCmsPagesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -202,12 +219,14 @@ export interface FileRouteTypes {
     | "/unauthorized"
     | "/verify-email"
     | "/billing"
+    | "/cms-pages"
     | "/team"
     | "/invite/$token"
     | "/settings/general"
     | "/settings/notifications"
     | "/settings/organization"
     | "/settings/security"
+    | "/cms-pages/"
   fileRoutesByTo: FileRoutesByTo
   to:
     | "/404"
@@ -228,6 +247,7 @@ export interface FileRouteTypes {
     | "/settings/notifications"
     | "/settings/organization"
     | "/settings/security"
+    | "/cms-pages"
   id:
     | "__root__"
     | "/404"
@@ -242,6 +262,7 @@ export interface FileRouteTypes {
     | "/unauthorized"
     | "/verify-email"
     | "/_app/billing"
+    | "/_app/cms-pages"
     | "/_app/team"
     | "/invite/$token"
     | "/_app/"
@@ -249,6 +270,7 @@ export interface FileRouteTypes {
     | "/_app/settings/notifications"
     | "/_app/settings/organization"
     | "/_app/settings/security"
+    | "/_app/cms-pages/"
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -366,12 +388,26 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof AppTeamRouteImport
       parentRoute: typeof AppRoute
     }
+    "/_app/cms-pages": {
+      id: "/_app/cms-pages"
+      path: "/cms-pages"
+      fullPath: "/cms-pages"
+      preLoaderRoute: typeof AppCmsPagesRouteImport
+      parentRoute: typeof AppRoute
+    }
     "/_app/billing": {
       id: "/_app/billing"
       path: "/billing"
       fullPath: "/billing"
       preLoaderRoute: typeof AppBillingRouteImport
       parentRoute: typeof AppRoute
+    }
+    "/_app/cms-pages/": {
+      id: "/_app/cms-pages/"
+      path: "/"
+      fullPath: "/cms-pages/"
+      preLoaderRoute: typeof AppCmsPagesIndexRouteImport
+      parentRoute: typeof AppCmsPagesRoute
     }
     "/_app/settings/security": {
       id: "/_app/settings/security"
@@ -404,8 +440,21 @@ declare module "@tanstack/react-router" {
   }
 }
 
+interface AppCmsPagesRouteChildren {
+  AppCmsPagesIndexRoute: typeof AppCmsPagesIndexRoute
+}
+
+const AppCmsPagesRouteChildren: AppCmsPagesRouteChildren = {
+  AppCmsPagesIndexRoute: AppCmsPagesIndexRoute,
+}
+
+const AppCmsPagesRouteWithChildren = AppCmsPagesRoute._addFileChildren(
+  AppCmsPagesRouteChildren,
+)
+
 interface AppRouteChildren {
   AppBillingRoute: typeof AppBillingRoute
+  AppCmsPagesRoute: typeof AppCmsPagesRouteWithChildren
   AppTeamRoute: typeof AppTeamRoute
   AppIndexRoute: typeof AppIndexRoute
   AppSettingsGeneralRoute: typeof AppSettingsGeneralRoute
@@ -416,6 +465,7 @@ interface AppRouteChildren {
 
 const AppRouteChildren: AppRouteChildren = {
   AppBillingRoute: AppBillingRoute,
+  AppCmsPagesRoute: AppCmsPagesRouteWithChildren,
   AppTeamRoute: AppTeamRoute,
   AppIndexRoute: AppIndexRoute,
   AppSettingsGeneralRoute: AppSettingsGeneralRoute,

@@ -13,6 +13,10 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+#: src/pages/_app/cms-pages.index.tsx
+msgid "(no title)"
+msgstr "(no title)"
+
 #. placeholder {0}: localeToNameMap[locale]
 #. placeholder {0}: tenant?.name ?? t`Dashboard`
 #: src/pages/_app/index.tsx
@@ -32,8 +36,8 @@ msgstr "{0} – {1}"
 
 #. placeholder {0}: plan.trialPeriodDays
 #: src/features/manage-billing/ui/plan-card.tsx
-msgid "{0} Days Free Trial"
-msgstr "{0} Days Free Trial"
+#~ msgid "{0} Days Free Trial"
+#~ msgstr "{0} Days Free Trial"
 
 #. placeholder {0}: subscription.trialDaysLeft
 #: src/features/manage-billing/ui/current-subscription.tsx
@@ -47,6 +51,10 @@ msgstr "{0} Days Left"
 #: src/pages/admin/users.$userId.tsx
 #~ msgid "{displayName} |Key Value Admin"
 #~ msgstr "{displayName} |Key Value Admin"
+
+#: src/features/manage-billing/ui/plan-card.tsx
+msgid "{trialDays} Days Free Trial"
+msgstr "{trialDays} Days Free Trial"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "• Focus on your product value — let the platform handle complexity."
@@ -169,6 +177,10 @@ msgstr "Active members"
 #~ msgid "Active Subscriptions"
 #~ msgstr "Active Subscriptions"
 
+#: src/features/page-admin/ui/page-translation-fields.tsx
+msgid "Add locale"
+msgstr "Add locale"
+
 #: src/features/invite-member/model/types.ts
 msgid "Admin"
 msgstr "Admin"
@@ -181,11 +193,9 @@ msgstr "Advanced Analytics"
 #~ msgid "Advanced Projects (Upgrade Required)"
 #~ msgstr "Advanced Projects (Upgrade Required)"
 
-#: src/pages/admin/organizations.index.tsx
-#: src/pages/admin/subscriptions.tsx
-#: src/pages/admin/users.index.tsx
-#~ msgid "All statuses"
-#~ msgstr "All statuses"
+#: src/pages/_app/cms-pages.index.tsx
+msgid "All statuses"
+msgstr "All statuses"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "All the boring stuff is already done — focus on your idea!"
@@ -215,6 +225,15 @@ msgstr "An account with this email already exists."
 #: src/features/create-organization/model/use-create-organization.ts
 msgid "An organization with this name already exists."
 msgstr "An organization with this name already exists."
+
+#: src/features/page-admin/model/types.ts
+#: src/pages/_app/cms-pages.index.tsx
+msgid "Archived"
+msgstr "Archived"
+
+#: src/features/page-admin/ui/delete-page-modal.tsx
+msgid "Are you sure you want to delete <0>{displayName}</0>? This action cannot be undone."
+msgstr "Are you sure you want to delete <0>{displayName}</0>? This action cannot be undone."
 
 #. placeholder {0}: member.firstName
 #. placeholder {1}: member.lastName
@@ -247,6 +266,10 @@ msgstr "At least one digit"
 #: src/pages/_app/settings/security.tsx
 msgid "At least one special character"
 msgstr "At least one special character"
+
+#: src/features/page-admin/model/types.ts
+msgid "At least one translation is required"
+msgstr "At least one translation is required"
 
 #: src/shared/ui/admin-layout/admin-nav.tsx
 #~ msgid "Audit Log"
@@ -339,6 +362,7 @@ msgstr "Billing Portal Unavailable"
 #: src/features/manage-organization/ui/member-actions.tsx
 #: src/features/member-role/ui/transfer-ownership-modal.tsx
 #: src/features/member-role/ui/update-member-authorities-modal.tsx
+#: src/features/page-admin/ui/delete-page-modal.tsx
 msgid "Cancel"
 msgstr "Cancel"
 
@@ -349,6 +373,10 @@ msgstr "Cancel"
 #: src/features/manage-billing/ui/current-subscription.tsx
 msgid "Cancels on"
 msgstr "Cancels on"
+
+#: src/features/page-admin/ui/page-translation-fields.tsx
+msgid "Canonical URL"
+msgstr "Canonical URL"
 
 #: src/features/member-role/ui/update-member-authorities-modal.tsx
 msgid "Change Member Role"
@@ -410,6 +438,10 @@ msgstr "Clear all"
 msgid "Close"
 msgstr "Close"
 
+#: src/pages/_app/cms-pages.index.tsx
+msgid "CMS Pages"
+msgstr "CMS Pages"
+
 #: src/features/invite-member/ui/send-invitation-modal.tsx
 msgid "colleague@example.com"
 msgstr "colleague@example.com"
@@ -448,6 +480,15 @@ msgstr "Confirm your"
 msgid "Contact Support"
 msgstr "Contact Support"
 
+#: src/features/page-admin/ui/page-translation-fields.tsx
+#: src/pages/_app/cms-pages.index.tsx
+msgid "Content"
+msgstr "Content"
+
+#: src/features/page-admin/model/types.ts
+msgid "Content is required for the default locale"
+msgstr "Content is required for the default locale"
+
 #: src/features/sign-in/ui/sign-in-form.tsx
 msgid "Continue"
 msgstr "Continue"
@@ -464,6 +505,10 @@ msgstr "Copy"
 msgid "Could not create Stripe Customer Portal session."
 msgstr "Could not create Stripe Customer Portal session."
 
+#: src/features/page-admin/ui/delete-page-modal.tsx
+msgid "Could not delete the page. It may be published."
+msgstr "Could not delete the page. It may be published."
+
 #: src/pages/admin/organizations.$tenantKey.tsx
 #~ msgid "Could not fetch members."
 #~ msgstr "Could not fetch members."
@@ -475,6 +520,10 @@ msgstr "Could not create Stripe Customer Portal session."
 #: src/pages/admin/organizations.index.tsx
 #~ msgid "Could not fetch organizations from the API."
 #~ msgstr "Could not fetch organizations from the API."
+
+#: src/pages/_app/cms-pages.index.tsx
+msgid "Could not fetch pages from the API."
+msgstr "Could not fetch pages from the API."
 
 #: src/pages/admin/subscriptions.tsx
 #~ msgid "Could not fetch subscriptions from the API."
@@ -633,6 +682,23 @@ msgstr "Dashboard"
 msgid "Date"
 msgstr "Date"
 
+#: src/features/page-admin/ui/page-translation-fields.tsx
+msgid "Default locale — required"
+msgstr "Default locale — required"
+
+#: src/features/page-admin/ui/delete-page-modal.tsx
+#: src/pages/_app/cms-pages.index.tsx
+msgid "Delete"
+msgstr "Delete"
+
+#: src/features/page-admin/ui/delete-page-modal.tsx
+msgid "Delete failed"
+msgstr "Delete failed"
+
+#: src/features/page-admin/ui/delete-page-modal.tsx
+msgid "Delete Page"
+msgstr "Delete Page"
+
 #: src/shared/ui/tenant-status-badge/tenant-status-badge.tsx
 #: src/shared/ui/user-status-badge/user-status-badge.tsx
 msgid "Deleted"
@@ -658,6 +724,12 @@ msgstr "Didn't receive it? Check your spam folder or"
 msgid "Don't have an account? <0>Create one</0>"
 msgstr "Don't have an account? <0>Create one</0>"
 
+#: src/features/page-admin/model/types.ts
+#: src/pages/_app/cms-pages.index.tsx
+msgid "Draft"
+msgstr "Draft"
+
+#: src/pages/_app/cms-pages.index.tsx
 #: src/pages/_app/settings/organization.tsx
 msgid "Edit"
 msgstr "Edit"
@@ -825,6 +897,10 @@ msgstr "Failed to load organization settings."
 #~ msgid "Failed to load organizations"
 #~ msgstr "Failed to load organizations"
 
+#: src/pages/_app/cms-pages.index.tsx
+msgid "Failed to load pages"
+msgstr "Failed to load pages"
+
 #: src/features/manage-billing/ui/plan-list.tsx
 msgid "Failed to load plans. Please try again later."
 msgstr "Failed to load plans. Please try again later."
@@ -934,6 +1010,7 @@ msgstr "Good"
 msgid "Here's what you can do from your personal workspace:"
 msgstr "Here's what you can do from your personal workspace:"
 
+#: src/pages/_app/cms-pages.index.tsx
 #: src/pages/_app/index.tsx
 #: src/pages/_app/settings/general.tsx
 #: src/pages/_app/settings/notifications.tsx
@@ -942,6 +1019,10 @@ msgstr "Here's what you can do from your personal workspace:"
 #: src/pages/_app/team.tsx
 msgid "Home"
 msgstr "Home"
+
+#: src/features/page-admin/ui/rich-content-editor.tsx
+msgid "HTML content. At least one paragraph required for the default locale."
+msgstr "HTML content. At least one paragraph required for the default locale."
 
 #: src/features/edit-user/ui/edit-user-modal.tsx
 #~ msgid "ID: {0}"
@@ -1109,6 +1190,10 @@ msgstr "Loading..."
 msgid "Loading…"
 msgstr "Loading…"
 
+#: src/features/page-admin/model/types.ts
+msgid "Locale is required"
+msgstr "Locale is required"
+
 #: src/pages/_app/index.tsx
 #: src/shared/ui/user-status-badge/user-status-badge.tsx
 msgid "Locked"
@@ -1180,6 +1265,10 @@ msgstr "Member Signups"
 msgid "Members"
 msgstr "Members"
 
+#: src/features/page-admin/ui/page-translation-fields.tsx
+msgid "Meta description for search engines"
+msgstr "Meta description for search engines"
+
 #: src/features/manage-billing/ui/plan-list.tsx
 #: src/pages/_app/index.tsx
 msgid "Monthly"
@@ -1188,6 +1277,10 @@ msgstr "Monthly"
 #: src/features/invite-member/model/types.ts
 msgid "Must be a valid email address"
 msgstr "Must be a valid email address"
+
+#: src/features/page-admin/model/types.ts
+msgid "Must be a valid UUID"
+msgstr "Must be a valid UUID"
 
 #: src/shared/ui/app-layout/app-header.tsx
 msgid "My Account"
@@ -1201,6 +1294,10 @@ msgstr "Name is too short"
 #: src/shared/ui/app-layout/app-header.tsx
 msgid "New Organization"
 msgstr "New Organization"
+
+#: src/pages/_app/cms-pages.index.tsx
+msgid "New page"
+msgstr "New page"
 
 #: src/features/change-password/ui/change-password-modal.tsx
 #: src/features/reset-password/ui/reset-password-form.tsx
@@ -1273,6 +1370,14 @@ msgstr "No organizations found."
 msgid "No organizations yet"
 msgstr "No organizations yet"
 
+#: src/pages/_app/cms-pages.index.tsx
+msgid "No pages found"
+msgstr "No pages found"
+
+#: src/pages/_app/cms-pages.index.tsx
+msgid "No pages match the current filter"
+msgstr "No pages match the current filter"
+
 #: src/pages/_app/team.tsx
 msgid "No pending invitations."
 msgstr "No pending invitations."
@@ -1300,6 +1405,10 @@ msgstr "No roles assigned."
 #: src/pages/admin/subscriptions.tsx
 #~ msgid "No subscriptions match the current filters"
 #~ msgstr "No subscriptions match the current filters"
+
+#: src/features/page-admin/ui/page-translation-fields.tsx
+msgid "No translations added. At least the default locale is required."
+msgstr "No translations added. At least the default locale is required."
 
 #: src/pages/admin/users.index.tsx
 #~ msgid "No users found"
@@ -1332,6 +1441,14 @@ msgstr "Notifications{0}"
 msgid "Number"
 msgstr "Number"
 
+#: src/features/page-admin/ui/page-translation-fields.tsx
+msgid "OG description"
+msgstr "OG description"
+
+#: src/features/page-admin/ui/page-translation-fields.tsx
+msgid "OG title"
+msgstr "OG title"
+
 #: src/pages/verify-email.tsx
 msgid "One click and you're all set."
 msgstr "One click and you're all set."
@@ -1339,6 +1456,18 @@ msgstr "One click and you're all set."
 #: src/features/manage-billing/ui/billing-portal-button.tsx
 msgid "Open Billing Portal"
 msgstr "Open Billing Portal"
+
+#: src/features/page-admin/ui/page-translation-fields.tsx
+msgid "Open Graph description"
+msgstr "Open Graph description"
+
+#: src/features/page-admin/ui/page-translation-fields.tsx
+msgid "Open Graph title"
+msgstr "Open Graph title"
+
+#: src/features/page-admin/ui/page-translation-fields.tsx
+msgid "Optional translation"
+msgstr "Optional translation"
 
 #: src/pages/create-organization.tsx
 msgid "organization"
@@ -1391,10 +1520,18 @@ msgstr "Organizations"
 #~ msgid "Organizations |Key Value Admin"
 #~ msgstr "Organizations |Key Value Admin"
 
+#: src/features/page-admin/ui/page-translation-fields.tsx
+msgid "Override page title for search engines"
+msgstr "Override page title for search engines"
+
 #: src/pages/admin/organizations.$tenantKey.tsx
 #: src/pages/admin/users.$userId.tsx
 #~ msgid "Overview"
 #~ msgstr "Overview"
+
+#: src/pages/_app/cms-pages.index.tsx
+msgid "Page"
+msgstr "Page"
 
 #: src/pages/404.tsx
 msgid "Page Not Found"
@@ -1407,6 +1544,14 @@ msgstr "Page Not Found"
 #: src/pages/404.tsx
 msgid "Page not found."
 msgstr "Page not found."
+
+#: src/features/page-admin/ui/page-translation-fields.tsx
+msgid "Page title"
+msgstr "Page title"
+
+#: src/pages/_app/cms-pages.index.tsx
+msgid "Pages"
+msgstr "Pages"
 
 #: src/features/sign-in/ui/sign-in-form.tsx
 #: src/features/signup/ui/signup-form.tsx
@@ -1471,6 +1616,8 @@ msgstr "Passwords do not match"
 msgid "Payment ID"
 msgstr "Payment ID"
 
+#: src/features/page-admin/model/types.ts
+#: src/pages/_app/cms-pages.index.tsx
 #: src/shared/ui/invitation-status-badge/invitation-status-badge.tsx
 msgid "Pending"
 msgstr "Pending"
@@ -1565,6 +1712,11 @@ msgstr "Provide a reason for the ban…"
 msgid "Provisioning workspace"
 msgstr "Provisioning workspace"
 
+#: src/features/page-admin/model/types.ts
+#: src/pages/_app/cms-pages.index.tsx
+msgid "Published"
+msgstr "Published"
+
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 #: src/pages/_app/settings/general.tsx
 #: src/pages/invite.$token.tsx
@@ -1575,6 +1727,7 @@ msgstr "read-only"
 msgid "Reason (optional)"
 msgstr "Reason (optional)"
 
+#: src/pages/_app/cms-pages.index.tsx
 #: src/pages/_app/settings/organization.tsx
 #: src/pages/_app/team.tsx
 msgid "Refresh"
@@ -1638,6 +1791,7 @@ msgstr "Reset your password"
 msgid "Restore access"
 msgstr "Restore access"
 
+#: src/pages/_app/cms-pages.index.tsx
 #: src/pages/_app/settings/general.tsx
 #: src/pages/_app/settings/security.tsx
 #: src/pages/_app/team.tsx
@@ -1767,6 +1921,18 @@ msgstr "Send reset link"
 msgid "Sent"
 msgstr "Sent"
 
+#: src/features/page-admin/ui/page-translation-fields.tsx
+msgid "SEO description"
+msgstr "SEO description"
+
+#: src/features/page-admin/ui/page-translation-fields.tsx
+msgid "SEO fields"
+msgstr "SEO fields"
+
+#: src/features/page-admin/ui/page-translation-fields.tsx
+msgid "SEO title"
+msgstr "SEO title"
+
 #: src/pages/500.tsx
 msgid "Server Error"
 msgstr "Server Error"
@@ -1875,6 +2041,14 @@ msgstr "Signing you in…"
 msgid "Slim top progress bar for navigation between pages (automatic with router)."
 msgstr "Slim top progress bar for navigation between pages (automatic with router)."
 
+#: src/features/page-admin/model/types.ts
+msgid "Slug is required"
+msgstr "Slug is required"
+
+#: src/features/page-admin/model/types.ts
+msgid "Slug must be lowercase alphanumeric with hyphens (e.g. about-us or blog/post-title)"
+msgstr "Slug must be lowercase alphanumeric with hyphens (e.g. about-us or blog/post-title)"
+
 #: src/features/signup/ui/signup-form.tsx
 #: src/pages/invite.$token.tsx
 msgid "Smith"
@@ -1914,6 +2088,7 @@ msgstr "Start building"
 
 #: src/features/invite-member/ui/invitation-details-modal.tsx
 #: src/features/manage-billing/ui/refund-list.tsx
+#: src/pages/_app/cms-pages.index.tsx
 #: src/pages/_app/settings/organization.tsx
 msgid "Status"
 msgstr "Status"
@@ -1999,6 +2174,10 @@ msgstr "Team members"
 msgid "Team Members"
 msgstr "Team Members"
 
+#: src/pages/_app/cms-pages.index.tsx
+msgid "Template"
+msgstr "Template"
+
 #: src/pages/admin/subscriptions.tsx
 #~ msgid "Tenant"
 #~ msgstr "Tenant"
@@ -2071,6 +2250,14 @@ msgstr "This verification link has expired or has already been used. Request a n
 msgid "Tips"
 msgstr "Tips"
 
+#: src/features/page-admin/ui/page-translation-fields.tsx
+msgid "Title"
+msgstr "Title"
+
+#: src/features/page-admin/model/types.ts
+msgid "Title is required for the default locale"
+msgstr "Title is required for the default locale"
+
 #: src/pages/_app/billing.tsx
 msgid "To access the billing portal, please complete your billing settings setup."
 msgstr "To access the billing portal, please complete your billing settings setup."
@@ -2110,6 +2297,10 @@ msgstr "Transfer Ownership"
 #: src/features/member-role/ui/transfer-ownership-modal.tsx
 msgid "Transferring ownership will make {displayName} the new Tenant Owner. You will become a Member of this tenant and lose all owner permissions. This action cannot be undone by you — only the new owner can transfer ownership back."
 msgstr "Transferring ownership will make {displayName} the new Tenant Owner. You will become a Member of this tenant and lose all owner permissions. This action cannot be undone by you — only the new owner can transfer ownership back."
+
+#: src/features/page-admin/ui/page-translation-fields.tsx
+msgid "Translations"
+msgstr "Translations"
 
 #: src/features/manage-billing/ui/current-subscription.tsx
 msgid "Trial Active"
@@ -2155,6 +2346,10 @@ msgstr "Unlimited"
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 msgid "Unverified"
 msgstr "Unverified"
+
+#: src/pages/_app/cms-pages.index.tsx
+msgid "Updated"
+msgstr "Updated"
 
 #: src/features/avatar/ui/avatar-upload.tsx
 msgid "Upload avatar"
@@ -2256,8 +2451,12 @@ msgid "Welcome back, {firstName}."
 msgstr "Welcome back, {firstName}."
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
-msgid "Welcome to IQKV!"
-msgstr "Welcome to IQKV!"
+#~ msgid "Welcome to IQKV!"
+#~ msgstr "Welcome to IQKV!"
+
+#: src/features/onboarding/ui/onboarding-modal.tsx
+msgid "Welcome to Key Value Platform!"
+msgstr "Welcome to Key Value Platform!"
 
 #: src/pages/_app/index.tsx
 msgid "Welcome, {firstName}!"
@@ -2283,6 +2482,10 @@ msgstr "Workspace"
 #~ msgid "Workspace setup failed. Please try again or contact support."
 #~ msgstr "Workspace setup failed. Please try again or contact support."
 
+#: src/pages/_app/cms-pages.index.tsx
+msgid "Workspace:"
+msgstr "Workspace:"
+
 #: src/features/manage-billing/ui/plan-list.tsx
 msgid "Yearly"
 msgstr "Yearly"
@@ -2306,6 +2509,10 @@ msgstr "You do not have permission to access this area."
 #: src/pages/unauthorized.tsx
 msgid "You do not have permission to access this area. Please sign in with an account that has the appropriate membership."
 msgstr "You do not have permission to access this area. Please sign in with an account that has the appropriate membership."
+
+#: src/pages/_app/cms-pages.index.tsx
+msgid "You do not have permission to manage CMS pages."
+msgstr "You do not have permission to manage CMS pages."
 
 #: src/pages/unauthorized.tsx
 #~ msgid "You do not have the required <0>PLATFORM_ADMIN</0> authority to access this area. Please sign in with an account that has the appropriate permissions."

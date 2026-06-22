@@ -13,6 +13,10 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: src/pages/_app/cms-pages.index.tsx
+msgid "(no title)"
+msgstr ""
+
 #. placeholder {0}: localeToNameMap[locale]
 #. placeholder {0}: tenant?.name ?? t`Dashboard`
 #: src/pages/_app/index.tsx
@@ -28,12 +32,16 @@ msgstr ""
 
 #. placeholder {0}: plan.trialPeriodDays
 #: src/features/manage-billing/ui/plan-card.tsx
-msgid "{0} Days Free Trial"
-msgstr ""
+#~ msgid "{0} Days Free Trial"
+#~ msgstr ""
 
 #. placeholder {0}: subscription.trialDaysLeft
 #: src/features/manage-billing/ui/current-subscription.tsx
 msgid "{0} Days Left"
+msgstr ""
+
+#: src/features/manage-billing/ui/plan-card.tsx
+msgid "{trialDays} Days Free Trial"
 msgstr ""
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
@@ -137,6 +145,10 @@ msgstr ""
 msgid "Active members"
 msgstr ""
 
+#: src/features/page-admin/ui/page-translation-fields.tsx
+msgid "Add locale"
+msgstr ""
+
 #: src/features/invite-member/model/types.ts
 msgid "Admin"
 msgstr "Администратор"
@@ -148,6 +160,10 @@ msgstr ""
 #: src/pages/billing-example.tsx
 #~ msgid "Advanced Projects (Upgrade Required)"
 #~ msgstr ""
+
+#: src/pages/_app/cms-pages.index.tsx
+msgid "All statuses"
+msgstr ""
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "All the boring stuff is already done — focus on your idea!"
@@ -173,6 +189,15 @@ msgstr "Акаунт с този имейл вече съществува."
 #: src/features/create-organization/model/use-create-organization.ts
 msgid "An organization with this name already exists."
 msgstr "Организация с това наименование вече съществува."
+
+#: src/features/page-admin/model/types.ts
+#: src/pages/_app/cms-pages.index.tsx
+msgid "Archived"
+msgstr ""
+
+#: src/features/page-admin/ui/delete-page-modal.tsx
+msgid "Are you sure you want to delete <0>{displayName}</0>? This action cannot be undone."
+msgstr ""
 
 #. placeholder {0}: member.firstName
 #. placeholder {1}: member.lastName
@@ -205,6 +230,10 @@ msgstr "Поне една цифра"
 #: src/pages/_app/settings/security.tsx
 msgid "At least one special character"
 msgstr "Поне един специален символ"
+
+#: src/features/page-admin/model/types.ts
+msgid "At least one translation is required"
+msgstr ""
 
 #: src/pages/loading-demo.tsx
 msgid "Automatic router integration via <0>router.subscribe()</0>"
@@ -273,12 +302,17 @@ msgstr ""
 #: src/features/manage-organization/ui/member-actions.tsx
 #: src/features/member-role/ui/transfer-ownership-modal.tsx
 #: src/features/member-role/ui/update-member-authorities-modal.tsx
+#: src/features/page-admin/ui/delete-page-modal.tsx
 msgid "Cancel"
 msgstr "Отказ"
 
 #: src/features/manage-billing/ui/current-subscription.tsx
 msgid "Cancels on"
 msgstr "Отменя се на"
+
+#: src/features/page-admin/ui/page-translation-fields.tsx
+msgid "Canonical URL"
+msgstr ""
 
 #: src/features/member-role/ui/update-member-authorities-modal.tsx
 msgid "Change Member Role"
@@ -324,6 +358,10 @@ msgstr "Изчисти всички"
 msgid "Close"
 msgstr "Затвори"
 
+#: src/pages/_app/cms-pages.index.tsx
+msgid "CMS Pages"
+msgstr ""
+
 #: src/features/invite-member/ui/send-invitation-modal.tsx
 msgid "colleague@example.com"
 msgstr "колега@example.com"
@@ -358,6 +396,15 @@ msgstr "Потвърдете"
 msgid "Contact Support"
 msgstr ""
 
+#: src/features/page-admin/ui/page-translation-fields.tsx
+#: src/pages/_app/cms-pages.index.tsx
+msgid "Content"
+msgstr ""
+
+#: src/features/page-admin/model/types.ts
+msgid "Content is required for the default locale"
+msgstr ""
+
 #: src/features/sign-in/ui/sign-in-form.tsx
 msgid "Continue"
 msgstr "Продължи"
@@ -373,6 +420,14 @@ msgstr ""
 #: src/features/manage-billing/model/use-billing-portal.ts
 msgid "Could not create Stripe Customer Portal session."
 msgstr "Не може да се създаде сесия на Stripe Customer Portal."
+
+#: src/features/page-admin/ui/delete-page-modal.tsx
+msgid "Could not delete the page. It may be published."
+msgstr ""
+
+#: src/pages/_app/cms-pages.index.tsx
+msgid "Could not fetch pages from the API."
+msgstr ""
 
 #: src/pages/_app/settings/general.tsx
 #: src/pages/_app/settings/security.tsx
@@ -501,6 +556,23 @@ msgstr "Табло"
 msgid "Date"
 msgstr "Дата"
 
+#: src/features/page-admin/ui/page-translation-fields.tsx
+msgid "Default locale — required"
+msgstr ""
+
+#: src/features/page-admin/ui/delete-page-modal.tsx
+#: src/pages/_app/cms-pages.index.tsx
+msgid "Delete"
+msgstr ""
+
+#: src/features/page-admin/ui/delete-page-modal.tsx
+msgid "Delete failed"
+msgstr ""
+
+#: src/features/page-admin/ui/delete-page-modal.tsx
+msgid "Delete Page"
+msgstr ""
+
 #: src/shared/ui/tenant-status-badge/tenant-status-badge.tsx
 #: src/shared/ui/user-status-badge/user-status-badge.tsx
 msgid "Deleted"
@@ -526,6 +598,12 @@ msgstr "Не сте получили? Проверете папката за с�
 msgid "Don't have an account? <0>Create one</0>"
 msgstr "Нямате акаунт? <0>Създайте</0>"
 
+#: src/features/page-admin/model/types.ts
+#: src/pages/_app/cms-pages.index.tsx
+msgid "Draft"
+msgstr ""
+
+#: src/pages/_app/cms-pages.index.tsx
 #: src/pages/_app/settings/organization.tsx
 msgid "Edit"
 msgstr "Редактирай"
@@ -639,6 +717,10 @@ msgstr "Зареждането на настройките за фактурир
 msgid "Failed to load organization settings."
 msgstr "Зареждането на настройките на организацията не успя."
 
+#: src/pages/_app/cms-pages.index.tsx
+msgid "Failed to load pages"
+msgstr ""
+
 #: src/features/manage-billing/ui/plan-list.tsx
 msgid "Failed to load plans. Please try again later."
 msgstr "Зареждането на плановете не успя. Моля, опитайте отново по-късно."
@@ -736,6 +818,7 @@ msgstr "Добра"
 msgid "Here's what you can do from your personal workspace:"
 msgstr "Ето какво можете да направите от личното си работно пространство:"
 
+#: src/pages/_app/cms-pages.index.tsx
 #: src/pages/_app/index.tsx
 #: src/pages/_app/settings/general.tsx
 #: src/pages/_app/settings/notifications.tsx
@@ -744,6 +827,10 @@ msgstr "Ето какво можете да направите от личнот
 #: src/pages/_app/team.tsx
 msgid "Home"
 msgstr "Начало"
+
+#: src/features/page-admin/ui/rich-content-editor.tsx
+msgid "HTML content. At least one paragraph required for the default locale."
+msgstr ""
 
 #. placeholder {0}: form.values.email
 #: src/features/forgot-password/ui/forgot-password-form.tsx
@@ -883,6 +970,10 @@ msgstr "Зареждане..."
 msgid "Loading…"
 msgstr "Зареждане…"
 
+#: src/features/page-admin/model/types.ts
+msgid "Locale is required"
+msgstr ""
+
 #: src/pages/_app/index.tsx
 #: src/shared/ui/user-status-badge/user-status-badge.tsx
 msgid "Locked"
@@ -934,6 +1025,10 @@ msgstr ""
 msgid "Members"
 msgstr "Членове"
 
+#: src/features/page-admin/ui/page-translation-fields.tsx
+msgid "Meta description for search engines"
+msgstr ""
+
 #: src/features/manage-billing/ui/plan-list.tsx
 #: src/pages/_app/index.tsx
 msgid "Monthly"
@@ -942,6 +1037,10 @@ msgstr ""
 #: src/features/invite-member/model/types.ts
 msgid "Must be a valid email address"
 msgstr "Трябва да е валиден имейл адрес"
+
+#: src/features/page-admin/model/types.ts
+msgid "Must be a valid UUID"
+msgstr ""
 
 #: src/shared/ui/app-layout/app-header.tsx
 msgid "My Account"
@@ -955,6 +1054,10 @@ msgstr "Наименованието е твърде кратко"
 #: src/shared/ui/app-layout/app-header.tsx
 msgid "New Organization"
 msgstr "Нова организация"
+
+#: src/pages/_app/cms-pages.index.tsx
+msgid "New page"
+msgstr ""
 
 #: src/features/change-password/ui/change-password-modal.tsx
 #: src/features/reset-password/ui/reset-password-form.tsx
@@ -1007,6 +1110,14 @@ msgstr "Не са намерени организации."
 msgid "No organizations yet"
 msgstr ""
 
+#: src/pages/_app/cms-pages.index.tsx
+msgid "No pages found"
+msgstr ""
+
+#: src/pages/_app/cms-pages.index.tsx
+msgid "No pages match the current filter"
+msgstr ""
+
 #: src/pages/_app/team.tsx
 msgid "No pending invitations."
 msgstr "Няма изчакващи покани."
@@ -1022,6 +1133,10 @@ msgstr "Няма резултати"
 #: src/pages/_app/settings/security.tsx
 msgid "No roles assigned."
 msgstr "Не са присвоени роли."
+
+#: src/features/page-admin/ui/page-translation-fields.tsx
+msgid "No translations added. At least the default locale is required."
+msgstr ""
 
 #: src/pages/forgot-password.tsx
 msgid "No worries — enter your email and we'll send you a secure link to reset it."
@@ -1042,6 +1157,14 @@ msgstr "Известия{0}"
 msgid "Number"
 msgstr "Цифра"
 
+#: src/features/page-admin/ui/page-translation-fields.tsx
+msgid "OG description"
+msgstr ""
+
+#: src/features/page-admin/ui/page-translation-fields.tsx
+msgid "OG title"
+msgstr ""
+
 #: src/pages/verify-email.tsx
 msgid "One click and you're all set."
 msgstr "Един клик и сте готови."
@@ -1049,6 +1172,18 @@ msgstr "Един клик и сте готови."
 #: src/features/manage-billing/ui/billing-portal-button.tsx
 msgid "Open Billing Portal"
 msgstr "Отвори портала за фактуриране"
+
+#: src/features/page-admin/ui/page-translation-fields.tsx
+msgid "Open Graph description"
+msgstr ""
+
+#: src/features/page-admin/ui/page-translation-fields.tsx
+msgid "Open Graph title"
+msgstr ""
+
+#: src/features/page-admin/ui/page-translation-fields.tsx
+msgid "Optional translation"
+msgstr ""
 
 #: src/pages/create-organization.tsx
 msgid "organization"
@@ -1089,6 +1224,14 @@ msgstr "Настройки на организацията"
 msgid "Organizations"
 msgstr "Организации"
 
+#: src/features/page-admin/ui/page-translation-fields.tsx
+msgid "Override page title for search engines"
+msgstr ""
+
+#: src/pages/_app/cms-pages.index.tsx
+msgid "Page"
+msgstr ""
+
 #: src/pages/404.tsx
 msgid "Page Not Found"
 msgstr "Страницата не е намерена"
@@ -1096,6 +1239,14 @@ msgstr "Страницата не е намерена"
 #: src/pages/404.tsx
 msgid "Page not found."
 msgstr "Страницата не е намерена."
+
+#: src/features/page-admin/ui/page-translation-fields.tsx
+msgid "Page title"
+msgstr ""
+
+#: src/pages/_app/cms-pages.index.tsx
+msgid "Pages"
+msgstr ""
 
 #: src/features/sign-in/ui/sign-in-form.tsx
 #: src/features/signup/ui/signup-form.tsx
@@ -1160,6 +1311,8 @@ msgstr "Паролите не съвпадат"
 msgid "Payment ID"
 msgstr "ID на плащане"
 
+#: src/features/page-admin/model/types.ts
+#: src/pages/_app/cms-pages.index.tsx
 #: src/shared/ui/invitation-status-badge/invitation-status-badge.tsx
 msgid "Pending"
 msgstr "Изчакващо"
@@ -1239,6 +1392,11 @@ msgstr "Посочете причина за забраната…"
 msgid "Provisioning workspace"
 msgstr "Подготвяне на работното пространство"
 
+#: src/features/page-admin/model/types.ts
+#: src/pages/_app/cms-pages.index.tsx
+msgid "Published"
+msgstr ""
+
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 #: src/pages/_app/settings/general.tsx
 #: src/pages/invite.$token.tsx
@@ -1249,6 +1407,7 @@ msgstr "само за четене"
 msgid "Reason (optional)"
 msgstr "Причина (по избор)"
 
+#: src/pages/_app/cms-pages.index.tsx
 #: src/pages/_app/settings/organization.tsx
 #: src/pages/_app/team.tsx
 msgid "Refresh"
@@ -1308,6 +1467,7 @@ msgstr "Нулирайте паролата си"
 msgid "Restore access"
 msgstr "Възстанови достъпа"
 
+#: src/pages/_app/cms-pages.index.tsx
 #: src/pages/_app/settings/general.tsx
 #: src/pages/_app/settings/security.tsx
 #: src/pages/_app/team.tsx
@@ -1417,6 +1577,18 @@ msgstr "Изпрати връзка за нулиране"
 msgid "Sent"
 msgstr "Изпратено"
 
+#: src/features/page-admin/ui/page-translation-fields.tsx
+msgid "SEO description"
+msgstr ""
+
+#: src/features/page-admin/ui/page-translation-fields.tsx
+msgid "SEO fields"
+msgstr ""
+
+#: src/features/page-admin/ui/page-translation-fields.tsx
+msgid "SEO title"
+msgstr ""
+
 #: src/pages/500.tsx
 msgid "Server Error"
 msgstr "Сървърна грешка"
@@ -1489,6 +1661,14 @@ msgstr "Влизане…"
 msgid "Slim top progress bar for navigation between pages (automatic with router)."
 msgstr "Тясна горна лента за напредък при навигация между страници (автоматична с рутер)."
 
+#: src/features/page-admin/model/types.ts
+msgid "Slug is required"
+msgstr ""
+
+#: src/features/page-admin/model/types.ts
+msgid "Slug must be lowercase alphanumeric with hyphens (e.g. about-us or blog/post-title)"
+msgstr ""
+
 #: src/features/signup/ui/signup-form.tsx
 #: src/pages/invite.$token.tsx
 msgid "Smith"
@@ -1524,6 +1704,7 @@ msgstr "Започнете да изграждате"
 
 #: src/features/invite-member/ui/invitation-details-modal.tsx
 #: src/features/manage-billing/ui/refund-list.tsx
+#: src/pages/_app/cms-pages.index.tsx
 #: src/pages/_app/settings/organization.tsx
 msgid "Status"
 msgstr "Статус"
@@ -1581,6 +1762,10 @@ msgstr "Членове на екипа"
 
 #: src/features/manage-billing/ui/plan-features.tsx
 msgid "Team Members"
+msgstr ""
+
+#: src/pages/_app/cms-pages.index.tsx
+msgid "Template"
 msgstr ""
 
 #: src/features/member-role/ui/update-member-authorities-modal.tsx
@@ -1643,6 +1828,14 @@ msgstr "Тази връзка за потвърждение е изтекла и
 msgid "Tips"
 msgstr ""
 
+#: src/features/page-admin/ui/page-translation-fields.tsx
+msgid "Title"
+msgstr ""
+
+#: src/features/page-admin/model/types.ts
+msgid "Title is required for the default locale"
+msgstr ""
+
 #: src/pages/_app/billing.tsx
 msgid "To access the billing portal, please complete your billing settings setup."
 msgstr ""
@@ -1678,6 +1871,10 @@ msgstr "Прехвърли собствеността"
 #: src/features/member-role/ui/transfer-ownership-modal.tsx
 msgid "Transferring ownership will make {displayName} the new Tenant Owner. You will become a Member of this tenant and lose all owner permissions. This action cannot be undone by you — only the new owner can transfer ownership back."
 msgstr "Прехвърлянето на собствеността ще направи {displayName} новия собственик на наемателя. Вие ще станете член на наемателя и ще загубите всички права на собственик. Това действие не може да бъде отменено от вас — само новият собственик може да прехвърли собствеността обратно."
+
+#: src/features/page-admin/ui/page-translation-fields.tsx
+msgid "Translations"
+msgstr ""
 
 #: src/features/manage-billing/ui/current-subscription.tsx
 msgid "Trial Active"
@@ -1723,6 +1920,10 @@ msgstr ""
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 msgid "Unverified"
 msgstr "Непотвърден"
+
+#: src/pages/_app/cms-pages.index.tsx
+msgid "Updated"
+msgstr ""
 
 #: src/features/avatar/ui/avatar-upload.tsx
 msgid "Upload avatar"
@@ -1790,7 +1991,11 @@ msgid "Welcome back, {firstName}."
 msgstr "Добре дошли отново, {firstName}."
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
-msgid "Welcome to IQKV!"
+#~ msgid "Welcome to IQKV!"
+#~ msgstr ""
+
+#: src/features/onboarding/ui/onboarding-modal.tsx
+msgid "Welcome to Key Value Platform!"
 msgstr ""
 
 #: src/pages/_app/index.tsx
@@ -1804,6 +2009,10 @@ msgstr "Служебен имейл"
 #: src/shared/ui/app-layout/app-nav.tsx
 msgid "Workspace"
 msgstr "Работно пространство"
+
+#: src/pages/_app/cms-pages.index.tsx
+msgid "Workspace:"
+msgstr ""
 
 #: src/features/manage-billing/ui/plan-list.tsx
 msgid "Yearly"
@@ -1824,6 +2033,10 @@ msgstr "Нямате разрешение за достъп до тази зон
 #: src/pages/unauthorized.tsx
 msgid "You do not have permission to access this area. Please sign in with an account that has the appropriate membership."
 msgstr "Нямате разрешение за достъп до тази зона. Моля, влезте с акаунт с подходящото членство."
+
+#: src/pages/_app/cms-pages.index.tsx
+msgid "You do not have permission to manage CMS pages."
+msgstr ""
 
 #: src/features/manage-billing/ui/current-subscription.tsx
 #~ msgid "You don't have an active subscription yet. Choose a plan below to get started."
