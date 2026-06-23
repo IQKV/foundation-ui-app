@@ -55,7 +55,7 @@ export function RichContentEditor({
     const incoming = value ?? "";
     if (currentHtml !== incoming) {
       suppressOnUpdate.current = true;
-      editor.commands.setContent(incoming);
+      editor.commands.setContent(incoming, { emitUpdate: false });
       suppressOnUpdate.current = false;
     }
   }, [value, editor]);

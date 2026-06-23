@@ -30,6 +30,8 @@ import { Route as AppSettingsSecurityRouteImport } from "./pages/_app/settings/s
 import { Route as AppSettingsOrganizationRouteImport } from "./pages/_app/settings/organization"
 import { Route as AppSettingsNotificationsRouteImport } from "./pages/_app/settings/notifications"
 import { Route as AppSettingsGeneralRouteImport } from "./pages/_app/settings/general"
+import { Route as AppCmsPagesCreateRouteImport } from "./pages/_app/cms-pages.create"
+import { Route as AppCmsPagesPageIdRouteImport } from "./pages/_app/cms-pages.$pageId"
 
 const VerifyEmailRoute = VerifyEmailRouteImport.update({
   id: "/verify-email",
@@ -136,6 +138,16 @@ const AppSettingsGeneralRoute = AppSettingsGeneralRouteImport.update({
   path: "/settings/general",
   getParentRoute: () => AppRoute,
 } as any)
+const AppCmsPagesCreateRoute = AppCmsPagesCreateRouteImport.update({
+  id: "/create",
+  path: "/create",
+  getParentRoute: () => AppCmsPagesRoute,
+} as any)
+const AppCmsPagesPageIdRoute = AppCmsPagesPageIdRouteImport.update({
+  id: "/$pageId",
+  path: "/$pageId",
+  getParentRoute: () => AppCmsPagesRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   "/404": typeof R404Route
@@ -153,6 +165,8 @@ export interface FileRoutesByFullPath {
   "/cms-pages": typeof AppCmsPagesRouteWithChildren
   "/team": typeof AppTeamRoute
   "/invite/$token": typeof InviteTokenRoute
+  "/cms-pages/$pageId": typeof AppCmsPagesPageIdRoute
+  "/cms-pages/create": typeof AppCmsPagesCreateRoute
   "/settings/general": typeof AppSettingsGeneralRoute
   "/settings/notifications": typeof AppSettingsNotificationsRoute
   "/settings/organization": typeof AppSettingsOrganizationRoute
@@ -174,6 +188,8 @@ export interface FileRoutesByTo {
   "/team": typeof AppTeamRoute
   "/invite/$token": typeof InviteTokenRoute
   "/": typeof AppIndexRoute
+  "/cms-pages/$pageId": typeof AppCmsPagesPageIdRoute
+  "/cms-pages/create": typeof AppCmsPagesCreateRoute
   "/settings/general": typeof AppSettingsGeneralRoute
   "/settings/notifications": typeof AppSettingsNotificationsRoute
   "/settings/organization": typeof AppSettingsOrganizationRoute
@@ -198,6 +214,8 @@ export interface FileRoutesById {
   "/_app/team": typeof AppTeamRoute
   "/invite/$token": typeof InviteTokenRoute
   "/_app/": typeof AppIndexRoute
+  "/_app/cms-pages/$pageId": typeof AppCmsPagesPageIdRoute
+  "/_app/cms-pages/create": typeof AppCmsPagesCreateRoute
   "/_app/settings/general": typeof AppSettingsGeneralRoute
   "/_app/settings/notifications": typeof AppSettingsNotificationsRoute
   "/_app/settings/organization": typeof AppSettingsOrganizationRoute
@@ -222,6 +240,8 @@ export interface FileRouteTypes {
     | "/cms-pages"
     | "/team"
     | "/invite/$token"
+    | "/cms-pages/$pageId"
+    | "/cms-pages/create"
     | "/settings/general"
     | "/settings/notifications"
     | "/settings/organization"
@@ -243,6 +263,8 @@ export interface FileRouteTypes {
     | "/team"
     | "/invite/$token"
     | "/"
+    | "/cms-pages/$pageId"
+    | "/cms-pages/create"
     | "/settings/general"
     | "/settings/notifications"
     | "/settings/organization"
@@ -266,6 +288,8 @@ export interface FileRouteTypes {
     | "/_app/team"
     | "/invite/$token"
     | "/_app/"
+    | "/_app/cms-pages/$pageId"
+    | "/_app/cms-pages/create"
     | "/_app/settings/general"
     | "/_app/settings/notifications"
     | "/_app/settings/organization"
@@ -437,14 +461,32 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof AppSettingsGeneralRouteImport
       parentRoute: typeof AppRoute
     }
+    "/_app/cms-pages/create": {
+      id: "/_app/cms-pages/create"
+      path: "/create"
+      fullPath: "/cms-pages/create"
+      preLoaderRoute: typeof AppCmsPagesCreateRouteImport
+      parentRoute: typeof AppCmsPagesRoute
+    }
+    "/_app/cms-pages/$pageId": {
+      id: "/_app/cms-pages/$pageId"
+      path: "/$pageId"
+      fullPath: "/cms-pages/$pageId"
+      preLoaderRoute: typeof AppCmsPagesPageIdRouteImport
+      parentRoute: typeof AppCmsPagesRoute
+    }
   }
 }
 
 interface AppCmsPagesRouteChildren {
+  AppCmsPagesPageIdRoute: typeof AppCmsPagesPageIdRoute
+  AppCmsPagesCreateRoute: typeof AppCmsPagesCreateRoute
   AppCmsPagesIndexRoute: typeof AppCmsPagesIndexRoute
 }
 
 const AppCmsPagesRouteChildren: AppCmsPagesRouteChildren = {
+  AppCmsPagesPageIdRoute: AppCmsPagesPageIdRoute,
+  AppCmsPagesCreateRoute: AppCmsPagesCreateRoute,
   AppCmsPagesIndexRoute: AppCmsPagesIndexRoute,
 }
 

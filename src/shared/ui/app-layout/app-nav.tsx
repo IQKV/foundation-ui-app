@@ -8,6 +8,7 @@ import {
   IconBuilding,
   IconLock,
   IconBell,
+  IconFileText,
 } from "@tabler/icons-react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useState } from "react";
@@ -46,10 +47,12 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 
 export function AppNav() {
   const { t } = useLingui();
-  const { isTenantOwner, isPersonalWorkspace } = useSession();
+  const { isTenantOwner, isPersonalWorkspace, payload } = useSession();
   const routerState = useRouterState();
   const currentPath = routerState.location.pathname;
   const [search, setSearch] = useState("");
+  const authorities = payload?.authorities ?? [];
+  const canManagePages = authorities.includes("TENANT_OWNER") || authorities.includes("ADMIN");
 
   const navItems: NavItem[] = [
     { label: t`Dashboard`, icon: <IconDashboard size={16} />, to: "/" },
@@ -57,6 +60,7 @@ export function AppNav() {
       ? [{ label: t`Billing`, icon: <IconCreditCard size={16} />, to: "/billing" }]
       : []),
     ...(isTenantOwner ? [{ label: t`Team`, icon: <IconUsers size={16} />, to: "/team" }] : []),
+    ...(canManagePages ? [{ label: t`CMS Pages`, icon: <IconFileText size={16} />, to: "/cms-pages" }] : []),
   ];
 
   const accountSubItems: NavItem[] = [

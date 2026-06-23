@@ -84,6 +84,12 @@ msgstr "1. Начално зареждане на страницата"
 msgid "2. Page Transitions"
 msgstr "2. Преходи между страници"
 
+#. placeholder {0}: defaultLocale ?? "default"
+#: src/pages/_app/cms-pages.$pageId.tsx
+#: src/pages/_app/cms-pages.create.tsx
+msgid "A translation for the default locale ({0}) is required."
+msgstr ""
+
 #: src/pages/invite.$token.tsx
 msgid "Accept invitation"
 msgstr "Приеми поканата"
@@ -251,6 +257,11 @@ msgstr "Назад"
 msgid "Back to <0>Sign in</0>"
 msgstr "Обратно към <0>Вход</0>"
 
+#: src/pages/_app/cms-pages.$pageId.tsx
+#: src/pages/_app/cms-pages.create.tsx
+msgid "Back to list"
+msgstr ""
+
 #: src/pages/invite.$token.tsx
 #: src/pages/verify-email.tsx
 msgid "Back to sign in"
@@ -303,6 +314,7 @@ msgstr ""
 #: src/features/member-role/ui/transfer-ownership-modal.tsx
 #: src/features/member-role/ui/update-member-authorities-modal.tsx
 #: src/features/page-admin/ui/delete-page-modal.tsx
+#: src/pages/_app/cms-pages.create.tsx
 msgid "Cancel"
 msgstr "Отказ"
 
@@ -358,7 +370,10 @@ msgstr "Изчисти всички"
 msgid "Close"
 msgstr "Затвори"
 
+#: src/pages/_app/cms-pages.$pageId.tsx
+#: src/pages/_app/cms-pages.create.tsx
 #: src/pages/_app/cms-pages.index.tsx
+#: src/shared/ui/app-layout/app-nav.tsx
 msgid "CMS Pages"
 msgstr ""
 
@@ -421,12 +436,20 @@ msgstr ""
 msgid "Could not create Stripe Customer Portal session."
 msgstr "Не може да се създаде сесия на Stripe Customer Portal."
 
+#: src/pages/_app/cms-pages.create.tsx
+msgid "Could not create the page. Please check the form and try again."
+msgstr ""
+
 #: src/features/page-admin/ui/delete-page-modal.tsx
 msgid "Could not delete the page. It may be published."
 msgstr ""
 
 #: src/pages/_app/cms-pages.index.tsx
 msgid "Could not fetch pages from the API."
+msgstr ""
+
+#: src/pages/_app/cms-pages.$pageId.tsx
+msgid "Could not fetch the page details."
 msgstr ""
 
 #: src/pages/_app/settings/general.tsx
@@ -445,6 +468,10 @@ msgstr "Не може да се заредят членовете."
 #: src/pages/_app/settings/organization.tsx
 msgid "Could not load organizations."
 msgstr "Не може да се заредят организациите."
+
+#: src/pages/_app/cms-pages.$pageId.tsx
+msgid "Could not save the page. Please check the form and try again."
+msgstr ""
 
 #: src/pages/_app/settings/organization.tsx
 msgid "Could not switch organization."
@@ -470,6 +497,10 @@ msgstr "Създай организация"
 
 #: src/pages/_app/settings/organization.tsx
 msgid "Create Organization"
+msgstr ""
+
+#: src/pages/_app/cms-pages.create.tsx
+msgid "Create page"
 msgstr ""
 
 #: src/pages/billing-example.tsx
@@ -511,6 +542,10 @@ msgstr ""
 #: src/features/signup/ui/provisioning-wait.tsx
 msgid "Creating your account"
 msgstr "Създаване на акаунта ви"
+
+#: src/pages/_app/cms-pages.create.tsx
+msgid "Creation failed"
+msgstr ""
 
 #: src/features/manage-billing/ui/billing-info.tsx
 msgid "Currency"
@@ -603,10 +638,24 @@ msgstr "Нямате акаунт? <0>Създайте</0>"
 msgid "Draft"
 msgstr ""
 
+#: src/pages/_app/cms-pages.$pageId.tsx
+#: src/pages/_app/cms-pages.create.tsx
+msgid "e.g. default, landing"
+msgstr ""
+
+#: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.index.tsx
 #: src/pages/_app/settings/organization.tsx
 msgid "Edit"
 msgstr "Редактирай"
+
+#: src/pages/_app/cms-pages.$pageId.tsx
+msgid "Edit — {defaultTitle}"
+msgstr ""
+
+#: src/pages/_app/cms-pages.$pageId.tsx
+msgid "Edit Page"
+msgstr ""
 
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 msgid "Edit Profile"
@@ -717,6 +766,10 @@ msgstr "Зареждането на настройките за фактурир
 msgid "Failed to load organization settings."
 msgstr "Зареждането на настройките на организацията не успя."
 
+#: src/pages/_app/cms-pages.$pageId.tsx
+msgid "Failed to load page"
+msgstr ""
+
 #: src/pages/_app/cms-pages.index.tsx
 msgid "Failed to load pages"
 msgstr ""
@@ -818,6 +871,13 @@ msgstr "Добра"
 msgid "Here's what you can do from your personal workspace:"
 msgstr "Ето какво можете да направите от личното си работно пространство:"
 
+#: src/pages/_app/cms-pages.$pageId.tsx
+#: src/pages/_app/cms-pages.create.tsx
+msgid "Hierarchy"
+msgstr ""
+
+#: src/pages/_app/cms-pages.$pageId.tsx
+#: src/pages/_app/cms-pages.create.tsx
 #: src/pages/_app/cms-pages.index.tsx
 #: src/pages/_app/index.tsx
 #: src/pages/_app/settings/general.tsx
@@ -830,6 +890,14 @@ msgstr "Начало"
 
 #: src/features/page-admin/ui/rich-content-editor.tsx
 msgid "HTML content. At least one paragraph required for the default locale."
+msgstr ""
+
+#: src/pages/_app/cms-pages.$pageId.tsx
+msgid "ID"
+msgstr ""
+
+#: src/pages/_app/cms-pages.$pageId.tsx
+msgid "Identity"
 msgstr ""
 
 #. placeholder {0}: form.values.email
@@ -1050,6 +1118,14 @@ msgstr "Моят акаунт"
 msgid "Name is too short"
 msgstr "Наименованието е твърде кратко"
 
+#: src/pages/_app/cms-pages.create.tsx
+msgid "New"
+msgstr ""
+
+#: src/pages/_app/cms-pages.create.tsx
+msgid "New CMS Page"
+msgstr ""
+
 #: src/features/tenant-switcher/ui/tenant-switcher.tsx
 #: src/shared/ui/app-layout/app-header.tsx
 msgid "New Organization"
@@ -1057,6 +1133,10 @@ msgstr "Нова организация"
 
 #: src/pages/_app/cms-pages.index.tsx
 msgid "New page"
+msgstr ""
+
+#: src/pages/_app/cms-pages.create.tsx
+msgid "New Page"
 msgstr ""
 
 #: src/features/change-password/ui/change-password-modal.tsx
@@ -1142,6 +1222,11 @@ msgstr ""
 msgid "No worries — enter your email and we'll send you a secure link to reset it."
 msgstr "Не се притеснявайте — въведете имейла си и ще ви изпратим сигурна връзка за нулиране."
 
+#: src/pages/_app/cms-pages.$pageId.tsx
+#: src/pages/_app/cms-pages.create.tsx
+msgid "None (top-level)"
+msgstr ""
+
 #: src/features/notification-bell/ui/notification-bell.tsx
 #: src/pages/_app/settings/notifications.tsx
 #: src/shared/ui/app-layout/app-nav.tsx
@@ -1179,6 +1264,16 @@ msgstr ""
 
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "Open Graph title"
+msgstr ""
+
+#: src/pages/_app/cms-pages.$pageId.tsx
+#: src/pages/_app/cms-pages.create.tsx
+msgid "Optional — makes this a child page"
+msgstr ""
+
+#: src/pages/_app/cms-pages.$pageId.tsx
+#: src/pages/_app/cms-pages.create.tsx
+msgid "Optional layout key"
 msgstr ""
 
 #: src/features/page-admin/ui/page-translation-fields.tsx
@@ -1240,12 +1335,27 @@ msgstr "Страницата не е намерена"
 msgid "Page not found."
 msgstr "Страницата не е намерена."
 
+#: src/pages/_app/cms-pages.$pageId.tsx
+#: src/pages/_app/cms-pages.create.tsx
+msgid "Page settings"
+msgstr ""
+
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "Page title"
 msgstr ""
 
 #: src/pages/_app/cms-pages.index.tsx
 msgid "Pages"
+msgstr ""
+
+#. placeholder {0}: page.status
+#: src/pages/_app/cms-pages.$pageId.tsx
+msgid "Pages with status <0>{0}</0> cannot be edited."
+msgstr ""
+
+#: src/pages/_app/cms-pages.$pageId.tsx
+#: src/pages/_app/cms-pages.create.tsx
+msgid "Parent page"
 msgstr ""
 
 #: src/features/sign-in/ui/sign-in-form.tsx
@@ -1403,6 +1513,10 @@ msgstr ""
 msgid "read-only"
 msgstr "само за четене"
 
+#: src/pages/_app/cms-pages.$pageId.tsx
+msgid "Read-only"
+msgstr ""
+
 #: src/features/ban-user/ui/ban-member-modal.tsx
 msgid "Reason (optional)"
 msgstr "Причина (по избор)"
@@ -1467,6 +1581,7 @@ msgstr "Нулирайте паролата си"
 msgid "Restore access"
 msgstr "Възстанови достъпа"
 
+#: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.index.tsx
 #: src/pages/_app/settings/general.tsx
 #: src/pages/_app/settings/security.tsx
@@ -1509,6 +1624,7 @@ msgid "Save Billing Information"
 msgstr ""
 
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
+#: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/settings/general.tsx
 msgid "Save changes"
 msgstr "Запази промените"
@@ -1517,6 +1633,10 @@ msgstr "Запази промените"
 #: src/features/manage-organization/ui/organization-settings.tsx
 msgid "Save Changes"
 msgstr "Запази промените"
+
+#: src/pages/_app/cms-pages.$pageId.tsx
+msgid "Save failed"
+msgstr ""
 
 #: src/pages/_app/team.tsx
 msgid "Search by name or email…"
@@ -1661,6 +1781,11 @@ msgstr "Влизане…"
 msgid "Slim top progress bar for navigation between pages (automatic with router)."
 msgstr "Тясна горна лента за напредък при навигация между страници (автоматична с рутер)."
 
+#: src/pages/_app/cms-pages.$pageId.tsx
+#: src/pages/_app/cms-pages.create.tsx
+msgid "Slug"
+msgstr ""
+
 #: src/features/page-admin/model/types.ts
 msgid "Slug is required"
 msgstr ""
@@ -1704,6 +1829,8 @@ msgstr "Започнете да изграждате"
 
 #: src/features/invite-member/ui/invitation-details-modal.tsx
 #: src/features/manage-billing/ui/refund-list.tsx
+#: src/pages/_app/cms-pages.$pageId.tsx
+#: src/pages/_app/cms-pages.create.tsx
 #: src/pages/_app/cms-pages.index.tsx
 #: src/pages/_app/settings/organization.tsx
 msgid "Status"
@@ -1764,8 +1891,15 @@ msgstr "Членове на екипа"
 msgid "Team Members"
 msgstr ""
 
+#: src/pages/_app/cms-pages.$pageId.tsx
+#: src/pages/_app/cms-pages.create.tsx
 #: src/pages/_app/cms-pages.index.tsx
 msgid "Template"
+msgstr ""
+
+#: src/pages/_app/cms-pages.$pageId.tsx
+#: src/pages/_app/cms-pages.create.tsx
+msgid "Tenant"
 msgstr ""
 
 #: src/features/member-role/ui/update-member-authorities-modal.tsx
@@ -1938,6 +2072,11 @@ msgstr "Главни и малки букви"
 msgid "Uppercase letter"
 msgstr "Главна буква"
 
+#: src/pages/_app/cms-pages.$pageId.tsx
+#: src/pages/_app/cms-pages.create.tsx
+msgid "URL path, e.g. about-us or blog/post"
+msgstr ""
+
 #: src/pages/loading-demo.tsx
 msgid "Uses <0>@mantine/nprogress</0> for top loading bar"
 msgstr "Използва <0>@mantine/nprogress</0> за горна лента за зареждане"
@@ -2034,6 +2173,8 @@ msgstr "Нямате разрешение за достъп до тази зон
 msgid "You do not have permission to access this area. Please sign in with an account that has the appropriate membership."
 msgstr "Нямате разрешение за достъп до тази зона. Моля, влезте с акаунт с подходящото членство."
 
+#: src/pages/_app/cms-pages.$pageId.tsx
+#: src/pages/_app/cms-pages.create.tsx
 #: src/pages/_app/cms-pages.index.tsx
 msgid "You do not have permission to manage CMS pages."
 msgstr ""

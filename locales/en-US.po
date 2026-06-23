@@ -96,6 +96,12 @@ msgstr "1. Initial Page Load"
 msgid "2. Page Transitions"
 msgstr "2. Page Transitions"
 
+#. placeholder {0}: defaultLocale ?? "default"
+#: src/pages/_app/cms-pages.$pageId.tsx
+#: src/pages/_app/cms-pages.create.tsx
+msgid "A translation for the default locale ({0}) is required."
+msgstr "A translation for the default locale ({0}) is required."
+
 #: src/pages/invite.$token.tsx
 msgid "Accept invitation"
 msgstr "Accept invitation"
@@ -295,6 +301,11 @@ msgstr "Back"
 msgid "Back to <0>Sign in</0>"
 msgstr "Back to <0>Sign in</0>"
 
+#: src/pages/_app/cms-pages.$pageId.tsx
+#: src/pages/_app/cms-pages.create.tsx
+msgid "Back to list"
+msgstr "Back to list"
+
 #: src/pages/invite.$token.tsx
 #: src/pages/verify-email.tsx
 msgid "Back to sign in"
@@ -363,6 +374,7 @@ msgstr "Billing Portal Unavailable"
 #: src/features/member-role/ui/transfer-ownership-modal.tsx
 #: src/features/member-role/ui/update-member-authorities-modal.tsx
 #: src/features/page-admin/ui/delete-page-modal.tsx
+#: src/pages/_app/cms-pages.create.tsx
 msgid "Cancel"
 msgstr "Cancel"
 
@@ -438,7 +450,10 @@ msgstr "Clear all"
 msgid "Close"
 msgstr "Close"
 
+#: src/pages/_app/cms-pages.$pageId.tsx
+#: src/pages/_app/cms-pages.create.tsx
 #: src/pages/_app/cms-pages.index.tsx
+#: src/shared/ui/app-layout/app-nav.tsx
 msgid "CMS Pages"
 msgstr "CMS Pages"
 
@@ -505,6 +520,10 @@ msgstr "Copy"
 msgid "Could not create Stripe Customer Portal session."
 msgstr "Could not create Stripe Customer Portal session."
 
+#: src/pages/_app/cms-pages.create.tsx
+msgid "Could not create the page. Please check the form and try again."
+msgstr "Could not create the page. Please check the form and try again."
+
 #: src/features/page-admin/ui/delete-page-modal.tsx
 msgid "Could not delete the page. It may be published."
 msgstr "Could not delete the page. It may be published."
@@ -528,6 +547,10 @@ msgstr "Could not fetch pages from the API."
 #: src/pages/admin/subscriptions.tsx
 #~ msgid "Could not fetch subscriptions from the API."
 #~ msgstr "Could not fetch subscriptions from the API."
+
+#: src/pages/_app/cms-pages.$pageId.tsx
+msgid "Could not fetch the page details."
+msgstr "Could not fetch the page details."
 
 #: src/pages/admin/users.$userId.tsx
 #~ msgid "Could not fetch user details."
@@ -554,6 +577,10 @@ msgstr "Could not load members."
 msgid "Could not load organizations."
 msgstr "Could not load organizations."
 
+#: src/pages/_app/cms-pages.$pageId.tsx
+msgid "Could not save the page. Please check the form and try again."
+msgstr "Could not save the page. Please check the form and try again."
+
 #: src/pages/_app/settings/organization.tsx
 msgid "Could not switch organization."
 msgstr "Could not switch organization."
@@ -579,6 +606,10 @@ msgstr "Create organization"
 #: src/pages/_app/settings/organization.tsx
 msgid "Create Organization"
 msgstr "Create Organization"
+
+#: src/pages/_app/cms-pages.create.tsx
+msgid "Create page"
+msgstr "Create page"
 
 #: src/pages/billing-example.tsx
 msgid "Create Project"
@@ -629,6 +660,10 @@ msgstr "Create, manage & invite teams to your workspace"
 #: src/features/signup/ui/provisioning-wait.tsx
 msgid "Creating your account"
 msgstr "Creating your account"
+
+#: src/pages/_app/cms-pages.create.tsx
+msgid "Creation failed"
+msgstr "Creation failed"
 
 #: src/features/manage-billing/ui/billing-info.tsx
 msgid "Currency"
@@ -729,10 +764,20 @@ msgstr "Don't have an account? <0>Create one</0>"
 msgid "Draft"
 msgstr "Draft"
 
+#: src/pages/_app/cms-pages.$pageId.tsx
+#: src/pages/_app/cms-pages.create.tsx
+msgid "e.g. default, landing"
+msgstr "e.g. default, landing"
+
+#: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.index.tsx
 #: src/pages/_app/settings/organization.tsx
 msgid "Edit"
 msgstr "Edit"
+
+#: src/pages/_app/cms-pages.$pageId.tsx
+msgid "Edit — {defaultTitle}"
+msgstr "Edit — {defaultTitle}"
 
 #: src/pages/admin/organizations.$tenantKey.tsx
 #: src/pages/admin/organizations.index.tsx
@@ -742,6 +787,10 @@ msgstr "Edit"
 #: src/features/edit-tenant/ui/edit-tenant-modal.tsx
 #~ msgid "Edit Organization"
 #~ msgstr "Edit Organization"
+
+#: src/pages/_app/cms-pages.$pageId.tsx
+msgid "Edit Page"
+msgstr "Edit Page"
 
 #: src/pages/_app/account.tsx
 #~ msgid "Edit profile"
@@ -897,6 +946,10 @@ msgstr "Failed to load organization settings."
 #~ msgid "Failed to load organizations"
 #~ msgstr "Failed to load organizations"
 
+#: src/pages/_app/cms-pages.$pageId.tsx
+msgid "Failed to load page"
+msgstr "Failed to load page"
+
 #: src/pages/_app/cms-pages.index.tsx
 msgid "Failed to load pages"
 msgstr "Failed to load pages"
@@ -1010,6 +1063,13 @@ msgstr "Good"
 msgid "Here's what you can do from your personal workspace:"
 msgstr "Here's what you can do from your personal workspace:"
 
+#: src/pages/_app/cms-pages.$pageId.tsx
+#: src/pages/_app/cms-pages.create.tsx
+msgid "Hierarchy"
+msgstr "Hierarchy"
+
+#: src/pages/_app/cms-pages.$pageId.tsx
+#: src/pages/_app/cms-pages.create.tsx
 #: src/pages/_app/cms-pages.index.tsx
 #: src/pages/_app/index.tsx
 #: src/pages/_app/settings/general.tsx
@@ -1024,9 +1084,17 @@ msgstr "Home"
 msgid "HTML content. At least one paragraph required for the default locale."
 msgstr "HTML content. At least one paragraph required for the default locale."
 
+#: src/pages/_app/cms-pages.$pageId.tsx
+msgid "ID"
+msgstr "ID"
+
 #: src/features/edit-user/ui/edit-user-modal.tsx
 #~ msgid "ID: {0}"
 #~ msgstr "ID: {0}"
+
+#: src/pages/_app/cms-pages.$pageId.tsx
+msgid "Identity"
+msgstr "Identity"
 
 #. placeholder {0}: form.values.email
 #: src/features/forgot-password/ui/forgot-password-form.tsx
@@ -1290,6 +1358,14 @@ msgstr "My Account"
 msgid "Name is too short"
 msgstr "Name is too short"
 
+#: src/pages/_app/cms-pages.create.tsx
+msgid "New"
+msgstr "New"
+
+#: src/pages/_app/cms-pages.create.tsx
+msgid "New CMS Page"
+msgstr "New CMS Page"
+
 #: src/features/tenant-switcher/ui/tenant-switcher.tsx
 #: src/shared/ui/app-layout/app-header.tsx
 msgid "New Organization"
@@ -1298,6 +1374,10 @@ msgstr "New Organization"
 #: src/pages/_app/cms-pages.index.tsx
 msgid "New page"
 msgstr "New page"
+
+#: src/pages/_app/cms-pages.create.tsx
+msgid "New Page"
+msgstr "New Page"
 
 #: src/features/change-password/ui/change-password-modal.tsx
 #: src/features/reset-password/ui/reset-password-form.tsx
@@ -1422,6 +1502,11 @@ msgstr "No translations added. At least the default locale is required."
 msgid "No worries — enter your email and we'll send you a secure link to reset it."
 msgstr "No worries — enter your email and we'll send you a secure link to reset it."
 
+#: src/pages/_app/cms-pages.$pageId.tsx
+#: src/pages/_app/cms-pages.create.tsx
+msgid "None (top-level)"
+msgstr "None (top-level)"
+
 #: src/features/notification-bell/ui/notification-bell.tsx
 #: src/pages/_app/settings/notifications.tsx
 #: src/shared/ui/app-layout/app-nav.tsx
@@ -1464,6 +1549,16 @@ msgstr "Open Graph description"
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "Open Graph title"
 msgstr "Open Graph title"
+
+#: src/pages/_app/cms-pages.$pageId.tsx
+#: src/pages/_app/cms-pages.create.tsx
+msgid "Optional — makes this a child page"
+msgstr "Optional — makes this a child page"
+
+#: src/pages/_app/cms-pages.$pageId.tsx
+#: src/pages/_app/cms-pages.create.tsx
+msgid "Optional layout key"
+msgstr "Optional layout key"
 
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "Optional translation"
@@ -1545,6 +1640,11 @@ msgstr "Page Not Found"
 msgid "Page not found."
 msgstr "Page not found."
 
+#: src/pages/_app/cms-pages.$pageId.tsx
+#: src/pages/_app/cms-pages.create.tsx
+msgid "Page settings"
+msgstr "Page settings"
+
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "Page title"
 msgstr "Page title"
@@ -1552,6 +1652,16 @@ msgstr "Page title"
 #: src/pages/_app/cms-pages.index.tsx
 msgid "Pages"
 msgstr "Pages"
+
+#. placeholder {0}: page.status
+#: src/pages/_app/cms-pages.$pageId.tsx
+msgid "Pages with status <0>{0}</0> cannot be edited."
+msgstr "Pages with status <0>{0}</0> cannot be edited."
+
+#: src/pages/_app/cms-pages.$pageId.tsx
+#: src/pages/_app/cms-pages.create.tsx
+msgid "Parent page"
+msgstr "Parent page"
 
 #: src/features/sign-in/ui/sign-in-form.tsx
 #: src/features/signup/ui/signup-form.tsx
@@ -1723,6 +1833,10 @@ msgstr "Published"
 msgid "read-only"
 msgstr "read-only"
 
+#: src/pages/_app/cms-pages.$pageId.tsx
+msgid "Read-only"
+msgstr "Read-only"
+
 #: src/features/ban-user/ui/ban-member-modal.tsx
 msgid "Reason (optional)"
 msgstr "Reason (optional)"
@@ -1791,6 +1905,7 @@ msgstr "Reset your password"
 msgid "Restore access"
 msgstr "Restore access"
 
+#: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.index.tsx
 #: src/pages/_app/settings/general.tsx
 #: src/pages/_app/settings/security.tsx
@@ -1833,6 +1948,7 @@ msgid "Save Billing Information"
 msgstr "Save Billing Information"
 
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
+#: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/settings/general.tsx
 msgid "Save changes"
 msgstr "Save changes"
@@ -1841,6 +1957,10 @@ msgstr "Save changes"
 #: src/features/manage-organization/ui/organization-settings.tsx
 msgid "Save Changes"
 msgstr "Save Changes"
+
+#: src/pages/_app/cms-pages.$pageId.tsx
+msgid "Save failed"
+msgstr "Save failed"
 
 #: src/features/manage-organization/ui/member-actions.tsx
 #~ msgid "Save Roles"
@@ -2041,6 +2161,11 @@ msgstr "Signing you in…"
 msgid "Slim top progress bar for navigation between pages (automatic with router)."
 msgstr "Slim top progress bar for navigation between pages (automatic with router)."
 
+#: src/pages/_app/cms-pages.$pageId.tsx
+#: src/pages/_app/cms-pages.create.tsx
+msgid "Slug"
+msgstr "Slug"
+
 #: src/features/page-admin/model/types.ts
 msgid "Slug is required"
 msgstr "Slug is required"
@@ -2088,6 +2213,8 @@ msgstr "Start building"
 
 #: src/features/invite-member/ui/invitation-details-modal.tsx
 #: src/features/manage-billing/ui/refund-list.tsx
+#: src/pages/_app/cms-pages.$pageId.tsx
+#: src/pages/_app/cms-pages.create.tsx
 #: src/pages/_app/cms-pages.index.tsx
 #: src/pages/_app/settings/organization.tsx
 msgid "Status"
@@ -2174,13 +2301,16 @@ msgstr "Team members"
 msgid "Team Members"
 msgstr "Team Members"
 
+#: src/pages/_app/cms-pages.$pageId.tsx
+#: src/pages/_app/cms-pages.create.tsx
 #: src/pages/_app/cms-pages.index.tsx
 msgid "Template"
 msgstr "Template"
 
-#: src/pages/admin/subscriptions.tsx
-#~ msgid "Tenant"
-#~ msgstr "Tenant"
+#: src/pages/_app/cms-pages.$pageId.tsx
+#: src/pages/_app/cms-pages.create.tsx
+msgid "Tenant"
+msgstr "Tenant"
 
 #: src/features/edit-tenant/ui/edit-tenant-modal.tsx
 #~ msgid "Tenant key"
@@ -2364,6 +2494,11 @@ msgstr "Uppercase and lowercase letters"
 msgid "Uppercase letter"
 msgstr "Uppercase letter"
 
+#: src/pages/_app/cms-pages.$pageId.tsx
+#: src/pages/_app/cms-pages.create.tsx
+msgid "URL path, e.g. about-us or blog/post"
+msgstr "URL path, e.g. about-us or blog/post"
+
 #: src/pages/admin/users.$userId.tsx
 #~ msgid "User"
 #~ msgstr "User"
@@ -2510,6 +2645,8 @@ msgstr "You do not have permission to access this area."
 msgid "You do not have permission to access this area. Please sign in with an account that has the appropriate membership."
 msgstr "You do not have permission to access this area. Please sign in with an account that has the appropriate membership."
 
+#: src/pages/_app/cms-pages.$pageId.tsx
+#: src/pages/_app/cms-pages.create.tsx
 #: src/pages/_app/cms-pages.index.tsx
 msgid "You do not have permission to manage CMS pages."
 msgstr "You do not have permission to manage CMS pages."
