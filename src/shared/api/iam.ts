@@ -27,6 +27,12 @@ export interface UserProfile {
   locale: string | null;
   /** Public URL of the user's avatar image. Null when no avatar has been uploaded. */
   avatarUrl: string | null;
+  /** ISO-8601 timestamp of the user's first sign-in. Null if they haven't signed in yet. */
+  firstSignInAt: string | null;
+  /** Whether the user has completed the welcome onboarding flow. */
+  onboardingCompleted: boolean;
+  /** Whether the user has completed initial profile setup (name fields populated). */
+  profileCompleted: boolean;
   /** Tenant names the user belongs to (aggregated server-side). */
   organizations: string[];
   /** Membership-level authorities across all tenants (e.g. TENANT_OWNER, ADMIN, MEMBER). */
