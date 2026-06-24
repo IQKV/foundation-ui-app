@@ -61,6 +61,10 @@ export const Route = createFileRoute("/_app")({
           clearSession();
           throw redirect({ to: "/sign-in", search: { reason: "forbidden" } });
         }
+        // Profile not yet completed → gate before entering the app
+        if (!payload.profile_completed) {
+          throw redirect({ to: "/complete-profile" });
+        }
         return;
       } catch (err) {
         if (isRedirect(err)) throw err;
@@ -80,6 +84,11 @@ export const Route = createFileRoute("/_app")({
     if (!isTenantSession(payload)) {
       clearSession();
       throw redirect({ to: "/sign-in", search: { redirect: location.href } });
+    }
+
+    // Profile not yet completed → gate before entering the app
+    if (!payload.profile_completed) {
+      throw redirect({ to: "/complete-profile" });
     }
   },
 

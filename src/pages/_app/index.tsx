@@ -242,7 +242,11 @@ interface PersonalWelcomeProps {
 }
 
 function PersonalWelcome({ firstName, lastName, email }: PersonalWelcomeProps) {
-  const initials = `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase();
+  const initials =
+    [firstName, lastName]
+      .map((s) => s?.trim().charAt(0) ?? "")
+      .join("")
+      .toUpperCase() || "?";
 
   return (
     <Paper withBorder radius="md" p="xl">

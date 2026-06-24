@@ -14,6 +14,7 @@ export interface JwtPayload {
   authorities: string[];
   email_verified: boolean;
   onboarding_completed: boolean;
+  profile_completed: boolean;
   exp: number;
   iat: number;
 }

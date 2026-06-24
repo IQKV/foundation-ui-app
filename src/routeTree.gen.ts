@@ -18,6 +18,7 @@ import { Route as MagicLinkRouteImport } from "./pages/magic-link"
 import { Route as LoadingDemoRouteImport } from "./pages/loading-demo"
 import { Route as ForgotPasswordRouteImport } from "./pages/forgot-password"
 import { Route as CreateOrganizationRouteImport } from "./pages/create-organization"
+import { Route as CompleteProfileRouteImport } from "./pages/complete-profile"
 import { Route as AppRouteImport } from "./pages/_app"
 import { Route as R500RouteImport } from "./pages/500"
 import { Route as R404RouteImport } from "./pages/404"
@@ -79,6 +80,11 @@ const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
 const CreateOrganizationRoute = CreateOrganizationRouteImport.update({
   id: "/create-organization",
   path: "/create-organization",
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CompleteProfileRoute = CompleteProfileRouteImport.update({
+  id: "/complete-profile",
+  path: "/complete-profile",
   getParentRoute: () => rootRouteImport,
 } as any)
 const AppRoute = AppRouteImport.update({
@@ -171,6 +177,7 @@ export interface FileRoutesByFullPath {
   "/404": typeof R404Route
   "/500": typeof R500Route
   "/": typeof AppIndexRoute
+  "/complete-profile": typeof CompleteProfileRoute
   "/create-organization": typeof CreateOrganizationRoute
   "/forgot-password": typeof ForgotPasswordRoute
   "/loading-demo": typeof LoadingDemoRoute
@@ -197,6 +204,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   "/404": typeof R404Route
   "/500": typeof R500Route
+  "/complete-profile": typeof CompleteProfileRoute
   "/create-organization": typeof CreateOrganizationRoute
   "/forgot-password": typeof ForgotPasswordRoute
   "/loading-demo": typeof LoadingDemoRoute
@@ -224,6 +232,7 @@ export interface FileRoutesById {
   "/404": typeof R404Route
   "/500": typeof R500Route
   "/_app": typeof AppRouteWithChildren
+  "/complete-profile": typeof CompleteProfileRoute
   "/create-organization": typeof CreateOrganizationRoute
   "/forgot-password": typeof ForgotPasswordRoute
   "/loading-demo": typeof LoadingDemoRoute
@@ -254,6 +263,7 @@ export interface FileRouteTypes {
     | "/404"
     | "/500"
     | "/"
+    | "/complete-profile"
     | "/create-organization"
     | "/forgot-password"
     | "/loading-demo"
@@ -280,6 +290,7 @@ export interface FileRouteTypes {
   to:
     | "/404"
     | "/500"
+    | "/complete-profile"
     | "/create-organization"
     | "/forgot-password"
     | "/loading-demo"
@@ -306,6 +317,7 @@ export interface FileRouteTypes {
     | "/404"
     | "/500"
     | "/_app"
+    | "/complete-profile"
     | "/create-organization"
     | "/forgot-password"
     | "/loading-demo"
@@ -335,6 +347,7 @@ export interface RootRouteChildren {
   R404Route: typeof R404Route
   R500Route: typeof R500Route
   AppRoute: typeof AppRouteWithChildren
+  CompleteProfileRoute: typeof CompleteProfileRoute
   CreateOrganizationRoute: typeof CreateOrganizationRoute
   ForgotPasswordRoute: typeof ForgotPasswordRoute
   LoadingDemoRoute: typeof LoadingDemoRoute
@@ -410,6 +423,13 @@ declare module "@tanstack/react-router" {
       path: "/create-organization"
       fullPath: "/create-organization"
       preLoaderRoute: typeof CreateOrganizationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    "/complete-profile": {
+      id: "/complete-profile"
+      path: "/complete-profile"
+      fullPath: "/complete-profile"
+      preLoaderRoute: typeof CompleteProfileRouteImport
       parentRoute: typeof rootRouteImport
     }
     "/_app": {
@@ -592,6 +612,7 @@ const rootRouteChildren: RootRouteChildren = {
   R404Route: R404Route,
   R500Route: R500Route,
   AppRoute: AppRouteWithChildren,
+  CompleteProfileRoute: CompleteProfileRoute,
   CreateOrganizationRoute: CreateOrganizationRoute,
   ForgotPasswordRoute: ForgotPasswordRoute,
   LoadingDemoRoute: LoadingDemoRoute,

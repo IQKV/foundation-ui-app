@@ -38,8 +38,14 @@ function OwnerCard() {
 
   if (!payload) return null;
 
-  const initials = `${payload.firstName.charAt(0)}${payload.lastName.charAt(0)}`.toUpperCase();
-  const displayName = `${payload.firstName} ${payload.lastName}`.trim();
+  const firstName = payload.firstName ?? "";
+  const lastName = payload.lastName ?? "";
+  const initials =
+    [firstName, lastName]
+      .map((s) => s.trim().charAt(0))
+      .join("")
+      .toUpperCase() || "?";
+  const displayName = `${firstName} ${lastName}`.trim() || payload.email;
 
   return (
     <Stack gap="xs">

@@ -260,6 +260,10 @@ export const iamApi = {
   deleteAvatar: (): Promise<void> =>
     httpClient.delete("/v1/iam/users/me/avatar").then(() => undefined),
 
+  /** Mark profile setup as completed. */
+  completeProfile: (): Promise<void> =>
+    httpClient.post("/v1/iam/users/me/profile/complete").then(() => undefined),
+
   /** Mark onboarding as completed. */
   completeOnboarding: (): Promise<void> =>
     httpClient.post("/v1/iam/users/me/onboarding/complete").then(() => undefined),
