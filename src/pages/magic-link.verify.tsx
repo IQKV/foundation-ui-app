@@ -10,6 +10,7 @@ import { AuthLayout } from "@/shared/ui";
 import { MagicLinkExchangeForm } from "@/features/magic-link";
 import { decodeJwt, isTenantSession } from "@/shared/lib/jwt";
 import { getAccessToken } from "@/processes/session";
+import { isMagicLinkEnabled } from "@/app/config/runtime-env";
 
 const magicLinkVerifySearchSchema = z.object({
   token: z.string(),
@@ -20,6 +21,9 @@ export const Route = createFileRoute("/magic-link/verify")({
   validateSearch: magicLinkVerifySearchSchema,
 
   beforeLoad: () => {
+    if (!isMagicLinkEnabled) {
+      throw redirect({ to: "/sign-in" });
+    }
     const token = getAccessToken();
     if (token) {
       const payload = decodeJwt(token);

@@ -12,7 +12,7 @@ import {
 import { IconAlertCircle, IconBuilding, IconUser, IconShieldHalf } from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Link } from "@tanstack/react-router";
-import { isDemoMode } from "@/app/config/runtime-env";
+import { isDemoMode, isMagicLinkEnabled } from "@/app/config/runtime-env";
 import { useSignIn } from "../model/use-sign-in";
 import type { SignInFormValues } from "../model/use-sign-in";
 import { DemoCredentialsHint } from "./demo-credentials-hint";
@@ -148,11 +148,13 @@ export function SignInForm({ redirectTo }: SignInFormProps) {
         </Button>
 
         {/* Magic link option */}
-        <Group justify="center" mt="md">
-          <Text component={Link} to="/magic-link" size="sm" c="blue.6">
-            <Trans>Use magic link instead</Trans>
-          </Text>
-        </Group>
+        {isMagicLinkEnabled && (
+          <Group justify="center" mt="md">
+            <Text component={Link} to="/magic-link" size="sm" c="blue.6">
+              <Trans>Use magic link instead</Trans>
+            </Text>
+          </Group>
+        )}
       </Stack>
     </form>
   );

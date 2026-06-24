@@ -8,6 +8,7 @@ const ENV_KEYS = [
   "VITE_LOG_LEVEL",
   "VITE_ROLLOUT_MODE",
   "VITE_DEMO_MODE",
+  "VITE_ENABLE_MAGIC_LINK",
 ] as const;
 
 export const clientBuildEnv: Record<string, string | undefined> = Object.fromEntries(
@@ -23,3 +24,4 @@ export const isMultiTenantMode = rolloutMode === "MULTI_TENANT";
 export const isSingleTenantMode = rolloutMode === "SINGLE_TENANT";
 
 export const isDemoMode = getConfig("VITE_DEMO_MODE", "false") === "true";
+export const isMagicLinkEnabled = getConfig("VITE_ENABLE_MAGIC_LINK", "true") === "true";
