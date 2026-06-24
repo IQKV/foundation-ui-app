@@ -47,7 +47,7 @@ export function useCompleteProfile(): UseCompleteProfileReturn {
   const { tenantKey } = useSession();
 
   const form = useForm<CompleteProfileFormValues>({
-    initialValues: { firstName: "", lastName: "", locale: null },
+    initialValues: { firstName: "", lastName: "", locale: "" },
     validate: (values) => validateWithZod(buildCompleteProfileSchema(), values),
   });
 
@@ -55,18 +55,16 @@ export function useCompleteProfile(): UseCompleteProfileReturn {
     setIsLoading(true);
     setErrorMessage(null);
     try {
-      // 1. Persist the name (and optional locale)
+      // 1. Persist the name and locale
       await iamApi.updateMe({
         firstName: values.firstName,
         lastName: values.lastName,
-        locale: values.locale ?? undefined,
+        locale: values.locale,
       });
 
-      // 2. Activate locale in Lingui immediately if the user chose one
-      if (values.locale) {
-        await dynamicActivateLocale(values.locale);
-        document.cookie = `locale=${values.locale};path=/;max-age=31536000;SameSite=Lax`;
-      }
+      // 2. Activate locale in Lingui immediately
+      await dynamicActivateLocale(values.locale);
+      document.cookie = `locale=${values.locale};path=/;max-age=31536000;SameSite=Lax`;
 
       // 3. Mark profile as completed
       await iamApi.completeProfile();

@@ -11,8 +11,8 @@ export function buildCompleteProfileSchema() {
       .string()
       .min(1, t`Last name is required`)
       .max(100),
-    /** BCP 47 locale tag (e.g. "en-US"). Null means "leave unchanged". */
-    locale: z.string().nullable(),
+    /** BCP 47 locale tag (e.g. "en-US"). */
+    locale: z.string().min(1, t`Language is required`),
   });
 }
 

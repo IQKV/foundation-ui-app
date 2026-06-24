@@ -2,6 +2,7 @@ import { Alert, Button, Group, Loader, Select, Stack, Text, TextInput } from "@m
 import { IconAlertCircle } from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
 import { localesApi } from "@/shared/api";
 import { useCompleteProfile } from "../model";
 
@@ -20,6 +21,13 @@ export function CompleteProfileForm() {
       value: l.code,
       label: l.nativeName ? `${l.name} — ${l.nativeName}` : l.name,
     })) ?? [];
+
+  // Set default locale to first option when locales are loaded
+  useEffect(() => {
+    if (locales && locales.length > 0 && !form.values.locale) {
+      form.setFieldValue("locale", locales[0].code);
+    }
+  }, [locales, form]);
 
   const handleFormSubmit = form.onSubmit((values) => onSubmit(values));
 
@@ -69,11 +77,10 @@ export function CompleteProfileForm() {
         <Select
           label={t`Language`}
           description={t`Sets your preferred language for notifications and emails.`}
-          placeholder={localesLoading ? t`Loading…` : t`Select language (optional)`}
+          placeholder={localesLoading ? t`Loading…` : t`Select language`}
           data={localeOptions}
           rightSection={localesLoading ? <Loader size="xs" /> : undefined}
           disabled={localesLoading || isLoading}
-          clearable
           searchable
           data-testid="complete-profile-locale"
           {...form.getInputProps("locale")}
