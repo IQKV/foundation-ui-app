@@ -58,16 +58,6 @@ export function MagicLinkInitiateForm() {
           {...form.getInputProps("email")}
         />
 
-        <TextInput
-          id="magic-link-tenant-key"
-          data-testid="magic-link-tenant-key-input"
-          label={t`Organization Key (optional)`}
-          placeholder={t`e.g., acme-corp`}
-          disabled={isLoading}
-          inputWrapperOrder={["label", "input", "error"]}
-          {...form.getInputProps("tenantKey")}
-        />
-
         <Button type="submit" fullWidth loading={isLoading} disabled={isLoading}>
           <Trans>Send magic link</Trans>
         </Button>

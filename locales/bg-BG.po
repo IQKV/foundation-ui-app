@@ -653,8 +653,8 @@ msgid "e.g. default, landing"
 msgstr ""
 
 #: src/features/magic-link/ui/magic-link-initiate-form.tsx
-msgid "e.g., acme-corp"
-msgstr ""
+#~ msgid "e.g., acme-corp"
+#~ msgstr ""
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.index.tsx
@@ -1317,8 +1317,8 @@ msgid "Organization Key"
 msgstr "Ключ на организацията"
 
 #: src/features/magic-link/ui/magic-link-initiate-form.tsx
-msgid "Organization Key (optional)"
-msgstr ""
+#~ msgid "Organization Key (optional)"
+#~ msgstr ""
 
 #: src/features/create-organization/ui/create-organization-form.tsx
 msgid "Organization name"

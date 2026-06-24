@@ -779,8 +779,8 @@ msgid "e.g. default, landing"
 msgstr "e.g. default, landing"
 
 #: src/features/magic-link/ui/magic-link-initiate-form.tsx
-msgid "e.g., acme-corp"
-msgstr "e.g., acme-corp"
+#~ msgid "e.g., acme-corp"
+#~ msgstr "e.g., acme-corp"
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.index.tsx
@@ -1605,8 +1605,8 @@ msgid "Organization Key"
 msgstr "Organization Key"
 
 #: src/features/magic-link/ui/magic-link-initiate-form.tsx
-msgid "Organization Key (optional)"
-msgstr "Organization Key (optional)"
+#~ msgid "Organization Key (optional)"
+#~ msgstr "Organization Key (optional)"
 
 #: src/features/create-organization/ui/create-organization-form.tsx
 msgid "Organization name"

@@ -13,7 +13,6 @@ function buildMagicLinkInitiateSchema() {
       .string()
       .min(1, t`Email is required`)
       .email(t`Enter a valid email address`),
-    tenantKey: z.string().optional(),
   });
 }
 
@@ -41,10 +40,10 @@ export function useMagicLinkInitiate(): UseMagicLinkInitiateReturn {
   const [isLoading, setIsLoading] = useState(false);
   const [isEmailSent, setIsEmailSent] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [pendingValues, setPendingValues] = useState<MagicLinkInitiateFormValues | null>(null);
+  const [pendingEmail, setPendingEmail] = useState<string | null>(null);
 
   const form = useForm<MagicLinkInitiateFormValues>({
-    initialValues: { email: "", tenantKey: "" },
+    initialValues: { email: "" },
     validate: (values) => validateWithZod(buildMagicLinkInitiateSchema(), values),
   });
 
@@ -54,10 +53,9 @@ export function useMagicLinkInitiate(): UseMagicLinkInitiateReturn {
     try {
       const request = {
         email: values.email,
-        ...(values.tenantKey ? { tenantKey: values.tenantKey } : {}),
       };
       await authApi.initiateMagicLink(request);
-      setPendingValues(values);
+      setPendingEmail(values.email);
       setIsEmailSent(true);
     } catch (err: unknown) {
       const status = isAxiosError(err) ? (err.response?.status ?? 0) : 0;
@@ -68,13 +66,12 @@ export function useMagicLinkInitiate(): UseMagicLinkInitiateReturn {
   };
 
   const onResend = async () => {
-    if (!pendingValues) return;
+    if (!pendingEmail) return;
     setIsLoading(true);
     setErrorMessage(null);
     try {
       const request = {
-        email: pendingValues.email,
-        ...(pendingValues.tenantKey ? { tenantKey: pendingValues.tenantKey } : {}),
+        email: pendingEmail,
       };
       await authApi.resendMagicLink(request);
     } catch (err: unknown) {
