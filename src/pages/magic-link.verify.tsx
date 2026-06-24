@@ -1,10 +1,7 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
-import { Alert, Box, Stack, Text, Title } from "@mantine/core";
-import { IconAlertCircle } from "@tabler/icons-react";
 import { z } from "zod";
-import { Trans, useLingui } from "@lingui/react/macro";
+import { useLingui } from "@lingui/react/macro";
 import { Helmet } from "@dr.pogodin/react-helmet";
-import { Link } from "@tanstack/react-router";
 import { pageTitle } from "@/shared/lib/page-title";
 import { AuthLayout } from "@/shared/ui";
 import { MagicLinkExchangeForm } from "@/features/magic-link";

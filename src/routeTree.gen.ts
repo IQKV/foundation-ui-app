@@ -21,6 +21,7 @@ import { Route as CreateOrganizationRouteImport } from "./pages/create-organizat
 import { Route as AppRouteImport } from "./pages/_app"
 import { Route as R500RouteImport } from "./pages/500"
 import { Route as R404RouteImport } from "./pages/404"
+import { Route as MagicLinkIndexRouteImport } from "./pages/magic-link.index"
 import { Route as AppIndexRouteImport } from "./pages/_app/index"
 import { Route as MagicLinkVerifyRouteImport } from "./pages/magic-link.verify"
 import { Route as InviteTokenRouteImport } from "./pages/invite.$token"
@@ -93,6 +94,11 @@ const R404Route = R404RouteImport.update({
   id: "/404",
   path: "/404",
   getParentRoute: () => rootRouteImport,
+} as any)
+const MagicLinkIndexRoute = MagicLinkIndexRouteImport.update({
+  id: "/",
+  path: "/",
+  getParentRoute: () => MagicLinkRoute,
 } as any)
 const AppIndexRoute = AppIndexRouteImport.update({
   id: "/",
@@ -179,6 +185,7 @@ export interface FileRoutesByFullPath {
   "/team": typeof AppTeamRoute
   "/invite/$token": typeof InviteTokenRoute
   "/magic-link/verify": typeof MagicLinkVerifyRoute
+  "/magic-link/": typeof MagicLinkIndexRoute
   "/cms-pages/$pageId": typeof AppCmsPagesPageIdRoute
   "/cms-pages/create": typeof AppCmsPagesCreateRoute
   "/settings/general": typeof AppSettingsGeneralRoute
@@ -193,7 +200,6 @@ export interface FileRoutesByTo {
   "/create-organization": typeof CreateOrganizationRoute
   "/forgot-password": typeof ForgotPasswordRoute
   "/loading-demo": typeof LoadingDemoRoute
-  "/magic-link": typeof MagicLinkRouteWithChildren
   "/reset-password": typeof ResetPasswordRoute
   "/sign-in": typeof SignInRoute
   "/signup": typeof SignupRoute
@@ -204,6 +210,7 @@ export interface FileRoutesByTo {
   "/invite/$token": typeof InviteTokenRoute
   "/magic-link/verify": typeof MagicLinkVerifyRoute
   "/": typeof AppIndexRoute
+  "/magic-link": typeof MagicLinkIndexRoute
   "/cms-pages/$pageId": typeof AppCmsPagesPageIdRoute
   "/cms-pages/create": typeof AppCmsPagesCreateRoute
   "/settings/general": typeof AppSettingsGeneralRoute
@@ -232,6 +239,7 @@ export interface FileRoutesById {
   "/invite/$token": typeof InviteTokenRoute
   "/magic-link/verify": typeof MagicLinkVerifyRoute
   "/_app/": typeof AppIndexRoute
+  "/magic-link/": typeof MagicLinkIndexRoute
   "/_app/cms-pages/$pageId": typeof AppCmsPagesPageIdRoute
   "/_app/cms-pages/create": typeof AppCmsPagesCreateRoute
   "/_app/settings/general": typeof AppSettingsGeneralRoute
@@ -260,6 +268,7 @@ export interface FileRouteTypes {
     | "/team"
     | "/invite/$token"
     | "/magic-link/verify"
+    | "/magic-link/"
     | "/cms-pages/$pageId"
     | "/cms-pages/create"
     | "/settings/general"
@@ -274,7 +283,6 @@ export interface FileRouteTypes {
     | "/create-organization"
     | "/forgot-password"
     | "/loading-demo"
-    | "/magic-link"
     | "/reset-password"
     | "/sign-in"
     | "/signup"
@@ -285,6 +293,7 @@ export interface FileRouteTypes {
     | "/invite/$token"
     | "/magic-link/verify"
     | "/"
+    | "/magic-link"
     | "/cms-pages/$pageId"
     | "/cms-pages/create"
     | "/settings/general"
@@ -312,6 +321,7 @@ export interface FileRouteTypes {
     | "/invite/$token"
     | "/magic-link/verify"
     | "/_app/"
+    | "/magic-link/"
     | "/_app/cms-pages/$pageId"
     | "/_app/cms-pages/create"
     | "/_app/settings/general"
@@ -422,6 +432,13 @@ declare module "@tanstack/react-router" {
       fullPath: "/404"
       preLoaderRoute: typeof R404RouteImport
       parentRoute: typeof rootRouteImport
+    }
+    "/magic-link/": {
+      id: "/magic-link/"
+      path: "/"
+      fullPath: "/magic-link/"
+      preLoaderRoute: typeof MagicLinkIndexRouteImport
+      parentRoute: typeof MagicLinkRoute
     }
     "/_app/": {
       id: "/_app/"
@@ -559,10 +576,12 @@ const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 
 interface MagicLinkRouteChildren {
   MagicLinkVerifyRoute: typeof MagicLinkVerifyRoute
+  MagicLinkIndexRoute: typeof MagicLinkIndexRoute
 }
 
 const MagicLinkRouteChildren: MagicLinkRouteChildren = {
   MagicLinkVerifyRoute: MagicLinkVerifyRoute,
+  MagicLinkIndexRoute: MagicLinkIndexRoute,
 }
 
 const MagicLinkRouteWithChildren = MagicLinkRoute._addFileChildren(
