@@ -267,6 +267,11 @@ msgstr ""
 msgid "Back to sign in"
 msgstr "Обратно към вход"
 
+#: src/features/magic-link/ui/magic-link-exchange-form.tsx
+#: src/features/magic-link/ui/magic-link-initiate-form.tsx
+msgid "Back to sign-in"
+msgstr ""
+
 #: src/features/ban-user/ui/ban-member-modal.tsx
 msgid "Ban member"
 msgstr "Забрани член"
@@ -343,6 +348,10 @@ msgstr "Промяна на парола"
 #: src/features/manage-organization/ui/member-actions.tsx
 msgid "Change Role"
 msgstr "Промяна на роля"
+
+#: src/features/magic-link/ui/magic-link-initiate-form.tsx
+msgid "Check your email"
+msgstr ""
 
 #: src/features/forgot-password/ui/forgot-password-form.tsx
 #: src/features/signup/ui/verify-email-prompt.tsx
@@ -643,6 +652,10 @@ msgstr ""
 msgid "e.g. default, landing"
 msgstr ""
 
+#: src/features/magic-link/ui/magic-link-initiate-form.tsx
+msgid "e.g., acme-corp"
+msgstr ""
+
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.index.tsx
 #: src/pages/_app/settings/organization.tsx
@@ -664,6 +677,7 @@ msgstr "Редактирай профил"
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 #: src/features/forgot-password/ui/forgot-password-form.tsx
 #: src/features/invite-member/ui/invitation-details-modal.tsx
+#: src/features/magic-link/ui/magic-link-initiate-form.tsx
 #: src/features/sign-in/ui/sign-in-form.tsx
 #: src/pages/_app/settings/general.tsx
 #: src/pages/invite.$token.tsx
@@ -679,6 +693,7 @@ msgid "email address."
 msgstr "имейл адрес."
 
 #: src/features/forgot-password/model/use-forgot-password.ts
+#: src/features/magic-link/model/use-magic-link-initiate.ts
 #: src/features/sign-in/model/use-sign-in.ts
 #: src/features/signup/model/use-signup.ts
 msgid "Email is required"
@@ -702,6 +717,7 @@ msgid "email@company.com"
 msgstr "имейл@компания.com"
 
 #: src/features/forgot-password/model/use-forgot-password.ts
+#: src/features/magic-link/model/use-magic-link-initiate.ts
 #: src/features/sign-in/model/use-sign-in.ts
 #: src/features/signup/model/use-signup.ts
 msgid "Enter a valid email address"
@@ -720,6 +736,10 @@ msgstr "Въведете имейл адреса, свързан с акаунт
 #: src/pages/_app/settings/security.tsx
 msgid "Enter your current password"
 msgstr "Въведете текущата си парола"
+
+#: src/pages/magic-link.tsx
+msgid "Enter your email and we'll send you a magic link to sign in."
+msgstr ""
 
 #: src/pages/invite.$token.tsx
 msgid "Enter your password to confirm your identity and join."
@@ -1055,6 +1075,10 @@ msgstr ""
 msgid "Lowercase letter"
 msgstr "Малка буква"
 
+#: src/features/magic-link/model/use-magic-link-exchange.ts
+msgid "Magic link is invalid or has expired. Please request a new one."
+msgstr ""
+
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Manage user roles, permissions & access"
 msgstr ""
@@ -1292,6 +1316,10 @@ msgstr "Организация"
 msgid "Organization Key"
 msgstr "Ключ на организацията"
 
+#: src/features/magic-link/ui/magic-link-initiate-form.tsx
+msgid "Organization Key (optional)"
+msgstr ""
+
 #: src/features/create-organization/ui/create-organization-form.tsx
 msgid "Organization name"
 msgstr "Наименование на организацията"
@@ -1458,6 +1486,10 @@ msgstr ""
 msgid "Please confirm your password"
 msgstr "Моля, потвърдете паролата си"
 
+#: src/features/magic-link/ui/magic-link-exchange-form.tsx
+msgid "Please wait while we verify your magic link."
+msgstr ""
+
 #: src/features/manage-billing/model/use-billing-portal.ts
 msgid "Portal error"
 msgstr "Грешка на портала"
@@ -1521,6 +1553,10 @@ msgstr ""
 msgid "Reason (optional)"
 msgstr "Причина (по избор)"
 
+#: src/features/magic-link/ui/magic-link-exchange-form.tsx
+msgid "Redirecting to your workspace..."
+msgstr ""
+
 #: src/pages/_app/cms-pages.index.tsx
 #: src/pages/_app/settings/organization.tsx
 #: src/pages/_app/team.tsx
@@ -1557,6 +1593,10 @@ msgstr "Повторете новата парола"
 msgid "Repeat your new password"
 msgstr "Повторете новата си парола"
 
+#: src/features/magic-link/ui/magic-link-exchange-form.tsx
+msgid "Request a new magic link"
+msgstr ""
+
 #: src/features/reset-password/ui/reset-password-form.tsx
 msgid "Request a new reset link"
 msgstr "Поискайте нова връзка за нулиране"
@@ -1564,6 +1604,10 @@ msgstr "Поискайте нова връзка за нулиране"
 #: src/features/signup/ui/verify-email-prompt.tsx
 msgid "Resend in {resendCooldown}s"
 msgstr "Изпрати отново след {resendCooldown} сек"
+
+#: src/features/magic-link/ui/magic-link-initiate-form.tsx
+msgid "Resend magic link"
+msgstr ""
 
 #: src/features/signup/ui/verify-email-prompt.tsx
 msgid "Resend verification email"
@@ -1689,6 +1733,10 @@ msgstr ""
 msgid "Send invitation"
 msgstr "Изпрати покана"
 
+#: src/features/magic-link/ui/magic-link-initiate-form.tsx
+msgid "Send magic link"
+msgstr ""
+
 #: src/features/forgot-password/ui/forgot-password-form.tsx
 msgid "Send reset link"
 msgstr "Изпрати връзка за нулиране"
@@ -1764,14 +1812,35 @@ msgstr "Влезте в работното си пространство"
 msgid "Sign in to your workspace to continue."
 msgstr "Влезте в работното си пространство, за да продължите."
 
+#: src/pages/magic-link.tsx
+msgid "Sign in with magic link"
+msgstr ""
+
+#: src/features/magic-link/ui/magic-link-initiate-form.tsx
+msgid "Sign in with password instead"
+msgstr ""
+
 #: src/features/sign-out/ui/sign-out-button.tsx
 #: src/shared/ui/app-layout/app-header.tsx
 msgid "Sign out"
 msgstr "Изход"
 
+#: src/features/magic-link/model/use-magic-link-exchange.ts
 #: src/features/sign-in/model/use-sign-in.ts
 msgid "Sign-in failed. Please try again."
 msgstr "Входът не успя. Моля, опитайте отново."
+
+#: src/features/magic-link/ui/magic-link-exchange-form.tsx
+msgid "Signed in successfully!"
+msgstr ""
+
+#: src/pages/magic-link.verify.tsx
+msgid "Signing in"
+msgstr ""
+
+#: src/features/magic-link/ui/magic-link-exchange-form.tsx
+msgid "Signing you in..."
+msgstr ""
 
 #: src/pages/invite.$token.tsx
 msgid "Signing you in…"
@@ -1810,6 +1879,7 @@ msgstr "Нещо се обърка"
 #: src/features/accept-invitation/model/use-accept-invitation.ts
 #: src/features/create-organization/model/use-create-organization.ts
 #: src/features/forgot-password/model/use-forgot-password.ts
+#: src/features/magic-link/model/use-magic-link-initiate.ts
 #: src/features/reset-password/model/use-reset-password.ts
 #: src/features/signup/model/use-signup.ts
 msgid "Something went wrong. Please try again."
@@ -1978,6 +2048,10 @@ msgstr ""
 #~ msgid "To access the billing portal, please complete your subscription setup by selecting a plan."
 #~ msgstr ""
 
+#: src/features/magic-link/model/use-magic-link-initiate.ts
+msgid "Too many attempts. Please try again later."
+msgstr ""
+
 #: src/features/create-organization/model/use-create-organization.ts
 #: src/features/forgot-password/model/use-forgot-password.ts
 #: src/features/reset-password/model/use-reset-password.ts
@@ -2077,6 +2151,10 @@ msgstr "Главна буква"
 msgid "URL path, e.g. about-us or blog/post"
 msgstr ""
 
+#: src/features/sign-in/ui/sign-in-form.tsx
+msgid "Use magic link instead"
+msgstr ""
+
 #: src/pages/loading-demo.tsx
 msgid "Uses <0>@mantine/nprogress</0> for top loading bar"
 msgstr "Използва <0>@mantine/nprogress</0> за горна лента за зареждане"
@@ -2112,6 +2190,10 @@ msgstr "Ще изпратим връзка за нулиране на вашия
 #: src/features/signup/ui/provisioning-wait.tsx
 msgid "We're preparing your workspace. This usually takes just a few seconds."
 msgstr "Подготвяме работното ви пространство. Обикновено отнема само няколко секунди."
+
+#: src/features/magic-link/ui/magic-link-initiate-form.tsx
+msgid "We've sent a magic link to your inbox. Click it to sign in!"
+msgstr ""
 
 #: src/features/signup/ui/password-strength.tsx
 msgid "Weak"
@@ -2204,6 +2286,7 @@ msgid "you@company.com"
 msgstr "you@company.com"
 
 #: src/features/forgot-password/ui/forgot-password-form.tsx
+#: src/features/magic-link/ui/magic-link-initiate-form.tsx
 #: src/features/sign-in/ui/sign-in-form.tsx
 msgid "you@example.com"
 msgstr "you@example.com"

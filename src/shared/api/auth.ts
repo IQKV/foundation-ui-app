@@ -33,6 +33,17 @@ export interface SignupStatusResponse {
 
 export type ProvisioningStatus = "PROVISIONING" | "ACTIVE" | "PROVISIONING_FAILED";
 
+export interface MagicLinkInitiateRequest {
+  email: string;
+  tenantKey?: string;
+}
+
+export interface MagicLinkExchangeRequest {
+  token: string;
+}
+
+export type MagicLinkResponse = SignInResponse;
+
 // ─── API ──────────────────────────────────────────────────────────────────────
 
 /**
@@ -98,4 +109,26 @@ export const authApi = {
    * The Bearer token is attached automatically by the auth interceptor.
    */
   signOut: (): Promise<void> => httpClient.post("/v1/iam/auth/signout").then(() => undefined),
+
+  /**
+   * Initiate magic link authentication - sends email with magic link token.
+   * Always returns 204 (no content) to prevent email enumeration.
+   */
+  initiateMagicLink: (body: MagicLinkInitiateRequest): Promise<void> =>
+    httpClient.post("/v1/iam/auth/magic-link/initiate", body).then(() => undefined),
+
+  /**
+   * Resend magic link authentication email - only if token exists and is valid.
+   * Always returns 204 (no content) to prevent email enumeration.
+   */
+  resendMagicLink: (body: MagicLinkInitiateRequest): Promise<void> =>
+    httpClient.post("/v1/iam/auth/magic-link/resend", body).then(() => undefined),
+
+  /**
+   * Exchange magic link token for JWT access and refresh tokens.
+   */
+  exchangeMagicLink: (body: MagicLinkExchangeRequest): Promise<MagicLinkResponse> =>
+    httpClient
+      .post<MagicLinkResponse>("/v1/iam/auth/magic-link/exchange", body)
+      .then((r) => r.data),
 };

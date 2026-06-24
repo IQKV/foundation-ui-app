@@ -146,6 +146,13 @@ export function SignInForm({ redirectTo }: SignInFormProps) {
         >
           <Trans>Continue</Trans>
         </Button>
+
+        {/* Magic link option */}
+        <Group justify="center" mt="md">
+          <Text component={Link} to="/magic-link" size="sm" c="blue.6">
+            <Trans>Use magic link instead</Trans>
+          </Text>
+        </Group>
       </Stack>
     </form>
   );

@@ -311,6 +311,11 @@ msgstr "Back to list"
 msgid "Back to sign in"
 msgstr "Back to sign in"
 
+#: src/features/magic-link/ui/magic-link-exchange-form.tsx
+#: src/features/magic-link/ui/magic-link-initiate-form.tsx
+msgid "Back to sign-in"
+msgstr "Back to sign-in"
+
 #: src/features/ban-user/ui/ban-member-modal.tsx
 msgid "Ban member"
 msgstr "Ban member"
@@ -411,6 +416,10 @@ msgstr "Change Role"
 #: src/pages/signup.tsx
 #~ msgid "Check email"
 #~ msgstr "Check email"
+
+#: src/features/magic-link/ui/magic-link-initiate-form.tsx
+msgid "Check your email"
+msgstr "Check your email"
 
 #: src/features/forgot-password/ui/forgot-password-form.tsx
 #: src/features/signup/ui/verify-email-prompt.tsx
@@ -769,6 +778,10 @@ msgstr "Draft"
 msgid "e.g. default, landing"
 msgstr "e.g. default, landing"
 
+#: src/features/magic-link/ui/magic-link-initiate-form.tsx
+msgid "e.g., acme-corp"
+msgstr "e.g., acme-corp"
+
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.index.tsx
 #: src/pages/_app/settings/organization.tsx
@@ -822,6 +835,7 @@ msgstr "Edit Profile"
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 #: src/features/forgot-password/ui/forgot-password-form.tsx
 #: src/features/invite-member/ui/invitation-details-modal.tsx
+#: src/features/magic-link/ui/magic-link-initiate-form.tsx
 #: src/features/sign-in/ui/sign-in-form.tsx
 #: src/pages/_app/settings/general.tsx
 #: src/pages/invite.$token.tsx
@@ -837,6 +851,7 @@ msgid "email address."
 msgstr "email address."
 
 #: src/features/forgot-password/model/use-forgot-password.ts
+#: src/features/magic-link/model/use-magic-link-initiate.ts
 #: src/features/sign-in/model/use-sign-in.ts
 #: src/features/signup/model/use-signup.ts
 msgid "Email is required"
@@ -864,6 +879,7 @@ msgid "email@company.com"
 msgstr "email@company.com"
 
 #: src/features/forgot-password/model/use-forgot-password.ts
+#: src/features/magic-link/model/use-magic-link-initiate.ts
 #: src/features/sign-in/model/use-sign-in.ts
 #: src/features/signup/model/use-signup.ts
 msgid "Enter a valid email address"
@@ -882,6 +898,10 @@ msgstr "Enter the email address associated with your account and we'll send you 
 #: src/pages/_app/settings/security.tsx
 msgid "Enter your current password"
 msgstr "Enter your current password"
+
+#: src/pages/magic-link.tsx
+msgid "Enter your email and we'll send you a magic link to sign in."
+msgstr "Enter your email and we'll send you a magic link to sign in."
 
 #: src/pages/invite.$token.tsx
 msgid "Enter your password to confirm your identity and join."
@@ -1275,6 +1295,10 @@ msgstr "Locked / Suspended"
 msgid "Lowercase letter"
 msgstr "Lowercase letter"
 
+#: src/features/magic-link/model/use-magic-link-exchange.ts
+msgid "Magic link is invalid or has expired. Please request a new one."
+msgstr "Magic link is invalid or has expired. Please request a new one."
+
 #: src/pages/admin/index.tsx
 #~ msgid "Manage organizations"
 #~ msgstr "Manage organizations"
@@ -1580,6 +1604,10 @@ msgstr "Organization"
 msgid "Organization Key"
 msgstr "Organization Key"
 
+#: src/features/magic-link/ui/magic-link-initiate-form.tsx
+msgid "Organization Key (optional)"
+msgstr "Organization Key (optional)"
+
 #: src/features/create-organization/ui/create-organization-form.tsx
 msgid "Organization name"
 msgstr "Organization name"
@@ -1778,6 +1806,10 @@ msgstr "Platform Highlights"
 msgid "Please confirm your password"
 msgstr "Please confirm your password"
 
+#: src/features/magic-link/ui/magic-link-exchange-form.tsx
+msgid "Please wait while we verify your magic link."
+msgstr "Please wait while we verify your magic link."
+
 #: src/features/manage-billing/model/use-billing-portal.ts
 msgid "Portal error"
 msgstr "Portal error"
@@ -1841,6 +1873,10 @@ msgstr "Read-only"
 msgid "Reason (optional)"
 msgstr "Reason (optional)"
 
+#: src/features/magic-link/ui/magic-link-exchange-form.tsx
+msgid "Redirecting to your workspace..."
+msgstr "Redirecting to your workspace..."
+
 #: src/pages/_app/cms-pages.index.tsx
 #: src/pages/_app/settings/organization.tsx
 #: src/pages/_app/team.tsx
@@ -1881,6 +1917,10 @@ msgstr "Repeat new password"
 msgid "Repeat your new password"
 msgstr "Repeat your new password"
 
+#: src/features/magic-link/ui/magic-link-exchange-form.tsx
+msgid "Request a new magic link"
+msgstr "Request a new magic link"
+
 #: src/features/reset-password/ui/reset-password-form.tsx
 msgid "Request a new reset link"
 msgstr "Request a new reset link"
@@ -1888,6 +1928,10 @@ msgstr "Request a new reset link"
 #: src/features/signup/ui/verify-email-prompt.tsx
 msgid "Resend in {resendCooldown}s"
 msgstr "Resend in {resendCooldown}s"
+
+#: src/features/magic-link/ui/magic-link-initiate-form.tsx
+msgid "Resend magic link"
+msgstr "Resend magic link"
 
 #: src/features/signup/ui/verify-email-prompt.tsx
 msgid "Resend verification email"
@@ -2033,6 +2077,10 @@ msgstr "Send email verifications, password resets & invitations"
 msgid "Send invitation"
 msgstr "Send invitation"
 
+#: src/features/magic-link/ui/magic-link-initiate-form.tsx
+msgid "Send magic link"
+msgstr "Send magic link"
+
 #: src/features/forgot-password/ui/forgot-password-form.tsx
 msgid "Send reset link"
 msgstr "Send reset link"
@@ -2144,14 +2192,35 @@ msgstr "Sign in to your workspace"
 msgid "Sign in to your workspace to continue."
 msgstr "Sign in to your workspace to continue."
 
+#: src/pages/magic-link.tsx
+msgid "Sign in with magic link"
+msgstr "Sign in with magic link"
+
+#: src/features/magic-link/ui/magic-link-initiate-form.tsx
+msgid "Sign in with password instead"
+msgstr "Sign in with password instead"
+
 #: src/features/sign-out/ui/sign-out-button.tsx
 #: src/shared/ui/app-layout/app-header.tsx
 msgid "Sign out"
 msgstr "Sign out"
 
+#: src/features/magic-link/model/use-magic-link-exchange.ts
 #: src/features/sign-in/model/use-sign-in.ts
 msgid "Sign-in failed. Please try again."
 msgstr "Sign-in failed. Please try again."
+
+#: src/features/magic-link/ui/magic-link-exchange-form.tsx
+msgid "Signed in successfully!"
+msgstr "Signed in successfully!"
+
+#: src/pages/magic-link.verify.tsx
+msgid "Signing in"
+msgstr "Signing in"
+
+#: src/features/magic-link/ui/magic-link-exchange-form.tsx
+msgid "Signing you in..."
+msgstr "Signing you in..."
 
 #: src/pages/invite.$token.tsx
 msgid "Signing you in…"
@@ -2190,6 +2259,7 @@ msgstr "Something went wrong"
 #: src/features/accept-invitation/model/use-accept-invitation.ts
 #: src/features/create-organization/model/use-create-organization.ts
 #: src/features/forgot-password/model/use-forgot-password.ts
+#: src/features/magic-link/model/use-magic-link-initiate.ts
 #: src/features/reset-password/model/use-reset-password.ts
 #: src/features/signup/model/use-signup.ts
 msgid "Something went wrong. Please try again."
@@ -2396,6 +2466,10 @@ msgstr "To access the billing portal, please complete your billing settings setu
 #~ msgid "To access the billing portal, please complete your subscription setup by selecting a plan."
 #~ msgstr "To access the billing portal, please complete your subscription setup by selecting a plan."
 
+#: src/features/magic-link/model/use-magic-link-initiate.ts
+msgid "Too many attempts. Please try again later."
+msgstr "Too many attempts. Please try again later."
+
 #: src/features/create-organization/model/use-create-organization.ts
 #: src/features/forgot-password/model/use-forgot-password.ts
 #: src/features/reset-password/model/use-reset-password.ts
@@ -2499,6 +2573,10 @@ msgstr "Uppercase letter"
 msgid "URL path, e.g. about-us or blog/post"
 msgstr "URL path, e.g. about-us or blog/post"
 
+#: src/features/sign-in/ui/sign-in-form.tsx
+msgid "Use magic link instead"
+msgstr "Use magic link instead"
+
 #: src/pages/admin/users.$userId.tsx
 #~ msgid "User"
 #~ msgstr "User"
@@ -2568,6 +2646,10 @@ msgstr "We'll send a reset link to your email address."
 #: src/features/signup/ui/provisioning-wait.tsx
 msgid "We're preparing your workspace. This usually takes just a few seconds."
 msgstr "We're preparing your workspace. This usually takes just a few seconds."
+
+#: src/features/magic-link/ui/magic-link-initiate-form.tsx
+msgid "We've sent a magic link to your inbox. Click it to sign in!"
+msgstr "We've sent a magic link to your inbox. Click it to sign in!"
 
 #: src/features/signup/ui/password-strength.tsx
 msgid "Weak"
@@ -2680,6 +2762,7 @@ msgid "you@company.com"
 msgstr "you@company.com"
 
 #: src/features/forgot-password/ui/forgot-password-form.tsx
+#: src/features/magic-link/ui/magic-link-initiate-form.tsx
 #: src/features/sign-in/ui/sign-in-form.tsx
 msgid "you@example.com"
 msgstr "you@example.com"

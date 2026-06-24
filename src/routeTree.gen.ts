@@ -14,6 +14,7 @@ import { Route as UnauthorizedRouteImport } from "./pages/unauthorized"
 import { Route as SignupRouteImport } from "./pages/signup"
 import { Route as SignInRouteImport } from "./pages/sign-in"
 import { Route as ResetPasswordRouteImport } from "./pages/reset-password"
+import { Route as MagicLinkRouteImport } from "./pages/magic-link"
 import { Route as LoadingDemoRouteImport } from "./pages/loading-demo"
 import { Route as ForgotPasswordRouteImport } from "./pages/forgot-password"
 import { Route as CreateOrganizationRouteImport } from "./pages/create-organization"
@@ -21,6 +22,7 @@ import { Route as AppRouteImport } from "./pages/_app"
 import { Route as R500RouteImport } from "./pages/500"
 import { Route as R404RouteImport } from "./pages/404"
 import { Route as AppIndexRouteImport } from "./pages/_app/index"
+import { Route as MagicLinkVerifyRouteImport } from "./pages/magic-link.verify"
 import { Route as InviteTokenRouteImport } from "./pages/invite.$token"
 import { Route as AppTeamRouteImport } from "./pages/_app/team"
 import { Route as AppCmsPagesRouteImport } from "./pages/_app/cms-pages"
@@ -58,6 +60,11 @@ const ResetPasswordRoute = ResetPasswordRouteImport.update({
   path: "/reset-password",
   getParentRoute: () => rootRouteImport,
 } as any)
+const MagicLinkRoute = MagicLinkRouteImport.update({
+  id: "/magic-link",
+  path: "/magic-link",
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LoadingDemoRoute = LoadingDemoRouteImport.update({
   id: "/loading-demo",
   path: "/loading-demo",
@@ -91,6 +98,11 @@ const AppIndexRoute = AppIndexRouteImport.update({
   id: "/",
   path: "/",
   getParentRoute: () => AppRoute,
+} as any)
+const MagicLinkVerifyRoute = MagicLinkVerifyRouteImport.update({
+  id: "/verify",
+  path: "/verify",
+  getParentRoute: () => MagicLinkRoute,
 } as any)
 const InviteTokenRoute = InviteTokenRouteImport.update({
   id: "/invite/$token",
@@ -156,6 +168,7 @@ export interface FileRoutesByFullPath {
   "/create-organization": typeof CreateOrganizationRoute
   "/forgot-password": typeof ForgotPasswordRoute
   "/loading-demo": typeof LoadingDemoRoute
+  "/magic-link": typeof MagicLinkRouteWithChildren
   "/reset-password": typeof ResetPasswordRoute
   "/sign-in": typeof SignInRoute
   "/signup": typeof SignupRoute
@@ -165,6 +178,7 @@ export interface FileRoutesByFullPath {
   "/cms-pages": typeof AppCmsPagesRouteWithChildren
   "/team": typeof AppTeamRoute
   "/invite/$token": typeof InviteTokenRoute
+  "/magic-link/verify": typeof MagicLinkVerifyRoute
   "/cms-pages/$pageId": typeof AppCmsPagesPageIdRoute
   "/cms-pages/create": typeof AppCmsPagesCreateRoute
   "/settings/general": typeof AppSettingsGeneralRoute
@@ -179,6 +193,7 @@ export interface FileRoutesByTo {
   "/create-organization": typeof CreateOrganizationRoute
   "/forgot-password": typeof ForgotPasswordRoute
   "/loading-demo": typeof LoadingDemoRoute
+  "/magic-link": typeof MagicLinkRouteWithChildren
   "/reset-password": typeof ResetPasswordRoute
   "/sign-in": typeof SignInRoute
   "/signup": typeof SignupRoute
@@ -187,6 +202,7 @@ export interface FileRoutesByTo {
   "/billing": typeof AppBillingRoute
   "/team": typeof AppTeamRoute
   "/invite/$token": typeof InviteTokenRoute
+  "/magic-link/verify": typeof MagicLinkVerifyRoute
   "/": typeof AppIndexRoute
   "/cms-pages/$pageId": typeof AppCmsPagesPageIdRoute
   "/cms-pages/create": typeof AppCmsPagesCreateRoute
@@ -204,6 +220,7 @@ export interface FileRoutesById {
   "/create-organization": typeof CreateOrganizationRoute
   "/forgot-password": typeof ForgotPasswordRoute
   "/loading-demo": typeof LoadingDemoRoute
+  "/magic-link": typeof MagicLinkRouteWithChildren
   "/reset-password": typeof ResetPasswordRoute
   "/sign-in": typeof SignInRoute
   "/signup": typeof SignupRoute
@@ -213,6 +230,7 @@ export interface FileRoutesById {
   "/_app/cms-pages": typeof AppCmsPagesRouteWithChildren
   "/_app/team": typeof AppTeamRoute
   "/invite/$token": typeof InviteTokenRoute
+  "/magic-link/verify": typeof MagicLinkVerifyRoute
   "/_app/": typeof AppIndexRoute
   "/_app/cms-pages/$pageId": typeof AppCmsPagesPageIdRoute
   "/_app/cms-pages/create": typeof AppCmsPagesCreateRoute
@@ -231,6 +249,7 @@ export interface FileRouteTypes {
     | "/create-organization"
     | "/forgot-password"
     | "/loading-demo"
+    | "/magic-link"
     | "/reset-password"
     | "/sign-in"
     | "/signup"
@@ -240,6 +259,7 @@ export interface FileRouteTypes {
     | "/cms-pages"
     | "/team"
     | "/invite/$token"
+    | "/magic-link/verify"
     | "/cms-pages/$pageId"
     | "/cms-pages/create"
     | "/settings/general"
@@ -254,6 +274,7 @@ export interface FileRouteTypes {
     | "/create-organization"
     | "/forgot-password"
     | "/loading-demo"
+    | "/magic-link"
     | "/reset-password"
     | "/sign-in"
     | "/signup"
@@ -262,6 +283,7 @@ export interface FileRouteTypes {
     | "/billing"
     | "/team"
     | "/invite/$token"
+    | "/magic-link/verify"
     | "/"
     | "/cms-pages/$pageId"
     | "/cms-pages/create"
@@ -278,6 +300,7 @@ export interface FileRouteTypes {
     | "/create-organization"
     | "/forgot-password"
     | "/loading-demo"
+    | "/magic-link"
     | "/reset-password"
     | "/sign-in"
     | "/signup"
@@ -287,6 +310,7 @@ export interface FileRouteTypes {
     | "/_app/cms-pages"
     | "/_app/team"
     | "/invite/$token"
+    | "/magic-link/verify"
     | "/_app/"
     | "/_app/cms-pages/$pageId"
     | "/_app/cms-pages/create"
@@ -304,6 +328,7 @@ export interface RootRouteChildren {
   CreateOrganizationRoute: typeof CreateOrganizationRoute
   ForgotPasswordRoute: typeof ForgotPasswordRoute
   LoadingDemoRoute: typeof LoadingDemoRoute
+  MagicLinkRoute: typeof MagicLinkRouteWithChildren
   ResetPasswordRoute: typeof ResetPasswordRoute
   SignInRoute: typeof SignInRoute
   SignupRoute: typeof SignupRoute
@@ -347,6 +372,13 @@ declare module "@tanstack/react-router" {
       path: "/reset-password"
       fullPath: "/reset-password"
       preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    "/magic-link": {
+      id: "/magic-link"
+      path: "/magic-link"
+      fullPath: "/magic-link"
+      preLoaderRoute: typeof MagicLinkRouteImport
       parentRoute: typeof rootRouteImport
     }
     "/loading-demo": {
@@ -397,6 +429,13 @@ declare module "@tanstack/react-router" {
       fullPath: "/"
       preLoaderRoute: typeof AppIndexRouteImport
       parentRoute: typeof AppRoute
+    }
+    "/magic-link/verify": {
+      id: "/magic-link/verify"
+      path: "/verify"
+      fullPath: "/magic-link/verify"
+      preLoaderRoute: typeof MagicLinkVerifyRouteImport
+      parentRoute: typeof MagicLinkRoute
     }
     "/invite/$token": {
       id: "/invite/$token"
@@ -518,6 +557,18 @@ const AppRouteChildren: AppRouteChildren = {
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 
+interface MagicLinkRouteChildren {
+  MagicLinkVerifyRoute: typeof MagicLinkVerifyRoute
+}
+
+const MagicLinkRouteChildren: MagicLinkRouteChildren = {
+  MagicLinkVerifyRoute: MagicLinkVerifyRoute,
+}
+
+const MagicLinkRouteWithChildren = MagicLinkRoute._addFileChildren(
+  MagicLinkRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   R404Route: R404Route,
   R500Route: R500Route,
@@ -525,6 +576,7 @@ const rootRouteChildren: RootRouteChildren = {
   CreateOrganizationRoute: CreateOrganizationRoute,
   ForgotPasswordRoute: ForgotPasswordRoute,
   LoadingDemoRoute: LoadingDemoRoute,
+  MagicLinkRoute: MagicLinkRouteWithChildren,
   ResetPasswordRoute: ResetPasswordRoute,
   SignInRoute: SignInRoute,
   SignupRoute: SignupRoute,
