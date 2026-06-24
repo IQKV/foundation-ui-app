@@ -93,7 +93,9 @@ function BillingPage() {
       <PageHeader title={t`Billing`} />
 
       <Stack gap="xl">
-        <CurrentSubscription tenantKey={isSingleTenantMode ? undefined : tenantKey ?? undefined} />
+        <CurrentSubscription
+          tenantKey={isSingleTenantMode ? undefined : (tenantKey ?? undefined)}
+        />
 
         {isTenantOwner && (
           <>
@@ -115,9 +117,9 @@ function BillingPage() {
               selectingPlanId={isCreatingCheckout ? "all" : undefined} // Simplification
             />
 
-            <BillingInfo tenantKey={isSingleTenantMode ? undefined : tenantKey ?? undefined} />
+            <BillingInfo tenantKey={isSingleTenantMode ? undefined : (tenantKey ?? undefined)} />
 
-            <RefundList tenantKey={isSingleTenantMode ? undefined : tenantKey ?? undefined} />
+            <RefundList tenantKey={isSingleTenantMode ? undefined : (tenantKey ?? undefined)} />
 
             {isBillingSettingsLoading && (
               <Paper withBorder p="xl" radius="md">
@@ -147,7 +149,7 @@ function BillingPage() {
 
                     <Group mt="md">
                       <BillingPortalButton
-                        tenantKey={isSingleTenantMode ? undefined : tenantKey ?? undefined}
+                        tenantKey={isSingleTenantMode ? undefined : (tenantKey ?? undefined)}
                         size="md"
                       />
                     </Group>
