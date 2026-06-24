@@ -6,11 +6,11 @@ import { useRefunds } from "../model/use-refunds";
 import { TestSelectors } from "@/shared/lib/test-selectors";
 
 interface RefundListProps {
-  tenantKey: string;
+  tenantKey?: string;
 }
 
 export function RefundList({ tenantKey }: RefundListProps) {
-  const { data: refunds, isLoading, isError } = useRefunds(tenantKey);
+  const { data: refunds, isLoading, isError } = useRefunds(tenantKey ?? null);
 
   if (isLoading) {
     return <Skeleton height={200} radius="md" data-testid={TestSelectors.REFUND_LIST_LOADING} />;

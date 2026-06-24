@@ -128,6 +128,22 @@ export const billingApi = {
       .then((r) => r.data),
 
   /**
+   * Get active subscription for current subject (tenant or user depending on mode).
+   * Requires TENANT_OWNER or MEMBER authority.
+   */
+  getActiveSubscriptionForMe: () =>
+    httpClient.get<SubscriptionResponse>(`/v1/billing/subscriptions/me/active`).then((r) => r.data),
+
+  /**
+   * Create a Stripe Checkout Session for current subject (single tenant mode).
+   * Requires TENANT_OWNER authority.
+   */
+  createCheckoutSessionForMe: (request: CreateCheckoutSessionRequest) =>
+    httpClient
+      .post<CheckoutSessionResponse>(`/v1/billing/subscriptions/me/checkout`, request)
+      .then((r) => r.data),
+
+  /**
    * List refunds for a tenant.
    * Requires TENANT_OWNER authority.
    */
@@ -135,6 +151,13 @@ export const billingApi = {
     httpClient
       .get<RefundResponse[]>(`/v1/billing/payments/${encodeURIComponent(tenantKey)}/refunds`)
       .then((r) => r.data),
+
+  /**
+   * List refunds for current subject (tenant or user depending on mode).
+   * Requires TENANT_OWNER authority.
+   */
+  listRefundsForMe: () =>
+    httpClient.get<RefundResponse[]>("/v1/billing/payments/me/refunds").then((r) => r.data),
 
   /**
    * Get billing settings for a tenant.
@@ -188,6 +211,28 @@ export const billingApi = {
   createTenantPortalSession: (tenantKey: string) =>
     httpClient
       .post<PortalSessionResponse>(`/v1/billing/settings/${encodeURIComponent(tenantKey)}/portal`)
+      .then((r) => r.data),
+
+  /**
+   * Get billing settings for the current user (SINGLE_TENANT mode only).
+   */
+  getUserBillingSettings: () =>
+    httpClient.get<BillingSettingsResponse>("/v1/billing/user-settings").then((r) => r.data),
+
+  /**
+   * Create billing settings for the current user (SINGLE_TENANT mode only).
+   */
+  createUserBillingSettings: (request: CreateBillingSettingsRequest) =>
+    httpClient
+      .post<BillingSettingsResponse>("/v1/billing/user-settings", request)
+      .then((r) => r.data),
+
+  /**
+   * Update billing settings for the current user (SINGLE_TENANT mode only).
+   */
+  updateUserBillingSettings: (request: UpdateBillingSettingsRequest) =>
+    httpClient
+      .patch<BillingSettingsResponse>("/v1/billing/user-settings", request)
       .then((r) => r.data),
 
   /**

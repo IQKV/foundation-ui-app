@@ -22,14 +22,18 @@ import {
 import { TestSelectors } from "@/shared/lib/test-selectors";
 
 interface BillingInfoProps {
-  tenantKey: string;
+  tenantKey?: string;
 }
 
 export function BillingInfo({ tenantKey }: BillingInfoProps) {
   const { t } = useLingui();
-  const { data: settings, isLoading, isError, error } = useBillingSettings(tenantKey);
-  const { mutate: createSettings, isPending: isCreating } = useCreateBillingSettings(tenantKey);
-  const { mutate: updateSettings, isPending: isUpdating } = useUpdateBillingSettings(tenantKey);
+  const { data: settings, isLoading, isError, error } = useBillingSettings(tenantKey ?? null);
+  const { mutate: createSettings, isPending: isCreating } = useCreateBillingSettings(
+    tenantKey ?? null,
+  );
+  const { mutate: updateSettings, isPending: isUpdating } = useUpdateBillingSettings(
+    tenantKey ?? null,
+  );
 
   const isNotFound = isError && isBillingSettingsNotFound(error);
 

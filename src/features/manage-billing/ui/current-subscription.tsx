@@ -6,11 +6,11 @@ import { useActiveSubscription } from "../model/use-subscription";
 import { TestSelectors } from "@/shared/lib/test-selectors";
 
 interface CurrentSubscriptionProps {
-  tenantKey: string;
+  tenantKey?: string;
 }
 
 export function CurrentSubscription({ tenantKey }: CurrentSubscriptionProps) {
-  const { data: subscription, isLoading, isError } = useActiveSubscription(tenantKey);
+  const { data: subscription, isLoading, isError } = useActiveSubscription(tenantKey ?? null);
 
   if (isLoading) {
     return (

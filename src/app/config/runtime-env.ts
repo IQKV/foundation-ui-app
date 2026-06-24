@@ -22,6 +22,8 @@ export const getConfig = (key: string, fallback?: string): string | undefined =>
 export const rolloutMode = getConfig("VITE_ROLLOUT_MODE", "MULTI_TENANT");
 export const isMultiTenantMode = rolloutMode === "MULTI_TENANT";
 export const isSingleTenantMode = rolloutMode === "SINGLE_TENANT";
+export const isMultiTenant = isMultiTenantMode;
+export const isSingleTenant = isSingleTenantMode;
 
 export const isDemoMode = getConfig("VITE_DEMO_MODE", "false") === "true";
 export const isMagicLinkEnabled = getConfig("VITE_ENABLE_MAGIC_LINK", "true") === "true";

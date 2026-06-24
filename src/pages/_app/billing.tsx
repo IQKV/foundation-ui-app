@@ -16,6 +16,7 @@ import { Helmet } from "@dr.pogodin/react-helmet";
 import { pageTitle } from "@/shared/lib/page-title";
 import { PageHeader } from "@/shared/ui";
 import { useSession } from "@/processes/session";
+import { isSingleTenantMode } from "@/app/config";
 import {
   BillingPortalButton,
   CurrentSubscription,
@@ -44,6 +45,7 @@ function BillingPage() {
   const { data: subscription } = useActiveSubscription(tenantKey);
   const { mutate: createCheckout, isPending: isCreatingCheckout } =
     useCreateCheckoutSession(tenantKey);
+
   const {
     data: billingSettings,
     error: billingSettingsError,
@@ -60,7 +62,8 @@ function BillingPage() {
     });
   };
 
-  if (isPersonalWorkspace) {
+  // In single tenant mode, don't show personal workspace message - we should have billing
+  if (!isSingleTenantMode && isPersonalWorkspace) {
     return (
       <Container size="md" data-testid={TestSelectors.PAGE("billing")}>
         <Helmet title={pageTitle(t`Billing`)} />
@@ -90,7 +93,7 @@ function BillingPage() {
       <PageHeader title={t`Billing`} />
 
       <Stack gap="xl">
-        {tenantKey && <CurrentSubscription tenantKey={tenantKey} />}
+        <CurrentSubscription tenantKey={isSingleTenantMode ? undefined : tenantKey} />
 
         {isTenantOwner && (
           <>
@@ -112,9 +115,9 @@ function BillingPage() {
               selectingPlanId={isCreatingCheckout ? "all" : undefined} // Simplification
             />
 
-            {tenantKey && <BillingInfo tenantKey={tenantKey} />}
+            <BillingInfo tenantKey={isSingleTenantMode ? undefined : tenantKey} />
 
-            {tenantKey && <RefundList tenantKey={tenantKey} />}
+            <RefundList tenantKey={isSingleTenantMode ? undefined : tenantKey} />
 
             {isBillingSettingsLoading && (
               <Paper withBorder p="xl" radius="md">
@@ -143,7 +146,10 @@ function BillingPage() {
                     </Text>
 
                     <Group mt="md">
-                      <BillingPortalButton tenantKey={tenantKey ?? undefined} size="md" />
+                      <BillingPortalButton
+                        tenantKey={isSingleTenantMode ? undefined : tenantKey}
+                        size="md"
+                      />
                     </Group>
                   </Stack>
                 </Group>
