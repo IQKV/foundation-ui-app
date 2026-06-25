@@ -33,7 +33,7 @@ import { TestSelectors } from "@/shared/lib/test-selectors";
 
 // ─── Route ────────────────────────────────────────────────────────────────────
 
-export const Route = createFileRoute("/_app/billing")({
+export const Route = createFileRoute("/_app/billing/")({
   component: BillingPage,
 });
 
@@ -57,8 +57,8 @@ function BillingPage() {
 
     createCheckout({
       planCode: plan.planCode,
-      successUrl: window.location.href,
-      cancelUrl: window.location.href,
+      successUrl: `${window.location.origin}/_app/billing/success`,
+      cancelUrl: `${window.location.origin}/_app/billing/failure`,
     });
   };
 

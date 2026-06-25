@@ -57,12 +57,24 @@ msgid "{trialDays} Days Free Trial"
 msgstr "{trialDays} Days Free Trial"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
+msgid "• Everything is set up for you — no workspace or organization setup needed."
+msgstr "• Everything is set up for you — no workspace or organization setup needed."
+
+#: src/features/onboarding/ui/onboarding-modal.tsx
+msgid "• Explore settings anytime to customize your experience."
+msgstr "• Explore settings anytime to customize your experience."
+
+#: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "• Focus on your product value — let the platform handle complexity."
 msgstr "• Focus on your product value — let the platform handle complexity."
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
-msgid "• Invite your team, create your first steps take just a click away!"
-msgstr "• Invite your team, create your first steps take just a click away!"
+msgid "• Invite your team — your first steps are just a click away!"
+msgstr "• Invite your team — your first steps are just a click away!"
+
+#: src/features/onboarding/ui/onboarding-modal.tsx
+#~ msgid "• Invite your team, create your first steps take just a click away!"
+#~ msgstr "• Invite your team, create your first steps take just a click away!"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "• No technical background needed — our intuitive UI is designed for everyone."
@@ -289,7 +301,7 @@ msgstr "At least one translation is required"
 msgid "Automatic router integration via <0>router.subscribe()</0>"
 msgstr "Automatic router integration via <0>router.subscribe()</0>"
 
-#: src/pages/_app/billing.tsx
+#: src/pages/_app/billing/index.tsx
 msgid "Available Plans"
 msgstr "Available Plans"
 
@@ -329,7 +341,7 @@ msgstr "Ban Member"
 msgid "Banning this member will immediately invalidate all their active sessions, revoke their access to this tenant, and send them a notification email. They will not be able to access this tenant again until unbanned."
 msgstr "Banning this member will immediately invalidate all their active sessions, revoke their access to this tenant, and send them a notification email. They will not be able to access this tenant again until unbanned."
 
-#: src/pages/_app/billing.tsx
+#: src/pages/_app/billing/index.tsx
 #: src/shared/ui/app-layout/app-nav.tsx
 msgid "Billing"
 msgstr "Billing"
@@ -342,7 +354,7 @@ msgstr "Billing Email"
 msgid "Billing Information"
 msgstr "Billing Information"
 
-#: src/pages/billing-example.tsx
+#: src/pages/-billing-example.tsx
 msgid "Billing Integration Example"
 msgstr "Billing Integration Example"
 
@@ -350,11 +362,11 @@ msgstr "Billing Integration Example"
 #~ msgid "Billing Manager"
 #~ msgstr "Billing Manager"
 
-#: src/pages/_app/billing.tsx
+#: src/pages/_app/billing/index.tsx
 msgid "Billing Portal"
 msgstr "Billing Portal"
 
-#: src/pages/_app/billing.tsx
+#: src/pages/_app/billing/index.tsx
 msgid "Billing Portal Unavailable"
 msgstr "Billing Portal Unavailable"
 
@@ -486,6 +498,10 @@ msgstr "Complete"
 #~ msgid "Complete your <0>profile</0> with your name and avatar"
 #~ msgstr "Complete your <0>profile</0> with your name and avatar"
 
+#: src/pages/complete-profile.tsx
+msgid "Complete your profile"
+msgstr "Complete your profile"
+
 #: src/features/signup/ui/provisioning-wait.tsx
 msgid "Configuring settings"
 msgstr "Configuring settings"
@@ -500,7 +516,7 @@ msgstr "Confirm new password"
 msgid "Confirm your"
 msgstr "Confirm your"
 
-#: src/pages/billing-example.tsx
+#: src/pages/-billing-example.tsx
 msgid "Contact Support"
 msgstr "Contact Support"
 
@@ -513,6 +529,7 @@ msgstr "Content"
 msgid "Content is required for the default locale"
 msgstr "Content is required for the default locale"
 
+#: src/features/complete-profile/ui/complete-profile-form.tsx
 #: src/features/sign-in/ui/sign-in-form.tsx
 msgid "Continue"
 msgstr "Continue"
@@ -620,7 +637,7 @@ msgstr "Create Organization"
 msgid "Create page"
 msgstr "Create page"
 
-#: src/pages/billing-example.tsx
+#: src/pages/-billing-example.tsx
 msgid "Create Project"
 msgstr "Create Project"
 
@@ -697,7 +714,7 @@ msgstr "Current password is required"
 msgid "Current Plan"
 msgstr "Current Plan"
 
-#: src/pages/billing-example.tsx
+#: src/pages/-billing-example.tsx
 msgid "Current plan limits:"
 msgstr "Current plan limits:"
 
@@ -899,7 +916,7 @@ msgstr "Enter the email address associated with your account and we'll send you 
 msgid "Enter your current password"
 msgstr "Enter your current password"
 
-#: src/pages/magic-link.tsx
+#: src/pages/magic-link.index.tsx
 msgid "Enter your email and we'll send you a magic link to sign in."
 msgstr "Enter your email and we'll send you a magic link to sign in."
 
@@ -1003,11 +1020,11 @@ msgstr "Failed to load refund history."
 msgid "Fair"
 msgstr "Fair"
 
-#: src/pages/billing-example.tsx
+#: src/pages/-billing-example.tsx
 msgid "Feature Gate Examples"
 msgstr "Feature Gate Examples"
 
-#: src/pages/billing-example.tsx
+#: src/pages/-billing-example.tsx
 msgid "Feature Usage Examples"
 msgstr "Feature Usage Examples"
 
@@ -1015,6 +1032,7 @@ msgstr "Feature Usage Examples"
 msgid "Features"
 msgstr "Features"
 
+#: src/features/complete-profile/ui/complete-profile-form.tsx
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 #: src/features/signup/ui/signup-form.tsx
 #: src/pages/_app/settings/general.tsx
@@ -1023,6 +1041,7 @@ msgid "First name"
 msgstr "First name"
 
 #: src/features/accept-invitation/model/use-accept-invitation.ts
+#: src/features/complete-profile/model/types.ts
 #: src/features/edit-profile/model/types.ts
 #: src/features/signup/model/use-signup.ts
 #: src/pages/_app/settings/general.tsx
@@ -1071,6 +1090,12 @@ msgstr "Get Started"
 msgid "Go home"
 msgstr "Go home"
 
+#: src/pages/_app/billing/success.tsx
+msgid "Go to Billing"
+msgstr "Go to Billing"
+
+#: src/pages/_app/billing/failure.tsx
+#: src/pages/_app/billing/success.tsx
 #: src/pages/unauthorized.tsx
 msgid "Go to Home"
 msgstr "Go to Home"
@@ -1166,7 +1191,7 @@ msgstr "Invitation not found"
 msgid "Invite member"
 msgstr "Invite member"
 
-#: src/pages/billing-example.tsx
+#: src/pages/-billing-example.tsx
 msgid "Invite Members"
 msgstr "Invite Members"
 
@@ -1174,6 +1199,7 @@ msgstr "Invite Members"
 msgid "invited."
 msgstr "invited."
 
+#: src/features/complete-profile/ui/complete-profile-form.tsx
 #: src/features/signup/ui/signup-form.tsx
 #: src/pages/invite.$token.tsx
 msgid "Jane"
@@ -1197,6 +1223,10 @@ msgstr "Join {0} and start collaborating with your team."
 #~ msgid "Joined Organizations"
 #~ msgstr "Joined Organizations"
 
+#: src/pages/complete-profile.tsx
+msgid "Just a name to get started — everything else can wait."
+msgstr "Just a name to get started — everything else can wait."
+
 #: src/pages/_app/settings/organization.tsx
 msgid "Key"
 msgstr "Key"
@@ -1205,12 +1235,18 @@ msgstr "Key"
 #~ msgid "Key:"
 #~ msgstr "Key:"
 
+#: src/features/complete-profile/ui/complete-profile-form.tsx
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 #: src/pages/_app/settings/general.tsx
 #: src/shared/ui/locale-switcher/locale-switcher.tsx
 msgid "Language"
 msgstr "Language"
 
+#: src/features/complete-profile/model/types.ts
+msgid "Language is required"
+msgstr "Language is required"
+
+#: src/features/complete-profile/ui/complete-profile-form.tsx
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 #: src/features/signup/ui/signup-form.tsx
 #: src/pages/_app/settings/general.tsx
@@ -1219,6 +1255,7 @@ msgid "Last name"
 msgstr "Last name"
 
 #: src/features/accept-invitation/model/use-accept-invitation.ts
+#: src/features/complete-profile/model/types.ts
 #: src/features/edit-profile/model/types.ts
 #: src/features/signup/model/use-signup.ts
 #: src/pages/_app/settings/general.tsx
@@ -1249,7 +1286,7 @@ msgstr "Limited support"
 msgid "Link expired or invalid"
 msgstr "Link expired or invalid"
 
-#: src/pages/_app/billing.tsx
+#: src/pages/_app/billing/index.tsx
 msgid "Loading billing information…"
 msgstr "Loading billing information…"
 
@@ -1273,6 +1310,7 @@ msgstr "Loading your invitation…"
 msgid "Loading..."
 msgstr "Loading..."
 
+#: src/features/complete-profile/ui/complete-profile-form.tsx
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 #: src/pages/_app/settings/general.tsx
 msgid "Loading…"
@@ -1319,9 +1357,13 @@ msgstr "Manage user roles, permissions & access"
 #~ msgid "Manage users"
 #~ msgstr "Manage users"
 
-#: src/pages/_app/billing.tsx
+#: src/pages/_app/billing/index.tsx
 msgid "Manage your billing information, view invoice history, and update your payment methods directly via our secure Stripe Customer Portal."
 msgstr "Manage your billing information, view invoice history, and update your payment methods directly via our secure Stripe Customer Portal."
+
+#: src/features/onboarding/ui/onboarding-modal.tsx
+msgid "Manage your subscription and billing when you are ready"
+msgstr "Manage your subscription and billing when you are ready"
 
 #: src/shared/ui/auth-layout/auth-layout.tsx
 msgid "Manage your team, subscriptions, and settings — all from one place, secured by enterprise-grade authentication."
@@ -1332,11 +1374,11 @@ msgstr "Manage your team, subscriptions, and settings — all from one place, se
 msgid "Mark all as read"
 msgstr "Mark all as read"
 
-#: src/pages/billing-example.tsx
+#: src/pages/-billing-example.tsx
 msgid "Max Projects:"
 msgstr "Max Projects:"
 
-#: src/pages/billing-example.tsx
+#: src/pages/-billing-example.tsx
 msgid "Max Users:"
 msgstr "Max Users:"
 
@@ -1562,6 +1604,10 @@ msgstr "OG title"
 msgid "One click and you're all set."
 msgstr "One click and you're all set."
 
+#: src/pages/complete-profile.tsx
+msgid "One last"
+msgstr "One last"
+
 #: src/features/manage-billing/ui/billing-portal-button.tsx
 msgid "Open Billing Portal"
 msgstr "Open Billing Portal"
@@ -1750,9 +1796,17 @@ msgstr "password."
 msgid "Passwords do not match"
 msgstr "Passwords do not match"
 
+#: src/pages/_app/billing/failure.tsx
+msgid "Payment Failed"
+msgstr "Payment Failed"
+
 #: src/features/manage-billing/ui/refund-list.tsx
 msgid "Payment ID"
 msgstr "Payment ID"
+
+#: src/pages/_app/billing/success.tsx
+msgid "Payment Successful"
+msgstr "Payment Successful"
 
 #: src/features/page-admin/model/types.ts
 #: src/pages/_app/cms-pages.index.tsx
@@ -1769,7 +1823,7 @@ msgstr "Pending invitations"
 #~ msgstr "Period End"
 
 #: src/features/manage-billing/ui/entitlements-card.tsx
-#: src/pages/_app/billing.tsx
+#: src/pages/_app/billing/index.tsx
 #: src/pages/_app/index.tsx
 msgid "Personal Workspace"
 msgstr "Personal Workspace"
@@ -1802,6 +1856,10 @@ msgstr "Plan Features"
 msgid "Platform Highlights"
 msgstr "Platform Highlights"
 
+#: src/features/complete-profile/model/use-complete-profile.ts
+msgid "Please check the form and try again."
+msgstr "Please check the form and try again."
+
 #: src/features/reset-password/model/use-reset-password.ts
 msgid "Please confirm your password"
 msgstr "Please confirm your password"
@@ -1818,15 +1876,15 @@ msgstr "Portal error"
 msgid "Priority Support"
 msgstr "Priority Support"
 
-#: src/pages/billing-example.tsx
+#: src/pages/-billing-example.tsx
 msgid "Priority Support (Upgrade Required)"
 msgstr "Priority Support (Upgrade Required)"
 
-#: src/pages/billing-example.tsx
+#: src/pages/-billing-example.tsx
 msgid "Priority Support Available"
 msgstr "Priority Support Available"
 
-#: src/pages/billing-example.tsx
+#: src/pages/-billing-example.tsx
 msgid "Priority Support:"
 msgstr "Priority Support:"
 
@@ -1838,7 +1896,7 @@ msgstr "Profile Information"
 msgid "Profile Picture"
 msgstr "Profile Picture"
 
-#: src/pages/billing-example.tsx
+#: src/pages/-billing-example.tsx
 msgid "Project Management"
 msgstr "Project Management"
 
@@ -1858,6 +1916,10 @@ msgstr "Provisioning workspace"
 #: src/pages/_app/cms-pages.index.tsx
 msgid "Published"
 msgstr "Published"
+
+#: src/pages/complete-profile.tsx
+msgid "quick step."
+msgstr "quick step."
 
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 #: src/pages/_app/settings/general.tsx
@@ -2034,6 +2096,10 @@ msgstr "Search organizations…"
 msgid "Search…"
 msgstr "Search…"
 
+#: src/features/onboarding/ui/onboarding-modal.tsx
+msgid "Secure your account with a strong password and notifications"
+msgstr "Secure your account with a strong password and notifications"
+
 #: src/pages/_app/settings/security.tsx
 #: src/shared/ui/app-layout/app-nav.tsx
 msgid "Security"
@@ -2051,6 +2117,7 @@ msgstr "See all notifications"
 #~ msgid "Select authorities for this member"
 #~ msgstr "Select authorities for this member"
 
+#: src/features/complete-profile/ui/complete-profile-form.tsx
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 #: src/pages/_app/settings/general.tsx
 #: src/shared/ui/locale-switcher/locale-switcher.tsx
@@ -2133,6 +2200,7 @@ msgstr "Set up your account in under a minute."
 msgid "Set up your workspace in under a minute."
 msgstr "Set up your workspace in under a minute."
 
+#: src/features/complete-profile/ui/complete-profile-form.tsx
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 #: src/pages/_app/settings/general.tsx
 msgid "Sets your preferred language for notifications and emails."
@@ -2192,7 +2260,7 @@ msgstr "Sign in to your workspace"
 msgid "Sign in to your workspace to continue."
 msgstr "Sign in to your workspace to continue."
 
-#: src/pages/magic-link.tsx
+#: src/pages/magic-link.index.tsx
 msgid "Sign in with magic link"
 msgstr "Sign in with magic link"
 
@@ -2243,6 +2311,7 @@ msgstr "Slug is required"
 msgid "Slug must be lowercase alphanumeric with hyphens (e.g. about-us or blog/post-title)"
 msgstr "Slug must be lowercase alphanumeric with hyphens (e.g. about-us or blog/post-title)"
 
+#: src/features/complete-profile/ui/complete-profile-form.tsx
 #: src/features/signup/ui/signup-form.tsx
 #: src/pages/invite.$token.tsx
 msgid "Smith"
@@ -2256,7 +2325,12 @@ msgstr "something great."
 msgid "Something went wrong"
 msgstr "Something went wrong"
 
+#: src/pages/_app/billing/failure.tsx
+msgid "Something went wrong with your payment. Please try again or contact support."
+msgstr "Something went wrong with your payment. Please try again or contact support."
+
 #: src/features/accept-invitation/model/use-accept-invitation.ts
+#: src/features/complete-profile/model/use-complete-profile.ts
 #: src/features/create-organization/model/use-create-organization.ts
 #: src/features/forgot-password/model/use-forgot-password.ts
 #: src/features/magic-link/model/use-magic-link-initiate.ts
@@ -2355,7 +2429,7 @@ msgstr "Switch to light mode"
 msgid "Team"
 msgstr "Team"
 
-#: src/pages/billing-example.tsx
+#: src/pages/-billing-example.tsx
 msgid "Team Management"
 msgstr "Team Management"
 
@@ -2370,6 +2444,10 @@ msgstr "Team members"
 #: src/features/manage-billing/ui/plan-features.tsx
 msgid "Team Members"
 msgstr "Team Members"
+
+#: src/pages/complete-profile.tsx
+msgid "Tell us your name so your teammates know who you are."
+msgstr "Tell us your name so your teammates know who you are."
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
@@ -2393,6 +2471,10 @@ msgstr "Tenant Owner"
 #: src/features/invite-member/ui/send-invitation-modal.tsx
 msgid "TENANT_OWNER cannot be granted via invitation"
 msgstr "TENANT_OWNER cannot be granted via invitation"
+
+#: src/pages/_app/billing/success.tsx
+msgid "Thank you for your subscription. Your account has been upgraded."
+msgstr "Thank you for your subscription. Your account has been upgraded."
 
 #: src/features/manage-organization/ui/organization-settings.tsx
 msgid "The unique identifier for your organization. This cannot be changed."
@@ -2422,7 +2504,7 @@ msgstr "This is taking a bit longer than usual. Hang tight — we're still worki
 msgid "This link is missing a verification token. Please use the link from your email."
 msgstr "This link is missing a verification token. Please use the link from your email."
 
-#: src/pages/billing-example.tsx
+#: src/pages/-billing-example.tsx
 msgid "This page demonstrates how to integrate the billing entitlements API for plan-based feature access control in your React application."
 msgstr "This page demonstrates how to integrate the billing entitlements API for plan-based feature access control in your React application."
 
@@ -2458,7 +2540,7 @@ msgstr "Title"
 msgid "Title is required for the default locale"
 msgstr "Title is required for the default locale"
 
-#: src/pages/_app/billing.tsx
+#: src/pages/_app/billing/index.tsx
 msgid "To access the billing portal, please complete your billing settings setup."
 msgstr "To access the billing portal, please complete your billing settings setup."
 
@@ -2518,6 +2600,7 @@ msgstr "Trial Status"
 msgid "Trusted by teams worldwide"
 msgstr "Trusted by teams worldwide"
 
+#: src/pages/_app/billing/failure.tsx
 #: src/shared/ui/error-boundary.tsx
 msgid "Try Again"
 msgstr "Try Again"
@@ -2550,6 +2633,10 @@ msgstr "Unlimited"
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 msgid "Unverified"
 msgstr "Unverified"
+
+#: src/features/onboarding/ui/onboarding-modal.tsx
+msgid "Update your profile and preferences in account settings"
+msgstr "Update your profile and preferences in account settings"
 
 #: src/pages/_app/cms-pages.index.tsx
 msgid "Updated"
@@ -2668,6 +2755,10 @@ msgid "Welcome back, {firstName}."
 msgstr "Welcome back, {firstName}."
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
+msgid "Welcome illustration"
+msgstr "Welcome illustration"
+
+#: src/features/onboarding/ui/onboarding-modal.tsx
 #~ msgid "Welcome to IQKV!"
 #~ msgstr "Welcome to IQKV!"
 
@@ -2678,6 +2769,18 @@ msgstr "Welcome to Key Value Platform!"
 #: src/pages/_app/index.tsx
 msgid "Welcome, {firstName}!"
 msgstr "Welcome, {firstName}!"
+
+#: src/features/onboarding/ui/onboarding-modal.tsx
+msgid "Welcome!"
+msgstr "Welcome!"
+
+#: src/features/onboarding/ui/onboarding-modal.tsx
+msgid "Welcome! Your account is ready — start using the app right away."
+msgstr "Welcome! Your account is ready — start using the app right away."
+
+#: src/features/onboarding/ui/onboarding-modal.tsx
+msgid "What you can do"
+msgstr "What you can do"
 
 #: src/features/signup/ui/signup-form.tsx
 msgid "Work email"
@@ -2714,6 +2817,10 @@ msgstr "You are already a member of this organization."
 #: src/pages/_app/settings/general.tsx
 msgid "You are not a member of any organization."
 msgstr "You are not a member of any organization."
+
+#: src/features/complete-profile/ui/complete-profile-form.tsx
+msgid "You can update your avatar and other details in settings later."
+msgstr "You can update your avatar and other details in settings later."
 
 #: src/pages/sign-in.tsx
 #~ msgid "You do not have permission to access the admin area."
@@ -2807,11 +2914,11 @@ msgstr "Your password"
 msgid "Your password has been changed successfully. You'll be redirected to sign in shortly."
 msgstr "Your password has been changed successfully. You'll be redirected to sign in shortly."
 
-#: src/pages/_app/billing.tsx
+#: src/pages/_app/billing/index.tsx
 msgid "Your payment information is securely processed by Stripe. We do not store your credit card details on our servers."
 msgstr "Your payment information is securely processed by Stripe. We do not store your credit card details on our servers."
 
-#: src/pages/_app/billing.tsx
+#: src/pages/_app/billing/index.tsx
 msgid "Your personal workspace doesn't require a subscription. Upgrade to an organization workspace to access additional features and team collaboration."
 msgstr "Your personal workspace doesn't require a subscription. Upgrade to an organization workspace to access additional features and team collaboration."
 

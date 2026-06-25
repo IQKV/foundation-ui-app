@@ -28,14 +28,16 @@ import { Route as MagicLinkVerifyRouteImport } from "./pages/magic-link.verify"
 import { Route as InviteTokenRouteImport } from "./pages/invite.$token"
 import { Route as AppTeamRouteImport } from "./pages/_app/team"
 import { Route as AppCmsPagesRouteImport } from "./pages/_app/cms-pages"
-import { Route as AppBillingRouteImport } from "./pages/_app/billing"
 import { Route as AppCmsPagesIndexRouteImport } from "./pages/_app/cms-pages.index"
+import { Route as AppBillingIndexRouteImport } from "./pages/_app/billing/index"
 import { Route as AppSettingsSecurityRouteImport } from "./pages/_app/settings/security"
 import { Route as AppSettingsOrganizationRouteImport } from "./pages/_app/settings/organization"
 import { Route as AppSettingsNotificationsRouteImport } from "./pages/_app/settings/notifications"
 import { Route as AppSettingsGeneralRouteImport } from "./pages/_app/settings/general"
 import { Route as AppCmsPagesCreateRouteImport } from "./pages/_app/cms-pages.create"
 import { Route as AppCmsPagesPageIdRouteImport } from "./pages/_app/cms-pages.$pageId"
+import { Route as AppBillingSuccessRouteImport } from "./pages/_app/billing/success"
+import { Route as AppBillingFailureRouteImport } from "./pages/_app/billing/failure"
 
 const VerifyEmailRoute = VerifyEmailRouteImport.update({
   id: "/verify-email",
@@ -131,15 +133,15 @@ const AppCmsPagesRoute = AppCmsPagesRouteImport.update({
   path: "/cms-pages",
   getParentRoute: () => AppRoute,
 } as any)
-const AppBillingRoute = AppBillingRouteImport.update({
-  id: "/billing",
-  path: "/billing",
-  getParentRoute: () => AppRoute,
-} as any)
 const AppCmsPagesIndexRoute = AppCmsPagesIndexRouteImport.update({
   id: "/",
   path: "/",
   getParentRoute: () => AppCmsPagesRoute,
+} as any)
+const AppBillingIndexRoute = AppBillingIndexRouteImport.update({
+  id: "/billing/",
+  path: "/billing/",
+  getParentRoute: () => AppRoute,
 } as any)
 const AppSettingsSecurityRoute = AppSettingsSecurityRouteImport.update({
   id: "/settings/security",
@@ -172,6 +174,16 @@ const AppCmsPagesPageIdRoute = AppCmsPagesPageIdRouteImport.update({
   path: "/$pageId",
   getParentRoute: () => AppCmsPagesRoute,
 } as any)
+const AppBillingSuccessRoute = AppBillingSuccessRouteImport.update({
+  id: "/billing/success",
+  path: "/billing/success",
+  getParentRoute: () => AppRoute,
+} as any)
+const AppBillingFailureRoute = AppBillingFailureRouteImport.update({
+  id: "/billing/failure",
+  path: "/billing/failure",
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   "/404": typeof R404Route
@@ -187,18 +199,20 @@ export interface FileRoutesByFullPath {
   "/signup": typeof SignupRoute
   "/unauthorized": typeof UnauthorizedRoute
   "/verify-email": typeof VerifyEmailRoute
-  "/billing": typeof AppBillingRoute
   "/cms-pages": typeof AppCmsPagesRouteWithChildren
   "/team": typeof AppTeamRoute
   "/invite/$token": typeof InviteTokenRoute
   "/magic-link/verify": typeof MagicLinkVerifyRoute
   "/magic-link/": typeof MagicLinkIndexRoute
+  "/billing/failure": typeof AppBillingFailureRoute
+  "/billing/success": typeof AppBillingSuccessRoute
   "/cms-pages/$pageId": typeof AppCmsPagesPageIdRoute
   "/cms-pages/create": typeof AppCmsPagesCreateRoute
   "/settings/general": typeof AppSettingsGeneralRoute
   "/settings/notifications": typeof AppSettingsNotificationsRoute
   "/settings/organization": typeof AppSettingsOrganizationRoute
   "/settings/security": typeof AppSettingsSecurityRoute
+  "/billing/": typeof AppBillingIndexRoute
   "/cms-pages/": typeof AppCmsPagesIndexRoute
 }
 export interface FileRoutesByTo {
@@ -213,18 +227,20 @@ export interface FileRoutesByTo {
   "/signup": typeof SignupRoute
   "/unauthorized": typeof UnauthorizedRoute
   "/verify-email": typeof VerifyEmailRoute
-  "/billing": typeof AppBillingRoute
   "/team": typeof AppTeamRoute
   "/invite/$token": typeof InviteTokenRoute
   "/magic-link/verify": typeof MagicLinkVerifyRoute
   "/": typeof AppIndexRoute
   "/magic-link": typeof MagicLinkIndexRoute
+  "/billing/failure": typeof AppBillingFailureRoute
+  "/billing/success": typeof AppBillingSuccessRoute
   "/cms-pages/$pageId": typeof AppCmsPagesPageIdRoute
   "/cms-pages/create": typeof AppCmsPagesCreateRoute
   "/settings/general": typeof AppSettingsGeneralRoute
   "/settings/notifications": typeof AppSettingsNotificationsRoute
   "/settings/organization": typeof AppSettingsOrganizationRoute
   "/settings/security": typeof AppSettingsSecurityRoute
+  "/billing": typeof AppBillingIndexRoute
   "/cms-pages": typeof AppCmsPagesIndexRoute
 }
 export interface FileRoutesById {
@@ -242,19 +258,21 @@ export interface FileRoutesById {
   "/signup": typeof SignupRoute
   "/unauthorized": typeof UnauthorizedRoute
   "/verify-email": typeof VerifyEmailRoute
-  "/_app/billing": typeof AppBillingRoute
   "/_app/cms-pages": typeof AppCmsPagesRouteWithChildren
   "/_app/team": typeof AppTeamRoute
   "/invite/$token": typeof InviteTokenRoute
   "/magic-link/verify": typeof MagicLinkVerifyRoute
   "/_app/": typeof AppIndexRoute
   "/magic-link/": typeof MagicLinkIndexRoute
+  "/_app/billing/failure": typeof AppBillingFailureRoute
+  "/_app/billing/success": typeof AppBillingSuccessRoute
   "/_app/cms-pages/$pageId": typeof AppCmsPagesPageIdRoute
   "/_app/cms-pages/create": typeof AppCmsPagesCreateRoute
   "/_app/settings/general": typeof AppSettingsGeneralRoute
   "/_app/settings/notifications": typeof AppSettingsNotificationsRoute
   "/_app/settings/organization": typeof AppSettingsOrganizationRoute
   "/_app/settings/security": typeof AppSettingsSecurityRoute
+  "/_app/billing/": typeof AppBillingIndexRoute
   "/_app/cms-pages/": typeof AppCmsPagesIndexRoute
 }
 export interface FileRouteTypes {
@@ -273,18 +291,20 @@ export interface FileRouteTypes {
     | "/signup"
     | "/unauthorized"
     | "/verify-email"
-    | "/billing"
     | "/cms-pages"
     | "/team"
     | "/invite/$token"
     | "/magic-link/verify"
     | "/magic-link/"
+    | "/billing/failure"
+    | "/billing/success"
     | "/cms-pages/$pageId"
     | "/cms-pages/create"
     | "/settings/general"
     | "/settings/notifications"
     | "/settings/organization"
     | "/settings/security"
+    | "/billing/"
     | "/cms-pages/"
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -299,18 +319,20 @@ export interface FileRouteTypes {
     | "/signup"
     | "/unauthorized"
     | "/verify-email"
-    | "/billing"
     | "/team"
     | "/invite/$token"
     | "/magic-link/verify"
     | "/"
     | "/magic-link"
+    | "/billing/failure"
+    | "/billing/success"
     | "/cms-pages/$pageId"
     | "/cms-pages/create"
     | "/settings/general"
     | "/settings/notifications"
     | "/settings/organization"
     | "/settings/security"
+    | "/billing"
     | "/cms-pages"
   id:
     | "__root__"
@@ -327,19 +349,21 @@ export interface FileRouteTypes {
     | "/signup"
     | "/unauthorized"
     | "/verify-email"
-    | "/_app/billing"
     | "/_app/cms-pages"
     | "/_app/team"
     | "/invite/$token"
     | "/magic-link/verify"
     | "/_app/"
     | "/magic-link/"
+    | "/_app/billing/failure"
+    | "/_app/billing/success"
     | "/_app/cms-pages/$pageId"
     | "/_app/cms-pages/create"
     | "/_app/settings/general"
     | "/_app/settings/notifications"
     | "/_app/settings/organization"
     | "/_app/settings/security"
+    | "/_app/billing/"
     | "/_app/cms-pages/"
   fileRoutesById: FileRoutesById
 }
@@ -495,19 +519,19 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof AppCmsPagesRouteImport
       parentRoute: typeof AppRoute
     }
-    "/_app/billing": {
-      id: "/_app/billing"
-      path: "/billing"
-      fullPath: "/billing"
-      preLoaderRoute: typeof AppBillingRouteImport
-      parentRoute: typeof AppRoute
-    }
     "/_app/cms-pages/": {
       id: "/_app/cms-pages/"
       path: "/"
       fullPath: "/cms-pages/"
       preLoaderRoute: typeof AppCmsPagesIndexRouteImport
       parentRoute: typeof AppCmsPagesRoute
+    }
+    "/_app/billing/": {
+      id: "/_app/billing/"
+      path: "/billing"
+      fullPath: "/billing/"
+      preLoaderRoute: typeof AppBillingIndexRouteImport
+      parentRoute: typeof AppRoute
     }
     "/_app/settings/security": {
       id: "/_app/settings/security"
@@ -551,6 +575,20 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof AppCmsPagesPageIdRouteImport
       parentRoute: typeof AppCmsPagesRoute
     }
+    "/_app/billing/success": {
+      id: "/_app/billing/success"
+      path: "/billing/success"
+      fullPath: "/billing/success"
+      preLoaderRoute: typeof AppBillingSuccessRouteImport
+      parentRoute: typeof AppRoute
+    }
+    "/_app/billing/failure": {
+      id: "/_app/billing/failure"
+      path: "/billing/failure"
+      fullPath: "/billing/failure"
+      preLoaderRoute: typeof AppBillingFailureRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
@@ -571,25 +609,29 @@ const AppCmsPagesRouteWithChildren = AppCmsPagesRoute._addFileChildren(
 )
 
 interface AppRouteChildren {
-  AppBillingRoute: typeof AppBillingRoute
   AppCmsPagesRoute: typeof AppCmsPagesRouteWithChildren
   AppTeamRoute: typeof AppTeamRoute
   AppIndexRoute: typeof AppIndexRoute
+  AppBillingFailureRoute: typeof AppBillingFailureRoute
+  AppBillingSuccessRoute: typeof AppBillingSuccessRoute
   AppSettingsGeneralRoute: typeof AppSettingsGeneralRoute
   AppSettingsNotificationsRoute: typeof AppSettingsNotificationsRoute
   AppSettingsOrganizationRoute: typeof AppSettingsOrganizationRoute
   AppSettingsSecurityRoute: typeof AppSettingsSecurityRoute
+  AppBillingIndexRoute: typeof AppBillingIndexRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
-  AppBillingRoute: AppBillingRoute,
   AppCmsPagesRoute: AppCmsPagesRouteWithChildren,
   AppTeamRoute: AppTeamRoute,
   AppIndexRoute: AppIndexRoute,
+  AppBillingFailureRoute: AppBillingFailureRoute,
+  AppBillingSuccessRoute: AppBillingSuccessRoute,
   AppSettingsGeneralRoute: AppSettingsGeneralRoute,
   AppSettingsNotificationsRoute: AppSettingsNotificationsRoute,
   AppSettingsOrganizationRoute: AppSettingsOrganizationRoute,
   AppSettingsSecurityRoute: AppSettingsSecurityRoute,
+  AppBillingIndexRoute: AppBillingIndexRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
