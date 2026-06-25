@@ -16,6 +16,22 @@ const slateGray: MantineThemeOverride["colors"] = {
   ],
 };
 
+// ── Mantine dark color ramp for dark theme components ─────────────────────────
+const darkColors: MantineThemeOverride["colors"] = {
+  dark: [
+    "#C1C2C5", // 0
+    "#A6A7AB", // 1
+    "#909296", // 2
+    "#5c5f66", // 3
+    "#373A40", // 4
+    "#2C2E33", // 5
+    "#25262b", // 6
+    "#1A1B1E", // 7
+    "#141517", // 8
+    "#101113", // 9
+  ],
+};
+
 // ── Deep indigo accent ────────────────────────────────────────────────────────
 const indigoAccent: MantineThemeOverride["colors"] = {
   blue: [
@@ -25,8 +41,8 @@ const indigoAccent: MantineThemeOverride["colors"] = {
     "#95a0fb", // 3
     "#7280f8", // 4
     "#5465f5", // 5
-    "#3b4ef0", // 6 ← primary
-    "#2c3dd4", // 7
+    "#3b4ef0", // 6 ← primary light
+    "#2c3dd4", // 7 ← primary dark
     "#1e2ea8", // 8
     "#111b7a", // 9
   ],
@@ -35,10 +51,11 @@ const indigoAccent: MantineThemeOverride["colors"] = {
 export const theme = createTheme({
   colors: {
     ...slateGray,
+    ...darkColors,
     ...indigoAccent,
   },
   primaryColor: "blue",
-  primaryShade: { light: 6, dark: 5 },
+  primaryShade: { light: 6, dark: 7 },
 
   fontFamily: "Inter, 'Inter Variable', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
   fontFamilyMonospace: "'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Roboto Mono', monospace",
@@ -157,7 +174,7 @@ export const cssVariablesResolver: CSSVariablesResolver = () => ({
     "--app-sidebar-border": "rgba(255,255,255,0.06)",
     "--app-sidebar-shadow": "1px 0 0 rgba(0,0,0,0.3)",
 
-    // Nav item colours on dark background
+    // Nav item colors on dark background
     "--app-nav-text": "rgba(255,255,255,0.65)",
     "--app-nav-text-active": "#ffffff",
     "--app-nav-icon": "rgba(255,255,255,0.45)",
