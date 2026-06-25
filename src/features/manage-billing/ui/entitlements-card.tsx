@@ -16,6 +16,7 @@ import dayjs from "dayjs";
 import { useEntitlements } from "../model/use-entitlements";
 import { useEntitlementsContext } from "../model/entitlements-context";
 import { useSession } from "@/processes/session/use-session";
+import { isMultiTenantMode } from "@/app/config";
 import { PlanFeatures } from "./plan-features";
 import { TestSelectors } from "@/shared/lib/test-selectors";
 
@@ -24,7 +25,7 @@ export function EntitlementsCard() {
   const { isPersonalWorkspace } = useSession();
   const { hasFeature, getQuota } = useEntitlementsContext();
 
-  if (isPersonalWorkspace) {
+  if (isMultiTenantMode && isPersonalWorkspace) {
     // Personal workspace always has entitlements
     const features = {
       maxUsers: getQuota("maxUsers"),

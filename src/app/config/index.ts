@@ -1,10 +1,13 @@
 export {
   clientBuildEnv,
   getConfig,
+  isMultiTenant,
   isMultiTenantMode,
+  isSingleTenant,
   isSingleTenantMode,
   rolloutMode,
 } from "./runtime-env";
+export { guardMultiTenantRoute } from "./rollout-guards";
 export {
   BILLING_FEATURES,
   DEFAULT_PERSONAL_WORKSPACE_FEATURES,

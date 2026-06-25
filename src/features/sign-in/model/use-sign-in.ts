@@ -8,7 +8,9 @@ import { t } from "@lingui/core/macro";
 import { authApi } from "@/shared/api/auth";
 import type { TenantMembershipSummary } from "@/shared/api/auth";
 import { setTokens } from "@/processes/session";
+import { pickPlatformMembership } from "@/shared/lib/rollout";
 import { validateWithZod } from "@/shared/lib/zod-form-validation";
+import { isSingleTenantMode } from "@/app/config";
 
 // ─── Schema factory ───────────────────────────────────────────────────────────
 
@@ -111,6 +113,16 @@ export function useSignIn(redirectTo?: string): UseSignInReturn {
 
       if (memberships.length === 0) {
         setErrorMessage(t`No active tenant memberships found for this account`);
+        return;
+      }
+
+      if (isSingleTenantMode) {
+        const platformMembership = pickPlatformMembership(memberships);
+        if (!platformMembership) {
+          setErrorMessage(t`No active tenant memberships found for this account`);
+          return;
+        }
+        await completeSignIn(values, platformMembership);
         return;
       }
 

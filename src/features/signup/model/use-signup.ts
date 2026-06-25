@@ -161,8 +161,7 @@ export function useSignup(): UseSignupReturn {
         { email: creds.email, password: creds.password },
         tenantKey,
       );
-      // After signup, the user is signed into their personal workspace
-      // (the backend creates an internal tenant — isPersonal = true).
+      // Session store resolves isPersonalWorkspace for the active rollout mode.
       setTokens(response.accessToken, response.refreshToken, response.tenantKey, true);
       void navigate({ to: "/" });
     } catch {

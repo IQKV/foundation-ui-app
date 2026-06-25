@@ -40,7 +40,7 @@ import { iamApi } from "@/shared/api";
 import type { TenantUserStatsParams } from "@/shared/api/iam";
 import { useSession } from "@/processes/session";
 import { FeatureGate, useEntitlementsContext } from "@/features/manage-billing";
-import { BILLING_FEATURES } from "@/app/config";
+import { BILLING_FEATURES, isMultiTenantMode } from "@/app/config";
 
 export const Route = createFileRoute("/_app/")({
   component: DashboardPage,
@@ -427,8 +427,8 @@ function DashboardPage() {
         breadcrumbs={[{ label: <Trans>Home</Trans> }, { label: <Trans>Dashboard</Trans> }]}
       />
 
-      {isPersonalWorkspace ? (
-        /* Personal workspace — welcome card with user info and getting-started guide */
+      {isMultiTenantMode && isPersonalWorkspace ? (
+        /* Multi-tenant personal workspace — getting-started guide with org CTAs */
         <PersonalWelcome firstName={firstName} lastName={lastName} email={email} />
       ) : (
         <Stack gap="md">

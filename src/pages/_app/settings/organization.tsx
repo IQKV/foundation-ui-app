@@ -31,8 +31,12 @@ import { iamApi, authApi, type UserMembership } from "@/shared/api";
 import { setTokens } from "@/processes/session";
 import { PageHeader } from "@/shared/ui";
 import { TestSelectors } from "@/shared/lib/test-selectors";
+import { guardMultiTenantRoute } from "@/app/config";
 
 export const Route = createFileRoute("/_app/settings/organization")({
+  beforeLoad: () => {
+    guardMultiTenantRoute();
+  },
   component: OrganizationsPage,
 });
 

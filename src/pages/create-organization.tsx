@@ -10,11 +10,13 @@ import { CreateOrganizationForm, useCreateOrganization } from "@/features/create
 import { decodeJwt } from "@/shared/lib/jwt";
 import { getAccessToken, useSessionStore } from "@/processes/session";
 import { iamApi } from "@/shared/api";
+import { guardMultiTenantRoute } from "@/app/config";
 
 // ─── Route ────────────────────────────────────────────────────────────────────
 
 export const Route = createFileRoute("/create-organization")({
   beforeLoad: () => {
+    guardMultiTenantRoute();
     const token = getAccessToken();
     if (!token) {
       throw redirect({ to: "/sign-in" });

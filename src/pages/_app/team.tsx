@@ -39,6 +39,7 @@ import { useSession } from "@/processes/session";
 import { SendInvitationModal, InvitationDetailsModal } from "@/features/invite-member";
 import { OrganizationSettings, MemberActions } from "@/features/manage-organization";
 import { useQuota } from "@/features/manage-billing";
+import { isMultiTenantMode } from "@/app/config";
 
 // ─── Route ────────────────────────────────────────────────────────────────────
 
@@ -441,7 +442,7 @@ function TeamPage() {
 
       <Stack gap="md">
         <TenantOwnerOnly>
-          {tenantKey && <OrganizationSettings tenantKey={tenantKey} />}
+          {tenantKey && isMultiTenantMode && <OrganizationSettings tenantKey={tenantKey} />}
         </TenantOwnerOnly>
 
         {/* Members list — visible to all authenticated users */}

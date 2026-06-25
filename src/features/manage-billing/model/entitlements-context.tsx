@@ -3,7 +3,11 @@ import type { UseQueryResult } from "@tanstack/react-query";
 import type { EntitlementsResponse, PlanFeatures } from "@/shared/api";
 import { useEntitlements } from "./use-entitlements";
 import { useSession } from "@/processes/session/use-session";
-import { DEFAULT_PERSONAL_WORKSPACE_FEATURES, DEFAULT_FREE_TENANT_FEATURES } from "@/app/config";
+import {
+  DEFAULT_PERSONAL_WORKSPACE_FEATURES,
+  DEFAULT_FREE_TENANT_FEATURES,
+  isMultiTenantMode,
+} from "@/app/config";
 
 interface EntitlementsContextType {
   entitlements: UseQueryResult<EntitlementsResponse, Error>;
@@ -32,8 +36,10 @@ export function EntitlementsProvider({ children }: EntitlementsProviderProps) {
   const entitlements = useEntitlements();
   const { isPersonalWorkspace } = useSession();
 
+  const usesPersonalWorkspaceEntitlements = isMultiTenantMode && isPersonalWorkspace;
+
   const resolvedFeatures = (): PlanFeatures => {
-    if (isPersonalWorkspace) return DEFAULT_PERSONAL_WORKSPACE_FEATURES;
+    if (usesPersonalWorkspaceEntitlements) return DEFAULT_PERSONAL_WORKSPACE_FEATURES;
     return entitlements.data?.features || DEFAULT_FREE_TENANT_FEATURES;
   };
 
@@ -51,7 +57,9 @@ export function EntitlementsProvider({ children }: EntitlementsProviderProps) {
   const getFeatureValue = (feature: "maxUsers" | "maxProjects"): number => getQuota(feature);
 
   const isActive = true; // Free plan is always active
-  const planCode = isPersonalWorkspace ? "personal" : entitlements.data?.planCode || "free";
+  const planCode = usesPersonalWorkspaceEntitlements
+    ? "personal"
+    : entitlements.data?.planCode || "free";
 
   const value: EntitlementsContextType = {
     entitlements,
