@@ -4,6 +4,8 @@ export interface PortalSessionResponse {
   url: string;
 }
 
+export type PricingModel = "FLAT" | "PER_SEAT";
+
 export interface Plan {
   id: string;
   planCode: string;
@@ -16,6 +18,9 @@ export interface Plan {
   scope: "TENANT" | "USER";
   active: boolean;
   trialPeriodDays?: number;
+  /** Pricing mode: FLAT (fixed price per period) or PER_SEAT (price × quantity). Null for plans
+   *  predating the per-seat feature — treat as FLAT. */
+  pricingModel?: PricingModel | null;
 }
 
 export interface SubscriptionResponse {
@@ -101,6 +106,9 @@ export interface PlanFeatures {
   maxUsers: number;
   maxProjects: number;
   features: Record<string, PlanFeature>;
+  /** Pricing mode carried from the billing catalog. Null for plans predating per-seat support —
+   *  treat as FLAT. */
+  pricingModel?: PricingModel | null;
 }
 
 export interface EntitlementsResponse {

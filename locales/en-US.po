@@ -56,6 +56,16 @@ msgstr "{0} Days Left"
 msgid "{trialDays} Days Free Trial"
 msgstr "{trialDays} Days Free Trial"
 
+#. placeholder {0}: plan.billingPeriod.toLowerCase()
+#: src/features/manage-billing/ui/plan-card.tsx
+msgid "/ {0}"
+msgstr "/ {0}"
+
+#. placeholder {0}: plan.billingPeriod.toLowerCase()
+#: src/features/manage-billing/ui/plan-card.tsx
+msgid "/ seat / {0}"
+msgstr "/ seat / {0}"
+
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "• Everything is set up for you — no workspace or organization setup needed."
 msgstr "• Everything is set up for you — no workspace or organization setup needed."

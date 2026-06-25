@@ -30,7 +30,7 @@ function getDisplayFeatures(features: PlanFeaturesType): string[] {
 export function PlanCard({ plan, isCurrent, onSelect, loading }: PlanCardProps) {
   const features = plan.featureSet
     ? (JSON.parse(plan.featureSet) as PlanFeaturesType)
-    : { maxUsers: 1, maxProjects: 1, features: {} };
+    : { maxUsers: 1, maxProjects: 1, features: {}, pricingModel: null };
 
   const displayFeatures = getDisplayFeatures(features);
 
@@ -77,7 +77,11 @@ export function PlanCard({ plan, isCurrent, onSelect, loading }: PlanCardProps) 
               ${(plan.priceMinor / 100).toFixed(2)}
             </Text>
             <Text size="sm" c="dimmed" mb={4}>
-              / {plan.billingPeriod.toLowerCase()}
+              {plan.pricingModel === "PER_SEAT" ? (
+                <Trans>/ seat / {plan.billingPeriod.toLowerCase()}</Trans>
+              ) : (
+                <Trans>/ {plan.billingPeriod.toLowerCase()}</Trans>
+              )}
             </Text>
           </Group>
 
