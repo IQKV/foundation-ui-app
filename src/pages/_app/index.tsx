@@ -379,11 +379,11 @@ function DashboardPage() {
     retry: false,
   });
 
-  // Fetch member count — not relevant for personal workspaces.
+  // Fetch member count — not relevant for personal workspaces or single-tenant mode.
   const { data: membersPage, isLoading: membersLoading } = useQuery({
     queryKey: ["tenant", tenantKey, "members"],
     queryFn: () => iamApi.listMembers(tenantKey!, { size: 1 }),
-    enabled: !!tenantKey && !isPersonalWorkspace,
+    enabled: !!tenantKey && !isPersonalWorkspace && isMultiTenantMode,
     retry: false,
   });
 
@@ -403,6 +403,7 @@ function DashboardPage() {
       !!tenantKey &&
       isTenantOwner &&
       !isPersonalWorkspace &&
+      isMultiTenantMode &&
       hasFeature(BILLING_FEATURES.ADVANCED_ANALYTICS),
     staleTime: 5 * 60 * 1000,
     retry: false,
@@ -441,21 +442,23 @@ function DashboardPage() {
 
           {/* Stat cards */}
           <SimpleGrid cols={{ base: 1, sm: 2, lg: isTenantOwner ? 3 : 1 }} spacing="md">
-            <StatCard
-              icon={<IconUsers size={20} />}
-              color="blue"
-              value={
-                membersLoading ? (
-                  <Skeleton height={28} width={48} radius="sm" />
-                ) : (
-                  (memberCount?.toLocaleString() ?? "—")
-                )
-              }
-              label={<Trans>Team members</Trans>}
-            />
+            {isMultiTenantMode && (
+              <StatCard
+                icon={<IconUsers size={20} />}
+                color="blue"
+                value={
+                  membersLoading ? (
+                    <Skeleton height={28} width={48} radius="sm" />
+                  ) : (
+                    (memberCount?.toLocaleString() ?? "—")
+                  )
+                }
+                label={<Trans>Team members</Trans>}
+              />
+            )}
 
             {/* Additional stat cards visible to TENANT_OWNER, requires advanced_analytics feature */}
-            {isTenantOwner && tenantKey && (
+            {isMultiTenantMode && isTenantOwner && tenantKey && (
               <FeatureGate feature={BILLING_FEATURES.ADVANCED_ANALYTICS}>
                 <>
                   <StatCard
@@ -492,7 +495,7 @@ function DashboardPage() {
           </SimpleGrid>
 
           {/* Signup trend chart — TENANT_OWNER only, requires advanced_analytics feature */}
-          {isTenantOwner && tenantKey && (
+          {isMultiTenantMode && isTenantOwner && tenantKey && (
             <FeatureGate feature={BILLING_FEATURES.ADVANCED_ANALYTICS} showUpgradePrompt>
               <SignupChartCard
                 tenantKey={tenantKey}

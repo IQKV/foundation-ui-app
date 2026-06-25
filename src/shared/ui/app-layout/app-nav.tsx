@@ -59,7 +59,9 @@ export function AppNav() {
     ...(!isMultiTenantMode || !isPersonalWorkspace
       ? [{ label: t`Billing`, icon: <IconCreditCard size={16} />, to: "/billing" }]
       : []),
-    ...(isTenantOwner ? [{ label: t`Team`, icon: <IconUsers size={16} />, to: "/team" }] : []),
+    ...(isMultiTenantMode && isTenantOwner
+      ? [{ label: t`Team`, icon: <IconUsers size={16} />, to: "/team" }]
+      : []),
     ...(canManagePages
       ? [{ label: t`CMS Pages`, icon: <IconFileText size={16} />, to: "/cms-pages" }]
       : []),

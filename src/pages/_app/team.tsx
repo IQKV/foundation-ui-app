@@ -40,10 +40,14 @@ import { SendInvitationModal, InvitationDetailsModal } from "@/features/invite-m
 import { OrganizationSettings, MemberActions } from "@/features/manage-organization";
 import { useQuota } from "@/features/manage-billing";
 import { isMultiTenantMode } from "@/app/config";
+import { guardMultiTenantRoute } from "@/app/config";
 
 // ─── Route ────────────────────────────────────────────────────────────────────
 
 export const Route = createFileRoute("/_app/team")({
+  beforeLoad: () => {
+    guardMultiTenantRoute();
+  },
   component: TeamPage,
 });
 
