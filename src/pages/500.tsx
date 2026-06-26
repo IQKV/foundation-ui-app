@@ -3,6 +3,7 @@ import { Container, Title, Text, Button, Stack } from "@mantine/core";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Helmet } from "@dr.pogodin/react-helmet";
 import { pageTitle } from "@/shared/lib/page-title";
+import { TestSelectors } from "@/shared/lib/test-selectors";
 
 export const Route = createFileRoute("/500")({
   component: InternalServerErrorPage,
@@ -20,7 +21,7 @@ function InternalServerErrorPage() {
         <Text c="dimmed">
           <Trans>Internal server error.</Trans>
         </Text>
-        <Button component={Link} to="/" data-testid="button--go-home">
+        <Button component={Link} to="/" data-testid={TestSelectors.ERROR_PAGE_GO_HOME_BUTTON}>
           <Trans>Go home</Trans>
         </Button>
       </Stack>

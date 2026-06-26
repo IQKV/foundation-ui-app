@@ -43,6 +43,7 @@ import {
   EMPTY_TRANSLATION,
 } from "@/features/page-admin";
 import type { PageFormValues } from "@/features/page-admin";
+import { TestSelectors } from "@/shared/lib/test-selectors";
 
 export const Route = createFileRoute("/_app/cms-pages/$pageId")({
   component: EditCmsPagePage,
@@ -291,7 +292,7 @@ function EditCmsPagePage() {
         </Alert>
       )}
 
-      <form onSubmit={handleSubmit} data-testid="form--edit-page">
+      <form onSubmit={handleSubmit} data-testid={TestSelectors.CMS_PAGE_EDIT_FORM}>
         <SimpleGrid cols={{ base: 1, md: 3 }} spacing="md" style={{ alignItems: "start" }}>
           {/* ─── Main: translations ─────────────────────────────────────── */}
           <Box style={{ gridColumn: "span 2" }}>
@@ -367,7 +368,7 @@ function EditCmsPagePage() {
                   required
                   size="sm"
                   disabled={!isEditable}
-                  data-testid="input--slug"
+                  data-testid={TestSelectors.CMS_PAGE_EDIT_SLUG_INPUT}
                   {...form.getInputProps("slug")}
                 />
 
@@ -376,7 +377,7 @@ function EditCmsPagePage() {
                   data={isEditable ? getEditablePageStatusOptions() : getPageStatusOptions()}
                   size="sm"
                   disabled={!isEditable}
-                  data-testid="input--status"
+                  data-testid={TestSelectors.CMS_PAGE_EDIT_STATUS_SELECT}
                   {...form.getInputProps("status")}
                 />
 
@@ -386,7 +387,7 @@ function EditCmsPagePage() {
                   description={t`Optional layout key`}
                   size="sm"
                   disabled={!isEditable}
-                  data-testid="input--template"
+                  data-testid={TestSelectors.CMS_PAGE_EDIT_TEMPLATE_INPUT}
                   {...form.getInputProps("template")}
                 />
               </Stack>
@@ -410,7 +411,7 @@ function EditCmsPagePage() {
                   clearable
                   size="sm"
                   disabled={!isEditable || parentOptions.length === 0}
-                  data-testid="input--parentId"
+                  data-testid={TestSelectors.CMS_PAGE_EDIT_PARENT_SELECT}
                 />
               </Stack>
             </Paper>
@@ -425,7 +426,7 @@ function EditCmsPagePage() {
                     loading={mutation.isPending}
                     disabled={!hasDefaultLocale}
                     fullWidth
-                    data-testid="button--save"
+                    data-testid={TestSelectors.CMS_PAGE_EDIT_SAVE_BUTTON}
                   >
                     <Trans>Save changes</Trans>
                   </Button>
@@ -437,7 +438,7 @@ function EditCmsPagePage() {
                   to="/cms-pages"
                   disabled={mutation.isPending}
                   fullWidth
-                  data-testid="button--cancel"
+                  data-testid={TestSelectors.CMS_PAGE_EDIT_CANCEL_BUTTON}
                 >
                   <Trans>Back to list</Trans>
                 </Button>

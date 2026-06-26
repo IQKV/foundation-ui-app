@@ -3,6 +3,7 @@ import { Container, Title, Text, Button, Stack, Alert, Code } from "@mantine/cor
 import { IconAlertTriangle, IconRefresh } from "@tabler/icons-react";
 import { t } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
+import { TestSelectors } from "@/shared/lib/test-selectors";
 
 interface ErrorBoundaryState {
   hasError: boolean;
@@ -47,7 +48,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
       }
 
       return (
-        <Container size="sm" py="xl" data-testid="error-boundary">
+        <Container size="sm" py="xl" data-testid={TestSelectors.ERROR_BOUNDARY}>
           <Stack gap="lg" align="center">
             <IconAlertTriangle size={64} color="var(--mantine-color-red-6)" />
             <Stack gap="sm" align="center">
@@ -61,7 +62,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
             <Button
               leftSection={<IconRefresh size="1rem" />}
               onClick={this.handleRetry}
-              data-testid="button--try-again"
+              data-testid={TestSelectors.ERROR_BOUNDARY_TRY_AGAIN_BUTTON}
             >
               <Trans>Try Again</Trans>
             </Button>

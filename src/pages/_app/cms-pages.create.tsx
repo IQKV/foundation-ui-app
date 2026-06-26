@@ -32,6 +32,7 @@ import {
   EMPTY_TRANSLATION,
 } from "@/features/page-admin";
 import type { PageFormValues } from "@/features/page-admin";
+import { TestSelectors } from "@/shared/lib/test-selectors";
 
 export const Route = createFileRoute("/_app/cms-pages/create")({
   component: CreateCmsPagePage,
@@ -138,7 +139,7 @@ function CreateCmsPagePage() {
         }
       />
 
-      <form onSubmit={handleSubmit} data-testid="form--create-page">
+      <form onSubmit={handleSubmit} data-testid={TestSelectors.CMS_PAGE_CREATE_FORM}>
         <SimpleGrid cols={{ base: 1, md: 3 }} spacing="md" style={{ alignItems: "start" }}>
           {/* ─── Main: translations ─────────────────────────────────────── */}
           <Box style={{ gridColumn: "span 2" }}>
@@ -198,7 +199,7 @@ function CreateCmsPagePage() {
                   description={t`URL path, e.g. about-us or blog/post`}
                   required
                   size="sm"
-                  data-testid="input--slug"
+                  data-testid={TestSelectors.CMS_PAGE_CREATE_SLUG_INPUT}
                   {...form.getInputProps("slug")}
                 />
 
@@ -206,7 +207,7 @@ function CreateCmsPagePage() {
                   label={t`Status`}
                   data={getEditablePageStatusOptions()}
                   size="sm"
-                  data-testid="input--status"
+                  data-testid={TestSelectors.CMS_PAGE_CREATE_STATUS_SELECT}
                   {...form.getInputProps("status")}
                 />
 
@@ -215,7 +216,7 @@ function CreateCmsPagePage() {
                   placeholder={t`e.g. default, landing`}
                   description={t`Optional layout key`}
                   size="sm"
-                  data-testid="input--template"
+                  data-testid={TestSelectors.CMS_PAGE_CREATE_TEMPLATE_INPUT}
                   {...form.getInputProps("template")}
                 />
               </Stack>
@@ -239,7 +240,7 @@ function CreateCmsPagePage() {
                   clearable
                   size="sm"
                   disabled={parentOptions.length === 0}
-                  data-testid="input--parentId"
+                  data-testid={TestSelectors.CMS_PAGE_CREATE_PARENT_SELECT}
                 />
               </Stack>
             </Paper>
@@ -253,7 +254,7 @@ function CreateCmsPagePage() {
                   loading={mutation.isPending}
                   disabled={!hasDefaultLocale}
                   fullWidth
-                  data-testid="button--create-page"
+                  data-testid={TestSelectors.CMS_PAGE_CREATE_SUBMIT_BUTTON}
                 >
                   <Trans>Create page</Trans>
                 </Button>
@@ -264,7 +265,7 @@ function CreateCmsPagePage() {
                   to="/cms-pages"
                   disabled={mutation.isPending}
                   fullWidth
-                  data-testid="button--cancel"
+                  data-testid={TestSelectors.CMS_PAGE_CREATE_CANCEL_BUTTON}
                 >
                   <Trans>Cancel</Trans>
                 </Button>

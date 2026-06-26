@@ -12,6 +12,7 @@ import { LocaleSwitcher } from "@/shared/ui/locale-switcher/locale-switcher";
 import { useQuery } from "@tanstack/react-query";
 import { iamApi } from "@/shared/api";
 import { Button } from "@mantine/core";
+import { TestSelectors } from "@/shared/lib/test-selectors";
 
 interface AppHeaderProps {
   opened: boolean;
@@ -62,7 +63,7 @@ function UserMenu() {
         <Menu.Item
           leftSection={<IconUser size={14} />}
           onClick={() => void navigate({ to: "/settings/general" })}
-          data-testid="button--profile"
+          data-testid={TestSelectors.HEADER_USER_MENU_PROFILE_BUTTON}
         >
           <Trans>My Account</Trans>
         </Menu.Item>
@@ -70,7 +71,7 @@ function UserMenu() {
           <Menu.Item
             leftSection={<IconBuilding size={14} />}
             onClick={() => void navigate({ to: "/settings/organization" })}
-            data-testid="button--organizations"
+            data-testid={TestSelectors.HEADER_USER_MENU_ORGANIZATIONS_BUTTON}
           >
             <Trans>Organizations</Trans>
           </Menu.Item>

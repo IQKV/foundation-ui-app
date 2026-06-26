@@ -38,6 +38,7 @@ import type { CmsPageSummary, CmsPageStatus } from "@/shared/api";
 import { PageHeader } from "@/shared/ui";
 import { useSession } from "@/processes/session";
 import { DeletePageModal } from "@/features/page-admin";
+import { TestSelectors } from "@/shared/lib/test-selectors";
 
 export const Route = createFileRoute("/_app/cms-pages/")({
   component: CmsPagesPage,
@@ -128,7 +129,7 @@ function CmsPagesPage() {
             size="sm"
             component={Link}
             to="/cms-pages/create"
-            data-testid="button-cms-pages-create"
+            data-testid={TestSelectors.CMS_PAGES_CREATE_NEW_PAGE_BUTTON}
           >
             <Trans>New page</Trans>
           </Button>
@@ -181,7 +182,7 @@ function CmsPagesPage() {
                   color="gray"
                   size="sm"
                   radius="sm"
-                  data-testid="badge-cms-pages-total-count"
+                  data-testid={TestSelectors.CMS_PAGES_TOTAL_PAGES_BADGE}
                 >
                   {data?.totalElements ?? 0}
                 </Badge>
@@ -203,7 +204,7 @@ function CmsPagesPage() {
                 clearable
                 size="xs"
                 style={{ width: 150 }}
-                data-testid="select-cms-pages-status-filter"
+                data-testid={TestSelectors.CMS_PAGES_STATUS_FILTER_SELECT}
               />
               <Tooltip label={t`Refresh`} withArrow>
                 <ActionIcon
@@ -212,7 +213,7 @@ function CmsPagesPage() {
                   size="sm"
                   onClick={() => void refetch()}
                   loading={isFetching}
-                  data-testid="button-cms-pages-refresh"
+                  data-testid={TestSelectors.CMS_PAGES_REFRESH_BUTTON}
                 >
                   <IconRefresh size={15} />
                 </ActionIcon>
@@ -349,7 +350,7 @@ function CmsPagesPage() {
                           variant="subtle"
                           color="gray"
                           size="sm"
-                          data-testid={`button-cms-page-actions--${p.id}`}
+                          data-testid={TestSelectors.CMS_PAGE_ACTIONS_MENU_TRIGGER(p.id)}
                         >
                           <IconDots size={15} />
                         </ActionIcon>
@@ -359,7 +360,7 @@ function CmsPagesPage() {
                           leftSection={<IconEdit size={14} />}
                           component={Link}
                           to={`/cms-pages/${p.id}`}
-                          data-testid={`button-cms-page-edit--${p.id}`}
+                          data-testid={TestSelectors.CMS_PAGE_EDIT_BUTTON(p.id)}
                         >
                           <Trans>Edit</Trans>
                         </Menu.Item>
@@ -368,7 +369,7 @@ function CmsPagesPage() {
                           color="red"
                           disabled={p.status === "PUBLISHED"}
                           onClick={() => handleDelete(p)}
-                          data-testid={`button-cms-page-delete--${p.id}`}
+                          data-testid={TestSelectors.CMS_PAGE_DELETE_BUTTON(p.id)}
                         >
                           <Trans>Delete</Trans>
                         </Menu.Item>

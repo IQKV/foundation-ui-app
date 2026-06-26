@@ -314,6 +314,42 @@ export const TestSelectors = {
   USER_STATUS_BADGE: "user-status-badge",
   TENANT_STATUS_BADGE: "tenant-status-badge",
   LOCALE_SWITCHER: "locale-switcher",
+
+  // Error Boundary
+  ERROR_BOUNDARY_TRY_AGAIN_BUTTON: "error-boundary-try-again-button",
+
+  // Header User Menu
+  HEADER_USER_MENU_PROFILE_BUTTON: "header-user-menu-profile-button",
+  HEADER_USER_MENU_ORGANIZATIONS_BUTTON: "header-user-menu-organizations-button",
+
+  // Error Pages
+  ERROR_PAGE_GO_HOME_BUTTON: "error-page-go-home-button",
+
+  // CMS Pages
+  CMS_PAGES_INDEX: "cms-pages-index-page",
+  CMS_PAGES_CREATE_NEW_PAGE_BUTTON: "cms-pages-create-new-page-button",
+  CMS_PAGES_TOTAL_PAGES_BADGE: "cms-pages-total-pages-badge",
+  CMS_PAGES_STATUS_FILTER_SELECT: "cms-pages-status-filter-select",
+  CMS_PAGES_REFRESH_BUTTON: "cms-pages-refresh-button",
+  CMS_PAGE_ACTIONS_MENU_TRIGGER: (pageId: string) => `cms-page-${pageId}-actions-menu-trigger`,
+  CMS_PAGE_EDIT_BUTTON: (pageId: string) => `cms-page-${pageId}-edit-button`,
+  CMS_PAGE_DELETE_BUTTON: (pageId: string) => `cms-page-${pageId}-delete-button`,
+  CMS_PAGE_CREATE: "cms-pages-create-page",
+  CMS_PAGE_CREATE_FORM: "cms-pages-create-page-form",
+  CMS_PAGE_CREATE_SLUG_INPUT: "cms-pages-create-page-slug-input",
+  CMS_PAGE_CREATE_STATUS_SELECT: "cms-pages-create-page-status-select",
+  CMS_PAGE_CREATE_TEMPLATE_INPUT: "cms-pages-create-page-template-input",
+  CMS_PAGE_CREATE_PARENT_SELECT: "cms-pages-create-page-parent-select",
+  CMS_PAGE_CREATE_SUBMIT_BUTTON: "cms-pages-create-page-submit-button",
+  CMS_PAGE_CREATE_CANCEL_BUTTON: "cms-pages-create-page-cancel-button",
+  CMS_PAGE_EDIT: (pageId: string) => `cms-pages-edit-page-${pageId}`,
+  CMS_PAGE_EDIT_FORM: "cms-pages-edit-page-form",
+  CMS_PAGE_EDIT_SLUG_INPUT: "cms-pages-edit-page-slug-input",
+  CMS_PAGE_EDIT_STATUS_SELECT: "cms-pages-edit-page-status-select",
+  CMS_PAGE_EDIT_TEMPLATE_INPUT: "cms-pages-edit-page-template-input",
+  CMS_PAGE_EDIT_PARENT_SELECT: "cms-pages-edit-page-parent-select",
+  CMS_PAGE_EDIT_SAVE_BUTTON: "cms-pages-edit-page-save-button",
+  CMS_PAGE_EDIT_CANCEL_BUTTON: "cms-pages-edit-page-cancel-button",
 } as const;
 
 /**
