@@ -3,9 +3,9 @@ import { Alert, Box, Stack, Text, Title } from "@mantine/core";
 import { IconAlertCircle, IconInfoCircle } from "@tabler/icons-react";
 import { z } from "zod";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Helmet } from "@dr.pogodin/react-helmet";
+
 import { Link } from "@tanstack/react-router";
-import { pageTitle } from "@/shared/lib/page-title";
+import { PageTitle } from "@/shared/lib/page-title";
 import { AuthLayout } from "@/shared/ui";
 import { SignInForm } from "@/features/sign-in";
 import { decodeJwt, isTenantSession } from "@/shared/lib/jwt";
@@ -44,9 +44,7 @@ function SignInPage() {
 
   return (
     <AuthLayout>
-      <Helmet>
-        <title>{pageTitle(t`Sign In`)}</title>
-      </Helmet>
+      <PageTitle segments={[t`Sign In`]} />
 
       {/* Heading */}
       <Box>

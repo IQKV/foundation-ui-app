@@ -1,9 +1,9 @@
 import { createFileRoute, redirect, useNavigate } from "@tanstack/react-router";
 import { Box, Text, Title } from "@mantine/core";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Helmet } from "@dr.pogodin/react-helmet";
+
 import { useEffect } from "react";
-import { pageTitle } from "@/shared/lib/page-title";
+import { PageTitle } from "@/shared/lib/page-title";
 import { AuthLayout } from "@/shared/ui";
 import { CompleteProfileForm } from "@/features/complete-profile";
 import { decodeJwt, isTenantSession } from "@/shared/lib/jwt";
@@ -68,9 +68,7 @@ function CompleteProfilePage() {
       }
       tagline={<Trans>Tell us your name so your teammates know who you are.</Trans>}
     >
-      <Helmet>
-        <title>{pageTitle(t`Complete your profile`)}</title>
-      </Helmet>
+      <PageTitle segments={[t`Complete your profile`]} />
 
       {/* Heading */}
       <Box>

@@ -27,8 +27,8 @@ import {
   IconLock,
 } from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Helmet } from "@dr.pogodin/react-helmet";
-import { pageTitle } from "@/shared/lib/page-title";
+
+import { PageTitle } from "@/shared/lib/page-title";
 import { validateWithZod } from "@/shared/lib/zod-form-validation";
 import { cmsApi, localesApi } from "@/shared/api";
 import type { CmsPageStatus } from "@/shared/api";
@@ -236,9 +236,7 @@ function EditCmsPagePage() {
 
   return (
     <Container size="xl" py={0}>
-      <Helmet>
-        <title>{pageTitle(t`Edit — ${defaultTitle}`)}</title>
-      </Helmet>
+      <PageTitle segments={[t`Edit — ${defaultTitle}`]} />
 
       <PageHeader
         title={

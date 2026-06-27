@@ -4,10 +4,10 @@ import { Box, Button, Loader, Stack, Text, ThemeIcon, Title } from "@mantine/cor
 import { IconAlertTriangle, IconCircleCheck } from "@tabler/icons-react";
 import { z } from "zod";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Helmet } from "@dr.pogodin/react-helmet";
+
 import { Link } from "@tanstack/react-router";
 import { isAxiosError } from "axios";
-import { pageTitle } from "@/shared/lib/page-title";
+import { PageTitle } from "@/shared/lib/page-title";
 import { AuthLayout } from "@/shared/ui";
 import { httpClient } from "@/shared/api/http-client";
 
@@ -78,9 +78,7 @@ function VerifyEmailPage() {
       }
       tagline={<Trans>One click and you're all set.</Trans>}
     >
-      <Helmet>
-        <title>{pageTitle(t`Verify Email`)}</title>
-      </Helmet>
+      <PageTitle segments={[t`Verify Email`]} />
 
       <Box>
         <Title order={2} fw={700} size="h3" mb={6}>

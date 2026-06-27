@@ -1,8 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Container, Title, Text, Button, Stack } from "@mantine/core";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Helmet } from "@dr.pogodin/react-helmet";
-import { pageTitle } from "@/shared/lib/page-title";
+
+import { PageTitle } from "@/shared/lib/page-title";
 import { TestSelectors } from "@/shared/lib/test-selectors";
 
 export const Route = createFileRoute("/500")({
@@ -13,9 +13,7 @@ function InternalServerErrorPage() {
   const { t } = useLingui();
   return (
     <Container size="sm" py="xl" data-testid="page-500">
-      <Helmet>
-        <title>{pageTitle(t`Server Error`)}</title>
-      </Helmet>
+      <PageTitle segments={[t`Server Error`]} />
       <Stack align="center" gap="md">
         <Title>500</Title>
         <Text c="dimmed">

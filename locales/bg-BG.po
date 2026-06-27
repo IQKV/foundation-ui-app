@@ -26,7 +26,7 @@ msgstr "{0}"
 
 #. placeholder {0}: data.periodFrom
 #. placeholder {1}: data.periodTo
-#: src/pages/_app/index.tsx
+#: src/widgets/dashboard-signup-chart/ui/dashboard-signup-chart.tsx
 msgid "{0} – {1}"
 msgstr ""
 
@@ -78,15 +78,15 @@ msgstr ""
 msgid "• No technical background needed — our intuitive UI is designed for everyone."
 msgstr ""
 
-#: src/pages/_app/index.tsx
+#: src/widgets/dashboard-personal-welcome/ui/dashboard-personal-welcome.tsx
 msgid "<0>Configure notifications</0> to stay informed."
 msgstr "<0>Конфигурирайте известията</0>, за да сте информирани."
 
-#: src/pages/_app/index.tsx
+#: src/widgets/dashboard-personal-welcome/ui/dashboard-personal-welcome.tsx
 msgid "<0>Create an organization</0> to collaborate with your team."
 msgstr "<0>Създайте организация</0>, за да работите в екип."
 
-#: src/pages/_app/index.tsx
+#: src/widgets/dashboard-personal-welcome/ui/dashboard-personal-welcome.tsx
 msgid "<0>Secure your account</0> by changing your password."
 msgstr "<0>Защитете акаунта си</0>, като промените паролата."
 
@@ -94,7 +94,7 @@ msgstr "<0>Защитете акаунта си</0>, като промените
 msgid "<0>Sign in now</0>"
 msgstr "<0>Влезте сега</0>"
 
-#: src/pages/_app/index.tsx
+#: src/widgets/dashboard-personal-welcome/ui/dashboard-personal-welcome.tsx
 msgid "<0>Update your profile</0> with your name and avatar."
 msgstr "<0>Актуализирайте профила си</0> с имe и аватар."
 
@@ -158,9 +158,9 @@ msgid "Actions"
 msgstr "Действия"
 
 #: src/features/manage-billing/ui/plan-card.tsx
-#: src/pages/_app/index.tsx
 #: src/shared/ui/tenant-status-badge/tenant-status-badge.tsx
 #: src/shared/ui/user-status-badge/user-status-badge.tsx
+#: src/widgets/dashboard-signup-chart/ui/dashboard-signup-chart.tsx
 msgid "Active"
 msgstr "Активен"
 
@@ -614,7 +614,7 @@ msgstr "Текущ абонамент"
 msgid "Current workspace"
 msgstr "Текущо работно пространство"
 
-#: src/pages/_app/index.tsx
+#: src/widgets/dashboard-signup-chart/ui/dashboard-signup-chart.tsx
 msgid "Daily"
 msgstr ""
 
@@ -730,8 +730,8 @@ msgstr "Имейлът е задължителен"
 msgid "Email verification"
 msgstr "Потвърждаване на имейл"
 
-#: src/pages/_app/index.tsx
 #: src/pages/verify-email.tsx
+#: src/widgets/dashboard-signup-chart/ui/dashboard-signup-chart.tsx
 msgid "Email verified"
 msgstr "Имейлът е потвърден"
 
@@ -922,7 +922,7 @@ msgstr "Към началната страница"
 msgid "Good"
 msgstr "Добра"
 
-#: src/pages/_app/index.tsx
+#: src/widgets/dashboard-personal-welcome/ui/dashboard-personal-welcome.tsx
 msgid "Here's what you can do from your personal workspace:"
 msgstr "Ето какво можете да направите от личното си работно пространство:"
 
@@ -1110,8 +1110,8 @@ msgstr "Зареждане…"
 msgid "Locale is required"
 msgstr ""
 
-#: src/pages/_app/index.tsx
 #: src/shared/ui/user-status-badge/user-status-badge.tsx
+#: src/widgets/dashboard-signup-chart/ui/dashboard-signup-chart.tsx
 msgid "Locked"
 msgstr "Заключен"
 
@@ -1161,7 +1161,7 @@ msgstr ""
 msgid "Member"
 msgstr "Член"
 
-#: src/pages/_app/index.tsx
+#: src/widgets/dashboard-signup-chart/ui/dashboard-signup-chart.tsx
 msgid "Member Signups"
 msgstr ""
 
@@ -1174,7 +1174,7 @@ msgid "Meta description for search engines"
 msgstr ""
 
 #: src/features/manage-billing/ui/plan-list.tsx
-#: src/pages/_app/index.tsx
+#: src/widgets/dashboard-signup-chart/ui/dashboard-signup-chart.tsx
 msgid "Monthly"
 msgstr ""
 
@@ -1221,7 +1221,7 @@ msgstr ""
 msgid "New password"
 msgstr "Нова парола"
 
-#: src/pages/_app/index.tsx
+#: src/widgets/dashboard-signup-chart/ui/dashboard-signup-chart.tsx
 msgid "New signups"
 msgstr ""
 
@@ -1525,7 +1525,7 @@ msgstr "Изчакващи покани"
 
 #: src/features/manage-billing/ui/entitlements-card.tsx
 #: src/pages/_app/billing/index.tsx
-#: src/pages/_app/index.tsx
+#: src/widgets/dashboard-personal-welcome/ui/dashboard-personal-welcome.tsx
 msgid "Personal Workspace"
 msgstr "Лично работно пространство"
 
@@ -1998,13 +1998,13 @@ msgstr "Все още се настройва…"
 msgid "Strong"
 msgstr "Силна"
 
-#: src/pages/_app/index.tsx
 #: src/shared/ui/tenant-status-badge/tenant-status-badge.tsx
 #: src/shared/ui/user-status-badge/user-status-badge.tsx
+#: src/widgets/dashboard-signup-chart/ui/dashboard-signup-chart.tsx
 msgid "Suspended"
 msgstr "Спрян"
 
-#: src/pages/_app/index.tsx
+#: src/widgets/dashboard-personal-welcome/ui/dashboard-personal-welcome.tsx
 msgid "Switch between workspaces anytime using the workspace switcher in the sidebar."
 msgstr "Превключвайте между работни пространства по всяко време с помощта на превключвателя в страничната лента."
 
@@ -2193,7 +2193,7 @@ msgstr "Доверено от екипи по целия свят"
 msgid "Try Again"
 msgstr "Опитай отново"
 
-#: src/pages/_app/index.tsx
+#: src/widgets/dashboard-signup-chart/ui/dashboard-signup-chart.tsx
 msgid "Unable to load signup data."
 msgstr ""
 
@@ -2320,7 +2320,7 @@ msgstr ""
 msgid "Welcome to Key Value Platform!"
 msgstr ""
 
-#: src/pages/_app/index.tsx
+#: src/widgets/dashboard-personal-welcome/ui/dashboard-personal-welcome.tsx
 msgid "Welcome, {firstName}!"
 msgstr "Добре дошли, {firstName}!"
 

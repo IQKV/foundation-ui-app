@@ -12,8 +12,8 @@ import {
   Button,
 } from "@mantine/core";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Helmet } from "@dr.pogodin/react-helmet";
-import { pageTitle } from "@/shared/lib/page-title";
+
+import { PageTitle } from "@/shared/lib/page-title";
 import { PageHeader } from "@/shared/ui";
 import {
   useNotificationList,
@@ -66,9 +66,7 @@ function NotificationsPage() {
 
   return (
     <Container size="md" py={0} data-testid={TestSelectors.NOTIFICATION_PAGE}>
-      <Helmet>
-        <title>{pageTitle(t`Notifications`)}</title>
-      </Helmet>
+      <PageTitle segments={[t`Notifications`]} />
 
       <PageHeader
         title={<Trans>Notifications</Trans>}

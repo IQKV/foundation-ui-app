@@ -4,7 +4,7 @@ import { localStorageColorSchemeManager, MantineProvider } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
 import { ModalsProvider } from "@mantine/modals";
 import { NavigationProgress, nprogress } from "@mantine/nprogress";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { createRouter, RouterProvider } from "@tanstack/react-router";
 import { I18nProvider } from "@lingui/react";
@@ -14,6 +14,7 @@ import { HelmetProvider } from "@dr.pogodin/react-helmet";
 import { routeTree } from "@/routeTree.gen";
 import { theme, cssVariablesResolver } from "./theme";
 import { ErrorBoundary, LoadingOverlay } from "@/shared/ui";
+import { queryClient } from "@/shared/lib/query-client";
 
 import "@mantine/core/styles.css";
 import "@mantine/notifications/styles.css";
@@ -21,14 +22,7 @@ import "@mantine/nprogress/styles.css";
 import "@mantine/tiptap/styles.css";
 import "mantine-datatable/styles.layer.css";
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: { staleTime: 1000 * 60, refetchOnWindowFocus: false },
-    mutations: { retry: false },
-  },
-});
-
-const router = createRouter({ routeTree, defaultPreload: "intent" });
+const router = createRouter({ routeTree, defaultPreload: "intent", context: { queryClient } });
 
 // Persist color scheme preference in localStorage under the same key used by
 // the Zustand theme store so both stay in sync across page reloads.

@@ -23,9 +23,9 @@ import {
   IconShieldHalf,
 } from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Helmet } from "@dr.pogodin/react-helmet";
+
 import { Link } from "@tanstack/react-router";
-import { pageTitle } from "@/shared/lib/page-title";
+import { PageTitle } from "@/shared/lib/page-title";
 import { AuthLayout } from "@/shared/ui";
 import { useAcceptInvitation } from "@/features/accept-invitation";
 import { decodeJwt, isTenantSession } from "@/shared/lib/jwt";
@@ -85,9 +85,7 @@ function InvitePage() {
         )
       }
     >
-      <Helmet>
-        <title>{pageTitle(t`Accept Invitation`)}</title>
-      </Helmet>
+      <PageTitle segments={[t`Accept Invitation`]} />
 
       {/* ── Loading preview ──────────────────────────────────────────────── */}
       {phase === "preview" && (

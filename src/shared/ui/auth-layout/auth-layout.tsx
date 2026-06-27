@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import { Box, Flex, Group, Stack, Text, Title, useMantineColorScheme } from "@mantine/core";
 import { IconShieldHalf } from "@tabler/icons-react";
 import { Trans } from "@lingui/react/macro";
-import { APP_NAME } from "@/shared/lib/page-title";
+import { APP_TITLE } from "@/shared/lib/page-title";
 import { ColorSchemeToggle } from "@/shared/ui/color-scheme-toggle/color-scheme-toggle";
 import { LocaleSwitcher } from "@/shared/ui/locale-switcher/locale-switcher";
 
@@ -103,7 +103,7 @@ function BrandPanel({ headline, tagline }: BrandPanelProps) {
             <IconShieldHalf size={20} color="#93c5fd" />
           </Box>
           <Text fw={700} size="lg" c="white" style={{ letterSpacing: "-0.02em" }}>
-            {APP_NAME}
+            {APP_TITLE}
           </Text>
         </Flex>
       </Box>
@@ -198,7 +198,7 @@ function FormPanel({ children }: { children: ReactNode }) {
             <IconShieldHalf size={18} color={isDark ? "#93c5fd" : "var(--mantine-color-blue-6)"} />
           </Box>
           <Text fw={700} size="md" c={isDark ? "white" : "dark.8"}>
-            {APP_NAME}
+            {APP_TITLE}
           </Text>
         </Flex>
 

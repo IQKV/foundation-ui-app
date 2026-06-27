@@ -31,8 +31,8 @@ import {
 } from "@tabler/icons-react";
 import dayjs from "dayjs";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Helmet } from "@dr.pogodin/react-helmet";
-import { pageTitle } from "@/shared/lib/page-title";
+
+import { PageTitle } from "@/shared/lib/page-title";
 import { cmsApi } from "@/shared/api";
 import type { CmsPageSummary, CmsPageStatus } from "@/shared/api";
 import { PageHeader } from "@/shared/ui";
@@ -112,9 +112,7 @@ function CmsPagesPage() {
 
   return (
     <Container size="xl" py={0}>
-      <Helmet>
-        <title>{pageTitle(t`CMS Pages`)}</title>
-      </Helmet>
+      <PageTitle segments={[t`CMS Pages`]} />
 
       <PageHeader
         title={<Trans>CMS Pages</Trans>}

@@ -19,8 +19,8 @@ import { IconShieldHalf, IconKey, IconAlertCircle, IconCircleCheck } from "@tabl
 import { useQuery } from "@tanstack/react-query";
 import { useForm } from "@mantine/form";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Helmet } from "@dr.pogodin/react-helmet";
-import { pageTitle } from "@/shared/lib/page-title";
+
+import { PageTitle } from "@/shared/lib/page-title";
 import { iamApi } from "@/shared/api";
 import { PageHeader } from "@/shared/ui";
 import { useChangePassword } from "@/features/change-password";
@@ -104,7 +104,7 @@ function SecuritySettingsPage() {
 
   return (
     <Container size="md" data-testid={TestSelectors.SECURITY_SETTINGS_PAGE}>
-      <Helmet title={pageTitle(t`Security Settings`)} />
+      <PageTitle segments={[t`Security Settings`]} />
       <PageHeader
         title={t`Security Settings`}
         breadcrumbs={[

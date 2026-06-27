@@ -2,8 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Box, Text, Title } from "@mantine/core";
 import { z } from "zod";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Helmet } from "@dr.pogodin/react-helmet";
-import { pageTitle } from "@/shared/lib/page-title";
+
+import { PageTitle } from "@/shared/lib/page-title";
 import { AuthLayout } from "@/shared/ui";
 import { MagicLinkInitiateForm } from "@/features/magic-link";
 
@@ -21,9 +21,7 @@ function MagicLinkPage() {
 
   return (
     <AuthLayout>
-      <Helmet>
-        <title>{pageTitle(t`Sign in with magic link`)}</title>
-      </Helmet>
+      <PageTitle segments={[t`Sign in with magic link`]} />
 
       {/* Heading */}
       <Box>

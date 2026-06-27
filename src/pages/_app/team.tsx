@@ -30,8 +30,8 @@ import {
 } from "@tabler/icons-react";
 import dayjs from "dayjs";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Helmet } from "@dr.pogodin/react-helmet";
-import { pageTitle } from "@/shared/lib/page-title";
+
+import { PageTitle } from "@/shared/lib/page-title";
 import { iamApi } from "@/shared/api";
 import type { Invitation, TenantMember } from "@/shared/api";
 import { InvitationStatusBadge, PageHeader, TenantOwnerOnly } from "@/shared/ui";
@@ -413,9 +413,7 @@ function TeamPage() {
 
   return (
     <Container size="xl" py={0}>
-      <Helmet>
-        <title>{pageTitle(t`Team`)}</title>
-      </Helmet>
+      <PageTitle segments={[t`Team`]} />
 
       <PageHeader
         title={<Trans>Team</Trans>}

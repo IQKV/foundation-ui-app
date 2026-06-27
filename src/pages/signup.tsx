@@ -1,8 +1,8 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { Box, Text, Title } from "@mantine/core";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Helmet } from "@dr.pogodin/react-helmet";
-import { pageTitle } from "@/shared/lib/page-title";
+
+import { PageTitle } from "@/shared/lib/page-title";
 import { AuthLayout } from "@/shared/ui";
 import { SignupForm, VerifyEmailPrompt, useSignup } from "@/features/signup";
 import { decodeJwt, isTenantSession } from "@/shared/lib/jwt";
@@ -69,9 +69,7 @@ function SignupPage() {
         )
       }
     >
-      <Helmet>
-        <title>{pageTitle(t`Create account`)}</title>
-      </Helmet>
+      <PageTitle segments={[t`Create account`]} />
 
       {/* Heading — only shown on the form step */}
       {phase === "form" && (

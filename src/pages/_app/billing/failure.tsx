@@ -2,8 +2,8 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { Container, Stack, Text, Paper, Button, Group, ThemeIcon, Title } from "@mantine/core";
 import { IconAlertCircle } from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Helmet } from "@dr.pogodin/react-helmet";
-import { pageTitle } from "@/shared/lib/page-title";
+
+import { PageTitle } from "@/shared/lib/page-title";
 
 export const Route = createFileRoute("/_app/billing/failure")({
   component: BillingFailurePage,
@@ -15,7 +15,7 @@ function BillingFailurePage() {
 
   return (
     <Container size="md" py="xl">
-      <Helmet title={pageTitle(t`Payment Failed`)} />
+      <PageTitle segments={[t`Payment Failed`]} />
       <Stack align="center" justify="center" py="xl">
         <Paper withBorder p="xl" radius="md" style={{ width: "100%" }}>
           <Stack align="center" gap="lg">

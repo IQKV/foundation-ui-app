@@ -1,8 +1,8 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { z } from "zod";
 import { useLingui } from "@lingui/react/macro";
-import { Helmet } from "@dr.pogodin/react-helmet";
-import { pageTitle } from "@/shared/lib/page-title";
+
+import { PageTitle } from "@/shared/lib/page-title";
 import { AuthLayout } from "@/shared/ui";
 import { MagicLinkExchangeForm } from "@/features/magic-link";
 import { decodeJwt, isTenantSession } from "@/shared/lib/jwt";
@@ -39,9 +39,7 @@ function MagicLinkVerifyPage() {
 
   return (
     <AuthLayout>
-      <Helmet>
-        <title>{pageTitle(t`Signing in`)}</title>
-      </Helmet>
+      <PageTitle segments={[t`Signing in`]} />
 
       <MagicLinkExchangeForm token={token} redirectTo={redirectTo} />
     </AuthLayout>

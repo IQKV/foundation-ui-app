@@ -3,8 +3,8 @@ import { Avatar, Box, Button, Divider, Group, Stack, Text, Title } from "@mantin
 import { IconArrowLeft } from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { useQuery } from "@tanstack/react-query";
-import { Helmet } from "@dr.pogodin/react-helmet";
-import { pageTitle } from "@/shared/lib/page-title";
+
+import { PageTitle } from "@/shared/lib/page-title";
 import { AuthLayout } from "@/shared/ui";
 import { CreateOrganizationForm, useCreateOrganization } from "@/features/create-organization";
 import { decodeJwt } from "@/shared/lib/jwt";
@@ -107,9 +107,7 @@ function CreateOrganizationPage() {
       }
       tagline={<Trans>Set up your workspace in under a minute.</Trans>}
     >
-      <Helmet>
-        <title>{pageTitle(t`Create organization`)}</title>
-      </Helmet>
+      <PageTitle segments={[t`Create organization`]} />
 
       {/* Owner card — shows who will own the new org */}
       <OwnerCard />

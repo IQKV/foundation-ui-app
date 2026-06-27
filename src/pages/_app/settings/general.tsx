@@ -20,8 +20,8 @@ import { useQuery } from "@tanstack/react-query";
 import { useForm } from "@mantine/form";
 import { useEffect } from "react";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Helmet } from "@dr.pogodin/react-helmet";
-import { pageTitle } from "@/shared/lib/page-title";
+
+import { PageTitle } from "@/shared/lib/page-title";
 import { iamApi, localesApi } from "@/shared/api";
 import { PageHeader } from "@/shared/ui";
 import { useEditProfile, type EditProfileFormValues } from "@/features/edit-profile";
@@ -144,7 +144,7 @@ function GeneralSettingsPage() {
 
   return (
     <Container size="md" data-testid={TestSelectors.GENERAL_SETTINGS_PAGE}>
-      <Helmet title={pageTitle(t`General Settings`)} />
+      <PageTitle segments={[t`General Settings`]} />
       <PageHeader
         title={t`General Settings`}
         breadcrumbs={[

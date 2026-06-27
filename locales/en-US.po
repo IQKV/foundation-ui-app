@@ -26,7 +26,7 @@ msgstr "{0}"
 
 #. placeholder {0}: data.periodFrom
 #. placeholder {1}: data.periodTo
-#: src/pages/_app/index.tsx
+#: src/widgets/dashboard-signup-chart/ui/dashboard-signup-chart.tsx
 msgid "{0} – {1}"
 msgstr "{0} – {1}"
 
@@ -90,15 +90,15 @@ msgstr "• Invite your team — your first steps are just a click away!"
 msgid "• No technical background needed — our intuitive UI is designed for everyone."
 msgstr "• No technical background needed — our intuitive UI is designed for everyone."
 
-#: src/pages/_app/index.tsx
+#: src/widgets/dashboard-personal-welcome/ui/dashboard-personal-welcome.tsx
 msgid "<0>Configure notifications</0> to stay informed."
 msgstr "<0>Configure notifications</0> to stay informed."
 
-#: src/pages/_app/index.tsx
+#: src/widgets/dashboard-personal-welcome/ui/dashboard-personal-welcome.tsx
 msgid "<0>Create an organization</0> to collaborate with your team."
 msgstr "<0>Create an organization</0> to collaborate with your team."
 
-#: src/pages/_app/index.tsx
+#: src/widgets/dashboard-personal-welcome/ui/dashboard-personal-welcome.tsx
 msgid "<0>Secure your account</0> by changing your password."
 msgstr "<0>Secure your account</0> by changing your password."
 
@@ -106,7 +106,7 @@ msgstr "<0>Secure your account</0> by changing your password."
 msgid "<0>Sign in now</0>"
 msgstr "<0>Sign in now</0>"
 
-#: src/pages/_app/index.tsx
+#: src/widgets/dashboard-personal-welcome/ui/dashboard-personal-welcome.tsx
 msgid "<0>Update your profile</0> with your name and avatar."
 msgstr "<0>Update your profile</0> with your name and avatar."
 
@@ -182,9 +182,9 @@ msgid "Actions"
 msgstr "Actions"
 
 #: src/features/manage-billing/ui/plan-card.tsx
-#: src/pages/_app/index.tsx
 #: src/shared/ui/tenant-status-badge/tenant-status-badge.tsx
 #: src/shared/ui/user-status-badge/user-status-badge.tsx
+#: src/widgets/dashboard-signup-chart/ui/dashboard-signup-chart.tsx
 msgid "Active"
 msgstr "Active"
 
@@ -736,7 +736,7 @@ msgstr "Current Subscription"
 msgid "Current workspace"
 msgstr "Current workspace"
 
-#: src/pages/_app/index.tsx
+#: src/widgets/dashboard-signup-chart/ui/dashboard-signup-chart.tsx
 msgid "Daily"
 msgstr "Daily"
 
@@ -892,8 +892,8 @@ msgstr "Email is required"
 msgid "Email verification"
 msgstr "Email verification"
 
-#: src/pages/_app/index.tsx
 #: src/pages/verify-email.tsx
+#: src/widgets/dashboard-signup-chart/ui/dashboard-signup-chart.tsx
 msgid "Email verified"
 msgstr "Email verified"
 
@@ -1114,7 +1114,7 @@ msgstr "Go to Home"
 msgid "Good"
 msgstr "Good"
 
-#: src/pages/_app/index.tsx
+#: src/widgets/dashboard-personal-welcome/ui/dashboard-personal-welcome.tsx
 msgid "Here's what you can do from your personal workspace:"
 msgstr "Here's what you can do from your personal workspace:"
 
@@ -1330,8 +1330,8 @@ msgstr "Loading…"
 msgid "Locale is required"
 msgstr "Locale is required"
 
-#: src/pages/_app/index.tsx
 #: src/shared/ui/user-status-badge/user-status-badge.tsx
+#: src/widgets/dashboard-signup-chart/ui/dashboard-signup-chart.tsx
 msgid "Locked"
 msgstr "Locked"
 
@@ -1397,7 +1397,7 @@ msgstr "Max Users:"
 msgid "Member"
 msgstr "Member"
 
-#: src/pages/_app/index.tsx
+#: src/widgets/dashboard-signup-chart/ui/dashboard-signup-chart.tsx
 msgid "Member Signups"
 msgstr "Member Signups"
 
@@ -1414,7 +1414,7 @@ msgid "Meta description for search engines"
 msgstr "Meta description for search engines"
 
 #: src/features/manage-billing/ui/plan-list.tsx
-#: src/pages/_app/index.tsx
+#: src/widgets/dashboard-signup-chart/ui/dashboard-signup-chart.tsx
 msgid "Monthly"
 msgstr "Monthly"
 
@@ -1461,7 +1461,7 @@ msgstr "New Page"
 msgid "New password"
 msgstr "New password"
 
-#: src/pages/_app/index.tsx
+#: src/widgets/dashboard-signup-chart/ui/dashboard-signup-chart.tsx
 msgid "New signups"
 msgstr "New signups"
 
@@ -1834,7 +1834,7 @@ msgstr "Pending invitations"
 
 #: src/features/manage-billing/ui/entitlements-card.tsx
 #: src/pages/_app/billing/index.tsx
-#: src/pages/_app/index.tsx
+#: src/widgets/dashboard-personal-welcome/ui/dashboard-personal-welcome.tsx
 msgid "Personal Workspace"
 msgstr "Personal Workspace"
 
@@ -2404,13 +2404,13 @@ msgstr "Strong"
 #~ msgid "Subscriptions |Key Value Admin"
 #~ msgstr "Subscriptions |Key Value Admin"
 
-#: src/pages/_app/index.tsx
 #: src/shared/ui/tenant-status-badge/tenant-status-badge.tsx
 #: src/shared/ui/user-status-badge/user-status-badge.tsx
+#: src/widgets/dashboard-signup-chart/ui/dashboard-signup-chart.tsx
 msgid "Suspended"
 msgstr "Suspended"
 
-#: src/pages/_app/index.tsx
+#: src/widgets/dashboard-personal-welcome/ui/dashboard-personal-welcome.tsx
 msgid "Switch between workspaces anytime using the workspace switcher in the sidebar."
 msgstr "Switch between workspaces anytime using the workspace switcher in the sidebar."
 
@@ -2615,7 +2615,7 @@ msgstr "Trusted by teams worldwide"
 msgid "Try Again"
 msgstr "Try Again"
 
-#: src/pages/_app/index.tsx
+#: src/widgets/dashboard-signup-chart/ui/dashboard-signup-chart.tsx
 msgid "Unable to load signup data."
 msgstr "Unable to load signup data."
 
@@ -2776,7 +2776,7 @@ msgstr "Welcome illustration"
 msgid "Welcome to Key Value Platform!"
 msgstr "Welcome to Key Value Platform!"
 
-#: src/pages/_app/index.tsx
+#: src/widgets/dashboard-personal-welcome/ui/dashboard-personal-welcome.tsx
 msgid "Welcome, {firstName}!"
 msgstr "Welcome, {firstName}!"
 

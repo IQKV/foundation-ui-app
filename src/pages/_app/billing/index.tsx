@@ -12,8 +12,8 @@ import {
 } from "@mantine/core";
 import { IconCreditCard, IconInfoCircle, IconPackage } from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Helmet } from "@dr.pogodin/react-helmet";
-import { pageTitle } from "@/shared/lib/page-title";
+
+import { PageTitle } from "@/shared/lib/page-title";
 import { PageHeader } from "@/shared/ui";
 import { useSession } from "@/processes/session";
 import { isSingleTenantMode } from "@/app/config";
@@ -66,7 +66,7 @@ function BillingPage() {
   if (!isSingleTenantMode && isPersonalWorkspace) {
     return (
       <Container size="md" data-testid={TestSelectors.PAGE("billing")}>
-        <Helmet title={pageTitle(t`Billing`)} />
+        <PageTitle segments={[t`Billing`]} />
         <PageHeader title={t`Billing`} />
         <Stack gap="xl">
           <Paper withBorder p="xl" radius="md">
@@ -89,7 +89,7 @@ function BillingPage() {
 
   return (
     <Container size="md" data-testid={TestSelectors.PAGE("billing")}>
-      <Helmet title={pageTitle(t`Billing`)} />
+      <PageTitle segments={[t`Billing`]} />
       <PageHeader title={t`Billing`} />
 
       <Stack gap="xl">

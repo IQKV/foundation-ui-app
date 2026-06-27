@@ -25,8 +25,8 @@ import {
   IconPlus,
 } from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Helmet } from "@dr.pogodin/react-helmet";
-import { pageTitle } from "@/shared/lib/page-title";
+
+import { PageTitle } from "@/shared/lib/page-title";
 import { iamApi, authApi, type UserMembership } from "@/shared/api";
 import { setTokens } from "@/processes/session";
 import { PageHeader } from "@/shared/ui";
@@ -95,7 +95,7 @@ function OrganizationsPage() {
 
   return (
     <Container size="xl" py={0} data-testid={TestSelectors.ORGANIZATION_SETTINGS_PAGE}>
-      <Helmet title={pageTitle(t`Organizations`)} />
+      <PageTitle segments={[t`Organizations`]} />
       <PageHeader
         title={<Trans>Organizations</Trans>}
         breadcrumbs={[

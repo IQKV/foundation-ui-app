@@ -2,8 +2,8 @@ import { createFileRoute, redirect } from "@tanstack/react-router";
 import { Box, Text, Title } from "@mantine/core";
 import { z } from "zod";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Helmet } from "@dr.pogodin/react-helmet";
-import { pageTitle } from "@/shared/lib/page-title";
+
+import { PageTitle } from "@/shared/lib/page-title";
 import { AuthLayout } from "@/shared/ui";
 import { ResetPasswordForm } from "@/features/reset-password";
 import { decodeJwt, isTenantSession } from "@/shared/lib/jwt";
@@ -70,9 +70,7 @@ function ResetPasswordPage() {
         </Trans>
       }
     >
-      <Helmet>
-        <title>{pageTitle(t`Reset Password`)}</title>
-      </Helmet>
+      <PageTitle segments={[t`Reset Password`]} />
 
       {/* Heading */}
       <Box>
