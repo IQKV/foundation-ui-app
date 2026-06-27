@@ -30,7 +30,7 @@ import { AuthLayout } from "@/shared/ui";
 import { useAcceptInvitation } from "@/features/accept-invitation";
 import { decodeJwt, isTenantSession } from "@/shared/lib/jwt";
 import { getAccessToken } from "@/processes/session";
-import dayjs from "dayjs";
+import { dayjs } from "@/shared/lib/date-utils";
 
 // ─── Route ────────────────────────────────────────────────────────────────────
 

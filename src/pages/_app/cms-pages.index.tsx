@@ -29,7 +29,8 @@ import {
   IconFileText,
   IconEdit,
 } from "@tabler/icons-react";
-import dayjs from "dayjs";
+import { dayjs } from "@/shared/lib/date-utils";
+import { getCmsPageStatusColor } from "@/shared/lib/color-utils";
 import { Trans, useLingui } from "@lingui/react/macro";
 
 import { PageTitle } from "@/shared/lib/page-title";
@@ -45,13 +46,6 @@ export const Route = createFileRoute("/_app/cms-pages/")({
 });
 
 const PAGE_SIZE = 20;
-
-const STATUS_COLOR: Record<CmsPageStatus, string> = {
-  DRAFT: "gray",
-  PENDING: "yellow",
-  PUBLISHED: "green",
-  ARCHIVED: "violet",
-};
 
 function CmsPagesPage() {
   const { t } = useLingui();
@@ -319,7 +313,7 @@ function CmsPagesPage() {
                   render: (p) => (
                     <Badge
                       variant="light"
-                      color={STATUS_COLOR[p.status] ?? "gray"}
+                      color={getCmsPageStatusColor(p.status)}
                       size="sm"
                       radius="sm"
                     >

@@ -1,7 +1,8 @@
 import { Paper, Stack, Title, Text, Table, Badge, Skeleton, Alert, Group } from "@mantine/core";
 import { IconAlertCircle, IconReceiptRefund } from "@tabler/icons-react";
 import { Trans } from "@lingui/react/macro";
-import dayjs from "dayjs";
+import { dayjs } from "@/shared/lib/date-utils";
+import { getRefundStatusColor } from "@/shared/lib/color-utils";
 import { useRefunds } from "../model/use-refunds";
 import { TestSelectors } from "@/shared/lib/test-selectors";
 
@@ -74,7 +75,7 @@ export function RefundList({ tenantKey }: RefundListProps) {
                 <Table.Td>
                   <Badge
                     variant="light"
-                    color={refund.status === "succeeded" ? "green" : "orange"}
+                    color={getRefundStatusColor(refund.status)}
                     data-testid={TestSelectors.REFUND_LIST_ROW_STATUS_BADGE(refund.id)}
                   >
                     {refund.status.toUpperCase()}

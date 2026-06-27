@@ -28,7 +28,7 @@ import {
   IconEye,
   IconLock,
 } from "@tabler/icons-react";
-import dayjs from "dayjs";
+import { dayjs } from "@/shared/lib/date-utils";
 import { Trans, useLingui } from "@lingui/react/macro";
 
 import { PageTitle } from "@/shared/lib/page-title";

@@ -1,6 +1,6 @@
 import { Modal, Stack, TextInput, Group, Button, Text, Divider, Alert } from "@mantine/core";
 import { Trans, useLingui } from "@lingui/react/macro";
-import dayjs from "dayjs";
+import { dayjs } from "@/shared/lib/date-utils";
 import type { Invitation } from "@/shared/api";
 import { InvitationStatusBadge } from "@/shared/ui";
 import { useRevokeInvitation } from "../model";

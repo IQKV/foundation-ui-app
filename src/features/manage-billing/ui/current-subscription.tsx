@@ -1,7 +1,8 @@
 import { Paper, Group, Stack, Title, Text, ThemeIcon, Badge, Skeleton, List } from "@mantine/core";
 import { IconCreditCard, IconCalendar, IconCheck } from "@tabler/icons-react";
 import { Trans } from "@lingui/react/macro";
-import dayjs from "dayjs";
+import { dayjs } from "@/shared/lib/date-utils";
+import { getSubscriptionStatusColor } from "@/shared/lib/color-utils";
 import { useActiveSubscription } from "../model/use-subscription";
 import { TestSelectors } from "@/shared/lib/test-selectors";
 
@@ -69,7 +70,7 @@ export function CurrentSubscription({ tenantKey }: CurrentSubscriptionProps) {
   }
 
   const isCanceled = subscription.status === "canceled";
-  const statusColor = subscription.status === "active" ? "green" : "orange";
+  const statusColor = getSubscriptionStatusColor(subscription.status);
 
   return (
     <Paper withBorder p="xl" radius="md" data-testid={TestSelectors.CURRENT_SUBSCRIPTION}>

@@ -1,6 +1,7 @@
 import { ActionIcon, Group, Stack, Text, Tooltip } from "@mantine/core";
 import { IconTrash } from "@tabler/icons-react";
 import type { UserNotification } from "@/shared/api";
+import { getNotificationSeverityColor } from "@/shared/lib/color-utils";
 
 interface NotificationItemProps {
   notification: UserNotification;
@@ -11,13 +12,7 @@ interface NotificationItemProps {
 export function NotificationItem({ notification, onMarkAsRead, onDelete }: NotificationItemProps) {
   const { id, title, message, isRead, createdAt, severity } = notification;
 
-  const severityColor: Record<string, string> = {
-    INFO: "blue",
-    WARNING: "yellow",
-    ERROR: "red",
-    SUCCESS: "green",
-  };
-  const color = severityColor[severity] ?? "blue";
+  const color = getNotificationSeverityColor(severity);
 
   return (
     <Group

@@ -12,7 +12,8 @@ import {
 } from "@mantine/core";
 import { IconUser, IconAlertCircle, IconInfoCircle } from "@tabler/icons-react";
 import { Trans } from "@lingui/react/macro";
-import dayjs from "dayjs";
+import { dayjs } from "@/shared/lib/date-utils";
+import { getSubscriptionStatusColor } from "@/shared/lib/color-utils";
 import { useEntitlements } from "../model/use-entitlements";
 import { useEntitlementsContext } from "../model/entitlements-context";
 import { useSession } from "@/processes/session/use-session";
@@ -116,7 +117,7 @@ export function EntitlementsCard() {
     return null;
   }
 
-  const statusColor = entitlements.status === "active" ? "green" : "orange";
+  const statusColor = getSubscriptionStatusColor(entitlements.status);
   const isEntitlementsActive = entitlements.status === "active";
 
   return (
