@@ -27,3 +27,5 @@ export const isSingleTenant = isSingleTenantMode;
 
 export const isDemoMode = getConfig("VITE_DEMO_MODE", "false") === "true";
 export const isMagicLinkEnabled = getConfig("VITE_ENABLE_MAGIC_LINK", "true") === "true";
+
+export const appTitle = getConfig("VITE_APP_TITLE", "Key Value")!;
