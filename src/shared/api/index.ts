@@ -4,50 +4,77 @@ import "./auth-interceptor";
 
 export { httpClient } from "./http-client";
 
-export { iamApi } from "./iam";
+// ─── IAM ──────────────────────────────────────────────────────────────────────
+
+export { iamApi, localesApi, notificationApi } from "./iam";
+export type { IamLocale, SortDirection } from "./iam";
+
+// Entity types — re-exported via the iam module shim for backward compatibility.
 export type {
   UserProfile,
   UserStatus,
   UpdateProfileRequest,
+  AvatarUploadInitResponse,
+  AvatarConfirmRequest,
+  AvatarResponse,
   UserMembership,
-  Tenant,
-  TenantStatus,
-  TenantMember,
   MemberStatus,
+  TenantMember,
   ListMembersParams,
-  Invitation,
-  InvitationStatus,
-  InvitationAuthority,
-  SendInvitationRequest,
-  InvitationPreview,
-  AcceptInvitationRequest,
-  AcceptInvitationResponse,
-  SortDirection,
-  PagedResponse,
-  UpdateTenantRequest,
-  UpdateTenantStatusRequest,
   UpdateMemberAuthoritiesRequest,
   MemberAuthoritiesResponse,
   BanUserRequest,
   BanResponse,
+  UserSignupSeriesPoint,
+  TenantUserStatsResponse,
+  TenantUserStatsParams,
 } from "./iam";
 
-export { localesApi } from "./iam";
-export type { IamLocale } from "./iam";
+export type {
+  Tenant,
+  TenantStatus,
+  CreateTenantRequest,
+  CreateTenantResponse,
+  UpdateTenantRequest,
+  UpdateTenantStatusRequest,
+} from "./iam";
+
+export type {
+  Invitation,
+  InvitationStatus,
+  InvitationAuthority,
+  InvitationPreview,
+  SendInvitationRequest,
+  AcceptInvitationRequest,
+  AcceptInvitationResponse,
+} from "./iam";
+
+export type {
+  UserNotification,
+  UserNotificationListResponse,
+  UnreadCountResponse,
+  NotificationPatchRequest,
+} from "./iam";
+
+export type { PagedResponse } from "./iam";
+
+// ─── CMS ──────────────────────────────────────────────────────────────────────
 
 export { cmsApi } from "./cms";
 export type {
   CmsPage,
+  CmsPageStatus,
   CmsPageSummary,
   CmsPageSummaryListResponse,
-  CmsPageStatus,
   CmsPageTranslation,
   CmsPageTranslationRequest,
+  CmsPageHierarchyItem,
   CreateCmsPageRequest,
   UpdateCmsPageRequest,
   ListCmsPageParams,
-  CmsPageHierarchyItem,
 } from "./cms";
+
+// ─── Auth ─────────────────────────────────────────────────────────────────────
 
 export { authApi } from "./auth";
 export type {
@@ -57,34 +84,36 @@ export type {
   TenantExchangeRequest,
   SignupStatusResponse,
   ProvisioningStatus,
+  MagicLinkInitiateRequest,
+  MagicLinkExchangeRequest,
+  MagicLinkResponse,
 } from "./auth";
+
+// ─── Password reset ───────────────────────────────────────────────────────────
 
 export { passwordResetApi } from "./password-reset";
 export type { ForgotPasswordRequest, ResetPasswordRequest } from "./password-reset";
 
+// ─── Signup ───────────────────────────────────────────────────────────────────
+
 export { signupApi } from "./signup";
 export type { RegisterUserRequest, SignupResponse } from "./signup";
 
+// ─── Billing ─────────────────────────────────────────────────────────────────
+
 export { billingApi } from "./billing";
 export type {
-  PortalSessionResponse,
   Plan,
-  SubscriptionResponse,
-  CreateCheckoutSessionRequest,
-  CheckoutSessionResponse,
-  BillingSettingsResponse,
-  CreateBillingSettingsRequest,
-  UpdateBillingSettingsRequest,
-  RefundResponse,
+  PricingModel,
   PlanFeature,
   PlanFeatures,
+  SubscriptionResponse,
   EntitlementsResponse,
+  BillingSettingsResponse,
+  RefundResponse,
+  CreateCheckoutSessionRequest,
+  CheckoutSessionResponse,
+  PortalSessionResponse,
+  CreateBillingSettingsRequest,
+  UpdateBillingSettingsRequest,
 } from "./billing";
-
-export { notificationApi } from "./iam";
-export type {
-  UserNotification,
-  UserNotificationListResponse,
-  UnreadCountResponse,
-  NotificationPatchRequest,
-} from "./iam";

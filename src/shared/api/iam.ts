@@ -1,240 +1,98 @@
 import { httpClient } from "./http-client";
+import type { PagedResponse } from "@/shared/types";
+import type {
+  UserProfile,
+  AvatarUploadInitResponse,
+  AvatarConfirmRequest,
+  AvatarResponse,
+  UpdateProfileRequest,
+  UserMembership,
+  TenantMember,
+  MemberStatus,
+  ListMembersParams,
+  UpdateMemberAuthoritiesRequest,
+  MemberAuthoritiesResponse,
+  BanUserRequest,
+  BanResponse,
+  UserSignupSeriesPoint,
+  TenantUserStatsResponse,
+  TenantUserStatsParams,
+} from "@/entities/user";
+import type { UserStatus } from "@/entities/user";
+import type {
+  Tenant,
+  TenantStatus,
+  CreateTenantRequest,
+  CreateTenantResponse,
+  UpdateTenantRequest,
+  UpdateTenantStatusRequest,
+} from "@/entities/tenant";
+import type {
+  Invitation,
+  InvitationStatus,
+  InvitationAuthority,
+  InvitationPreview,
+  SendInvitationRequest,
+  AcceptInvitationRequest,
+  AcceptInvitationResponse,
+} from "@/entities/invitation";
+import type {
+  UserNotification,
+  UserNotificationListResponse,
+  UnreadCountResponse,
+  NotificationPatchRequest,
+} from "@/entities/notification";
 
-// ─── Shared types ─────────────────────────────────────────────────────────────
+// Re-export entity types so existing imports from "@/shared/api" keep working.
+export type { PagedResponse };
+export type {
+  UserStatus,
+  UserProfile,
+  AvatarUploadInitResponse,
+  AvatarConfirmRequest,
+  AvatarResponse,
+  UpdateProfileRequest,
+  UserMembership,
+  MemberStatus,
+  TenantMember,
+  ListMembersParams,
+  UpdateMemberAuthoritiesRequest,
+  MemberAuthoritiesResponse,
+  BanUserRequest,
+  BanResponse,
+  UserSignupSeriesPoint,
+  TenantUserStatsResponse,
+  TenantUserStatsParams,
+};
+export type {
+  Tenant,
+  TenantStatus,
+  CreateTenantRequest,
+  CreateTenantResponse,
+  UpdateTenantRequest,
+  UpdateTenantStatusRequest,
+};
+export type {
+  Invitation,
+  InvitationStatus,
+  InvitationAuthority,
+  InvitationPreview,
+  SendInvitationRequest,
+  AcceptInvitationRequest,
+  AcceptInvitationResponse,
+};
+export type {
+  UserNotification,
+  UserNotificationListResponse,
+  UnreadCountResponse,
+  NotificationPatchRequest,
+};
 
-export type SortDirection = "asc" | "desc";
+// ─── Shared query helpers ─────────────────────────────────────────────────────
 
-export interface PagedResponse<T> {
-  content: T[];
-  page: number;
-  size: number;
-  totalElements: number;
-  totalPages: number;
-}
+export type { SortDirection } from "@/shared/types";
 
-// ─── User types ───────────────────────────────────────────────────────────────
-
-export type UserStatus = "ACTIVE" | "LOCKED" | "SUSPENDED" | "DELETED";
-
-export interface UserProfile {
-  id: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  status: UserStatus;
-  emailVerified: boolean;
-  /** BCP 47 locale tag (e.g. "en-US"). Null when not yet set. */
-  locale: string | null;
-  /** Public URL of the user's avatar image. Null when no avatar has been uploaded. */
-  avatarUrl: string | null;
-  /** ISO-8601 timestamp of the user's first sign-in. Null if they haven't signed in yet. */
-  firstSignInAt: string | null;
-  /** Whether the user has completed the welcome onboarding flow. */
-  onboardingCompleted: boolean;
-  /** Whether the user has completed initial profile setup (name fields populated). */
-  profileCompleted: boolean;
-  /** Tenant names the user belongs to (aggregated server-side). */
-  organizations: string[];
-  /** Membership-level authorities across all tenants (e.g. TENANT_OWNER, ADMIN, MEMBER). */
-  membershipAuthorities: string[];
-  createdAt: string;
-  updatedAt: string;
-}
-
-export interface AvatarUploadInitResponse {
-  presignedUploadUrl: string;
-  objectKey: string;
-  expiresInMinutes: number;
-}
-
-export interface AvatarConfirmRequest {
-  objectKey: string;
-}
-
-export interface AvatarResponse {
-  avatarUrl: string;
-}
-
-export interface UpdateProfileRequest {
-  firstName: string;
-  lastName: string;
-  /** BCP 47 locale tag. Optional — omit to leave unchanged. */
-  locale?: string | null;
-}
-
-export interface UserMembership {
-  tenantKey: string;
-  tenantName: string;
-  status: string;
-  authorities: string[];
-  isPersonal: boolean;
-  isInternal: boolean;
-}
-
-// ─── Tenant types ─────────────────────────────────────────────────────────────
-
-export type TenantStatus = "ACTIVE" | "SUSPENDED" | "DELETED";
-
-export interface Tenant {
-  id: string;
-  tenantKey: string;
-  name: string;
-  status: TenantStatus;
-  /** True when this is the user's personal workspace. */
-  isPersonal: boolean;
-  /** True when this is an internal platform workspace (e.g. the reserved platform tenant). */
-  isInternal: boolean;
-  createdAt: string;
-  updatedAt: string;
-}
-
-export interface UpdateTenantRequest {
-  name: string;
-}
-
-export interface UpdateTenantStatusRequest {
-  status: TenantStatus;
-}
-
-export interface CreateTenantRequest {
-  name: string;
-}
-
-export interface CreateTenantResponse {
-  id: string;
-  tenantKey: string;
-  name: string;
-  status: TenantStatus;
-  createdAt: string;
-  updatedAt: string;
-}
-
-// ─── Member types ─────────────────────────────────────────────────────────────
-
-export type MemberStatus = "ACTIVE" | "SUSPENDED" | "REMOVED";
-
-export interface TenantMember {
-  id: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  emailVerified: boolean;
-  membershipStatus: MemberStatus;
-  tenantAuthorities: string[];
-  createdAt: string;
-  updatedAt: string;
-}
-
-export interface ListMembersParams {
-  page?: number;
-  size?: number;
-  search?: string;
-  sortBy?: "firstName" | "email" | "createdAt";
-  sortDir?: SortDirection;
-}
-
-export interface UpdateMemberAuthoritiesRequest {
-  authorities: string[];
-}
-
-export interface MemberAuthoritiesResponse {
-  userId: string;
-  tenantKey: string;
-  authorities: string[];
-}
-
-// ─── Ban types ─────────────────────────────────────────────────────────────────
-
-export interface BanUserRequest {
-  reason?: string;
-  expiresAt?: string;
-}
-
-export interface BanResponse {
-  id: string;
-  userId: string;
-  initiatorId: string;
-  type: "PLATFORM" | "TENANT";
-  tenantKey?: string;
-  reason?: string;
-  expiresAt?: string;
-  createdAt: string;
-  updatedAt: string;
-}
-
-// ─── Invitation types ─────────────────────────────────────────────────────────
-
-export type InvitationStatus = "PENDING" | "ACCEPTED" | "REVOKED" | "EXPIRED";
-export type InvitationAuthority = "ADMIN" | "MEMBER";
-
-export interface Invitation {
-  invitationId: string;
-  email: string;
-  tenantKey: string;
-  authority: InvitationAuthority;
-  status: InvitationStatus;
-  expiresAt: string;
-  createdAt: string;
-}
-
-export interface SendInvitationRequest {
-  email: string;
-  authority?: InvitationAuthority;
-}
-
-// ─── Invitation accept flow (public — no auth required) ───────────────────────
-
-export interface InvitationPreview {
-  invitationId: string;
-  tenantName: string;
-  email: string;
-  authority: string;
-  expiresAt: string;
-  /** True when the invited email has no account yet — new user must provide name + password. */
-  requiresSignup: boolean;
-}
-
-export interface AcceptInvitationRequest {
-  password: string;
-  /** Required only when requiresSignup is true. */
-  firstName?: string;
-  /** Required only when requiresSignup is true. */
-  lastName?: string;
-}
-
-export interface AcceptInvitationResponse {
-  accessToken: string;
-  refreshToken: string;
-  tenantKey: string;
-}
-
-// ─── Tenant user stats types ──────────────────────────────────────────────────
-
-export interface UserSignupSeriesPoint {
-  period: string;
-  signups: number;
-}
-
-export interface TenantUserStatsResponse {
-  tenantKey: string;
-  totalMembers: number;
-  activeMembers: number;
-  lockedMembers: number;
-  suspendedMembers: number;
-  emailVerifiedCount: number;
-  signupSeries: UserSignupSeriesPoint[];
-  periodFrom: string;
-  periodTo: string;
-  granularity: "day" | "month";
-}
-
-export interface TenantUserStatsParams {
-  from?: string;
-  to?: string;
-  granularity?: "day" | "month";
-}
-
-// ─── API ──────────────────────────────────────────────────────────────────────
+// ─── IAM API ──────────────────────────────────────────────────────────────────
 
 export const iamApi = {
   // ── Self-service user ──────────────────────────────────────────────────────
@@ -296,7 +154,7 @@ export const iamApi = {
   retryProvisioning: (tenantKey: string) =>
     httpClient.post<Tenant>(`/v1/iam/tenants/${tenantKey}/retry-provisioning`).then((r) => r.data),
 
-  // ── Members (TENANT_OWNER / ADMIN / MEMBER) ──────────────────────────────
+  // ── Members (TENANT_OWNER / ADMIN / MEMBER) ───────────────────────────────
 
   /** List members of the current tenant. */
   listMembers: (tenantKey: string, params: ListMembersParams = {}) =>
@@ -373,7 +231,7 @@ export const iamApi = {
   revokeInvitation: (tenantKey: string, invitationId: string) =>
     httpClient.delete(`/v1/iam/tenants/${tenantKey}/invitations/${invitationId}`),
 
-  // ── Invitation accept flow (public — no JWT / X-Tenant-ID required) ────────
+  // ── Invitation accept flow (public — no JWT / X-Tenant-ID required) ───────
 
   /**
    * Preview an invitation by token.
@@ -408,35 +266,6 @@ export interface IamLocale {
 export const localesApi = {
   list: () => httpClient.get<IamLocale[]>("/v1/iam/locales").then((r) => r.data),
 };
-
-// ─── Notification types ───────────────────────────────────────────────────────
-
-export interface UserNotification {
-  id: string;
-  type: string;
-  severity: string;
-  title: string;
-  message: string | null;
-  /** Raw JSON string — use JSON.parse if you need the object. */
-  payload: string | null;
-  isRead: boolean;
-  createdAt: string;
-  readAt: string | null;
-}
-
-export interface UserNotificationListResponse {
-  items: UserNotification[];
-  totalElements: number;
-  unreadCount: number;
-}
-
-export interface UnreadCountResponse {
-  unreadCount: number;
-}
-
-export interface NotificationPatchRequest {
-  isRead: boolean;
-}
 
 // ─── Notification API ─────────────────────────────────────────────────────────
 

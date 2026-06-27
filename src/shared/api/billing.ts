@@ -1,122 +1,40 @@
 import { httpClient } from "./http-client";
+import type {
+  Plan,
+  PricingModel,
+  PlanFeature,
+  PlanFeatures,
+  Entitlements,
+  Subscription,
+  CreateCheckoutSessionRequest,
+  CheckoutSessionResponse,
+  PortalSessionResponse,
+  BillingSettings,
+  CreateBillingSettingsRequest,
+  UpdateBillingSettingsRequest,
+} from "@/entities/subscription";
+import type { Refund } from "@/entities/refund";
 
-export interface PortalSessionResponse {
-  url: string;
-}
+// Re-export entity types so existing imports from "@/shared/api" keep working.
+export type {
+  Plan,
+  PricingModel,
+  PlanFeature,
+  PlanFeatures,
+  CreateCheckoutSessionRequest,
+  CheckoutSessionResponse,
+  PortalSessionResponse,
+  Refund,
+};
 
-export type PricingModel = "FLAT" | "PER_SEAT";
+// API response aliases — keep the *Response suffix that consumers already use.
+export type SubscriptionResponse = Subscription;
+export type EntitlementsResponse = Entitlements;
+export type BillingSettingsResponse = BillingSettings;
+export type RefundResponse = Refund;
+export type { CreateBillingSettingsRequest, UpdateBillingSettingsRequest };
 
-export interface Plan {
-  id: string;
-  planCode: string;
-  displayName: string;
-  description?: string;
-  billingPeriod: "MONTHLY" | "ANNUAL";
-  priceMinor: number;
-  currency: string;
-  featureSet: string;
-  scope: "TENANT" | "USER";
-  active: boolean;
-  trialPeriodDays?: number;
-  /** Pricing mode: FLAT (fixed price per period) or PER_SEAT (price × quantity). Null for plans
-   *  predating the per-seat feature — treat as FLAT. */
-  pricingModel?: PricingModel | null;
-}
-
-export interface SubscriptionResponse {
-  id: string;
-  tenantKey: string;
-  externalSubscriptionId: string;
-  status: string;
-  planId: string;
-  quantity: number;
-  trialStart: string | null;
-  trialEnd: string | null;
-  isInTrial: boolean;
-  trialDaysLeft: number | null;
-  currentPeriodStart: string;
-  currentPeriodEnd: string;
-  cancelAtPeriodEnd: boolean;
-  canceledAt: string | null;
-}
-
-export interface CreateCheckoutSessionRequest {
-  planCode: string;
-  successUrl: string;
-  cancelUrl: string;
-  trialPeriodDays?: number;
-  quantity?: number;
-  allowPromotionCodes?: boolean;
-}
-
-export interface CheckoutSessionResponse {
-  checkoutUrl: string;
-}
-
-export interface BillingSettingsResponse {
-  id: string;
-  tenantKey: string;
-  billingEmail: string;
-  companyName: string;
-  billingAddress: string;
-  taxId: string;
-  taxIdType: string;
-  currency: string;
-  createdAt: string;
-  updatedAt: string;
-}
-
-export interface CreateBillingSettingsRequest {
-  billingEmail: string;
-  companyName?: string;
-  billingAddress?: string;
-  taxId?: string;
-  taxIdType?: string;
-  currency: string;
-}
-
-export interface UpdateBillingSettingsRequest {
-  billingEmail?: string;
-  companyName?: string;
-  billingAddress?: string;
-  taxId?: string;
-  taxIdType?: string;
-  currency?: string;
-}
-
-export interface RefundResponse {
-  id: string;
-  tenantKey: string;
-  externalRefundId: string;
-  externalPaymentId: string;
-  amount: number;
-  currency: string;
-  status: string;
-  occurredAt: string;
-}
-
-export interface PlanFeature {
-  code: string;
-  title: string;
-  value: string;
-  description?: string;
-}
-
-export interface PlanFeatures {
-  maxUsers: number;
-  maxProjects: number;
-  features: Record<string, PlanFeature>;
-  /** Pricing mode carried from the billing catalog. Null for plans predating per-seat support —
-   *  treat as FLAT. */
-  pricingModel?: PricingModel | null;
-}
-
-export interface EntitlementsResponse {
-  planCode: string;
-  status: "active" | "canceled" | "incomplete" | "incomplete_expired" | "past_due" | "unpaid";
-  currentPeriodEnd: string;
-  features: PlanFeatures;
-}
+// ─── Billing API ──────────────────────────────────────────────────────────────
 
 export const billingApi = {
   /**
@@ -130,9 +48,7 @@ export const billingApi = {
    */
   getActiveSubscription: (tenantKey: string) =>
     httpClient
-      .get<SubscriptionResponse>(
-        `/v1/billing/subscriptions/${encodeURIComponent(tenantKey)}/active`,
-      )
+      .get<Subscription>(`/v1/billing/subscriptions/${encodeURIComponent(tenantKey)}/active`)
       .then((r) => r.data),
 
   /**
@@ -140,7 +56,7 @@ export const billingApi = {
    * Requires TENANT_OWNER or MEMBER authority.
    */
   getActiveSubscriptionForMe: () =>
-    httpClient.get<SubscriptionResponse>(`/v1/billing/subscriptions/me/active`).then((r) => r.data),
+    httpClient.get<Subscription>(`/v1/billing/subscriptions/me/active`).then((r) => r.data),
 
   /**
    * Create a Stripe Checkout Session for current subject (single tenant mode).
@@ -148,113 +64,101 @@ export const billingApi = {
    */
   createCheckoutSessionForMe: (request: CreateCheckoutSessionRequest) =>
     httpClient
-      .post<CheckoutSessionResponse>(`/v1/billing/subscriptions/me/checkout`, request)
+      .post<CheckoutSessionResponse>("/v1/billing/checkout/me", request)
       .then((r) => r.data),
 
   /**
-   * List refunds for a tenant.
-   * Requires TENANT_OWNER authority.
-   */
-  listRefunds: (tenantKey: string) =>
-    httpClient
-      .get<RefundResponse[]>(`/v1/billing/payments/${encodeURIComponent(tenantKey)}/refunds`)
-      .then((r) => r.data),
-
-  /**
-   * List refunds for current subject (tenant or user depending on mode).
-   * Requires TENANT_OWNER authority.
-   */
-  listRefundsForMe: () =>
-    httpClient.get<RefundResponse[]>("/v1/billing/payments/me/refunds").then((r) => r.data),
-
-  /**
-   * Get billing settings for a tenant.
-   * Requires TENANT_OWNER authority.
-   */
-  getBillingSettings: (tenantKey: string) =>
-    httpClient
-      .get<BillingSettingsResponse>(`/v1/billing/settings/${encodeURIComponent(tenantKey)}`)
-      .then((r) => r.data),
-
-  /**
-   * Create billing settings for a tenant (tenant self-service, first-time setup).
-   * Requires TENANT_OWNER authority.
-   */
-  createBillingSettings: (tenantKey: string, request: CreateBillingSettingsRequest) =>
-    httpClient
-      .post<BillingSettingsResponse>(
-        `/v1/billing/settings/${encodeURIComponent(tenantKey)}`,
-        request,
-      )
-      .then((r) => r.data),
-
-  /**
-   * Update billing settings for a tenant.
-   * Requires TENANT_OWNER authority.
-   */
-  updateBillingSettings: (tenantKey: string, request: UpdateBillingSettingsRequest) =>
-    httpClient
-      .patch<BillingSettingsResponse>(
-        `/v1/billing/settings/${encodeURIComponent(tenantKey)}`,
-        request,
-      )
-      .then((r) => r.data),
-
-  /**
-   * Create a Stripe Checkout Session for a tenant.
+   * Create a Stripe Checkout Session for a specific tenant.
    * Requires TENANT_OWNER authority.
    */
   createCheckoutSession: (tenantKey: string, request: CreateCheckoutSessionRequest) =>
     httpClient
       .post<CheckoutSessionResponse>(
-        `/v1/billing/subscriptions/${encodeURIComponent(tenantKey)}/checkout`,
+        `/v1/billing/checkout/${encodeURIComponent(tenantKey)}`,
         request,
       )
       .then((r) => r.data),
 
   /**
-   * Create a Stripe Customer Portal session for a tenant.
-   * Requires TENANT_OWNER authority.
+   * Create a Stripe Customer Portal session for current user (single-tenant mode).
+   */
+  createUserPortalSession: () =>
+    httpClient.post<PortalSessionResponse>("/v1/billing/portal/me").then((r) => r.data),
+
+  /**
+   * Create a Stripe Customer Portal session for a specific tenant.
    */
   createTenantPortalSession: (tenantKey: string) =>
     httpClient
-      .post<PortalSessionResponse>(`/v1/billing/settings/${encodeURIComponent(tenantKey)}/portal`)
+      .post<PortalSessionResponse>(`/v1/billing/portal/${encodeURIComponent(tenantKey)}`)
       .then((r) => r.data),
 
   /**
-   * Get billing settings for the current user (SINGLE_TENANT mode only).
-   */
-  getUserBillingSettings: () =>
-    httpClient.get<BillingSettingsResponse>("/v1/billing/user-settings").then((r) => r.data),
-
-  /**
-   * Create billing settings for the current user (SINGLE_TENANT mode only).
-   */
-  createUserBillingSettings: (request: CreateBillingSettingsRequest) =>
-    httpClient
-      .post<BillingSettingsResponse>("/v1/billing/user-settings", request)
-      .then((r) => r.data),
-
-  /**
-   * Update billing settings for the current user (SINGLE_TENANT mode only).
-   */
-  updateUserBillingSettings: (request: UpdateBillingSettingsRequest) =>
-    httpClient
-      .patch<BillingSettingsResponse>("/v1/billing/user-settings", request)
-      .then((r) => r.data),
-
-  /**
-   * Create a Stripe Customer Portal session for the current user.
-   * Only active in SINGLE_TENANT mode.
-   */
-  createUserPortalSession: () =>
-    httpClient.post<PortalSessionResponse>("/v1/billing/user-settings/portal").then((r) => r.data),
-
-  /**
-   * Get entitlements for the current user/tenant.
-   * Returns active plan, subscription status, and typed features.
-   * Requires TENANT_OWNER or MEMBER authority.
+   * Get entitlements for current subject (resolves to user or tenant based on mode).
    */
   getEntitlements: () =>
-    httpClient.get<EntitlementsResponse>("/v1/billing/entitlements/me").then((r) => r.data),
+    httpClient.get<Entitlements>("/v1/billing/entitlements/me").then((r) => r.data),
+
+  /**
+   * Get entitlements for a specific tenant.
+   */
+  getTenantEntitlements: (tenantKey: string) =>
+    httpClient
+      .get<Entitlements>(`/v1/billing/entitlements/${encodeURIComponent(tenantKey)}`)
+      .then((r) => r.data),
+
+  /**
+   * List refunds for current user (single-tenant mode).
+   */
+  listRefundsForMe: () => httpClient.get<Refund[]>("/v1/billing/refunds/me").then((r) => r.data),
+
+  /**
+   * List refunds for a specific tenant.
+   */
+  listRefunds: (tenantKey: string) =>
+    httpClient
+      .get<Refund[]>(`/v1/billing/refunds/${encodeURIComponent(tenantKey)}`)
+      .then((r) => r.data),
+
+  /**
+   * Get billing settings for a specific tenant.
+   */
+  getBillingSettings: (tenantKey: string) =>
+    httpClient
+      .get<BillingSettings>(`/v1/billing/settings/${encodeURIComponent(tenantKey)}`)
+      .then((r) => r.data),
+
+  /**
+   * Get billing settings for current user (single-tenant mode).
+   */
+  getUserBillingSettings: () =>
+    httpClient.get<BillingSettings>("/v1/billing/settings/me").then((r) => r.data),
+
+  /**
+   * Create billing settings for a specific tenant.
+   */
+  createBillingSettings: (tenantKey: string, data: CreateBillingSettingsRequest) =>
+    httpClient
+      .post<BillingSettings>(`/v1/billing/settings/${encodeURIComponent(tenantKey)}`, data)
+      .then((r) => r.data),
+
+  /**
+   * Update billing settings for a specific tenant.
+   */
+  updateBillingSettings: (tenantKey: string, data: UpdateBillingSettingsRequest) =>
+    httpClient
+      .patch<BillingSettings>(`/v1/billing/settings/${encodeURIComponent(tenantKey)}`, data)
+      .then((r) => r.data),
+
+  /**
+   * Create billing settings for current user (single-tenant mode).
+   */
+  createUserBillingSettings: (data: CreateBillingSettingsRequest) =>
+    httpClient.post<BillingSettings>("/v1/billing/settings/me", data).then((r) => r.data),
+
+  /**
+   * Update billing settings for current user (single-tenant mode).
+   */
+  updateUserBillingSettings: (data: UpdateBillingSettingsRequest) =>
+    httpClient.patch<BillingSettings>("/v1/billing/settings/me", data).then((r) => r.data),
 };
