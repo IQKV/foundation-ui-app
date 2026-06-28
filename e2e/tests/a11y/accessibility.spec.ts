@@ -1,4 +1,4 @@
-import { test as base, expect } from "@playwright/test";
+import { test } from "@playwright/test";
 import { test as authTest } from "../../fixtures/index.js";
 import { checkA11y } from "../../lib/a11y.js";
 import { TestSelectors, byTestId } from "../../lib/test-selectors.js";
@@ -11,26 +11,26 @@ import { ROUTES } from "../../config/routes.js";
  * contrast failures, missing form labels, keyboard-trap patterns, etc.
  * They do NOT replace manual testing with assistive technologies.
  *
- * Unauthenticated pages use the plain `base` test fixture.
+ * Unauthenticated pages use the plain `test` fixture.
  * Authenticated pages use the `authTest` fixture (tenantPage).
  */
 
 // ─── Unauthenticated pages ────────────────────────────────────────────────────
 
-base.describe("A11y — Unauthenticated pages", () => {
-  base.test("sign-in page has no violations", async ({ page }) => {
+test.describe("A11y — Unauthenticated pages", () => {
+  test("sign-in page has no violations", async ({ page }) => {
     await page.goto(ROUTES.SIGN_IN);
     await page.locator(byTestId(TestSelectors.SIGN_IN_FORM)).waitFor({ state: "visible" });
     await checkA11y(page);
   });
 
-  base.test("404 error page has no violations", async ({ page }) => {
+  test("404 error page has no violations", async ({ page }) => {
     await page.goto(ROUTES.NOT_FOUND);
     await page.locator(byTestId(TestSelectors.PAGE_404)).waitFor({ state: "visible" });
     await checkA11y(page);
   });
 
-  base.test("500 error page has no violations", async ({ page }) => {
+  test("500 error page has no violations", async ({ page }) => {
     await page.goto(ROUTES.SERVER_ERROR);
     await page.locator(byTestId(TestSelectors.PAGE_500)).waitFor({ state: "visible" });
     await checkA11y(page);
