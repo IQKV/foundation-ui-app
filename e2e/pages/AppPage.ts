@@ -6,18 +6,25 @@ export class AppPage {
 
   async goToHome() {
     await this.page.goto("/");
-    await this.page.waitForLoadState("networkidle");
+    // Wait for a visible sentinel rather than networkidle
+    // (networkidle is unreliable when the app holds open WS/SSE connections)
+    await this.page
+      .locator(`${byTestId(TestSelectors.AUTH_LAYOUT)}, ${byTestId(TestSelectors.APP_LAYOUT)}`)
+      .first()
+      .waitFor({ state: "visible", timeout: 15_000 });
   }
 
   async goTo404() {
     await this.page.goto("/404");
-    await this.page.waitForLoadState("networkidle");
+    await this.page.locator(byTestId(TestSelectors.PAGE_404)).waitFor({
+      state: "visible",
+      timeout: 15_000,
+    });
   }
 
   async expectHomePageVisible() {
     // Unauthenticated navigation to "/" redirects to sign-in.
-    // Verify the auth page rendered correctly.
-    await expect(this.page.getByRole("heading", { name: /welcome/i })).toBeVisible();
+    await expect(this.page.locator(byTestId(TestSelectors.SIGN_IN_FORM))).toBeVisible();
   }
 
   async expect404PageVisible() {
@@ -31,17 +38,15 @@ export class AppPage {
   }
 
   // Helper methods for common test operations
-  async getByTestId(testId: string): Promise<Locator> {
+  getByTestId(testId: string): Locator {
     return this.page.locator(byTestId(testId));
   }
 
   async clickByTestId(testId: string) {
-    const element = await this.getByTestId(testId);
-    await element.click();
+    await this.getByTestId(testId).click();
   }
 
   async waitForTestId(testId: string, options?: { state?: "attached" | "visible" | "hidden" }) {
-    const element = await this.getByTestId(testId);
-    await element.waitFor(options);
+    await this.getByTestId(testId).waitFor(options);
   }
 }

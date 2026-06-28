@@ -1,31 +1,33 @@
+/**
+ * Backward-compatible re-export of all config modules.
+ *
+ * New code should import directly from the focused modules:
+ *   import { ROUTES }    from "./routes.js"
+ *   import { TIMEOUTS }  from "./timeouts.js"
+ *   import { AUTH_CONFIG } from "./auth.js"
+ *   import { VIEWPORTS } from "./viewports.js"
+ *
+ * Existing code that imports TEST_CONFIG from this file continues to work.
+ */
+export { ROUTES } from "./routes.js";
+export { TIMEOUTS } from "./timeouts.js";
+export { AUTH_CONFIG } from "./auth.js";
+export { VIEWPORTS } from "./viewports.js";
+
+import { ROUTES } from "./routes.js";
+import { TIMEOUTS } from "./timeouts.js";
+import { AUTH_CONFIG } from "./auth.js";
+import { VIEWPORTS } from "./viewports.js";
+
+/**
+ * @deprecated Import directly from the focused config modules instead.
+ * Kept for backward compatibility with existing test files.
+ */
 export const TEST_CONFIG = {
-  DEFAULT_TIMEOUT: 10_000,
-  NAVIGATION_TIMEOUT: 15_000,
-
-  VIEWPORTS: {
-    mobile: { width: 375, height: 667 },
-    tablet: { width: 768, height: 1024 },
-    desktop: { width: 1920, height: 1080 },
-  },
-
-  ROUTES: {
-    HOME: "/",
-    SIGN_IN: "/sign-in",
-    DASHBOARD: "/dashboard",
-    NOT_FOUND: "/404",
-    UNKNOWN: "/this-page-does-not-exist",
-  },
-
-  /**
-   * Tenant owner credentials — seeded by 20260517000004-demo-e2e-users.xml.
-   * Read from process.env so CI secrets override the .env.e2e defaults.
-   */
-  TENANT_OWNER: {
-    email: process.env["E2E_TENANT_OWNER_EMAIL"] ?? "margaret.hayes@demo.iqkv.com",
-    password: process.env["E2E_TENANT_OWNER_PASSWORD"] ?? "ChangeMePass123!",
-    tenantKey: process.env["E2E_TENANT_KEY"] ?? "demo0001",
-  },
-
-  /** Path where Playwright stores the authenticated browser state. */
-  STORAGE_STATE: ".playwright/auth/tenant-owner.json",
+  DEFAULT_TIMEOUT: TIMEOUTS.DEFAULT,
+  NAVIGATION_TIMEOUT: TIMEOUTS.NAVIGATION,
+  VIEWPORTS,
+  ROUTES,
+  TENANT_OWNER: AUTH_CONFIG.TENANT_OWNER,
+  STORAGE_STATE: AUTH_CONFIG.STORAGE_STATE,
 } as const;

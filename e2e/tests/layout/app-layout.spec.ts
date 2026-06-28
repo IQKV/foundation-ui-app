@@ -1,22 +1,17 @@
 import { expect } from "@playwright/test";
 import { test } from "../../fixtures/index.js";
 import { TestSelectors, byTestId } from "../../lib/test-selectors.js";
-import { restoreTenantSession } from "../../fixtures/auth.fixture.js";
 
 /**
  * Authenticated layout tests.
  *
  * All tests use the `tenantPage` fixture (tenant owner signed in).
- * `restoreTenantSession` is called in beforeEach so the page is always
- * on the dashboard with the app shell visible before each test.
+ * The fixture already calls restoreTenantSession during setup, so each
+ * test starts on the dashboard with the app shell visible — no beforeEach needed.
  *
  * The dashboard lives at "/" (TanStack route /_app/), NOT "/dashboard".
  */
 test.describe("App Layout E2E Tests", () => {
-  test.beforeEach(async ({ tenantPage }) => {
-    await restoreTenantSession(tenantPage);
-  });
-
   test("app layout loads with all key elements", async ({ tenantPage }) => {
     await expect(tenantPage.locator(byTestId(TestSelectors.APP_LAYOUT))).toBeVisible();
     await expect(tenantPage.locator(byTestId(TestSelectors.APP_HEADER))).toBeVisible();
@@ -41,8 +36,15 @@ test.describe("App Layout E2E Tests", () => {
   test("color scheme toggle works", async ({ tenantPage }) => {
     const toggle = tenantPage.locator(byTestId(TestSelectors.HEADER_COLOR_SCHEME_TOGGLE));
     await expect(toggle).toBeVisible();
+
+    // Read the current scheme so we can assert it flipped
+    const htmlEl = tenantPage.locator("html");
+    const before = await htmlEl.getAttribute("data-mantine-color-scheme");
+
     await toggle.click();
-    await tenantPage.waitForTimeout(300);
+
+    // Wait for Mantine to apply the new scheme attribute instead of sleeping
+    await expect(htmlEl).not.toHaveAttribute("data-mantine-color-scheme", before ?? "");
     await expect(toggle).toBeVisible();
   });
 
@@ -107,17 +109,18 @@ test.describe("App Layout E2E Tests", () => {
 
     for (const { width, height, mobile } of viewports) {
       await tenantPage.setViewportSize({ width, height });
-      await tenantPage.waitForTimeout(150);
-
-      await expect(tenantPage.locator(byTestId(TestSelectors.APP_LAYOUT))).toBeVisible();
-      await expect(tenantPage.locator(byTestId(TestSelectors.APP_HEADER))).toBeVisible();
 
       const mobileToggle = tenantPage.locator(byTestId(TestSelectors.HEADER_MOBILE_MENU_TOGGLE));
+
+      // Wait for Mantine's CSS breakpoint to apply rather than sleeping
       if (mobile) {
         await expect(mobileToggle).toBeVisible();
       } else {
         await expect(mobileToggle).toBeHidden();
       }
+
+      await expect(tenantPage.locator(byTestId(TestSelectors.APP_LAYOUT))).toBeVisible();
+      await expect(tenantPage.locator(byTestId(TestSelectors.APP_HEADER))).toBeVisible();
     }
   });
 });
@@ -125,16 +128,12 @@ test.describe("App Layout E2E Tests", () => {
 test.describe("Error Pages", () => {
   test("404 page renders with correct testids", async ({ tenantPage }) => {
     await tenantPage.goto("/404");
-    await tenantPage.waitForLoadState("networkidle");
-
     await expect(tenantPage.locator(byTestId(TestSelectors.PAGE_404))).toBeVisible();
     await expect(tenantPage.locator(byTestId(TestSelectors.BUTTON("go-home")))).toBeVisible();
   });
 
   test("500 page renders with correct testids", async ({ tenantPage }) => {
     await tenantPage.goto("/500");
-    await tenantPage.waitForLoadState("networkidle");
-
     await expect(tenantPage.locator(byTestId(TestSelectors.PAGE_500))).toBeVisible();
     await expect(tenantPage.locator(byTestId(TestSelectors.BUTTON("go-home")))).toBeVisible();
   });

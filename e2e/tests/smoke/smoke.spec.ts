@@ -19,9 +19,8 @@ test.describe("App Smoke Tests", () => {
 
   test("sign-in form has correct inputs and submit button", async ({ page }) => {
     await page.goto("/sign-in");
-    await page.waitForLoadState("networkidle");
-
     await expect(page.locator(byTestId(TestSelectors.SIGN_IN_FORM))).toBeVisible();
+
     await expect(page.locator(byTestId(TestSelectors.SIGN_IN_EMAIL_INPUT))).toBeVisible();
     await expect(page.locator(byTestId(TestSelectors.SIGN_IN_PASSWORD_INPUT))).toBeVisible();
     await expect(page.locator(byTestId(TestSelectors.SIGN_IN_SUBMIT_BUTTON))).toBeVisible();
@@ -37,7 +36,7 @@ test.describe("App Smoke Tests", () => {
 
   test("404 go-home button navigates to app root (redirects to sign-in)", async ({ page }) => {
     await page.goto("/404");
-    await page.waitForLoadState("networkidle");
+    await page.locator(byTestId(TestSelectors.PAGE_404)).waitFor({ state: "visible" });
     await page.locator(byTestId(TestSelectors.BUTTON("go-home"))).click();
     // Unauthenticated visit to "/" redirects to sign-in
     await expect(page).toHaveURL(/sign-in/);
@@ -51,6 +50,7 @@ test.describe("App Smoke Tests", () => {
 
   test("essential meta tags are present", async ({ page }) => {
     await page.goto("/");
+    await testUtils.waitForPageReady(page);
     expect(await page.locator('meta[name="viewport"]').count()).toBeGreaterThan(0);
   });
 
@@ -90,13 +90,12 @@ test.describe("App Smoke Tests", () => {
 
   test("auth layout is present on sign-in page", async ({ page }) => {
     await page.goto("/sign-in");
-    await page.waitForLoadState("networkidle");
     await expect(page.locator(byTestId(TestSelectors.AUTH_LAYOUT))).toBeVisible();
   });
 
   test("locale switcher is present on sign-in page", async ({ page }) => {
     await page.goto("/sign-in");
-    await page.waitForLoadState("networkidle");
+    await expect(page.locator(byTestId(TestSelectors.AUTH_LAYOUT))).toBeVisible();
     await expect(page.locator(byTestId(TestSelectors.LOCALE_SWITCHER))).toBeVisible();
   });
 });
