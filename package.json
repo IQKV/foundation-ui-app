@@ -154,7 +154,7 @@
     "oxfmt": "^0.56.0",
     "oxlint": "^1.71.0",
     "oxlint-tsgolint": "^0.23.0",
-    "postcss": "^8.5.15",
+    "postcss": "^8.5.16",
     "postcss-preset-mantine": "1.18.0",
     "postcss-simple-vars": "^7.0.1",
     "prop-types": "^15.8.1",
