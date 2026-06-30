@@ -8,10 +8,13 @@ export type SubscriptionStatus =
   | "unpaid"
   | "paused";
 
+export type GatewayType = "STRIPE" | "LEMON_SQUEEZY";
+
 export interface Subscription {
   id: string;
   tenantKey: string;
   externalSubscriptionId: string;
+  externalCustomerId?: string | null;
   status: SubscriptionStatus;
   planId: string;
   quantity: number;
@@ -23,6 +26,8 @@ export interface Subscription {
   currentPeriodEnd: string;
   cancelAtPeriodEnd: boolean;
   canceledAt: string | null;
+  gatewayType?: GatewayType;
+  externalOrderId?: string | null;
 }
 
 // ─── Plan ─────────────────────────────────────────────────────────────────────
@@ -39,11 +44,14 @@ export interface Plan {
   currency: string;
   featureSet: string;
   scope: "TENANT" | "USER";
+  externalProductId?: string | null;
+  externalPriceId?: string | null;
   active: boolean;
   trialPeriodDays?: number;
   /** Pricing mode: FLAT (fixed price per period) or PER_SEAT (price × quantity). Null for plans
    *  predating the per-seat feature — treat as FLAT. */
   pricingModel?: PricingModel | null;
+  gatewayType?: GatewayType;
 }
 
 // ─── Entitlements ─────────────────────────────────────────────────────────────
@@ -95,12 +103,14 @@ export interface PortalSessionResponse {
 export interface BillingSettings {
   id: string;
   tenantKey: string;
+  externalCustomerId?: string | null;
   billingEmail: string;
   companyName: string;
   billingAddress: string;
   taxId: string;
   taxIdType: string;
   currency: string;
+  gatewayType?: GatewayType;
   createdAt: string;
   updatedAt: string;
 }

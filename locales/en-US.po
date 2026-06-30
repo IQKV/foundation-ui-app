@@ -553,8 +553,11 @@ msgid "Copy"
 msgstr "Copy"
 
 #: src/features/manage-billing/model/use-billing-portal.ts
-msgid "Could not create Stripe Customer Portal session."
-msgstr "Could not create Stripe Customer Portal session."
+msgid "Could not open the billing portal. Please try again."
+msgstr "Could not open the billing portal. Please try again."
+
+#~ msgid "Could not create Stripe Customer Portal session."
+#~ msgstr "Could not create Stripe Customer Portal session."
 
 #: src/pages/_app/cms-pages.create.tsx
 msgid "Could not create the page. Please check the form and try again."
@@ -1368,8 +1371,15 @@ msgstr "Manage user roles, permissions & access"
 #~ msgstr "Manage users"
 
 #: src/pages/_app/billing/index.tsx
-msgid "Manage your billing information, view invoice history, and update your payment methods directly via our secure Stripe Customer Portal."
-msgstr "Manage your billing information, view invoice history, and update your payment methods directly via our secure Stripe Customer Portal."
+msgid "Manage your billing information, view invoice history, and update your payment methods directly via our secure billing portal."
+msgstr "Manage your billing information, view invoice history, and update your payment methods directly via our secure billing portal."
+
+#: src/pages/_app/billing/index.tsx
+msgid "Manage your billing information, view order history, and update your payment methods directly via our secure billing portal."
+msgstr "Manage your billing information, view order history, and update your payment methods directly via our secure billing portal."
+
+#~ msgid "Manage your billing information, view invoice history, and update your payment methods directly via our secure Stripe Customer Portal."
+#~ msgstr "Manage your billing information, view invoice history, and update your payment methods directly via our secure Stripe Customer Portal."
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Manage your subscription and billing when you are ready"
@@ -2925,8 +2935,11 @@ msgid "Your password has been changed successfully. You'll be redirected to sign
 msgstr "Your password has been changed successfully. You'll be redirected to sign in shortly."
 
 #: src/pages/_app/billing/index.tsx
-msgid "Your payment information is securely processed by Stripe. We do not store your credit card details on our servers."
-msgstr "Your payment information is securely processed by Stripe. We do not store your credit card details on our servers."
+msgid "Your payment information is securely processed by our payment provider. We do not store your payment details on our servers."
+msgstr "Your payment information is securely processed by our payment provider. We do not store your payment details on our servers."
+
+#~ msgid "Your payment information is securely processed by Stripe. We do not store your credit card details on our servers."
+#~ msgstr "Your payment information is securely processed by Stripe. We do not store your credit card details on our servers."
 
 #: src/pages/_app/billing/index.tsx
 msgid "Your personal workspace doesn't require a subscription. Upgrade to an organization workspace to access additional features and team collaboration."

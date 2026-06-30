@@ -9,6 +9,7 @@ const ENV_KEYS = [
   "VITE_ROLLOUT_MODE",
   "VITE_DEMO_MODE",
   "VITE_ENABLE_MAGIC_LINK",
+  "VITE_PAYMENT_GATEWAY_TYPE",
 ] as const;
 
 export const clientBuildEnv: Record<string, string | undefined> = Object.fromEntries(
@@ -27,5 +28,8 @@ export const isSingleTenant = isSingleTenantMode;
 
 export const isDemoMode = getConfig("VITE_DEMO_MODE", "false") === "true";
 export const isMagicLinkEnabled = getConfig("VITE_ENABLE_MAGIC_LINK", "true") === "true";
+export const paymentGatewayType = getConfig("VITE_PAYMENT_GATEWAY_TYPE", "STRIPE") as
+  | "STRIPE"
+  | "LEMON_SQUEEZY";
 
 export const appTitle = getConfig("VITE_APP_TITLE", "Key Value")!;

@@ -6,6 +6,7 @@ export {
   isSingleTenant,
   isSingleTenantMode,
   rolloutMode,
+  paymentGatewayType,
 } from "./runtime-env";
 export { guardMultiTenantRoute } from "./rollout-guards";
 export {

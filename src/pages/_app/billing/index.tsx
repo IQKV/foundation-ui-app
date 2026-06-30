@@ -16,7 +16,7 @@ import { Trans, useLingui } from "@lingui/react/macro";
 import { PageTitle } from "@/shared/lib/page-title";
 import { PageHeader } from "@/shared/ui";
 import { useSession } from "@/processes/session";
-import { isSingleTenantMode } from "@/app/config";
+import { isSingleTenantMode, paymentGatewayType } from "@/app/config";
 import {
   BillingPortalButton,
   CurrentSubscription,
@@ -141,10 +141,17 @@ function BillingPage() {
                       <Trans>Billing Portal</Trans>
                     </Title>
                     <Text size="sm" c="dimmed">
-                      <Trans>
-                        Manage your billing information, view invoice history, and update your
-                        payment methods directly via our secure Stripe Customer Portal.
-                      </Trans>
+                      {paymentGatewayType === "LEMON_SQUEEZY" ? (
+                        <Trans>
+                          Manage your billing information, view order history, and update your
+                          payment methods directly via our secure billing portal.
+                        </Trans>
+                      ) : (
+                        <Trans>
+                          Manage your billing information, view invoice history, and update your
+                          payment methods directly via our secure billing portal.
+                        </Trans>
+                      )}
                     </Text>
 
                     <Group mt="md">
@@ -179,8 +186,8 @@ function BillingPage() {
                 <IconInfoCircle size={18} color="var(--mantine-color-blue-filled)" />
                 <Text size="xs" c="blue">
                   <Trans>
-                    Your payment information is securely processed by Stripe. We do not store your
-                    credit card details on our servers.
+                    Your payment information is securely processed by our payment provider. We do
+                    not store your payment details on our servers.
                   </Trans>
                 </Text>
               </Group>

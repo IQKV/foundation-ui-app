@@ -21,7 +21,7 @@ export function useBillingPortal(tenantKey?: string) {
     onError: () => {
       notifications.show({
         title: t`Portal error`,
-        message: t`Could not create Stripe Customer Portal session.`,
+        message: t`Could not open the billing portal. Please try again.`,
         color: "red",
         icon: createElement(IconX, { size: 16 }),
       });
