@@ -8,21 +8,21 @@ This is the tenant surface of the platform — separate from `foundation-ui-plat
 
 ### Implemented today
 
-| Area                   | What it does                                                                                                                                                                                                                               |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Area                   | What it does                                                                                                                                                                                                                                                                  |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Sign-in**            | Two-step flow: credentials → tenant discovery (`POST /v1/iam/users/tenants`); multi-tenant users pick a workspace; single-tenant users sign in directly (`POST /v1/iam/auth/signin`). Supports OAuth2/OIDC sign-in (Google/GitHub/Microsoft) and Enterprise SSO (tenant OIDC) |
-| **Sign-up**            | Self-service registration with tenant creation; polls provisioning status until the tenant is `ACTIVE`                                                                                                                                     |
-| **Password reset**     | Forgot-password email flow and token-based reset (`/forgot-password`, `/reset-password`)                                                                                                                                                   |
-| **Email verification** | Token-based verification page (`/verify-email?token=…`)                                                                                                                                                                                    |
-| **Invitations**        | Accept flow for new and existing users (`/invite/:token`); owners invite members, view pending invitations, revoke invitations                                                                                                             |
-| **Dashboard**          | Workspace name, welcome message, team member count                                                                                                                                                                                         |
-| **Team**               | Searchable member list; pending invitations panel (TENANT_OWNER only); send invitation modal (ADMIN or MEMBER role); ban/unban members (TENANT_OWNER only); change member role (TENANT_OWNER only); transfer ownership (TENANT_OWNER only) |
-| **My Account**         | Profile view, edit name, change password, organizations and roles; connected accounts (link/unlink OAuth2 providers)                                                                                                                       |
-| **Billing**            | Billing portal access (Stripe or Lemon Squeezy), current subscription view, plan catalog, billing info, refunds list; **plan-based feature access control** with entitlements API integration                                               |
-| **Tenant Settings**    | Organization metadata editing                                                                                                                                                                                                              |
-| **Notifications**      | In-app notifications with WebSocket support; notification bell UI                                                                                                                                                                          |
-| **Session security**   | Access token in memory; refresh token + tenant key in `sessionStorage`; silent refresh on 401; 30-minute inactivity sign-out                                                                                                               |
-| **UX**                 | Light/dark theme, Lingui i18n (English catalog), locale cookie, navigation progress, error boundaries                                                                                                                                      |
+| **Sign-up**            | Self-service registration with tenant creation; polls provisioning status until the tenant is `ACTIVE`                                                                                                                                                                        |
+| **Password reset**     | Forgot-password email flow and token-based reset (`/forgot-password`, `/reset-password`)                                                                                                                                                                                      |
+| **Email verification** | Token-based verification page (`/verify-email?token=…`)                                                                                                                                                                                                                       |
+| **Invitations**        | Accept flow for new and existing users (`/invite/:token`); owners invite members, view pending invitations, revoke invitations                                                                                                                                                |
+| **Dashboard**          | Workspace name, welcome message, team member count                                                                                                                                                                                                                            |
+| **Team**               | Searchable member list; pending invitations panel (TENANT_OWNER only); send invitation modal (ADMIN or MEMBER role); ban/unban members (TENANT_OWNER only); change member role (TENANT_OWNER only); transfer ownership (TENANT_OWNER only)                                    |
+| **My Account**         | Profile view, edit name, change password, organizations and roles; connected accounts (link/unlink OAuth2 providers)                                                                                                                                                          |
+| **Billing**            | Billing portal access (Stripe or Lemon Squeezy), current subscription view, plan catalog, billing info, refunds list; **plan-based feature access control** with entitlements API integration                                                                                 |
+| **Tenant Settings**    | Organization metadata editing                                                                                                                                                                                                                                                 |
+| **Notifications**      | In-app notifications with WebSocket support; notification bell UI                                                                                                                                                                                                             |
+| **Session security**   | Access token in memory; refresh token + tenant key in `sessionStorage`; silent refresh on 401; 30-minute inactivity sign-out                                                                                                                                                  |
+| **UX**                 | Light/dark theme, Lingui i18n (English catalog), locale cookie, navigation progress, error boundaries                                                                                                                                                                         |
 
 ## Routes
 
@@ -212,14 +212,14 @@ In development, the app uses `baseURL: /api` and Vite proxies to `VITE_API_SERVE
 
 ## Environment variables
 
-| Variable                  | Default (`.env.example`)    | Description                                                         |
-| ------------------------- | --------------------------- | ------------------------------------------------------------------- |
-| `VITE_API_SERVER_URL`     | `https://api.iqkv.site/api` | API base URL (origin + path prefix)                                 |
-| `VITE_LOG_LEVEL`          | `info`                      | Client log level: `silent`, `info`, `debug`                          |
-| `VITE_ROLLOUT_MODE`       | `MULTI_TENANT`              | Operational mode: `MULTI_TENANT` or `SINGLE_TENANT`                 |
-| `VITE_DEMO_MODE`          | `false`                     | Show demo helpers in auth flows (non-production only)               |
-| `VITE_ENABLE_MAGIC_LINK`  | `true`                      | Enable magic link auth routes (`/magic-link/*`)                     |
-| `VITE_PAYMENT_GATEWAY_TYPE` | `STRIPE`                  | Billing UI mode: `STRIPE` or `LEMON_SQUEEZY`                        |
+| Variable                    | Default (`.env.example`)    | Description                                           |
+| --------------------------- | --------------------------- | ----------------------------------------------------- |
+| `VITE_API_SERVER_URL`       | `https://api.iqkv.site/api` | API base URL (origin + path prefix)                   |
+| `VITE_LOG_LEVEL`            | `info`                      | Client log level: `silent`, `info`, `debug`           |
+| `VITE_ROLLOUT_MODE`         | `MULTI_TENANT`              | Operational mode: `MULTI_TENANT` or `SINGLE_TENANT`   |
+| `VITE_DEMO_MODE`            | `false`                     | Show demo helpers in auth flows (non-production only) |
+| `VITE_ENABLE_MAGIC_LINK`    | `true`                      | Enable magic link auth routes (`/magic-link/*`)       |
+| `VITE_PAYMENT_GATEWAY_TYPE` | `STRIPE`                    | Billing UI mode: `STRIPE` or `LEMON_SQUEEZY`          |
 
 Copy `.env.example` to `.env.local` for local overrides. For runtime overrides without a rebuild, copy `public/config.js.example` to `public/config.js` and set `window.VITE_*` values.
 
