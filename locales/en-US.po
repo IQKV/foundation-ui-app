@@ -90,6 +90,10 @@ msgstr "• Invite your team — your first steps are just a click away!"
 msgid "• No technical background needed — our intuitive UI is designed for everyone."
 msgstr "• No technical background needed — our intuitive UI is designed for everyone."
 
+#: src/pages/_app/settings/security.tsx
+msgid "••••••••"
+msgstr "••••••••"
+
 #: src/widgets/dashboard-personal-welcome/ui/dashboard-personal-welcome.tsx
 msgid "<0>Configure notifications</0> to stay informed."
 msgstr "<0>Configure notifications</0> to stay informed."
@@ -156,6 +160,14 @@ msgstr "Accessible with proper keyboard handling"
 #~ msgid "Account"
 #~ msgstr "Account"
 
+#: src/pages/auth.callback.tsx
+msgid "Account linked"
+msgstr "Account linked"
+
+#: src/pages/auth.callback.tsx
+msgid "Account linked successfully."
+msgstr "Account linked successfully."
+
 #: src/pages/_app/settings/general.tsx
 #: src/pages/_app/settings/notifications.tsx
 #: src/pages/_app/settings/organization.tsx
@@ -163,6 +175,10 @@ msgstr "Accessible with proper keyboard handling"
 #: src/shared/ui/app-layout/app-nav.tsx
 msgid "Account Settings"
 msgstr "Account Settings"
+
+#: src/pages/_app/settings/security.tsx
+msgid "Account unlinked"
+msgstr "Account unlinked"
 
 #: src/features/manage-billing/ui/billing-info.tsx
 #: src/features/manage-organization/ui/organization-settings.tsx
@@ -302,6 +318,10 @@ msgstr "At least one translation is required"
 #: src/shared/ui/admin-layout/admin-nav.tsx
 #~ msgid "Audit Log"
 #~ msgstr "Audit Log"
+
+#: src/pages/auth.callback.tsx
+msgid "Authentication failed"
+msgstr "Authentication failed"
 
 #: src/pages/admin/subscriptions.tsx
 #~ msgid "Auto-Renew"
@@ -477,6 +497,18 @@ msgstr "Clear all"
 #~ msgid "Clear filters"
 #~ msgstr "Clear filters"
 
+#: src/pages/_app/settings/security.tsx
+msgid "Client ID"
+msgstr "Client ID"
+
+#: src/pages/_app/settings/security.tsx
+msgid "Client ID is required"
+msgstr "Client ID is required"
+
+#: src/pages/_app/settings/security.tsx
+msgid "Client secret"
+msgstr "Client secret"
+
 #: src/features/invite-member/ui/invitation-details-modal.tsx
 msgid "Close"
 msgstr "Close"
@@ -512,6 +544,14 @@ msgstr "Complete"
 msgid "Complete your profile"
 msgstr "Complete your profile"
 
+#: src/pages/auth.callback.tsx
+msgid "Completing sign-in"
+msgstr "Completing sign-in"
+
+#: src/pages/_app/settings/security.tsx
+msgid "Configure a custom OIDC provider for your tenant. The client secret is write-only and will not be shown after saving."
+msgstr "Configure a custom OIDC provider for your tenant. The client secret is write-only and will not be shown after saving."
+
 #: src/features/signup/ui/provisioning-wait.tsx
 msgid "Configuring settings"
 msgstr "Configuring settings"
@@ -525,6 +565,19 @@ msgstr "Confirm new password"
 #: src/pages/verify-email.tsx
 msgid "Confirm your"
 msgstr "Confirm your"
+
+#: src/pages/_app/settings/security.tsx
+msgid "Connect"
+msgstr "Connect"
+
+#: src/pages/_app/settings/security.tsx
+#: src/pages/auth.callback.tsx
+msgid "Connected"
+msgstr "Connected"
+
+#: src/pages/_app/settings/security.tsx
+msgid "Connected Accounts"
+msgstr "Connected Accounts"
 
 #: src/pages/-billing-example.tsx
 msgid "Contact Support"
@@ -544,6 +597,22 @@ msgstr "Content is required for the default locale"
 msgid "Continue"
 msgstr "Continue"
 
+#: src/pages/sign-in.tsx
+msgid "Continue with"
+msgstr "Continue with"
+
+#: src/pages/sign-in.tsx
+msgid "Continue with GitHub"
+msgstr "Continue with GitHub"
+
+#: src/pages/sign-in.tsx
+msgid "Continue with Google"
+msgstr "Continue with Google"
+
+#: src/pages/sign-in.tsx
+msgid "Continue with Microsoft"
+msgstr "Continue with Microsoft"
+
 #: src/features/sign-in/ui/demo-credentials-hint.tsx
 msgid "Copied!"
 msgstr "Copied!"
@@ -552,16 +621,16 @@ msgstr "Copied!"
 msgid "Copy"
 msgstr "Copy"
 
-#: src/features/manage-billing/model/use-billing-portal.ts
-msgid "Could not open the billing portal. Please try again."
-msgstr "Could not open the billing portal. Please try again."
-
 #~ msgid "Could not create Stripe Customer Portal session."
 #~ msgstr "Could not create Stripe Customer Portal session."
 
 #: src/pages/_app/cms-pages.create.tsx
 msgid "Could not create the page. Please check the form and try again."
 msgstr "Could not create the page. Please check the form and try again."
+
+#: src/pages/_app/settings/security.tsx
+msgid "Could not delete SSO configuration."
+msgstr "Could not delete SSO configuration."
 
 #: src/features/page-admin/ui/delete-page-modal.tsx
 msgid "Could not delete the page. It may be published."
@@ -616,9 +685,17 @@ msgstr "Could not load members."
 msgid "Could not load organizations."
 msgstr "Could not load organizations."
 
+#: src/features/manage-billing/model/use-billing-portal.ts
+msgid "Could not open the billing portal. Please try again."
+msgstr "Could not open the billing portal. Please try again."
+
 #: src/pages/_app/cms-pages.$pageId.tsx
 msgid "Could not save the page. Please check the form and try again."
 msgstr "Could not save the page. Please check the form and try again."
+
+#: src/pages/_app/settings/security.tsx
+msgid "Could not start the linking flow."
+msgstr "Could not start the linking flow."
 
 #: src/pages/_app/settings/organization.tsx
 msgid "Could not switch organization."
@@ -627,6 +704,14 @@ msgstr "Could not switch organization."
 #: src/features/tenant-switcher/model/use-tenant-switcher.ts
 msgid "Could not switch organization. Please try again."
 msgstr "Could not switch organization. Please try again."
+
+#: src/pages/_app/settings/security.tsx
+msgid "Could not unlink this provider."
+msgstr "Could not unlink this provider."
+
+#: src/pages/_app/settings/security.tsx
+msgid "Could not update SSO configuration."
+msgstr "Could not update SSO configuration."
 
 #: src/features/signup/ui/signup-form.tsx
 #: src/pages/signup.tsx
@@ -762,10 +847,12 @@ msgstr "Default locale — required"
 
 #: src/features/page-admin/ui/delete-page-modal.tsx
 #: src/pages/_app/cms-pages.index.tsx
+#: src/pages/_app/settings/security.tsx
 msgid "Delete"
 msgstr "Delete"
 
 #: src/features/page-admin/ui/delete-page-modal.tsx
+#: src/pages/_app/settings/security.tsx
 msgid "Delete failed"
 msgstr "Delete failed"
 
@@ -773,6 +860,7 @@ msgstr "Delete failed"
 msgid "Delete Page"
 msgstr "Delete Page"
 
+#: src/pages/_app/settings/security.tsx
 #: src/shared/ui/tenant-status-badge/tenant-status-badge.tsx
 #: src/shared/ui/user-status-badge/user-status-badge.tsx
 msgid "Deleted"
@@ -793,6 +881,18 @@ msgstr "Demo Progress Bar"
 #: src/features/signup/ui/verify-email-prompt.tsx
 msgid "Didn't receive it? Check your spam folder or"
 msgstr "Didn't receive it? Check your spam folder or"
+
+#: src/pages/_app/settings/security.tsx
+msgid "Disconnect"
+msgstr "Disconnect"
+
+#: src/pages/_app/settings/security.tsx
+msgid "Display name"
+msgstr "Display name"
+
+#: src/pages/_app/settings/security.tsx
+msgid "Display name is required"
+msgstr "Display name is required"
 
 #: src/pages/sign-in.tsx
 msgid "Don't have an account? <0>Create one</0>"
@@ -908,6 +1008,10 @@ msgstr "Email verified:"
 msgid "email@company.com"
 msgstr "email@company.com"
 
+#: src/pages/_app/settings/security.tsx
+msgid "Enabled"
+msgstr "Enabled"
+
 #: src/features/forgot-password/model/use-forgot-password.ts
 #: src/features/magic-link/model/use-magic-link-initiate.ts
 #: src/features/sign-in/model/use-sign-in.ts
@@ -951,6 +1055,10 @@ msgstr "Error"
 #: src/shared/ui/error-boundary.tsx
 msgid "Error Details (Development)"
 msgstr "Error Details (Development)"
+
+#: src/pages/_app/settings/security.tsx
+msgid "Example: Contoso SSO"
+msgstr "Example: Contoso SSO"
 
 #: src/shared/ui/invitation-status-badge/invitation-status-badge.tsx
 msgid "Expired"
@@ -1098,6 +1206,10 @@ msgstr "General Settings"
 msgid "Get Started"
 msgstr "Get Started"
 
+#: src/pages/_app/settings/security.tsx
+msgid "GitHub"
+msgstr "GitHub"
+
 #: src/pages/404.tsx
 #: src/pages/500.tsx
 msgid "Go home"
@@ -1116,6 +1228,10 @@ msgstr "Go to Home"
 #: src/features/signup/ui/password-strength.tsx
 msgid "Good"
 msgstr "Good"
+
+#: src/pages/_app/settings/security.tsx
+msgid "Google"
+msgstr "Google"
 
 #: src/widgets/dashboard-personal-welcome/ui/dashboard-personal-welcome.tsx
 msgid "Here's what you can do from your personal workspace:"
@@ -1141,6 +1257,10 @@ msgstr "Home"
 #: src/features/page-admin/ui/rich-content-editor.tsx
 msgid "HTML content. At least one paragraph required for the default locale."
 msgstr "HTML content. At least one paragraph required for the default locale."
+
+#: src/pages/_app/settings/security.tsx
+msgid "https://issuer.example.com"
+msgstr "https://issuer.example.com"
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 msgid "ID"
@@ -1211,6 +1331,14 @@ msgstr "Invite Members"
 #: src/pages/invite.$token.tsx
 msgid "invited."
 msgstr "invited."
+
+#: src/pages/_app/settings/security.tsx
+msgid "Issuer URI"
+msgstr "Issuer URI"
+
+#: src/pages/_app/settings/security.tsx
+msgid "Issuer URI is required"
+msgstr "Issuer URI is required"
 
 #: src/features/complete-profile/ui/complete-profile-form.tsx
 #: src/features/signup/ui/signup-form.tsx
@@ -1299,6 +1427,10 @@ msgstr "Limited support"
 msgid "Link expired or invalid"
 msgstr "Link expired or invalid"
 
+#: src/pages/_app/settings/security.tsx
+msgid "Link failed"
+msgstr "Link failed"
+
 #: src/pages/_app/billing/index.tsx
 msgid "Loading billing information…"
 msgstr "Loading billing information…"
@@ -1374,12 +1506,12 @@ msgstr "Manage user roles, permissions & access"
 msgid "Manage your billing information, view invoice history, and update your payment methods directly via our secure billing portal."
 msgstr "Manage your billing information, view invoice history, and update your payment methods directly via our secure billing portal."
 
+#~ msgid "Manage your billing information, view invoice history, and update your payment methods directly via our secure Stripe Customer Portal."
+#~ msgstr "Manage your billing information, view invoice history, and update your payment methods directly via our secure Stripe Customer Portal."
+
 #: src/pages/_app/billing/index.tsx
 msgid "Manage your billing information, view order history, and update your payment methods directly via our secure billing portal."
 msgstr "Manage your billing information, view order history, and update your payment methods directly via our secure billing portal."
-
-#~ msgid "Manage your billing information, view invoice history, and update your payment methods directly via our secure Stripe Customer Portal."
-#~ msgstr "Manage your billing information, view invoice history, and update your payment methods directly via our secure Stripe Customer Portal."
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Manage your subscription and billing when you are ready"
@@ -1422,6 +1554,10 @@ msgstr "Members"
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "Meta description for search engines"
 msgstr "Meta description for search engines"
+
+#: src/pages/_app/settings/security.tsx
+msgid "Microsoft"
+msgstr "Microsoft"
 
 #: src/features/manage-billing/ui/plan-list.tsx
 #: src/widgets/dashboard-signup-chart/ui/dashboard-signup-chart.tsx
@@ -1494,6 +1630,10 @@ msgstr "No active tenant memberships found for this account"
 #: src/features/manage-billing/ui/billing-info.tsx
 msgid "No billing information has been configured yet. Fill in the details below to get started."
 msgstr "No billing information has been configured yet. Fill in the details below to get started."
+
+#: src/pages/_app/settings/security.tsx
+msgid "No external sign-in providers are enabled."
+msgstr "No external sign-in providers are enabled."
 
 #: src/pages/_app/settings/organization.tsx
 msgid "No matches."
@@ -1593,6 +1733,10 @@ msgstr "No worries — enter your email and we'll send you a secure link to rese
 msgid "None (top-level)"
 msgstr "None (top-level)"
 
+#: src/pages/_app/settings/security.tsx
+msgid "Not connected"
+msgstr "Not connected"
+
 #: src/features/notification-bell/ui/notification-bell.tsx
 #: src/pages/_app/settings/notifications.tsx
 #: src/shared/ui/app-layout/app-nav.tsx
@@ -1640,6 +1784,10 @@ msgstr "Open Graph description"
 msgid "Open Graph title"
 msgstr "Open Graph title"
 
+#: src/pages/_app/settings/security.tsx
+msgid "openid profile email"
+msgstr "openid profile email"
+
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
 msgid "Optional — makes this a child page"
@@ -1653,6 +1801,10 @@ msgstr "Optional layout key"
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "Optional translation"
 msgstr "Optional translation"
+
+#: src/pages/sign-in.tsx
+msgid "or"
+msgstr "or"
 
 #: src/pages/create-organization.tsx
 msgid "organization"
@@ -1884,6 +2036,10 @@ msgstr "Please check the form and try again."
 msgid "Please confirm your password"
 msgstr "Please confirm your password"
 
+#: src/pages/auth.callback.tsx
+msgid "Please wait while we finish signing you in."
+msgstr "Please wait while we finish signing you in."
+
 #: src/features/magic-link/ui/magic-link-exchange-form.tsx
 msgid "Please wait while we verify your magic link."
 msgstr "Please wait while we verify your magic link."
@@ -1927,6 +2083,10 @@ msgstr "Projects"
 #: src/features/ban-user/ui/ban-member-modal.tsx
 msgid "Provide a reason for the ban…"
 msgstr "Provide a reason for the ban…"
+
+#: src/pages/_app/settings/security.tsx
+msgid "Provider key"
+msgstr "Provider key"
 
 #: src/features/signup/ui/provisioning-wait.tsx
 msgid "Provisioning workspace"
@@ -2066,6 +2226,7 @@ msgid "Roles"
 msgstr "Roles"
 
 #: src/features/member-role/ui/update-member-authorities-modal.tsx
+#: src/pages/_app/settings/security.tsx
 msgid "Save"
 msgstr "Save"
 
@@ -2085,12 +2246,21 @@ msgid "Save Changes"
 msgstr "Save Changes"
 
 #: src/pages/_app/cms-pages.$pageId.tsx
+#: src/pages/_app/settings/security.tsx
 msgid "Save failed"
 msgstr "Save failed"
 
 #: src/features/manage-organization/ui/member-actions.tsx
 #~ msgid "Save Roles"
 #~ msgstr "Save Roles"
+
+#: src/pages/_app/settings/security.tsx
+msgid "Saved"
+msgstr "Saved"
+
+#: src/pages/_app/settings/security.tsx
+msgid "Scopes"
+msgstr "Scopes"
 
 #: src/pages/_app/team.tsx
 msgid "Search by name or email…"
@@ -2298,10 +2468,15 @@ msgstr "Sign out"
 msgid "Sign-in failed. Please try again."
 msgstr "Sign-in failed. Please try again."
 
+#: src/pages/auth.callback.tsx
+msgid "Signed in"
+msgstr "Signed in"
+
 #: src/features/magic-link/ui/magic-link-exchange-form.tsx
 msgid "Signed in successfully!"
 msgstr "Signed in successfully!"
 
+#: src/pages/auth.callback.tsx
 #: src/pages/magic-link.verify.tsx
 msgid "Signing in"
 msgstr "Signing in"
@@ -2362,6 +2537,14 @@ msgstr "Something went wrong. Please try again."
 #: src/features/signup/ui/password-strength.tsx
 msgid "Special character"
 msgstr "Special character"
+
+#: src/pages/_app/settings/security.tsx
+msgid "SSO configuration removed."
+msgstr "SSO configuration removed."
+
+#: src/pages/_app/settings/security.tsx
+msgid "SSO configuration updated."
+msgstr "SSO configuration updated."
 
 #: src/features/manage-organization/ui/member-actions.tsx
 #~ msgid "Standard organization member."
@@ -2488,6 +2671,10 @@ msgstr "Tenant"
 msgid "Tenant Owner"
 msgstr "Tenant Owner"
 
+#: src/pages/_app/settings/security.tsx
+msgid "Tenant SSO"
+msgstr "Tenant SSO"
+
 #: src/features/invite-member/ui/send-invitation-modal.tsx
 msgid "TENANT_OWNER cannot be granted via invitation"
 msgstr "TENANT_OWNER cannot be granted via invitation"
@@ -2495,6 +2682,10 @@ msgstr "TENANT_OWNER cannot be granted via invitation"
 #: src/pages/_app/billing/success.tsx
 msgid "Thank you for your subscription. Your account has been upgraded."
 msgstr "Thank you for your subscription. Your account has been upgraded."
+
+#: src/pages/_app/settings/security.tsx
+msgid "The provider was disconnected."
+msgstr "The provider was disconnected."
 
 #: src/features/manage-organization/ui/organization-settings.tsx
 msgid "The unique identifier for your organization. This cannot be changed."
@@ -2650,6 +2841,10 @@ msgstr "Unbanning this member will restore their access to this tenant. They wil
 msgid "Unlimited"
 msgstr "Unlimited"
 
+#: src/pages/_app/settings/security.tsx
+msgid "Unlink failed"
+msgstr "Unlink failed"
+
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 msgid "Unverified"
 msgstr "Unverified"
@@ -2773,6 +2968,10 @@ msgstr "Welcome back"
 #: src/pages/_app/index.tsx
 msgid "Welcome back, {firstName}."
 msgstr "Welcome back, {firstName}."
+
+#: src/pages/auth.callback.tsx
+msgid "Welcome back."
+msgstr "Welcome back."
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Welcome illustration"

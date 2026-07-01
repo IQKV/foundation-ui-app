@@ -1,6 +1,7 @@
 import { http, HttpResponse } from "msw";
 import { MOCK_SIGN_IN_RESPONSE } from "../data/auth";
 import { MOCK_TENANT_MEMBERSHIPS } from "../data/tenant";
+import { MOCK_OAUTH2_ENABLED_PROVIDERS, MOCK_OAUTH2_LINKED_IDENTITIES } from "../data/oauth2";
 
 /**
  * MSW handlers for authentication endpoints.
@@ -67,5 +68,25 @@ export const authHandlers = [
   // GET /v1/iam/auth/signup/status/:tenantKey
   http.get("*/v1/iam/auth/signup/status/:tenantKey", () => {
     return HttpResponse.json({ tenantKey: "demo0099", tenantStatus: "ACTIVE" }, { status: 200 });
+  }),
+
+  http.get("*/v1/iam/auth/oauth2/providers", () => {
+    return HttpResponse.json({ providers: MOCK_OAUTH2_ENABLED_PROVIDERS }, { status: 200 });
+  }),
+
+  http.get("*/v1/iam/auth/oauth2/identities", () => {
+    return HttpResponse.json(MOCK_OAUTH2_LINKED_IDENTITIES, { status: 200 });
+  }),
+
+  http.get("*/v1/iam/auth/oauth2/link/:provider/authorize-url", ({ params }) => {
+    const provider = String(params["provider"] ?? "provider");
+    return HttpResponse.json(
+      { url: `https://example.com/oauth2/authorize?provider=${encodeURIComponent(provider)}` },
+      { status: 200 },
+    );
+  }),
+
+  http.delete("*/v1/iam/auth/oauth2/link/:provider", () => {
+    return new HttpResponse(null, { status: 204 });
   }),
 ];

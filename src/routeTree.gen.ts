@@ -26,6 +26,7 @@ import { Route as MagicLinkIndexRouteImport } from "./pages/magic-link.index"
 import { Route as AppIndexRouteImport } from "./pages/_app/index"
 import { Route as MagicLinkVerifyRouteImport } from "./pages/magic-link.verify"
 import { Route as InviteTokenRouteImport } from "./pages/invite.$token"
+import { Route as AuthCallbackRouteImport } from "./pages/auth.callback"
 import { Route as AppTeamRouteImport } from "./pages/_app/team"
 import { Route as AppCmsPagesRouteImport } from "./pages/_app/cms-pages"
 import { Route as AppCmsPagesIndexRouteImport } from "./pages/_app/cms-pages.index"
@@ -123,6 +124,11 @@ const InviteTokenRoute = InviteTokenRouteImport.update({
   path: "/invite/$token",
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthCallbackRoute = AuthCallbackRouteImport.update({
+  id: "/auth/callback",
+  path: "/auth/callback",
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AppTeamRoute = AppTeamRouteImport.update({
   id: "/team",
   path: "/team",
@@ -201,6 +207,7 @@ export interface FileRoutesByFullPath {
   "/verify-email": typeof VerifyEmailRoute
   "/cms-pages": typeof AppCmsPagesRouteWithChildren
   "/team": typeof AppTeamRoute
+  "/auth/callback": typeof AuthCallbackRoute
   "/invite/$token": typeof InviteTokenRoute
   "/magic-link/verify": typeof MagicLinkVerifyRoute
   "/magic-link/": typeof MagicLinkIndexRoute
@@ -228,6 +235,7 @@ export interface FileRoutesByTo {
   "/unauthorized": typeof UnauthorizedRoute
   "/verify-email": typeof VerifyEmailRoute
   "/team": typeof AppTeamRoute
+  "/auth/callback": typeof AuthCallbackRoute
   "/invite/$token": typeof InviteTokenRoute
   "/magic-link/verify": typeof MagicLinkVerifyRoute
   "/": typeof AppIndexRoute
@@ -260,6 +268,7 @@ export interface FileRoutesById {
   "/verify-email": typeof VerifyEmailRoute
   "/_app/cms-pages": typeof AppCmsPagesRouteWithChildren
   "/_app/team": typeof AppTeamRoute
+  "/auth/callback": typeof AuthCallbackRoute
   "/invite/$token": typeof InviteTokenRoute
   "/magic-link/verify": typeof MagicLinkVerifyRoute
   "/_app/": typeof AppIndexRoute
@@ -293,6 +302,7 @@ export interface FileRouteTypes {
     | "/verify-email"
     | "/cms-pages"
     | "/team"
+    | "/auth/callback"
     | "/invite/$token"
     | "/magic-link/verify"
     | "/magic-link/"
@@ -320,6 +330,7 @@ export interface FileRouteTypes {
     | "/unauthorized"
     | "/verify-email"
     | "/team"
+    | "/auth/callback"
     | "/invite/$token"
     | "/magic-link/verify"
     | "/"
@@ -351,6 +362,7 @@ export interface FileRouteTypes {
     | "/verify-email"
     | "/_app/cms-pages"
     | "/_app/team"
+    | "/auth/callback"
     | "/invite/$token"
     | "/magic-link/verify"
     | "/_app/"
@@ -381,6 +393,7 @@ export interface RootRouteChildren {
   SignupRoute: typeof SignupRoute
   UnauthorizedRoute: typeof UnauthorizedRoute
   VerifyEmailRoute: typeof VerifyEmailRoute
+  AuthCallbackRoute: typeof AuthCallbackRoute
   InviteTokenRoute: typeof InviteTokenRoute
 }
 
@@ -503,6 +516,13 @@ declare module "@tanstack/react-router" {
       path: "/invite/$token"
       fullPath: "/invite/$token"
       preLoaderRoute: typeof InviteTokenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    "/auth/callback": {
+      id: "/auth/callback"
+      path: "/auth/callback"
+      fullPath: "/auth/callback"
+      preLoaderRoute: typeof AuthCallbackRouteImport
       parentRoute: typeof rootRouteImport
     }
     "/_app/team": {
@@ -664,6 +684,7 @@ const rootRouteChildren: RootRouteChildren = {
   SignupRoute: SignupRoute,
   UnauthorizedRoute: UnauthorizedRoute,
   VerifyEmailRoute: VerifyEmailRoute,
+  AuthCallbackRoute: AuthCallbackRoute,
   InviteTokenRoute: InviteTokenRoute,
 }
 export const routeTree = rootRouteImport

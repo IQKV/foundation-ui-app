@@ -72,6 +72,25 @@ export type {
   UpdateTenantRequest,
   UpdateTenantStatusRequest,
 };
+
+export interface TenantSsoConfigResponse {
+  providerKey: string;
+  displayName: string;
+  issuerUri: string;
+  clientId: string;
+  scopes: string;
+  enabled: boolean;
+  hasClientSecret: boolean;
+}
+
+export interface TenantSsoConfigRequest {
+  displayName: string;
+  issuerUri: string;
+  clientId: string;
+  clientSecret?: string;
+  scopes: string;
+  enabled: boolean;
+}
 export type {
   Invitation,
   InvitationStatus,
@@ -153,6 +172,15 @@ export const iamApi = {
   /** Retry tenant provisioning. */
   retryProvisioning: (tenantKey: string) =>
     httpClient.post<Tenant>(`/v1/iam/tenants/${tenantKey}/retry-provisioning`).then((r) => r.data),
+
+  getTenantSsoConfig: () =>
+    httpClient.get<TenantSsoConfigResponse | null>("/v1/iam/tenants/sso").then((r) => r.data),
+
+  updateTenantSsoConfig: (data: TenantSsoConfigRequest): Promise<void> =>
+    httpClient.put("/v1/iam/tenants/sso", data).then(() => undefined),
+
+  deleteTenantSsoConfig: (): Promise<void> =>
+    httpClient.delete("/v1/iam/tenants/sso").then(() => undefined),
 
   // ── Members (TENANT_OWNER / ADMIN / MEMBER) ───────────────────────────────
 

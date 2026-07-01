@@ -37,6 +37,8 @@ export type {
   CreateTenantResponse,
   UpdateTenantRequest,
   UpdateTenantStatusRequest,
+  TenantSsoConfigResponse,
+  TenantSsoConfigRequest,
 } from "./iam";
 
 export type {
@@ -88,6 +90,15 @@ export type {
   MagicLinkExchangeRequest,
   MagicLinkResponse,
 } from "./auth";
+
+// ─── OAuth2 / OIDC ────────────────────────────────────────────────────────────
+
+export { oauth2Api, buildOAuth2AuthorizeUrl, resolveApiUrl } from "./oauth2";
+export type {
+  OAuth2EnabledProvidersResponse,
+  OAuth2LinkedIdentity,
+  OAuth2AuthorizationUrlResponse,
+} from "./oauth2";
 
 // ─── Password reset ───────────────────────────────────────────────────────────
 
