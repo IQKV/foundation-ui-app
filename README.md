@@ -158,7 +158,7 @@ Conditionally renders children when a feature-map code is enabled:
 | Component / Hook           | Purpose                                                     |
 | -------------------------- | ----------------------------------------------------------- |
 | `EntitlementsCard`         | Current plan, status, renewal date, and feature list card   |
-| `PlanEntitlement`             | Feature list display (quota badges + boolean icons)         |
+| `PlanEntitlement`          | Feature list display (quota badges + boolean icons)         |
 | `PlanCard`                 | Single plan tile with price, features, and select action    |
 | `PlanList`                 | Grid of `PlanCard` components from catalog                  |
 | `CurrentSubscription`      | Active subscription summary                                 |
