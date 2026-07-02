@@ -18,7 +18,7 @@ import { useEntitlements } from "../model/use-entitlements";
 import { useEntitlementsContext } from "../model/entitlements-context";
 import { useSession } from "@/processes/session/use-session";
 import { isMultiTenantMode } from "@/app/config";
-import { PlanFeatures } from "./plan-features";
+import { PlanEntitlement } from "./plan-entitlement";
 import { TestSelectors } from "@/shared/lib/test-selectors";
 
 export function EntitlementsCard() {
@@ -73,7 +73,7 @@ export function EntitlementsCard() {
           <Divider />
 
           {/* Features */}
-          <PlanFeatures features={features} showTitle={false} />
+          <PlanEntitlement features={features} showTitle={false} />
         </Stack>
       </Paper>
     );
@@ -173,7 +173,7 @@ export function EntitlementsCard() {
         <Divider />
 
         {/* Features */}
-        <PlanFeatures features={entitlements.features} showTitle={false} />
+        <PlanEntitlement features={entitlements.features} showTitle={false} />
       </Stack>
     </Paper>
   );

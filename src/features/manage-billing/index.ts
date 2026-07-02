@@ -4,7 +4,7 @@ export { PlanList } from "./ui/plan-list";
 export { CurrentSubscription } from "./ui/current-subscription";
 export { BillingInfo } from "./ui/billing-info";
 export { RefundList } from "./ui/refund-list";
-export { PlanFeatures } from "./ui/plan-features";
+export { PlanEntitlement } from "./ui/plan-entitlement";
 export { EntitlementsCard } from "./ui/entitlements-card";
 export { FeatureGate } from "./ui/feature-gate";
 export { useBillingPortal } from "./model/use-billing-portal";

@@ -229,7 +229,7 @@ msgstr "Add locale"
 msgid "Admin"
 msgstr "Admin"
 
-#: src/features/manage-billing/ui/plan-features.tsx
+#: src/features/manage-billing/ui/plan-entitlement.tsx
 msgid "Advanced Analytics"
 msgstr "Advanced Analytics"
 
@@ -2009,7 +2009,7 @@ msgstr "Pick a date and time"
 msgid "Plan"
 msgstr "Plan"
 
-#: src/features/manage-billing/ui/plan-features.tsx
+#: src/features/manage-billing/ui/plan-entitlement.tsx
 msgid "Plan Features"
 msgstr "Plan Features"
 
@@ -2048,7 +2048,7 @@ msgstr "Please wait while we verify your magic link."
 msgid "Portal error"
 msgstr "Portal error"
 
-#: src/features/manage-billing/ui/plan-features.tsx
+#: src/features/manage-billing/ui/plan-entitlement.tsx
 msgid "Priority Support"
 msgstr "Priority Support"
 
@@ -2076,7 +2076,7 @@ msgstr "Profile Picture"
 msgid "Project Management"
 msgstr "Project Management"
 
-#: src/features/manage-billing/ui/plan-features.tsx
+#: src/features/manage-billing/ui/plan-entitlement.tsx
 msgid "Projects"
 msgstr "Projects"
 
@@ -2644,7 +2644,7 @@ msgstr "Team Management"
 msgid "Team members"
 msgstr "Team members"
 
-#: src/features/manage-billing/ui/plan-features.tsx
+#: src/features/manage-billing/ui/plan-entitlement.tsx
 msgid "Team Members"
 msgstr "Team Members"
 
@@ -2837,7 +2837,7 @@ msgstr "Unban Member"
 msgid "Unbanning this member will restore their access to this tenant. They will be able to access this tenant again with their existing credentials."
 msgstr "Unbanning this member will restore their access to this tenant. They will be able to access this tenant again with their existing credentials."
 
-#: src/features/manage-billing/ui/plan-features.tsx
+#: src/features/manage-billing/ui/plan-entitlement.tsx
 msgid "Unlimited"
 msgstr "Unlimited"
 

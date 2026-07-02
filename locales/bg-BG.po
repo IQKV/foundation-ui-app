@@ -197,7 +197,7 @@ msgstr ""
 msgid "Admin"
 msgstr "Администратор"
 
-#: src/features/manage-billing/ui/plan-features.tsx
+#: src/features/manage-billing/ui/plan-entitlement.tsx
 msgid "Advanced Analytics"
 msgstr ""
 
@@ -1700,7 +1700,7 @@ msgstr "Изберете дата и час"
 msgid "Plan"
 msgstr "План"
 
-#: src/features/manage-billing/ui/plan-features.tsx
+#: src/features/manage-billing/ui/plan-entitlement.tsx
 msgid "Plan Features"
 msgstr ""
 
@@ -1728,7 +1728,7 @@ msgstr ""
 msgid "Portal error"
 msgstr "Грешка на портала"
 
-#: src/features/manage-billing/ui/plan-features.tsx
+#: src/features/manage-billing/ui/plan-entitlement.tsx
 msgid "Priority Support"
 msgstr ""
 
@@ -1756,7 +1756,7 @@ msgstr "Снимка на профила"
 msgid "Project Management"
 msgstr ""
 
-#: src/features/manage-billing/ui/plan-features.tsx
+#: src/features/manage-billing/ui/plan-entitlement.tsx
 msgid "Projects"
 msgstr ""
 
@@ -2234,7 +2234,7 @@ msgstr ""
 msgid "Team members"
 msgstr "Членове на екипа"
 
-#: src/features/manage-billing/ui/plan-features.tsx
+#: src/features/manage-billing/ui/plan-entitlement.tsx
 msgid "Team Members"
 msgstr ""
 
@@ -2415,7 +2415,7 @@ msgstr "Разблокирай член"
 msgid "Unbanning this member will restore their access to this tenant. They will be able to access this tenant again with their existing credentials."
 msgstr "Разблокирането на този член ще възстанови достъпа им до наемателя. Те ще могат да достъпват наемателя отново с текущите си данни за достъп."
 
-#: src/features/manage-billing/ui/plan-features.tsx
+#: src/features/manage-billing/ui/plan-entitlement.tsx
 msgid "Unlimited"
 msgstr ""
 

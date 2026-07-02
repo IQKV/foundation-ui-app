@@ -1,11 +1,11 @@
 import { createContext, useContext, ReactNode } from "react";
 import type { UseQueryResult } from "@tanstack/react-query";
-import type { EntitlementsResponse, PlanFeatures } from "@/shared/api";
+import type { EntitlementsResponse, PlanEntitlement } from "@/shared/api";
 import { useEntitlements } from "./use-entitlements";
 import { useSession } from "@/processes/session/use-session";
 import {
   DEFAULT_PERSONAL_WORKSPACE_FEATURES,
-  DEFAULT_FREE_TENANT_FEATURES,
+  DEFAULT_FREE_TENANT_ENTITLEMENT,
   isMultiTenantMode,
 } from "@/app/config";
 
@@ -38,9 +38,9 @@ export function EntitlementsProvider({ children }: EntitlementsProviderProps) {
 
   const usesPersonalWorkspaceEntitlements = isMultiTenantMode && isPersonalWorkspace;
 
-  const resolvedFeatures = (): PlanFeatures => {
+  const resolvedFeatures = (): PlanEntitlement => {
     if (usesPersonalWorkspaceEntitlements) return DEFAULT_PERSONAL_WORKSPACE_FEATURES;
-    return entitlements.data?.features || DEFAULT_FREE_TENANT_FEATURES;
+    return entitlements.data?.features || DEFAULT_FREE_TENANT_ENTITLEMENT;
   };
 
   const hasFeature = (featureCode: string): boolean => {

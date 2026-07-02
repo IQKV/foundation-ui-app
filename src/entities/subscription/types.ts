@@ -63,7 +63,7 @@ export interface PlanFeature {
   description?: string;
 }
 
-export interface PlanFeatures {
+export interface PlanEntitlement {
   maxUsers: number;
   maxProjects: number;
   features: Record<string, PlanFeature>;
@@ -76,7 +76,7 @@ export interface Entitlements {
   planCode: string;
   status: "active" | "canceled" | "incomplete" | "incomplete_expired" | "past_due" | "unpaid";
   currentPeriodEnd: string;
-  features: PlanFeatures;
+  features: PlanEntitlement;
 }
 
 // ─── Checkout ─────────────────────────────────────────────────────────────────

@@ -8,12 +8,12 @@ import {
   IconChartBar,
 } from "@tabler/icons-react";
 import { Trans } from "@lingui/react/macro";
-import type { PlanFeatures as PlanFeaturesType } from "@/shared/api";
+import type { PlanEntitlement as PlanEntitlementType } from "@/shared/api";
 import { BILLING_FEATURES } from "@/app/config";
 import { TestSelectors } from "@/shared/lib/test-selectors";
 
-interface PlanFeaturesProps {
-  features: PlanFeaturesType;
+interface PlanEntitlementProps {
+  features: PlanEntitlementType;
   showTitle?: boolean;
 }
 
@@ -68,7 +68,7 @@ function FeatureItem({ icon, label, value, isUnlimited, testId }: FeatureItemPro
   );
 }
 
-export function PlanFeatures({ features, showTitle = true }: PlanFeaturesProps) {
+export function PlanEntitlement({ features, showTitle = true }: PlanEntitlementProps) {
   const prioritySupportEntry = features.features[BILLING_FEATURES.PRIORITY_SUPPORT];
   const hasPrioritySupport =
     prioritySupportEntry !== undefined && prioritySupportEntry.value.toLowerCase() === "true";

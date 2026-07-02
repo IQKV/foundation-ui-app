@@ -5,7 +5,7 @@ import { Trans } from "@lingui/react/macro";
 import { useEntitlementsContext } from "../model/entitlements-context";
 
 interface FeatureGateProps {
-  /** Feature code to check — must match a key in PlanFeatures.features map (e.g. "priority_support") */
+  /** Feature code to check — must match a key in PlanEntitlement.features map (e.g. "priority_support") */
   feature: string;
   children: ReactNode;
   fallback?: ReactNode;

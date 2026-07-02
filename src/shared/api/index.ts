@@ -117,7 +117,7 @@ export type {
   Plan,
   PricingModel,
   PlanFeature,
-  PlanFeatures,
+  PlanEntitlement,
   SubscriptionResponse,
   EntitlementsResponse,
   BillingSettingsResponse,

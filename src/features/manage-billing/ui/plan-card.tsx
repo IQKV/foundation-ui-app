@@ -1,7 +1,7 @@
 import { Paper, Text, Title, Button, List, ThemeIcon, Stack, Group, Badge } from "@mantine/core";
 import { IconCheck } from "@tabler/icons-react";
 import { Trans } from "@lingui/react/macro";
-import type { Plan, PlanFeatures as PlanFeaturesType } from "@/shared/api";
+import type { Plan, PlanEntitlement as PlanEntitlementType } from "@/shared/api";
 import { BILLING_FEATURES } from "@/app/config";
 import { TestSelectors } from "@/shared/lib/test-selectors";
 
@@ -12,7 +12,7 @@ interface PlanCardProps {
   loading?: boolean;
 }
 
-function getDisplayFeatures(features: PlanFeaturesType): string[] {
+function getDisplayFeatures(features: PlanEntitlementType): string[] {
   const display: string[] = [];
   display.push(`Max users: ${features.maxUsers === 0 ? "Unlimited" : features.maxUsers}`);
   display.push(`Max projects: ${features.maxProjects === 0 ? "Unlimited" : features.maxProjects}`);
@@ -29,7 +29,7 @@ function getDisplayFeatures(features: PlanFeaturesType): string[] {
 
 export function PlanCard({ plan, isCurrent, onSelect, loading }: PlanCardProps) {
   const features = plan.featureSet
-    ? (JSON.parse(plan.featureSet) as PlanFeaturesType)
+    ? (JSON.parse(plan.featureSet) as PlanEntitlementType)
     : { maxUsers: 1, maxProjects: 1, features: {}, pricingModel: null };
 
   const displayFeatures = getDisplayFeatures(features);

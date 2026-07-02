@@ -12,6 +12,6 @@ export { guardMultiTenantRoute } from "./rollout-guards";
 export {
   BILLING_FEATURES,
   DEFAULT_PERSONAL_WORKSPACE_FEATURES,
-  DEFAULT_FREE_TENANT_FEATURES,
+  DEFAULT_FREE_TENANT_ENTITLEMENT,
 } from "./billing";
 export type { BillingFeatureCode } from "./billing";

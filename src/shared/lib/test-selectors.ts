@@ -147,7 +147,7 @@ export const TestSelectors = {
   ENTITLEMENTS_PERIOD_END: "entitlements-period-end",
 
   // Plan Features
-  PLAN_FEATURES: "plan-features",
+  PLAN_FEATURES: "plan-entitlement",
   PLAN_FEATURE_PRIORITY_SUPPORT: "plan-feature-priority-support",
   PLAN_FEATURE_ADVANCED_ANALYTICS: "plan-feature-advanced-analytics",
   PLAN_FEATURE_MAX_USERS: "plan-feature-max-users",
