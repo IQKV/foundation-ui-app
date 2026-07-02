@@ -14,8 +14,12 @@ interface PlanCardProps {
 
 function getDisplayFeatures(planEntitlement: PlanEntitlementType): string[] {
   const display: string[] = [];
-  display.push(`Max users: ${planEntitlement.maxUsers === 0 ? "Unlimited" : planEntitlement.maxUsers}`);
-  display.push(`Max projects: ${planEntitlement.maxProjects === 0 ? "Unlimited" : planEntitlement.maxProjects}`);
+  display.push(
+    `Max users: ${planEntitlement.maxUsers === 0 ? "Unlimited" : planEntitlement.maxUsers}`,
+  );
+  display.push(
+    `Max projects: ${planEntitlement.maxProjects === 0 ? "Unlimited" : planEntitlement.maxProjects}`,
+  );
   const prioritySupport = planEntitlement.features[BILLING_FEATURES.PRIORITY_SUPPORT];
   if (prioritySupport && prioritySupport.value.toLowerCase() === "true") {
     display.push("Priority support");
