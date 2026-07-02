@@ -28,8 +28,8 @@ function getDisplayFeatures(features: PlanEntitlementType): string[] {
 }
 
 export function PlanCard({ plan, isCurrent, onSelect, loading }: PlanCardProps) {
-  const features = plan.featureSet
-    ? (JSON.parse(plan.featureSet) as PlanEntitlementType)
+  const features = plan.entitlement
+    ? (JSON.parse(plan.entitlement) as PlanEntitlementType)
     : { maxUsers: 1, maxProjects: 1, features: {}, pricingModel: null };
 
   const displayFeatures = getDisplayFeatures(features);

@@ -42,7 +42,7 @@ export interface Plan {
   billingPeriod: "MONTHLY" | "ANNUAL";
   priceMinor: number;
   currency: string;
-  featureSet: string;
+  entitlement: string;
   scope: "TENANT" | "USER";
   externalProductId?: string | null;
   externalPriceId?: string | null;
