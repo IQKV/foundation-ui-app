@@ -12,15 +12,15 @@ interface PlanCardProps {
   loading?: boolean;
 }
 
-function getDisplayFeatures(features: PlanEntitlementType): string[] {
+function getDisplayFeatures(planEntitlement: PlanEntitlementType): string[] {
   const display: string[] = [];
-  display.push(`Max users: ${features.maxUsers === 0 ? "Unlimited" : features.maxUsers}`);
-  display.push(`Max projects: ${features.maxProjects === 0 ? "Unlimited" : features.maxProjects}`);
-  const prioritySupport = features.features[BILLING_FEATURES.PRIORITY_SUPPORT];
+  display.push(`Max users: ${planEntitlement.maxUsers === 0 ? "Unlimited" : planEntitlement.maxUsers}`);
+  display.push(`Max projects: ${planEntitlement.maxProjects === 0 ? "Unlimited" : planEntitlement.maxProjects}`);
+  const prioritySupport = planEntitlement.features[BILLING_FEATURES.PRIORITY_SUPPORT];
   if (prioritySupport && prioritySupport.value.toLowerCase() === "true") {
     display.push("Priority support");
   }
-  const advancedAnalytics = features.features[BILLING_FEATURES.ADVANCED_ANALYTICS];
+  const advancedAnalytics = planEntitlement.features[BILLING_FEATURES.ADVANCED_ANALYTICS];
   if (advancedAnalytics && advancedAnalytics.value.toLowerCase() === "true") {
     display.push("Advanced analytics");
   }
@@ -28,11 +28,11 @@ function getDisplayFeatures(features: PlanEntitlementType): string[] {
 }
 
 export function PlanCard({ plan, isCurrent, onSelect, loading }: PlanCardProps) {
-  const features = plan.entitlement
+  const planEntitlement = plan.entitlement
     ? (JSON.parse(plan.entitlement) as PlanEntitlementType)
     : { maxUsers: 1, maxProjects: 1, features: {}, pricingModel: null };
 
-  const displayFeatures = getDisplayFeatures(features);
+  const displayFeatures = getDisplayFeatures(planEntitlement);
 
   return (
     <Paper
