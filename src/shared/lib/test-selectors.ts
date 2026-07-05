@@ -162,6 +162,17 @@ export const TestSelectors = {
   REFUND_LIST_ROW_STATUS_BADGE: (refundId: string) => `refund-list-row-${refundId}-status-badge`,
   REFUND_LIST_ROW_PAYMENT_ID: (refundId: string) => `refund-list-row-${refundId}-payment-id`,
 
+  // Webhook Logs
+  WEBHOOK_LOG_LIST: "webhook-log-list",
+  WEBHOOK_LOG_LIST_LOADING: "webhook-log-list-loading",
+  WEBHOOK_LOG_LIST_ERROR: "webhook-log-list-error",
+  WEBHOOK_LOG_LIST_TABLE: "webhook-log-list-table",
+  WEBHOOK_LOG_LIST_ROW: (id: string) => `webhook-log-list-row-${id}`,
+  WEBHOOK_LOG_LIST_ROW_EVENT_TYPE: (id: string) => `webhook-log-list-row-${id}-event-type`,
+  WEBHOOK_LOG_LIST_ROW_STATUS_BADGE: (id: string) => `webhook-log-list-row-${id}-status-badge`,
+  WEBHOOK_LOG_LIST_ROW_RECEIVED_AT: (id: string) => `webhook-log-list-row-${id}-received-at`,
+  WEBHOOK_LOG_LIST_ROW_ERROR: (id: string) => `webhook-log-list-row-${id}-error`,
+
   // Organization
   ORGANIZATION_SETTINGS: "organization-settings",
   ORGANIZATION_SETTINGS_LOADING: "organization-settings-loading",

@@ -18,7 +18,7 @@ This is the tenant surface of the platform — separate from `foundation-ui-plat
 | **Dashboard**          | Workspace name, welcome message, team member count                                                                                                                                                                                                                            |
 | **Team**               | Searchable member list; pending invitations panel (TENANT_OWNER only); send invitation modal (ADMIN or MEMBER role); ban/unban members (TENANT_OWNER only); change member role (TENANT_OWNER only); transfer ownership (TENANT_OWNER only)                                    |
 | **My Account**         | Profile view, edit name, change password, organizations and roles; connected accounts (link/unlink OAuth2 providers)                                                                                                                                                          |
-| **Billing**            | Billing portal access (Stripe or Lemon Squeezy), current subscription view, plan catalog, billing info, refunds list; **plan-based feature access control** with entitlements API integration                                                                                 |
+| **Billing**            | Billing portal access (Stripe or Lemon Squeezy), current subscription view, plan catalog, billing info, refunds list, webhook logs; **plan-based feature access control** with entitlements API integration                                                                   |
 | **Tenant Settings**    | Organization metadata editing                                                                                                                                                                                                                                                 |
 | **Notifications**      | In-app notifications with WebSocket support; notification bell UI                                                                                                                                                                                                             |
 | **Session security**   | Access token in memory; refresh token + tenant key in `sessionStorage`; silent refresh on 401; 30-minute inactivity sign-out                                                                                                                                                  |
@@ -26,27 +26,27 @@ This is the tenant surface of the platform — separate from `foundation-ui-plat
 
 ## Routes
 
-| Path                              | Access        | Description                             |
-| --------------------------------- | ------------- | --------------------------------------- |
-| `/sign-in`                        | Public        | Tenant sign-in with optional redirect   |
-| `/auth/callback`                  | Public        | OAuth2/OIDC callback handler            |
-| `/signup`                         | Public        | New user + tenant registration          |
-| `/forgot-password`                | Public        | Request password reset email            |
-| `/reset-password`                 | Public        | Set new password from email token       |
-| `/verify-email`                   | Public        | Confirm email from link token           |
-| `/invite/:token`                  | Public        | Preview and accept workspace invitation |
-| `/magic-link`                     | Public        | Magic link entry (feature-flagged)      |
-| `/magic-link/verify`              | Public        | Exchange magic link token for session   |
-| `/create-organization`            | Authenticated | Create a new organization               |
-| `/`                               | Authenticated | Dashboard                               |
-| `/team`                           | Authenticated | Members and invitations                 |
-| `/billing`                        | Authenticated | Billing portal, plans, refunds          |
-| `/account/settings/general`       | Authenticated | General account settings                |
-| `/account/settings/organization`  | Authenticated | Organization settings                   |
-| `/account/settings/security`      | Authenticated | Security settings                       |
-| `/account/settings/notifications` | Authenticated | Notification settings                   |
-| `/unauthorized`                   | Public        | Shown when JWT is not a tenant session  |
-| `/404`, `/500`                    | Public        | Error pages                             |
+| Path                              | Access        | Description                                  |
+| --------------------------------- | ------------- | -------------------------------------------- |
+| `/sign-in`                        | Public        | Tenant sign-in with optional redirect        |
+| `/auth/callback`                  | Public        | OAuth2/OIDC callback handler                 |
+| `/signup`                         | Public        | New user + tenant registration               |
+| `/forgot-password`                | Public        | Request password reset email                 |
+| `/reset-password`                 | Public        | Set new password from email token            |
+| `/verify-email`                   | Public        | Confirm email from link token                |
+| `/invite/:token`                  | Public        | Preview and accept workspace invitation      |
+| `/magic-link`                     | Public        | Magic link entry (feature-flagged)           |
+| `/magic-link/verify`              | Public        | Exchange magic link token for session        |
+| `/create-organization`            | Authenticated | Create a new organization                    |
+| `/`                               | Authenticated | Dashboard                                    |
+| `/team`                           | Authenticated | Members and invitations                      |
+| `/billing`                        | Authenticated | Billing portal, plans, refunds, webhook logs |
+| `/account/settings/general`       | Authenticated | General account settings                     |
+| `/account/settings/organization`  | Authenticated | Organization settings                        |
+| `/account/settings/security`      | Authenticated | Security settings                            |
+| `/account/settings/notifications` | Authenticated | Notification settings                        |
+| `/unauthorized`                   | Public        | Shown when JWT is not a tenant session       |
+| `/404`, `/500`                    | Public        | Error pages                                  |
 
 Authenticated routes live under the `/_app` layout, which enforces a valid tenant JWT (or silent refresh) before rendering.
 
@@ -68,6 +68,7 @@ Authenticated routes live under the `/_app` layout, which enforces a valid tenan
 | Team — invitations (send, list, revoke) | Done (TENANT_OWNER) |
 | Profile & change password               | Done                |
 | Billing self-service                    | Done                |
+| Webhook logs (tenant)                   | Done                |
 | Plan-based feature access control       | Done                |
 | Tenant settings                         | Done                |
 | Notifications                           | Done                |
@@ -155,21 +156,22 @@ Conditionally renders children when a feature-map code is enabled:
 
 ### UI components (`features/manage-billing`)
 
-| Component / Hook           | Purpose                                                     |
-| -------------------------- | ----------------------------------------------------------- |
-| `EntitlementsCard`         | Current plan, status, renewal date, and feature list card   |
-| `PlanEntitlement`          | Feature list display (quota badges + boolean icons)         |
-| `PlanCard`                 | Single plan tile with price, features, and select action    |
-| `PlanList`                 | Grid of `PlanCard` components from catalog                  |
-| `CurrentSubscription`      | Active subscription summary                                 |
-| `BillingInfo`              | Billing settings form                                       |
-| `RefundList`               | Refund history table                                        |
-| `BillingPortalButton`      | Opens the billing portal (Stripe or Lemon Squeezy)          |
-| `FeatureGate`              | Conditional render by feature code                          |
-| `useEntitlements`          | TanStack Query hook — fetches `/v1/billing/entitlements/me` |
-| `useHasFeature(code)`      | Boolean check against features map                          |
-| `useQuota(field)`          | Returns typed quota value                                   |
-| `useEntitlementsContext()` | Raw context access                                          |
+| Component / Hook           | Purpose                                                          |
+| -------------------------- | ---------------------------------------------------------------- |
+| `EntitlementsCard`         | Current plan, status, renewal date, and feature list card        |
+| `PlanEntitlement`          | Feature list display (quota badges + boolean icons)              |
+| `PlanCard`                 | Single plan tile with price, features, and select action         |
+| `PlanList`                 | Grid of `PlanCard` components from catalog                       |
+| `CurrentSubscription`      | Active subscription summary                                      |
+| `BillingInfo`              | Billing settings form                                            |
+| `RefundList`               | Refund history table                                             |
+| `WebhookLogList`           | Webhook log history table with search, status filter, pagination |
+| `BillingPortalButton`      | Opens the billing portal (Stripe or Lemon Squeezy)               |
+| `FeatureGate`              | Conditional render by feature code                               |
+| `useEntitlements`          | TanStack Query hook — fetches `/v1/billing/entitlements/me`      |
+| `useHasFeature(code)`      | Boolean check against features map                               |
+| `useQuota(field)`          | Returns typed quota value                                        |
+| `useEntitlementsContext()` | Raw context access                                               |
 
 A working integration example lives at `src/pages/billing-example.tsx`.
 

@@ -4,6 +4,7 @@ export { PlanList } from "./ui/plan-list";
 export { CurrentSubscription } from "./ui/current-subscription";
 export { BillingInfo } from "./ui/billing-info";
 export { RefundList } from "./ui/refund-list";
+export { WebhookLogList } from "./ui/webhook-log-list";
 export { PlanEntitlement } from "./ui/plan-entitlement";
 export { EntitlementsCard } from "./ui/entitlements-card";
 export { FeatureGate } from "./ui/feature-gate";
@@ -17,6 +18,7 @@ export {
   isBillingSettingsNotFound,
 } from "./model/use-billing-settings";
 export { useRefunds } from "./model/use-refunds";
+export { useWebhookLogs } from "./model/use-webhook-logs";
 export { useEntitlements } from "./model/use-entitlements";
 export {
   EntitlementsProvider,

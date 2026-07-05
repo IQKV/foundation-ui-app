@@ -41,6 +41,26 @@ export function getNotificationSeverityColor(severity: string): string {
 }
 
 /**
+ * Returns a Mantine color name for a webhook log status string.
+ */
+export function getWebhookLogStatusColor(status: string): string {
+  switch (status.toUpperCase()) {
+    case "PROCESSED":
+    case "DELIVERED":
+    case "SUCCESS":
+      return "green";
+    case "FAILED":
+      return "red";
+    case "PENDING":
+      return "blue";
+    case "IGNORED":
+      return "gray";
+    default:
+      return "gray";
+  }
+}
+
+/**
  * Returns a Mantine color name for a CMS page status string.
  */
 export function getCmsPageStatusColor(status: string): string {

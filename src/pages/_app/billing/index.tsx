@@ -23,6 +23,7 @@ import {
   PlanList,
   BillingInfo,
   RefundList,
+  WebhookLogList,
   useActiveSubscription,
   useCreateCheckoutSession,
   useBillingSettings,
@@ -120,6 +121,8 @@ function BillingPage() {
             <BillingInfo tenantKey={isSingleTenantMode ? undefined : (tenantKey ?? undefined)} />
 
             <RefundList tenantKey={isSingleTenantMode ? undefined : (tenantKey ?? undefined)} />
+
+            <WebhookLogList />
 
             {isBillingSettingsLoading && (
               <Paper withBorder p="xl" radius="md">

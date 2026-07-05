@@ -14,6 +14,7 @@ import type {
   UpdateBillingSettingsRequest,
 } from "@/entities/subscription";
 import type { Refund } from "@/entities/refund";
+import type { WebhookLog, PagedWebhookLogResponse } from "@/entities/webhook-log";
 
 // Re-export entity types so existing imports from "@/shared/api" keep working.
 export type {
@@ -25,6 +26,8 @@ export type {
   CheckoutSessionResponse,
   PortalSessionResponse,
   Refund,
+  WebhookLog,
+  PagedWebhookLogResponse,
 };
 
 // API response aliases — keep the *Response suffix that consumers already use.
@@ -161,4 +164,29 @@ export const billingApi = {
    */
   updateUserBillingSettings: (data: UpdateBillingSettingsRequest) =>
     httpClient.patch<BillingSettings>("/v1/billing/settings/me", data).then((r) => r.data),
+
+  /**
+   * List webhook logs for the current subject (tenant in multi-tenant, user in single-tenant).
+   * Requires TENANT_OWNER, ADMIN, or MEMBER authority.
+   */
+  listWebhookLogsForMe: (
+    params: {
+      page?: number;
+      size?: number;
+      sortBy?: string;
+      sortDir?: string;
+      search?: string;
+      status?: string;
+    } = {},
+  ) =>
+    httpClient
+      .get<PagedWebhookLogResponse>("/v1/billing/webhook-logs/me", { params })
+      .then((r) => r.data),
+
+  /**
+   * Get a single webhook log by ID for the current subject.
+   * Requires TENANT_OWNER, ADMIN, or MEMBER authority.
+   */
+  getWebhookLogForMe: (id: string) =>
+    httpClient.get<WebhookLog>(`/v1/billing/webhook-logs/me/${id}`).then((r) => r.data),
 };
