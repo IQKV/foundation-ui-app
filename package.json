@@ -81,7 +81,7 @@
     "@tiptap/react": "^3.27.1",
     "@tiptap/starter-kit": "^3.27.1",
     "@types/sanitize-html": "^2.16.1",
-    "@xyflow/react": "^12.11.1",
+    "@xyflow/react": "^12.11.2",
     "axios": "^1.18.1",
     "chroma-js": "^3.2.0",
     "classnames": "^2.5.1",
