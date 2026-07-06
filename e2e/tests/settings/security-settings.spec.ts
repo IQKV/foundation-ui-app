@@ -16,35 +16,29 @@ test.describe("Security Settings Page", () => {
     await security.expectPageVisible();
   });
 
-  test("change-password button is visible", async () => {
-    await expect(security.changePasswordButton).toBeVisible();
-  });
-
-  test("change-password modal opens on button click", async () => {
-    await security.openChangePasswordModal();
-    await security.expectChangePasswordModalVisible();
-  });
-
-  test("change-password modal closes on cancel", async () => {
-    await security.openChangePasswordModal();
-    await security.cancelChangePassword();
-    await security.expectChangePasswordModalHidden();
-  });
-
-  test("change-password form inputs are all present", async () => {
-    await security.openChangePasswordModal();
-    await expect(security.currentPasswordInput).toBeVisible();
-    await expect(security.newPasswordInput).toBeVisible();
-    await expect(security.confirmPasswordInput).toBeVisible();
-    await expect(security.changePasswordConfirmButton).toBeVisible();
-    await expect(security.changePasswordCancelButton).toBeVisible();
+  test("inline change-password form fields are all present", async () => {
+    await security.expectPasswordFormVisible();
   });
 
   test("password fields mask input", async () => {
-    await security.openChangePasswordModal();
     await expect(security.currentPasswordInput).toHaveAttribute("type", "password");
     await expect(security.newPasswordInput).toHaveAttribute("type", "password");
     await expect(security.confirmPasswordInput).toHaveAttribute("type", "password");
+  });
+
+  test("change-password submit button is visible and enabled", async () => {
+    await expect(security.changePasswordButton).toBeVisible();
+    await expect(security.changePasswordButton).toBeEnabled();
+  });
+
+  test("password inputs accept typed values", async () => {
+    await security.currentPasswordInput.fill("OldPass1!");
+    await security.newPasswordInput.fill("NewPass1!");
+    await security.confirmPasswordInput.fill("NewPass1!");
+
+    await expect(security.currentPasswordInput).toHaveValue("OldPass1!");
+    await expect(security.newPasswordInput).toHaveValue("NewPass1!");
+    await expect(security.confirmPasswordInput).toHaveValue("NewPass1!");
   });
 
   test("navigating directly to /settings/security works when authenticated", async ({

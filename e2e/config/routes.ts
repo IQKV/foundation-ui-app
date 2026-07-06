@@ -11,7 +11,7 @@ export const ROUTES = {
   SIGN_UP: "/sign-up",
   FORGOT_PASSWORD: "/forgot-password",
   RESET_PASSWORD: "/reset-password",
-  DASHBOARD: "/dashboard",
+  DASHBOARD: "/",
   SETTINGS_GENERAL: "/settings/general",
   SETTINGS_SECURITY: "/settings/security",
   SETTINGS_ORGANIZATION: "/settings/organization",

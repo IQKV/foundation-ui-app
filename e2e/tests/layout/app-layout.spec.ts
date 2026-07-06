@@ -50,13 +50,16 @@ test.describe("App Layout E2E Tests", () => {
 
   test("user menu opens and displays options", async ({ tenantPage }) => {
     await tenantPage.locator(byTestId(TestSelectors.HEADER_USER_MENU_BUTTON)).click();
-    // Mantine menu animates in
-    await tenantPage
-      .locator(byTestId(TestSelectors.HEADER_USER_MENU))
-      .waitFor({ state: "visible" });
+    // Scope to the dropdown so Mantine's portal doesn't cause false negatives
+    const menu = tenantPage.locator(byTestId(TestSelectors.HEADER_USER_MENU));
+    await menu.waitFor({ state: "visible" });
 
-    await expect(tenantPage.locator(byTestId(TestSelectors.BUTTON("profile")))).toBeVisible();
-    await expect(tenantPage.locator(byTestId(TestSelectors.BUTTON("sign-out")))).toBeVisible();
+    // Profile link is always present
+    await expect(
+      menu.locator(byTestId(TestSelectors.HEADER_USER_MENU_PROFILE_BUTTON)),
+    ).toBeVisible();
+    // Sign-out is always present
+    await expect(menu.locator(byTestId(TestSelectors.BUTTON("sign-out")))).toBeVisible();
   });
 
   test("sign out button is visible and enabled", async ({ tenantPage }) => {
@@ -128,17 +131,27 @@ test.describe("App Layout E2E Tests", () => {
 test.describe("Error Pages", () => {
   test("404 page renders with correct testids", async ({ tenantPage }) => {
     await tenantPage.goto("/404");
+    await tenantPage.locator(byTestId(TestSelectors.PAGE_404)).waitFor({ state: "visible" });
     await expect(tenantPage.locator(byTestId(TestSelectors.PAGE_404))).toBeVisible();
-    await expect(tenantPage.locator(byTestId(TestSelectors.BUTTON("go-home")))).toBeVisible();
+    await expect(
+      tenantPage.locator(byTestId(TestSelectors.ERROR_PAGE_GO_HOME_BUTTON)),
+    ).toBeVisible();
   });
 
   test("500 page renders with correct testids", async ({ tenantPage }) => {
     await tenantPage.goto("/500");
+    await tenantPage.locator(byTestId(TestSelectors.PAGE_500)).waitFor({ state: "visible" });
     await expect(tenantPage.locator(byTestId(TestSelectors.PAGE_500))).toBeVisible();
-    await expect(tenantPage.locator(byTestId(TestSelectors.BUTTON("go-home")))).toBeVisible();
+    await expect(
+      tenantPage.locator(byTestId(TestSelectors.ERROR_PAGE_GO_HOME_BUTTON)),
+    ).toBeVisible();
   });
 
-  test("error boundary is hidden when no render error has occurred", async ({ tenantPage }) => {
-    await expect(tenantPage.locator(byTestId(TestSelectors.ERROR_BOUNDARY))).toBeHidden();
+  test("error boundary is not mounted when no render error has occurred", async ({
+    tenantPage,
+  }) => {
+    // ErrorBoundary only renders its fallback (and the data-testid) when hasError=true.
+    // When healthy the node is never in the DOM, so we assert it is not attached.
+    await expect(tenantPage.locator(byTestId(TestSelectors.ERROR_BOUNDARY))).not.toBeAttached();
   });
 });

@@ -31,13 +31,13 @@ test.describe("App Smoke Tests", () => {
     await app.goTo404();
     await app.expect404PageVisible();
     await testUtils.expectVisibleByTestId(page, TestSelectors.PAGE_404);
-    await testUtils.expectVisibleByTestId(page, TestSelectors.BUTTON("go-home"));
+    await testUtils.expectVisibleByTestId(page, TestSelectors.ERROR_PAGE_GO_HOME_BUTTON);
   });
 
   test("404 go-home button navigates to app root (redirects to sign-in)", async ({ page }) => {
     await page.goto("/404");
     await page.locator(byTestId(TestSelectors.PAGE_404)).waitFor({ state: "visible" });
-    await page.locator(byTestId(TestSelectors.BUTTON("go-home"))).click();
+    await page.locator(byTestId(TestSelectors.ERROR_PAGE_GO_HOME_BUTTON)).click();
     // Unauthenticated visit to "/" redirects to sign-in
     await expect(page).toHaveURL(/sign-in/);
   });
@@ -79,7 +79,7 @@ test.describe("App Smoke Tests", () => {
   test("error boundary is not visible on normal page load", async ({ page }) => {
     await page.goto("/");
     await testUtils.waitForPageReady(page);
-    await expect(page.locator(byTestId(TestSelectors.ERROR_BOUNDARY))).toBeHidden();
+    await expect(page.locator(byTestId(TestSelectors.ERROR_BOUNDARY))).not.toBeAttached();
   });
 
   test("loading overlay is hidden after page loads", async ({ page }) => {

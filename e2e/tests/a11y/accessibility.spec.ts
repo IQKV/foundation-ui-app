@@ -3,12 +3,13 @@ import { test as authTest } from "../../fixtures/index.js";
 import { checkA11y } from "../../lib/a11y.js";
 import { TestSelectors, byTestId } from "../../lib/test-selectors.js";
 import { ROUTES } from "../../config/routes.js";
+import { TIMEOUTS } from "../../config/timeouts.js";
 
 /**
  * Accessibility tests using axe-core.
  *
- * These are structural checks — they catch missing ARIA roles, colour
- * contrast failures, missing form labels, keyboard-trap patterns, etc.
+ * These are structural checks — they catch missing ARIA roles, colour-contrast
+ * failures, missing form labels, keyboard-trap patterns, etc.
  * They do NOT replace manual testing with assistive technologies.
  *
  * Unauthenticated pages use the plain `test` fixture.
@@ -21,6 +22,26 @@ test.describe("A11y — Unauthenticated pages", () => {
   test("sign-in page has no violations", async ({ page }) => {
     await page.goto(ROUTES.SIGN_IN);
     await page.locator(byTestId(TestSelectors.SIGN_IN_FORM)).waitFor({ state: "visible" });
+    await checkA11y(page);
+  });
+
+  test("sign-up page has no violations", async ({ page }) => {
+    await page.goto(ROUTES.SIGN_UP);
+    await page.locator(byTestId(TestSelectors.SIGN_UP_FORM)).waitFor({ state: "visible" });
+    await checkA11y(page);
+  });
+
+  test("forgot-password page has no violations", async ({ page }) => {
+    await page.goto(ROUTES.FORGOT_PASSWORD);
+    await page.locator(byTestId(TestSelectors.FORGOT_PASSWORD_FORM)).waitFor({ state: "visible" });
+    await checkA11y(page);
+  });
+
+  test("reset-password page (no token) has no violations", async ({ page }) => {
+    await page.goto(ROUTES.RESET_PASSWORD);
+    await page
+      .locator(byTestId(TestSelectors.RESET_PASSWORD_NO_TOKEN))
+      .waitFor({ state: "visible", timeout: TIMEOUTS.NAVIGATION });
     await checkA11y(page);
   });
 
@@ -41,16 +62,27 @@ test.describe("A11y — Unauthenticated pages", () => {
 
 authTest.describe("A11y — Authenticated pages", () => {
   authTest("app shell (dashboard) has no violations", async ({ tenantPage }) => {
+    // tenantPage fixture already lands on "/" — wait for the shell to be fully painted
+    // before running axe to avoid scanning partially-rendered async content.
+    await tenantPage
+      .locator(byTestId(TestSelectors.APP_LAYOUT))
+      .waitFor({ state: "visible", timeout: TIMEOUTS.NAVIGATION });
     await checkA11y(tenantPage);
   });
 
   authTest("header has no violations", async ({ tenantPage }) => {
+    await tenantPage
+      .locator(byTestId(TestSelectors.APP_HEADER))
+      .waitFor({ state: "visible", timeout: TIMEOUTS.NAVIGATION });
     await checkA11y(tenantPage, {
       include: byTestId(TestSelectors.APP_HEADER),
     });
   });
 
   authTest("navigation has no violations", async ({ tenantPage }) => {
+    await tenantPage
+      .locator(byTestId(TestSelectors.APP_NAV))
+      .waitFor({ state: "visible", timeout: TIMEOUTS.NAVIGATION });
     await checkA11y(tenantPage, {
       include: byTestId(TestSelectors.APP_NAV),
     });
@@ -60,7 +92,7 @@ authTest.describe("A11y — Authenticated pages", () => {
     await tenantPage.goto(ROUTES.SETTINGS_GENERAL);
     await tenantPage
       .locator(byTestId(TestSelectors.GENERAL_SETTINGS_PAGE))
-      .waitFor({ state: "visible" });
+      .waitFor({ state: "visible", timeout: TIMEOUTS.NAVIGATION });
     await checkA11y(tenantPage);
   });
 
@@ -68,7 +100,7 @@ authTest.describe("A11y — Authenticated pages", () => {
     await tenantPage.goto(ROUTES.SETTINGS_SECURITY);
     await tenantPage
       .locator(byTestId(TestSelectors.SECURITY_SETTINGS_PAGE))
-      .waitFor({ state: "visible" });
+      .waitFor({ state: "visible", timeout: TIMEOUTS.NAVIGATION });
     await checkA11y(tenantPage);
   });
 
@@ -76,15 +108,18 @@ authTest.describe("A11y — Authenticated pages", () => {
     await tenantPage.goto(ROUTES.SETTINGS_ORGANIZATION);
     await tenantPage
       .locator(byTestId(TestSelectors.ORGANIZATION_SETTINGS_PAGE))
-      .waitFor({ state: "visible" });
+      .waitFor({ state: "visible", timeout: TIMEOUTS.NAVIGATION });
     await checkA11y(tenantPage);
   });
 
   authTest("user menu has no violations when open", async ({ tenantPage }) => {
+    await tenantPage
+      .locator(byTestId(TestSelectors.HEADER_USER_MENU_BUTTON))
+      .waitFor({ state: "visible", timeout: TIMEOUTS.NAVIGATION });
     await tenantPage.locator(byTestId(TestSelectors.HEADER_USER_MENU_BUTTON)).click();
     await tenantPage
       .locator(byTestId(TestSelectors.HEADER_USER_MENU))
-      .waitFor({ state: "visible" });
+      .waitFor({ state: "visible", timeout: TIMEOUTS.DEFAULT });
     await checkA11y(tenantPage, {
       include: byTestId(TestSelectors.HEADER_USER_MENU),
     });

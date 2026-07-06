@@ -127,6 +127,10 @@ export class GeneralSettingsPage {
 
   async expectPageVisible() {
     await expect(this.pageRoot).toBeVisible();
+    // Avatar and profile sections are rendered immediately (static markup),
+    // but profile data loads async — wait for the form to be ready so the
+    // sections have fully mounted before we assert them.
+    await this.waitForProfileFormReady();
     await expect(this.profileSection).toBeVisible();
     await expect(this.avatarSection).toBeVisible();
   }
