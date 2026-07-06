@@ -30,6 +30,7 @@ import {
   useNotificationWs,
 } from "../model";
 import { NotificationItem } from "./notification-item";
+import { TestSelectors } from "@/shared/lib/test-selectors";
 
 export function NotificationBell() {
   const [opened, { toggle, close }] = useDisclosure(false);
@@ -78,7 +79,7 @@ export function NotificationBell() {
               color="gray"
               size="md"
               onClick={toggle}
-              data-testid="notification-bell-button"
+              data-testid={TestSelectors.NOTIFICATION_BELL_BUTTON}
               aria-label={t`Notifications${hasUnread ? `, ${unreadCount} unread` : ""}`}
             >
               <IconBell size={18} />
@@ -87,7 +88,7 @@ export function NotificationBell() {
         </Tooltip>
       </Popover.Target>
 
-      <Popover.Dropdown p={0} data-testid="notification-bell-dropdown">
+      <Popover.Dropdown p={0} data-testid={TestSelectors.NOTIFICATION_BELL_DROPDOWN}>
         {/* Header */}
         <Group px="md" py="sm" justify="space-between">
           <Group gap="xs">
@@ -106,7 +107,7 @@ export function NotificationBell() {
               size="xs"
               onClick={() => markAllAsRead.mutate()}
               disabled={markAllAsRead.isPending}
-              data-testid="notification-mark-all-read"
+              data-testid={TestSelectors.NOTIFICATION_MARK_ALL_READ}
             >
               {t`Mark all as read`}
             </Anchor>
@@ -154,7 +155,7 @@ export function NotificationBell() {
                 ta="center"
                 py="xs"
                 onClick={close}
-                data-testid="notification-see-all"
+                data-testid={TestSelectors.NOTIFICATION_SEE_ALL}
               >
                 {t`See all notifications`}
               </Anchor>
@@ -175,7 +176,7 @@ export function NotificationBell() {
                   color="red"
                   onClick={() => deleteAll.mutate()}
                   loading={deleteAll.isPending}
-                  data-testid="notification-delete-all"
+                  data-testid={TestSelectors.NOTIFICATION_DELETE_ALL}
                 >
                   {t`Clear all`}
                 </Button>

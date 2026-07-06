@@ -53,7 +53,7 @@ function UserMenu() {
         </Avatar>
       </Menu.Target>
 
-      <Menu.Dropdown data-testid="header-user-menu">
+      <Menu.Dropdown data-testid={TestSelectors.HEADER_USER_MENU}>
         {displayName && (
           <>
             <Menu.Label>{displayName}</Menu.Label>

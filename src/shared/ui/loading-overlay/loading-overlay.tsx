@@ -6,6 +6,7 @@ import {
   Text,
 } from "@mantine/core";
 import { t } from "@lingui/core/macro";
+import { TestSelectors } from "@/shared/lib/test-selectors";
 
 interface LoadingOverlayProps {
   visible: boolean;
@@ -38,7 +39,7 @@ export function LoadingOverlay({ visible, message, zIndex = 1000 }: LoadingOverl
           </Center>
         ),
       }}
-      data-testid="loading-overlay"
+      data-testid={TestSelectors.LOADING_OVERLAY}
     />
   );
 }
