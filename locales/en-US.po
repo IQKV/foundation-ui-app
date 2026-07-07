@@ -613,6 +613,10 @@ msgstr "Continue with Google"
 msgid "Continue with Microsoft"
 msgstr "Continue with Microsoft"
 
+#: src/pages/sign-in.tsx
+msgid "Continue with SSO"
+msgstr "Continue with SSO"
+
 #: src/features/sign-in/ui/demo-credentials-hint.tsx
 msgid "Copied!"
 msgstr "Copied!"
@@ -1045,9 +1049,14 @@ msgstr "Enter your password to confirm your identity and join."
 msgid "Enter your workspace"
 msgstr "Enter your workspace"
 
+#: src/pages/sign-in.tsx
+msgid "Enterprise SSO"
+msgstr "Enterprise SSO"
+
 #: src/features/manage-billing/ui/billing-info.tsx
 #: src/features/manage-billing/ui/plan-list.tsx
 #: src/features/manage-billing/ui/refund-list.tsx
+#: src/features/manage-billing/ui/webhook-log-list.tsx
 #: src/features/manage-organization/ui/organization-settings.tsx
 msgid "Error"
 msgstr "Error"
@@ -1055,6 +1064,14 @@ msgstr "Error"
 #: src/shared/ui/error-boundary.tsx
 msgid "Error Details (Development)"
 msgstr "Error Details (Development)"
+
+#: src/features/manage-billing/ui/webhook-log-list.tsx
+msgid "Event Type"
+msgstr "Event Type"
+
+#: src/pages/sign-in.tsx
+msgid "Example: acme1234"
+msgstr "Example: acme1234"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Example: Contoso SSO"
@@ -1136,6 +1153,10 @@ msgstr "Failed to load refund history."
 #: src/pages/admin/users.index.tsx
 #~ msgid "Failed to load users"
 #~ msgstr "Failed to load users"
+
+#: src/features/manage-billing/ui/webhook-log-list.tsx
+msgid "Failed to load webhook log history."
+msgstr "Failed to load webhook log history."
 
 #: src/features/signup/ui/password-strength.tsx
 msgid "Fair"
@@ -1724,6 +1745,10 @@ msgstr "No translations added. At least the default locale is required."
 #~ msgid "No users match the current filters"
 #~ msgstr "No users match the current filters"
 
+#: src/features/manage-billing/ui/webhook-log-list.tsx
+msgid "No webhook logs found."
+msgstr "No webhook logs found."
+
 #: src/pages/forgot-password.tsx
 msgid "No worries — enter your email and we'll send you a secure link to reset it."
 msgstr "No worries — enter your email and we'll send you a secure link to reset it."
@@ -2115,6 +2140,10 @@ msgstr "Read-only"
 msgid "Reason (optional)"
 msgstr "Reason (optional)"
 
+#: src/features/manage-billing/ui/webhook-log-list.tsx
+msgid "Received At"
+msgstr "Received At"
+
 #: src/features/magic-link/ui/magic-link-exchange-form.tsx
 msgid "Redirecting to your workspace..."
 msgstr "Redirecting to your workspace..."
@@ -2274,6 +2303,10 @@ msgstr "Search by name or email…"
 #~ msgid "Search by tenant or plan…"
 #~ msgstr "Search by tenant or plan…"
 
+#: src/features/manage-billing/ui/webhook-log-list.tsx
+msgid "Search event type…"
+msgstr "Search event type…"
+
 #: src/pages/_app/settings/organization.tsx
 msgid "Search organizations…"
 msgstr "Search organizations…"
@@ -2321,6 +2354,10 @@ msgstr "Select Plan"
 #: src/features/member-role/ui/update-member-authorities-modal.tsx
 msgid "Select role"
 msgstr "Select role"
+
+#: src/features/member-role/ui/update-member-authorities-modal.tsx
+#~ msgid "Select roles"
+#~ msgstr "Select roles"
 
 #: src/features/sign-in/ui/sign-in-form.tsx
 msgid "Select the workspace you want to sign in to."
@@ -2560,6 +2597,7 @@ msgstr "Start building"
 
 #: src/features/invite-member/ui/invitation-details-modal.tsx
 #: src/features/manage-billing/ui/refund-list.tsx
+#: src/features/manage-billing/ui/webhook-log-list.tsx
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
 #: src/pages/_app/cms-pages.index.tsx
@@ -2879,6 +2917,10 @@ msgstr "URL path, e.g. about-us or blog/post"
 msgid "Use magic link instead"
 msgstr "Use magic link instead"
 
+#: src/pages/sign-in.tsx
+msgid "Use this if your organization configured a custom OIDC provider for tenant sign-in."
+msgstr "Use this if your organization configured a custom OIDC provider for tenant sign-in."
+
 #: src/pages/admin/users.$userId.tsx
 #~ msgid "User"
 #~ msgstr "User"
@@ -2957,6 +2999,10 @@ msgstr "We've sent a magic link to your inbox. Click it to sign in!"
 msgid "Weak"
 msgstr "Weak"
 
+#: src/features/manage-billing/ui/webhook-log-list.tsx
+msgid "Webhook Logs"
+msgstr "Webhook Logs"
+
 #: src/pages/invite.$token.tsx
 msgid "Welcome aboard"
 msgstr "Welcome aboard"
@@ -3009,9 +3055,9 @@ msgstr "Work email"
 msgid "Workspace"
 msgstr "Workspace"
 
-#: src/pages/dashboard.tsx
-#~ msgid "Workspace key"
-#~ msgstr "Workspace key"
+#: src/pages/sign-in.tsx
+msgid "Workspace key"
+msgstr "Workspace key"
 
 #: src/pages/dashboard.tsx
 #~ msgid "Workspace settings"

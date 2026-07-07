@@ -15,7 +15,7 @@ msgstr ""
 
 #: src/pages/_app/cms-pages.index.tsx
 msgid "(no title)"
-msgstr ""
+msgstr "(без заглавие)"
 
 #. placeholder {0}: localeToNameMap[locale]
 #. placeholder {0}: tenant?.name ?? t`Dashboard`
@@ -28,7 +28,7 @@ msgstr "{0}"
 #. placeholder {1}: data.periodTo
 #: src/widgets/dashboard-signup-chart/ui/dashboard-signup-chart.tsx
 msgid "{0} – {1}"
-msgstr ""
+msgstr "{0} – {1}"
 
 #. placeholder {0}: plan.trialPeriodDays
 #: src/features/manage-billing/ui/plan-card.tsx
@@ -38,37 +38,37 @@ msgstr ""
 #. placeholder {0}: subscription.trialDaysLeft
 #: src/features/manage-billing/ui/current-subscription.tsx
 msgid "{0} Days Left"
-msgstr ""
+msgstr "{0} дни остават"
 
 #: src/features/manage-billing/ui/plan-card.tsx
 msgid "{trialDays} Days Free Trial"
-msgstr ""
+msgstr "{trialDays} дни безплатен пробен период"
 
 #. placeholder {0}: plan.billingPeriod.toLowerCase()
 #: src/features/manage-billing/ui/plan-card.tsx
 msgid "/ {0}"
-msgstr ""
+msgstr "/ {0}"
 
 #. placeholder {0}: plan.billingPeriod.toLowerCase()
 #: src/features/manage-billing/ui/plan-card.tsx
 msgid "/ seat / {0}"
-msgstr ""
+msgstr "/ място / {0}"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "• Everything is set up for you — no workspace or organization setup needed."
-msgstr ""
+msgstr "• Всичко е настроено за вас — не е необходима настройка на работно пространство или организация."
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "• Explore settings anytime to customize your experience."
-msgstr ""
+msgstr "• Разглеждайте настройките по всяко време, за да персонализирате изживяването си."
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "• Focus on your product value — let the platform handle complexity."
-msgstr ""
+msgstr "• Фокусирайте се върху стойността на продукта — оставете платформата да се справи със сложността."
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "• Invite your team — your first steps are just a click away!"
-msgstr ""
+msgstr "• Поканете екипа си — първите ви стъпки са само на едно кликване!"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 #~ msgid "• Invite your team, create your first steps take just a click away!"
@@ -76,11 +76,11 @@ msgstr ""
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "• No technical background needed — our intuitive UI is designed for everyone."
-msgstr ""
+msgstr "• Не е необходим технически опит — интуитивният ни интерфейс е създаден за всеки."
 
 #: src/pages/_app/settings/security.tsx
 msgid "••••••••"
-msgstr ""
+msgstr "••••••••"
 
 #: src/widgets/dashboard-personal-welcome/ui/dashboard-personal-welcome.tsx
 msgid "<0>Configure notifications</0> to stay informed."
@@ -114,7 +114,7 @@ msgstr "2. Преходи между страници"
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
 msgid "A translation for the default locale ({0}) is required."
-msgstr ""
+msgstr "Необходим е превод за локала по подразбиране ({0})."
 
 #: src/pages/invite.$token.tsx
 msgid "Accept invitation"
@@ -142,11 +142,11 @@ msgstr "Достъпно с правилна клавиатурна обрабо
 
 #: src/pages/auth.callback.tsx
 msgid "Account linked"
-msgstr ""
+msgstr "Акаунтът е свързан"
 
 #: src/pages/auth.callback.tsx
 msgid "Account linked successfully."
-msgstr ""
+msgstr "Акаунтът е свързан успешно."
 
 #: src/pages/_app/settings/general.tsx
 #: src/pages/_app/settings/notifications.tsx
@@ -158,7 +158,7 @@ msgstr "Настройки на акаунта"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Account unlinked"
-msgstr ""
+msgstr "Акаунтът е разкачен"
 
 #: src/features/manage-billing/ui/billing-info.tsx
 #: src/features/manage-organization/ui/organization-settings.tsx
@@ -183,15 +183,15 @@ msgstr "Активен"
 #: src/features/manage-billing/ui/current-subscription.tsx
 #: src/features/manage-billing/ui/entitlements-card.tsx
 msgid "ACTIVE"
-msgstr ""
+msgstr "АКТИВЕН"
 
 #: src/pages/_app/index.tsx
 msgid "Active members"
-msgstr ""
+msgstr "Активни членове"
 
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "Add locale"
-msgstr ""
+msgstr "Добави локал"
 
 #: src/features/invite-member/model/types.ts
 msgid "Admin"
@@ -199,7 +199,7 @@ msgstr "Администратор"
 
 #: src/features/manage-billing/ui/plan-entitlement.tsx
 msgid "Advanced Analytics"
-msgstr ""
+msgstr "Разширена аналитика"
 
 #: src/pages/billing-example.tsx
 #~ msgid "Advanced Projects (Upgrade Required)"
@@ -207,11 +207,11 @@ msgstr ""
 
 #: src/pages/_app/cms-pages.index.tsx
 msgid "All statuses"
-msgstr ""
+msgstr "Всички статуси"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "All the boring stuff is already done — focus on your idea!"
-msgstr ""
+msgstr "Всичко скучно е вече свършено — фокусирайте се върху идеята си!"
 
 #: src/features/signup/ui/signup-form.tsx
 #: src/pages/invite.$token.tsx
@@ -237,11 +237,11 @@ msgstr "Организация с това наименование вече с�
 #: src/features/page-admin/model/types.ts
 #: src/pages/_app/cms-pages.index.tsx
 msgid "Archived"
-msgstr ""
+msgstr "Архивирано"
 
 #: src/features/page-admin/ui/delete-page-modal.tsx
 msgid "Are you sure you want to delete <0>{displayName}</0>? This action cannot be undone."
-msgstr ""
+msgstr "Сигурни ли сте, че искате да изтриете <0>{displayName}</0>? Това действие не може да бъде отменено."
 
 #. placeholder {0}: member.firstName
 #. placeholder {1}: member.lastName
@@ -277,11 +277,11 @@ msgstr "Поне един специален символ"
 
 #: src/features/page-admin/model/types.ts
 msgid "At least one translation is required"
-msgstr ""
+msgstr "Необходим е поне един превод"
 
 #: src/pages/auth.callback.tsx
 msgid "Authentication failed"
-msgstr ""
+msgstr "Удостоверяването не успя"
 
 #: src/pages/loading-demo.tsx
 msgid "Automatic router integration via <0>router.subscribe()</0>"
@@ -302,7 +302,7 @@ msgstr "Обратно към <0>Вход</0>"
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
 msgid "Back to list"
-msgstr ""
+msgstr "Обратно към списъка"
 
 #: src/pages/invite.$token.tsx
 #: src/pages/verify-email.tsx
@@ -312,7 +312,7 @@ msgstr "Обратно към вход"
 #: src/features/magic-link/ui/magic-link-exchange-form.tsx
 #: src/features/magic-link/ui/magic-link-initiate-form.tsx
 msgid "Back to sign-in"
-msgstr ""
+msgstr "Обратно към вход"
 
 #: src/features/ban-user/ui/ban-member-modal.tsx
 msgid "Ban member"
@@ -342,7 +342,7 @@ msgstr "Информация за фактуриране"
 
 #: src/pages/-billing-example.tsx
 msgid "Billing Integration Example"
-msgstr ""
+msgstr "Пример за интеграция с фактуриране"
 
 #: src/pages/_app/billing/index.tsx
 msgid "Billing Portal"
@@ -350,7 +350,7 @@ msgstr "Портал за фактуриране"
 
 #: src/pages/_app/billing/index.tsx
 msgid "Billing Portal Unavailable"
-msgstr ""
+msgstr "Порталът за фактуриране е недостъпен"
 
 #: src/features/ban-user/ui/ban-member-modal.tsx
 #: src/features/ban-user/ui/unban-member-modal.tsx
@@ -371,7 +371,7 @@ msgstr "Отменя се на"
 
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "Canonical URL"
-msgstr ""
+msgstr "Каноничен URL"
 
 #: src/features/member-role/ui/update-member-authorities-modal.tsx
 msgid "Change Member Role"
@@ -393,7 +393,7 @@ msgstr "Промяна на роля"
 
 #: src/features/magic-link/ui/magic-link-initiate-form.tsx
 msgid "Check your email"
-msgstr ""
+msgstr "Проверете имейла си"
 
 #: src/features/forgot-password/ui/forgot-password-form.tsx
 #: src/features/signup/ui/verify-email-prompt.tsx
@@ -419,15 +419,15 @@ msgstr "Изчисти всички"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Client ID"
-msgstr ""
+msgstr "Клиентски идентификатор"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Client ID is required"
-msgstr ""
+msgstr "Клиентският идентификатор е задължителен"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Client secret"
-msgstr ""
+msgstr "Клиентска тайна"
 
 #: src/features/invite-member/ui/invitation-details-modal.tsx
 msgid "Close"
@@ -438,7 +438,7 @@ msgstr "Затвори"
 #: src/pages/_app/cms-pages.index.tsx
 #: src/shared/ui/app-layout/app-nav.tsx
 msgid "CMS Pages"
-msgstr ""
+msgstr "CMS Страници"
 
 #: src/features/invite-member/ui/send-invitation-modal.tsx
 msgid "colleague@example.com"
@@ -458,15 +458,15 @@ msgstr "Завършено"
 
 #: src/pages/complete-profile.tsx
 msgid "Complete your profile"
-msgstr ""
+msgstr "Попълнете профила си"
 
 #: src/pages/auth.callback.tsx
 msgid "Completing sign-in"
-msgstr ""
+msgstr "Завършване на входа"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Configure a custom OIDC provider for your tenant. The client secret is write-only and will not be shown after saving."
-msgstr ""
+msgstr "Конфигурирайте персонализиран OIDC доставчик за вашия наемател. Клиентската тайна е само за запис и няма да бъде показана след запазване."
 
 #: src/features/signup/ui/provisioning-wait.tsx
 msgid "Configuring settings"
@@ -484,29 +484,29 @@ msgstr "Потвърдете"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Connect"
-msgstr ""
+msgstr "Свържи"
 
 #: src/pages/_app/settings/security.tsx
 #: src/pages/auth.callback.tsx
 msgid "Connected"
-msgstr ""
+msgstr "Свързан"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Connected Accounts"
-msgstr ""
+msgstr "Свързани акаунти"
 
 #: src/pages/-billing-example.tsx
 msgid "Contact Support"
-msgstr ""
+msgstr "Свържете се с поддръжката"
 
 #: src/features/page-admin/ui/page-translation-fields.tsx
 #: src/pages/_app/cms-pages.index.tsx
 msgid "Content"
-msgstr ""
+msgstr "Съдържание"
 
 #: src/features/page-admin/model/types.ts
 msgid "Content is required for the default locale"
-msgstr ""
+msgstr "Съдържанието е задължително за локала по подразбиране"
 
 #: src/features/complete-profile/ui/complete-profile-form.tsx
 #: src/features/sign-in/ui/sign-in-form.tsx
@@ -515,50 +515,54 @@ msgstr "Продължи"
 
 #: src/pages/sign-in.tsx
 msgid "Continue with"
-msgstr ""
+msgstr "Продължи с"
 
 #: src/pages/sign-in.tsx
 msgid "Continue with GitHub"
-msgstr ""
+msgstr "Продължи с GitHub"
 
 #: src/pages/sign-in.tsx
 msgid "Continue with Google"
-msgstr ""
+msgstr "Продължи с Google"
 
 #: src/pages/sign-in.tsx
 msgid "Continue with Microsoft"
-msgstr ""
+msgstr "Продължи с Microsoft"
+
+#: src/pages/sign-in.tsx
+msgid "Continue with SSO"
+msgstr "Продължи с SSO"
 
 #: src/features/sign-in/ui/demo-credentials-hint.tsx
 msgid "Copied!"
-msgstr ""
+msgstr "Копирано!"
 
 #: src/features/sign-in/ui/demo-credentials-hint.tsx
 msgid "Copy"
-msgstr ""
+msgstr "Копирай"
 
 #~ msgid "Could not create Stripe Customer Portal session."
 #~ msgstr "Не може да се създаде сесия на Stripe Customer Portal."
 
 #: src/pages/_app/cms-pages.create.tsx
 msgid "Could not create the page. Please check the form and try again."
-msgstr ""
+msgstr "Не може да се създаде страницата. Моля, проверете формуляра и опитайте отново."
 
 #: src/pages/_app/settings/security.tsx
 msgid "Could not delete SSO configuration."
-msgstr ""
+msgstr "Не може да се изтрие SSO конфигурацията."
 
 #: src/features/page-admin/ui/delete-page-modal.tsx
 msgid "Could not delete the page. It may be published."
-msgstr ""
+msgstr "Не може да се изтрие страницата. Тя може да е публикувана."
 
 #: src/pages/_app/cms-pages.index.tsx
 msgid "Could not fetch pages from the API."
-msgstr ""
+msgstr "Не може да се извлекат страниците от API."
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 msgid "Could not fetch the page details."
-msgstr ""
+msgstr "Не може да се извлекат детайлите на страницата."
 
 #: src/pages/_app/settings/general.tsx
 #: src/pages/_app/settings/security.tsx
@@ -583,11 +587,11 @@ msgstr "Не може да се отвори порталът за фактур�
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 msgid "Could not save the page. Please check the form and try again."
-msgstr ""
+msgstr "Не може да се запази страницата. Моля, проверете формуляра и опитайте отново."
 
 #: src/pages/_app/settings/security.tsx
 msgid "Could not start the linking flow."
-msgstr ""
+msgstr "Не може да се стартира процесът на свързване."
 
 #: src/pages/_app/settings/organization.tsx
 msgid "Could not switch organization."
@@ -599,11 +603,11 @@ msgstr "Не може да се смени организацията. Моля,
 
 #: src/pages/_app/settings/security.tsx
 msgid "Could not unlink this provider."
-msgstr ""
+msgstr "Не може да се разкачи този доставчик."
 
 #: src/pages/_app/settings/security.tsx
 msgid "Could not update SSO configuration."
-msgstr ""
+msgstr "Не може да се актуализира SSO конфигурацията."
 
 #: src/features/signup/ui/signup-form.tsx
 #: src/pages/signup.tsx
@@ -621,15 +625,15 @@ msgstr "Създай организация"
 
 #: src/pages/_app/settings/organization.tsx
 msgid "Create Organization"
-msgstr ""
+msgstr "Създай организация"
 
 #: src/pages/_app/cms-pages.create.tsx
 msgid "Create page"
-msgstr ""
+msgstr "Създай страница"
 
 #: src/pages/-billing-example.tsx
 msgid "Create Project"
-msgstr ""
+msgstr "Създай проект"
 
 #: src/pages/create-organization.tsx
 msgid "Create your"
@@ -661,7 +665,7 @@ msgstr "Създайте организацията си"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Create, manage & invite teams to your workspace"
-msgstr ""
+msgstr "Създавайте, управлявайте и каните екипи в работното си пространство"
 
 #: src/features/signup/ui/provisioning-wait.tsx
 msgid "Creating your account"
@@ -669,7 +673,7 @@ msgstr "Създаване на акаунта ви"
 
 #: src/pages/_app/cms-pages.create.tsx
 msgid "Creation failed"
-msgstr ""
+msgstr "Създаването не успя"
 
 #: src/features/manage-billing/ui/billing-info.tsx
 msgid "Currency"
@@ -692,7 +696,7 @@ msgstr "Текущ план"
 
 #: src/pages/-billing-example.tsx
 msgid "Current plan limits:"
-msgstr ""
+msgstr "Ограничения на текущия план:"
 
 #: src/features/manage-billing/ui/current-subscription.tsx
 msgid "Current Subscription"
@@ -704,7 +708,7 @@ msgstr "Текущо работно пространство"
 
 #: src/widgets/dashboard-signup-chart/ui/dashboard-signup-chart.tsx
 msgid "Daily"
-msgstr ""
+msgstr "Дневно"
 
 #: src/pages/_app/index.tsx
 #: src/shared/ui/app-layout/app-nav.tsx
@@ -717,22 +721,22 @@ msgstr "Дата"
 
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "Default locale — required"
-msgstr ""
+msgstr "Локал по подразбиране — задължителен"
 
 #: src/features/page-admin/ui/delete-page-modal.tsx
 #: src/pages/_app/cms-pages.index.tsx
 #: src/pages/_app/settings/security.tsx
 msgid "Delete"
-msgstr ""
+msgstr "Изтрий"
 
 #: src/features/page-admin/ui/delete-page-modal.tsx
 #: src/pages/_app/settings/security.tsx
 msgid "Delete failed"
-msgstr ""
+msgstr "Изтриването не успя"
 
 #: src/features/page-admin/ui/delete-page-modal.tsx
 msgid "Delete Page"
-msgstr ""
+msgstr "Изтрий страница"
 
 #: src/pages/_app/settings/security.tsx
 #: src/shared/ui/tenant-status-badge/tenant-status-badge.tsx
@@ -742,7 +746,7 @@ msgstr "Изтрито"
 
 #: src/features/sign-in/ui/demo-credentials-hint.tsx
 msgid "Demo environment"
-msgstr ""
+msgstr "Демо среда"
 
 #: src/pages/loading-demo.tsx
 msgid "Demo LoadingOverlay (2s)"
@@ -758,15 +762,15 @@ msgstr "Не сте получили? Проверете папката за с�
 
 #: src/pages/_app/settings/security.tsx
 msgid "Disconnect"
-msgstr ""
+msgstr "Разкачи"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Display name"
-msgstr ""
+msgstr "Показвано име"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Display name is required"
-msgstr ""
+msgstr "Показваното име е задължително"
 
 #: src/pages/sign-in.tsx
 msgid "Don't have an account? <0>Create one</0>"
@@ -775,12 +779,12 @@ msgstr "Нямате акаунт? <0>Създайте</0>"
 #: src/features/page-admin/model/types.ts
 #: src/pages/_app/cms-pages.index.tsx
 msgid "Draft"
-msgstr ""
+msgstr "Чернова"
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
 msgid "e.g. default, landing"
-msgstr ""
+msgstr "напр. default, landing"
 
 #: src/features/magic-link/ui/magic-link-initiate-form.tsx
 #~ msgid "e.g., acme-corp"
@@ -794,11 +798,11 @@ msgstr "Редактирай"
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 msgid "Edit — {defaultTitle}"
-msgstr ""
+msgstr "Редактирай — {defaultTitle}"
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 msgid "Edit Page"
-msgstr ""
+msgstr "Редактирай страница"
 
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 msgid "Edit Profile"
@@ -848,7 +852,7 @@ msgstr "имейл@компания.com"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Enabled"
-msgstr ""
+msgstr "Активирано"
 
 #: src/features/forgot-password/model/use-forgot-password.ts
 #: src/features/magic-link/model/use-magic-link-initiate.ts
@@ -873,7 +877,7 @@ msgstr "Въведете текущата си парола"
 
 #: src/pages/magic-link.index.tsx
 msgid "Enter your email and we'll send you a magic link to sign in."
-msgstr ""
+msgstr "Въведете имейла си и ще ви изпратим магическа връзка за вход."
 
 #: src/pages/invite.$token.tsx
 msgid "Enter your password to confirm your identity and join."
@@ -883,9 +887,14 @@ msgstr "Въведете паролата си, за да потвърдите �
 msgid "Enter your workspace"
 msgstr "Влезте в работното си пространство"
 
+#: src/pages/sign-in.tsx
+msgid "Enterprise SSO"
+msgstr "Корпоративен SSO"
+
 #: src/features/manage-billing/ui/billing-info.tsx
 #: src/features/manage-billing/ui/plan-list.tsx
 #: src/features/manage-billing/ui/refund-list.tsx
+#: src/features/manage-billing/ui/webhook-log-list.tsx
 #: src/features/manage-organization/ui/organization-settings.tsx
 msgid "Error"
 msgstr "Грешка"
@@ -894,9 +903,17 @@ msgstr "Грешка"
 msgid "Error Details (Development)"
 msgstr "Детайли на грешката (разработка)"
 
+#: src/features/manage-billing/ui/webhook-log-list.tsx
+msgid "Event Type"
+msgstr "Тип събитие"
+
+#: src/pages/sign-in.tsx
+msgid "Example: acme1234"
+msgstr "Пример: acme1234"
+
 #: src/pages/_app/settings/security.tsx
 msgid "Example: Contoso SSO"
-msgstr ""
+msgstr "Пример: Contoso SSO"
 
 #: src/shared/ui/invitation-status-badge/invitation-status-badge.tsx
 msgid "Expired"
@@ -926,11 +943,11 @@ msgstr "Зареждането на настройките на организа
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 msgid "Failed to load page"
-msgstr ""
+msgstr "Зареждането на страницата не успя"
 
 #: src/pages/_app/cms-pages.index.tsx
 msgid "Failed to load pages"
-msgstr ""
+msgstr "Зареждането на страниците не успя"
 
 #: src/features/manage-billing/ui/plan-list.tsx
 msgid "Failed to load plans. Please try again later."
@@ -945,21 +962,25 @@ msgstr "Зареждането на профила не успя"
 msgid "Failed to load refund history."
 msgstr "Зареждането на историята на възстановяванията не успя."
 
+#: src/features/manage-billing/ui/webhook-log-list.tsx
+msgid "Failed to load webhook log history."
+msgstr "Зареждането на историята на webhook журнала не успя."
+
 #: src/features/signup/ui/password-strength.tsx
 msgid "Fair"
 msgstr "Задоволителна"
 
 #: src/pages/-billing-example.tsx
 msgid "Feature Gate Examples"
-msgstr ""
+msgstr "Примери за ограничаване на функции"
 
 #: src/pages/-billing-example.tsx
 msgid "Feature Usage Examples"
-msgstr ""
+msgstr "Примери за използване на функции"
 
 #: src/features/manage-billing/ui/current-subscription.tsx
 msgid "Features"
-msgstr ""
+msgstr "Функции"
 
 #: src/features/complete-profile/ui/complete-profile-form.tsx
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
@@ -995,7 +1016,7 @@ msgstr "Забравихте"
 
 #: src/features/manage-billing/ui/current-subscription.tsx
 msgid "Free"
-msgstr ""
+msgstr "Безплатен"
 
 #: src/pages/loading-demo.tsx
 msgid "Full-screen centered loader shown on first app load (while locale initializes)."
@@ -1012,11 +1033,11 @@ msgstr "Общи настройки"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Get Started"
-msgstr ""
+msgstr "Започнете"
 
 #: src/pages/_app/settings/security.tsx
 msgid "GitHub"
-msgstr ""
+msgstr "GitHub"
 
 #: src/pages/404.tsx
 #: src/pages/500.tsx
@@ -1025,7 +1046,7 @@ msgstr "Към началото"
 
 #: src/pages/_app/billing/success.tsx
 msgid "Go to Billing"
-msgstr ""
+msgstr "Към фактуриране"
 
 #: src/pages/_app/billing/failure.tsx
 #: src/pages/_app/billing/success.tsx
@@ -1039,7 +1060,7 @@ msgstr "Добра"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Google"
-msgstr ""
+msgstr "Google"
 
 #: src/widgets/dashboard-personal-welcome/ui/dashboard-personal-welcome.tsx
 msgid "Here's what you can do from your personal workspace:"
@@ -1048,7 +1069,7 @@ msgstr "Ето какво можете да направите от личнот
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
 msgid "Hierarchy"
-msgstr ""
+msgstr "Йерархия"
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
@@ -1064,19 +1085,19 @@ msgstr "Начало"
 
 #: src/features/page-admin/ui/rich-content-editor.tsx
 msgid "HTML content. At least one paragraph required for the default locale."
-msgstr ""
+msgstr "HTML съдържание. Необходим е поне един параграф за локала по подразбиране."
 
 #: src/pages/_app/settings/security.tsx
 msgid "https://issuer.example.com"
-msgstr ""
+msgstr "https://issuer.example.com"
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 msgid "Identity"
-msgstr ""
+msgstr "Самоличност"
 
 #. placeholder {0}: form.values.email
 #: src/features/forgot-password/ui/forgot-password-form.tsx
@@ -1130,7 +1151,7 @@ msgstr "Покани член"
 
 #: src/pages/-billing-example.tsx
 msgid "Invite Members"
-msgstr ""
+msgstr "Покани членове"
 
 #: src/pages/invite.$token.tsx
 msgid "invited."
@@ -1138,11 +1159,11 @@ msgstr "поканени."
 
 #: src/pages/_app/settings/security.tsx
 msgid "Issuer URI"
-msgstr ""
+msgstr "Издател URI"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Issuer URI is required"
-msgstr ""
+msgstr "Издателят URI е задължителен"
 
 #: src/features/complete-profile/ui/complete-profile-form.tsx
 #: src/features/signup/ui/signup-form.tsx
@@ -1162,7 +1183,7 @@ msgstr "Присъедини се към {0} и започни да работи
 
 #: src/pages/complete-profile.tsx
 msgid "Just a name to get started — everything else can wait."
-msgstr ""
+msgstr "Само едно ime за начало — всичко останало може да изчака."
 
 #: src/pages/_app/settings/organization.tsx
 msgid "Key"
@@ -1177,7 +1198,7 @@ msgstr "Език"
 
 #: src/features/complete-profile/model/types.ts
 msgid "Language is required"
-msgstr ""
+msgstr "Езикът е задължителен"
 
 #: src/features/complete-profile/ui/complete-profile-form.tsx
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
@@ -1205,7 +1226,7 @@ msgstr "Фамилното ime е твърде дълго"
 
 #: src/features/manage-billing/ui/current-subscription.tsx
 msgid "Limited support"
-msgstr ""
+msgstr "Ограничена поддръжка"
 
 #: src/pages/verify-email.tsx
 msgid "Link expired or invalid"
@@ -1213,11 +1234,11 @@ msgstr "Връзката е изтекла или невалидна"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Link failed"
-msgstr ""
+msgstr "Свързването не успя"
 
 #: src/pages/_app/billing/index.tsx
 msgid "Loading billing information…"
-msgstr ""
+msgstr "Зареждане на информацията за фактуриране…"
 
 #: src/pages/loading-demo.tsx
 msgid "Loading Demo"
@@ -1243,7 +1264,7 @@ msgstr "Зареждане…"
 
 #: src/features/page-admin/model/types.ts
 msgid "Locale is required"
-msgstr ""
+msgstr "Локалът е задължителен"
 
 #: src/shared/ui/user-status-badge/user-status-badge.tsx
 #: src/widgets/dashboard-signup-chart/ui/dashboard-signup-chart.tsx
@@ -1252,7 +1273,7 @@ msgstr "Заключен"
 
 #: src/pages/_app/index.tsx
 msgid "Locked / Suspended"
-msgstr ""
+msgstr "Заключен / Спрян"
 
 #: src/features/signup/ui/password-strength.tsx
 msgid "Lowercase letter"
@@ -1260,11 +1281,11 @@ msgstr "Малка буква"
 
 #: src/features/magic-link/model/use-magic-link-exchange.ts
 msgid "Magic link is invalid or has expired. Please request a new one."
-msgstr ""
+msgstr "Магическата връзка е невалидна или е изтекла. Моля, поискайте нова."
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Manage user roles, permissions & access"
-msgstr ""
+msgstr "Управлявайте потребителски роли, разрешения и достъп"
 
 #: src/pages/_app/billing/index.tsx
 msgid "Manage your billing information, view invoice history, and update your payment methods directly via our secure billing portal."
@@ -1279,7 +1300,7 @@ msgstr "Управлявайте информацията за фактурир�
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Manage your subscription and billing when you are ready"
-msgstr ""
+msgstr "Управлявайте абонамента и фактурирането, когато сте готови"
 
 #: src/shared/ui/auth-layout/auth-layout.tsx
 msgid "Manage your team, subscriptions, and settings — all from one place, secured by enterprise-grade authentication."
@@ -1292,11 +1313,11 @@ msgstr "Маркирай всички като прочетени"
 
 #: src/pages/-billing-example.tsx
 msgid "Max Projects:"
-msgstr ""
+msgstr "Макс. проекти:"
 
 #: src/pages/-billing-example.tsx
 msgid "Max Users:"
-msgstr ""
+msgstr "Макс. потребители:"
 
 #: src/features/invite-member/model/types.ts
 #: src/features/member-role/ui/update-member-authorities-modal.tsx
@@ -1305,7 +1326,7 @@ msgstr "Член"
 
 #: src/widgets/dashboard-signup-chart/ui/dashboard-signup-chart.tsx
 msgid "Member Signups"
-msgstr ""
+msgstr "Регистрации на членове"
 
 #: src/pages/_app/team.tsx
 msgid "Members"
@@ -1313,16 +1334,16 @@ msgstr "Членове"
 
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "Meta description for search engines"
-msgstr ""
+msgstr "Мета описание за търсачки"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Microsoft"
-msgstr ""
+msgstr "Microsoft"
 
 #: src/features/manage-billing/ui/plan-list.tsx
 #: src/widgets/dashboard-signup-chart/ui/dashboard-signup-chart.tsx
 msgid "Monthly"
-msgstr ""
+msgstr "Месечно"
 
 #: src/features/invite-member/model/types.ts
 msgid "Must be a valid email address"
@@ -1330,7 +1351,7 @@ msgstr "Трябва да е валиден имейл адрес"
 
 #: src/features/page-admin/model/types.ts
 msgid "Must be a valid UUID"
-msgstr ""
+msgstr "Трябва да е валиден UUID"
 
 #: src/shared/ui/app-layout/app-header.tsx
 msgid "My Account"
@@ -1342,11 +1363,11 @@ msgstr "Наименованието е твърде кратко"
 
 #: src/pages/_app/cms-pages.create.tsx
 msgid "New"
-msgstr ""
+msgstr "Нова"
 
 #: src/pages/_app/cms-pages.create.tsx
 msgid "New CMS Page"
-msgstr ""
+msgstr "Нова CMS страница"
 
 #: src/features/tenant-switcher/ui/tenant-switcher.tsx
 #: src/shared/ui/app-layout/app-header.tsx
@@ -1355,11 +1376,11 @@ msgstr "Нова организация"
 
 #: src/pages/_app/cms-pages.index.tsx
 msgid "New page"
-msgstr ""
+msgstr "Нова страница"
 
 #: src/pages/_app/cms-pages.create.tsx
 msgid "New Page"
-msgstr ""
+msgstr "Нова страница"
 
 #: src/features/change-password/ui/change-password-modal.tsx
 #: src/features/reset-password/ui/reset-password-form.tsx
@@ -1369,7 +1390,7 @@ msgstr "Нова парола"
 
 #: src/widgets/dashboard-signup-chart/ui/dashboard-signup-chart.tsx
 msgid "New signups"
-msgstr ""
+msgstr "Нови регистрации"
 
 #: src/features/manage-billing/ui/current-subscription.tsx
 msgid "Next Billing Date"
@@ -1377,7 +1398,7 @@ msgstr "Следваща дата за фактуриране"
 
 #: src/features/manage-billing/ui/entitlements-card.tsx
 msgid "No active subscription found. Subscribe to a plan to access platform features."
-msgstr ""
+msgstr "Не е намерен активен абонамент. Абонирайте се за план, за да получите достъп до функциите на платформата."
 
 #: src/features/sign-in/model/use-sign-in.ts
 msgid "No active tenant memberships found for this account"
@@ -1385,11 +1406,11 @@ msgstr "Не са намерени активни членства за наем
 
 #: src/features/manage-billing/ui/billing-info.tsx
 msgid "No billing information has been configured yet. Fill in the details below to get started."
-msgstr ""
+msgstr "Все още не е конфигурирана информация за фактуриране. Попълнете данните по-долу, за да започнете."
 
 #: src/pages/_app/settings/security.tsx
 msgid "No external sign-in providers are enabled."
-msgstr ""
+msgstr "Няма активирани външни доставчици за вход."
 
 #: src/pages/_app/settings/organization.tsx
 msgid "No matches."
@@ -1414,15 +1435,15 @@ msgstr "Не са намерени организации."
 
 #: src/pages/_app/settings/organization.tsx
 msgid "No organizations yet"
-msgstr ""
+msgstr "Все още няма организации"
 
 #: src/pages/_app/cms-pages.index.tsx
 msgid "No pages found"
-msgstr ""
+msgstr "Не са намерени страници"
 
 #: src/pages/_app/cms-pages.index.tsx
 msgid "No pages match the current filter"
-msgstr ""
+msgstr "Няма страници, съответстващи на текущия филтър"
 
 #: src/pages/_app/team.tsx
 msgid "No pending invitations."
@@ -1442,7 +1463,11 @@ msgstr "Не са присвоени роли."
 
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "No translations added. At least the default locale is required."
-msgstr ""
+msgstr "Не са добавени преводи. Необходим е поне локалът по подразбиране."
+
+#: src/features/manage-billing/ui/webhook-log-list.tsx
+msgid "No webhook logs found."
+msgstr "Не са намерени записи на webhook."
 
 #: src/pages/forgot-password.tsx
 msgid "No worries — enter your email and we'll send you a secure link to reset it."
@@ -1451,11 +1476,11 @@ msgstr "Не се притеснявайте — въведете имейла �
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
 msgid "None (top-level)"
-msgstr ""
+msgstr "Няма (горно ниво)"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Not connected"
-msgstr ""
+msgstr "Не е свързан"
 
 #: src/features/notification-bell/ui/notification-bell.tsx
 #: src/pages/_app/settings/notifications.tsx
@@ -1474,11 +1499,11 @@ msgstr "Цифра"
 
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "OG description"
-msgstr ""
+msgstr "OG описание"
 
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "OG title"
-msgstr ""
+msgstr "OG заглавие"
 
 #: src/pages/verify-email.tsx
 msgid "One click and you're all set."
@@ -1486,7 +1511,7 @@ msgstr "Един клик и сте готови."
 
 #: src/pages/complete-profile.tsx
 msgid "One last"
-msgstr ""
+msgstr "Последна"
 
 #: src/features/manage-billing/ui/billing-portal-button.tsx
 msgid "Open Billing Portal"
@@ -1494,33 +1519,33 @@ msgstr "Отвори портала за фактуриране"
 
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "Open Graph description"
-msgstr ""
+msgstr "Open Graph описание"
 
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "Open Graph title"
-msgstr ""
+msgstr "Open Graph заглавие"
 
 #: src/pages/_app/settings/security.tsx
 msgid "openid profile email"
-msgstr ""
+msgstr "openid profile email"
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
 msgid "Optional — makes this a child page"
-msgstr ""
+msgstr "По избор — прави страницата дъщерна"
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
 msgid "Optional layout key"
-msgstr ""
+msgstr "По избор ключ за оформление"
 
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "Optional translation"
-msgstr ""
+msgstr "По избор превод"
 
 #: src/pages/sign-in.tsx
 msgid "or"
-msgstr ""
+msgstr "или"
 
 #: src/pages/create-organization.tsx
 msgid "organization"
@@ -1567,11 +1592,11 @@ msgstr "Организации"
 
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "Override page title for search engines"
-msgstr ""
+msgstr "Замени заглавието на страницата за търсачки"
 
 #: src/pages/_app/cms-pages.index.tsx
 msgid "Page"
-msgstr ""
+msgstr "Страница"
 
 #: src/pages/404.tsx
 msgid "Page Not Found"
@@ -1584,25 +1609,25 @@ msgstr "Страницата не е намерена."
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
 msgid "Page settings"
-msgstr ""
+msgstr "Настройки на страницата"
 
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "Page title"
-msgstr ""
+msgstr "Заглавие на страницата"
 
 #: src/pages/_app/cms-pages.index.tsx
 msgid "Pages"
-msgstr ""
+msgstr "Страници"
 
 #. placeholder {0}: page.status
 #: src/pages/_app/cms-pages.$pageId.tsx
 msgid "Pages with status <0>{0}</0> cannot be edited."
-msgstr ""
+msgstr "Страниците със статус <0>{0}</0> не могат да бъдат редактирани."
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
 msgid "Parent page"
-msgstr ""
+msgstr "Родителска страница"
 
 #: src/features/sign-in/ui/sign-in-form.tsx
 #: src/features/signup/ui/signup-form.tsx
@@ -1665,7 +1690,7 @@ msgstr "Паролите не съвпадат"
 
 #: src/pages/_app/billing/failure.tsx
 msgid "Payment Failed"
-msgstr ""
+msgstr "Плащането не успя"
 
 #: src/features/manage-billing/ui/refund-list.tsx
 msgid "Payment ID"
@@ -1673,7 +1698,7 @@ msgstr "ID на плащане"
 
 #: src/pages/_app/billing/success.tsx
 msgid "Payment Successful"
-msgstr ""
+msgstr "Плащането е успешно"
 
 #: src/features/page-admin/model/types.ts
 #: src/pages/_app/cms-pages.index.tsx
@@ -1702,15 +1727,15 @@ msgstr "План"
 
 #: src/features/manage-billing/ui/plan-entitlement.tsx
 msgid "Plan Features"
-msgstr ""
+msgstr "Функции на плана"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Platform Highlights"
-msgstr ""
+msgstr "Основни предимства на платформата"
 
 #: src/features/complete-profile/model/use-complete-profile.ts
 msgid "Please check the form and try again."
-msgstr ""
+msgstr "Моля, проверете формуляра и опитайте отново."
 
 #: src/features/reset-password/model/use-reset-password.ts
 msgid "Please confirm your password"
@@ -1718,11 +1743,11 @@ msgstr "Моля, потвърдете паролата си"
 
 #: src/pages/auth.callback.tsx
 msgid "Please wait while we finish signing you in."
-msgstr ""
+msgstr "Моля, изчакайте докато завършим входа ви."
 
 #: src/features/magic-link/ui/magic-link-exchange-form.tsx
 msgid "Please wait while we verify your magic link."
-msgstr ""
+msgstr "Моля, изчакайте докато проверяваме магическата ви връзка."
 
 #: src/features/manage-billing/model/use-billing-portal.ts
 msgid "Portal error"
@@ -1730,19 +1755,19 @@ msgstr "Грешка на портала"
 
 #: src/features/manage-billing/ui/plan-entitlement.tsx
 msgid "Priority Support"
-msgstr ""
+msgstr "Приоритетна поддръжка"
 
 #: src/pages/-billing-example.tsx
 msgid "Priority Support (Upgrade Required)"
-msgstr ""
+msgstr "Приоритетна поддръжка (необходимо е надграждане)"
 
 #: src/pages/-billing-example.tsx
 msgid "Priority Support Available"
-msgstr ""
+msgstr "Приоритетна поддръжка е налична"
 
 #: src/pages/-billing-example.tsx
 msgid "Priority Support:"
-msgstr ""
+msgstr "Приоритетна поддръжка:"
 
 #: src/pages/_app/settings/general.tsx
 msgid "Profile Information"
@@ -1754,11 +1779,11 @@ msgstr "Снимка на профила"
 
 #: src/pages/-billing-example.tsx
 msgid "Project Management"
-msgstr ""
+msgstr "Управление на проекти"
 
 #: src/features/manage-billing/ui/plan-entitlement.tsx
 msgid "Projects"
-msgstr ""
+msgstr "Проекти"
 
 #: src/features/ban-user/ui/ban-member-modal.tsx
 msgid "Provide a reason for the ban…"
@@ -1766,7 +1791,7 @@ msgstr "Посочете причина за забраната…"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Provider key"
-msgstr ""
+msgstr "Ключ на доставчика"
 
 #: src/features/signup/ui/provisioning-wait.tsx
 msgid "Provisioning workspace"
@@ -1775,11 +1800,11 @@ msgstr "Подготвяне на работното пространство"
 #: src/features/page-admin/model/types.ts
 #: src/pages/_app/cms-pages.index.tsx
 msgid "Published"
-msgstr ""
+msgstr "Публикувано"
 
 #: src/pages/complete-profile.tsx
 msgid "quick step."
-msgstr ""
+msgstr "бърза стъпка."
 
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 #: src/pages/_app/settings/general.tsx
@@ -1789,15 +1814,19 @@ msgstr "само за четене"
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 msgid "Read-only"
-msgstr ""
+msgstr "Само за четене"
 
 #: src/features/ban-user/ui/ban-member-modal.tsx
 msgid "Reason (optional)"
 msgstr "Причина (по избор)"
 
+#: src/features/manage-billing/ui/webhook-log-list.tsx
+msgid "Received At"
+msgstr "Получено на"
+
 #: src/features/magic-link/ui/magic-link-exchange-form.tsx
 msgid "Redirecting to your workspace..."
-msgstr ""
+msgstr "Пренасочване към работното ви пространство..."
 
 #: src/pages/_app/cms-pages.index.tsx
 #: src/pages/_app/settings/organization.tsx
@@ -1824,7 +1853,7 @@ msgstr "Премахни член"
 
 #: src/features/manage-billing/ui/entitlements-card.tsx
 msgid "Renews On"
-msgstr ""
+msgstr "Подновява се на"
 
 #: src/features/change-password/ui/change-password-modal.tsx
 #: src/pages/_app/settings/security.tsx
@@ -1837,7 +1866,7 @@ msgstr "Повторете новата си парола"
 
 #: src/features/magic-link/ui/magic-link-exchange-form.tsx
 msgid "Request a new magic link"
-msgstr ""
+msgstr "Поискайте нова магическа връзка"
 
 #: src/features/reset-password/ui/reset-password-form.tsx
 msgid "Request a new reset link"
@@ -1849,7 +1878,7 @@ msgstr "Изпрати отново след {resendCooldown} сек"
 
 #: src/features/magic-link/ui/magic-link-initiate-form.tsx
 msgid "Resend magic link"
-msgstr ""
+msgstr "Изпрати отново магическата връзка"
 
 #: src/features/signup/ui/verify-email-prompt.tsx
 msgid "Resend verification email"
@@ -1908,7 +1937,7 @@ msgstr "Запази"
 
 #: src/features/manage-billing/ui/billing-info.tsx
 msgid "Save Billing Information"
-msgstr ""
+msgstr "Запази информацията за фактуриране"
 
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 #: src/pages/_app/cms-pages.$pageId.tsx
@@ -1924,19 +1953,23 @@ msgstr "Запази промените"
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/settings/security.tsx
 msgid "Save failed"
-msgstr ""
+msgstr "Запазването не успя"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Saved"
-msgstr ""
+msgstr "Запазено"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Scopes"
-msgstr ""
+msgstr "Обхвати"
 
 #: src/pages/_app/team.tsx
 msgid "Search by name or email…"
 msgstr "Търсете по ime или имейл…"
+
+#: src/features/manage-billing/ui/webhook-log-list.tsx
+msgid "Search event type…"
+msgstr "Търсете тип събитие…"
 
 #: src/pages/_app/settings/organization.tsx
 msgid "Search organizations…"
@@ -1948,7 +1981,7 @@ msgstr "Търсете…"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Secure your account with a strong password and notifications"
-msgstr ""
+msgstr "Защитете акаунта си с силна парола и известия"
 
 #: src/pages/_app/settings/security.tsx
 #: src/shared/ui/app-layout/app-nav.tsx
@@ -1978,13 +2011,17 @@ msgstr "Изберете план"
 msgid "Select role"
 msgstr "Изберете роля"
 
+#: src/features/member-role/ui/update-member-authorities-modal.tsx
+#~ msgid "Select roles"
+#~ msgstr ""
+
 #: src/features/sign-in/ui/sign-in-form.tsx
 msgid "Select the workspace you want to sign in to."
 msgstr "Изберете работното пространство, в което искате да влезете."
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Send email verifications, password resets & invitations"
-msgstr ""
+msgstr "Изпращайте потвърждения на имейл, нулирания на парола и покани"
 
 #: src/features/invite-member/ui/send-invitation-modal.tsx
 msgid "Send invitation"
@@ -1992,7 +2029,7 @@ msgstr "Изпрати покана"
 
 #: src/features/magic-link/ui/magic-link-initiate-form.tsx
 msgid "Send magic link"
-msgstr ""
+msgstr "Изпрати магическа връзка"
 
 #: src/features/forgot-password/ui/forgot-password-form.tsx
 msgid "Send reset link"
@@ -2004,15 +2041,15 @@ msgstr "Изпратено"
 
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "SEO description"
-msgstr ""
+msgstr "SEO описание"
 
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "SEO fields"
-msgstr ""
+msgstr "SEO полета"
 
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "SEO title"
-msgstr ""
+msgstr "SEO заглавие"
 
 #: src/pages/500.tsx
 msgid "Server Error"
@@ -2028,11 +2065,11 @@ msgstr "Задайте нова парола"
 
 #: src/features/manage-billing/ui/billing-info.tsx
 msgid "Set Up Billing Information"
-msgstr ""
+msgstr "Настройте информацията за фактуриране"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Set up subscriptions & billing instantly"
-msgstr ""
+msgstr "Настройте абонаменти и фактуриране незабавно"
 
 #: src/pages/signup.tsx
 msgid "Set up your account in under a minute."
@@ -2072,11 +2109,11 @@ msgstr "Влезте в работното си пространство, за �
 
 #: src/pages/magic-link.index.tsx
 msgid "Sign in with magic link"
-msgstr ""
+msgstr "Вход с магическа връзка"
 
 #: src/features/magic-link/ui/magic-link-initiate-form.tsx
 msgid "Sign in with password instead"
-msgstr ""
+msgstr "Вход с парола"
 
 #: src/features/sign-out/ui/sign-out-button.tsx
 #: src/shared/ui/app-layout/app-header.tsx
@@ -2090,20 +2127,20 @@ msgstr "Входът не успя. Моля, опитайте отново."
 
 #: src/pages/auth.callback.tsx
 msgid "Signed in"
-msgstr ""
+msgstr "Влязохте"
 
 #: src/features/magic-link/ui/magic-link-exchange-form.tsx
 msgid "Signed in successfully!"
-msgstr ""
+msgstr "Влязохте успешно!"
 
 #: src/pages/auth.callback.tsx
 #: src/pages/magic-link.verify.tsx
 msgid "Signing in"
-msgstr ""
+msgstr "Влизане"
 
 #: src/features/magic-link/ui/magic-link-exchange-form.tsx
 msgid "Signing you in..."
-msgstr ""
+msgstr "Влизане..."
 
 #: src/pages/invite.$token.tsx
 msgid "Signing you in…"
@@ -2116,15 +2153,15 @@ msgstr "Тясна горна лента за напредък при навиг
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
 msgid "Slug"
-msgstr ""
+msgstr "Слъг"
 
 #: src/features/page-admin/model/types.ts
 msgid "Slug is required"
-msgstr ""
+msgstr "Слъгът е задължителен"
 
 #: src/features/page-admin/model/types.ts
 msgid "Slug must be lowercase alphanumeric with hyphens (e.g. about-us or blog/post-title)"
-msgstr ""
+msgstr "Слъгът трябва да е с малки букви и цифри с тирета (напр. about-us или blog/post-title)"
 
 #: src/features/complete-profile/ui/complete-profile-form.tsx
 #: src/features/signup/ui/signup-form.tsx
@@ -2142,7 +2179,7 @@ msgstr "Нещо се обърка"
 
 #: src/pages/_app/billing/failure.tsx
 msgid "Something went wrong with your payment. Please try again or contact support."
-msgstr ""
+msgstr "Нещо се обърка с плащането ви. Моля, опитайте отново или се свържете с поддръжката."
 
 #: src/features/accept-invitation/model/use-accept-invitation.ts
 #: src/features/complete-profile/model/use-complete-profile.ts
@@ -2160,11 +2197,11 @@ msgstr "Специален символ"
 
 #: src/pages/_app/settings/security.tsx
 msgid "SSO configuration removed."
-msgstr ""
+msgstr "SSO конфигурацията е премахната."
 
 #: src/pages/_app/settings/security.tsx
 msgid "SSO configuration updated."
-msgstr ""
+msgstr "SSO конфигурацията е актуализирана."
 
 #: src/pages/loading-demo.tsx
 msgid "Start"
@@ -2176,6 +2213,7 @@ msgstr "Започнете да изграждате"
 
 #: src/features/invite-member/ui/invitation-details-modal.tsx
 #: src/features/manage-billing/ui/refund-list.tsx
+#: src/features/manage-billing/ui/webhook-log-list.tsx
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
 #: src/pages/_app/cms-pages.index.tsx
@@ -2224,7 +2262,7 @@ msgstr "Екип"
 
 #: src/pages/-billing-example.tsx
 msgid "Team Management"
-msgstr ""
+msgstr "Управление на екипа"
 
 #: src/pages/billing-example.tsx
 #~ msgid "Team Management (Upgrade Required)"
@@ -2236,22 +2274,22 @@ msgstr "Членове на екипа"
 
 #: src/features/manage-billing/ui/plan-entitlement.tsx
 msgid "Team Members"
-msgstr ""
+msgstr "Членове на екипа"
 
 #: src/pages/complete-profile.tsx
 msgid "Tell us your name so your teammates know who you are."
-msgstr ""
+msgstr "Кажете ни как се казвате, за да знаят вашите колеги кой сте."
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
 #: src/pages/_app/cms-pages.index.tsx
 msgid "Template"
-msgstr ""
+msgstr "Шаблон"
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
 msgid "Tenant"
-msgstr ""
+msgstr "Наемател"
 
 #: src/features/member-role/ui/update-member-authorities-modal.tsx
 msgid "Tenant Owner"
@@ -2259,7 +2297,7 @@ msgstr "Собственик на наемателя"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Tenant SSO"
-msgstr ""
+msgstr "SSO на наемателя"
 
 #: src/features/invite-member/ui/send-invitation-modal.tsx
 msgid "TENANT_OWNER cannot be granted via invitation"
@@ -2267,11 +2305,11 @@ msgstr "TENANT_OWNER не може да бъде предоставен чрез
 
 #: src/pages/_app/billing/success.tsx
 msgid "Thank you for your subscription. Your account has been upgraded."
-msgstr ""
+msgstr "Благодарим ви за абонамента. Акаунтът ви е надграден."
 
 #: src/pages/_app/settings/security.tsx
 msgid "The provider was disconnected."
-msgstr ""
+msgstr "Доставчикът беше разкачен."
 
 #: src/features/manage-organization/ui/organization-settings.tsx
 msgid "The unique identifier for your organization. This cannot be changed."
@@ -2283,7 +2321,7 @@ msgstr "Отчита темата (поддържа тъмен режим и ц�
 
 #: src/features/manage-billing/ui/feature-gate.tsx
 msgid "This feature requires an active subscription. Please upgrade your plan to access this functionality."
-msgstr ""
+msgstr "Тази функция изисква активен абонамент. Моля, надградете плана си, за да получите достъп до тази функционалност."
 
 #: src/features/accept-invitation/model/use-accept-invitation.ts
 msgid "This invitation link has expired or is no longer valid."
@@ -2303,7 +2341,7 @@ msgstr "В тази връзка липсва токен за потвържде
 
 #: src/pages/-billing-example.tsx
 msgid "This page demonstrates how to integrate the billing entitlements API for plan-based feature access control in your React application."
-msgstr ""
+msgstr "Тази страница демонстрира как да интегрирате API за права при фактуриране за контрол на достъпа до функции въз основа на план във вашето React приложение."
 
 #: src/features/reset-password/ui/reset-password-form.tsx
 msgid "This password reset link is missing a token. Please request a new one."
@@ -2323,19 +2361,19 @@ msgstr "Тази връзка за потвърждение е изтекла и
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Tips"
-msgstr ""
+msgstr "Съвети"
 
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "Title"
-msgstr ""
+msgstr "Заглавие"
 
 #: src/features/page-admin/model/types.ts
 msgid "Title is required for the default locale"
-msgstr ""
+msgstr "Заглавието е задължително за локала по подразбиране"
 
 #: src/pages/_app/billing/index.tsx
 msgid "To access the billing portal, please complete your billing settings setup."
-msgstr ""
+msgstr "За достъп до портала за фактуриране, моля, завършете настройките за фактуриране."
 
 #: src/pages/_app/billing.tsx
 #~ msgid "To access the billing portal, please complete your subscription setup by selecting a plan."
@@ -2343,7 +2381,7 @@ msgstr ""
 
 #: src/features/magic-link/model/use-magic-link-initiate.ts
 msgid "Too many attempts. Please try again later."
-msgstr ""
+msgstr "Твърде много опити. Моля, опитайте отново по-късно."
 
 #: src/features/create-organization/model/use-create-organization.ts
 #: src/features/forgot-password/model/use-forgot-password.ts
@@ -2358,7 +2396,7 @@ msgstr "Твърде много опити за вход. Моля, опитай
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Track all activity with built-in audit trails"
-msgstr ""
+msgstr "Проследявайте всяка дейност с вградени одитни следи"
 
 #: src/features/member-role/ui/transfer-ownership-modal.tsx
 msgid "Transfer ownership"
@@ -2375,15 +2413,15 @@ msgstr "Прехвърлянето на собствеността ще напр
 
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "Translations"
-msgstr ""
+msgstr "Преводи"
 
 #: src/features/manage-billing/ui/current-subscription.tsx
 msgid "Trial Active"
-msgstr ""
+msgstr "Пробният период е активен"
 
 #: src/features/manage-billing/ui/current-subscription.tsx
 msgid "Trial Status"
-msgstr ""
+msgstr "Статус на пробния период"
 
 #: src/shared/ui/auth-layout/auth-layout.tsx
 msgid "Trusted by teams worldwide"
@@ -2396,11 +2434,11 @@ msgstr "Опитай отново"
 
 #: src/widgets/dashboard-signup-chart/ui/dashboard-signup-chart.tsx
 msgid "Unable to load signup data."
-msgstr ""
+msgstr "Не може да се заредят данните за регистрации."
 
 #: src/features/manage-billing/ui/entitlements-card.tsx
 msgid "Unable to load subscription information. Please try again later."
-msgstr ""
+msgstr "Не може да се зареди информацията за абонамента. Моля, опитайте отново по-късно."
 
 #: src/features/ban-user/ui/unban-member-modal.tsx
 msgid "Unban member"
@@ -2417,11 +2455,11 @@ msgstr "Разблокирането на този член ще възстан�
 
 #: src/features/manage-billing/ui/plan-entitlement.tsx
 msgid "Unlimited"
-msgstr ""
+msgstr "Неограничено"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Unlink failed"
-msgstr ""
+msgstr "Разкачването не успя"
 
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 msgid "Unverified"
@@ -2429,11 +2467,11 @@ msgstr "Непотвърден"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Update your profile and preferences in account settings"
-msgstr ""
+msgstr "Актуализирайте профила и предпочитанията си в настройките на акаунта"
 
 #: src/pages/_app/cms-pages.index.tsx
 msgid "Updated"
-msgstr ""
+msgstr "Актуализирано"
 
 #: src/features/avatar/ui/avatar-upload.tsx
 msgid "Upload avatar"
@@ -2451,11 +2489,15 @@ msgstr "Главна буква"
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
 msgid "URL path, e.g. about-us or blog/post"
-msgstr ""
+msgstr "URL път, напр. about-us или blog/post"
 
 #: src/features/sign-in/ui/sign-in-form.tsx
 msgid "Use magic link instead"
-msgstr ""
+msgstr "Използвай магическа връзка"
+
+#: src/pages/sign-in.tsx
+msgid "Use this if your organization configured a custom OIDC provider for tenant sign-in."
+msgstr "Използвайте това, ако организацията ви е конфигурирала персонализиран OIDC доставчик за вход."
 
 #: src/pages/loading-demo.tsx
 msgid "Uses <0>@mantine/nprogress</0> for top loading bar"
@@ -2495,11 +2537,15 @@ msgstr "Подготвяме работното ви пространство. �
 
 #: src/features/magic-link/ui/magic-link-initiate-form.tsx
 msgid "We've sent a magic link to your inbox. Click it to sign in!"
-msgstr ""
+msgstr "Изпратихме магическа връзка в пощата ви. Кликнете върху нея, за да влезете!"
 
 #: src/features/signup/ui/password-strength.tsx
 msgid "Weak"
 msgstr "Слаба"
+
+#: src/features/manage-billing/ui/webhook-log-list.tsx
+msgid "Webhook Logs"
+msgstr "Журнал на webhook"
 
 #: src/pages/invite.$token.tsx
 msgid "Welcome aboard"
@@ -2515,11 +2561,11 @@ msgstr "Добре дошли отново, {firstName}."
 
 #: src/pages/auth.callback.tsx
 msgid "Welcome back."
-msgstr ""
+msgstr "Добре дошли отново."
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Welcome illustration"
-msgstr ""
+msgstr "Илюстрация за добре дошли"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 #~ msgid "Welcome to IQKV!"
@@ -2527,7 +2573,7 @@ msgstr ""
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Welcome to Key Value Platform!"
-msgstr ""
+msgstr "Добре дошли в Key Value Platform!"
 
 #: src/widgets/dashboard-personal-welcome/ui/dashboard-personal-welcome.tsx
 msgid "Welcome, {firstName}!"
@@ -2535,15 +2581,15 @@ msgstr "Добре дошли, {firstName}!"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Welcome!"
-msgstr ""
+msgstr "Добре дошли!"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Welcome! Your account is ready — start using the app right away."
-msgstr ""
+msgstr "Добре дошли! Акаунтът ви е готов — започнете да използвате приложението веднага."
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "What you can do"
-msgstr ""
+msgstr "Какво можете да правите"
 
 #: src/features/signup/ui/signup-form.tsx
 msgid "Work email"
@@ -2553,13 +2599,17 @@ msgstr "Служебен имейл"
 msgid "Workspace"
 msgstr "Работно пространство"
 
+#: src/pages/sign-in.tsx
+msgid "Workspace key"
+msgstr "Ключ на работното пространство"
+
 #: src/pages/_app/cms-pages.index.tsx
 msgid "Workspace:"
-msgstr ""
+msgstr "Работно пространство:"
 
 #: src/features/manage-billing/ui/plan-list.tsx
 msgid "Yearly"
-msgstr ""
+msgstr "Годишно"
 
 #: src/features/accept-invitation/model/use-accept-invitation.ts
 msgid "You are already a member of this organization."
@@ -2571,7 +2621,7 @@ msgstr "Не сте член на никоя организация."
 
 #: src/features/complete-profile/ui/complete-profile-form.tsx
 msgid "You can update your avatar and other details in settings later."
-msgstr ""
+msgstr "Можете да актуализирате аватара и другите данни в настройките по-късно."
 
 #: src/pages/sign-in.tsx
 msgid "You do not have permission to access this area."
@@ -2585,7 +2635,7 @@ msgstr "Нямате разрешение за достъп до тази зон
 #: src/pages/_app/cms-pages.create.tsx
 #: src/pages/_app/cms-pages.index.tsx
 msgid "You do not have permission to manage CMS pages."
-msgstr ""
+msgstr "Нямате разрешение да управлявате CMS страниците."
 
 #: src/features/manage-billing/ui/current-subscription.tsx
 #~ msgid "You don't have an active subscription yet. Choose a plan below to get started."
@@ -2597,7 +2647,7 @@ msgstr "Вече нямате достъп до тази организация.
 
 #: src/pages/_app/settings/organization.tsx
 msgid "You're currently using your personal workspace. Create an organization to collaborate with others, manage members, and share resources."
-msgstr ""
+msgstr "В момента използвате личното си работно пространство. Създайте организация, за да работите с другите, управлявате членове и споделяте ресурси."
 
 #: src/pages/invite.$token.tsx
 msgid "You've been"
@@ -2605,7 +2655,7 @@ msgstr "Вие бяхте"
 
 #: src/pages/_app/team.tsx
 msgid "You've reached the maximum number of members for your plan. Please upgrade to invite more members."
-msgstr ""
+msgstr "Достигнахте максималния брой членове за вашия план. Моля, надградете, за да поканите повече членове."
 
 #: src/features/signup/ui/signup-form.tsx
 msgid "you@company.com"
@@ -2631,7 +2681,7 @@ msgstr "Имейл адресът ви е потвърден. Готови ст�
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Your enterprise-ready microservices foundation for scalable SaaS products."
-msgstr ""
+msgstr "Вашата корпоративна основа от микроуслуги за мащабируеми SaaS продукти."
 
 #: src/pages/invite.$token.tsx
 msgid "Your existing password"
@@ -2658,7 +2708,7 @@ msgstr "Информацията за плащане се обработва с�
 
 #: src/pages/_app/billing/index.tsx
 msgid "Your personal workspace doesn't require a subscription. Upgrade to an organization workspace to access additional features and team collaboration."
-msgstr ""
+msgstr "Личното ви работно пространство не изисква абонамент. Надградете до организационно работно пространство, за да получите достъп до допълнителни функции и екипно сътрудничество."
 
 #: src/pages/sign-in.tsx
 msgid "Your session expired due to inactivity."
