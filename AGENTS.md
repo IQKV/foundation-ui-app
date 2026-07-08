@@ -950,14 +950,7 @@ export interface ProblemDetail {
 }
 
 export type AppErrorType =
-  | "network"
-  | "timeout"
-  | "canceled"
-  | "auth"
-  | "validation"
-  | "client"
-  | "server"
-  | "unknown";
+  "network" | "timeout" | "canceled" | "auth" | "validation" | "client" | "server" | "unknown";
 
 export interface AppError {
   type: AppErrorType;
