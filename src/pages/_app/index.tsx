@@ -22,8 +22,8 @@ function DashboardPage() {
   const { t } = useLingui();
   const { tenantKey, payload, isPersonalWorkspace, isTenantOwner } = useSession();
   const { hasFeature } = useEntitlementsContext();
-  const firstName = payload?.firstName ?? "";
-  const lastName = payload?.lastName ?? "";
+  const firstName = payload?.first_name ?? "";
+  const lastName = payload?.last_name ?? "";
   const email = payload?.email ?? "";
 
   // Fetch tenant details — all members should be able to see this.

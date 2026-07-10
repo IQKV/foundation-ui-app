@@ -2,10 +2,10 @@ import { jwtDecode } from "jwt-decode";
 
 export interface JwtPayload {
   sub: string;
-  userId: string;
+  user_id: string;
   email: string;
-  firstName: string;
-  lastName: string;
+  first_name: string;
+  last_name: string;
   /**
    * The active tenant key, or null for admin/platform-scoped tokens that
    * carry no tenant context.
@@ -25,7 +25,21 @@ export interface JwtPayload {
  */
 export function decodeJwt(token: string): JwtPayload | null {
   try {
-    return jwtDecode<JwtPayload>(token);
+    const decoded = jwtDecode<Record<string, unknown>>(token);
+    return {
+      sub: decoded.sub as string,
+      user_id: decoded.user_id as string,
+      email: decoded.email as string,
+      first_name: decoded.first_name as string,
+      last_name: decoded.last_name as string,
+      tenant_id: decoded.tenant_id as string | null,
+      authorities: decoded.authorities as string[],
+      email_verified: decoded.email_verified as boolean,
+      onboarding_completed: decoded.onboarding_completed as boolean,
+      profile_completed: decoded.profile_completed as boolean,
+      exp: decoded.exp as number,
+      iat: decoded.iat as number,
+    };
   } catch {
     return null;
   }

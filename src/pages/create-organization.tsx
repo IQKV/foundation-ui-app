@@ -40,8 +40,8 @@ function OwnerCard() {
 
   if (!payload) return null;
 
-  const firstName = payload.firstName ?? "";
-  const lastName = payload.lastName ?? "";
+  const firstName = payload.first_name ?? "";
+  const lastName = payload.last_name ?? "";
   const initials =
     [firstName, lastName]
       .map((s) => s.trim().charAt(0))

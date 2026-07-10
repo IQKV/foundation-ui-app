@@ -73,7 +73,7 @@ interface MembersPanelProps {
 function MembersPanel({ tenantKey }: MembersPanelProps) {
   const { t } = useLingui();
   const { isTenantOwner, payload } = useSession();
-  const userId = payload?.userId;
+  const userId = payload?.user_id;
   const authorities = payload?.authorities ?? [];
   const isOwner = authorities.includes("TENANT_OWNER");
   const [search, setSearch] = useState("");

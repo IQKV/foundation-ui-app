@@ -32,10 +32,10 @@ function UserMenu() {
   });
 
   const initials = payload
-    ? `${payload.firstName.charAt(0)}${payload.lastName.charAt(0)}`.toUpperCase()
+    ? `${payload.first_name.charAt(0)}${payload.last_name.charAt(0)}`.toUpperCase()
     : "?";
 
-  const displayName = payload ? `${payload.firstName} ${payload.lastName}` : "";
+  const displayName = payload ? `${payload.first_name} ${payload.last_name}` : "";
 
   return (
     <Menu shadow="md" width={200} position="bottom-end">
