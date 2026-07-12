@@ -1,5 +1,10 @@
 import { useSessionStore } from "./session.store";
-import { decodeJwt, isTenantOwner as checkTenantOwner, isTenantSession } from "@/shared/lib/jwt";
+import {
+  decodeJwt,
+  isTenantOwner as checkTenantOwner,
+  canManageTenantSso,
+  isTenantSession,
+} from "@/shared/lib/jwt";
 import type { JwtPayload } from "@/shared/lib/jwt";
 
 export interface UseSessionResult {
@@ -13,6 +18,8 @@ export interface UseSessionResult {
   isAuthenticated: boolean;
   /** True if the authenticated user holds the TENANT_OWNER authority. */
   isTenantOwner: boolean;
+  /** True if the authenticated user can manage tenant SSO (TENANT_OWNER or PLATFORM_ADMIN). */
+  canManageTenantSso: boolean;
   /**
    * True when the active workspace is the user's personal workspace.
    *
@@ -32,6 +39,7 @@ const unauthenticated = (isLoading: boolean, tenantKey: string | null): UseSessi
   isLoading,
   isAuthenticated: false,
   isTenantOwner: false,
+  canManageTenantSso: false,
   isPersonalWorkspace: false,
   payload: null,
   tenantKey,
@@ -84,6 +92,7 @@ export function useSession(): UseSessionResult {
     isLoading: false,
     isAuthenticated: true,
     isTenantOwner: checkTenantOwner(payload),
+    canManageTenantSso: canManageTenantSso(payload),
     isPersonalWorkspace,
     payload,
     tenantKey,

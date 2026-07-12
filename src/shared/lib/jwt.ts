@@ -59,3 +59,12 @@ export function isTenantSession(payload: JwtPayload): boolean {
 export function isTenantOwner(payload: JwtPayload): boolean {
   return payload.authorities.includes("TENANT_OWNER");
 }
+
+/**
+ * Return true if the payload carries either TENANT_OWNER or PLATFORM_ADMIN authority.
+ */
+export function canManageTenantSso(payload: JwtPayload): boolean {
+  return (
+    payload.authorities.includes("TENANT_OWNER") || payload.authorities.includes("PLATFORM_ADMIN")
+  );
+}

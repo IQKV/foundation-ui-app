@@ -17,6 +17,8 @@ import {
   List,
   ThemeIcon,
   Switch,
+  Accordion,
+  Title,
 } from "@mantine/core";
 import {
   IconAlertCircle,
@@ -53,7 +55,7 @@ const PASSWORD_PATTERN = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z0-9]).+$/;
 function SecuritySettingsPage() {
   const { t } = useLingui();
   const queryClient = useQueryClient();
-  const { isTenantOwner, tenantKey } = useSession();
+  const { canManageTenantSso, tenantKey } = useSession();
 
   const {
     data: profile,
@@ -118,7 +120,7 @@ function SecuritySettingsPage() {
   const { data: tenantSso, isLoading: tenantSsoLoading } = useQuery({
     queryKey: ["tenant-sso"],
     queryFn: () => iamApi.getTenantSsoConfig(),
-    enabled: isTenantOwner,
+    enabled: canManageTenantSso,
   });
 
   const form = useForm({
@@ -285,223 +287,93 @@ function SecuritySettingsPage() {
       />
 
       <Stack gap="xl">
-        <Paper withBorder radius="md" style={{ overflow: "hidden" }}>
-          <Group px="md" py="sm" style={{ borderBottom: "1px solid var(--mantine-color-gray-2)" }}>
-            <IconLink size={15} color="var(--mantine-color-gray-6)" />
-            <Text fw={600} size="sm">
-              <Trans>Connected Accounts</Trans>
-            </Text>
-            {!providersLoading && (
-              <Badge variant="light" color="gray" size="sm" radius="sm" ml="auto">
-                {enabledProviders.length}
-              </Badge>
-            )}
+        {/* PRIMARY: Password Change */}
+        <Paper
+          withBorder
+          p="xl"
+          radius="md"
+          shadow="sm"
+          data-testid={TestSelectors.SECURITY_SETTINGS_PASSWORD_SECTION}
+        >
+          <Group gap="md" mb="md">
+            <IconKey size={24} color="var(--mantine-color-blue-6)" />
+            <div>
+              <Text fw={600} size="lg">
+                <Trans>Change Password</Trans>
+              </Text>
+              <Text size="sm" c="dimmed">
+                <Trans>Update your password to keep your account secure</Trans>
+              </Text>
+            </div>
           </Group>
 
-          {providersLoading ? (
-            <Stack gap={0}>
-              {Array.from({ length: 2 }).map((_, i) => (
-                <Box
-                  key={i}
-                  px="md"
-                  py="sm"
-                  style={{ borderBottom: "1px solid var(--mantine-color-gray-1)" }}
-                >
-                  <Skeleton height={12} width="35%" radius="sm" />
-                </Box>
-              ))}
-            </Stack>
-          ) : enabledProviders.length === 0 ? (
-            <Text size="sm" c="dimmed" px="md" py="lg" ta="center">
-              <Trans>No external sign-in providers are enabled.</Trans>
-            </Text>
-          ) : (
-            <Stack gap={0}>
-              {enabledProviders.map((provider) => {
-                const isLinked = linkedProviders.has(provider);
-                const icon =
-                  provider === "google" ? (
-                    <IconBrandGoogle size={16} />
-                  ) : provider === "github" ? (
-                    <IconBrandGithub size={16} />
-                  ) : provider === "microsoft" ? (
-                    <IconBrandWindows size={16} />
-                  ) : (
-                    <IconLink size={16} />
-                  );
+          <Divider my="md" />
 
-                const label =
-                  provider === "google"
-                    ? t`Google`
-                    : provider === "github"
-                      ? t`GitHub`
-                      : provider === "microsoft"
-                        ? t`Microsoft`
-                        : provider;
+          <form onSubmit={handleSubmit}>
+            <Stack gap="md">
+              <PasswordInput
+                label={t`Current password`}
+                placeholder={t`Enter your current password`}
+                data-testid={TestSelectors.SECURITY_SETTINGS_CURRENT_PASSWORD_INPUT}
+                {...form.getInputProps("currentPassword")}
+              />
 
-                const identity = linkedIdentities.find((i) => i.provider === provider) ?? null;
+              <PasswordInput
+                label={t`New password`}
+                placeholder={t`Enter new password`}
+                data-testid={TestSelectors.SECURITY_SETTINGS_NEW_PASSWORD_INPUT}
+                {...form.getInputProps("newPassword")}
+              />
 
-                return (
-                  <Box
-                    key={provider}
-                    px="md"
-                    py="sm"
-                    style={{ borderBottom: "1px solid var(--mantine-color-gray-1)" }}
-                    data-testid={`security-settings-oauth2-${provider}`}
-                  >
-                    <Group justify="space-between" wrap="nowrap" align="center">
-                      <Group gap="sm" wrap="nowrap">
-                        {identity?.avatarUrl ? (
-                          <Avatar src={identity.avatarUrl} radius="xl" size={32} />
-                        ) : (
-                          <Box
-                            style={{
-                              width: 32,
-                              height: 32,
-                              borderRadius: "50%",
-                              background: "var(--mantine-color-gray-1)",
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                              flexShrink: 0,
-                            }}
-                          >
-                            {icon}
-                          </Box>
-                        )}
+              <PasswordInput
+                label={t`Confirm new password`}
+                placeholder={t`Repeat new password`}
+                data-testid={TestSelectors.SECURITY_SETTINGS_CONFIRM_PASSWORD_INPUT}
+                {...form.getInputProps("confirmPassword")}
+              />
 
-                        <Stack gap={0}>
-                          <Text size="sm" fw={500}>
-                            {label}
-                          </Text>
-                          <Text size="xs" c="dimmed">
-                            {identity?.email ||
-                              identity?.displayName ||
-                              (isLinked ? t`Connected` : t`Not connected`)}
-                          </Text>
-                        </Stack>
-                      </Group>
-
-                      <Group gap="xs" wrap="nowrap">
-                        {identitiesLoading ? (
-                          <Skeleton height={30} width={90} radius="sm" />
-                        ) : isLinked ? (
-                          <Button
-                            variant="subtle"
-                            color="red"
-                            leftSection={<IconTrash size={16} />}
-                            loading={unlinkMutation.isPending}
-                            onClick={() => unlinkMutation.mutate(provider)}
-                            data-testid={`security-settings-oauth2-unlink-${provider}`}
-                          >
-                            <Trans>Disconnect</Trans>
-                          </Button>
-                        ) : (
-                          <Button
-                            variant="light"
-                            leftSection={<IconLink size={16} />}
-                            loading={linkMutation.isPending}
-                            onClick={() => linkMutation.mutate(provider)}
-                            data-testid={`security-settings-oauth2-link-${provider}`}
-                          >
-                            <Trans>Connect</Trans>
-                          </Button>
-                        )}
-                      </Group>
-                    </Group>
-                  </Box>
-                );
-              })}
-            </Stack>
-          )}
-        </Paper>
-
-        {isTenantOwner && (
-          <Paper withBorder p="xl" radius="md" data-testid="tenant-sso-settings">
-            <Group gap="md" mb="xl">
-              <IconShieldHalf size={20} color="var(--mantine-color-blue-6)" />
-              <Text fw={600}>
-                <Trans>Tenant SSO</Trans>
-              </Text>
-            </Group>
-
-            <form onSubmit={ssoForm.onSubmit((v) => saveSsoMutation.mutate(v))}>
-              <Stack gap="md">
-                <Text size="sm" c="dimmed">
-                  <Trans>
-                    Configure a custom OIDC provider for your tenant. The client secret is
-                    write-only and will not be shown after saving.
-                  </Trans>
+              <Stack gap={4}>
+                <Text size="xs" c="dimmed" fw={500}>
+                  <Trans>Password requirements:</Trans>
                 </Text>
-
-                <TextInput
-                  label={t`Provider key`}
-                  value={tenantSso?.providerKey ?? (tenantKey ? `oidc:${tenantKey}` : "")}
-                  readOnly
-                />
-
-                <TextInput
-                  label={t`Display name`}
-                  placeholder={t`Example: Contoso SSO`}
-                  disabled={tenantSsoLoading}
-                  {...ssoForm.getInputProps("displayName")}
-                />
-
-                <TextInput
-                  label={t`Issuer URI`}
-                  placeholder={t`https://issuer.example.com`}
-                  disabled={tenantSsoLoading}
-                  {...ssoForm.getInputProps("issuerUri")}
-                />
-
-                <TextInput
-                  label={t`Client ID`}
-                  placeholder={t`Client ID`}
-                  disabled={tenantSsoLoading}
-                  {...ssoForm.getInputProps("clientId")}
-                />
-
-                <PasswordInput
-                  label={t`Client secret`}
-                  placeholder={tenantSso?.hasClientSecret ? t`••••••••` : t`Client secret`}
-                  disabled={tenantSsoLoading}
-                  {...ssoForm.getInputProps("clientSecret")}
-                />
-
-                <TextInput
-                  label={t`Scopes`}
-                  placeholder={t`openid profile email`}
-                  disabled={tenantSsoLoading}
-                  {...ssoForm.getInputProps("scopes")}
-                />
-
-                <Switch
-                  label={t`Enabled`}
-                  checked={ssoForm.values.enabled}
-                  onChange={(e) => ssoForm.setFieldValue("enabled", e.currentTarget.checked)}
-                  disabled={tenantSsoLoading}
-                />
-
-                <Group justify="flex-end">
-                  {tenantSso && (
-                    <Button
-                      variant="subtle"
-                      color="red"
-                      onClick={() => deleteSsoMutation.mutate()}
-                      loading={deleteSsoMutation.isPending}
-                      leftSection={<IconTrash size={16} />}
-                    >
-                      <Trans>Delete</Trans>
-                    </Button>
-                  )}
-                  <Button type="submit" loading={saveSsoMutation.isPending}>
-                    <Trans>Save</Trans>
-                  </Button>
-                </Group>
+                <List
+                  size="xs"
+                  c="dimmed"
+                  spacing={2}
+                  icon={
+                    <ThemeIcon size={12} radius="xl" color="gray" variant="transparent">
+                      <IconCircleCheck size={12} />
+                    </ThemeIcon>
+                  }
+                >
+                  <List.Item>
+                    <Trans>At least 8 characters, at most 128</Trans>
+                  </List.Item>
+                  <List.Item>
+                    <Trans>Uppercase and lowercase letters</Trans>
+                  </List.Item>
+                  <List.Item>
+                    <Trans>At least one digit</Trans>
+                  </List.Item>
+                  <List.Item>
+                    <Trans>At least one special character</Trans>
+                  </List.Item>
+                </List>
               </Stack>
-            </form>
-          </Paper>
-        )}
+
+              <Group justify="flex-end" mt="md">
+                <Button
+                  type="submit"
+                  size="md"
+                  loading={mutation.isPending}
+                  data-testid={TestSelectors.SECURITY_SETTINGS_CHANGE_PASSWORD_BUTTON}
+                >
+                  <Trans>Change password</Trans>
+                </Button>
+              </Group>
+            </Stack>
+          </form>
+        </Paper>
 
         {/* Roles Card */}
         <Paper
@@ -511,12 +383,17 @@ function SecuritySettingsPage() {
           data-testid={TestSelectors.SECURITY_SETTINGS_ROLES_SECTION}
         >
           <Group px="md" py="sm" style={{ borderBottom: "1px solid var(--mantine-color-gray-2)" }}>
-            <IconShieldHalf size={15} color="var(--mantine-color-gray-6)" />
-            <Text fw={600} size="sm">
-              <Trans>Roles</Trans>
-            </Text>
+            <IconShieldHalf size={18} color="var(--mantine-color-gray-6)" />
+            <div style={{ flex: 1 }}>
+              <Text fw={600} size="sm">
+                <Trans>Your Roles</Trans>
+              </Text>
+              <Text size="xs" c="dimmed">
+                <Trans>Permissions assigned to your account</Trans>
+              </Text>
+            </div>
             {!profileLoading && (
-              <Badge variant="light" color="gray" size="sm" radius="sm" ml="auto">
+              <Badge variant="light" color="gray" size="sm" radius="sm">
                 {profile?.membershipAuthorities?.length ?? 0}
               </Badge>
             )}
@@ -574,87 +451,247 @@ function SecuritySettingsPage() {
           )}
         </Paper>
 
-        {/* Password Card */}
-        <Paper
-          withBorder
-          p="xl"
-          radius="md"
-          data-testid={TestSelectors.SECURITY_SETTINGS_PASSWORD_SECTION}
-        >
-          <Group gap="md" mb="xl">
-            <IconKey size={20} color="var(--mantine-color-orange-6)" />
-            <Text fw={600}>
-              <Trans>Change Password</Trans>
-            </Text>
-          </Group>
-
-          <form onSubmit={handleSubmit}>
-            <Stack gap="md">
-              <PasswordInput
-                label={t`Current password`}
-                placeholder={t`Enter your current password`}
-                data-testid={TestSelectors.SECURITY_SETTINGS_CURRENT_PASSWORD_INPUT}
-                {...form.getInputProps("currentPassword")}
-              />
-
-              <PasswordInput
-                label={t`New password`}
-                placeholder={t`Enter new password`}
-                data-testid={TestSelectors.SECURITY_SETTINGS_NEW_PASSWORD_INPUT}
-                {...form.getInputProps("newPassword")}
-              />
-
-              <PasswordInput
-                label={t`Confirm new password`}
-                placeholder={t`Repeat new password`}
-                data-testid={TestSelectors.SECURITY_SETTINGS_CONFIRM_PASSWORD_INPUT}
-                {...form.getInputProps("confirmPassword")}
-              />
-
-              <Stack gap={4}>
-                <Text size="xs" c="dimmed" fw={500}>
-                  <Trans>Password requirements:</Trans>
+        {/* SECONDARY: Advanced Settings (Collapsible) */}
+        <Accordion variant="separated" radius="md">
+          <Accordion.Item value="connected-accounts">
+            <Accordion.Control icon={<IconLink size={18} />}>
+              <Group gap="xs">
+                <Text fw={500}>
+                  <Trans>Connected Accounts</Trans>
                 </Text>
-                <List
-                  size="xs"
-                  c="dimmed"
-                  spacing={2}
-                  icon={
-                    <ThemeIcon size={12} radius="xl" color="gray" variant="transparent">
-                      <IconCircleCheck size={12} />
-                    </ThemeIcon>
-                  }
-                >
-                  <List.Item>
-                    <Trans>At least 8 characters, at most 128</Trans>
-                  </List.Item>
-                  <List.Item>
-                    <Trans>Uppercase and lowercase letters</Trans>
-                  </List.Item>
-                  <List.Item>
-                    <Trans>At least one digit</Trans>
-                  </List.Item>
-                  <List.Item>
-                    <Trans>At least one special character</Trans>
-                  </List.Item>
-                </List>
-              </Stack>
-
-              <Divider />
-
-              <Group justify="flex-end">
-                <Button
-                  type="submit"
-                  color="orange"
-                  loading={mutation.isPending}
-                  data-testid={TestSelectors.SECURITY_SETTINGS_CHANGE_PASSWORD_BUTTON}
-                >
-                  <Trans>Change password</Trans>
-                </Button>
+                {!providersLoading && (
+                  <Badge variant="light" color="gray" size="sm" radius="sm">
+                    {linkedIdentities.length}/{enabledProviders.length}
+                  </Badge>
+                )}
               </Group>
-            </Stack>
-          </form>
-        </Paper>
+              <Text size="xs" c="dimmed" mt={2}>
+                <Trans>Link external accounts for quick sign-in</Trans>
+              </Text>
+            </Accordion.Control>
+            <Accordion.Panel>
+              {providersLoading ? (
+                <Stack gap="sm">
+                  {Array.from({ length: 2 }).map((_, i) => (
+                    <Skeleton key={i} height={60} radius="sm" />
+                  ))}
+                </Stack>
+              ) : enabledProviders.length === 0 ? (
+                <Alert color="gray" variant="light">
+                  <Trans>No external sign-in providers are enabled by your organization.</Trans>
+                </Alert>
+              ) : (
+                <Stack gap="sm">
+                  {enabledProviders.map((provider) => {
+                    const isLinked = linkedProviders.has(provider);
+                    const icon =
+                      provider === "google" ? (
+                        <IconBrandGoogle size={20} />
+                      ) : provider === "github" ? (
+                        <IconBrandGithub size={20} />
+                      ) : provider === "microsoft" ? (
+                        <IconBrandWindows size={20} />
+                      ) : (
+                        <IconLink size={20} />
+                      );
+
+                    const label =
+                      provider === "google"
+                        ? t`Google`
+                        : provider === "github"
+                          ? t`GitHub`
+                          : provider === "microsoft"
+                            ? t`Microsoft`
+                            : provider;
+
+                    const identity = linkedIdentities.find((i) => i.provider === provider) ?? null;
+
+                    return (
+                      <Paper
+                        key={provider}
+                        withBorder
+                        p="md"
+                        radius="sm"
+                        data-testid={`security-settings-oauth2-${provider}`}
+                      >
+                        <Group justify="space-between" wrap="nowrap" align="center">
+                          <Group gap="md" wrap="nowrap">
+                            {identity?.avatarUrl ? (
+                              <Avatar src={identity.avatarUrl} radius="xl" size={40} />
+                            ) : (
+                              <Box
+                                style={{
+                                  width: 40,
+                                  height: 40,
+                                  borderRadius: "50%",
+                                  background: "var(--mantine-color-gray-1)",
+                                  display: "flex",
+                                  alignItems: "center",
+                                  justifyContent: "center",
+                                  flexShrink: 0,
+                                }}
+                              >
+                                {icon}
+                              </Box>
+                            )}
+
+                            <Stack gap={2}>
+                              <Text size="sm" fw={500}>
+                                {label}
+                              </Text>
+                              <Text size="xs" c="dimmed">
+                                {identity?.email ||
+                                  identity?.displayName ||
+                                  (isLinked ? t`Connected` : t`Not connected`)}
+                              </Text>
+                            </Stack>
+                          </Group>
+
+                          <Group gap="xs" wrap="nowrap">
+                            {identitiesLoading ? (
+                              <Skeleton height={36} width={100} radius="sm" />
+                            ) : isLinked ? (
+                              <Button
+                                variant="light"
+                                color="red"
+                                size="sm"
+                                leftSection={<IconTrash size={16} />}
+                                loading={unlinkMutation.isPending}
+                                onClick={() => unlinkMutation.mutate(provider)}
+                                data-testid={`security-settings-oauth2-unlink-${provider}`}
+                              >
+                                <Trans>Disconnect</Trans>
+                              </Button>
+                            ) : (
+                              <Button
+                                variant="light"
+                                size="sm"
+                                leftSection={<IconLink size={16} />}
+                                loading={linkMutation.isPending}
+                                onClick={() => linkMutation.mutate(provider)}
+                                data-testid={`security-settings-oauth2-link-${provider}`}
+                              >
+                                <Trans>Connect</Trans>
+                              </Button>
+                            )}
+                          </Group>
+                        </Group>
+                      </Paper>
+                    );
+                  })}
+                </Stack>
+              )}
+            </Accordion.Panel>
+          </Accordion.Item>
+
+          {canManageTenantSso && (
+            <Accordion.Item value="tenant-sso">
+              <Accordion.Control icon={<IconShieldHalf size={18} />}>
+                <Text fw={500}>
+                  <Trans>Tenant SSO Configuration</Trans>
+                </Text>
+                <Text size="xs" c="dimmed" mt={2}>
+                  <Trans>Configure custom OIDC provider for your organization</Trans>
+                </Text>
+              </Accordion.Control>
+              <Accordion.Panel>
+                <Box data-testid="tenant-sso-settings">
+                  <form onSubmit={ssoForm.onSubmit((v) => saveSsoMutation.mutate(v))}>
+                    <Stack gap="md">
+                      <Alert variant="light" color="blue">
+                        <Text size="sm">
+                          <Trans>
+                            Configure a custom OIDC provider for your tenant. The client secret is
+                            write-only and will not be shown after saving.
+                          </Trans>
+                        </Text>
+                      </Alert>
+
+                      <TextInput
+                        label={t`Provider key`}
+                        value={tenantSso?.providerKey ?? (tenantKey ? `oidc:${tenantKey}` : "")}
+                        readOnly
+                        description={t`Unique identifier for this SSO provider`}
+                      />
+
+                      <TextInput
+                        label={t`Display name`}
+                        placeholder={t`Example: Contoso SSO`}
+                        disabled={tenantSsoLoading}
+                        {...ssoForm.getInputProps("displayName")}
+                      />
+
+                      <TextInput
+                        label={t`Issuer URI`}
+                        placeholder={t`https://issuer.example.com`}
+                        disabled={tenantSsoLoading}
+                        description={t`OIDC discovery endpoint`}
+                        {...ssoForm.getInputProps("issuerUri")}
+                      />
+
+                      <TextInput
+                        label={t`Client ID`}
+                        placeholder={t`Client ID`}
+                        disabled={tenantSsoLoading}
+                        {...ssoForm.getInputProps("clientId")}
+                      />
+
+                      <PasswordInput
+                        label={t`Client secret`}
+                        placeholder={tenantSso?.hasClientSecret ? t`••••••••` : t`Client secret`}
+                        disabled={tenantSsoLoading}
+                        description={
+                          tenantSso?.hasClientSecret
+                            ? t`Leave blank to keep existing secret`
+                            : t`Required for new configuration`
+                        }
+                        {...ssoForm.getInputProps("clientSecret")}
+                      />
+
+                      <TextInput
+                        label={t`Scopes`}
+                        placeholder={t`openid profile email`}
+                        disabled={tenantSsoLoading}
+                        {...ssoForm.getInputProps("scopes")}
+                      />
+
+                      <Switch
+                        label={t`Enabled`}
+                        description={t`Allow users to sign in with this provider`}
+                        checked={ssoForm.values.enabled}
+                        onChange={(e) => ssoForm.setFieldValue("enabled", e.currentTarget.checked)}
+                        disabled={tenantSsoLoading}
+                      />
+
+                      <Divider />
+
+                      <Group justify="flex-end">
+                        {tenantSso && (
+                          <Button
+                            variant="subtle"
+                            color="red"
+                            onClick={() => deleteSsoMutation.mutate()}
+                            loading={deleteSsoMutation.isPending}
+                            leftSection={<IconTrash size={16} />}
+                          >
+                            <Trans>Delete</Trans>
+                          </Button>
+                        )}
+                        <Button
+                          type="submit"
+                          loading={saveSsoMutation.isPending}
+                          disabled={!ssoForm.isDirty()}
+                        >
+                          <Trans>Save</Trans>
+                        </Button>
+                      </Group>
+                    </Stack>
+                  </form>
+                </Box>
+              </Accordion.Panel>
+            </Accordion.Item>
+          )}
+        </Accordion>
       </Stack>
     </Container>
   );
