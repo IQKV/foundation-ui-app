@@ -1,5 +1,16 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
-import { Alert, Box, Button, Divider, Group, Stack, Text, TextInput, Title } from "@mantine/core";
+import {
+  Alert,
+  Box,
+  Button,
+  Collapse,
+  Divider,
+  Group,
+  Stack,
+  Text,
+  TextInput,
+  Title,
+} from "@mantine/core";
 import {
   IconAlertCircle,
   IconBrandGithub,
@@ -53,6 +64,7 @@ function SignInPage() {
   const { t } = useLingui();
   const { redirect: redirectTo, reason } = Route.useSearch();
   const [ssoTenantKey, setSsoTenantKey] = useState("");
+  const [ssoOpen, setSsoOpen] = useState(false);
 
   const { data: oauth2Providers = [], isLoading: oauth2ProvidersLoading } = useQuery({
     queryKey: ["oauth2", "providers"],
@@ -166,34 +178,46 @@ function SignInPage() {
         </Stack>
       )}
 
-      <Stack gap="sm">
-        <Divider
-          label={t`Enterprise SSO`}
-          labelPosition="center"
-          styles={{ label: { color: "var(--mantine-color-dimmed)" } }}
-        />
-        <TextInput
-          label={t`Workspace key`}
-          placeholder={t`Example: acme1234`}
-          value={ssoTenantKey}
-          onChange={(e) => setSsoTenantKey(e.currentTarget.value)}
-          data-testid="sign-in-sso-tenant-key"
-        />
-        <Button
-          variant="default"
-          fullWidth
-          leftSection={<IconLock size={18} />}
-          disabled={!ssoTenantKey.trim()}
-          onClick={() => startOAuth2(`oidc:${ssoTenantKey.trim()}`, ssoTenantKey.trim())}
-          data-testid="sign-in-sso-submit"
-        >
-          <Trans>Continue with SSO</Trans>
-        </Button>
-        <Text size="xs" c="dimmed">
+      {/* Enterprise SSO — secondary, collapsed by default */}
+      <Stack gap={0}>
+        <Text size="xs" c="dimmed" ta="center">
           <Trans>
-            Use this if your organization configured a custom OIDC provider for tenant sign-in.
+            Using a corporate identity provider?{" "}
+            <Text
+              component="span"
+              size="xs"
+              c="dimmed"
+              td="underline"
+              style={{ cursor: "pointer" }}
+              onClick={() => setSsoOpen((o) => !o)}
+              data-testid="sign-in-sso-toggle"
+            >
+              Sign in with Enterprise SSO
+            </Text>
           </Trans>
         </Text>
+
+        <Collapse in={ssoOpen}>
+          <Stack gap="sm" pt="md">
+            <TextInput
+              label={t`Workspace key`}
+              placeholder={t`Example: acme1234`}
+              value={ssoTenantKey}
+              onChange={(e) => setSsoTenantKey(e.currentTarget.value)}
+              data-testid="sign-in-sso-tenant-key"
+            />
+            <Button
+              variant="default"
+              fullWidth
+              leftSection={<IconLock size={18} />}
+              disabled={!ssoTenantKey.trim()}
+              onClick={() => startOAuth2(`oidc:${ssoTenantKey.trim()}`, ssoTenantKey.trim())}
+              data-testid="sign-in-sso-submit"
+            >
+              <Trans>Continue with SSO</Trans>
+            </Button>
+          </Stack>
+        </Collapse>
       </Stack>
 
       {/* Footer */}

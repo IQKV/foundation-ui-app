@@ -147,13 +147,16 @@ export function SignInForm({ redirectTo }: SignInFormProps) {
           <Trans>Continue</Trans>
         </Button>
 
-        {/* Magic link option */}
+        {/* Magic link — secondary option, visually muted */}
         {isMagicLinkEnabled && (
-          <Group justify="center" mt="md">
-            <Text component={Link} to="/magic-link" size="sm" c="blue.6">
-              <Trans>Use magic link instead</Trans>
-            </Text>
-          </Group>
+          <Text size="xs" c="dimmed" ta="center">
+            <Trans>
+              No password?{" "}
+              <Text component={Link} to="/magic-link" size="xs" c="dimmed" td="underline">
+                Email me a sign-in link
+              </Text>
+            </Trans>
+          </Text>
         )}
       </Stack>
     </form>
