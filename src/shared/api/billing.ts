@@ -113,14 +113,15 @@ export const billingApi = {
   /**
    * List refunds for current user (single-tenant mode).
    */
-  listRefundsForMe: () => httpClient.get<Refund[]>("/v1/billing/refunds/me").then((r) => r.data),
+  listRefundsForMe: () =>
+    httpClient.get<Refund[]>("/v1/billing/payments/me/refunds").then((r) => r.data),
 
   /**
    * List refunds for a specific tenant.
    */
   listRefunds: (tenantKey: string) =>
     httpClient
-      .get<Refund[]>(`/v1/billing/refunds/${encodeURIComponent(tenantKey)}`)
+      .get<Refund[]>(`/v1/billing/payments/${encodeURIComponent(tenantKey)}/refunds`)
       .then((r) => r.data),
 
   /**
