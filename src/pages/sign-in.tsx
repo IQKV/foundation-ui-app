@@ -197,7 +197,7 @@ function SignInPage() {
           </Trans>
         </Text>
 
-        <Collapse in={ssoOpen}>
+        <Collapse opened={ssoOpen}>
           <Stack gap="sm" pt="md">
             <TextInput
               label={t`Workspace key`}
