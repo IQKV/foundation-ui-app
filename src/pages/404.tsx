@@ -9,7 +9,7 @@ export const Route = createFileRoute("/404")({
   component: NotFoundPage,
 });
 
-function NotFoundPage() {
+export function NotFoundPage() {
   const { t } = useLingui();
   return (
     <Container size="sm" py="xl" data-testid="page-404">
