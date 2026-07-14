@@ -6,9 +6,13 @@ import { TIMEOUTS } from "../config/timeouts.js";
 /**
  * Page Object for the Organization Settings page (/settings/organization).
  *
+ * The page shows a table of the user's organization memberships with search
+ * and refresh controls. Tenant owners see an "Edit" button per row that
+ * switches into the target workspace.
+ *
  * Covers:
- *   - Organization info form (name, key, status)
- *   - Members table
+ *   - Org memberships table
+ *   - Search and refresh controls
  *   - Member action menus (change role, ban, remove, transfer ownership)
  *   - Send Invitation modal
  *   - Invitation Details modal
@@ -46,6 +50,10 @@ export class OrgSettingsPage {
   }
 
   // ─── Organization info form locators ─────────────────────────────────────
+  // NOTE: The org settings page no longer has an inline edit form.
+  // It shows a table of the user's organization memberships instead.
+  // These locators are kept for backward compatibility but are not used by
+  // any currently passing tests.
 
   get orgSettingsForm(): Locator {
     return this.page.locator(byTestId(TestSelectors.ORGANIZATION_SETTINGS_FORM));
@@ -140,12 +148,6 @@ export class OrgSettingsPage {
   }
 
   // ─── Actions ──────────────────────────────────────────────────────────────
-
-  async waitForOrgFormReady() {
-    // Wait for the org form to finish loading data
-    await expect(this.orgLoading).toBeHidden({ timeout: TIMEOUTS.SLOW });
-    await expect(this.orgNameInput).not.toBeDisabled({ timeout: TIMEOUTS.DEFAULT });
-  }
 
   async openMemberActionsMenu() {
     await this.memberActionsMenuButton.click();

@@ -182,7 +182,7 @@ export const cssVariablesResolver: CSSVariablesResolver = () => ({
     "--app-nav-hover-bg": "rgba(255,255,255,0.07)",
     "--app-nav-active-bg": "rgba(59,78,240,0.75)",
 
-    "--app-nav-section-label": "rgba(255,255,255,0.30)",
+    "--app-nav-section-label": "rgba(255,255,255,0.55)",
     "--app-nav-search-bg": "rgba(255,255,255,0.08)",
     "--app-nav-search-border": "rgba(255,255,255,0.12)",
     "--app-nav-search-placeholder": "rgba(255,255,255,0.35)",

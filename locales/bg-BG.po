@@ -213,6 +213,10 @@ msgstr "Всички статуси"
 msgid "All the boring stuff is already done — focus on your idea!"
 msgstr "Всичко скучно е вече свършено — фокусирайте се върху идеята си!"
 
+#: src/pages/_app/settings/security.tsx
+msgid "Allow users to sign in with this provider"
+msgstr ""
+
 #: src/features/signup/ui/signup-form.tsx
 #: src/pages/invite.$token.tsx
 msgid "Already have an account? <0>Sign in</0>"
@@ -467,6 +471,10 @@ msgstr "Завършване на входа"
 #: src/pages/_app/settings/security.tsx
 msgid "Configure a custom OIDC provider for your tenant. The client secret is write-only and will not be shown after saving."
 msgstr "Конфигурирайте персонализиран OIDC доставчик за вашия наемател. Клиентската тайна е само за запис и няма да бъде показана след запазване."
+
+#: src/pages/_app/settings/security.tsx
+msgid "Configure custom OIDC provider for your organization"
+msgstr ""
 
 #: src/features/signup/ui/provisioning-wait.tsx
 msgid "Configuring settings"
@@ -888,8 +896,8 @@ msgid "Enter your workspace"
 msgstr "Влезте в работното си пространство"
 
 #: src/pages/sign-in.tsx
-msgid "Enterprise SSO"
-msgstr "Корпоративен SSO"
+#~ msgid "Enterprise SSO"
+#~ msgstr "Корпоративен SSO"
 
 #: src/features/manage-billing/ui/billing-info.tsx
 #: src/features/manage-billing/ui/plan-list.tsx
@@ -1220,6 +1228,10 @@ msgstr "Фамилното ime е задължително"
 msgid "Last name is too long"
 msgstr "Фамилното ime е твърде дълго"
 
+#: src/pages/_app/settings/security.tsx
+msgid "Leave blank to keep existing secret"
+msgstr ""
+
 #: src/features/onboarding/ui/onboarding-modal.tsx
 #~ msgid "Let's get you up and running with a quick guide."
 #~ msgstr ""
@@ -1231,6 +1243,10 @@ msgstr "Ограничена поддръжка"
 #: src/pages/verify-email.tsx
 msgid "Link expired or invalid"
 msgstr "Връзката е изтекла или невалидна"
+
+#: src/pages/_app/settings/security.tsx
+msgid "Link external accounts for quick sign-in"
+msgstr ""
 
 #: src/pages/_app/settings/security.tsx
 msgid "Link failed"
@@ -1409,8 +1425,12 @@ msgid "No billing information has been configured yet. Fill in the details below
 msgstr "Все още не е конфигурирана информация за фактуриране. Попълнете данните по-долу, за да започнете."
 
 #: src/pages/_app/settings/security.tsx
-msgid "No external sign-in providers are enabled."
-msgstr "Няма активирани външни доставчици за вход."
+msgid "No external sign-in providers are enabled by your organization."
+msgstr ""
+
+#: src/pages/_app/settings/security.tsx
+#~ msgid "No external sign-in providers are enabled."
+#~ msgstr "Няма активирани външни доставчици за вход."
 
 #: src/pages/_app/settings/organization.tsx
 msgid "No matches."
@@ -1444,6 +1464,10 @@ msgstr "Не са намерени страници"
 #: src/pages/_app/cms-pages.index.tsx
 msgid "No pages match the current filter"
 msgstr "Няма страници, съответстващи на текущия филтър"
+
+#: src/features/sign-in/ui/sign-in-form.tsx
+msgid "No password? <0>Email me a sign-in link</0>"
+msgstr ""
 
 #: src/pages/_app/team.tsx
 msgid "No pending invitations."
@@ -1504,6 +1528,10 @@ msgstr "OG описание"
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "OG title"
 msgstr "OG заглавие"
+
+#: src/pages/_app/settings/security.tsx
+msgid "OIDC discovery endpoint"
+msgstr ""
 
 #: src/pages/verify-email.tsx
 msgid "One click and you're all set."
@@ -1710,6 +1738,10 @@ msgstr "Изчакващо"
 msgid "Pending invitations"
 msgstr "Изчакващи покани"
 
+#: src/pages/_app/settings/security.tsx
+msgid "Permissions assigned to your account"
+msgstr ""
+
 #: src/features/manage-billing/ui/entitlements-card.tsx
 #: src/pages/_app/billing/index.tsx
 #: src/widgets/dashboard-personal-welcome/ui/dashboard-personal-welcome.tsx
@@ -1872,6 +1904,10 @@ msgstr "Поискайте нова магическа връзка"
 msgid "Request a new reset link"
 msgstr "Поискайте нова връзка за нулиране"
 
+#: src/pages/_app/settings/security.tsx
+msgid "Required for new configuration"
+msgstr ""
+
 #: src/features/signup/ui/verify-email-prompt.tsx
 msgid "Resend in {resendCooldown}s"
 msgstr "Изпрати отново след {resendCooldown} сек"
@@ -1927,8 +1963,8 @@ msgid "Role"
 msgstr "Роля"
 
 #: src/pages/_app/settings/security.tsx
-msgid "Roles"
-msgstr "Роли"
+#~ msgid "Roles"
+#~ msgstr "Роли"
 
 #: src/features/member-role/ui/update-member-authorities-modal.tsx
 #: src/pages/_app/settings/security.tsx
@@ -2255,6 +2291,15 @@ msgstr "Превключи към тъмен режим"
 msgid "Switch to light mode"
 msgstr "Превключи към светъл режим"
 
+#: src/features/tenant-switcher/ui/tenant-switcher.tsx
+msgid "Switch workspace"
+msgstr ""
+
+#. placeholder {0}: activeMembership.tenantName
+#: src/features/tenant-switcher/ui/tenant-switcher.tsx
+msgid "Switch workspace (current: {0})"
+msgstr ""
+
 #: src/pages/_app/team.tsx
 #: src/shared/ui/app-layout/app-nav.tsx
 msgid "Team"
@@ -2296,8 +2341,12 @@ msgid "Tenant Owner"
 msgstr "Собственик на наемателя"
 
 #: src/pages/_app/settings/security.tsx
-msgid "Tenant SSO"
-msgstr "SSO на наемателя"
+#~ msgid "Tenant SSO"
+#~ msgstr "SSO на наемателя"
+
+#: src/pages/_app/settings/security.tsx
+msgid "Tenant SSO Configuration"
+msgstr ""
 
 #: src/features/invite-member/ui/send-invitation-modal.tsx
 msgid "TENANT_OWNER cannot be granted via invitation"
@@ -2453,6 +2502,10 @@ msgstr "Разблокирай член"
 msgid "Unbanning this member will restore their access to this tenant. They will be able to access this tenant again with their existing credentials."
 msgstr "Разблокирането на този член ще възстанови достъпа им до наемателя. Те ще могат да достъпват наемателя отново с текущите си данни за достъп."
 
+#: src/pages/_app/settings/security.tsx
+msgid "Unique identifier for this SSO provider"
+msgstr ""
+
 #: src/features/manage-billing/ui/plan-entitlement.tsx
 msgid "Unlimited"
 msgstr "Неограничено"
@@ -2464,6 +2517,10 @@ msgstr "Разкачването не успя"
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 msgid "Unverified"
 msgstr "Непотвърден"
+
+#: src/pages/_app/settings/security.tsx
+msgid "Update your password to keep your account secure"
+msgstr ""
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Update your profile and preferences in account settings"
@@ -2492,12 +2549,16 @@ msgid "URL path, e.g. about-us or blog/post"
 msgstr "URL път, напр. about-us или blog/post"
 
 #: src/features/sign-in/ui/sign-in-form.tsx
-msgid "Use magic link instead"
-msgstr "Използвай магическа връзка"
+#~ msgid "Use magic link instead"
+#~ msgstr "Използвай магическа връзка"
 
 #: src/pages/sign-in.tsx
-msgid "Use this if your organization configured a custom OIDC provider for tenant sign-in."
-msgstr "Използвайте това, ако организацията ви е конфигурирала персонализиран OIDC доставчик за вход."
+#~ msgid "Use this if your organization configured a custom OIDC provider for tenant sign-in."
+#~ msgstr "Използвайте това, ако организацията ви е конфигурирала персонализиран OIDC доставчик за вход."
+
+#: src/shared/ui/app-layout/app-header.tsx
+msgid "User menu"
+msgstr ""
 
 #: src/pages/loading-demo.tsx
 msgid "Uses <0>@mantine/nprogress</0> for top loading bar"
@@ -2506,6 +2567,10 @@ msgstr "Използва <0>@mantine/nprogress</0> за горна лента з
 #: src/pages/loading-demo.tsx
 msgid "Uses <0>LoadingOverlay</0> component for full-screen loading"
 msgstr "Използва компонента <0>LoadingOverlay</0> за цялоекранно зареждане"
+
+#: src/pages/sign-in.tsx
+msgid "Using a corporate identity provider? <0>Sign in with Enterprise SSO</0>"
+msgstr ""
 
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 msgid "Verified"
@@ -2709,6 +2774,10 @@ msgstr "Информацията за плащане се обработва с�
 #: src/pages/_app/billing/index.tsx
 msgid "Your personal workspace doesn't require a subscription. Upgrade to an organization workspace to access additional features and team collaboration."
 msgstr "Личното ви работно пространство не изисква абонамент. Надградете до организационно работно пространство, за да получите достъп до допълнителни функции и екипно сътрудничество."
+
+#: src/pages/_app/settings/security.tsx
+msgid "Your Roles"
+msgstr ""
 
 #: src/pages/sign-in.tsx
 msgid "Your session expired due to inactivity."

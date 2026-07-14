@@ -39,17 +39,27 @@ export class SecuritySettingsPage {
   // ─── Inline change-password form locators ────────────────────────────────
   // The change-password form is rendered inline inside the Password section.
   // There is no modal — the fields and submit button live directly on the page.
+  //
+  // Mantine's PasswordInput puts data-testid on the outer wrapper div, not
+  // the <input> itself. Scoping to `input` inside the wrapper gives us the
+  // real <input type="password"> for attribute checks and fill() calls.
 
   get currentPasswordInput(): Locator {
-    return this.page.locator(byTestId(TestSelectors.SECURITY_SETTINGS_CURRENT_PASSWORD_INPUT));
+    return this.page
+      .locator(byTestId(TestSelectors.SECURITY_SETTINGS_CURRENT_PASSWORD_INPUT))
+      .locator("input");
   }
 
   get newPasswordInput(): Locator {
-    return this.page.locator(byTestId(TestSelectors.SECURITY_SETTINGS_NEW_PASSWORD_INPUT));
+    return this.page
+      .locator(byTestId(TestSelectors.SECURITY_SETTINGS_NEW_PASSWORD_INPUT))
+      .locator("input");
   }
 
   get confirmPasswordInput(): Locator {
-    return this.page.locator(byTestId(TestSelectors.SECURITY_SETTINGS_CONFIRM_PASSWORD_INPUT));
+    return this.page
+      .locator(byTestId(TestSelectors.SECURITY_SETTINGS_CONFIRM_PASSWORD_INPUT))
+      .locator("input");
   }
 
   /** Submit button for the inline change-password form. */

@@ -8,7 +8,7 @@ import {
   IconShieldHalf,
 } from "@tabler/icons-react";
 import { useNavigate } from "@tanstack/react-router";
-import { Trans } from "@lingui/react/macro";
+import { Trans, useLingui } from "@lingui/react/macro";
 import { useTenantSwitcher } from "../model/use-tenant-switcher";
 import { isMultiTenantMode } from "@/app/config";
 import type { UserMembership } from "@/shared/api/iam";
@@ -49,6 +49,7 @@ function WorkspaceIcon({
  * icon (shield = internal, person = personal, building = organization).
  */
 export function TenantSwitcher() {
+  const { t } = useLingui();
   const navigate = useNavigate();
   const { activeMembership, otherMemberships, isLoading, isSwitching, switchingTo, switchTo } =
     useTenantSwitcher();
@@ -62,6 +63,11 @@ export function TenantSwitcher() {
       <Menu shadow="md" width="target" position="bottom-start" withinPortal>
         <Menu.Target>
           <UnstyledButton
+            aria-label={
+              activeMembership
+                ? t`Switch workspace (current: ${activeMembership.tenantName})`
+                : t`Switch workspace`
+            }
             style={{
               width: "100%",
               padding: "6px 8px",

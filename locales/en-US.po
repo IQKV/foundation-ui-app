@@ -245,6 +245,10 @@ msgstr "All statuses"
 msgid "All the boring stuff is already done — focus on your idea!"
 msgstr "All the boring stuff is already done — focus on your idea!"
 
+#: src/pages/_app/settings/security.tsx
+msgid "Allow users to sign in with this provider"
+msgstr "Allow users to sign in with this provider"
+
 #: src/features/signup/ui/signup-form.tsx
 #: src/pages/invite.$token.tsx
 msgid "Already have an account? <0>Sign in</0>"
@@ -551,6 +555,10 @@ msgstr "Completing sign-in"
 #: src/pages/_app/settings/security.tsx
 msgid "Configure a custom OIDC provider for your tenant. The client secret is write-only and will not be shown after saving."
 msgstr "Configure a custom OIDC provider for your tenant. The client secret is write-only and will not be shown after saving."
+
+#: src/pages/_app/settings/security.tsx
+msgid "Configure custom OIDC provider for your organization"
+msgstr "Configure custom OIDC provider for your organization"
 
 #: src/features/signup/ui/provisioning-wait.tsx
 msgid "Configuring settings"
@@ -1050,8 +1058,8 @@ msgid "Enter your workspace"
 msgstr "Enter your workspace"
 
 #: src/pages/sign-in.tsx
-msgid "Enterprise SSO"
-msgstr "Enterprise SSO"
+#~ msgid "Enterprise SSO"
+#~ msgstr "Enterprise SSO"
 
 #: src/features/manage-billing/ui/billing-info.tsx
 #: src/features/manage-billing/ui/plan-list.tsx
@@ -1432,6 +1440,10 @@ msgstr "Last name is too long"
 #~ msgid "Last updated"
 #~ msgstr "Last updated"
 
+#: src/pages/_app/settings/security.tsx
+msgid "Leave blank to keep existing secret"
+msgstr "Leave blank to keep existing secret"
+
 #: src/features/signup/ui/signup-form.tsx
 #~ msgid "Leave blank to use your name"
 #~ msgstr "Leave blank to use your name"
@@ -1447,6 +1459,10 @@ msgstr "Limited support"
 #: src/pages/verify-email.tsx
 msgid "Link expired or invalid"
 msgstr "Link expired or invalid"
+
+#: src/pages/_app/settings/security.tsx
+msgid "Link external accounts for quick sign-in"
+msgstr "Link external accounts for quick sign-in"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Link failed"
@@ -1653,8 +1669,12 @@ msgid "No billing information has been configured yet. Fill in the details below
 msgstr "No billing information has been configured yet. Fill in the details below to get started."
 
 #: src/pages/_app/settings/security.tsx
-msgid "No external sign-in providers are enabled."
-msgstr "No external sign-in providers are enabled."
+msgid "No external sign-in providers are enabled by your organization."
+msgstr "No external sign-in providers are enabled by your organization."
+
+#: src/pages/_app/settings/security.tsx
+#~ msgid "No external sign-in providers are enabled."
+#~ msgstr "No external sign-in providers are enabled."
 
 #: src/pages/_app/settings/organization.tsx
 msgid "No matches."
@@ -1704,6 +1724,10 @@ msgstr "No pages found"
 #: src/pages/_app/cms-pages.index.tsx
 msgid "No pages match the current filter"
 msgstr "No pages match the current filter"
+
+#: src/features/sign-in/ui/sign-in-form.tsx
+msgid "No password? <0>Email me a sign-in link</0>"
+msgstr "No password? <0>Email me a sign-in link</0>"
 
 #: src/pages/_app/team.tsx
 msgid "No pending invitations."
@@ -1788,6 +1812,10 @@ msgstr "OG description"
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "OG title"
 msgstr "OG title"
+
+#: src/pages/_app/settings/security.tsx
+msgid "OIDC discovery endpoint"
+msgstr "OIDC discovery endpoint"
 
 #: src/pages/verify-email.tsx
 msgid "One click and you're all set."
@@ -2019,6 +2047,10 @@ msgstr "Pending invitations"
 #~ msgid "Period End"
 #~ msgstr "Period End"
 
+#: src/pages/_app/settings/security.tsx
+msgid "Permissions assigned to your account"
+msgstr "Permissions assigned to your account"
+
 #: src/features/manage-billing/ui/entitlements-card.tsx
 #: src/pages/_app/billing/index.tsx
 #: src/widgets/dashboard-personal-welcome/ui/dashboard-personal-welcome.tsx
@@ -2196,6 +2228,10 @@ msgstr "Request a new magic link"
 msgid "Request a new reset link"
 msgstr "Request a new reset link"
 
+#: src/pages/_app/settings/security.tsx
+msgid "Required for new configuration"
+msgstr "Required for new configuration"
+
 #: src/features/signup/ui/verify-email-prompt.tsx
 msgid "Resend in {resendCooldown}s"
 msgstr "Resend in {resendCooldown}s"
@@ -2251,8 +2287,8 @@ msgid "Role"
 msgstr "Role"
 
 #: src/pages/_app/settings/security.tsx
-msgid "Roles"
-msgstr "Roles"
+#~ msgid "Roles"
+#~ msgstr "Roles"
 
 #: src/features/member-role/ui/update-member-authorities-modal.tsx
 #: src/pages/_app/settings/security.tsx
@@ -2661,6 +2697,15 @@ msgstr "Switch to dark mode"
 msgid "Switch to light mode"
 msgstr "Switch to light mode"
 
+#: src/features/tenant-switcher/ui/tenant-switcher.tsx
+msgid "Switch workspace"
+msgstr "Switch workspace"
+
+#. placeholder {0}: activeMembership.tenantName
+#: src/features/tenant-switcher/ui/tenant-switcher.tsx
+msgid "Switch workspace (current: {0})"
+msgstr "Switch workspace (current: {0})"
+
 #: src/shared/ui/admin-layout/admin-nav.tsx
 #~ msgid "System"
 #~ msgstr "System"
@@ -2710,8 +2755,12 @@ msgid "Tenant Owner"
 msgstr "Tenant Owner"
 
 #: src/pages/_app/settings/security.tsx
-msgid "Tenant SSO"
-msgstr "Tenant SSO"
+#~ msgid "Tenant SSO"
+#~ msgstr "Tenant SSO"
+
+#: src/pages/_app/settings/security.tsx
+msgid "Tenant SSO Configuration"
+msgstr "Tenant SSO Configuration"
 
 #: src/features/invite-member/ui/send-invitation-modal.tsx
 msgid "TENANT_OWNER cannot be granted via invitation"
@@ -2875,6 +2924,10 @@ msgstr "Unban Member"
 msgid "Unbanning this member will restore their access to this tenant. They will be able to access this tenant again with their existing credentials."
 msgstr "Unbanning this member will restore their access to this tenant. They will be able to access this tenant again with their existing credentials."
 
+#: src/pages/_app/settings/security.tsx
+msgid "Unique identifier for this SSO provider"
+msgstr "Unique identifier for this SSO provider"
+
 #: src/features/manage-billing/ui/plan-entitlement.tsx
 msgid "Unlimited"
 msgstr "Unlimited"
@@ -2886,6 +2939,10 @@ msgstr "Unlink failed"
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 msgid "Unverified"
 msgstr "Unverified"
+
+#: src/pages/_app/settings/security.tsx
+msgid "Update your password to keep your account secure"
+msgstr "Update your password to keep your account secure"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Update your profile and preferences in account settings"
@@ -2914,12 +2971,12 @@ msgid "URL path, e.g. about-us or blog/post"
 msgstr "URL path, e.g. about-us or blog/post"
 
 #: src/features/sign-in/ui/sign-in-form.tsx
-msgid "Use magic link instead"
-msgstr "Use magic link instead"
+#~ msgid "Use magic link instead"
+#~ msgstr "Use magic link instead"
 
 #: src/pages/sign-in.tsx
-msgid "Use this if your organization configured a custom OIDC provider for tenant sign-in."
-msgstr "Use this if your organization configured a custom OIDC provider for tenant sign-in."
+#~ msgid "Use this if your organization configured a custom OIDC provider for tenant sign-in."
+#~ msgstr "Use this if your organization configured a custom OIDC provider for tenant sign-in."
 
 #: src/pages/admin/users.$userId.tsx
 #~ msgid "User"
@@ -2928,6 +2985,10 @@ msgstr "Use this if your organization configured a custom OIDC provider for tena
 #: src/pages/admin/users.$userId.tsx
 #~ msgid "User |Key Value Admin"
 #~ msgstr "User |Key Value Admin"
+
+#: src/shared/ui/app-layout/app-header.tsx
+msgid "User menu"
+msgstr "User menu"
 
 #: src/pages/admin/users.$userId.tsx
 #: src/pages/admin/users.index.tsx
@@ -2946,6 +3007,10 @@ msgstr "Uses <0>@mantine/nprogress</0> for top loading bar"
 #: src/pages/loading-demo.tsx
 msgid "Uses <0>LoadingOverlay</0> component for full-screen loading"
 msgstr "Uses <0>LoadingOverlay</0> component for full-screen loading"
+
+#: src/pages/sign-in.tsx
+msgid "Using a corporate identity provider? <0>Sign in with Enterprise SSO</0>"
+msgstr "Using a corporate identity provider? <0>Sign in with Enterprise SSO</0>"
 
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 msgid "Verified"
@@ -3189,6 +3254,10 @@ msgstr "Your payment information is securely processed by our payment provider. 
 #: src/pages/_app/billing/index.tsx
 msgid "Your personal workspace doesn't require a subscription. Upgrade to an organization workspace to access additional features and team collaboration."
 msgstr "Your personal workspace doesn't require a subscription. Upgrade to an organization workspace to access additional features and team collaboration."
+
+#: src/pages/_app/settings/security.tsx
+msgid "Your Roles"
+msgstr "Your Roles"
 
 #: src/pages/sign-in.tsx
 msgid "Your session expired due to inactivity."

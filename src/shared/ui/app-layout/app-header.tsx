@@ -1,7 +1,7 @@
-import { Group, Burger, Avatar, Menu, Text } from "@mantine/core";
+import { Group, Burger, Avatar, Menu, Text, UnstyledButton } from "@mantine/core";
 import { IconLogout, IconUser, IconBuilding, IconPlus } from "@tabler/icons-react";
 import { Link, useNavigate } from "@tanstack/react-router";
-import { Trans } from "@lingui/react/macro";
+import { Trans, useLingui } from "@lingui/react/macro";
 import { useSignOut } from "@/features/sign-out";
 import { NotificationBell } from "@/features/notification-bell";
 import { useSessionStore } from "@/processes/session";
@@ -20,6 +20,7 @@ interface AppHeaderProps {
 }
 
 function UserMenu() {
+  const { t } = useLingui();
   const { isLoading, signOut } = useSignOut();
   const navigate = useNavigate();
   const accessToken = useSessionStore((s) => s.accessToken);
@@ -40,17 +41,15 @@ function UserMenu() {
   return (
     <Menu shadow="md" width={200} position="bottom-end">
       <Menu.Target>
-        <Avatar
-          src={profile?.avatarUrl}
-          size={32}
-          radius="xl"
-          color="blue"
-          variant="filled"
-          style={{ cursor: "pointer" }}
+        <UnstyledButton
+          style={{ cursor: "pointer", borderRadius: "50%", lineHeight: 0 }}
           data-testid="header-user-menu-button"
+          aria-label={displayName ? displayName : t`User menu`}
         >
-          {initials}
-        </Avatar>
+          <Avatar src={profile?.avatarUrl} size={32} radius="xl" color="blue" variant="filled">
+            {initials}
+          </Avatar>
+        </UnstyledButton>
       </Menu.Target>
 
       <Menu.Dropdown data-testid={TestSelectors.HEADER_USER_MENU}>
