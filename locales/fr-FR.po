@@ -15,7 +15,7 @@ msgstr ""
 
 #: src/pages/_app/cms-pages.index.tsx
 msgid "(no title)"
-msgstr "(no title)"
+msgstr "(sans titre)"
 
 #. placeholder {0}: localeToNameMap[locale]
 #. placeholder {0}: tenant?.name ?? t`Dashboard`
@@ -37,16 +37,16 @@ msgstr "{0} – {1}"
 #. placeholder {0}: plan.trialPeriodDays
 #: src/features/manage-billing/ui/plan-card.tsx
 #~ msgid "{0} Days Free Trial"
-#~ msgstr "{0} Days Free Trial"
+#~ msgstr "{0} jours d'essai gratuit"
 
 #. placeholder {0}: subscription.trialDaysLeft
 #: src/features/manage-billing/ui/current-subscription.tsx
 msgid "{0} Days Left"
-msgstr "{0} Days Left"
+msgstr "{0} jours restants"
 
 #: src/pages/admin/organizations.$tenantKey.tsx
 #~ msgid "{activeSubscriptions} active subscription(s)"
-#~ msgstr "{activeSubscriptions} active subscription(s)"
+#~ msgstr "{activeSubscriptions} abonnement(s) actif(s)"
 
 #: src/pages/admin/users.$userId.tsx
 #~ msgid "{displayName} |Key Value Admin"
@@ -54,7 +54,7 @@ msgstr "{0} Days Left"
 
 #: src/features/manage-billing/ui/plan-card.tsx
 msgid "{trialDays} Days Free Trial"
-msgstr "{trialDays} Days Free Trial"
+msgstr "{trialDays} jours d'essai gratuit"
 
 #. placeholder {0}: plan.billingPeriod.toLowerCase()
 #: src/features/manage-billing/ui/plan-card.tsx
@@ -64,31 +64,31 @@ msgstr "/ {0}"
 #. placeholder {0}: plan.billingPeriod.toLowerCase()
 #: src/features/manage-billing/ui/plan-card.tsx
 msgid "/ seat / {0}"
-msgstr "/ seat / {0}"
+msgstr "/ siège / {0}"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "• Everything is set up for you — no workspace or organization setup needed."
-msgstr "• Everything is set up for you — no workspace or organization setup needed."
+msgstr "• Tout est configuré pour vous — aucune configuration d'espace de travail ou d'organisation nécessaire."
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "• Explore settings anytime to customize your experience."
-msgstr "• Explore settings anytime to customize your experience."
+msgstr "• Explorez les paramètres à tout moment pour personnaliser votre expérience."
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "• Focus on your product value — let the platform handle complexity."
-msgstr "• Focus on your product value — let the platform handle complexity."
+msgstr "• Concentrez-vous sur la valeur de votre produit — laissez la plateforme gérer la complexité."
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "• Invite your team — your first steps are just a click away!"
-msgstr "• Invite your team — your first steps are just a click away!"
+msgstr "• Invitez votre équipe — vos premiers pas sont à portée de clic !"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 #~ msgid "• Invite your team, create your first steps take just a click away!"
-#~ msgstr "• Invite your team, create your first steps take just a click away!"
+#~ msgstr "• Invitez votre équipe, vos premiers pas ne sont qu'à un clic !"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "• No technical background needed — our intuitive UI is designed for everyone."
-msgstr "• No technical background needed — our intuitive UI is designed for everyone."
+msgstr "• Aucune formation technique nécessaire — notre interface intuitive est conçue pour tous."
 
 #: src/pages/_app/settings/security.tsx
 msgid "••••••••"
@@ -96,77 +96,77 @@ msgstr "••••••••"
 
 #: src/widgets/dashboard-personal-welcome/ui/dashboard-personal-welcome.tsx
 msgid "<0>Configure notifications</0> to stay informed."
-msgstr "<0>Configure notifications</0> to stay informed."
+msgstr "<0>Configurer les notifications</0> pour rester informé."
 
 #: src/widgets/dashboard-personal-welcome/ui/dashboard-personal-welcome.tsx
 msgid "<0>Create an organization</0> to collaborate with your team."
-msgstr "<0>Create an organization</0> to collaborate with your team."
+msgstr "<0>Créer une organisation</0> pour collaborer avec votre équipe."
 
 #: src/widgets/dashboard-personal-welcome/ui/dashboard-personal-welcome.tsx
 msgid "<0>Secure your account</0> by changing your password."
-msgstr "<0>Secure your account</0> by changing your password."
+msgstr "<0>Sécurisez votre compte</0> en changeant votre mot de passe."
 
 #: src/features/reset-password/ui/reset-password-form.tsx
 msgid "<0>Sign in now</0>"
-msgstr "<0>Sign in now</0>"
+msgstr "<0>Se connecter maintenant</0>"
 
 #: src/widgets/dashboard-personal-welcome/ui/dashboard-personal-welcome.tsx
 msgid "<0>Update your profile</0> with your name and avatar."
-msgstr "<0>Update your profile</0> with your name and avatar."
+msgstr "<0>Mettez à jour votre profil</0> avec votre nom et votre avatar."
 
 #: src/pages/loading-demo.tsx
 msgid "1. Initial Page Load"
-msgstr "1. Initial Page Load"
+msgstr "1. Chargement initial de la page"
 
 #: src/pages/loading-demo.tsx
 msgid "2. Page Transitions"
-msgstr "2. Page Transitions"
+msgstr "2. Transitions de page"
 
 #. placeholder {0}: defaultLocale ?? "default"
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
 msgid "A translation for the default locale ({0}) is required."
-msgstr "A translation for the default locale ({0}) is required."
+msgstr "Une traduction pour la locale par défaut ({0}) est requise."
 
 #: src/pages/invite.$token.tsx
 msgid "Accept invitation"
-msgstr "Accept invitation"
+msgstr "Accepter l'invitation"
 
 #: src/pages/invite.$token.tsx
 msgid "Accept Invitation"
-msgstr "Accept Invitation"
+msgstr "Accepter l'invitation"
 
 #: src/pages/invite.$token.tsx
 msgid "Accept your invitation to join a workspace."
-msgstr "Accept your invitation to join a workspace."
+msgstr "Acceptez votre invitation pour rejoindre un espace de travail."
 
 #: src/shared/ui/invitation-status-badge/invitation-status-badge.tsx
 msgid "Accepted"
-msgstr "Accepted"
+msgstr "Acceptée"
 
 #: src/pages/unauthorized.tsx
 msgid "Access Denied"
-msgstr "Access Denied"
+msgstr "Accès refusé"
 
 #: src/pages/unauthorized.tsx
 #~ msgid "Access Denied |Key Value Admin"
-#~ msgstr "Access Denied |Key Value Admin"
+#~ msgstr "Accès refusé |Key Value Admin"
 
 #: src/pages/loading-demo.tsx
 msgid "Accessible with proper keyboard handling"
-msgstr "Accessible with proper keyboard handling"
+msgstr "Accessible avec une gestion correcte du clavier"
 
 #: src/pages/signup.tsx
 #~ msgid "Account"
-#~ msgstr "Account"
+#~ msgstr "Compte"
 
 #: src/pages/auth.callback.tsx
 msgid "Account linked"
-msgstr "Account linked"
+msgstr "Compte lié"
 
 #: src/pages/auth.callback.tsx
 msgid "Account linked successfully."
-msgstr "Account linked successfully."
+msgstr "Compte lié avec succès."
 
 #: src/pages/_app/settings/general.tsx
 #: src/pages/_app/settings/notifications.tsx
@@ -174,11 +174,11 @@ msgstr "Account linked successfully."
 #: src/pages/_app/settings/security.tsx
 #: src/shared/ui/app-layout/app-nav.tsx
 msgid "Account Settings"
-msgstr "Account Settings"
+msgstr "Paramètres du compte"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Account unlinked"
-msgstr "Account unlinked"
+msgstr "Compte dissocié"
 
 #: src/features/manage-billing/ui/billing-info.tsx
 #: src/features/manage-organization/ui/organization-settings.tsx
@@ -191,7 +191,7 @@ msgstr "Acme Inc."
 
 #: src/features/signup/ui/signup-form.tsx
 #~ msgid "Acme Inc. (optional)"
-#~ msgstr "Acme Inc. (optional)"
+#~ msgstr "Acme Inc. (facultatif)"
 
 #: src/features/manage-organization/ui/member-actions.tsx
 msgid "Actions"

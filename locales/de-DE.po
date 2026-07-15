@@ -15,7 +15,7 @@ msgstr ""
 
 #: src/pages/_app/cms-pages.index.tsx
 msgid "(no title)"
-msgstr "(no title)"
+msgstr "(kein Titel)"
 
 #. placeholder {0}: localeToNameMap[locale]
 #. placeholder {0}: tenant?.name ?? t`Dashboard`
@@ -37,16 +37,16 @@ msgstr "{0} – {1}"
 #. placeholder {0}: plan.trialPeriodDays
 #: src/features/manage-billing/ui/plan-card.tsx
 #~ msgid "{0} Days Free Trial"
-#~ msgstr "{0} Days Free Trial"
+#~ msgstr "{0} Tage kostenlose Testversion"
 
 #. placeholder {0}: subscription.trialDaysLeft
 #: src/features/manage-billing/ui/current-subscription.tsx
 msgid "{0} Days Left"
-msgstr "{0} Days Left"
+msgstr "{0} Tage verbleibend"
 
 #: src/pages/admin/organizations.$tenantKey.tsx
 #~ msgid "{activeSubscriptions} active subscription(s)"
-#~ msgstr "{activeSubscriptions} active subscription(s)"
+#~ msgstr "{activeSubscriptions} aktives Abonnement(s)"
 
 #: src/pages/admin/users.$userId.tsx
 #~ msgid "{displayName} |Key Value Admin"
@@ -54,7 +54,7 @@ msgstr "{0} Days Left"
 
 #: src/features/manage-billing/ui/plan-card.tsx
 msgid "{trialDays} Days Free Trial"
-msgstr "{trialDays} Days Free Trial"
+msgstr "{trialDays} Tage kostenlose Testversion"
 
 #. placeholder {0}: plan.billingPeriod.toLowerCase()
 #: src/features/manage-billing/ui/plan-card.tsx
@@ -64,31 +64,31 @@ msgstr "/ {0}"
 #. placeholder {0}: plan.billingPeriod.toLowerCase()
 #: src/features/manage-billing/ui/plan-card.tsx
 msgid "/ seat / {0}"
-msgstr "/ seat / {0}"
+msgstr "/ Platz / {0}"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "• Everything is set up for you — no workspace or organization setup needed."
-msgstr "• Everything is set up for you — no workspace or organization setup needed."
+msgstr "• Alles ist für Sie eingerichtet — kein Workspace oder Organisations-Setup erforderlich."
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "• Explore settings anytime to customize your experience."
-msgstr "• Explore settings anytime to customize your experience."
+msgstr "• Erkunden Sie die Einstellungen jederzeit, um Ihr Erlebnis anzupassen."
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "• Focus on your product value — let the platform handle complexity."
-msgstr "• Focus on your product value — let the platform handle complexity."
+msgstr "• Konzentrieren Sie sich auf Ihren Mehrwert — die Plattform übernimmt die Komplexität."
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "• Invite your team — your first steps are just a click away!"
-msgstr "• Invite your team — your first steps are just a click away!"
+msgstr "• Laden Sie Ihr Team ein — Ihre ersten Schritte sind nur einen Klick entfernt!"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 #~ msgid "• Invite your team, create your first steps take just a click away!"
-#~ msgstr "• Invite your team, create your first steps take just a click away!"
+#~ msgstr "• Laden Sie Ihr Team ein, Ihre ersten Schritte sind nur einen Klick entfernt!"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "• No technical background needed — our intuitive UI is designed for everyone."
-msgstr "• No technical background needed — our intuitive UI is designed for everyone."
+msgstr "• Kein technisches Hintergrundwissen erforderlich — unsere intuitive Oberfläche ist für jeden gedacht."
 
 #: src/pages/_app/settings/security.tsx
 msgid "••••••••"
@@ -96,77 +96,77 @@ msgstr "••••••••"
 
 #: src/widgets/dashboard-personal-welcome/ui/dashboard-personal-welcome.tsx
 msgid "<0>Configure notifications</0> to stay informed."
-msgstr "<0>Configure notifications</0> to stay informed."
+msgstr "<0>Benachrichtigungen konfigurieren</0>, um informiert zu bleiben."
 
 #: src/widgets/dashboard-personal-welcome/ui/dashboard-personal-welcome.tsx
 msgid "<0>Create an organization</0> to collaborate with your team."
-msgstr "<0>Create an organization</0> to collaborate with your team."
+msgstr "<0>Organisation erstellen</0>, um mit Ihrem Team zusammenzuarbeiten."
 
 #: src/widgets/dashboard-personal-welcome/ui/dashboard-personal-welcome.tsx
 msgid "<0>Secure your account</0> by changing your password."
-msgstr "<0>Secure your account</0> by changing your password."
+msgstr "<0>Konto sichern</0>, indem Sie Ihr Passwort ändern."
 
 #: src/features/reset-password/ui/reset-password-form.tsx
 msgid "<0>Sign in now</0>"
-msgstr "<0>Sign in now</0>"
+msgstr "<0>Jetzt anmelden</0>"
 
 #: src/widgets/dashboard-personal-welcome/ui/dashboard-personal-welcome.tsx
 msgid "<0>Update your profile</0> with your name and avatar."
-msgstr "<0>Update your profile</0> with your name and avatar."
+msgstr "<0>Profil aktualisieren</0> mit Ihrem Namen und Avatar."
 
 #: src/pages/loading-demo.tsx
 msgid "1. Initial Page Load"
-msgstr "1. Initial Page Load"
+msgstr "1. Erster Seitenaufruf"
 
 #: src/pages/loading-demo.tsx
 msgid "2. Page Transitions"
-msgstr "2. Page Transitions"
+msgstr "2. Seitenübergänge"
 
 #. placeholder {0}: defaultLocale ?? "default"
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
 msgid "A translation for the default locale ({0}) is required."
-msgstr "A translation for the default locale ({0}) is required."
+msgstr "Eine Übersetzung für das Standard-Gebietsschema ({0}) ist erforderlich."
 
 #: src/pages/invite.$token.tsx
 msgid "Accept invitation"
-msgstr "Accept invitation"
+msgstr "Einladung annehmen"
 
 #: src/pages/invite.$token.tsx
 msgid "Accept Invitation"
-msgstr "Accept Invitation"
+msgstr "Einladung annehmen"
 
 #: src/pages/invite.$token.tsx
 msgid "Accept your invitation to join a workspace."
-msgstr "Accept your invitation to join a workspace."
+msgstr "Nehmen Sie Ihre Einladung an, einem Workspace beizutreten."
 
 #: src/shared/ui/invitation-status-badge/invitation-status-badge.tsx
 msgid "Accepted"
-msgstr "Accepted"
+msgstr "Angenommen"
 
 #: src/pages/unauthorized.tsx
 msgid "Access Denied"
-msgstr "Access Denied"
+msgstr "Zugriff verweigert"
 
 #: src/pages/unauthorized.tsx
 #~ msgid "Access Denied |Key Value Admin"
-#~ msgstr "Access Denied |Key Value Admin"
+#~ msgstr "Zugriff verweigert |Key Value Admin"
 
 #: src/pages/loading-demo.tsx
 msgid "Accessible with proper keyboard handling"
-msgstr "Accessible with proper keyboard handling"
+msgstr "Zugänglich mit korrekter Tastatursteuerung"
 
 #: src/pages/signup.tsx
 #~ msgid "Account"
-#~ msgstr "Account"
+#~ msgstr "Konto"
 
 #: src/pages/auth.callback.tsx
 msgid "Account linked"
-msgstr "Account linked"
+msgstr "Konto verknüpft"
 
 #: src/pages/auth.callback.tsx
 msgid "Account linked successfully."
-msgstr "Account linked successfully."
+msgstr "Konto erfolgreich verknüpft."
 
 #: src/pages/_app/settings/general.tsx
 #: src/pages/_app/settings/notifications.tsx
@@ -174,11 +174,11 @@ msgstr "Account linked successfully."
 #: src/pages/_app/settings/security.tsx
 #: src/shared/ui/app-layout/app-nav.tsx
 msgid "Account Settings"
-msgstr "Account Settings"
+msgstr "Kontoeinstellungen"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Account unlinked"
-msgstr "Account unlinked"
+msgstr "Kontoverbindung getrennt"
 
 #: src/features/manage-billing/ui/billing-info.tsx
 #: src/features/manage-organization/ui/organization-settings.tsx
@@ -195,226 +195,226 @@ msgstr "Acme Inc."
 
 #: src/features/manage-organization/ui/member-actions.tsx
 msgid "Actions"
-msgstr "Actions"
+msgstr "Aktionen"
 
 #: src/features/manage-billing/ui/plan-card.tsx
 #: src/shared/ui/tenant-status-badge/tenant-status-badge.tsx
 #: src/shared/ui/user-status-badge/user-status-badge.tsx
 #: src/widgets/dashboard-signup-chart/ui/dashboard-signup-chart.tsx
 msgid "Active"
-msgstr "Active"
+msgstr "Aktiv"
 
 #: src/features/manage-billing/ui/current-subscription.tsx
 #: src/features/manage-billing/ui/entitlements-card.tsx
 msgid "ACTIVE"
-msgstr "ACTIVE"
+msgstr "AKTIV"
 
 #: src/pages/_app/index.tsx
 msgid "Active members"
-msgstr "Active members"
+msgstr "Aktive Mitglieder"
 
 #: src/pages/dashboard.tsx
 #~ msgid "Active subscription"
-#~ msgstr "Active subscription"
+#~ msgstr "Aktives Abonnement"
 
 #: src/pages/admin/index.tsx
 #~ msgid "Active Subscriptions"
-#~ msgstr "Active Subscriptions"
+#~ msgstr "Aktive Abonnements"
 
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "Add locale"
-msgstr "Add locale"
+msgstr "Gebietsschema hinzufügen"
 
 #: src/features/invite-member/model/types.ts
 msgid "Admin"
-msgstr "Admin"
+msgstr "Administrator"
 
 #: src/features/manage-billing/ui/plan-entitlement.tsx
 msgid "Advanced Analytics"
-msgstr "Advanced Analytics"
+msgstr "Erweiterte Analysen"
 
 #: src/pages/billing-example.tsx
 #~ msgid "Advanced Projects (Upgrade Required)"
-#~ msgstr "Advanced Projects (Upgrade Required)"
+#~ msgstr "Erweiterte Projekte (Upgrade erforderlich)"
 
 #: src/pages/_app/cms-pages.index.tsx
 msgid "All statuses"
-msgstr "All statuses"
+msgstr "Alle Status"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "All the boring stuff is already done — focus on your idea!"
-msgstr "All the boring stuff is already done — focus on your idea!"
+msgstr "Der ganze langweilige Kram ist bereits erledigt — konzentrieren Sie sich auf Ihre Idee!"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Allow users to sign in with this provider"
-msgstr "Allow users to sign in with this provider"
+msgstr "Benutzern erlauben, sich mit diesem Anbieter anzumelden"
 
 #: src/features/signup/ui/signup-form.tsx
 #: src/pages/invite.$token.tsx
 msgid "Already have an account? <0>Sign in</0>"
-msgstr "Already have an account? <0>Sign in</0>"
+msgstr "Haben Sie bereits ein Konto? <0>Anmelden</0>"
 
 #: src/shared/ui/auth-layout/auth-layout.tsx
 msgid "always in reach."
-msgstr "always in reach."
+msgstr "immer griffbereit."
 
 #: src/features/manage-billing/ui/refund-list.tsx
 msgid "Amount"
-msgstr "Amount"
+msgstr "Betrag"
 
 #: src/features/signup/model/use-signup.ts
 msgid "An account with this email already exists."
-msgstr "An account with this email already exists."
+msgstr "Ein Konto mit dieser E-Mail-Adresse existiert bereits."
 
 #: src/features/signup/model/use-signup.ts
 #~ msgid "An account with this email or organization name already exists."
-#~ msgstr "An account with this email or organization name already exists."
+#~ msgstr "Ein Konto mit dieser E-Mail-Adresse oder diesem Organisationsnamen existiert bereits."
 
 #: src/features/create-organization/model/use-create-organization.ts
 msgid "An organization with this name already exists."
-msgstr "An organization with this name already exists."
+msgstr "Eine Organisation mit diesem Namen existiert bereits."
 
 #: src/features/page-admin/model/types.ts
 #: src/pages/_app/cms-pages.index.tsx
 msgid "Archived"
-msgstr "Archived"
+msgstr "Archiviert"
 
 #: src/features/page-admin/ui/delete-page-modal.tsx
 msgid "Are you sure you want to delete <0>{displayName}</0>? This action cannot be undone."
-msgstr "Are you sure you want to delete <0>{displayName}</0>? This action cannot be undone."
+msgstr "Möchten Sie <0>{displayName}</0> wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden."
 
 #. placeholder {0}: member.firstName
 #. placeholder {1}: member.lastName
 #: src/features/manage-organization/ui/member-actions.tsx
 msgid "Are you sure you want to remove <0>{0} {1}</0> from this organization? They will lose all access immediately."
-msgstr "Are you sure you want to remove <0>{0} {1}</0> from this organization? They will lose all access immediately."
+msgstr "Möchten Sie <0>{0} {1}</0> wirklich aus dieser Organisation entfernen? Der Zugriff wird sofort entzogen."
 
 #: src/features/ban-user/ui/ban-member-modal.tsx
 #: src/features/member-role/ui/transfer-ownership-modal.tsx
 msgid "Are you sure?"
-msgstr "Are you sure?"
+msgstr "Sind Sie sicher?"
 
 #: src/features/reset-password/ui/reset-password-form.tsx
 #: src/features/signup/ui/password-strength.tsx
 #: src/features/signup/ui/signup-form.tsx
 msgid "At least 8 characters"
-msgstr "At least 8 characters"
+msgstr "Mindestens 8 Zeichen"
 
 #: src/features/change-password/ui/change-password-modal.tsx
 #: src/pages/_app/settings/security.tsx
 msgid "At least 8 characters, at most 128"
-msgstr "At least 8 characters, at most 128"
+msgstr "Mindestens 8, höchstens 128 Zeichen"
 
 #: src/features/change-password/ui/change-password-modal.tsx
 #: src/pages/_app/settings/security.tsx
 msgid "At least one digit"
-msgstr "At least one digit"
+msgstr "Mindestens eine Ziffer"
 
 #: src/features/change-password/ui/change-password-modal.tsx
 #: src/pages/_app/settings/security.tsx
 msgid "At least one special character"
-msgstr "At least one special character"
+msgstr "Mindestens ein Sonderzeichen"
 
 #: src/features/page-admin/model/types.ts
 msgid "At least one translation is required"
-msgstr "At least one translation is required"
+msgstr "Mindestens eine Übersetzung ist erforderlich"
 
 #: src/shared/ui/admin-layout/admin-nav.tsx
 #~ msgid "Audit Log"
-#~ msgstr "Audit Log"
+#~ msgstr "Prüfprotokoll"
 
 #: src/pages/auth.callback.tsx
 msgid "Authentication failed"
-msgstr "Authentication failed"
+msgstr "Authentifizierung fehlgeschlagen"
 
 #: src/pages/admin/subscriptions.tsx
 #~ msgid "Auto-Renew"
-#~ msgstr "Auto-Renew"
+#~ msgstr "Automatisch verlängern"
 
 #: src/pages/loading-demo.tsx
 msgid "Automatic router integration via <0>router.subscribe()</0>"
-msgstr "Automatic router integration via <0>router.subscribe()</0>"
+msgstr "Automatische Router-Integration über <0>router.subscribe()</0>"
 
 #: src/pages/_app/billing/index.tsx
 msgid "Available Plans"
-msgstr "Available Plans"
+msgstr "Verfügbare Tarife"
 
 #: src/pages/create-organization.tsx
 msgid "Back"
-msgstr "Back"
+msgstr "Zurück"
 
 #: src/features/forgot-password/ui/forgot-password-form.tsx
 msgid "Back to <0>Sign in</0>"
-msgstr "Back to <0>Sign in</0>"
+msgstr "Zurück zur <0>Anmeldung</0>"
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
 msgid "Back to list"
-msgstr "Back to list"
+msgstr "Zurück zur Liste"
 
 #: src/pages/invite.$token.tsx
 #: src/pages/verify-email.tsx
 msgid "Back to sign in"
-msgstr "Back to sign in"
+msgstr "Zurück zur Anmeldung"
 
 #: src/features/magic-link/ui/magic-link-exchange-form.tsx
 #: src/features/magic-link/ui/magic-link-initiate-form.tsx
 msgid "Back to sign-in"
-msgstr "Back to sign-in"
+msgstr "Zurück zur Anmeldung"
 
 #: src/features/ban-user/ui/ban-member-modal.tsx
 msgid "Ban member"
-msgstr "Ban member"
+msgstr "Mitglied sperren"
 
 #: src/features/ban-user/ui/ban-member-modal.tsx
 #: src/features/manage-organization/ui/member-actions.tsx
 msgid "Ban Member"
-msgstr "Ban Member"
+msgstr "Mitglied sperren"
 
 #: src/features/ban-user/ui/ban-member-modal.tsx
 msgid "Banning this member will immediately invalidate all their active sessions, revoke their access to this tenant, and send them a notification email. They will not be able to access this tenant again until unbanned."
-msgstr "Banning this member will immediately invalidate all their active sessions, revoke their access to this tenant, and send them a notification email. They will not be able to access this tenant again until unbanned."
+msgstr "Das Sperren dieses Mitglieds macht alle aktiven Sitzungen sofort ungültig, entzieht den Zugang zu diesem Mandanten und sendet eine Benachrichtigungs-E-Mail. Das Mitglied kann erst nach Aufhebung der Sperre wieder zugreifen."
 
 #: src/pages/_app/billing/index.tsx
 #: src/shared/ui/app-layout/app-nav.tsx
 msgid "Billing"
-msgstr "Billing"
+msgstr "Abrechnung"
 
 #: src/features/manage-billing/ui/billing-info.tsx
 msgid "Billing Email"
-msgstr "Billing Email"
+msgstr "Abrechnungs-E-Mail"
 
 #: src/features/manage-billing/ui/billing-info.tsx
 msgid "Billing Information"
-msgstr "Billing Information"
+msgstr "Abrechnungsinformationen"
 
 #: src/pages/-billing-example.tsx
 msgid "Billing Integration Example"
-msgstr "Billing Integration Example"
+msgstr "Beispiel zur Abrechnungsintegration"
 
 #: src/features/manage-organization/ui/member-actions.tsx
 #~ msgid "Billing Manager"
-#~ msgstr "Billing Manager"
+#~ msgstr "Abrechnungsmanager"
 
 #: src/pages/_app/billing/index.tsx
 msgid "Billing Portal"
-msgstr "Billing Portal"
+msgstr "Abrechnungsportal"
 
 #: src/pages/_app/billing/index.tsx
 msgid "Billing Portal Unavailable"
-msgstr "Billing Portal Unavailable"
+msgstr "Abrechnungsportal nicht verfügbar"
 
 #: src/pages/sign-in.tsx
 #~ msgid "By signing in you agree to our <0>Terms of Service</0> and <1>Privacy Policy</1>."
-#~ msgstr "By signing in you agree to our <0>Terms of Service</0> and <1>Privacy Policy</1>."
+#~ msgstr "Durch die Anmeldung stimmen Sie unseren <0>Nutzungsbedingungen</0> und der <1>Datenschutzrichtlinie</1> zu."
 
 #: src/features/manage-organization/ui/member-actions.tsx
 #~ msgid "Can manage members and invitations."
-#~ msgstr "Can manage members and invitations."
+#~ msgstr "Kann Mitglieder und Einladungen verwalten."
 
 #: src/features/manage-organization/ui/member-actions.tsx
 #~ msgid "Can manage subscriptions and billing settings."
-#~ msgstr "Can manage subscriptions and billing settings."
+#~ msgstr "Kann Abonnements und Abrechnungseinstellungen verwalten."
 
 #: src/features/ban-user/ui/ban-member-modal.tsx
 #: src/features/ban-user/ui/unban-member-modal.tsx
@@ -427,418 +427,418 @@ msgstr "Billing Portal Unavailable"
 #: src/features/page-admin/ui/delete-page-modal.tsx
 #: src/pages/_app/cms-pages.create.tsx
 msgid "Cancel"
-msgstr "Cancel"
+msgstr "Abbrechen"
 
 #: src/pages/admin/subscriptions.tsx
 #~ msgid "Canceling"
-#~ msgstr "Canceling"
+#~ msgstr "Wird gekündigt"
 
 #: src/features/manage-billing/ui/current-subscription.tsx
 msgid "Cancels on"
-msgstr "Cancels on"
+msgstr "Wird gekündigt am"
 
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "Canonical URL"
-msgstr "Canonical URL"
+msgstr "Kanonische URL"
 
 #: src/features/member-role/ui/update-member-authorities-modal.tsx
 msgid "Change Member Role"
-msgstr "Change Member Role"
+msgstr "Mitgliederrolle ändern"
 
 #: src/features/change-password/ui/change-password-modal.tsx
 #: src/pages/_app/settings/security.tsx
 msgid "Change password"
-msgstr "Change password"
+msgstr "Passwort ändern"
 
 #: src/features/change-password/ui/change-password-modal.tsx
 #: src/pages/_app/settings/security.tsx
 msgid "Change Password"
-msgstr "Change Password"
+msgstr "Passwort ändern"
 
 #: src/features/manage-organization/ui/member-actions.tsx
 msgid "Change Role"
-msgstr "Change Role"
+msgstr "Rolle ändern"
 
 #: src/pages/signup.tsx
 #~ msgid "Check email"
-#~ msgstr "Check email"
+#~ msgstr "E-Mail prüfen"
 
 #: src/features/magic-link/ui/magic-link-initiate-form.tsx
 msgid "Check your email"
-msgstr "Check your email"
+msgstr "E-Mail prüfen"
 
 #: src/features/forgot-password/ui/forgot-password-form.tsx
 #: src/features/signup/ui/verify-email-prompt.tsx
 msgid "Check your inbox"
-msgstr "Check your inbox"
+msgstr "Posteingang prüfen"
 
 #: src/pages/reset-password.tsx
 msgid "Choose a new password"
-msgstr "Choose a new password"
+msgstr "Neues Passwort wählen"
 
 #: src/pages/invite.$token.tsx
 msgid "Choose a password"
-msgstr "Choose a password"
+msgstr "Passwort wählen"
 
 #: src/pages/reset-password.tsx
 msgid "Choose a strong password with at least 8 characters, including uppercase, lowercase, a number, and a special character."
-msgstr "Choose a strong password with at least 8 characters, including uppercase, lowercase, a number, and a special character."
+msgstr "Wählen Sie ein starkes Passwort mit mindestens 8 Zeichen, einschließlich Groß- und Kleinbuchstaben, einer Zahl und einem Sonderzeichen."
 
 #: src/pages/admin/organizations.index.tsx
 #: src/pages/admin/subscriptions.tsx
 #: src/pages/admin/users.index.tsx
 #~ msgid "Clear"
-#~ msgstr "Clear"
+#~ msgstr "Löschen"
 
 #: src/features/notification-bell/ui/notification-bell.tsx
 #: src/pages/_app/settings/notifications.tsx
 msgid "Clear all"
-msgstr "Clear all"
+msgstr "Alle löschen"
 
 #: src/pages/admin/organizations.index.tsx
 #: src/pages/admin/subscriptions.tsx
 #: src/pages/admin/users.index.tsx
 #~ msgid "Clear filters"
-#~ msgstr "Clear filters"
+#~ msgstr "Filter löschen"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Client ID"
-msgstr "Client ID"
+msgstr "Client-ID"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Client ID is required"
-msgstr "Client ID is required"
+msgstr "Client-ID ist erforderlich"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Client secret"
-msgstr "Client secret"
+msgstr "Client-Secret"
 
 #: src/features/invite-member/ui/invitation-details-modal.tsx
 msgid "Close"
-msgstr "Close"
+msgstr "Schließen"
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
 #: src/pages/_app/cms-pages.index.tsx
 #: src/shared/ui/app-layout/app-nav.tsx
 msgid "CMS Pages"
-msgstr "CMS Pages"
+msgstr "CMS-Seiten"
 
 #: src/features/invite-member/ui/send-invitation-modal.tsx
 msgid "colleague@example.com"
-msgstr "colleague@example.com"
+msgstr "kollege@beispiel.de"
 
 #: src/pages/admin/index.tsx
 #~ msgid "Coming soon"
-#~ msgstr "Coming soon"
+#~ msgstr "Demnächst verfügbar"
 
 #: src/features/manage-billing/ui/billing-info.tsx
 msgid "Company Name"
-msgstr "Company Name"
+msgstr "Firmenname"
 
 #: src/pages/loading-demo.tsx
 msgid "Complete"
-msgstr "Complete"
+msgstr "Abgeschlossen"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 #~ msgid "Complete your <0>profile</0> with your name and avatar"
-#~ msgstr "Complete your <0>profile</0> with your name and avatar"
+#~ msgstr "Vervollständigen Sie Ihr <0>Profil</0> mit Ihrem Namen und Avatar"
 
 #: src/pages/complete-profile.tsx
 msgid "Complete your profile"
-msgstr "Complete your profile"
+msgstr "Profil vervollständigen"
 
 #: src/pages/auth.callback.tsx
 msgid "Completing sign-in"
-msgstr "Completing sign-in"
+msgstr "Anmeldung wird abgeschlossen"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Configure a custom OIDC provider for your tenant. The client secret is write-only and will not be shown after saving."
-msgstr "Configure a custom OIDC provider for your tenant. The client secret is write-only and will not be shown after saving."
+msgstr "Konfigurieren Sie einen benutzerdefinierten OIDC-Anbieter für Ihren Mandanten. Das Client-Secret wird nur geschrieben und nach dem Speichern nicht mehr angezeigt."
 
 #: src/pages/_app/settings/security.tsx
 msgid "Configure custom OIDC provider for your organization"
-msgstr "Configure custom OIDC provider for your organization"
+msgstr "Benutzerdefinierten OIDC-Anbieter für Ihre Organisation konfigurieren"
 
 #: src/features/signup/ui/provisioning-wait.tsx
 msgid "Configuring settings"
-msgstr "Configuring settings"
+msgstr "Einstellungen werden konfiguriert"
 
 #: src/features/change-password/ui/change-password-modal.tsx
 #: src/features/reset-password/ui/reset-password-form.tsx
 #: src/pages/_app/settings/security.tsx
 msgid "Confirm new password"
-msgstr "Confirm new password"
+msgstr "Neues Passwort bestätigen"
 
 #: src/pages/verify-email.tsx
 msgid "Confirm your"
-msgstr "Confirm your"
+msgstr "Bestätigen Sie Ihre"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Connect"
-msgstr "Connect"
+msgstr "Verbinden"
 
 #: src/pages/_app/settings/security.tsx
 #: src/pages/auth.callback.tsx
 msgid "Connected"
-msgstr "Connected"
+msgstr "Verbunden"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Connected Accounts"
-msgstr "Connected Accounts"
+msgstr "Verknüpfte Konten"
 
 #: src/pages/-billing-example.tsx
 msgid "Contact Support"
-msgstr "Contact Support"
+msgstr "Support kontaktieren"
 
 #: src/features/page-admin/ui/page-translation-fields.tsx
 #: src/pages/_app/cms-pages.index.tsx
 msgid "Content"
-msgstr "Content"
+msgstr "Inhalt"
 
 #: src/features/page-admin/model/types.ts
 msgid "Content is required for the default locale"
-msgstr "Content is required for the default locale"
+msgstr "Inhalt ist für das Standard-Gebietsschema erforderlich"
 
 #: src/features/complete-profile/ui/complete-profile-form.tsx
 #: src/features/sign-in/ui/sign-in-form.tsx
 msgid "Continue"
-msgstr "Continue"
+msgstr "Weiter"
 
 #: src/pages/sign-in.tsx
 msgid "Continue with"
-msgstr "Continue with"
+msgstr "Weiter mit"
 
 #: src/pages/sign-in.tsx
 msgid "Continue with GitHub"
-msgstr "Continue with GitHub"
+msgstr "Weiter mit GitHub"
 
 #: src/pages/sign-in.tsx
 msgid "Continue with Google"
-msgstr "Continue with Google"
+msgstr "Weiter mit Google"
 
 #: src/pages/sign-in.tsx
 msgid "Continue with Microsoft"
-msgstr "Continue with Microsoft"
+msgstr "Weiter mit Microsoft"
 
 #: src/pages/sign-in.tsx
 msgid "Continue with SSO"
-msgstr "Continue with SSO"
+msgstr "Weiter mit SSO"
 
 #: src/features/sign-in/ui/demo-credentials-hint.tsx
 msgid "Copied!"
-msgstr "Copied!"
+msgstr "Kopiert!"
 
 #: src/features/sign-in/ui/demo-credentials-hint.tsx
 msgid "Copy"
-msgstr "Copy"
+msgstr "Kopieren"
 
 #~ msgid "Could not create Stripe Customer Portal session."
-#~ msgstr "Could not create Stripe Customer Portal session."
+#~ msgstr "Stripe-Kundenportal-Sitzung konnte nicht erstellt werden."
 
 #: src/pages/_app/cms-pages.create.tsx
 msgid "Could not create the page. Please check the form and try again."
-msgstr "Could not create the page. Please check the form and try again."
+msgstr "Seite konnte nicht erstellt werden. Bitte überprüfen Sie das Formular und versuchen Sie es erneut."
 
 #: src/pages/_app/settings/security.tsx
 msgid "Could not delete SSO configuration."
-msgstr "Could not delete SSO configuration."
+msgstr "SSO-Konfiguration konnte nicht gelöscht werden."
 
 #: src/features/page-admin/ui/delete-page-modal.tsx
 msgid "Could not delete the page. It may be published."
-msgstr "Could not delete the page. It may be published."
+msgstr "Seite konnte nicht gelöscht werden. Sie ist möglicherweise veröffentlicht."
 
 #: src/pages/admin/organizations.$tenantKey.tsx
 #~ msgid "Could not fetch members."
-#~ msgstr "Could not fetch members."
+#~ msgstr "Mitglieder konnten nicht abgerufen werden."
 
 #: src/pages/admin/organizations.$tenantKey.tsx
 #~ msgid "Could not fetch organization details."
-#~ msgstr "Could not fetch organization details."
+#~ msgstr "Organisationsdetails konnten nicht abgerufen werden."
 
 #: src/pages/admin/organizations.index.tsx
 #~ msgid "Could not fetch organizations from the API."
-#~ msgstr "Could not fetch organizations from the API."
+#~ msgstr "Organisationen konnten nicht von der API abgerufen werden."
 
 #: src/pages/_app/cms-pages.index.tsx
 msgid "Could not fetch pages from the API."
-msgstr "Could not fetch pages from the API."
+msgstr "Seiten konnten nicht von der API abgerufen werden."
 
 #: src/pages/admin/subscriptions.tsx
 #~ msgid "Could not fetch subscriptions from the API."
-#~ msgstr "Could not fetch subscriptions from the API."
+#~ msgstr "Abonnements konnten nicht von der API abgerufen werden."
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 msgid "Could not fetch the page details."
-msgstr "Could not fetch the page details."
+msgstr "Seitendetails konnten nicht abgerufen werden."
 
 #: src/pages/admin/users.$userId.tsx
 #~ msgid "Could not fetch user details."
-#~ msgstr "Could not fetch user details."
+#~ msgstr "Benutzerdetails konnten nicht abgerufen werden."
 
 #: src/pages/admin/users.index.tsx
 #~ msgid "Could not fetch users from the API."
-#~ msgstr "Could not fetch users from the API."
+#~ msgstr "Benutzer konnten nicht von der API abgerufen werden."
 
 #: src/pages/_app/settings/general.tsx
 #: src/pages/_app/settings/security.tsx
 msgid "Could not fetch your account details."
-msgstr "Could not fetch your account details."
+msgstr "Ihre Kontodetails konnten nicht abgerufen werden."
 
 #: src/pages/_app/team.tsx
 msgid "Could not load invitations."
-msgstr "Could not load invitations."
+msgstr "Einladungen konnten nicht geladen werden."
 
 #: src/pages/_app/team.tsx
 msgid "Could not load members."
-msgstr "Could not load members."
+msgstr "Mitglieder konnten nicht geladen werden."
 
 #: src/pages/_app/settings/organization.tsx
 msgid "Could not load organizations."
-msgstr "Could not load organizations."
+msgstr "Organisationen konnten nicht geladen werden."
 
 #: src/features/manage-billing/model/use-billing-portal.ts
 msgid "Could not open the billing portal. Please try again."
-msgstr "Could not open the billing portal. Please try again."
+msgstr "Abrechnungsportal konnte nicht geöffnet werden. Bitte versuchen Sie es erneut."
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 msgid "Could not save the page. Please check the form and try again."
-msgstr "Could not save the page. Please check the form and try again."
+msgstr "Seite konnte nicht gespeichert werden. Bitte überprüfen Sie das Formular und versuchen Sie es erneut."
 
 #: src/pages/_app/settings/security.tsx
 msgid "Could not start the linking flow."
-msgstr "Could not start the linking flow."
+msgstr "Verknüpfungsvorgang konnte nicht gestartet werden."
 
 #: src/pages/_app/settings/organization.tsx
 msgid "Could not switch organization."
-msgstr "Could not switch organization."
+msgstr "Organisation konnte nicht gewechselt werden."
 
 #: src/features/tenant-switcher/model/use-tenant-switcher.ts
 msgid "Could not switch organization. Please try again."
-msgstr "Could not switch organization. Please try again."
+msgstr "Organisation konnte nicht gewechselt werden. Bitte versuchen Sie es erneut."
 
 #: src/pages/_app/settings/security.tsx
 msgid "Could not unlink this provider."
-msgstr "Could not unlink this provider."
+msgstr "Dieser Anbieter konnte nicht getrennt werden."
 
 #: src/pages/_app/settings/security.tsx
 msgid "Could not update SSO configuration."
-msgstr "Could not update SSO configuration."
+msgstr "SSO-Konfiguration konnte nicht aktualisiert werden."
 
 #: src/features/signup/ui/signup-form.tsx
 #: src/pages/signup.tsx
 msgid "Create account"
-msgstr "Create account"
+msgstr "Konto erstellen"
 
 #: src/pages/invite.$token.tsx
 msgid "Create account and join"
-msgstr "Create account and join"
+msgstr "Konto erstellen und beitreten"
 
 #: src/features/create-organization/ui/create-organization-form.tsx
 #: src/pages/create-organization.tsx
 msgid "Create organization"
-msgstr "Create organization"
+msgstr "Organisation erstellen"
 
 #: src/pages/_app/settings/organization.tsx
 msgid "Create Organization"
-msgstr "Create Organization"
+msgstr "Organisation erstellen"
 
 #: src/pages/_app/cms-pages.create.tsx
 msgid "Create page"
-msgstr "Create page"
+msgstr "Seite erstellen"
 
 #: src/pages/-billing-example.tsx
 msgid "Create Project"
-msgstr "Create Project"
+msgstr "Projekt erstellen"
 
 #: src/pages/create-organization.tsx
 msgid "Create your"
-msgstr "Create your"
+msgstr "Erstellen Sie Ihre"
 
 #: src/pages/signup.tsx
 msgid "Create your account"
-msgstr "Create your account"
+msgstr "Konto erstellen"
 
 #: src/pages/signup.tsx
 msgid "Create your account and join the platform in seconds. No credit card required."
-msgstr "Create your account and join the platform in seconds. No credit card required."
+msgstr "Erstellen Sie Ihr Konto und treten Sie der Plattform in Sekunden bei. Keine Kreditkarte erforderlich."
 
 #: src/pages/signup.tsx
 #~ msgid "Create your account and workspace in seconds. No credit card required."
-#~ msgstr "Create your account and workspace in seconds. No credit card required."
+#~ msgstr "Erstellen Sie Ihr Konto und Ihren Workspace in Sekunden. Keine Kreditkarte erforderlich."
 
 #: src/pages/signup.tsx
 msgid "Create your account in seconds. No credit card required."
-msgstr "Create your account in seconds. No credit card required."
+msgstr "Erstellen Sie Ihr Konto in Sekunden. Keine Kreditkarte erforderlich."
 
 #: src/pages/invite.$token.tsx
 msgid "Create your account to accept this invitation."
-msgstr "Create your account to accept this invitation."
+msgstr "Erstellen Sie ein Konto, um diese Einladung anzunehmen."
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 #~ msgid "Create your first <0>organization</0> to collaborate with your team"
-#~ msgstr "Create your first <0>organization</0> to collaborate with your team"
+#~ msgstr "Erstellen Sie Ihre erste <0>Organisation</0> zur Zusammenarbeit mit Ihrem Team"
 
 #: src/pages/create-organization.tsx
 msgid "Create your organization"
-msgstr "Create your organization"
+msgstr "Organisation erstellen"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Create, manage & invite teams to your workspace"
-msgstr "Create, manage & invite teams to your workspace"
+msgstr "Teams erstellen, verwalten und in Ihren Workspace einladen"
 
 #: src/pages/admin/organizations.$tenantKey.tsx
 #: src/pages/admin/organizations.index.tsx
 #: src/pages/admin/subscriptions.tsx
 #~ msgid "Created"
-#~ msgstr "Created"
+#~ msgstr "Erstellt"
 
 #: src/features/signup/ui/provisioning-wait.tsx
 msgid "Creating your account"
-msgstr "Creating your account"
+msgstr "Konto wird erstellt"
 
 #: src/pages/_app/cms-pages.create.tsx
 msgid "Creation failed"
-msgstr "Creation failed"
+msgstr "Erstellung fehlgeschlagen"
 
 #: src/features/manage-billing/ui/billing-info.tsx
 msgid "Currency"
-msgstr "Currency"
+msgstr "Währung"
 
 #: src/features/tenant-switcher/ui/tenant-switcher.tsx
 #~ msgid "Current organization"
-#~ msgstr "Current organization"
+#~ msgstr "Aktuelle Organisation"
 
 #: src/features/change-password/ui/change-password-modal.tsx
 #: src/pages/_app/settings/security.tsx
 msgid "Current password"
-msgstr "Current password"
+msgstr "Aktuelles Passwort"
 
 #: src/features/change-password/model/types.ts
 #: src/pages/_app/settings/security.tsx
 msgid "Current password is required"
-msgstr "Current password is required"
+msgstr "Aktuelles Passwort ist erforderlich"
 
 #: src/features/manage-billing/ui/entitlements-card.tsx
 #: src/features/manage-billing/ui/plan-card.tsx
 msgid "Current Plan"
-msgstr "Current Plan"
+msgstr "Aktueller Tarif"
 
 #: src/pages/-billing-example.tsx
 msgid "Current plan limits:"
-msgstr "Current plan limits:"
+msgstr "Grenzen des aktuellen Tarifs:"
 
 #: src/features/manage-billing/ui/current-subscription.tsx
 msgid "Current Subscription"
-msgstr "Current Subscription"
+msgstr "Aktuelles Abonnement"
 
 #: src/features/tenant-switcher/ui/tenant-switcher.tsx
 msgid "Current workspace"
-msgstr "Current workspace"
+msgstr "Aktueller Workspace"
 
 #: src/widgets/dashboard-signup-chart/ui/dashboard-signup-chart.tsx
 msgid "Daily"
-msgstr "Daily"
+msgstr "Täglich"
 
 #: src/pages/_app/index.tsx
 #: src/shared/ui/app-layout/app-nav.tsx
@@ -851,128 +851,128 @@ msgstr "Dashboard"
 
 #: src/features/manage-billing/ui/refund-list.tsx
 msgid "Date"
-msgstr "Date"
+msgstr "Datum"
 
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "Default locale — required"
-msgstr "Default locale — required"
+msgstr "Standard-Gebietsschema — erforderlich"
 
 #: src/features/page-admin/ui/delete-page-modal.tsx
 #: src/pages/_app/cms-pages.index.tsx
 #: src/pages/_app/settings/security.tsx
 msgid "Delete"
-msgstr "Delete"
+msgstr "Löschen"
 
 #: src/features/page-admin/ui/delete-page-modal.tsx
 #: src/pages/_app/settings/security.tsx
 msgid "Delete failed"
-msgstr "Delete failed"
+msgstr "Löschen fehlgeschlagen"
 
 #: src/features/page-admin/ui/delete-page-modal.tsx
 msgid "Delete Page"
-msgstr "Delete Page"
+msgstr "Seite löschen"
 
 #: src/pages/_app/settings/security.tsx
 #: src/shared/ui/tenant-status-badge/tenant-status-badge.tsx
 #: src/shared/ui/user-status-badge/user-status-badge.tsx
 msgid "Deleted"
-msgstr "Deleted"
+msgstr "Gelöscht"
 
 #: src/features/sign-in/ui/demo-credentials-hint.tsx
 msgid "Demo environment"
-msgstr "Demo environment"
+msgstr "Demo-Umgebung"
 
 #: src/pages/loading-demo.tsx
 msgid "Demo LoadingOverlay (2s)"
-msgstr "Demo LoadingOverlay (2s)"
+msgstr "Demo Ladeüberlagerung (2 Sek.)"
 
 #: src/pages/loading-demo.tsx
 msgid "Demo Progress Bar"
-msgstr "Demo Progress Bar"
+msgstr "Demo-Fortschrittsbalken"
 
 #: src/features/signup/ui/verify-email-prompt.tsx
 msgid "Didn't receive it? Check your spam folder or"
-msgstr "Didn't receive it? Check your spam folder or"
+msgstr "Nichts erhalten? Prüfen Sie Ihren Spam-Ordner oder"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Disconnect"
-msgstr "Disconnect"
+msgstr "Trennen"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Display name"
-msgstr "Display name"
+msgstr "Anzeigename"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Display name is required"
-msgstr "Display name is required"
+msgstr "Anzeigename ist erforderlich"
 
 #: src/pages/sign-in.tsx
 msgid "Don't have an account? <0>Create one</0>"
-msgstr "Don't have an account? <0>Create one</0>"
+msgstr "Kein Konto? <0>Jetzt erstellen</0>"
 
 #: src/features/page-admin/model/types.ts
 #: src/pages/_app/cms-pages.index.tsx
 msgid "Draft"
-msgstr "Draft"
+msgstr "Entwurf"
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
 msgid "e.g. default, landing"
-msgstr "e.g. default, landing"
+msgstr "z. B. default, landing"
 
 #: src/features/magic-link/ui/magic-link-initiate-form.tsx
 #~ msgid "e.g., acme-corp"
-#~ msgstr "e.g., acme-corp"
+#~ msgstr "z. B. acme-corp"
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.index.tsx
 #: src/pages/_app/settings/organization.tsx
 msgid "Edit"
-msgstr "Edit"
+msgstr "Bearbeiten"
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 msgid "Edit — {defaultTitle}"
-msgstr "Edit — {defaultTitle}"
+msgstr "Bearbeiten — {defaultTitle}"
 
 #: src/pages/admin/organizations.$tenantKey.tsx
 #: src/pages/admin/organizations.index.tsx
 #~ msgid "Edit organization"
-#~ msgstr "Edit organization"
+#~ msgstr "Organisation bearbeiten"
 
 #: src/features/edit-tenant/ui/edit-tenant-modal.tsx
 #~ msgid "Edit Organization"
-#~ msgstr "Edit Organization"
+#~ msgstr "Organisation bearbeiten"
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 msgid "Edit Page"
-msgstr "Edit Page"
+msgstr "Seite bearbeiten"
 
 #: src/pages/_app/account.tsx
 #~ msgid "Edit profile"
-#~ msgstr "Edit profile"
+#~ msgstr "Profil bearbeiten"
 
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 msgid "Edit Profile"
-msgstr "Edit Profile"
+msgstr "Profil bearbeiten"
 
 #: src/features/manage-organization/ui/member-actions.tsx
 #~ msgid "Edit Roles"
-#~ msgstr "Edit Roles"
+#~ msgstr "Rollen bearbeiten"
 
 #. placeholder {0}: member.firstName
 #. placeholder {1}: member.lastName
 #: src/features/manage-organization/ui/member-actions.tsx
 #~ msgid "Edit Roles: {0} {1}"
-#~ msgstr "Edit Roles: {0} {1}"
+#~ msgstr "Rollen bearbeiten: {0} {1}"
 
 #: src/pages/admin/users.$userId.tsx
 #: src/pages/admin/users.index.tsx
 #~ msgid "Edit user"
-#~ msgstr "Edit user"
+#~ msgstr "Benutzer bearbeiten"
 
 #: src/features/edit-user/ui/edit-user-modal.tsx
 #~ msgid "Edit User"
-#~ msgstr "Edit User"
+#~ msgstr "Benutzer bearbeiten"
 
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 #: src/features/forgot-password/ui/forgot-password-form.tsx
@@ -982,80 +982,80 @@ msgstr "Edit Profile"
 #: src/pages/_app/settings/general.tsx
 #: src/pages/invite.$token.tsx
 msgid "Email"
-msgstr "Email"
+msgstr "E-Mail"
 
 #: src/features/invite-member/ui/send-invitation-modal.tsx
 msgid "Email address"
-msgstr "Email address"
+msgstr "E-Mail-Adresse"
 
 #: src/pages/verify-email.tsx
 msgid "email address."
-msgstr "email address."
+msgstr "E-Mail-Adresse."
 
 #: src/features/forgot-password/model/use-forgot-password.ts
 #: src/features/magic-link/model/use-magic-link-initiate.ts
 #: src/features/sign-in/model/use-sign-in.ts
 #: src/features/signup/model/use-signup.ts
 msgid "Email is required"
-msgstr "Email is required"
+msgstr "E-Mail ist erforderlich"
 
 #: src/pages/_app/account.tsx
 #~ msgid "Email unverified"
-#~ msgstr "Email unverified"
+#~ msgstr "E-Mail nicht verifiziert"
 
 #: src/pages/verify-email.tsx
 msgid "Email verification"
-msgstr "Email verification"
+msgstr "E-Mail-Verifizierung"
 
 #: src/pages/verify-email.tsx
 #: src/widgets/dashboard-signup-chart/ui/dashboard-signup-chart.tsx
 msgid "Email verified"
-msgstr "Email verified"
+msgstr "E-Mail verifiziert"
 
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 msgid "Email verified:"
-msgstr "Email verified:"
+msgstr "E-Mail verifiziert:"
 
 #: src/features/manage-billing/ui/billing-info.tsx
 msgid "email@company.com"
-msgstr "email@company.com"
+msgstr "email@unternehmen.de"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Enabled"
-msgstr "Enabled"
+msgstr "Aktiviert"
 
 #: src/features/forgot-password/model/use-forgot-password.ts
 #: src/features/magic-link/model/use-magic-link-initiate.ts
 #: src/features/sign-in/model/use-sign-in.ts
 #: src/features/signup/model/use-signup.ts
 msgid "Enter a valid email address"
-msgstr "Enter a valid email address"
+msgstr "Geben Sie eine gültige E-Mail-Adresse ein"
 
 #: src/features/change-password/ui/change-password-modal.tsx
 #: src/pages/_app/settings/security.tsx
 msgid "Enter new password"
-msgstr "Enter new password"
+msgstr "Neues Passwort eingeben"
 
 #: src/features/forgot-password/ui/forgot-password-form.tsx
 msgid "Enter the email address associated with your account and we'll send you a link to reset your password."
-msgstr "Enter the email address associated with your account and we'll send you a link to reset your password."
+msgstr "Geben Sie die mit Ihrem Konto verknüpfte E-Mail-Adresse ein und wir senden Ihnen einen Link zum Zurücksetzen Ihres Passworts."
 
 #: src/features/change-password/ui/change-password-modal.tsx
 #: src/pages/_app/settings/security.tsx
 msgid "Enter your current password"
-msgstr "Enter your current password"
+msgstr "Aktuelles Passwort eingeben"
 
 #: src/pages/magic-link.index.tsx
 msgid "Enter your email and we'll send you a magic link to sign in."
-msgstr "Enter your email and we'll send you a magic link to sign in."
+msgstr "Geben Sie Ihre E-Mail ein und wir senden Ihnen einen Magic Link zur Anmeldung."
 
 #: src/pages/invite.$token.tsx
 msgid "Enter your password to confirm your identity and join."
-msgstr "Enter your password to confirm your identity and join."
+msgstr "Geben Sie Ihr Passwort ein, um Ihre Identität zu bestätigen und beizutreten."
 
 #: src/features/signup/ui/verify-email-prompt.tsx
 msgid "Enter your workspace"
-msgstr "Enter your workspace"
+msgstr "Workspace betreten"
 
 #: src/pages/sign-in.tsx
 #~ msgid "Enterprise SSO"
@@ -1067,120 +1067,120 @@ msgstr "Enter your workspace"
 #: src/features/manage-billing/ui/webhook-log-list.tsx
 #: src/features/manage-organization/ui/organization-settings.tsx
 msgid "Error"
-msgstr "Error"
+msgstr "Fehler"
 
 #: src/shared/ui/error-boundary.tsx
 msgid "Error Details (Development)"
-msgstr "Error Details (Development)"
+msgstr "Fehlerdetails (Entwicklung)"
 
 #: src/features/manage-billing/ui/webhook-log-list.tsx
 msgid "Event Type"
-msgstr "Event Type"
+msgstr "Ereignistyp"
 
 #: src/pages/sign-in.tsx
 msgid "Example: acme1234"
-msgstr "Example: acme1234"
+msgstr "Beispiel: acme1234"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Example: Contoso SSO"
-msgstr "Example: Contoso SSO"
+msgstr "Beispiel: Contoso SSO"
 
 #: src/shared/ui/invitation-status-badge/invitation-status-badge.tsx
 msgid "Expired"
-msgstr "Expired"
+msgstr "Abgelaufen"
 
 #: src/features/invite-member/ui/invitation-details-modal.tsx
 #: src/pages/_app/team.tsx
 #: src/pages/invite.$token.tsx
 msgid "Expires"
-msgstr "Expires"
+msgstr "Läuft ab"
 
 #: src/features/ban-user/ui/ban-member-modal.tsx
 msgid "Expires at (optional)"
-msgstr "Expires at (optional)"
+msgstr "Läuft ab am (optional)"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 #~ msgid "Explore your <0>settings</0> to customize your experience"
-#~ msgstr "Explore your <0>settings</0> to customize your experience"
+#~ msgstr "Erkunden Sie Ihre <0>Einstellungen</0>, um Ihr Erlebnis anzupassen"
 
 #: src/pages/admin/organizations.tsx
 #: src/pages/admin/subscriptions.tsx
 #: src/pages/admin/users.tsx
 #~ msgid "Export"
-#~ msgstr "Export"
+#~ msgstr "Exportieren"
 
 #: src/pages/admin/index.tsx
 #~ msgid "Failed to load"
-#~ msgstr "Failed to load"
+#~ msgstr "Laden fehlgeschlagen"
 
 #: src/features/manage-billing/ui/billing-info.tsx
 msgid "Failed to load billing settings."
-msgstr "Failed to load billing settings."
+msgstr "Abrechnungseinstellungen konnten nicht geladen werden."
 
 #: src/pages/admin/organizations.$tenantKey.tsx
 #~ msgid "Failed to load organization"
-#~ msgstr "Failed to load organization"
+#~ msgstr "Organisation konnte nicht geladen werden"
 
 #: src/features/manage-organization/ui/organization-settings.tsx
 msgid "Failed to load organization settings."
-msgstr "Failed to load organization settings."
+msgstr "Organisationseinstellungen konnten nicht geladen werden."
 
 #: src/pages/admin/organizations.index.tsx
 #~ msgid "Failed to load organizations"
-#~ msgstr "Failed to load organizations"
+#~ msgstr "Organisationen konnten nicht geladen werden"
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 msgid "Failed to load page"
-msgstr "Failed to load page"
+msgstr "Seite konnte nicht geladen werden"
 
 #: src/pages/_app/cms-pages.index.tsx
 msgid "Failed to load pages"
-msgstr "Failed to load pages"
+msgstr "Seiten konnten nicht geladen werden"
 
 #: src/features/manage-billing/ui/plan-list.tsx
 msgid "Failed to load plans. Please try again later."
-msgstr "Failed to load plans. Please try again later."
+msgstr "Tarife konnten nicht geladen werden. Bitte versuchen Sie es später erneut."
 
 #: src/pages/_app/settings/general.tsx
 #: src/pages/_app/settings/security.tsx
 msgid "Failed to load profile"
-msgstr "Failed to load profile"
+msgstr "Profil konnte nicht geladen werden"
 
 #: src/features/manage-billing/ui/refund-list.tsx
 msgid "Failed to load refund history."
-msgstr "Failed to load refund history."
+msgstr "Rückerstattungsverlauf konnte nicht geladen werden."
 
 #: src/pages/admin/subscriptions.tsx
 #~ msgid "Failed to load subscriptions"
-#~ msgstr "Failed to load subscriptions"
+#~ msgstr "Abonnements konnten nicht geladen werden"
 
 #: src/pages/admin/users.$userId.tsx
 #~ msgid "Failed to load user"
-#~ msgstr "Failed to load user"
+#~ msgstr "Benutzer konnte nicht geladen werden"
 
 #: src/pages/admin/users.index.tsx
 #~ msgid "Failed to load users"
-#~ msgstr "Failed to load users"
+#~ msgstr "Benutzer konnten nicht geladen werden"
 
 #: src/features/manage-billing/ui/webhook-log-list.tsx
 msgid "Failed to load webhook log history."
-msgstr "Failed to load webhook log history."
+msgstr "Webhook-Protokollverlauf konnte nicht geladen werden."
 
 #: src/features/signup/ui/password-strength.tsx
 msgid "Fair"
-msgstr "Fair"
+msgstr "Ausreichend"
 
 #: src/pages/-billing-example.tsx
 msgid "Feature Gate Examples"
-msgstr "Feature Gate Examples"
+msgstr "Beispiele für Feature-Gates"
 
 #: src/pages/-billing-example.tsx
 msgid "Feature Usage Examples"
-msgstr "Feature Usage Examples"
+msgstr "Beispiele zur Feature-Nutzung"
 
 #: src/features/manage-billing/ui/current-subscription.tsx
 msgid "Features"
-msgstr "Features"
+msgstr "Funktionen"
 
 #: src/features/complete-profile/ui/complete-profile-form.tsx
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
@@ -1188,7 +1188,7 @@ msgstr "Features"
 #: src/pages/_app/settings/general.tsx
 #: src/pages/invite.$token.tsx
 msgid "First name"
-msgstr "First name"
+msgstr "Vorname"
 
 #: src/features/accept-invitation/model/use-accept-invitation.ts
 #: src/features/complete-profile/model/types.ts
@@ -1196,44 +1196,44 @@ msgstr "First name"
 #: src/features/signup/model/use-signup.ts
 #: src/pages/_app/settings/general.tsx
 msgid "First name is required"
-msgstr "First name is required"
+msgstr "Vorname ist erforderlich"
 
 #: src/features/signup/model/use-signup.ts
 msgid "First name is too long"
-msgstr "First name is too long"
+msgstr "Vorname ist zu lang"
 
 #: src/pages/forgot-password.tsx
 msgid "Forgot Password"
-msgstr "Forgot Password"
+msgstr "Passwort vergessen"
 
 #: src/features/sign-in/ui/sign-in-form.tsx
 msgid "Forgot password?"
-msgstr "Forgot password?"
+msgstr "Passwort vergessen?"
 
 #: src/pages/forgot-password.tsx
 msgid "Forgot your"
-msgstr "Forgot your"
+msgstr "Haben Sie Ihr"
 
 #: src/features/manage-billing/ui/current-subscription.tsx
 msgid "Free"
-msgstr "Free"
+msgstr "Kostenlos"
 
 #: src/pages/loading-demo.tsx
 msgid "Full-screen centered loader shown on first app load (while locale initializes)."
-msgstr "Full-screen centered loader shown on first app load (while locale initializes)."
+msgstr "Vollbild-Ladeanimation beim ersten App-Start (während das Gebietsschema initialisiert wird)."
 
 #: src/pages/_app/settings/general.tsx
 #: src/shared/ui/app-layout/app-nav.tsx
 msgid "General"
-msgstr "General"
+msgstr "Allgemein"
 
 #: src/pages/_app/settings/general.tsx
 msgid "General Settings"
-msgstr "General Settings"
+msgstr "Allgemeine Einstellungen"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Get Started"
-msgstr "Get Started"
+msgstr "Loslegen"
 
 #: src/pages/_app/settings/security.tsx
 msgid "GitHub"
@@ -1242,21 +1242,21 @@ msgstr "GitHub"
 #: src/pages/404.tsx
 #: src/pages/500.tsx
 msgid "Go home"
-msgstr "Go home"
+msgstr "Zur Startseite"
 
 #: src/pages/_app/billing/success.tsx
 msgid "Go to Billing"
-msgstr "Go to Billing"
+msgstr "Zur Abrechnung"
 
 #: src/pages/_app/billing/failure.tsx
 #: src/pages/_app/billing/success.tsx
 #: src/pages/unauthorized.tsx
 msgid "Go to Home"
-msgstr "Go to Home"
+msgstr "Zur Startseite"
 
 #: src/features/signup/ui/password-strength.tsx
 msgid "Good"
-msgstr "Good"
+msgstr "Gut"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Google"
@@ -1264,12 +1264,12 @@ msgstr "Google"
 
 #: src/widgets/dashboard-personal-welcome/ui/dashboard-personal-welcome.tsx
 msgid "Here's what you can do from your personal workspace:"
-msgstr "Here's what you can do from your personal workspace:"
+msgstr "Das können Sie in Ihrem persönlichen Workspace tun:"
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
 msgid "Hierarchy"
-msgstr "Hierarchy"
+msgstr "Hierarchie"
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
@@ -1281,15 +1281,15 @@ msgstr "Hierarchy"
 #: src/pages/_app/settings/security.tsx
 #: src/pages/_app/team.tsx
 msgid "Home"
-msgstr "Home"
+msgstr "Startseite"
 
 #: src/features/page-admin/ui/rich-content-editor.tsx
 msgid "HTML content. At least one paragraph required for the default locale."
-msgstr "HTML content. At least one paragraph required for the default locale."
+msgstr "HTML-Inhalt. Mindestens ein Absatz für das Standard-Gebietsschema erforderlich."
 
 #: src/pages/_app/settings/security.tsx
 msgid "https://issuer.example.com"
-msgstr "https://issuer.example.com"
+msgstr "https://aussteller.beispiel.de"
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 msgid "ID"
@@ -1301,120 +1301,120 @@ msgstr "ID"
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 msgid "Identity"
-msgstr "Identity"
+msgstr "Identität"
 
 #. placeholder {0}: form.values.email
 #: src/features/forgot-password/ui/forgot-password-form.tsx
 msgid "If <0>{0}</0> is registered, you'll receive a password reset link shortly. Check your spam folder if you don't see it."
-msgstr "If <0>{0}</0> is registered, you'll receive a password reset link shortly. Check your spam folder if you don't see it."
+msgstr "Wenn <0>{0}</0> registriert ist, erhalten Sie in Kürze einen Link zum Zurücksetzen des Passworts. Prüfen Sie Ihren Spam-Ordner, falls Sie ihn nicht sehen."
 
 #: src/pages/loading-demo.tsx
 msgid "Implementation Details"
-msgstr "Implementation Details"
+msgstr "Implementierungsdetails"
 
 #: src/features/accept-invitation/model/use-accept-invitation.ts
 msgid "Incorrect password. Please try again."
-msgstr "Incorrect password. Please try again."
+msgstr "Falsches Passwort. Bitte versuchen Sie es erneut."
 
 #: src/pages/500.tsx
 msgid "Internal server error."
-msgstr "Internal server error."
+msgstr "Interner Serverfehler."
 
 #: src/features/manage-billing/ui/billing-info.tsx
 msgid "Invalid email"
-msgstr "Invalid email"
+msgstr "Ungültige E-Mail"
 
 #: src/features/sign-in/model/use-sign-in.ts
 msgid "Invalid email or password"
-msgstr "Invalid email or password"
+msgstr "Ungültige E-Mail oder ungültiges Passwort"
 
 #: src/features/accept-invitation/model/use-accept-invitation.ts
 msgid "Invalid request. Please check your details and try again."
-msgstr "Invalid request. Please check your details and try again."
+msgstr "Ungültige Anfrage. Bitte überprüfen Sie Ihre Daten und versuchen Sie es erneut."
 
 #: src/features/reset-password/ui/reset-password-form.tsx
 msgid "Invalid reset link"
-msgstr "Invalid reset link"
+msgstr "Ungültiger Zurücksetz-Link"
 
 #: src/pages/verify-email.tsx
 msgid "Invalid verification link"
-msgstr "Invalid verification link"
+msgstr "Ungültiger Verifizierungslink"
 
 #: src/features/invite-member/ui/invitation-details-modal.tsx
 msgid "Invitation details"
-msgstr "Invitation details"
+msgstr "Einladungsdetails"
 
 #: src/pages/invite.$token.tsx
 msgid "Invitation not found"
-msgstr "Invitation not found"
+msgstr "Einladung nicht gefunden"
 
 #: src/features/invite-member/ui/send-invitation-modal.tsx
 #: src/pages/_app/team.tsx
 msgid "Invite member"
-msgstr "Invite member"
+msgstr "Mitglied einladen"
 
 #: src/pages/-billing-example.tsx
 msgid "Invite Members"
-msgstr "Invite Members"
+msgstr "Mitglieder einladen"
 
 #: src/pages/invite.$token.tsx
 msgid "invited."
-msgstr "invited."
+msgstr "eingeladen."
 
 #: src/pages/_app/settings/security.tsx
 msgid "Issuer URI"
-msgstr "Issuer URI"
+msgstr "Aussteller-URI"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Issuer URI is required"
-msgstr "Issuer URI is required"
+msgstr "Aussteller-URI ist erforderlich"
 
 #: src/features/complete-profile/ui/complete-profile-form.tsx
 #: src/features/signup/ui/signup-form.tsx
 #: src/pages/invite.$token.tsx
 msgid "Jane"
-msgstr "Jane"
+msgstr "Jana"
 
 #. placeholder {0}: preview.tenantName
 #: src/pages/invite.$token.tsx
 msgid "Join {0}"
-msgstr "Join {0}"
+msgstr "{0} beitreten"
 
 #. placeholder {0}: preview.tenantName
 #: src/pages/invite.$token.tsx
 msgid "Join {0} and start collaborating with your team."
-msgstr "Join {0} and start collaborating with your team."
+msgstr "{0} beitreten und mit Ihrem Team zusammenarbeiten."
 
 #: src/pages/_app/account.tsx
 #~ msgid "Joined"
-#~ msgstr "Joined"
+#~ msgstr "Beigetreten"
 
 #: src/pages/admin/users.$userId.tsx
 #~ msgid "Joined Organizations"
-#~ msgstr "Joined Organizations"
+#~ msgstr "Beigetretene Organisationen"
 
 #: src/pages/complete-profile.tsx
 msgid "Just a name to get started — everything else can wait."
-msgstr "Just a name to get started — everything else can wait."
+msgstr "Nur ein Name zum Starten — alles andere kann warten."
 
 #: src/pages/_app/settings/organization.tsx
 msgid "Key"
-msgstr "Key"
+msgstr "Schlüssel"
 
 #: src/features/edit-tenant/ui/edit-tenant-modal.tsx
 #~ msgid "Key:"
-#~ msgstr "Key:"
+#~ msgstr "Schlüssel:"
 
 #: src/features/complete-profile/ui/complete-profile-form.tsx
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 #: src/pages/_app/settings/general.tsx
 #: src/shared/ui/locale-switcher/locale-switcher.tsx
 msgid "Language"
-msgstr "Language"
+msgstr "Sprache"
 
 #: src/features/complete-profile/model/types.ts
 msgid "Language is required"
-msgstr "Language is required"
+msgstr "Sprache ist erforderlich"
 
 #: src/features/complete-profile/ui/complete-profile-form.tsx
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
@@ -1422,7 +1422,7 @@ msgstr "Language is required"
 #: src/pages/_app/settings/general.tsx
 #: src/pages/invite.$token.tsx
 msgid "Last name"
-msgstr "Last name"
+msgstr "Nachname"
 
 #: src/features/accept-invitation/model/use-accept-invitation.ts
 #: src/features/complete-profile/model/types.ts
@@ -1430,167 +1430,167 @@ msgstr "Last name"
 #: src/features/signup/model/use-signup.ts
 #: src/pages/_app/settings/general.tsx
 msgid "Last name is required"
-msgstr "Last name is required"
+msgstr "Nachname ist erforderlich"
 
 #: src/features/signup/model/use-signup.ts
 msgid "Last name is too long"
-msgstr "Last name is too long"
+msgstr "Nachname ist zu lang"
 
 #: src/pages/_app/account.tsx
 #~ msgid "Last updated"
-#~ msgstr "Last updated"
+#~ msgstr "Zuletzt aktualisiert"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Leave blank to keep existing secret"
-msgstr "Leave blank to keep existing secret"
+msgstr "Leer lassen, um das bestehende Secret beizubehalten"
 
 #: src/features/signup/ui/signup-form.tsx
 #~ msgid "Leave blank to use your name"
-#~ msgstr "Leave blank to use your name"
+#~ msgstr "Leer lassen, um Ihren Namen zu verwenden"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 #~ msgid "Let's get you up and running with a quick guide."
-#~ msgstr "Let's get you up and running with a quick guide."
+#~ msgstr "Wir bringen Sie mit einer schnellen Anleitung zum Laufen."
 
 #: src/features/manage-billing/ui/current-subscription.tsx
 msgid "Limited support"
-msgstr "Limited support"
+msgstr "Eingeschränkter Support"
 
 #: src/pages/verify-email.tsx
 msgid "Link expired or invalid"
-msgstr "Link expired or invalid"
+msgstr "Link abgelaufen oder ungültig"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Link external accounts for quick sign-in"
-msgstr "Link external accounts for quick sign-in"
+msgstr "Externe Konten für schnelle Anmeldung verknüpfen"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Link failed"
-msgstr "Link failed"
+msgstr "Verknüpfung fehlgeschlagen"
 
 #: src/pages/_app/billing/index.tsx
 msgid "Loading billing information…"
-msgstr "Loading billing information…"
+msgstr "Abrechnungsinformationen werden geladen…"
 
 #: src/pages/loading-demo.tsx
 msgid "Loading Demo"
-msgstr "Loading Demo"
+msgstr "Demo Ladevorgang"
 
 #: src/pages/loading-demo.tsx
 #~ msgid "Loading Demo |Key Value Admin"
-#~ msgstr "Loading Demo |Key Value Admin"
+#~ msgstr "Demo Ladevorgang |Key Value Admin"
 
 #: src/pages/loading-demo.tsx
 msgid "Loading States Demo"
-msgstr "Loading States Demo"
+msgstr "Demo Ladezustände"
 
 #: src/pages/invite.$token.tsx
 msgid "Loading your invitation…"
-msgstr "Loading your invitation…"
+msgstr "Ihre Einladung wird geladen…"
 
 #: src/shared/ui/loading-overlay/loading-overlay.tsx
 msgid "Loading..."
-msgstr "Loading..."
+msgstr "Wird geladen..."
 
 #: src/features/complete-profile/ui/complete-profile-form.tsx
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 #: src/pages/_app/settings/general.tsx
 msgid "Loading…"
-msgstr "Loading…"
+msgstr "Wird geladen…"
 
 #: src/features/page-admin/model/types.ts
 msgid "Locale is required"
-msgstr "Locale is required"
+msgstr "Gebietsschema ist erforderlich"
 
 #: src/shared/ui/user-status-badge/user-status-badge.tsx
 #: src/widgets/dashboard-signup-chart/ui/dashboard-signup-chart.tsx
 msgid "Locked"
-msgstr "Locked"
+msgstr "Gesperrt"
 
 #: src/pages/_app/index.tsx
 msgid "Locked / Suspended"
-msgstr "Locked / Suspended"
+msgstr "Gesperrt / Ausgesetzt"
 
 #: src/features/signup/ui/password-strength.tsx
 msgid "Lowercase letter"
-msgstr "Lowercase letter"
+msgstr "Kleinbuchstabe"
 
 #: src/features/magic-link/model/use-magic-link-exchange.ts
 msgid "Magic link is invalid or has expired. Please request a new one."
-msgstr "Magic link is invalid or has expired. Please request a new one."
+msgstr "Der Magic Link ist ungültig oder abgelaufen. Bitte fordern Sie einen neuen an."
 
 #: src/pages/admin/index.tsx
 #~ msgid "Manage organizations"
-#~ msgstr "Manage organizations"
+#~ msgstr "Organisationen verwalten"
 
 #: src/pages/admin/index.tsx
 #~ msgid "Manage subscriptions"
-#~ msgstr "Manage subscriptions"
+#~ msgstr "Abonnements verwalten"
 
 #: src/pages/dashboard.tsx
 #~ msgid "Manage team"
-#~ msgstr "Manage team"
+#~ msgstr "Team verwalten"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Manage user roles, permissions & access"
-msgstr "Manage user roles, permissions & access"
+msgstr "Benutzerrollen, Berechtigungen und Zugriff verwalten"
 
 #: src/pages/admin/index.tsx
 #~ msgid "Manage users"
-#~ msgstr "Manage users"
+#~ msgstr "Benutzer verwalten"
 
 #: src/pages/_app/billing/index.tsx
 msgid "Manage your billing information, view invoice history, and update your payment methods directly via our secure billing portal."
-msgstr "Manage your billing information, view invoice history, and update your payment methods directly via our secure billing portal."
+msgstr "Verwalten Sie Ihre Abrechnungsinformationen, zeigen Sie den Rechnungsverlauf an und aktualisieren Sie Ihre Zahlungsmethoden direkt über unser sicheres Abrechnungsportal."
 
 #~ msgid "Manage your billing information, view invoice history, and update your payment methods directly via our secure Stripe Customer Portal."
-#~ msgstr "Manage your billing information, view invoice history, and update your payment methods directly via our secure Stripe Customer Portal."
+#~ msgstr "Verwalten Sie Ihre Abrechnungsinformationen, zeigen Sie den Rechnungsverlauf an und aktualisieren Sie Ihre Zahlungsmethoden direkt über unser sicheres Stripe-Kundenportal."
 
 #: src/pages/_app/billing/index.tsx
 msgid "Manage your billing information, view order history, and update your payment methods directly via our secure billing portal."
-msgstr "Manage your billing information, view order history, and update your payment methods directly via our secure billing portal."
+msgstr "Verwalten Sie Ihre Abrechnungsinformationen, zeigen Sie den Bestellverlauf an und aktualisieren Sie Ihre Zahlungsmethoden direkt über unser sicheres Abrechnungsportal."
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Manage your subscription and billing when you are ready"
-msgstr "Manage your subscription and billing when you are ready"
+msgstr "Verwalten Sie Ihr Abonnement und Ihre Abrechnung, wenn Sie bereit sind"
 
 #: src/shared/ui/auth-layout/auth-layout.tsx
 msgid "Manage your team, subscriptions, and settings — all from one place, secured by enterprise-grade authentication."
-msgstr "Manage your team, subscriptions, and settings — all from one place, secured by enterprise-grade authentication."
+msgstr "Verwalten Sie Ihr Team, Abonnements und Einstellungen — alles an einem Ort, gesichert durch Unternehmensauthentifizierung."
 
 #: src/features/notification-bell/ui/notification-bell.tsx
 #: src/pages/_app/settings/notifications.tsx
 msgid "Mark all as read"
-msgstr "Mark all as read"
+msgstr "Alle als gelesen markieren"
 
 #: src/pages/-billing-example.tsx
 msgid "Max Projects:"
-msgstr "Max Projects:"
+msgstr "Max. Projekte:"
 
 #: src/pages/-billing-example.tsx
 msgid "Max Users:"
-msgstr "Max Users:"
+msgstr "Max. Benutzer:"
 
 #: src/features/invite-member/model/types.ts
 #: src/features/member-role/ui/update-member-authorities-modal.tsx
 msgid "Member"
-msgstr "Member"
+msgstr "Mitglied"
 
 #: src/widgets/dashboard-signup-chart/ui/dashboard-signup-chart.tsx
 msgid "Member Signups"
-msgstr "Member Signups"
+msgstr "Mitglieder-Registrierungen"
 
 #: src/pages/admin/organizations.$tenantKey.tsx
 #~ msgid "member(s)"
-#~ msgstr "member(s)"
+#~ msgstr "Mitglied(er)"
 
 #: src/pages/_app/team.tsx
 msgid "Members"
-msgstr "Members"
+msgstr "Mitglieder"
 
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "Meta description for search engines"
-msgstr "Meta description for search engines"
+msgstr "Meta-Beschreibung für Suchmaschinen"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Microsoft"
@@ -1599,243 +1599,243 @@ msgstr "Microsoft"
 #: src/features/manage-billing/ui/plan-list.tsx
 #: src/widgets/dashboard-signup-chart/ui/dashboard-signup-chart.tsx
 msgid "Monthly"
-msgstr "Monthly"
+msgstr "Monatlich"
 
 #: src/features/invite-member/model/types.ts
 msgid "Must be a valid email address"
-msgstr "Must be a valid email address"
+msgstr "Muss eine gültige E-Mail-Adresse sein"
 
 #: src/features/page-admin/model/types.ts
 msgid "Must be a valid UUID"
-msgstr "Must be a valid UUID"
+msgstr "Muss eine gültige UUID sein"
 
 #: src/shared/ui/app-layout/app-header.tsx
 msgid "My Account"
-msgstr "My Account"
+msgstr "Mein Konto"
 
 #: src/features/manage-organization/ui/organization-settings.tsx
 msgid "Name is too short"
-msgstr "Name is too short"
+msgstr "Name ist zu kurz"
 
 #: src/pages/_app/cms-pages.create.tsx
 msgid "New"
-msgstr "New"
+msgstr "Neu"
 
 #: src/pages/_app/cms-pages.create.tsx
 msgid "New CMS Page"
-msgstr "New CMS Page"
+msgstr "Neue CMS-Seite"
 
 #: src/features/tenant-switcher/ui/tenant-switcher.tsx
 #: src/shared/ui/app-layout/app-header.tsx
 msgid "New Organization"
-msgstr "New Organization"
+msgstr "Neue Organisation"
 
 #: src/pages/_app/cms-pages.index.tsx
 msgid "New page"
-msgstr "New page"
+msgstr "Neue Seite"
 
 #: src/pages/_app/cms-pages.create.tsx
 msgid "New Page"
-msgstr "New Page"
+msgstr "Neue Seite"
 
 #: src/features/change-password/ui/change-password-modal.tsx
 #: src/features/reset-password/ui/reset-password-form.tsx
 #: src/pages/_app/settings/security.tsx
 msgid "New password"
-msgstr "New password"
+msgstr "Neues Passwort"
 
 #: src/widgets/dashboard-signup-chart/ui/dashboard-signup-chart.tsx
 msgid "New signups"
-msgstr "New signups"
+msgstr "Neue Registrierungen"
 
 #: src/features/manage-billing/ui/current-subscription.tsx
 msgid "Next Billing Date"
-msgstr "Next Billing Date"
+msgstr "Nächstes Abrechnungsdatum"
 
 #: src/pages/admin/organizations.$tenantKey.tsx
 #~ msgid "No active subscription"
-#~ msgstr "No active subscription"
+#~ msgstr "Kein aktives Abonnement"
 
 #: src/features/manage-billing/ui/entitlements-card.tsx
 msgid "No active subscription found. Subscribe to a plan to access platform features."
-msgstr "No active subscription found. Subscribe to a plan to access platform features."
+msgstr "Kein aktives Abonnement gefunden. Abonnieren Sie einen Tarif, um auf Plattformfunktionen zuzugreifen."
 
 #: src/features/sign-in/model/use-sign-in.ts
 msgid "No active tenant memberships found for this account"
-msgstr "No active tenant memberships found for this account"
+msgstr "Für dieses Konto wurden keine aktiven Mandantenmitgliedschaften gefunden"
 
 #: src/features/manage-billing/ui/billing-info.tsx
 msgid "No billing information has been configured yet. Fill in the details below to get started."
-msgstr "No billing information has been configured yet. Fill in the details below to get started."
+msgstr "Es wurden noch keine Abrechnungsinformationen konfiguriert. Füllen Sie die folgenden Details aus, um zu beginnen."
 
 #: src/pages/_app/settings/security.tsx
 msgid "No external sign-in providers are enabled by your organization."
-msgstr "No external sign-in providers are enabled by your organization."
+msgstr "Ihre Organisation hat keine externen Anmeldeanbieter aktiviert."
 
 #: src/pages/_app/settings/security.tsx
 #~ msgid "No external sign-in providers are enabled."
-#~ msgstr "No external sign-in providers are enabled."
+#~ msgstr "Es sind keine externen Anmeldeanbieter aktiviert."
 
 #: src/pages/_app/settings/organization.tsx
 msgid "No matches."
-msgstr "No matches."
+msgstr "Keine Treffer."
 
 #: src/pages/admin/organizations.$tenantKey.tsx
 #~ msgid "No members found"
-#~ msgstr "No members found"
+#~ msgstr "Keine Mitglieder gefunden"
 
 #: src/pages/_app/team.tsx
 msgid "No members found."
-msgstr "No members found."
+msgstr "Keine Mitglieder gefunden."
 
 #: src/pages/admin/organizations.$tenantKey.tsx
 #~ msgid "No members match the search"
-#~ msgstr "No members match the search"
+#~ msgstr "Keine Mitglieder entsprechen der Suche"
 
 #: src/pages/_app/team.tsx
 msgid "No members match the search."
-msgstr "No members match the search."
+msgstr "Keine Mitglieder entsprechen der Suche."
 
 #: src/features/notification-bell/ui/notification-bell.tsx
 #: src/pages/_app/settings/notifications.tsx
 msgid "No notifications yet"
-msgstr "No notifications yet"
+msgstr "Noch keine Benachrichtigungen"
 
 #: src/pages/admin/organizations.index.tsx
 #~ msgid "No organizations found"
-#~ msgstr "No organizations found"
+#~ msgstr "Keine Organisationen gefunden"
 
 #: src/pages/_app/settings/organization.tsx
 msgid "No organizations found."
-msgstr "No organizations found."
+msgstr "Keine Organisationen gefunden."
 
 #: src/pages/admin/organizations.index.tsx
 #~ msgid "No organizations match the current filters"
-#~ msgstr "No organizations match the current filters"
+#~ msgstr "Keine Organisationen entsprechen den aktuellen Filtern"
 
 #: src/pages/_app/settings/organization.tsx
 msgid "No organizations yet"
-msgstr "No organizations yet"
+msgstr "Noch keine Organisationen"
 
 #: src/pages/_app/cms-pages.index.tsx
 msgid "No pages found"
-msgstr "No pages found"
+msgstr "Keine Seiten gefunden"
 
 #: src/pages/_app/cms-pages.index.tsx
 msgid "No pages match the current filter"
-msgstr "No pages match the current filter"
+msgstr "Keine Seiten entsprechen dem aktuellen Filter"
 
 #: src/features/sign-in/ui/sign-in-form.tsx
 msgid "No password? <0>Email me a sign-in link</0>"
-msgstr "No password? <0>Email me a sign-in link</0>"
+msgstr "Kein Passwort? <0>Anmeldelink per E-Mail senden</0>"
 
 #: src/pages/_app/team.tsx
 msgid "No pending invitations."
-msgstr "No pending invitations."
+msgstr "Keine ausstehenden Einladungen."
 
 #: src/features/manage-billing/ui/plan-list.tsx
 msgid "No plans available at the moment."
-msgstr "No plans available at the moment."
+msgstr "Derzeit keine Tarife verfügbar."
 
 #: src/shared/ui/app-layout/app-nav.tsx
 msgid "No results"
-msgstr "No results"
+msgstr "Keine Ergebnisse"
 
 #: src/pages/_app/settings/security.tsx
 msgid "No roles assigned."
-msgstr "No roles assigned."
+msgstr "Keine Rollen zugewiesen."
 
 #: src/pages/admin/subscriptions.tsx
 #~ msgid "No subscriptions found"
-#~ msgstr "No subscriptions found"
+#~ msgstr "Keine Abonnements gefunden"
 
 #: src/pages/admin/organizations.$tenantKey.tsx
 #~ msgid "No subscriptions found for this organization."
-#~ msgstr "No subscriptions found for this organization."
+#~ msgstr "Keine Abonnements für diese Organisation gefunden."
 
 #: src/pages/admin/subscriptions.tsx
 #~ msgid "No subscriptions match the current filters"
-#~ msgstr "No subscriptions match the current filters"
+#~ msgstr "Keine Abonnements entsprechen den aktuellen Filtern"
 
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "No translations added. At least the default locale is required."
-msgstr "No translations added. At least the default locale is required."
+msgstr "Keine Übersetzungen hinzugefügt. Mindestens das Standard-Gebietsschema ist erforderlich."
 
 #: src/pages/admin/users.index.tsx
 #~ msgid "No users found"
-#~ msgstr "No users found"
+#~ msgstr "Keine Benutzer gefunden"
 
 #: src/pages/admin/users.index.tsx
 #~ msgid "No users match the current filters"
-#~ msgstr "No users match the current filters"
+#~ msgstr "Keine Benutzer entsprechen den aktuellen Filtern"
 
 #: src/features/manage-billing/ui/webhook-log-list.tsx
 msgid "No webhook logs found."
-msgstr "No webhook logs found."
+msgstr "Keine Webhook-Protokolle gefunden."
 
 #: src/pages/forgot-password.tsx
 msgid "No worries — enter your email and we'll send you a secure link to reset it."
-msgstr "No worries — enter your email and we'll send you a secure link to reset it."
+msgstr "Kein Problem — geben Sie Ihre E-Mail ein und wir senden Ihnen einen sicheren Link zum Zurücksetzen."
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
 msgid "None (top-level)"
-msgstr "None (top-level)"
+msgstr "Keine (oberste Ebene)"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Not connected"
-msgstr "Not connected"
+msgstr "Nicht verbunden"
 
 #: src/features/notification-bell/ui/notification-bell.tsx
 #: src/pages/_app/settings/notifications.tsx
 #: src/shared/ui/app-layout/app-nav.tsx
 msgid "Notifications"
-msgstr "Notifications"
+msgstr "Benachrichtigungen"
 
 #: src/shared/ui/admin-layout/admin-header.tsx
 #~ msgid "Notifications (coming soon)"
-#~ msgstr "Notifications (coming soon)"
+#~ msgstr "Benachrichtigungen (demnächst)"
 
 #. placeholder {0}: hasUnread ? `, ${unreadCount} unread` : ""
 #: src/features/notification-bell/ui/notification-bell.tsx
 msgid "Notifications{0}"
-msgstr "Notifications{0}"
+msgstr "Benachrichtigungen{0}"
 
 #: src/features/signup/ui/password-strength.tsx
 msgid "Number"
-msgstr "Number"
+msgstr "Zahl"
 
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "OG description"
-msgstr "OG description"
+msgstr "OG-Beschreibung"
 
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "OG title"
-msgstr "OG title"
+msgstr "OG-Titel"
 
 #: src/pages/_app/settings/security.tsx
 msgid "OIDC discovery endpoint"
-msgstr "OIDC discovery endpoint"
+msgstr "OIDC-Discovery-Endpunkt"
 
 #: src/pages/verify-email.tsx
 msgid "One click and you're all set."
-msgstr "One click and you're all set."
+msgstr "Ein Klick und Sie sind startklar."
 
 #: src/pages/complete-profile.tsx
 msgid "One last"
-msgstr "One last"
+msgstr "Noch ein letzter"
 
 #: src/features/manage-billing/ui/billing-portal-button.tsx
 msgid "Open Billing Portal"
-msgstr "Open Billing Portal"
+msgstr "Abrechnungsportal öffnen"
 
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "Open Graph description"
-msgstr "Open Graph description"
+msgstr "Open-Graph-Beschreibung"
 
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "Open Graph title"
-msgstr "Open Graph title"
+msgstr "Open-Graph-Titel"
 
 #: src/pages/_app/settings/security.tsx
 msgid "openid profile email"
@@ -1844,133 +1844,133 @@ msgstr "openid profile email"
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
 msgid "Optional — makes this a child page"
-msgstr "Optional — makes this a child page"
+msgstr "Optional — macht diese Seite zu einer Unterseite"
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
 msgid "Optional layout key"
-msgstr "Optional layout key"
+msgstr "Optionaler Layout-Schlüssel"
 
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "Optional translation"
-msgstr "Optional translation"
+msgstr "Optionale Übersetzung"
 
 #: src/pages/sign-in.tsx
 msgid "or"
-msgstr "or"
+msgstr "oder"
 
 #: src/pages/create-organization.tsx
 msgid "organization"
-msgstr "organization"
+msgstr "Organisation"
 
 #: src/pages/_app/settings/organization.tsx
 msgid "Organization"
-msgstr "Organization"
+msgstr "Organisation"
 
 #: src/pages/admin/organizations.$tenantKey.tsx
 #~ msgid "Organization |Key Value Admin"
-#~ msgstr "Organization |Key Value Admin"
+#~ msgstr "Organisation |Key Value Admin"
 
 #: src/features/manage-organization/ui/organization-settings.tsx
 msgid "Organization Key"
-msgstr "Organization Key"
+msgstr "Organisationsschlüssel"
 
 #: src/features/magic-link/ui/magic-link-initiate-form.tsx
 #~ msgid "Organization Key (optional)"
-#~ msgstr "Organization Key (optional)"
+#~ msgstr "Organisationsschlüssel (optional)"
 
 #: src/features/create-organization/ui/create-organization-form.tsx
 msgid "Organization name"
-msgstr "Organization name"
+msgstr "Organisationsname"
 
 #: src/features/manage-organization/ui/organization-settings.tsx
 msgid "Organization Name"
-msgstr "Organization Name"
+msgstr "Organisationsname"
 
 #: src/features/create-organization/model/use-create-organization.ts
 msgid "Organization name is required"
-msgstr "Organization name is required"
+msgstr "Organisationsname ist erforderlich"
 
 #: src/features/create-organization/model/use-create-organization.ts
 msgid "Organization name is too long"
-msgstr "Organization name is too long"
+msgstr "Organisationsname ist zu lang"
 
 #: src/features/manage-organization/ui/organization-settings.tsx
 msgid "Organization Settings"
-msgstr "Organization Settings"
+msgstr "Organisationseinstellungen"
 
 #: src/pages/_app/account.tsx
 #~ msgid "organization(s)"
-#~ msgstr "organization(s)"
+#~ msgstr "Organisation(en)"
 
 #: src/pages/_app/settings/general.tsx
 #: src/pages/_app/settings/organization.tsx
 #: src/shared/ui/app-layout/app-header.tsx
 #: src/shared/ui/app-layout/app-nav.tsx
 msgid "Organizations"
-msgstr "Organizations"
+msgstr "Organisationen"
 
 #: src/pages/admin/organizations.index.tsx
 #~ msgid "Organizations |Key Value Admin"
-#~ msgstr "Organizations |Key Value Admin"
+#~ msgstr "Organisationen |Key Value Admin"
 
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "Override page title for search engines"
-msgstr "Override page title for search engines"
+msgstr "Seitentitel für Suchmaschinen überschreiben"
 
 #: src/pages/admin/organizations.$tenantKey.tsx
 #: src/pages/admin/users.$userId.tsx
 #~ msgid "Overview"
-#~ msgstr "Overview"
+#~ msgstr "Übersicht"
 
 #: src/pages/_app/cms-pages.index.tsx
 msgid "Page"
-msgstr "Page"
+msgstr "Seite"
 
 #: src/pages/404.tsx
 msgid "Page Not Found"
-msgstr "Page Not Found"
+msgstr "Seite nicht gefunden"
 
 #: src/pages/404.tsx
 #~ msgid "Page Not Found |Key Value Admin"
-#~ msgstr "Page Not Found |Key Value Admin"
+#~ msgstr "Seite nicht gefunden |Key Value Admin"
 
 #: src/pages/404.tsx
 msgid "Page not found."
-msgstr "Page not found."
+msgstr "Seite nicht gefunden."
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
 msgid "Page settings"
-msgstr "Page settings"
+msgstr "Seiteneinstellungen"
 
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "Page title"
-msgstr "Page title"
+msgstr "Seitentitel"
 
 #: src/pages/_app/cms-pages.index.tsx
 msgid "Pages"
-msgstr "Pages"
+msgstr "Seiten"
 
 #. placeholder {0}: page.status
 #: src/pages/_app/cms-pages.$pageId.tsx
 msgid "Pages with status <0>{0}</0> cannot be edited."
-msgstr "Pages with status <0>{0}</0> cannot be edited."
+msgstr "Seiten mit Status <0>{0}</0> können nicht bearbeitet werden."
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
 msgid "Parent page"
-msgstr "Parent page"
+msgstr "Übergeordnete Seite"
 
 #: src/features/sign-in/ui/sign-in-form.tsx
 #: src/features/signup/ui/signup-form.tsx
 #: src/pages/invite.$token.tsx
 msgid "Password"
-msgstr "Password"
+msgstr "Passwort"
 
 #: src/features/sign-in/model/use-sign-in.ts
 msgid "Password is required"
-msgstr "Password is required"
+msgstr "Passwort ist erforderlich"
 
 #: src/features/accept-invitation/model/use-accept-invitation.ts
 #: src/features/change-password/model/types.ts
@@ -1978,7 +1978,7 @@ msgstr "Password is required"
 #: src/features/signup/model/use-signup.ts
 #: src/pages/_app/settings/security.tsx
 msgid "Password must be at least 8 characters"
-msgstr "Password must be at least 8 characters"
+msgstr "Passwort muss mindestens 8 Zeichen lang sein"
 
 #: src/features/accept-invitation/model/use-accept-invitation.ts
 #: src/features/change-password/model/types.ts
@@ -1986,275 +1986,275 @@ msgstr "Password must be at least 8 characters"
 #: src/features/signup/model/use-signup.ts
 #: src/pages/_app/settings/security.tsx
 msgid "Password must be at most 128 characters"
-msgstr "Password must be at most 128 characters"
+msgstr "Passwort darf höchstens 128 Zeichen lang sein"
 
 #: src/features/reset-password/model/use-reset-password.ts
 #: src/features/signup/model/use-signup.ts
 msgid "Password must contain uppercase, lowercase, a number, and a special character"
-msgstr "Password must contain uppercase, lowercase, a number, and a special character"
+msgstr "Passwort muss Groß- und Kleinbuchstaben, eine Zahl und ein Sonderzeichen enthalten"
 
 #: src/features/change-password/model/types.ts
 #: src/pages/_app/settings/security.tsx
 msgid "Password must contain uppercase, lowercase, digit, and special character"
-msgstr "Password must contain uppercase, lowercase, digit, and special character"
+msgstr "Passwort muss Groß- und Kleinbuchstaben, eine Ziffer und ein Sonderzeichen enthalten"
 
 #: src/features/change-password/ui/change-password-modal.tsx
 #: src/pages/_app/settings/security.tsx
 msgid "Password requirements:"
-msgstr "Password requirements:"
+msgstr "Passwortanforderungen:"
 
 #: src/features/reset-password/ui/reset-password-form.tsx
 msgid "Password updated"
-msgstr "Password updated"
+msgstr "Passwort aktualisiert"
 
 #: src/pages/forgot-password.tsx
 msgid "password?"
-msgstr "password?"
+msgstr "Passwort vergessen?"
 
 #: src/pages/reset-password.tsx
 msgid "password."
-msgstr "password."
+msgstr "Passwort."
 
 #: src/features/change-password/model/types.ts
 #: src/features/reset-password/model/use-reset-password.ts
 #: src/pages/_app/settings/security.tsx
 msgid "Passwords do not match"
-msgstr "Passwords do not match"
+msgstr "Passwörter stimmen nicht überein"
 
 #: src/pages/_app/billing/failure.tsx
 msgid "Payment Failed"
-msgstr "Payment Failed"
+msgstr "Zahlung fehlgeschlagen"
 
 #: src/features/manage-billing/ui/refund-list.tsx
 msgid "Payment ID"
-msgstr "Payment ID"
+msgstr "Zahlungs-ID"
 
 #: src/pages/_app/billing/success.tsx
 msgid "Payment Successful"
-msgstr "Payment Successful"
+msgstr "Zahlung erfolgreich"
 
 #: src/features/page-admin/model/types.ts
 #: src/pages/_app/cms-pages.index.tsx
 #: src/shared/ui/invitation-status-badge/invitation-status-badge.tsx
 msgid "Pending"
-msgstr "Pending"
+msgstr "Ausstehend"
 
 #: src/pages/_app/team.tsx
 msgid "Pending invitations"
-msgstr "Pending invitations"
+msgstr "Ausstehende Einladungen"
 
 #: src/pages/admin/subscriptions.tsx
 #~ msgid "Period End"
-#~ msgstr "Period End"
+#~ msgstr "Periodenende"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Permissions assigned to your account"
-msgstr "Permissions assigned to your account"
+msgstr "Ihrem Konto zugewiesene Berechtigungen"
 
 #: src/features/manage-billing/ui/entitlements-card.tsx
 #: src/pages/_app/billing/index.tsx
 #: src/widgets/dashboard-personal-welcome/ui/dashboard-personal-welcome.tsx
 msgid "Personal Workspace"
-msgstr "Personal Workspace"
+msgstr "Persönlicher Workspace"
 
 #: src/features/ban-user/ui/ban-member-modal.tsx
 msgid "Pick a date and time"
-msgstr "Pick a date and time"
+msgstr "Datum und Uhrzeit auswählen"
 
 #: src/features/manage-billing/ui/current-subscription.tsx
 #: src/features/manage-billing/ui/entitlements-card.tsx
 msgid "Plan"
-msgstr "Plan"
+msgstr "Tarif"
 
 #: src/features/manage-billing/ui/plan-entitlement.tsx
 msgid "Plan Features"
-msgstr "Plan Features"
+msgstr "Tarif-Funktionen"
 
 #: src/pages/admin/organizations.index.tsx
 #: src/pages/admin/subscriptions.tsx
 #: src/pages/admin/users.index.tsx
 #: src/shared/ui/admin-layout/admin-nav.tsx
 #~ msgid "Platform"
-#~ msgstr "Platform"
+#~ msgstr "Plattform"
 
 #: src/pages/sign-in.tsx
 #~ msgid "Platform administration"
-#~ msgstr "Platform administration"
+#~ msgstr "Plattformadministration"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Platform Highlights"
-msgstr "Platform Highlights"
+msgstr "Plattform-Highlights"
 
 #: src/features/complete-profile/model/use-complete-profile.ts
 msgid "Please check the form and try again."
-msgstr "Please check the form and try again."
+msgstr "Bitte überprüfen Sie das Formular und versuchen Sie es erneut."
 
 #: src/features/reset-password/model/use-reset-password.ts
 msgid "Please confirm your password"
-msgstr "Please confirm your password"
+msgstr "Bitte bestätigen Sie Ihr Passwort"
 
 #: src/pages/auth.callback.tsx
 msgid "Please wait while we finish signing you in."
-msgstr "Please wait while we finish signing you in."
+msgstr "Bitte warten Sie, während die Anmeldung abgeschlossen wird."
 
 #: src/features/magic-link/ui/magic-link-exchange-form.tsx
 msgid "Please wait while we verify your magic link."
-msgstr "Please wait while we verify your magic link."
+msgstr "Bitte warten Sie, während Ihr Magic Link verifiziert wird."
 
 #: src/features/manage-billing/model/use-billing-portal.ts
 msgid "Portal error"
-msgstr "Portal error"
+msgstr "Portalfehler"
 
 #: src/features/manage-billing/ui/plan-entitlement.tsx
 msgid "Priority Support"
-msgstr "Priority Support"
+msgstr "Prioritätssupport"
 
 #: src/pages/-billing-example.tsx
 msgid "Priority Support (Upgrade Required)"
-msgstr "Priority Support (Upgrade Required)"
+msgstr "Prioritätssupport (Upgrade erforderlich)"
 
 #: src/pages/-billing-example.tsx
 msgid "Priority Support Available"
-msgstr "Priority Support Available"
+msgstr "Prioritätssupport verfügbar"
 
 #: src/pages/-billing-example.tsx
 msgid "Priority Support:"
-msgstr "Priority Support:"
+msgstr "Prioritätssupport:"
 
 #: src/pages/_app/settings/general.tsx
 msgid "Profile Information"
-msgstr "Profile Information"
+msgstr "Profilinformationen"
 
 #: src/pages/_app/settings/general.tsx
 msgid "Profile Picture"
-msgstr "Profile Picture"
+msgstr "Profilbild"
 
 #: src/pages/-billing-example.tsx
 msgid "Project Management"
-msgstr "Project Management"
+msgstr "Projektverwaltung"
 
 #: src/features/manage-billing/ui/plan-entitlement.tsx
 msgid "Projects"
-msgstr "Projects"
+msgstr "Projekte"
 
 #: src/features/ban-user/ui/ban-member-modal.tsx
 msgid "Provide a reason for the ban…"
-msgstr "Provide a reason for the ban…"
+msgstr "Geben Sie einen Grund für die Sperre an…"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Provider key"
-msgstr "Provider key"
+msgstr "Anbieterschlüssel"
 
 #: src/features/signup/ui/provisioning-wait.tsx
 msgid "Provisioning workspace"
-msgstr "Provisioning workspace"
+msgstr "Workspace wird bereitgestellt"
 
 #: src/features/page-admin/model/types.ts
 #: src/pages/_app/cms-pages.index.tsx
 msgid "Published"
-msgstr "Published"
+msgstr "Veröffentlicht"
 
 #: src/pages/complete-profile.tsx
 msgid "quick step."
-msgstr "quick step."
+msgstr "kurzer Schritt."
 
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 #: src/pages/_app/settings/general.tsx
 #: src/pages/invite.$token.tsx
 msgid "read-only"
-msgstr "read-only"
+msgstr "schreibgeschützt"
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 msgid "Read-only"
-msgstr "Read-only"
+msgstr "Schreibgeschützt"
 
 #: src/features/ban-user/ui/ban-member-modal.tsx
 msgid "Reason (optional)"
-msgstr "Reason (optional)"
+msgstr "Grund (optional)"
 
 #: src/features/manage-billing/ui/webhook-log-list.tsx
 msgid "Received At"
-msgstr "Received At"
+msgstr "Empfangen am"
 
 #: src/features/magic-link/ui/magic-link-exchange-form.tsx
 msgid "Redirecting to your workspace..."
-msgstr "Redirecting to your workspace..."
+msgstr "Weiterleitung zu Ihrem Workspace..."
 
 #: src/pages/_app/cms-pages.index.tsx
 #: src/pages/_app/settings/organization.tsx
 #: src/pages/_app/team.tsx
 msgid "Refresh"
-msgstr "Refresh"
+msgstr "Aktualisieren"
 
 #: src/features/manage-billing/ui/refund-list.tsx
 msgid "Refund History"
-msgstr "Refund History"
+msgstr "Rückerstattungsverlauf"
 
 #: src/features/forgot-password/ui/forgot-password-form.tsx
 #: src/features/reset-password/ui/reset-password-form.tsx
 msgid "Remember your password? <0>Sign in</0>"
-msgstr "Remember your password? <0>Sign in</0>"
+msgstr "Passwort erinnert? <0>Anmelden</0>"
 
 #: src/features/manage-organization/ui/member-actions.tsx
 msgid "Remove"
-msgstr "Remove"
+msgstr "Entfernen"
 
 #: src/features/manage-organization/ui/member-actions.tsx
 msgid "Remove Member"
-msgstr "Remove Member"
+msgstr "Mitglied entfernen"
 
 #: src/pages/admin/organizations.$tenantKey.tsx
 #~ msgid "Renews"
-#~ msgstr "Renews"
+#~ msgstr "Verlängert sich"
 
 #: src/features/manage-billing/ui/entitlements-card.tsx
 msgid "Renews On"
-msgstr "Renews On"
+msgstr "Verlängert sich am"
 
 #: src/features/change-password/ui/change-password-modal.tsx
 #: src/pages/_app/settings/security.tsx
 msgid "Repeat new password"
-msgstr "Repeat new password"
+msgstr "Neues Passwort wiederholen"
 
 #: src/features/reset-password/ui/reset-password-form.tsx
 msgid "Repeat your new password"
-msgstr "Repeat your new password"
+msgstr "Neues Passwort wiederholen"
 
 #: src/features/magic-link/ui/magic-link-exchange-form.tsx
 msgid "Request a new magic link"
-msgstr "Request a new magic link"
+msgstr "Neuen Magic Link anfordern"
 
 #: src/features/reset-password/ui/reset-password-form.tsx
 msgid "Request a new reset link"
-msgstr "Request a new reset link"
+msgstr "Neuen Zurücksetz-Link anfordern"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Required for new configuration"
-msgstr "Required for new configuration"
+msgstr "Für neue Konfiguration erforderlich"
 
 #: src/features/signup/ui/verify-email-prompt.tsx
 msgid "Resend in {resendCooldown}s"
-msgstr "Resend in {resendCooldown}s"
+msgstr "Erneut senden in {resendCooldown}s"
 
 #: src/features/magic-link/ui/magic-link-initiate-form.tsx
 msgid "Resend magic link"
-msgstr "Resend magic link"
+msgstr "Magic Link erneut senden"
 
 #: src/features/signup/ui/verify-email-prompt.tsx
 msgid "Resend verification email"
-msgstr "Resend verification email"
+msgstr "Verifizierungs-E-Mail erneut senden"
 
 #: src/pages/reset-password.tsx
 msgid "Reset Password"
-msgstr "Reset Password"
+msgstr "Passwort zurücksetzen"
 
 #: src/pages/forgot-password.tsx
 msgid "Reset your password"
-msgstr "Reset your password"
+msgstr "Passwort zurücksetzen"
 
 #: src/features/ban-user/ui/unban-member-modal.tsx
 msgid "Restore access"
-msgstr "Restore access"
+msgstr "Zugang wiederherstellen"
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.index.tsx
@@ -2262,309 +2262,309 @@ msgstr "Restore access"
 #: src/pages/_app/settings/security.tsx
 #: src/pages/_app/team.tsx
 msgid "Retry"
-msgstr "Retry"
+msgstr "Erneut versuchen"
 
 #: src/features/manage-organization/ui/organization-settings.tsx
 msgid "Retry Provisioning"
-msgstr "Retry Provisioning"
+msgstr "Bereitstellung erneut versuchen"
 
 #: src/features/invite-member/ui/invitation-details-modal.tsx
 msgid "Revoke"
-msgstr "Revoke"
+msgstr "Widerrufen"
 
 #: src/shared/ui/invitation-status-badge/invitation-status-badge.tsx
 msgid "Revoked"
-msgstr "Revoked"
+msgstr "Widerrufen"
 
 #: src/features/invite-member/ui/invitation-details-modal.tsx
 msgid "Revoking this invitation will prevent the recipient from accepting it."
-msgstr "Revoking this invitation will prevent the recipient from accepting it."
+msgstr "Das Widerrufen dieser Einladung verhindert, dass der Empfänger sie annehmen kann."
 
 #: src/features/invite-member/ui/invitation-details-modal.tsx
 #: src/features/invite-member/ui/send-invitation-modal.tsx
 #: src/pages/_app/settings/organization.tsx
 msgid "Role"
-msgstr "Role"
+msgstr "Rolle"
 
 #: src/pages/_app/settings/security.tsx
 #~ msgid "Roles"
-#~ msgstr "Roles"
+#~ msgstr "Rollen"
 
 #: src/features/member-role/ui/update-member-authorities-modal.tsx
 #: src/pages/_app/settings/security.tsx
 msgid "Save"
-msgstr "Save"
+msgstr "Speichern"
 
 #: src/features/manage-billing/ui/billing-info.tsx
 msgid "Save Billing Information"
-msgstr "Save Billing Information"
+msgstr "Abrechnungsinformationen speichern"
 
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/settings/general.tsx
 msgid "Save changes"
-msgstr "Save changes"
+msgstr "Änderungen speichern"
 
 #: src/features/manage-billing/ui/billing-info.tsx
 #: src/features/manage-organization/ui/organization-settings.tsx
 msgid "Save Changes"
-msgstr "Save Changes"
+msgstr "Änderungen speichern"
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/settings/security.tsx
 msgid "Save failed"
-msgstr "Save failed"
+msgstr "Speichern fehlgeschlagen"
 
 #: src/features/manage-organization/ui/member-actions.tsx
 #~ msgid "Save Roles"
-#~ msgstr "Save Roles"
+#~ msgstr "Rollen speichern"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Saved"
-msgstr "Saved"
+msgstr "Gespeichert"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Scopes"
-msgstr "Scopes"
+msgstr "Bereiche"
 
 #: src/pages/_app/team.tsx
 msgid "Search by name or email…"
-msgstr "Search by name or email…"
+msgstr "Nach Name oder E-Mail suchen…"
 
 #: src/pages/admin/organizations.index.tsx
 #~ msgid "Search by name or key…"
-#~ msgstr "Search by name or key…"
+#~ msgstr "Nach Name oder Schlüssel suchen…"
 
 #: src/pages/admin/subscriptions.tsx
 #~ msgid "Search by tenant or plan…"
-#~ msgstr "Search by tenant or plan…"
+#~ msgstr "Nach Mandant oder Tarif suchen…"
 
 #: src/features/manage-billing/ui/webhook-log-list.tsx
 msgid "Search event type…"
-msgstr "Search event type…"
+msgstr "Ereignistyp suchen…"
 
 #: src/pages/_app/settings/organization.tsx
 msgid "Search organizations…"
-msgstr "Search organizations…"
+msgstr "Organisationen suchen…"
 
 #: src/pages/admin/users.tsx
 #~ msgid "Search users…"
-#~ msgstr "Search users…"
+#~ msgstr "Benutzer suchen…"
 
 #: src/shared/ui/app-layout/app-nav.tsx
 msgid "Search…"
-msgstr "Search…"
+msgstr "Suchen…"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Secure your account with a strong password and notifications"
-msgstr "Secure your account with a strong password and notifications"
+msgstr "Sichern Sie Ihr Konto mit einem starken Passwort und Benachrichtigungen"
 
 #: src/pages/_app/settings/security.tsx
 #: src/shared/ui/app-layout/app-nav.tsx
 msgid "Security"
-msgstr "Security"
+msgstr "Sicherheit"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Security Settings"
-msgstr "Security Settings"
+msgstr "Sicherheitseinstellungen"
 
 #: src/features/notification-bell/ui/notification-bell.tsx
 msgid "See all notifications"
-msgstr "See all notifications"
+msgstr "Alle Benachrichtigungen anzeigen"
 
 #: src/features/manage-organization/ui/member-actions.tsx
 #~ msgid "Select authorities for this member"
-#~ msgstr "Select authorities for this member"
+#~ msgstr "Berechtigungen für dieses Mitglied auswählen"
 
 #: src/features/complete-profile/ui/complete-profile-form.tsx
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 #: src/pages/_app/settings/general.tsx
 #: src/shared/ui/locale-switcher/locale-switcher.tsx
 msgid "Select language"
-msgstr "Select language"
+msgstr "Sprache auswählen"
 
 #: src/features/manage-billing/ui/plan-card.tsx
 msgid "Select Plan"
-msgstr "Select Plan"
+msgstr "Tarif auswählen"
 
 #: src/features/member-role/ui/update-member-authorities-modal.tsx
 msgid "Select role"
-msgstr "Select role"
+msgstr "Rolle auswählen"
 
 #: src/features/member-role/ui/update-member-authorities-modal.tsx
 #~ msgid "Select roles"
-#~ msgstr "Select roles"
+#~ msgstr "Rollen auswählen"
 
 #: src/features/sign-in/ui/sign-in-form.tsx
 msgid "Select the workspace you want to sign in to."
-msgstr "Select the workspace you want to sign in to."
+msgstr "Wählen Sie den Workspace aus, in dem Sie sich anmelden möchten."
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Send email verifications, password resets & invitations"
-msgstr "Send email verifications, password resets & invitations"
+msgstr "E-Mail-Verifizierungen, Passwort-Zurücksetzen und Einladungen senden"
 
 #: src/features/invite-member/ui/send-invitation-modal.tsx
 msgid "Send invitation"
-msgstr "Send invitation"
+msgstr "Einladung senden"
 
 #: src/features/magic-link/ui/magic-link-initiate-form.tsx
 msgid "Send magic link"
-msgstr "Send magic link"
+msgstr "Magic Link senden"
 
 #: src/features/forgot-password/ui/forgot-password-form.tsx
 msgid "Send reset link"
-msgstr "Send reset link"
+msgstr "Zurücksetz-Link senden"
 
 #: src/features/invite-member/ui/invitation-details-modal.tsx
 msgid "Sent"
-msgstr "Sent"
+msgstr "Gesendet"
 
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "SEO description"
-msgstr "SEO description"
+msgstr "SEO-Beschreibung"
 
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "SEO fields"
-msgstr "SEO fields"
+msgstr "SEO-Felder"
 
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "SEO title"
-msgstr "SEO title"
+msgstr "SEO-Titel"
 
 #: src/pages/500.tsx
 msgid "Server Error"
-msgstr "Server Error"
+msgstr "Serverfehler"
 
 #: src/pages/500.tsx
 #~ msgid "Server Error |Key Value Admin"
-#~ msgstr "Server Error |Key Value Admin"
+#~ msgstr "Serverfehler |Key Value Admin"
 
 #: src/pages/reset-password.tsx
 msgid "Set a new"
-msgstr "Set a new"
+msgstr "Legen Sie ein neues"
 
 #: src/features/reset-password/ui/reset-password-form.tsx
 msgid "Set new password"
-msgstr "Set new password"
+msgstr "Neues Passwort festlegen"
 
 #: src/features/manage-billing/ui/billing-info.tsx
 msgid "Set Up Billing Information"
-msgstr "Set Up Billing Information"
+msgstr "Abrechnungsinformationen einrichten"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Set up subscriptions & billing instantly"
-msgstr "Set up subscriptions & billing instantly"
+msgstr "Abonnements und Abrechnung sofort einrichten"
 
 #: src/pages/signup.tsx
 msgid "Set up your account in under a minute."
-msgstr "Set up your account in under a minute."
+msgstr "Richten Sie Ihr Konto in weniger als einer Minute ein."
 
 #: src/pages/create-organization.tsx
 msgid "Set up your workspace in under a minute."
-msgstr "Set up your workspace in under a minute."
+msgstr "Richten Sie Ihren Workspace in weniger als einer Minute ein."
 
 #: src/features/complete-profile/ui/complete-profile-form.tsx
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 #: src/pages/_app/settings/general.tsx
 msgid "Sets your preferred language for notifications and emails."
-msgstr "Sets your preferred language for notifications and emails."
+msgstr "Legt Ihre bevorzugte Sprache für Benachrichtigungen und E-Mails fest."
 
 #: src/pages/signup.tsx
 #~ msgid "Setting up"
-#~ msgstr "Setting up"
+#~ msgstr "Wird eingerichtet"
 
 #: src/features/signup/ui/provisioning-wait.tsx
 msgid "Setting up your workspace"
-msgstr "Setting up your workspace"
+msgstr "Ihr Workspace wird eingerichtet"
 
 #: src/shared/ui/app-layout/app-nav.tsx
 #~ msgid "Settings"
-#~ msgstr "Settings"
+#~ msgstr "Einstellungen"
 
 #. placeholder {0}: notifications.length
 #. placeholder {1}: listData?.totalElements ?? 0
 #: src/features/notification-bell/ui/notification-bell.tsx
 msgid "Showing {0} of {1}"
-msgstr "Showing {0} of {1}"
+msgstr "Zeige {0} von {1}"
 
 #: src/pages/admin/organizations.$tenantKey.tsx
 #~ msgid "Showing {0}–{1} of {totalElements} members"
-#~ msgstr "Showing {0}–{1} of {totalElements} members"
+#~ msgstr "Zeige {0}–{1} von {totalElements} Mitgliedern"
 
 #: src/pages/admin/organizations.index.tsx
 #~ msgid "Showing {rangeStart}–{rangeEnd} of {totalElements} organizations"
-#~ msgstr "Showing {rangeStart}–{rangeEnd} of {totalElements} organizations"
+#~ msgstr "Zeige {rangeStart}–{rangeEnd} von {totalElements} Organisationen"
 
 #: src/pages/admin/subscriptions.tsx
 #~ msgid "Showing {rangeStart}–{rangeEnd} of {totalElements} subscriptions"
-#~ msgstr "Showing {rangeStart}–{rangeEnd} of {totalElements} subscriptions"
+#~ msgstr "Zeige {rangeStart}–{rangeEnd} von {totalElements} Abonnements"
 
 #: src/pages/admin/users.index.tsx
 #~ msgid "Showing {rangeStart}–{rangeEnd} of {totalElements} users"
-#~ msgstr "Showing {rangeStart}–{rangeEnd} of {totalElements} users"
+#~ msgstr "Zeige {rangeStart}–{rangeEnd} von {totalElements} Benutzern"
 
 #: src/features/sign-in/ui/sign-in-form.tsx
 #~ msgid "Sign in"
-#~ msgstr "Sign in"
+#~ msgstr "Anmelden"
 
 #: src/pages/sign-in.tsx
 msgid "Sign In"
-msgstr "Sign In"
+msgstr "Anmelden"
 
 #: src/pages/sign-in.tsx
 #~ msgid "Sign In |Key Value Admin"
-#~ msgstr "Sign In |Key Value Admin"
+#~ msgstr "Anmelden |Key Value Admin"
 
 #: src/pages/verify-email.tsx
 msgid "Sign in to your workspace"
-msgstr "Sign in to your workspace"
+msgstr "Melden Sie sich in Ihrem Workspace an"
 
 #: src/pages/sign-in.tsx
 msgid "Sign in to your workspace to continue."
-msgstr "Sign in to your workspace to continue."
+msgstr "Melden Sie sich in Ihrem Workspace an, um fortzufahren."
 
 #: src/pages/magic-link.index.tsx
 msgid "Sign in with magic link"
-msgstr "Sign in with magic link"
+msgstr "Mit Magic Link anmelden"
 
 #: src/features/magic-link/ui/magic-link-initiate-form.tsx
 msgid "Sign in with password instead"
-msgstr "Sign in with password instead"
+msgstr "Stattdessen mit Passwort anmelden"
 
 #: src/features/sign-out/ui/sign-out-button.tsx
 #: src/shared/ui/app-layout/app-header.tsx
 msgid "Sign out"
-msgstr "Sign out"
+msgstr "Abmelden"
 
 #: src/features/magic-link/model/use-magic-link-exchange.ts
 #: src/features/sign-in/model/use-sign-in.ts
 msgid "Sign-in failed. Please try again."
-msgstr "Sign-in failed. Please try again."
+msgstr "Anmeldung fehlgeschlagen. Bitte versuchen Sie es erneut."
 
 #: src/pages/auth.callback.tsx
 msgid "Signed in"
-msgstr "Signed in"
+msgstr "Angemeldet"
 
 #: src/features/magic-link/ui/magic-link-exchange-form.tsx
 msgid "Signed in successfully!"
-msgstr "Signed in successfully!"
+msgstr "Erfolgreich angemeldet!"
 
 #: src/pages/auth.callback.tsx
 #: src/pages/magic-link.verify.tsx
 msgid "Signing in"
-msgstr "Signing in"
+msgstr "Wird angemeldet"
 
 #: src/features/magic-link/ui/magic-link-exchange-form.tsx
 msgid "Signing you in..."
-msgstr "Signing you in..."
+msgstr "Meldung wird durchgeführt..."
 
 #: src/pages/invite.$token.tsx
 msgid "Signing you in…"
-msgstr "Signing you in…"
+msgstr "Meldung wird durchgeführt…"
 
 #: src/pages/loading-demo.tsx
 msgid "Slim top progress bar for navigation between pages (automatic with router)."
-msgstr "Slim top progress bar for navigation between pages (automatic with router)."
+msgstr "Schlanker oberer Fortschrittsbalken für Navigation zwischen Seiten (automatisch mit Router)."
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
@@ -2573,29 +2573,29 @@ msgstr "Slug"
 
 #: src/features/page-admin/model/types.ts
 msgid "Slug is required"
-msgstr "Slug is required"
+msgstr "Slug ist erforderlich"
 
 #: src/features/page-admin/model/types.ts
 msgid "Slug must be lowercase alphanumeric with hyphens (e.g. about-us or blog/post-title)"
-msgstr "Slug must be lowercase alphanumeric with hyphens (e.g. about-us or blog/post-title)"
+msgstr "Slug muss alphanumerische Kleinbuchstaben mit Bindestrichen enthalten (z. B. about-us oder blog/post-title)"
 
 #: src/features/complete-profile/ui/complete-profile-form.tsx
 #: src/features/signup/ui/signup-form.tsx
 #: src/pages/invite.$token.tsx
 msgid "Smith"
-msgstr "Smith"
+msgstr "Müller"
 
 #: src/pages/signup.tsx
 msgid "something great."
-msgstr "something great."
+msgstr "etwas Großartiges."
 
 #: src/shared/ui/error-boundary.tsx
 msgid "Something went wrong"
-msgstr "Something went wrong"
+msgstr "Etwas ist schief gelaufen"
 
 #: src/pages/_app/billing/failure.tsx
 msgid "Something went wrong with your payment. Please try again or contact support."
-msgstr "Something went wrong with your payment. Please try again or contact support."
+msgstr "Bei Ihrer Zahlung ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder kontaktieren Sie den Support."
 
 #: src/features/accept-invitation/model/use-accept-invitation.ts
 #: src/features/complete-profile/model/use-complete-profile.ts
@@ -2605,23 +2605,23 @@ msgstr "Something went wrong with your payment. Please try again or contact supp
 #: src/features/reset-password/model/use-reset-password.ts
 #: src/features/signup/model/use-signup.ts
 msgid "Something went wrong. Please try again."
-msgstr "Something went wrong. Please try again."
+msgstr "Etwas ist schief gelaufen. Bitte versuchen Sie es erneut."
 
 #: src/features/signup/ui/password-strength.tsx
 msgid "Special character"
-msgstr "Special character"
+msgstr "Sonderzeichen"
 
 #: src/pages/_app/settings/security.tsx
 msgid "SSO configuration removed."
-msgstr "SSO configuration removed."
+msgstr "SSO-Konfiguration entfernt."
 
 #: src/pages/_app/settings/security.tsx
 msgid "SSO configuration updated."
-msgstr "SSO configuration updated."
+msgstr "SSO-Konfiguration aktualisiert."
 
 #: src/features/manage-organization/ui/member-actions.tsx
 #~ msgid "Standard organization member."
-#~ msgstr "Standard organization member."
+#~ msgstr "Standard-Organisationsmitglied."
 
 #: src/pages/loading-demo.tsx
 msgid "Start"
@@ -2629,7 +2629,7 @@ msgstr "Start"
 
 #: src/pages/signup.tsx
 msgid "Start building"
-msgstr "Start building"
+msgstr "Beginnen Sie zu bauen"
 
 #: src/features/invite-member/ui/invitation-details-modal.tsx
 #: src/features/manage-billing/ui/refund-list.tsx
@@ -2643,23 +2643,23 @@ msgstr "Status"
 
 #: src/pages/signup.tsx
 #~ msgid "Step 1: Create account"
-#~ msgstr "Step 1: Create account"
+#~ msgstr "Schritt 1: Konto erstellen"
 
 #: src/pages/signup.tsx
 #~ msgid "Step 2: Workspace setup"
-#~ msgstr "Step 2: Workspace setup"
+#~ msgstr "Schritt 2: Workspace-Einrichtung"
 
 #: src/pages/signup.tsx
 #~ msgid "Step 3: Verify email"
-#~ msgstr "Step 3: Verify email"
+#~ msgstr "Schritt 3: E-Mail verifizieren"
 
 #: src/features/signup/ui/provisioning-wait.tsx
 msgid "Still setting up…"
-msgstr "Still setting up…"
+msgstr "Wird immer noch eingerichtet…"
 
 #: src/features/signup/ui/password-strength.tsx
 msgid "Strong"
-msgstr "Strong"
+msgstr "Stark"
 
 #: src/pages/admin/organizations.$tenantKey.tsx
 #: src/pages/admin/subscriptions.tsx
