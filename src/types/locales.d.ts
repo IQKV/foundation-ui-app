@@ -1,15 +1,11 @@
-declare module "../locales/en" {
+declare module "../../../locales/en-US" {
   export const messages: Record<string, any>;
 }
 
-declare module "../locales/ru" {
+declare module "../../../locales/bg-BG" {
   export const messages: Record<string, any>;
 }
 
-declare module "../locales/it" {
-  export const messages: Record<string, any>;
-}
-
-declare module "../locales/*" {
+declare module "../../../locales/*" {
   export const messages: Record<string, any>;
 }
