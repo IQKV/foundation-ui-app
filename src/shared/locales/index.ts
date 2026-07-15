@@ -5,9 +5,9 @@ import { messages } from "../../../locales/en-US";
 i18n.load("en-US", messages);
 i18n.activate("en-US");
 
-export type SupportedLocales = "en-US" | "bg-BG";
+export type SupportedLocales = "en-US" | "bg-BG" | "de-DE" | "fr-FR";
 
-export const availableLocales = ["en-US", "bg-BG"];
+export const availableLocales = ["en-US", "bg-BG", "de-DE", "fr-FR"];
 
 export const getClientLocale = () => {
   if (typeof window !== "undefined") {
@@ -42,11 +42,15 @@ export const getSupportedLocale = (userLocale: string) => {
 export const localeToFlagEmojiMap: Record<SupportedLocales, string> = {
   "en-US": "🇺🇸",
   "bg-BG": "🇧🇬",
+  "de-DE": "🇩🇪",
+  "fr-FR": "🇫🇷",
 };
 
 export const localeToNameMap: Record<SupportedLocales, string> = {
   "en-US": "English (US)",
   "bg-BG": "Български (България)",
+  "de-DE": "Deutsch (Deutschland)",
+  "fr-FR": "Français (France)",
 };
 
 export const getLocaleName = (locale: SupportedLocales) => {
