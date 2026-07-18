@@ -2679,32 +2679,32 @@ msgstr "Suspended"
 
 #: src/widgets/dashboard-personal-welcome/ui/dashboard-personal-welcome.tsx
 msgid "Switch between workspaces anytime using the workspace switcher in the sidebar."
-msgstr "Switch between workspaces anytime using the workspace switcher in the sidebar."
+msgstr "Wechseln Sie jederzeit zwischen Arbeitsbereichen mit dem Arbeitsbereichs-Umschalter in der Seitenleiste."
 
 #: src/pages/_app/settings/organization.tsx
 msgid "Switch failed"
-msgstr "Switch failed"
+msgstr "Wechsel fehlgeschlagen"
 
 #: src/features/tenant-switcher/ui/tenant-switcher.tsx
 msgid "Switch to"
-msgstr "Switch to"
+msgstr "Wechseln zu"
 
 #: src/shared/ui/color-scheme-toggle/color-scheme-toggle.tsx
 msgid "Switch to dark mode"
-msgstr "Switch to dark mode"
+msgstr "Zum Dunkelmodus wechseln"
 
 #: src/shared/ui/color-scheme-toggle/color-scheme-toggle.tsx
 msgid "Switch to light mode"
-msgstr "Switch to light mode"
+msgstr "Zum Hellmodus wechseln"
 
 #: src/features/tenant-switcher/ui/tenant-switcher.tsx
 msgid "Switch workspace"
-msgstr "Switch workspace"
+msgstr "Arbeitsbereich wechseln"
 
 #. placeholder {0}: activeMembership.tenantName
 #: src/features/tenant-switcher/ui/tenant-switcher.tsx
 msgid "Switch workspace (current: {0})"
-msgstr "Switch workspace (current: {0})"
+msgstr "Arbeitsbereich wechseln (aktuell: {0})"
 
 #: src/shared/ui/admin-layout/admin-nav.tsx
 #~ msgid "System"
@@ -2717,7 +2717,7 @@ msgstr "Team"
 
 #: src/pages/-billing-example.tsx
 msgid "Team Management"
-msgstr "Team Management"
+msgstr "Teamverwaltung"
 
 #: src/pages/billing-example.tsx
 #~ msgid "Team Management (Upgrade Required)"
@@ -2725,26 +2725,26 @@ msgstr "Team Management"
 
 #: src/pages/_app/index.tsx
 msgid "Team members"
-msgstr "Team members"
+msgstr "Teammitglieder"
 
 #: src/features/manage-billing/ui/plan-entitlement.tsx
 msgid "Team Members"
-msgstr "Team Members"
+msgstr "Teammitglieder"
 
 #: src/pages/complete-profile.tsx
 msgid "Tell us your name so your teammates know who you are."
-msgstr "Tell us your name so your teammates know who you are."
+msgstr "Teilen Sie uns Ihren Namen mit, damit Ihre Teammitglieder wissen, wer Sie sind."
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
 #: src/pages/_app/cms-pages.index.tsx
 msgid "Template"
-msgstr "Template"
+msgstr "Vorlage"
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
 msgid "Tenant"
-msgstr "Tenant"
+msgstr "Mandant"
 
 #: src/features/edit-tenant/ui/edit-tenant-modal.tsx
 #~ msgid "Tenant key"
@@ -2752,7 +2752,7 @@ msgstr "Tenant"
 
 #: src/features/member-role/ui/update-member-authorities-modal.tsx
 msgid "Tenant Owner"
-msgstr "Tenant Owner"
+msgstr "Mandanteninhaber"
 
 #: src/pages/_app/settings/security.tsx
 #~ msgid "Tenant SSO"
@@ -2760,63 +2760,63 @@ msgstr "Tenant Owner"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Tenant SSO Configuration"
-msgstr "Tenant SSO Configuration"
+msgstr "Mandanten-SSO-Konfiguration"
 
 #: src/features/invite-member/ui/send-invitation-modal.tsx
 msgid "TENANT_OWNER cannot be granted via invitation"
-msgstr "TENANT_OWNER cannot be granted via invitation"
+msgstr "TENANT_OWNER kann nicht per Einladung vergeben werden"
 
 #: src/pages/_app/billing/success.tsx
 msgid "Thank you for your subscription. Your account has been upgraded."
-msgstr "Thank you for your subscription. Your account has been upgraded."
+msgstr "Vielen Dank für Ihr Abonnement. Ihr Konto wurde aufgewertet."
 
 #: src/pages/_app/settings/security.tsx
 msgid "The provider was disconnected."
-msgstr "The provider was disconnected."
+msgstr "Der Anbieter wurde getrennt."
 
 #: src/features/manage-organization/ui/organization-settings.tsx
 msgid "The unique identifier for your organization. This cannot be changed."
-msgstr "The unique identifier for your organization. This cannot be changed."
+msgstr "Der eindeutige Bezeichner Ihrer Organisation. Dieser kann nicht geändert werden."
 
 #: src/pages/loading-demo.tsx
 msgid "Theme-aware (respects dark mode and color scheme)"
-msgstr "Theme-aware (respects dark mode and color scheme)"
+msgstr "Thema-bewusst (berücksichtigt Dunkelmodus und Farbschema)"
 
 #: src/features/manage-billing/ui/feature-gate.tsx
 msgid "This feature requires an active subscription. Please upgrade your plan to access this functionality."
-msgstr "This feature requires an active subscription. Please upgrade your plan to access this functionality."
+msgstr "Diese Funktion erfordert ein aktives Abonnement. Bitte upgraden Sie Ihren Plan, um auf diese Funktionalität zuzugreifen."
 
 #: src/features/accept-invitation/model/use-accept-invitation.ts
 msgid "This invitation link has expired or is no longer valid."
-msgstr "This invitation link has expired or is no longer valid."
+msgstr "Dieser Einladungslink ist abgelaufen oder nicht mehr gültig."
 
 #: src/pages/invite.$token.tsx
 msgid "This invitation link has expired, been revoked, or doesn't exist. Contact the person who invited you to request a new one."
-msgstr "This invitation link has expired, been revoked, or doesn't exist. Contact the person who invited you to request a new one."
+msgstr "Dieser Einladungslink ist abgelaufen, wurde widerrufen oder existiert nicht. Kontaktieren Sie die Person, die Sie eingeladen hat, um einen neuen Link zu erhalten."
 
 #: src/features/signup/ui/provisioning-wait.tsx
 msgid "This is taking a bit longer than usual. Hang tight — we're still working on it."
-msgstr "This is taking a bit longer than usual. Hang tight — we're still working on it."
+msgstr "Das dauert etwas länger als üblich. Bitte warten Sie — wir arbeiten noch daran."
 
 #: src/pages/verify-email.tsx
 msgid "This link is missing a verification token. Please use the link from your email."
-msgstr "This link is missing a verification token. Please use the link from your email."
+msgstr "Diesem Link fehlt ein Verifizierungstoken. Bitte verwenden Sie den Link aus Ihrer E-Mail."
 
 #: src/pages/-billing-example.tsx
 msgid "This page demonstrates how to integrate the billing entitlements API for plan-based feature access control in your React application."
-msgstr "This page demonstrates how to integrate the billing entitlements API for plan-based feature access control in your React application."
+msgstr "Diese Seite zeigt, wie man die Abrechnungsberechtigungs-API für planbasierte Funktionszugriffssteuerung in Ihrer React-Anwendung integriert."
 
 #: src/features/reset-password/ui/reset-password-form.tsx
 msgid "This password reset link is missing a token. Please request a new one."
-msgstr "This password reset link is missing a token. Please request a new one."
+msgstr "Diesem Link zum Zurücksetzen des Passworts fehlt ein Token. Bitte fordern Sie einen neuen an."
 
 #: src/features/reset-password/model/use-reset-password.ts
 msgid "This reset link is invalid or has expired. Please request a new one."
-msgstr "This reset link is invalid or has expired. Please request a new one."
+msgstr "Dieser Link zum Zurücksetzen ist ungültig oder abgelaufen. Bitte fordern Sie einen neuen an."
 
 #: src/pages/loading-demo.tsx
 msgid "This template uses Mantine's official loading components for optimal UX."
-msgstr "This template uses Mantine's official loading components for optimal UX."
+msgstr "Diese Vorlage verwendet die offiziellen Ladekomponenten von Mantine für optimale Benutzererfahrung."
 
 #: src/pages/admin/users.$userId.tsx
 #~ msgid "This user is not a member of any organization."
@@ -2824,23 +2824,23 @@ msgstr "This template uses Mantine's official loading components for optimal UX.
 
 #: src/pages/verify-email.tsx
 msgid "This verification link has expired or has already been used. Request a new one from your account settings."
-msgstr "This verification link has expired or has already been used. Request a new one from your account settings."
+msgstr "Dieser Verifizierungslink ist abgelaufen oder wurde bereits verwendet. Fordern Sie einen neuen in Ihren Kontoeinstellungen an."
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Tips"
-msgstr "Tips"
+msgstr "Tipps"
 
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "Title"
-msgstr "Title"
+msgstr "Titel"
 
 #: src/features/page-admin/model/types.ts
 msgid "Title is required for the default locale"
-msgstr "Title is required for the default locale"
+msgstr "Titel ist für das Standardgebietsschema erforderlich"
 
 #: src/pages/_app/billing/index.tsx
 msgid "To access the billing portal, please complete your billing settings setup."
-msgstr "To access the billing portal, please complete your billing settings setup."
+msgstr "Um auf das Abrechnungsportal zuzugreifen, schließen Sie bitte die Einrichtung Ihrer Abrechnungseinstellungen ab."
 
 #: src/pages/_app/billing.tsx
 #~ msgid "To access the billing portal, please complete your subscription setup by selecting a plan."
@@ -2848,18 +2848,18 @@ msgstr "To access the billing portal, please complete your billing settings setu
 
 #: src/features/magic-link/model/use-magic-link-initiate.ts
 msgid "Too many attempts. Please try again later."
-msgstr "Too many attempts. Please try again later."
+msgstr "Zu viele Versuche. Bitte versuchen Sie es später erneut."
 
 #: src/features/create-organization/model/use-create-organization.ts
 #: src/features/forgot-password/model/use-forgot-password.ts
 #: src/features/reset-password/model/use-reset-password.ts
 #: src/features/signup/model/use-signup.ts
 msgid "Too many requests. Please wait a moment before trying again."
-msgstr "Too many requests. Please wait a moment before trying again."
+msgstr "Zu viele Anfragen. Bitte warten Sie einen Moment, bevor Sie es erneut versuchen."
 
 #: src/features/sign-in/model/use-sign-in.ts
 msgid "Too many sign-in attempts. Please try again later."
-msgstr "Too many sign-in attempts. Please try again later."
+msgstr "Zu viele Anmeldeversuche. Bitte versuchen Sie es später erneut."
 
 #: src/pages/admin/index.tsx
 #~ msgid "Total Users"
@@ -2867,108 +2867,108 @@ msgstr "Too many sign-in attempts. Please try again later."
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Track all activity with built-in audit trails"
-msgstr "Track all activity with built-in audit trails"
+msgstr "Verfolgen Sie alle Aktivitäten mit integrierten Prüfpfaden"
 
 #: src/features/member-role/ui/transfer-ownership-modal.tsx
 msgid "Transfer ownership"
-msgstr "Transfer ownership"
+msgstr "Eigentümerschaft übertragen"
 
 #: src/features/manage-organization/ui/member-actions.tsx
 #: src/features/member-role/ui/transfer-ownership-modal.tsx
 msgid "Transfer Ownership"
-msgstr "Transfer Ownership"
+msgstr "Eigentümerschaft übertragen"
 
 #: src/features/member-role/ui/transfer-ownership-modal.tsx
 msgid "Transferring ownership will make {displayName} the new Tenant Owner. You will become a Member of this tenant and lose all owner permissions. This action cannot be undone by you — only the new owner can transfer ownership back."
-msgstr "Transferring ownership will make {displayName} the new Tenant Owner. You will become a Member of this tenant and lose all owner permissions. This action cannot be undone by you — only the new owner can transfer ownership back."
+msgstr "Durch die Übertragung der Eigentümerschaft wird {displayName} zum neuen Mandanteninhaber. Sie werden Mitglied dieses Mandanten und verlieren alle Eigentümerberechtigungen. Diese Aktion kann von Ihnen nicht rückgängig gemacht werden — nur der neue Eigentümer kann die Eigentümerschaft zurückübertragen."
 
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "Translations"
-msgstr "Translations"
+msgstr "Übersetzungen"
 
 #: src/features/manage-billing/ui/current-subscription.tsx
 msgid "Trial Active"
-msgstr "Trial Active"
+msgstr "Testphase aktiv"
 
 #: src/features/manage-billing/ui/current-subscription.tsx
 msgid "Trial Status"
-msgstr "Trial Status"
+msgstr "Testphasenstatus"
 
 #: src/shared/ui/auth-layout/auth-layout.tsx
 msgid "Trusted by teams worldwide"
-msgstr "Trusted by teams worldwide"
+msgstr "Von Teams weltweit vertraut"
 
 #: src/pages/_app/billing/failure.tsx
 #: src/shared/ui/error-boundary.tsx
 msgid "Try Again"
-msgstr "Try Again"
+msgstr "Erneut versuchen"
 
 #: src/widgets/dashboard-signup-chart/ui/dashboard-signup-chart.tsx
 msgid "Unable to load signup data."
-msgstr "Unable to load signup data."
+msgstr "Registrierungsdaten konnten nicht geladen werden."
 
 #: src/features/manage-billing/ui/entitlements-card.tsx
 msgid "Unable to load subscription information. Please try again later."
-msgstr "Unable to load subscription information. Please try again later."
+msgstr "Abonnementinformationen konnten nicht geladen werden. Bitte versuchen Sie es später erneut."
 
 #: src/features/ban-user/ui/unban-member-modal.tsx
 msgid "Unban member"
-msgstr "Unban member"
+msgstr "Mitglied entsperren"
 
 #: src/features/ban-user/ui/unban-member-modal.tsx
 #: src/features/manage-organization/ui/member-actions.tsx
 msgid "Unban Member"
-msgstr "Unban Member"
+msgstr "Mitglied entsperren"
 
 #: src/features/ban-user/ui/unban-member-modal.tsx
 msgid "Unbanning this member will restore their access to this tenant. They will be able to access this tenant again with their existing credentials."
-msgstr "Unbanning this member will restore their access to this tenant. They will be able to access this tenant again with their existing credentials."
+msgstr "Durch das Entsperren dieses Mitglieds wird dessen Zugriff auf diesen Mandanten wiederhergestellt. Sie können mit ihren bestehenden Zugangsdaten wieder auf diesen Mandanten zugreifen."
 
 #: src/pages/_app/settings/security.tsx
 msgid "Unique identifier for this SSO provider"
-msgstr "Unique identifier for this SSO provider"
+msgstr "Eindeutiger Bezeichner für diesen SSO-Anbieter"
 
 #: src/features/manage-billing/ui/plan-entitlement.tsx
 msgid "Unlimited"
-msgstr "Unlimited"
+msgstr "Unbegrenzt"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Unlink failed"
-msgstr "Unlink failed"
+msgstr "Verknüpfung trennen fehlgeschlagen"
 
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 msgid "Unverified"
-msgstr "Unverified"
+msgstr "Nicht verifiziert"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Update your password to keep your account secure"
-msgstr "Update your password to keep your account secure"
+msgstr "Aktualisieren Sie Ihr Passwort, um Ihr Konto sicher zu halten"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Update your profile and preferences in account settings"
-msgstr "Update your profile and preferences in account settings"
+msgstr "Aktualisieren Sie Ihr Profil und Ihre Einstellungen in den Kontoeinstellungen"
 
 #: src/pages/_app/cms-pages.index.tsx
 msgid "Updated"
-msgstr "Updated"
+msgstr "Aktualisiert"
 
 #: src/features/avatar/ui/avatar-upload.tsx
 msgid "Upload avatar"
-msgstr "Upload avatar"
+msgstr "Avatar hochladen"
 
 #: src/features/change-password/ui/change-password-modal.tsx
 #: src/pages/_app/settings/security.tsx
 msgid "Uppercase and lowercase letters"
-msgstr "Uppercase and lowercase letters"
+msgstr "Groß- und Kleinbuchstaben"
 
 #: src/features/signup/ui/password-strength.tsx
 msgid "Uppercase letter"
-msgstr "Uppercase letter"
+msgstr "Großbuchstabe"
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
 msgid "URL path, e.g. about-us or blog/post"
-msgstr "URL path, e.g. about-us or blog/post"
+msgstr "URL-Pfad, z. B. about-us oder blog/post"
 
 #: src/features/sign-in/ui/sign-in-form.tsx
 #~ msgid "Use magic link instead"
@@ -2988,7 +2988,7 @@ msgstr "URL path, e.g. about-us or blog/post"
 
 #: src/shared/ui/app-layout/app-header.tsx
 msgid "User menu"
-msgstr "User menu"
+msgstr "Benutzermenü"
 
 #: src/pages/admin/users.$userId.tsx
 #: src/pages/admin/users.index.tsx
@@ -3002,19 +3002,19 @@ msgstr "User menu"
 
 #: src/pages/loading-demo.tsx
 msgid "Uses <0>@mantine/nprogress</0> for top loading bar"
-msgstr "Uses <0>@mantine/nprogress</0> for top loading bar"
+msgstr "Verwendet <0>@mantine/nprogress</0> für die obere Ladebalken"
 
 #: src/pages/loading-demo.tsx
 msgid "Uses <0>LoadingOverlay</0> component for full-screen loading"
-msgstr "Uses <0>LoadingOverlay</0> component for full-screen loading"
+msgstr "Verwendet die <0>LoadingOverlay</0>-Komponente für Vollbild-Laden"
 
 #: src/pages/sign-in.tsx
 msgid "Using a corporate identity provider? <0>Sign in with Enterprise SSO</0>"
-msgstr "Using a corporate identity provider? <0>Sign in with Enterprise SSO</0>"
+msgstr "Verwenden Sie einen Unternehmensidentitätsanbieter? <0>Mit Enterprise-SSO anmelden</0>"
 
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 msgid "Verified"
-msgstr "Verified"
+msgstr "Verifiziert"
 
 #: src/pages/signup.tsx
 #~ msgid "Verify"
@@ -3022,11 +3022,11 @@ msgstr "Verified"
 
 #: src/pages/verify-email.tsx
 msgid "Verify Email"
-msgstr "Verify Email"
+msgstr "E-Mail verifizieren"
 
 #: src/pages/verify-email.tsx
 msgid "Verifying your email address…"
-msgstr "Verifying your email address…"
+msgstr "Ihre E-Mail-Adresse wird verifiziert…"
 
 #: src/pages/dashboard.tsx
 #~ msgid "View billing"
@@ -3034,7 +3034,7 @@ msgstr "Verifying your email address…"
 
 #: src/pages/_app/team.tsx
 msgid "View details"
-msgstr "View details"
+msgstr "Details anzeigen"
 
 #: src/pages/admin/organizations.index.tsx
 #~ msgid "View organization"
@@ -3046,47 +3046,47 @@ msgstr "View details"
 
 #: src/features/signup/ui/verify-email-prompt.tsx
 msgid "We sent a verification link to <0>{email}</0>. Click it to confirm your email address."
-msgstr "We sent a verification link to <0>{email}</0>. Click it to confirm your email address."
+msgstr "Wir haben einen Verifizierungslink an <0>{email}</0> gesendet. Klicken Sie darauf, um Ihre E-Mail-Adresse zu bestätigen."
 
 #: src/pages/forgot-password.tsx
 msgid "We'll send a reset link to your email address."
-msgstr "We'll send a reset link to your email address."
+msgstr "Wir senden einen Link zum Zurücksetzen an Ihre E-Mail-Adresse."
 
 #: src/features/signup/ui/provisioning-wait.tsx
 msgid "We're preparing your workspace. This usually takes just a few seconds."
-msgstr "We're preparing your workspace. This usually takes just a few seconds."
+msgstr "Wir bereiten Ihren Arbeitsbereich vor. Dies dauert normalerweise nur wenige Sekunden."
 
 #: src/features/magic-link/ui/magic-link-initiate-form.tsx
 msgid "We've sent a magic link to your inbox. Click it to sign in!"
-msgstr "We've sent a magic link to your inbox. Click it to sign in!"
+msgstr "Wir haben einen Magic-Link an Ihren Posteingang gesendet. Klicken Sie darauf, um sich anzumelden!"
 
 #: src/features/signup/ui/password-strength.tsx
 msgid "Weak"
-msgstr "Weak"
+msgstr "Schwach"
 
 #: src/features/manage-billing/ui/webhook-log-list.tsx
 msgid "Webhook Logs"
-msgstr "Webhook Logs"
+msgstr "Webhook-Protokolle"
 
 #: src/pages/invite.$token.tsx
 msgid "Welcome aboard"
-msgstr "Welcome aboard"
+msgstr "Willkommen an Bord"
 
 #: src/pages/sign-in.tsx
 msgid "Welcome back"
-msgstr "Welcome back"
+msgstr "Willkommen zurück"
 
 #: src/pages/_app/index.tsx
 msgid "Welcome back, {firstName}."
-msgstr "Welcome back, {firstName}."
+msgstr "Willkommen zurück, {firstName}."
 
 #: src/pages/auth.callback.tsx
 msgid "Welcome back."
-msgstr "Welcome back."
+msgstr "Willkommen zurück."
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Welcome illustration"
-msgstr "Welcome illustration"
+msgstr "Willkommensillustration"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 #~ msgid "Welcome to IQKV!"
@@ -3094,35 +3094,35 @@ msgstr "Welcome illustration"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Welcome to Key Value Platform!"
-msgstr "Welcome to Key Value Platform!"
+msgstr "Willkommen bei der Key Value Platform!"
 
 #: src/widgets/dashboard-personal-welcome/ui/dashboard-personal-welcome.tsx
 msgid "Welcome, {firstName}!"
-msgstr "Welcome, {firstName}!"
+msgstr "Willkommen, {firstName}!"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Welcome!"
-msgstr "Welcome!"
+msgstr "Willkommen!"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Welcome! Your account is ready — start using the app right away."
-msgstr "Welcome! Your account is ready — start using the app right away."
+msgstr "Willkommen! Ihr Konto ist bereit — nutzen Sie die App sofort."
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "What you can do"
-msgstr "What you can do"
+msgstr "Was Sie tun können"
 
 #: src/features/signup/ui/signup-form.tsx
 msgid "Work email"
-msgstr "Work email"
+msgstr "Geschäftliche E-Mail"
 
 #: src/shared/ui/app-layout/app-nav.tsx
 msgid "Workspace"
-msgstr "Workspace"
+msgstr "Arbeitsbereich"
 
 #: src/pages/sign-in.tsx
 msgid "Workspace key"
-msgstr "Workspace key"
+msgstr "Arbeitsbereich-Schlüssel"
 
 #: src/pages/dashboard.tsx
 #~ msgid "Workspace settings"
@@ -3134,23 +3134,23 @@ msgstr "Workspace key"
 
 #: src/pages/_app/cms-pages.index.tsx
 msgid "Workspace:"
-msgstr "Workspace:"
+msgstr "Arbeitsbereich:"
 
 #: src/features/manage-billing/ui/plan-list.tsx
 msgid "Yearly"
-msgstr "Yearly"
+msgstr "Jährlich"
 
 #: src/features/accept-invitation/model/use-accept-invitation.ts
 msgid "You are already a member of this organization."
-msgstr "You are already a member of this organization."
+msgstr "Sie sind bereits Mitglied dieser Organisation."
 
 #: src/pages/_app/settings/general.tsx
 msgid "You are not a member of any organization."
-msgstr "You are not a member of any organization."
+msgstr "Sie sind kein Mitglied einer Organisation."
 
 #: src/features/complete-profile/ui/complete-profile-form.tsx
 msgid "You can update your avatar and other details in settings later."
-msgstr "You can update your avatar and other details in settings later."
+msgstr "Sie können Ihren Avatar und andere Details später in den Einstellungen aktualisieren."
 
 #: src/pages/sign-in.tsx
 #~ msgid "You do not have permission to access the admin area."
@@ -3158,17 +3158,17 @@ msgstr "You can update your avatar and other details in settings later."
 
 #: src/pages/sign-in.tsx
 msgid "You do not have permission to access this area."
-msgstr "You do not have permission to access this area."
+msgstr "Sie haben keine Berechtigung, auf diesen Bereich zuzugreifen."
 
 #: src/pages/unauthorized.tsx
 msgid "You do not have permission to access this area. Please sign in with an account that has the appropriate membership."
-msgstr "You do not have permission to access this area. Please sign in with an account that has the appropriate membership."
+msgstr "Sie haben keine Berechtigung, auf diesen Bereich zuzugreifen. Bitte melden Sie sich mit einem Konto an, das die entsprechende Mitgliedschaft besitzt."
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
 #: src/pages/_app/cms-pages.index.tsx
 msgid "You do not have permission to manage CMS pages."
-msgstr "You do not have permission to manage CMS pages."
+msgstr "Sie haben keine Berechtigung, CMS-Seiten zu verwalten."
 
 #: src/pages/unauthorized.tsx
 #~ msgid "You do not have the required <0>PLATFORM_ADMIN</0> authority to access this area. Please sign in with an account that has the appropriate permissions."
@@ -3180,19 +3180,19 @@ msgstr "You do not have permission to manage CMS pages."
 
 #: src/features/tenant-switcher/model/use-tenant-switcher.ts
 msgid "You no longer have access to this organization."
-msgstr "You no longer have access to this organization."
+msgstr "Sie haben keinen Zugriff mehr auf diese Organisation."
 
 #: src/pages/_app/settings/organization.tsx
 msgid "You're currently using your personal workspace. Create an organization to collaborate with others, manage members, and share resources."
-msgstr "You're currently using your personal workspace. Create an organization to collaborate with others, manage members, and share resources."
+msgstr "Sie verwenden derzeit Ihren persönlichen Arbeitsbereich. Erstellen Sie eine Organisation, um mit anderen zusammenzuarbeiten, Mitglieder zu verwalten und Ressourcen zu teilen."
 
 #: src/pages/invite.$token.tsx
 msgid "You've been"
-msgstr "You've been"
+msgstr "Sie wurden"
 
 #: src/pages/_app/team.tsx
 msgid "You've reached the maximum number of members for your plan. Please upgrade to invite more members."
-msgstr "You've reached the maximum number of members for your plan. Please upgrade to invite more members."
+msgstr "Sie haben die maximale Anzahl an Mitgliedern für Ihren Plan erreicht. Bitte upgraden Sie, um weitere Mitglieder einzuladen."
 
 #: src/features/signup/ui/signup-form.tsx
 msgid "you@company.com"
@@ -3210,11 +3210,11 @@ msgstr "you@example.com"
 
 #: src/features/accept-invitation/model/use-accept-invitation.ts
 msgid "Your account is locked or suspended."
-msgstr "Your account is locked or suspended."
+msgstr "Ihr Konto ist gesperrt oder ausgesetzt."
 
 #: src/features/sign-in/model/use-sign-in.ts
 msgid "Your account is not active or has been suspended"
-msgstr "Your account is not active or has been suspended"
+msgstr "Ihr Konto ist nicht aktiv oder wurde ausgesetzt"
 
 #: src/pages/signup.tsx
 #~ msgid "Your details"
@@ -3222,47 +3222,47 @@ msgstr "Your account is not active or has been suspended"
 
 #: src/pages/verify-email.tsx
 msgid "Your email address has been confirmed. You're all set."
-msgstr "Your email address has been confirmed. You're all set."
+msgstr "Ihre E-Mail-Adresse wurde bestätigt. Alles ist bereit."
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Your enterprise-ready microservices foundation for scalable SaaS products."
-msgstr "Your enterprise-ready microservices foundation for scalable SaaS products."
+msgstr "Ihre unternehmensreife Microservices-Grundlage für skalierbare SaaS-Produkte."
 
 #: src/pages/invite.$token.tsx
 msgid "Your existing password"
-msgstr "Your existing password"
+msgstr "Ihr aktuelles Passwort"
 
 #: src/pages/reset-password.tsx
 msgid "Your new password must be different from your previous one."
-msgstr "Your new password must be different from your previous one."
+msgstr "Ihr neues Passwort muss sich von Ihrem vorherigen unterscheiden."
 
 #: src/features/sign-in/ui/sign-in-form.tsx
 msgid "Your password"
-msgstr "Your password"
+msgstr "Ihr Passwort"
 
 #: src/features/reset-password/ui/reset-password-form.tsx
 msgid "Your password has been changed successfully. You'll be redirected to sign in shortly."
-msgstr "Your password has been changed successfully. You'll be redirected to sign in shortly."
+msgstr "Ihr Passwort wurde erfolgreich geändert. Sie werden in Kürze zur Anmeldung weitergeleitet."
 
 #: src/pages/_app/billing/index.tsx
 msgid "Your payment information is securely processed by our payment provider. We do not store your payment details on our servers."
-msgstr "Your payment information is securely processed by our payment provider. We do not store your payment details on our servers."
+msgstr "Ihre Zahlungsinformationen werden sicher von unserem Zahlungsanbieter verarbeitet. Wir speichern Ihre Zahlungsdetails nicht auf unseren Servern."
 
 #~ msgid "Your payment information is securely processed by Stripe. We do not store your credit card details on our servers."
 #~ msgstr "Your payment information is securely processed by Stripe. We do not store your credit card details on our servers."
 
 #: src/pages/_app/billing/index.tsx
 msgid "Your personal workspace doesn't require a subscription. Upgrade to an organization workspace to access additional features and team collaboration."
-msgstr "Your personal workspace doesn't require a subscription. Upgrade to an organization workspace to access additional features and team collaboration."
+msgstr "Ihr persönlicher Arbeitsbereich erfordert kein Abonnement. Upgraden Sie auf einen Organisations-Arbeitsbereich, um auf zusätzliche Funktionen und Teamzusammenarbeit zuzugreifen."
 
 #: src/pages/_app/settings/security.tsx
 msgid "Your Roles"
-msgstr "Your Roles"
+msgstr "Ihre Rollen"
 
 #: src/pages/sign-in.tsx
 msgid "Your session expired due to inactivity."
-msgstr "Your session expired due to inactivity."
+msgstr "Ihre Sitzung ist aufgrund von Inaktivität abgelaufen."
 
 #: src/shared/ui/auth-layout/auth-layout.tsx
 msgid "Your workspace,"
-msgstr "Your workspace,"
+msgstr "Ihr Arbeitsbereich,"
