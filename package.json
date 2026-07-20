@@ -99,7 +99,7 @@
     "lottie-web": "^5.13.0",
     "mantine-datatable": "^9.4.0",
     "miragejs": "^0.1.48",
-    "nuqs": "^2.9.0",
+    "nuqs": "^2.9.1",
     "query-string": "^9.4.1",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
