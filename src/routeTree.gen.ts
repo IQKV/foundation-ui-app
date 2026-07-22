@@ -9,89 +9,40 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from "./pages/__root"
-import { Route as VerifyEmailRouteImport } from "./pages/verify-email"
-import { Route as UnauthorizedRouteImport } from "./pages/unauthorized"
-import { Route as SignupRouteImport } from "./pages/signup"
-import { Route as SignInRouteImport } from "./pages/sign-in"
-import { Route as ResetPasswordRouteImport } from "./pages/reset-password"
-import { Route as MagicLinkRouteImport } from "./pages/magic-link"
-import { Route as LoadingDemoRouteImport } from "./pages/loading-demo"
-import { Route as ForgotPasswordRouteImport } from "./pages/forgot-password"
-import { Route as CreateOrganizationRouteImport } from "./pages/create-organization"
-import { Route as CompleteProfileRouteImport } from "./pages/complete-profile"
-import { Route as AppRouteImport } from "./pages/_app"
-import { Route as R500RouteImport } from "./pages/500"
 import { Route as R404RouteImport } from "./pages/404"
-import { Route as MagicLinkIndexRouteImport } from "./pages/magic-link.index"
+import { Route as R500RouteImport } from "./pages/500"
+import { Route as AppRouteImport } from "./pages/_app"
+import { Route as CompleteProfileRouteImport } from "./pages/complete-profile"
+import { Route as CreateOrganizationRouteImport } from "./pages/create-organization"
+import { Route as ForgotPasswordRouteImport } from "./pages/forgot-password"
+import { Route as LoadingDemoRouteImport } from "./pages/loading-demo"
+import { Route as MagicLinkRouteImport } from "./pages/magic-link"
+import { Route as ResetPasswordRouteImport } from "./pages/reset-password"
+import { Route as SignInRouteImport } from "./pages/sign-in"
+import { Route as SignupRouteImport } from "./pages/signup"
+import { Route as UnauthorizedRouteImport } from "./pages/unauthorized"
+import { Route as VerifyEmailRouteImport } from "./pages/verify-email"
 import { Route as AppIndexRouteImport } from "./pages/_app/index"
-import { Route as MagicLinkVerifyRouteImport } from "./pages/magic-link.verify"
-import { Route as InviteTokenRouteImport } from "./pages/invite.$token"
-import { Route as AuthCallbackRouteImport } from "./pages/auth.callback"
-import { Route as AppTeamRouteImport } from "./pages/_app/team"
 import { Route as AppCmsPagesRouteImport } from "./pages/_app/cms-pages"
-import { Route as AppCmsPagesIndexRouteImport } from "./pages/_app/cms-pages.index"
+import { Route as AppTeamRouteImport } from "./pages/_app/team"
+import { Route as AuthCallbackRouteImport } from "./pages/auth.callback"
+import { Route as InviteTokenRouteImport } from "./pages/invite.$token"
+import { Route as MagicLinkIndexRouteImport } from "./pages/magic-link.index"
+import { Route as MagicLinkVerifyRouteImport } from "./pages/magic-link.verify"
 import { Route as AppBillingIndexRouteImport } from "./pages/_app/billing/index"
-import { Route as AppSettingsSecurityRouteImport } from "./pages/_app/settings/security"
-import { Route as AppSettingsOrganizationRouteImport } from "./pages/_app/settings/organization"
-import { Route as AppSettingsNotificationsRouteImport } from "./pages/_app/settings/notifications"
-import { Route as AppSettingsGeneralRouteImport } from "./pages/_app/settings/general"
-import { Route as AppCmsPagesCreateRouteImport } from "./pages/_app/cms-pages.create"
-import { Route as AppCmsPagesPageIdRouteImport } from "./pages/_app/cms-pages.$pageId"
-import { Route as AppBillingSuccessRouteImport } from "./pages/_app/billing/success"
 import { Route as AppBillingFailureRouteImport } from "./pages/_app/billing/failure"
+import { Route as AppBillingSuccessRouteImport } from "./pages/_app/billing/success"
+import { Route as AppCmsPagesIndexRouteImport } from "./pages/_app/cms-pages.index"
+import { Route as AppCmsPagesPageIdRouteImport } from "./pages/_app/cms-pages.$pageId"
+import { Route as AppCmsPagesCreateRouteImport } from "./pages/_app/cms-pages.create"
+import { Route as AppSettingsGeneralRouteImport } from "./pages/_app/settings/general"
+import { Route as AppSettingsNotificationsRouteImport } from "./pages/_app/settings/notifications"
+import { Route as AppSettingsOrganizationRouteImport } from "./pages/_app/settings/organization"
+import { Route as AppSettingsSecurityRouteImport } from "./pages/_app/settings/security"
 
-const VerifyEmailRoute = VerifyEmailRouteImport.update({
-  id: "/verify-email",
-  path: "/verify-email",
-  getParentRoute: () => rootRouteImport,
-} as any)
-const UnauthorizedRoute = UnauthorizedRouteImport.update({
-  id: "/unauthorized",
-  path: "/unauthorized",
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SignupRoute = SignupRouteImport.update({
-  id: "/signup",
-  path: "/signup",
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SignInRoute = SignInRouteImport.update({
-  id: "/sign-in",
-  path: "/sign-in",
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ResetPasswordRoute = ResetPasswordRouteImport.update({
-  id: "/reset-password",
-  path: "/reset-password",
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MagicLinkRoute = MagicLinkRouteImport.update({
-  id: "/magic-link",
-  path: "/magic-link",
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LoadingDemoRoute = LoadingDemoRouteImport.update({
-  id: "/loading-demo",
-  path: "/loading-demo",
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
-  id: "/forgot-password",
-  path: "/forgot-password",
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CreateOrganizationRoute = CreateOrganizationRouteImport.update({
-  id: "/create-organization",
-  path: "/create-organization",
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CompleteProfileRoute = CompleteProfileRouteImport.update({
-  id: "/complete-profile",
-  path: "/complete-profile",
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AppRoute = AppRouteImport.update({
-  id: "/_app",
+const R404Route = R404RouteImport.update({
+  id: "/404",
+  path: "/404",
   getParentRoute: () => rootRouteImport,
 } as any)
 const R500Route = R500RouteImport.update({
@@ -99,39 +50,63 @@ const R500Route = R500RouteImport.update({
   path: "/500",
   getParentRoute: () => rootRouteImport,
 } as any)
-const R404Route = R404RouteImport.update({
-  id: "/404",
-  path: "/404",
+const AppRoute = AppRouteImport.update({
+  id: "/_app",
   getParentRoute: () => rootRouteImport,
 } as any)
-const MagicLinkIndexRoute = MagicLinkIndexRouteImport.update({
-  id: "/",
-  path: "/",
-  getParentRoute: () => MagicLinkRoute,
+const CompleteProfileRoute = CompleteProfileRouteImport.update({
+  id: "/complete-profile",
+  path: "/complete-profile",
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CreateOrganizationRoute = CreateOrganizationRouteImport.update({
+  id: "/create-organization",
+  path: "/create-organization",
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
+  id: "/forgot-password",
+  path: "/forgot-password",
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoadingDemoRoute = LoadingDemoRouteImport.update({
+  id: "/loading-demo",
+  path: "/loading-demo",
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MagicLinkRoute = MagicLinkRouteImport.update({
+  id: "/magic-link",
+  path: "/magic-link",
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: "/reset-password",
+  path: "/reset-password",
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SignInRoute = SignInRouteImport.update({
+  id: "/sign-in",
+  path: "/sign-in",
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SignupRoute = SignupRouteImport.update({
+  id: "/signup",
+  path: "/signup",
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UnauthorizedRoute = UnauthorizedRouteImport.update({
+  id: "/unauthorized",
+  path: "/unauthorized",
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VerifyEmailRoute = VerifyEmailRouteImport.update({
+  id: "/verify-email",
+  path: "/verify-email",
+  getParentRoute: () => rootRouteImport,
 } as any)
 const AppIndexRoute = AppIndexRouteImport.update({
   id: "/",
   path: "/",
-  getParentRoute: () => AppRoute,
-} as any)
-const MagicLinkVerifyRoute = MagicLinkVerifyRouteImport.update({
-  id: "/verify",
-  path: "/verify",
-  getParentRoute: () => MagicLinkRoute,
-} as any)
-const InviteTokenRoute = InviteTokenRouteImport.update({
-  id: "/invite/$token",
-  path: "/invite/$token",
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthCallbackRoute = AuthCallbackRouteImport.update({
-  id: "/auth/callback",
-  path: "/auth/callback",
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AppTeamRoute = AppTeamRouteImport.update({
-  id: "/team",
-  path: "/team",
   getParentRoute: () => AppRoute,
 } as any)
 const AppCmsPagesRoute = AppCmsPagesRouteImport.update({
@@ -139,24 +114,64 @@ const AppCmsPagesRoute = AppCmsPagesRouteImport.update({
   path: "/cms-pages",
   getParentRoute: () => AppRoute,
 } as any)
-const AppCmsPagesIndexRoute = AppCmsPagesIndexRouteImport.update({
+const AppTeamRoute = AppTeamRouteImport.update({
+  id: "/team",
+  path: "/team",
+  getParentRoute: () => AppRoute,
+} as any)
+const AuthCallbackRoute = AuthCallbackRouteImport.update({
+  id: "/auth/callback",
+  path: "/auth/callback",
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InviteTokenRoute = InviteTokenRouteImport.update({
+  id: "/invite/$token",
+  path: "/invite/$token",
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MagicLinkIndexRoute = MagicLinkIndexRouteImport.update({
   id: "/",
   path: "/",
-  getParentRoute: () => AppCmsPagesRoute,
+  getParentRoute: () => MagicLinkRoute,
+} as any)
+const MagicLinkVerifyRoute = MagicLinkVerifyRouteImport.update({
+  id: "/verify",
+  path: "/verify",
+  getParentRoute: () => MagicLinkRoute,
 } as any)
 const AppBillingIndexRoute = AppBillingIndexRouteImport.update({
   id: "/billing/",
   path: "/billing/",
   getParentRoute: () => AppRoute,
 } as any)
-const AppSettingsSecurityRoute = AppSettingsSecurityRouteImport.update({
-  id: "/settings/security",
-  path: "/settings/security",
+const AppBillingFailureRoute = AppBillingFailureRouteImport.update({
+  id: "/billing/failure",
+  path: "/billing/failure",
   getParentRoute: () => AppRoute,
 } as any)
-const AppSettingsOrganizationRoute = AppSettingsOrganizationRouteImport.update({
-  id: "/settings/organization",
-  path: "/settings/organization",
+const AppBillingSuccessRoute = AppBillingSuccessRouteImport.update({
+  id: "/billing/success",
+  path: "/billing/success",
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCmsPagesIndexRoute = AppCmsPagesIndexRouteImport.update({
+  id: "/",
+  path: "/",
+  getParentRoute: () => AppCmsPagesRoute,
+} as any)
+const AppCmsPagesPageIdRoute = AppCmsPagesPageIdRouteImport.update({
+  id: "/$pageId",
+  path: "/$pageId",
+  getParentRoute: () => AppCmsPagesRoute,
+} as any)
+const AppCmsPagesCreateRoute = AppCmsPagesCreateRouteImport.update({
+  id: "/create",
+  path: "/create",
+  getParentRoute: () => AppCmsPagesRoute,
+} as any)
+const AppSettingsGeneralRoute = AppSettingsGeneralRouteImport.update({
+  id: "/settings/general",
+  path: "/settings/general",
   getParentRoute: () => AppRoute,
 } as any)
 const AppSettingsNotificationsRoute =
@@ -165,29 +180,14 @@ const AppSettingsNotificationsRoute =
     path: "/settings/notifications",
     getParentRoute: () => AppRoute,
   } as any)
-const AppSettingsGeneralRoute = AppSettingsGeneralRouteImport.update({
-  id: "/settings/general",
-  path: "/settings/general",
+const AppSettingsOrganizationRoute = AppSettingsOrganizationRouteImport.update({
+  id: "/settings/organization",
+  path: "/settings/organization",
   getParentRoute: () => AppRoute,
 } as any)
-const AppCmsPagesCreateRoute = AppCmsPagesCreateRouteImport.update({
-  id: "/create",
-  path: "/create",
-  getParentRoute: () => AppCmsPagesRoute,
-} as any)
-const AppCmsPagesPageIdRoute = AppCmsPagesPageIdRouteImport.update({
-  id: "/$pageId",
-  path: "/$pageId",
-  getParentRoute: () => AppCmsPagesRoute,
-} as any)
-const AppBillingSuccessRoute = AppBillingSuccessRouteImport.update({
-  id: "/billing/success",
-  path: "/billing/success",
-  getParentRoute: () => AppRoute,
-} as any)
-const AppBillingFailureRoute = AppBillingFailureRouteImport.update({
-  id: "/billing/failure",
-  path: "/billing/failure",
+const AppSettingsSecurityRoute = AppSettingsSecurityRouteImport.update({
+  id: "/settings/security",
+  path: "/settings/security",
   getParentRoute: () => AppRoute,
 } as any)
 
@@ -399,81 +399,11 @@ export interface RootRouteChildren {
 
 declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
-    "/verify-email": {
-      id: "/verify-email"
-      path: "/verify-email"
-      fullPath: "/verify-email"
-      preLoaderRoute: typeof VerifyEmailRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    "/unauthorized": {
-      id: "/unauthorized"
-      path: "/unauthorized"
-      fullPath: "/unauthorized"
-      preLoaderRoute: typeof UnauthorizedRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    "/signup": {
-      id: "/signup"
-      path: "/signup"
-      fullPath: "/signup"
-      preLoaderRoute: typeof SignupRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    "/sign-in": {
-      id: "/sign-in"
-      path: "/sign-in"
-      fullPath: "/sign-in"
-      preLoaderRoute: typeof SignInRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    "/reset-password": {
-      id: "/reset-password"
-      path: "/reset-password"
-      fullPath: "/reset-password"
-      preLoaderRoute: typeof ResetPasswordRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    "/magic-link": {
-      id: "/magic-link"
-      path: "/magic-link"
-      fullPath: "/magic-link"
-      preLoaderRoute: typeof MagicLinkRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    "/loading-demo": {
-      id: "/loading-demo"
-      path: "/loading-demo"
-      fullPath: "/loading-demo"
-      preLoaderRoute: typeof LoadingDemoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    "/forgot-password": {
-      id: "/forgot-password"
-      path: "/forgot-password"
-      fullPath: "/forgot-password"
-      preLoaderRoute: typeof ForgotPasswordRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    "/create-organization": {
-      id: "/create-organization"
-      path: "/create-organization"
-      fullPath: "/create-organization"
-      preLoaderRoute: typeof CreateOrganizationRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    "/complete-profile": {
-      id: "/complete-profile"
-      path: "/complete-profile"
-      fullPath: "/complete-profile"
-      preLoaderRoute: typeof CompleteProfileRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    "/_app": {
-      id: "/_app"
-      path: ""
-      fullPath: "/"
-      preLoaderRoute: typeof AppRouteImport
+    "/404": {
+      id: "/404"
+      path: "/404"
+      fullPath: "/404"
+      preLoaderRoute: typeof R404RouteImport
       parentRoute: typeof rootRouteImport
     }
     "/500": {
@@ -483,53 +413,88 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof R500RouteImport
       parentRoute: typeof rootRouteImport
     }
-    "/404": {
-      id: "/404"
-      path: "/404"
-      fullPath: "/404"
-      preLoaderRoute: typeof R404RouteImport
+    "/_app": {
+      id: "/_app"
+      path: ""
+      fullPath: "/"
+      preLoaderRoute: typeof AppRouteImport
       parentRoute: typeof rootRouteImport
     }
-    "/magic-link/": {
-      id: "/magic-link/"
-      path: "/"
-      fullPath: "/magic-link/"
-      preLoaderRoute: typeof MagicLinkIndexRouteImport
-      parentRoute: typeof MagicLinkRoute
+    "/complete-profile": {
+      id: "/complete-profile"
+      path: "/complete-profile"
+      fullPath: "/complete-profile"
+      preLoaderRoute: typeof CompleteProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    "/create-organization": {
+      id: "/create-organization"
+      path: "/create-organization"
+      fullPath: "/create-organization"
+      preLoaderRoute: typeof CreateOrganizationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    "/forgot-password": {
+      id: "/forgot-password"
+      path: "/forgot-password"
+      fullPath: "/forgot-password"
+      preLoaderRoute: typeof ForgotPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    "/loading-demo": {
+      id: "/loading-demo"
+      path: "/loading-demo"
+      fullPath: "/loading-demo"
+      preLoaderRoute: typeof LoadingDemoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    "/magic-link": {
+      id: "/magic-link"
+      path: "/magic-link"
+      fullPath: "/magic-link"
+      preLoaderRoute: typeof MagicLinkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    "/reset-password": {
+      id: "/reset-password"
+      path: "/reset-password"
+      fullPath: "/reset-password"
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    "/sign-in": {
+      id: "/sign-in"
+      path: "/sign-in"
+      fullPath: "/sign-in"
+      preLoaderRoute: typeof SignInRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    "/signup": {
+      id: "/signup"
+      path: "/signup"
+      fullPath: "/signup"
+      preLoaderRoute: typeof SignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    "/unauthorized": {
+      id: "/unauthorized"
+      path: "/unauthorized"
+      fullPath: "/unauthorized"
+      preLoaderRoute: typeof UnauthorizedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    "/verify-email": {
+      id: "/verify-email"
+      path: "/verify-email"
+      fullPath: "/verify-email"
+      preLoaderRoute: typeof VerifyEmailRouteImport
+      parentRoute: typeof rootRouteImport
     }
     "/_app/": {
       id: "/_app/"
       path: "/"
       fullPath: "/"
       preLoaderRoute: typeof AppIndexRouteImport
-      parentRoute: typeof AppRoute
-    }
-    "/magic-link/verify": {
-      id: "/magic-link/verify"
-      path: "/verify"
-      fullPath: "/magic-link/verify"
-      preLoaderRoute: typeof MagicLinkVerifyRouteImport
-      parentRoute: typeof MagicLinkRoute
-    }
-    "/invite/$token": {
-      id: "/invite/$token"
-      path: "/invite/$token"
-      fullPath: "/invite/$token"
-      preLoaderRoute: typeof InviteTokenRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    "/auth/callback": {
-      id: "/auth/callback"
-      path: "/auth/callback"
-      fullPath: "/auth/callback"
-      preLoaderRoute: typeof AuthCallbackRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    "/_app/team": {
-      id: "/_app/team"
-      path: "/team"
-      fullPath: "/team"
-      preLoaderRoute: typeof AppTeamRouteImport
       parentRoute: typeof AppRoute
     }
     "/_app/cms-pages": {
@@ -539,12 +504,40 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof AppCmsPagesRouteImport
       parentRoute: typeof AppRoute
     }
-    "/_app/cms-pages/": {
-      id: "/_app/cms-pages/"
+    "/_app/team": {
+      id: "/_app/team"
+      path: "/team"
+      fullPath: "/team"
+      preLoaderRoute: typeof AppTeamRouteImport
+      parentRoute: typeof AppRoute
+    }
+    "/auth/callback": {
+      id: "/auth/callback"
+      path: "/auth/callback"
+      fullPath: "/auth/callback"
+      preLoaderRoute: typeof AuthCallbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    "/invite/$token": {
+      id: "/invite/$token"
+      path: "/invite/$token"
+      fullPath: "/invite/$token"
+      preLoaderRoute: typeof InviteTokenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    "/magic-link/": {
+      id: "/magic-link/"
       path: "/"
-      fullPath: "/cms-pages/"
-      preLoaderRoute: typeof AppCmsPagesIndexRouteImport
-      parentRoute: typeof AppCmsPagesRoute
+      fullPath: "/magic-link/"
+      preLoaderRoute: typeof MagicLinkIndexRouteImport
+      parentRoute: typeof MagicLinkRoute
+    }
+    "/magic-link/verify": {
+      id: "/magic-link/verify"
+      path: "/verify"
+      fullPath: "/magic-link/verify"
+      preLoaderRoute: typeof MagicLinkVerifyRouteImport
+      parentRoute: typeof MagicLinkRoute
     }
     "/_app/billing/": {
       id: "/_app/billing/"
@@ -553,39 +546,25 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof AppBillingIndexRouteImport
       parentRoute: typeof AppRoute
     }
-    "/_app/settings/security": {
-      id: "/_app/settings/security"
-      path: "/settings/security"
-      fullPath: "/settings/security"
-      preLoaderRoute: typeof AppSettingsSecurityRouteImport
+    "/_app/billing/failure": {
+      id: "/_app/billing/failure"
+      path: "/billing/failure"
+      fullPath: "/billing/failure"
+      preLoaderRoute: typeof AppBillingFailureRouteImport
       parentRoute: typeof AppRoute
     }
-    "/_app/settings/organization": {
-      id: "/_app/settings/organization"
-      path: "/settings/organization"
-      fullPath: "/settings/organization"
-      preLoaderRoute: typeof AppSettingsOrganizationRouteImport
+    "/_app/billing/success": {
+      id: "/_app/billing/success"
+      path: "/billing/success"
+      fullPath: "/billing/success"
+      preLoaderRoute: typeof AppBillingSuccessRouteImport
       parentRoute: typeof AppRoute
     }
-    "/_app/settings/notifications": {
-      id: "/_app/settings/notifications"
-      path: "/settings/notifications"
-      fullPath: "/settings/notifications"
-      preLoaderRoute: typeof AppSettingsNotificationsRouteImport
-      parentRoute: typeof AppRoute
-    }
-    "/_app/settings/general": {
-      id: "/_app/settings/general"
-      path: "/settings/general"
-      fullPath: "/settings/general"
-      preLoaderRoute: typeof AppSettingsGeneralRouteImport
-      parentRoute: typeof AppRoute
-    }
-    "/_app/cms-pages/create": {
-      id: "/_app/cms-pages/create"
-      path: "/create"
-      fullPath: "/cms-pages/create"
-      preLoaderRoute: typeof AppCmsPagesCreateRouteImport
+    "/_app/cms-pages/": {
+      id: "/_app/cms-pages/"
+      path: "/"
+      fullPath: "/cms-pages/"
+      preLoaderRoute: typeof AppCmsPagesIndexRouteImport
       parentRoute: typeof AppCmsPagesRoute
     }
     "/_app/cms-pages/$pageId": {
@@ -595,18 +574,39 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof AppCmsPagesPageIdRouteImport
       parentRoute: typeof AppCmsPagesRoute
     }
-    "/_app/billing/success": {
-      id: "/_app/billing/success"
-      path: "/billing/success"
-      fullPath: "/billing/success"
-      preLoaderRoute: typeof AppBillingSuccessRouteImport
+    "/_app/cms-pages/create": {
+      id: "/_app/cms-pages/create"
+      path: "/create"
+      fullPath: "/cms-pages/create"
+      preLoaderRoute: typeof AppCmsPagesCreateRouteImport
+      parentRoute: typeof AppCmsPagesRoute
+    }
+    "/_app/settings/general": {
+      id: "/_app/settings/general"
+      path: "/settings/general"
+      fullPath: "/settings/general"
+      preLoaderRoute: typeof AppSettingsGeneralRouteImport
       parentRoute: typeof AppRoute
     }
-    "/_app/billing/failure": {
-      id: "/_app/billing/failure"
-      path: "/billing/failure"
-      fullPath: "/billing/failure"
-      preLoaderRoute: typeof AppBillingFailureRouteImport
+    "/_app/settings/notifications": {
+      id: "/_app/settings/notifications"
+      path: "/settings/notifications"
+      fullPath: "/settings/notifications"
+      preLoaderRoute: typeof AppSettingsNotificationsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    "/_app/settings/organization": {
+      id: "/_app/settings/organization"
+      path: "/settings/organization"
+      fullPath: "/settings/organization"
+      preLoaderRoute: typeof AppSettingsOrganizationRouteImport
+      parentRoute: typeof AppRoute
+    }
+    "/_app/settings/security": {
+      id: "/_app/settings/security"
+      path: "/settings/security"
+      fullPath: "/settings/security"
+      preLoaderRoute: typeof AppSettingsSecurityRouteImport
       parentRoute: typeof AppRoute
     }
   }

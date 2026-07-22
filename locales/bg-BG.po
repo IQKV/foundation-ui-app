@@ -30,11 +30,6 @@ msgstr "{0}"
 msgid "{0} – {1}"
 msgstr "{0} – {1}"
 
-#. placeholder {0}: plan.trialPeriodDays
-#: src/features/manage-billing/ui/plan-card.tsx
-#~ msgid "{0} Days Free Trial"
-#~ msgstr ""
-
 #. placeholder {0}: subscription.trialDaysLeft
 #: src/features/manage-billing/ui/current-subscription.tsx
 msgid "{0} Days Left"
@@ -69,10 +64,6 @@ msgstr "• Фокусирайте се върху стойността на п�
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "• Invite your team — your first steps are just a click away!"
 msgstr "• Поканете екипа си — първите ви стъпки са само на едно кликване!"
-
-#: src/features/onboarding/ui/onboarding-modal.tsx
-#~ msgid "• Invite your team, create your first steps take just a click away!"
-#~ msgstr ""
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "• No technical background needed — our intuitive UI is designed for everyone."
@@ -200,10 +191,6 @@ msgstr "Администратор"
 #: src/features/manage-billing/ui/plan-entitlement.tsx
 msgid "Advanced Analytics"
 msgstr "Разширена аналитика"
-
-#: src/pages/billing-example.tsx
-#~ msgid "Advanced Projects (Upgrade Required)"
-#~ msgstr ""
 
 #: src/pages/_app/cms-pages.index.tsx
 msgid "All statuses"
@@ -456,10 +443,6 @@ msgstr "Наименование на компанията"
 msgid "Complete"
 msgstr "Завършено"
 
-#: src/features/onboarding/ui/onboarding-modal.tsx
-#~ msgid "Complete your <0>profile</0> with your name and avatar"
-#~ msgstr ""
-
 #: src/pages/complete-profile.tsx
 msgid "Complete your profile"
 msgstr "Попълнете профила си"
@@ -548,9 +531,6 @@ msgstr "Копирано!"
 #: src/features/sign-in/ui/demo-credentials-hint.tsx
 msgid "Copy"
 msgstr "Копирай"
-
-#~ msgid "Could not create Stripe Customer Portal session."
-#~ msgstr "Не може да се създаде сесия на Stripe Customer Portal."
 
 #: src/pages/_app/cms-pages.create.tsx
 msgid "Could not create the page. Please check the form and try again."
@@ -662,10 +642,6 @@ msgstr "Създайте акаунта си за секунди. Не се из
 #: src/pages/invite.$token.tsx
 msgid "Create your account to accept this invitation."
 msgstr "Създайте акаунт, за да приемете тази покана."
-
-#: src/features/onboarding/ui/onboarding-modal.tsx
-#~ msgid "Create your first <0>organization</0> to collaborate with your team"
-#~ msgstr ""
 
 #: src/pages/create-organization.tsx
 msgid "Create your organization"
@@ -794,10 +770,6 @@ msgstr "Чернова"
 msgid "e.g. default, landing"
 msgstr "напр. default, landing"
 
-#: src/features/magic-link/ui/magic-link-initiate-form.tsx
-#~ msgid "e.g., acme-corp"
-#~ msgstr ""
-
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.index.tsx
 #: src/pages/_app/settings/organization.tsx
@@ -895,10 +867,6 @@ msgstr "Въведете паролата си, за да потвърдите �
 msgid "Enter your workspace"
 msgstr "Влезте в работното си пространство"
 
-#: src/pages/sign-in.tsx
-#~ msgid "Enterprise SSO"
-#~ msgstr "Корпоративен SSO"
-
 #: src/features/manage-billing/ui/billing-info.tsx
 #: src/features/manage-billing/ui/plan-list.tsx
 #: src/features/manage-billing/ui/refund-list.tsx
@@ -936,10 +904,6 @@ msgstr "Изтича"
 #: src/features/ban-user/ui/ban-member-modal.tsx
 msgid "Expires at (optional)"
 msgstr "Изтича на (по избор)"
-
-#: src/features/onboarding/ui/onboarding-modal.tsx
-#~ msgid "Explore your <0>settings</0> to customize your experience"
-#~ msgstr ""
 
 #: src/features/manage-billing/ui/billing-info.tsx
 msgid "Failed to load billing settings."
@@ -1232,10 +1196,6 @@ msgstr "Фамилното ime е твърде дълго"
 msgid "Leave blank to keep existing secret"
 msgstr ""
 
-#: src/features/onboarding/ui/onboarding-modal.tsx
-#~ msgid "Let's get you up and running with a quick guide."
-#~ msgstr ""
-
 #: src/features/manage-billing/ui/current-subscription.tsx
 msgid "Limited support"
 msgstr "Ограничена поддръжка"
@@ -1306,9 +1266,6 @@ msgstr "Управлявайте потребителски роли, разре
 #: src/pages/_app/billing/index.tsx
 msgid "Manage your billing information, view invoice history, and update your payment methods directly via our secure billing portal."
 msgstr "Управлявайте информацията за фактуриране, преглеждайте историята на фактурите и актуализирайте методите за плащане директно чрез сигурния портал за фактуриране."
-
-#~ msgid "Manage your billing information, view invoice history, and update your payment methods directly via our secure Stripe Customer Portal."
-#~ msgstr "Управлявайте информацията за фактуриране, преглеждайте историята на фактурите и актуализирайте методите за плащане директно чрез сигурния Stripe Customer Portal."
 
 #: src/pages/_app/billing/index.tsx
 msgid "Manage your billing information, view order history, and update your payment methods directly via our secure billing portal."
@@ -1427,10 +1384,6 @@ msgstr "Все още не е конфигурирана информация з
 #: src/pages/_app/settings/security.tsx
 msgid "No external sign-in providers are enabled by your organization."
 msgstr ""
-
-#: src/pages/_app/settings/security.tsx
-#~ msgid "No external sign-in providers are enabled."
-#~ msgstr "Няма активирани външни доставчици за вход."
 
 #: src/pages/_app/settings/organization.tsx
 msgid "No matches."
@@ -1586,10 +1539,6 @@ msgstr "Организация"
 #: src/features/manage-organization/ui/organization-settings.tsx
 msgid "Organization Key"
 msgstr "Ключ на организацията"
-
-#: src/features/magic-link/ui/magic-link-initiate-form.tsx
-#~ msgid "Organization Key (optional)"
-#~ msgstr ""
 
 #: src/features/create-organization/ui/create-organization-form.tsx
 msgid "Organization name"
@@ -1962,10 +1911,6 @@ msgstr "Отмяната на тази покана ще попречи на п�
 msgid "Role"
 msgstr "Роля"
 
-#: src/pages/_app/settings/security.tsx
-#~ msgid "Roles"
-#~ msgstr "Роли"
-
 #: src/features/member-role/ui/update-member-authorities-modal.tsx
 #: src/pages/_app/settings/security.tsx
 msgid "Save"
@@ -2046,10 +1991,6 @@ msgstr "Изберете план"
 #: src/features/member-role/ui/update-member-authorities-modal.tsx
 msgid "Select role"
 msgstr "Изберете роля"
-
-#: src/features/member-role/ui/update-member-authorities-modal.tsx
-#~ msgid "Select roles"
-#~ msgstr ""
 
 #: src/features/sign-in/ui/sign-in-form.tsx
 msgid "Select the workspace you want to sign in to."
@@ -2309,10 +2250,6 @@ msgstr "Екип"
 msgid "Team Management"
 msgstr "Управление на екипа"
 
-#: src/pages/billing-example.tsx
-#~ msgid "Team Management (Upgrade Required)"
-#~ msgstr ""
-
 #: src/pages/_app/index.tsx
 msgid "Team members"
 msgstr "Членове на екипа"
@@ -2339,10 +2276,6 @@ msgstr "Наемател"
 #: src/features/member-role/ui/update-member-authorities-modal.tsx
 msgid "Tenant Owner"
 msgstr "Собственик на наемателя"
-
-#: src/pages/_app/settings/security.tsx
-#~ msgid "Tenant SSO"
-#~ msgstr "SSO на наемателя"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Tenant SSO Configuration"
@@ -2423,10 +2356,6 @@ msgstr "Заглавието е задължително за локала по 
 #: src/pages/_app/billing/index.tsx
 msgid "To access the billing portal, please complete your billing settings setup."
 msgstr "За достъп до портала за фактуриране, моля, завършете настройките за фактуриране."
-
-#: src/pages/_app/billing.tsx
-#~ msgid "To access the billing portal, please complete your subscription setup by selecting a plan."
-#~ msgstr ""
 
 #: src/features/magic-link/model/use-magic-link-initiate.ts
 msgid "Too many attempts. Please try again later."
@@ -2548,14 +2477,6 @@ msgstr "Главна буква"
 msgid "URL path, e.g. about-us or blog/post"
 msgstr "URL път, напр. about-us или blog/post"
 
-#: src/features/sign-in/ui/sign-in-form.tsx
-#~ msgid "Use magic link instead"
-#~ msgstr "Използвай магическа връзка"
-
-#: src/pages/sign-in.tsx
-#~ msgid "Use this if your organization configured a custom OIDC provider for tenant sign-in."
-#~ msgstr "Използвайте това, ако организацията ви е конфигурирала персонализиран OIDC доставчик за вход."
-
 #: src/shared/ui/app-layout/app-header.tsx
 msgid "User menu"
 msgstr ""
@@ -2633,10 +2554,6 @@ msgid "Welcome illustration"
 msgstr "Илюстрация за добре дошли"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
-#~ msgid "Welcome to IQKV!"
-#~ msgstr ""
-
-#: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Welcome to Key Value Platform!"
 msgstr "Добре дошли в Key Value Platform!"
 
@@ -2702,10 +2619,6 @@ msgstr "Нямате разрешение за достъп до тази зон
 msgid "You do not have permission to manage CMS pages."
 msgstr "Нямате разрешение да управлявате CMS страниците."
 
-#: src/features/manage-billing/ui/current-subscription.tsx
-#~ msgid "You don't have an active subscription yet. Choose a plan below to get started."
-#~ msgstr "Все още нямате активен абонамент. Изберете план по-долу, за да започнете."
-
 #: src/features/tenant-switcher/model/use-tenant-switcher.ts
 msgid "You no longer have access to this organization."
 msgstr "Вече нямате достъп до тази организация."
@@ -2767,9 +2680,6 @@ msgstr "Паролата ви е сменена успешно. Ще бъдет�
 #: src/pages/_app/billing/index.tsx
 msgid "Your payment information is securely processed by our payment provider. We do not store your payment details on our servers."
 msgstr "Информацията за плащане се обработва сигурно от нашия доставчик на разплащания. Не съхраняваме данните за плащане на нашите сървъри."
-
-#~ msgid "Your payment information is securely processed by Stripe. We do not store your credit card details on our servers."
-#~ msgstr "Информацията за плащане се обработва сигурно от Stripe. Не съхраняваме данните на кредитната ви карта на нашите сървъри."
 
 #: src/pages/_app/billing/index.tsx
 msgid "Your personal workspace doesn't require a subscription. Upgrade to an organization workspace to access additional features and team collaboration."

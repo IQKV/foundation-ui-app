@@ -30,27 +30,10 @@ msgstr "{0}"
 msgid "{0} – {1}"
 msgstr "{0} – {1}"
 
-#: src/pages/admin/organizations.$tenantKey.tsx
-#~ msgid "{0} |Key Value Admin"
-#~ msgstr "{0} |Key Value Admin"
-
-#. placeholder {0}: plan.trialPeriodDays
-#: src/features/manage-billing/ui/plan-card.tsx
-#~ msgid "{0} Days Free Trial"
-#~ msgstr "{0} jours d'essai gratuit"
-
 #. placeholder {0}: subscription.trialDaysLeft
 #: src/features/manage-billing/ui/current-subscription.tsx
 msgid "{0} Days Left"
 msgstr "{0} jours restants"
-
-#: src/pages/admin/organizations.$tenantKey.tsx
-#~ msgid "{activeSubscriptions} active subscription(s)"
-#~ msgstr "{activeSubscriptions} abonnement(s) actif(s)"
-
-#: src/pages/admin/users.$userId.tsx
-#~ msgid "{displayName} |Key Value Admin"
-#~ msgstr "{displayName} |Key Value Admin"
 
 #: src/features/manage-billing/ui/plan-card.tsx
 msgid "{trialDays} Days Free Trial"
@@ -81,10 +64,6 @@ msgstr "• Concentrez-vous sur la valeur de votre produit — laissez la platef
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "• Invite your team — your first steps are just a click away!"
 msgstr "• Invitez votre équipe — vos premiers pas sont à portée de clic !"
-
-#: src/features/onboarding/ui/onboarding-modal.tsx
-#~ msgid "• Invite your team, create your first steps take just a click away!"
-#~ msgstr "• Invitez votre équipe, vos premiers pas ne sont qu'à un clic !"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "• No technical background needed — our intuitive UI is designed for everyone."
@@ -148,17 +127,9 @@ msgstr "Acceptée"
 msgid "Access Denied"
 msgstr "Accès refusé"
 
-#: src/pages/unauthorized.tsx
-#~ msgid "Access Denied |Key Value Admin"
-#~ msgstr "Accès refusé |Key Value Admin"
-
 #: src/pages/loading-demo.tsx
 msgid "Accessible with proper keyboard handling"
 msgstr "Accessible avec une gestion correcte du clavier"
-
-#: src/pages/signup.tsx
-#~ msgid "Account"
-#~ msgstr "Compte"
 
 #: src/pages/auth.callback.tsx
 msgid "Account linked"
@@ -189,10 +160,6 @@ msgstr "ACME Corp"
 msgid "Acme Inc."
 msgstr "Acme Inc."
 
-#: src/features/signup/ui/signup-form.tsx
-#~ msgid "Acme Inc. (optional)"
-#~ msgstr "Acme Inc. (facultatif)"
-
 #: src/features/manage-organization/ui/member-actions.tsx
 msgid "Actions"
 msgstr "Actions"
@@ -213,14 +180,6 @@ msgstr "ACTIVE"
 msgid "Active members"
 msgstr "Membres actifs"
 
-#: src/pages/dashboard.tsx
-#~ msgid "Active subscription"
-#~ msgstr "Active subscription"
-
-#: src/pages/admin/index.tsx
-#~ msgid "Active Subscriptions"
-#~ msgstr "Active Subscriptions"
-
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "Add locale"
 msgstr "Ajouter une langue"
@@ -232,10 +191,6 @@ msgstr "Administrateur"
 #: src/features/manage-billing/ui/plan-entitlement.tsx
 msgid "Advanced Analytics"
 msgstr "Analyses avancées"
-
-#: src/pages/billing-example.tsx
-#~ msgid "Advanced Projects (Upgrade Required)"
-#~ msgstr "Advanced Projects (Upgrade Required)"
 
 #: src/pages/_app/cms-pages.index.tsx
 msgid "All statuses"
@@ -265,10 +220,6 @@ msgstr "Montant"
 #: src/features/signup/model/use-signup.ts
 msgid "An account with this email already exists."
 msgstr "Un compte avec cet email existe déjà."
-
-#: src/features/signup/model/use-signup.ts
-#~ msgid "An account with this email or organization name already exists."
-#~ msgstr "An account with this email or organization name already exists."
 
 #: src/features/create-organization/model/use-create-organization.ts
 msgid "An organization with this name already exists."
@@ -319,17 +270,9 @@ msgstr "Au moins un caractère spécial"
 msgid "At least one translation is required"
 msgstr "Au moins une traduction est requise"
 
-#: src/shared/ui/admin-layout/admin-nav.tsx
-#~ msgid "Audit Log"
-#~ msgstr "Audit Log"
-
 #: src/pages/auth.callback.tsx
 msgid "Authentication failed"
 msgstr "L'authentification a échoué"
-
-#: src/pages/admin/subscriptions.tsx
-#~ msgid "Auto-Renew"
-#~ msgstr "Auto-Renew"
 
 #: src/pages/loading-demo.tsx
 msgid "Automatic router integration via <0>router.subscribe()</0>"
@@ -392,10 +335,6 @@ msgstr "Informations de facturation"
 msgid "Billing Integration Example"
 msgstr "Exemple d'intégration de facturation"
 
-#: src/features/manage-organization/ui/member-actions.tsx
-#~ msgid "Billing Manager"
-#~ msgstr "Billing Manager"
-
 #: src/pages/_app/billing/index.tsx
 msgid "Billing Portal"
 msgstr "Portail de facturation"
@@ -403,18 +342,6 @@ msgstr "Portail de facturation"
 #: src/pages/_app/billing/index.tsx
 msgid "Billing Portal Unavailable"
 msgstr "Portail de facturation indisponible"
-
-#: src/pages/sign-in.tsx
-#~ msgid "By signing in you agree to our <0>Terms of Service</0> and <1>Privacy Policy</1>."
-#~ msgstr "By signing in you agree to our <0>Terms of Service</0> and <1>Privacy Policy</1>."
-
-#: src/features/manage-organization/ui/member-actions.tsx
-#~ msgid "Can manage members and invitations."
-#~ msgstr "Can manage members and invitations."
-
-#: src/features/manage-organization/ui/member-actions.tsx
-#~ msgid "Can manage subscriptions and billing settings."
-#~ msgstr "Can manage subscriptions and billing settings."
 
 #: src/features/ban-user/ui/ban-member-modal.tsx
 #: src/features/ban-user/ui/unban-member-modal.tsx
@@ -428,10 +355,6 @@ msgstr "Portail de facturation indisponible"
 #: src/pages/_app/cms-pages.create.tsx
 msgid "Cancel"
 msgstr "Annuler"
-
-#: src/pages/admin/subscriptions.tsx
-#~ msgid "Canceling"
-#~ msgstr "Canceling"
 
 #: src/features/manage-billing/ui/current-subscription.tsx
 msgid "Cancels on"
@@ -459,10 +382,6 @@ msgstr "Changer le mot de passe"
 msgid "Change Role"
 msgstr "Changer le rôle"
 
-#: src/pages/signup.tsx
-#~ msgid "Check email"
-#~ msgstr "Check email"
-
 #: src/features/magic-link/ui/magic-link-initiate-form.tsx
 msgid "Check your email"
 msgstr "Vérifiez votre email"
@@ -484,22 +403,10 @@ msgstr "Choisissez un mot de passe"
 msgid "Choose a strong password with at least 8 characters, including uppercase, lowercase, a number, and a special character."
 msgstr "Choisissez un mot de passe fort d'au moins 8 caractères, incluant des majuscules, des minuscules, un chiffre et un caractère spécial."
 
-#: src/pages/admin/organizations.index.tsx
-#: src/pages/admin/subscriptions.tsx
-#: src/pages/admin/users.index.tsx
-#~ msgid "Clear"
-#~ msgstr "Clear"
-
 #: src/features/notification-bell/ui/notification-bell.tsx
 #: src/pages/_app/settings/notifications.tsx
 msgid "Clear all"
 msgstr "Tout effacer"
-
-#: src/pages/admin/organizations.index.tsx
-#: src/pages/admin/subscriptions.tsx
-#: src/pages/admin/users.index.tsx
-#~ msgid "Clear filters"
-#~ msgstr "Clear filters"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Client ID"
@@ -528,10 +435,6 @@ msgstr "Pages CMS"
 msgid "colleague@example.com"
 msgstr "colleague@example.com"
 
-#: src/pages/admin/index.tsx
-#~ msgid "Coming soon"
-#~ msgstr "Coming soon"
-
 #: src/features/manage-billing/ui/billing-info.tsx
 msgid "Company Name"
 msgstr "Nom de l'entreprise"
@@ -539,10 +442,6 @@ msgstr "Nom de l'entreprise"
 #: src/pages/loading-demo.tsx
 msgid "Complete"
 msgstr "Terminé"
-
-#: src/features/onboarding/ui/onboarding-modal.tsx
-#~ msgid "Complete your <0>profile</0> with your name and avatar"
-#~ msgstr "Complete your <0>profile</0> with your name and avatar"
 
 #: src/pages/complete-profile.tsx
 msgid "Complete your profile"
@@ -633,9 +532,6 @@ msgstr "Copié !"
 msgid "Copy"
 msgstr "Copier"
 
-#~ msgid "Could not create Stripe Customer Portal session."
-#~ msgstr "Could not create Stripe Customer Portal session."
-
 #: src/pages/_app/cms-pages.create.tsx
 msgid "Could not create the page. Please check the form and try again."
 msgstr "Impossible de créer la page. Veuillez vérifier le formulaire et réessayer."
@@ -648,37 +544,13 @@ msgstr "Impossible de supprimer la configuration SSO."
 msgid "Could not delete the page. It may be published."
 msgstr "Impossible de supprimer la page. Elle est peut-être publiée."
 
-#: src/pages/admin/organizations.$tenantKey.tsx
-#~ msgid "Could not fetch members."
-#~ msgstr "Could not fetch members."
-
-#: src/pages/admin/organizations.$tenantKey.tsx
-#~ msgid "Could not fetch organization details."
-#~ msgstr "Could not fetch organization details."
-
-#: src/pages/admin/organizations.index.tsx
-#~ msgid "Could not fetch organizations from the API."
-#~ msgstr "Could not fetch organizations from the API."
-
 #: src/pages/_app/cms-pages.index.tsx
 msgid "Could not fetch pages from the API."
 msgstr "Impossible de récupérer les pages depuis l'API."
 
-#: src/pages/admin/subscriptions.tsx
-#~ msgid "Could not fetch subscriptions from the API."
-#~ msgstr "Could not fetch subscriptions from the API."
-
 #: src/pages/_app/cms-pages.$pageId.tsx
 msgid "Could not fetch the page details."
 msgstr "Impossible de récupérer les détails de la page."
-
-#: src/pages/admin/users.$userId.tsx
-#~ msgid "Could not fetch user details."
-#~ msgstr "Could not fetch user details."
-
-#: src/pages/admin/users.index.tsx
-#~ msgid "Could not fetch users from the API."
-#~ msgstr "Could not fetch users from the API."
 
 #: src/pages/_app/settings/general.tsx
 #: src/pages/_app/settings/security.tsx
@@ -764,20 +636,12 @@ msgid "Create your account and join the platform in seconds. No credit card requ
 msgstr "Créez votre compte et rejoignez la plateforme en quelques secondes. Aucune carte de crédit requise."
 
 #: src/pages/signup.tsx
-#~ msgid "Create your account and workspace in seconds. No credit card required."
-#~ msgstr "Create your account and workspace in seconds. No credit card required."
-
-#: src/pages/signup.tsx
 msgid "Create your account in seconds. No credit card required."
 msgstr "Créez votre compte en quelques secondes. Aucune carte de crédit requise."
 
 #: src/pages/invite.$token.tsx
 msgid "Create your account to accept this invitation."
 msgstr "Créez votre compte pour accepter cette invitation."
-
-#: src/features/onboarding/ui/onboarding-modal.tsx
-#~ msgid "Create your first <0>organization</0> to collaborate with your team"
-#~ msgstr "Create your first <0>organization</0> to collaborate with your team"
 
 #: src/pages/create-organization.tsx
 msgid "Create your organization"
@@ -786,12 +650,6 @@ msgstr "Créez votre organisation"
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Create, manage & invite teams to your workspace"
 msgstr "Créez, gérez et invitez des équipes dans votre espace de travail"
-
-#: src/pages/admin/organizations.$tenantKey.tsx
-#: src/pages/admin/organizations.index.tsx
-#: src/pages/admin/subscriptions.tsx
-#~ msgid "Created"
-#~ msgstr "Created"
 
 #: src/features/signup/ui/provisioning-wait.tsx
 msgid "Creating your account"
@@ -804,10 +662,6 @@ msgstr "La création a échoué"
 #: src/features/manage-billing/ui/billing-info.tsx
 msgid "Currency"
 msgstr "Devise"
-
-#: src/features/tenant-switcher/ui/tenant-switcher.tsx
-#~ msgid "Current organization"
-#~ msgstr "Current organization"
 
 #: src/features/change-password/ui/change-password-modal.tsx
 #: src/pages/_app/settings/security.tsx
@@ -844,10 +698,6 @@ msgstr "Quotidien"
 #: src/shared/ui/app-layout/app-nav.tsx
 msgid "Dashboard"
 msgstr "Tableau de bord"
-
-#: src/pages/admin/index.tsx
-#~ msgid "Dashboard |Key Value Admin"
-#~ msgstr "Dashboard |Key Value Admin"
 
 #: src/features/manage-billing/ui/refund-list.tsx
 msgid "Date"
@@ -920,10 +770,6 @@ msgstr "Brouillon"
 msgid "e.g. default, landing"
 msgstr "par ex. default, landing"
 
-#: src/features/magic-link/ui/magic-link-initiate-form.tsx
-#~ msgid "e.g., acme-corp"
-#~ msgstr "e.g., acme-corp"
-
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.index.tsx
 #: src/pages/_app/settings/organization.tsx
@@ -934,45 +780,13 @@ msgstr "Modifier"
 msgid "Edit — {defaultTitle}"
 msgstr "Modifier — {defaultTitle}"
 
-#: src/pages/admin/organizations.$tenantKey.tsx
-#: src/pages/admin/organizations.index.tsx
-#~ msgid "Edit organization"
-#~ msgstr "Edit organization"
-
-#: src/features/edit-tenant/ui/edit-tenant-modal.tsx
-#~ msgid "Edit Organization"
-#~ msgstr "Edit Organization"
-
 #: src/pages/_app/cms-pages.$pageId.tsx
 msgid "Edit Page"
 msgstr "Modifier la page"
 
-#: src/pages/_app/account.tsx
-#~ msgid "Edit profile"
-#~ msgstr "Edit profile"
-
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 msgid "Edit Profile"
 msgstr "Modifier le profil"
-
-#: src/features/manage-organization/ui/member-actions.tsx
-#~ msgid "Edit Roles"
-#~ msgstr "Edit Roles"
-
-#. placeholder {0}: member.firstName
-#. placeholder {1}: member.lastName
-#: src/features/manage-organization/ui/member-actions.tsx
-#~ msgid "Edit Roles: {0} {1}"
-#~ msgstr "Edit Roles: {0} {1}"
-
-#: src/pages/admin/users.$userId.tsx
-#: src/pages/admin/users.index.tsx
-#~ msgid "Edit user"
-#~ msgstr "Edit user"
-
-#: src/features/edit-user/ui/edit-user-modal.tsx
-#~ msgid "Edit User"
-#~ msgstr "Edit User"
 
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 #: src/features/forgot-password/ui/forgot-password-form.tsx
@@ -998,10 +812,6 @@ msgstr "adresse email."
 #: src/features/signup/model/use-signup.ts
 msgid "Email is required"
 msgstr "L'email est requis"
-
-#: src/pages/_app/account.tsx
-#~ msgid "Email unverified"
-#~ msgstr "Email unverified"
 
 #: src/pages/verify-email.tsx
 msgid "Email verification"
@@ -1057,10 +867,6 @@ msgstr "Entrez votre mot de passe pour confirmer votre identité et rejoindre."
 msgid "Enter your workspace"
 msgstr "Entrez votre espace de travail"
 
-#: src/pages/sign-in.tsx
-#~ msgid "Enterprise SSO"
-#~ msgstr "Enterprise SSO"
-
 #: src/features/manage-billing/ui/billing-info.tsx
 #: src/features/manage-billing/ui/plan-list.tsx
 #: src/features/manage-billing/ui/refund-list.tsx
@@ -1099,35 +905,13 @@ msgstr "Expire"
 msgid "Expires at (optional)"
 msgstr "Expire le (optionnel)"
 
-#: src/features/onboarding/ui/onboarding-modal.tsx
-#~ msgid "Explore your <0>settings</0> to customize your experience"
-#~ msgstr "Explore your <0>settings</0> to customize your experience"
-
-#: src/pages/admin/organizations.tsx
-#: src/pages/admin/subscriptions.tsx
-#: src/pages/admin/users.tsx
-#~ msgid "Export"
-#~ msgstr "Export"
-
-#: src/pages/admin/index.tsx
-#~ msgid "Failed to load"
-#~ msgstr "Failed to load"
-
 #: src/features/manage-billing/ui/billing-info.tsx
 msgid "Failed to load billing settings."
 msgstr "Échec du chargement des paramètres de facturation."
 
-#: src/pages/admin/organizations.$tenantKey.tsx
-#~ msgid "Failed to load organization"
-#~ msgstr "Failed to load organization"
-
 #: src/features/manage-organization/ui/organization-settings.tsx
 msgid "Failed to load organization settings."
 msgstr "Échec du chargement des paramètres de l'organisation."
-
-#: src/pages/admin/organizations.index.tsx
-#~ msgid "Failed to load organizations"
-#~ msgstr "Failed to load organizations"
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 msgid "Failed to load page"
@@ -1149,18 +933,6 @@ msgstr "Échec du chargement du profil"
 #: src/features/manage-billing/ui/refund-list.tsx
 msgid "Failed to load refund history."
 msgstr "Échec du chargement de l'historique des remboursements."
-
-#: src/pages/admin/subscriptions.tsx
-#~ msgid "Failed to load subscriptions"
-#~ msgstr "Failed to load subscriptions"
-
-#: src/pages/admin/users.$userId.tsx
-#~ msgid "Failed to load user"
-#~ msgstr "Failed to load user"
-
-#: src/pages/admin/users.index.tsx
-#~ msgid "Failed to load users"
-#~ msgstr "Failed to load users"
 
 #: src/features/manage-billing/ui/webhook-log-list.tsx
 msgid "Failed to load webhook log history."
@@ -1295,10 +1067,6 @@ msgstr "https://issuer.example.com"
 msgid "ID"
 msgstr "ID"
 
-#: src/features/edit-user/ui/edit-user-modal.tsx
-#~ msgid "ID: {0}"
-#~ msgstr "ID: {0}"
-
 #: src/pages/_app/cms-pages.$pageId.tsx
 msgid "Identity"
 msgstr "Identité"
@@ -1385,14 +1153,6 @@ msgstr "Rejoindre {0}"
 msgid "Join {0} and start collaborating with your team."
 msgstr "Rejoignez {0} et commencez à collaborer avec votre équipe."
 
-#: src/pages/_app/account.tsx
-#~ msgid "Joined"
-#~ msgstr "Joined"
-
-#: src/pages/admin/users.$userId.tsx
-#~ msgid "Joined Organizations"
-#~ msgstr "Joined Organizations"
-
 #: src/pages/complete-profile.tsx
 msgid "Just a name to get started — everything else can wait."
 msgstr "Juste un nom pour commencer — tout le reste peut attendre."
@@ -1400,10 +1160,6 @@ msgstr "Juste un nom pour commencer — tout le reste peut attendre."
 #: src/pages/_app/settings/organization.tsx
 msgid "Key"
 msgstr "Clé"
-
-#: src/features/edit-tenant/ui/edit-tenant-modal.tsx
-#~ msgid "Key:"
-#~ msgstr "Key:"
 
 #: src/features/complete-profile/ui/complete-profile-form.tsx
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
@@ -1436,21 +1192,9 @@ msgstr "Le nom de famille est requis"
 msgid "Last name is too long"
 msgstr "Le nom de famille est trop long"
 
-#: src/pages/_app/account.tsx
-#~ msgid "Last updated"
-#~ msgstr "Last updated"
-
 #: src/pages/_app/settings/security.tsx
 msgid "Leave blank to keep existing secret"
 msgstr "Laissez vide pour conserver le secret existant"
-
-#: src/features/signup/ui/signup-form.tsx
-#~ msgid "Leave blank to use your name"
-#~ msgstr "Leave blank to use your name"
-
-#: src/features/onboarding/ui/onboarding-modal.tsx
-#~ msgid "Let's get you up and running with a quick guide."
-#~ msgstr "Let's get you up and running with a quick guide."
 
 #: src/features/manage-billing/ui/current-subscription.tsx
 msgid "Limited support"
@@ -1475,10 +1219,6 @@ msgstr "Chargement des informations de facturation…"
 #: src/pages/loading-demo.tsx
 msgid "Loading Demo"
 msgstr "Chargement de la démonstration"
-
-#: src/pages/loading-demo.tsx
-#~ msgid "Loading Demo |Key Value Admin"
-#~ msgstr "Loading Demo |Key Value Admin"
 
 #: src/pages/loading-demo.tsx
 msgid "Loading States Demo"
@@ -1519,32 +1259,13 @@ msgstr "Lettre minuscule"
 msgid "Magic link is invalid or has expired. Please request a new one."
 msgstr "Le lien magique est invalide ou a expiré. Veuillez en demander un nouveau."
 
-#: src/pages/admin/index.tsx
-#~ msgid "Manage organizations"
-#~ msgstr "Manage organizations"
-
-#: src/pages/admin/index.tsx
-#~ msgid "Manage subscriptions"
-#~ msgstr "Manage subscriptions"
-
-#: src/pages/dashboard.tsx
-#~ msgid "Manage team"
-#~ msgstr "Manage team"
-
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Manage user roles, permissions & access"
 msgstr "Gérer les rôles, les permissions et l'accès des utilisateurs"
 
-#: src/pages/admin/index.tsx
-#~ msgid "Manage users"
-#~ msgstr "Manage users"
-
 #: src/pages/_app/billing/index.tsx
 msgid "Manage your billing information, view invoice history, and update your payment methods directly via our secure billing portal."
 msgstr "Gérez vos informations de facturation, consultez l'historique des factures et mettez à jour vos méthodes de paiement directement via notre portail de facturation sécurisé."
-
-#~ msgid "Manage your billing information, view invoice history, and update your payment methods directly via our secure Stripe Customer Portal."
-#~ msgstr "Manage your billing information, view invoice history, and update your payment methods directly via our secure Stripe Customer Portal."
 
 #: src/pages/_app/billing/index.tsx
 msgid "Manage your billing information, view order history, and update your payment methods directly via our secure billing portal."
@@ -1579,10 +1300,6 @@ msgstr "Membre"
 #: src/widgets/dashboard-signup-chart/ui/dashboard-signup-chart.tsx
 msgid "Member Signups"
 msgstr "Inscriptions des membres"
-
-#: src/pages/admin/organizations.$tenantKey.tsx
-#~ msgid "member(s)"
-#~ msgstr "member(s)"
 
 #: src/pages/_app/team.tsx
 msgid "Members"
@@ -1652,10 +1369,6 @@ msgstr "Nouvelles inscriptions"
 msgid "Next Billing Date"
 msgstr "Prochaine date de facturation"
 
-#: src/pages/admin/organizations.$tenantKey.tsx
-#~ msgid "No active subscription"
-#~ msgstr "No active subscription"
-
 #: src/features/manage-billing/ui/entitlements-card.tsx
 msgid "No active subscription found. Subscribe to a plan to access platform features."
 msgstr "Aucun abonnement actif trouvé. Abonnez-vous à un plan pour accéder aux fonctionnalités de la plateforme."
@@ -1672,25 +1385,13 @@ msgstr "Aucune information de facturation n'a encore été configurée. Rempliss
 msgid "No external sign-in providers are enabled by your organization."
 msgstr "Aucun fournisseur de connexion externe n'est activé par votre organisation."
 
-#: src/pages/_app/settings/security.tsx
-#~ msgid "No external sign-in providers are enabled."
-#~ msgstr "No external sign-in providers are enabled."
-
 #: src/pages/_app/settings/organization.tsx
 msgid "No matches."
 msgstr "Aucune correspondance."
 
-#: src/pages/admin/organizations.$tenantKey.tsx
-#~ msgid "No members found"
-#~ msgstr "No members found"
-
 #: src/pages/_app/team.tsx
 msgid "No members found."
 msgstr "Aucun membre trouvé."
-
-#: src/pages/admin/organizations.$tenantKey.tsx
-#~ msgid "No members match the search"
-#~ msgstr "No members match the search"
 
 #: src/pages/_app/team.tsx
 msgid "No members match the search."
@@ -1701,17 +1402,9 @@ msgstr "Aucun membre ne correspond à la recherche."
 msgid "No notifications yet"
 msgstr "Pas de notifications"
 
-#: src/pages/admin/organizations.index.tsx
-#~ msgid "No organizations found"
-#~ msgstr "No organizations found"
-
 #: src/pages/_app/settings/organization.tsx
 msgid "No organizations found."
 msgstr "Aucune organisation trouvée."
-
-#: src/pages/admin/organizations.index.tsx
-#~ msgid "No organizations match the current filters"
-#~ msgstr "No organizations match the current filters"
 
 #: src/pages/_app/settings/organization.tsx
 msgid "No organizations yet"
@@ -1745,29 +1438,9 @@ msgstr "Aucun résultat"
 msgid "No roles assigned."
 msgstr "Aucun rôle attribué."
 
-#: src/pages/admin/subscriptions.tsx
-#~ msgid "No subscriptions found"
-#~ msgstr "No subscriptions found"
-
-#: src/pages/admin/organizations.$tenantKey.tsx
-#~ msgid "No subscriptions found for this organization."
-#~ msgstr "No subscriptions found for this organization."
-
-#: src/pages/admin/subscriptions.tsx
-#~ msgid "No subscriptions match the current filters"
-#~ msgstr "No subscriptions match the current filters"
-
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "No translations added. At least the default locale is required."
 msgstr "No translations added. At least the default locale is required."
-
-#: src/pages/admin/users.index.tsx
-#~ msgid "No users found"
-#~ msgstr "No users found"
-
-#: src/pages/admin/users.index.tsx
-#~ msgid "No users match the current filters"
-#~ msgstr "No users match the current filters"
 
 #: src/features/manage-billing/ui/webhook-log-list.tsx
 msgid "No webhook logs found."
@@ -1791,10 +1464,6 @@ msgstr "Non connecté"
 #: src/shared/ui/app-layout/app-nav.tsx
 msgid "Notifications"
 msgstr "Notifications"
-
-#: src/shared/ui/admin-layout/admin-header.tsx
-#~ msgid "Notifications (coming soon)"
-#~ msgstr "Notifications (coming soon)"
 
 #. placeholder {0}: hasUnread ? `, ${unreadCount} unread` : ""
 #: src/features/notification-bell/ui/notification-bell.tsx
@@ -1867,17 +1536,9 @@ msgstr "organisation"
 msgid "Organization"
 msgstr "Organisation"
 
-#: src/pages/admin/organizations.$tenantKey.tsx
-#~ msgid "Organization |Key Value Admin"
-#~ msgstr "Organization |Key Value Admin"
-
 #: src/features/manage-organization/ui/organization-settings.tsx
 msgid "Organization Key"
 msgstr "Clé de l'organisation"
-
-#: src/features/magic-link/ui/magic-link-initiate-form.tsx
-#~ msgid "Organization Key (optional)"
-#~ msgstr "Organization Key (optional)"
 
 #: src/features/create-organization/ui/create-organization-form.tsx
 msgid "Organization name"
@@ -1899,10 +1560,6 @@ msgstr "Le nom de l'organisation est trop long"
 msgid "Organization Settings"
 msgstr "Paramètres de l'organisation"
 
-#: src/pages/_app/account.tsx
-#~ msgid "organization(s)"
-#~ msgstr "organization(s)"
-
 #: src/pages/_app/settings/general.tsx
 #: src/pages/_app/settings/organization.tsx
 #: src/shared/ui/app-layout/app-header.tsx
@@ -1910,18 +1567,9 @@ msgstr "Paramètres de l'organisation"
 msgid "Organizations"
 msgstr "Organisations"
 
-#: src/pages/admin/organizations.index.tsx
-#~ msgid "Organizations |Key Value Admin"
-#~ msgstr "Organizations |Key Value Admin"
-
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "Override page title for search engines"
 msgstr "Remplacer le titre de la page pour les moteurs de recherche"
-
-#: src/pages/admin/organizations.$tenantKey.tsx
-#: src/pages/admin/users.$userId.tsx
-#~ msgid "Overview"
-#~ msgstr "Overview"
 
 #: src/pages/_app/cms-pages.index.tsx
 msgid "Page"
@@ -1930,10 +1578,6 @@ msgstr "Page"
 #: src/pages/404.tsx
 msgid "Page Not Found"
 msgstr "Page non trouvée"
-
-#: src/pages/404.tsx
-#~ msgid "Page Not Found |Key Value Admin"
-#~ msgstr "Page Not Found |Key Value Admin"
 
 #: src/pages/404.tsx
 msgid "Page not found."
@@ -2043,10 +1687,6 @@ msgstr "En attente"
 msgid "Pending invitations"
 msgstr "Invitations en attente"
 
-#: src/pages/admin/subscriptions.tsx
-#~ msgid "Period End"
-#~ msgstr "Period End"
-
 #: src/pages/_app/settings/security.tsx
 msgid "Permissions assigned to your account"
 msgstr "Autorisations attribuées à votre compte"
@@ -2069,17 +1709,6 @@ msgstr "Plan"
 #: src/features/manage-billing/ui/plan-entitlement.tsx
 msgid "Plan Features"
 msgstr "Caractéristiques du plan"
-
-#: src/pages/admin/organizations.index.tsx
-#: src/pages/admin/subscriptions.tsx
-#: src/pages/admin/users.index.tsx
-#: src/shared/ui/admin-layout/admin-nav.tsx
-#~ msgid "Platform"
-#~ msgstr "Platform"
-
-#: src/pages/sign-in.tsx
-#~ msgid "Platform administration"
-#~ msgstr "Platform administration"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Platform Highlights"
@@ -2203,10 +1832,6 @@ msgstr "Retirer"
 msgid "Remove Member"
 msgstr "Retirer le membre"
 
-#: src/pages/admin/organizations.$tenantKey.tsx
-#~ msgid "Renews"
-#~ msgstr "Renews"
-
 #: src/features/manage-billing/ui/entitlements-card.tsx
 msgid "Renews On"
 msgstr "Renouvelé le"
@@ -2286,10 +1911,6 @@ msgstr "Révoquer cette invitation empêchera le destinataire de l'accepter."
 msgid "Role"
 msgstr "Rôle"
 
-#: src/pages/_app/settings/security.tsx
-#~ msgid "Roles"
-#~ msgstr "Roles"
-
 #: src/features/member-role/ui/update-member-authorities-modal.tsx
 #: src/pages/_app/settings/security.tsx
 msgid "Save"
@@ -2315,10 +1936,6 @@ msgstr "Enregistrer les modifications"
 msgid "Save failed"
 msgstr "L'enregistrement a échoué"
 
-#: src/features/manage-organization/ui/member-actions.tsx
-#~ msgid "Save Roles"
-#~ msgstr "Save Roles"
-
 #: src/pages/_app/settings/security.tsx
 msgid "Saved"
 msgstr "Enregistré"
@@ -2331,14 +1948,6 @@ msgstr "Portées"
 msgid "Search by name or email…"
 msgstr "Rechercher par nom ou email…"
 
-#: src/pages/admin/organizations.index.tsx
-#~ msgid "Search by name or key…"
-#~ msgstr "Search by name or key…"
-
-#: src/pages/admin/subscriptions.tsx
-#~ msgid "Search by tenant or plan…"
-#~ msgstr "Search by tenant or plan…"
-
 #: src/features/manage-billing/ui/webhook-log-list.tsx
 msgid "Search event type…"
 msgstr "Rechercher le type d'événement…"
@@ -2346,10 +1955,6 @@ msgstr "Rechercher le type d'événement…"
 #: src/pages/_app/settings/organization.tsx
 msgid "Search organizations…"
 msgstr "Rechercher des organisations…"
-
-#: src/pages/admin/users.tsx
-#~ msgid "Search users…"
-#~ msgstr "Search users…"
 
 #: src/shared/ui/app-layout/app-nav.tsx
 msgid "Search…"
@@ -2372,10 +1977,6 @@ msgstr "Paramètres de sécurité"
 msgid "See all notifications"
 msgstr "Voir toutes les notifications"
 
-#: src/features/manage-organization/ui/member-actions.tsx
-#~ msgid "Select authorities for this member"
-#~ msgstr "Select authorities for this member"
-
 #: src/features/complete-profile/ui/complete-profile-form.tsx
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 #: src/pages/_app/settings/general.tsx
@@ -2390,10 +1991,6 @@ msgstr "Sélectionner le plan"
 #: src/features/member-role/ui/update-member-authorities-modal.tsx
 msgid "Select role"
 msgstr "Sélectionner le rôle"
-
-#: src/features/member-role/ui/update-member-authorities-modal.tsx
-#~ msgid "Select roles"
-#~ msgstr "Select roles"
 
 #: src/features/sign-in/ui/sign-in-form.tsx
 msgid "Select the workspace you want to sign in to."
@@ -2435,10 +2032,6 @@ msgstr "Titre SEO"
 msgid "Server Error"
 msgstr "Erreur serveur"
 
-#: src/pages/500.tsx
-#~ msgid "Server Error |Key Value Admin"
-#~ msgstr "Server Error |Key Value Admin"
-
 #: src/pages/reset-password.tsx
 msgid "Set a new"
 msgstr "Définir un nouveau"
@@ -2469,17 +2062,9 @@ msgstr "Configurez votre espace de travail en moins d'une minute."
 msgid "Sets your preferred language for notifications and emails."
 msgstr "Définit votre langue préférée pour les notifications et les e-mails."
 
-#: src/pages/signup.tsx
-#~ msgid "Setting up"
-#~ msgstr "Setting up"
-
 #: src/features/signup/ui/provisioning-wait.tsx
 msgid "Setting up your workspace"
 msgstr "Configuration de votre espace de travail"
-
-#: src/shared/ui/app-layout/app-nav.tsx
-#~ msgid "Settings"
-#~ msgstr "Settings"
 
 #. placeholder {0}: notifications.length
 #. placeholder {1}: listData?.totalElements ?? 0
@@ -2487,33 +2072,9 @@ msgstr "Configuration de votre espace de travail"
 msgid "Showing {0} of {1}"
 msgstr "Affichage de {0} sur {1}"
 
-#: src/pages/admin/organizations.$tenantKey.tsx
-#~ msgid "Showing {0}–{1} of {totalElements} members"
-#~ msgstr "Showing {0}–{1} of {totalElements} members"
-
-#: src/pages/admin/organizations.index.tsx
-#~ msgid "Showing {rangeStart}–{rangeEnd} of {totalElements} organizations"
-#~ msgstr "Showing {rangeStart}–{rangeEnd} of {totalElements} organizations"
-
-#: src/pages/admin/subscriptions.tsx
-#~ msgid "Showing {rangeStart}–{rangeEnd} of {totalElements} subscriptions"
-#~ msgstr "Showing {rangeStart}–{rangeEnd} of {totalElements} subscriptions"
-
-#: src/pages/admin/users.index.tsx
-#~ msgid "Showing {rangeStart}–{rangeEnd} of {totalElements} users"
-#~ msgstr "Showing {rangeStart}–{rangeEnd} of {totalElements} users"
-
-#: src/features/sign-in/ui/sign-in-form.tsx
-#~ msgid "Sign in"
-#~ msgstr "Sign in"
-
 #: src/pages/sign-in.tsx
 msgid "Sign In"
 msgstr "Se connecter"
-
-#: src/pages/sign-in.tsx
-#~ msgid "Sign In |Key Value Admin"
-#~ msgstr "Sign In |Key Value Admin"
 
 #: src/pages/verify-email.tsx
 msgid "Sign in to your workspace"
@@ -2619,10 +2180,6 @@ msgstr "Configuration SSO supprimée."
 msgid "SSO configuration updated."
 msgstr "Configuration SSO mise à jour."
 
-#: src/features/manage-organization/ui/member-actions.tsx
-#~ msgid "Standard organization member."
-#~ msgstr "Standard organization member."
-
 #: src/pages/loading-demo.tsx
 msgid "Start"
 msgstr "Commencer"
@@ -2641,18 +2198,6 @@ msgstr "Commencer à construire"
 msgid "Status"
 msgstr "Statut"
 
-#: src/pages/signup.tsx
-#~ msgid "Step 1: Create account"
-#~ msgstr "Step 1: Create account"
-
-#: src/pages/signup.tsx
-#~ msgid "Step 2: Workspace setup"
-#~ msgstr "Step 2: Workspace setup"
-
-#: src/pages/signup.tsx
-#~ msgid "Step 3: Verify email"
-#~ msgstr "Step 3: Verify email"
-
 #: src/features/signup/ui/provisioning-wait.tsx
 msgid "Still setting up…"
 msgstr "Configuration en cours…"
@@ -2660,16 +2205,6 @@ msgstr "Configuration en cours…"
 #: src/features/signup/ui/password-strength.tsx
 msgid "Strong"
 msgstr "Fort"
-
-#: src/pages/admin/organizations.$tenantKey.tsx
-#: src/pages/admin/subscriptions.tsx
-#: src/shared/ui/admin-layout/admin-nav.tsx
-#~ msgid "Subscriptions"
-#~ msgstr "Subscriptions"
-
-#: src/pages/admin/subscriptions.tsx
-#~ msgid "Subscriptions |Key Value Admin"
-#~ msgstr "Subscriptions |Key Value Admin"
 
 #: src/shared/ui/tenant-status-badge/tenant-status-badge.tsx
 #: src/shared/ui/user-status-badge/user-status-badge.tsx
@@ -2706,10 +2241,6 @@ msgstr "Changer d'espace de travail"
 msgid "Switch workspace (current: {0})"
 msgstr "Changer d'espace de travail (actuel : {0})"
 
-#: src/shared/ui/admin-layout/admin-nav.tsx
-#~ msgid "System"
-#~ msgstr "System"
-
 #: src/pages/_app/team.tsx
 #: src/shared/ui/app-layout/app-nav.tsx
 msgid "Team"
@@ -2718,10 +2249,6 @@ msgstr "Équipe"
 #: src/pages/-billing-example.tsx
 msgid "Team Management"
 msgstr "Gestion d'équipe"
-
-#: src/pages/billing-example.tsx
-#~ msgid "Team Management (Upgrade Required)"
-#~ msgstr "Team Management (Upgrade Required)"
 
 #: src/pages/_app/index.tsx
 msgid "Team members"
@@ -2746,17 +2273,9 @@ msgstr "Modèle"
 msgid "Tenant"
 msgstr "Tenant"
 
-#: src/features/edit-tenant/ui/edit-tenant-modal.tsx
-#~ msgid "Tenant key"
-#~ msgstr "Tenant key"
-
 #: src/features/member-role/ui/update-member-authorities-modal.tsx
 msgid "Tenant Owner"
 msgstr "Propriétaire du tenant"
-
-#: src/pages/_app/settings/security.tsx
-#~ msgid "Tenant SSO"
-#~ msgstr "Tenant SSO"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Tenant SSO Configuration"
@@ -2818,10 +2337,6 @@ msgstr "Ce lien de réinitialisation est invalide ou a expiré. Veuillez en dema
 msgid "This template uses Mantine's official loading components for optimal UX."
 msgstr "Ce modèle utilise les composants de chargement officiels de Mantine pour une UX optimale."
 
-#: src/pages/admin/users.$userId.tsx
-#~ msgid "This user is not a member of any organization."
-#~ msgstr "This user is not a member of any organization."
-
 #: src/pages/verify-email.tsx
 msgid "This verification link has expired or has already been used. Request a new one from your account settings."
 msgstr "Ce lien de vérification a expiré ou a déjà été utilisé. Demandez-en un nouveau dans les paramètres de votre compte."
@@ -2842,10 +2357,6 @@ msgstr "Le titre est requis pour la langue par défaut"
 msgid "To access the billing portal, please complete your billing settings setup."
 msgstr "Pour accéder au portail de facturation, veuillez terminer la configuration de vos paramètres de facturation."
 
-#: src/pages/_app/billing.tsx
-#~ msgid "To access the billing portal, please complete your subscription setup by selecting a plan."
-#~ msgstr "To access the billing portal, please complete your subscription setup by selecting a plan."
-
 #: src/features/magic-link/model/use-magic-link-initiate.ts
 msgid "Too many attempts. Please try again later."
 msgstr "Trop de tentatives. Veuillez réessayer plus tard."
@@ -2860,10 +2371,6 @@ msgstr "Trop de demandes. Veuillez attendre un moment avant de réessayer."
 #: src/features/sign-in/model/use-sign-in.ts
 msgid "Too many sign-in attempts. Please try again later."
 msgstr "Trop de tentatives de connexion. Veuillez réessayer plus tard."
-
-#: src/pages/admin/index.tsx
-#~ msgid "Total Users"
-#~ msgstr "Total Users"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Track all activity with built-in audit trails"
@@ -2970,35 +2477,9 @@ msgstr "Lettre majuscule"
 msgid "URL path, e.g. about-us or blog/post"
 msgstr "Chemin URL, par ex. about-us ou blog/post"
 
-#: src/features/sign-in/ui/sign-in-form.tsx
-#~ msgid "Use magic link instead"
-#~ msgstr "Use magic link instead"
-
-#: src/pages/sign-in.tsx
-#~ msgid "Use this if your organization configured a custom OIDC provider for tenant sign-in."
-#~ msgstr "Use this if your organization configured a custom OIDC provider for tenant sign-in."
-
-#: src/pages/admin/users.$userId.tsx
-#~ msgid "User"
-#~ msgstr "User"
-
-#: src/pages/admin/users.$userId.tsx
-#~ msgid "User |Key Value Admin"
-#~ msgstr "User |Key Value Admin"
-
 #: src/shared/ui/app-layout/app-header.tsx
 msgid "User menu"
 msgstr "Menu utilisateur"
-
-#: src/pages/admin/users.$userId.tsx
-#: src/pages/admin/users.index.tsx
-#: src/shared/ui/admin-layout/admin-nav.tsx
-#~ msgid "Users"
-#~ msgstr "Users"
-
-#: src/pages/admin/users.index.tsx
-#~ msgid "Users |Key Value Admin"
-#~ msgstr "Users |Key Value Admin"
 
 #: src/pages/loading-demo.tsx
 msgid "Uses <0>@mantine/nprogress</0> for top loading bar"
@@ -3016,10 +2497,6 @@ msgstr "Vous utilisez un fournisseur d'identité d'entreprise ? <0>Se connecter 
 msgid "Verified"
 msgstr "Vérifié"
 
-#: src/pages/signup.tsx
-#~ msgid "Verify"
-#~ msgstr "Verify"
-
 #: src/pages/verify-email.tsx
 msgid "Verify Email"
 msgstr "Vérifier l'email"
@@ -3028,21 +2505,9 @@ msgstr "Vérifier l'email"
 msgid "Verifying your email address…"
 msgstr "Vérification de votre adresse e-mail…"
 
-#: src/pages/dashboard.tsx
-#~ msgid "View billing"
-#~ msgstr "View billing"
-
 #: src/pages/_app/team.tsx
 msgid "View details"
 msgstr "Voir les détails"
-
-#: src/pages/admin/organizations.index.tsx
-#~ msgid "View organization"
-#~ msgstr "View organization"
-
-#: src/pages/admin/users.index.tsx
-#~ msgid "View user"
-#~ msgstr "View user"
 
 #: src/features/signup/ui/verify-email-prompt.tsx
 msgid "We sent a verification link to <0>{email}</0>. Click it to confirm your email address."
@@ -3089,10 +2554,6 @@ msgid "Welcome illustration"
 msgstr "Illustration de bienvenue"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
-#~ msgid "Welcome to IQKV!"
-#~ msgstr "Welcome to IQKV!"
-
-#: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Welcome to Key Value Platform!"
 msgstr "Bienvenue sur Key Value Platform !"
 
@@ -3124,14 +2585,6 @@ msgstr "Espace de travail"
 msgid "Workspace key"
 msgstr "Clé de l'espace de travail"
 
-#: src/pages/dashboard.tsx
-#~ msgid "Workspace settings"
-#~ msgstr "Workspace settings"
-
-#: src/features/signup/model/use-signup.ts
-#~ msgid "Workspace setup failed. Please try again or contact support."
-#~ msgstr "Workspace setup failed. Please try again or contact support."
-
 #: src/pages/_app/cms-pages.index.tsx
 msgid "Workspace:"
 msgstr "Espace de travail :"
@@ -3153,10 +2606,6 @@ msgid "You can update your avatar and other details in settings later."
 msgstr "Vous pourrez mettre à jour votre avatar et d'autres détails dans les paramètres ultérieurement."
 
 #: src/pages/sign-in.tsx
-#~ msgid "You do not have permission to access the admin area."
-#~ msgstr "You do not have permission to access the admin area."
-
-#: src/pages/sign-in.tsx
 msgid "You do not have permission to access this area."
 msgstr "Vous n'avez pas la permission d'accéder à cette zone."
 
@@ -3169,14 +2618,6 @@ msgstr "Vous n'avez pas la permission d'accéder à cette zone. Veuillez vous co
 #: src/pages/_app/cms-pages.index.tsx
 msgid "You do not have permission to manage CMS pages."
 msgstr "Vous n'avez pas la permission de gérer les pages CMS."
-
-#: src/pages/unauthorized.tsx
-#~ msgid "You do not have the required <0>PLATFORM_ADMIN</0> authority to access this area. Please sign in with an account that has the appropriate permissions."
-#~ msgstr "You do not have the required <0>PLATFORM_ADMIN</0> authority to access this area. Please sign in with an account that has the appropriate permissions."
-
-#: src/features/manage-billing/ui/current-subscription.tsx
-#~ msgid "You don't have an active subscription yet. Choose a plan below to get started."
-#~ msgstr "You don't have an active subscription yet. Choose a plan below to get started."
 
 #: src/features/tenant-switcher/model/use-tenant-switcher.ts
 msgid "You no longer have access to this organization."
@@ -3204,10 +2645,6 @@ msgstr "vous@entreprise.com"
 msgid "you@example.com"
 msgstr "vous@exemple.com"
 
-#: src/features/sign-in/model/use-sign-in.ts
-#~ msgid "Your account does not have admin access"
-#~ msgstr "Your account does not have admin access"
-
 #: src/features/accept-invitation/model/use-accept-invitation.ts
 msgid "Your account is locked or suspended."
 msgstr "Votre compte est verrouillé ou suspendu."
@@ -3215,10 +2652,6 @@ msgstr "Votre compte est verrouillé ou suspendu."
 #: src/features/sign-in/model/use-sign-in.ts
 msgid "Your account is not active or has been suspended"
 msgstr "Votre compte n'est pas actif ou a été suspendu"
-
-#: src/pages/signup.tsx
-#~ msgid "Your details"
-#~ msgstr "Your details"
 
 #: src/pages/verify-email.tsx
 msgid "Your email address has been confirmed. You're all set."
@@ -3247,9 +2680,6 @@ msgstr "Votre mot de passe a été changé avec succès. Vous serez redirigé ve
 #: src/pages/_app/billing/index.tsx
 msgid "Your payment information is securely processed by our payment provider. We do not store your payment details on our servers."
 msgstr "Vos informations de paiement sont traitées de manière sécurisée par notre fournisseur de paiement. Nous ne stockons pas vos détails de paiement sur nos serveurs."
-
-#~ msgid "Your payment information is securely processed by Stripe. We do not store your credit card details on our servers."
-#~ msgstr "Your payment information is securely processed by Stripe. We do not store your credit card details on our servers."
 
 #: src/pages/_app/billing/index.tsx
 msgid "Your personal workspace doesn't require a subscription. Upgrade to an organization workspace to access additional features and team collaboration."
