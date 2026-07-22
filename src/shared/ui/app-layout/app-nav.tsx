@@ -11,7 +11,7 @@ import {
   IconFileText,
 } from "@tabler/icons-react";
 import { Link, useRouterState } from "@tanstack/react-router";
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { useSession } from "@/processes/session";
 import { isMultiTenantMode } from "@/app/config";
@@ -55,17 +55,14 @@ export function AppNav() {
   const authorities = payload?.authorities ?? [];
   const canManagePages = authorities.includes("TENANT_OWNER") || authorities.includes("ADMIN");
 
-  const addonNavItems = useMemo(() => {
-    const workspaceItems = navigationExtension.getNavItems("workspace").map((item) => {
-      const IconComponent = item.icon;
-      return {
-        label: item.label,
-        icon: <IconComponent size={16} />,
-        to: item.to,
-      };
-    });
-    return workspaceItems;
-  }, []);
+  const addonNavItems: NavItem[] = navigationExtension.getNavItems("workspace").map((item) => {
+    const IconComponent = item.icon;
+    return {
+      label: item.label,
+      icon: <IconComponent size={16} />,
+      to: item.to,
+    };
+  });
 
   const baseNavItems: NavItem[] = [
     { label: t`Dashboard`, icon: <IconDashboard size={16} />, to: "/" },
