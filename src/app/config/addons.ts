@@ -7,6 +7,6 @@ export const AddonConfigSchema = z.object({
 export type AddonConfig = z.infer<typeof AddonConfigSchema>;
 
 export function getAddonConfig(): AddonConfig {
-  const enabledAddons = import.meta.env.VITE_ENABLED_ADDONS?.split(",") ?? [];
+  const enabledAddons = import.meta.env.VITE_ENABLED_PLATFORM_ADDONS?.split(",") ?? [];
   return { enabled: enabledAddons };
 }
