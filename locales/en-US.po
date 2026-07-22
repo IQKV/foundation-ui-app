@@ -184,6 +184,14 @@ msgstr "Active members"
 msgid "Add locale"
 msgstr "Add locale"
 
+#: src/pages/_app/addons/$addonPath.tsx
+msgid "Addon Page"
+msgstr "Addon Page"
+
+#: src/pages/_app/addons/$addonPath.tsx
+msgid "Addons"
+msgstr "Addons"
+
 #: src/features/invite-member/model/types.ts
 msgid "Admin"
 msgstr "Admin"
@@ -694,6 +702,7 @@ msgstr "Current workspace"
 msgid "Daily"
 msgstr "Daily"
 
+#: src/pages/_app/addons/$addonPath.tsx
 #: src/pages/_app/index.tsx
 #: src/shared/ui/app-layout/app-nav.tsx
 msgid "Dashboard"
@@ -1043,6 +1052,7 @@ msgstr "Here's what you can do from your personal workspace:"
 msgid "Hierarchy"
 msgstr "Hierarchy"
 
+#: src/pages/_app/addons/$addonPath.tsx
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
 #: src/pages/_app/cms-pages.index.tsx
@@ -1160,6 +1170,10 @@ msgstr "Just a name to get started — everything else can wait."
 #: src/pages/_app/settings/organization.tsx
 msgid "Key"
 msgstr "Key"
+
+#: src/pages/_app/addons/$addonPath.tsx
+msgid "Key Value"
+msgstr "Key Value"
 
 #: src/features/complete-profile/ui/complete-profile-form.tsx
 #: src/features/edit-profile/ui/edit-profile-modal.tsx

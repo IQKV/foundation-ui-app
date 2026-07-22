@@ -11,6 +11,7 @@ import { useSession } from "@/processes/session";
 import { FeatureGate, useEntitlementsContext } from "@/features/manage-billing";
 import { BILLING_FEATURES, isMultiTenantMode } from "@/app/config";
 import { DashboardStatCard, DashboardSignupChart, DashboardPersonalWelcome } from "@/widgets";
+import { widgetExtension } from "@/app/addons";
 
 export const Route = createFileRoute("/_app/")({
   component: DashboardPage,
@@ -25,6 +26,7 @@ function DashboardPage() {
   const firstName = payload?.first_name ?? "";
   const lastName = payload?.last_name ?? "";
   const email = payload?.email ?? "";
+  const addonWidgets = widgetExtension.getWidgets("dashboard");
 
   // Fetch tenant details — all members should be able to see this.
   const { data: tenant, isLoading: tenantLoading } = useQuery({
@@ -158,6 +160,16 @@ function DashboardPage() {
                 statsLoading={statsLoading}
               />
             </FeatureGate>
+          )}
+
+          {/* Addon widgets */}
+          {addonWidgets.length > 0 && (
+            <SimpleGrid cols={{ base: 1, sm: 2, lg: 3 }} spacing="md">
+              {addonWidgets.map((widget) => {
+                const WidgetComponent = widget.component;
+                return <WidgetComponent key={widget.id} />;
+              })}
+            </SimpleGrid>
           )}
         </Stack>
       )}

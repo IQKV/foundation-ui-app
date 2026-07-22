@@ -11,11 +11,12 @@ import {
   IconFileText,
 } from "@tabler/icons-react";
 import { Link, useRouterState } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { useSession } from "@/processes/session";
 import { isMultiTenantMode } from "@/app/config";
 import { TenantSwitcher } from "@/features/tenant-switcher";
+import { navigationExtension } from "@/app/addons";
 
 interface NavItem {
   label: string;
@@ -54,7 +55,19 @@ export function AppNav() {
   const authorities = payload?.authorities ?? [];
   const canManagePages = authorities.includes("TENANT_OWNER") || authorities.includes("ADMIN");
 
-  const navItems: NavItem[] = [
+  const addonNavItems = useMemo(() => {
+    const workspaceItems = navigationExtension.getNavItems("workspace").map((item) => {
+      const IconComponent = item.icon;
+      return {
+        label: item.label,
+        icon: <IconComponent size={16} />,
+        to: item.to,
+      };
+    });
+    return workspaceItems;
+  }, []);
+
+  const baseNavItems: NavItem[] = [
     { label: t`Dashboard`, icon: <IconDashboard size={16} />, to: "/" },
     ...(!isMultiTenantMode || !isPersonalWorkspace
       ? [{ label: t`Billing`, icon: <IconCreditCard size={16} />, to: "/billing" }]
@@ -66,6 +79,8 @@ export function AppNav() {
       ? [{ label: t`CMS Pages`, icon: <IconFileText size={16} />, to: "/cms-pages" }]
       : []),
   ];
+
+  const navItems: NavItem[] = [...baseNavItems, ...addonNavItems];
 
   const accountSubItems: NavItem[] = [
     { label: t`General`, icon: <IconUserCircle size={14} />, to: "/settings/general" },

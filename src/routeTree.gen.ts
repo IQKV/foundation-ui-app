@@ -23,12 +23,14 @@ import { Route as SignupRouteImport } from "./pages/signup"
 import { Route as UnauthorizedRouteImport } from "./pages/unauthorized"
 import { Route as VerifyEmailRouteImport } from "./pages/verify-email"
 import { Route as AppIndexRouteImport } from "./pages/_app/index"
+import { Route as AppAddonsRouteImport } from "./pages/_app/addons"
 import { Route as AppCmsPagesRouteImport } from "./pages/_app/cms-pages"
 import { Route as AppTeamRouteImport } from "./pages/_app/team"
 import { Route as AuthCallbackRouteImport } from "./pages/auth.callback"
 import { Route as InviteTokenRouteImport } from "./pages/invite.$token"
 import { Route as MagicLinkIndexRouteImport } from "./pages/magic-link.index"
 import { Route as MagicLinkVerifyRouteImport } from "./pages/magic-link.verify"
+import { Route as AppAddonsAddonPathRouteImport } from "./pages/_app/addons/$addonPath"
 import { Route as AppBillingIndexRouteImport } from "./pages/_app/billing/index"
 import { Route as AppBillingFailureRouteImport } from "./pages/_app/billing/failure"
 import { Route as AppBillingSuccessRouteImport } from "./pages/_app/billing/success"
@@ -109,6 +111,11 @@ const AppIndexRoute = AppIndexRouteImport.update({
   path: "/",
   getParentRoute: () => AppRoute,
 } as any)
+const AppAddonsRoute = AppAddonsRouteImport.update({
+  id: "/addons",
+  path: "/addons",
+  getParentRoute: () => AppRoute,
+} as any)
 const AppCmsPagesRoute = AppCmsPagesRouteImport.update({
   id: "/cms-pages",
   path: "/cms-pages",
@@ -138,6 +145,11 @@ const MagicLinkVerifyRoute = MagicLinkVerifyRouteImport.update({
   id: "/verify",
   path: "/verify",
   getParentRoute: () => MagicLinkRoute,
+} as any)
+const AppAddonsAddonPathRoute = AppAddonsAddonPathRouteImport.update({
+  id: "/$addonPath",
+  path: "/$addonPath",
+  getParentRoute: () => AppAddonsRoute,
 } as any)
 const AppBillingIndexRoute = AppBillingIndexRouteImport.update({
   id: "/billing/",
@@ -205,12 +217,14 @@ export interface FileRoutesByFullPath {
   "/signup": typeof SignupRoute
   "/unauthorized": typeof UnauthorizedRoute
   "/verify-email": typeof VerifyEmailRoute
+  "/addons": typeof AppAddonsRouteWithChildren
   "/cms-pages": typeof AppCmsPagesRouteWithChildren
   "/team": typeof AppTeamRoute
   "/auth/callback": typeof AuthCallbackRoute
   "/invite/$token": typeof InviteTokenRoute
   "/magic-link/verify": typeof MagicLinkVerifyRoute
   "/magic-link/": typeof MagicLinkIndexRoute
+  "/addons/$addonPath": typeof AppAddonsAddonPathRoute
   "/billing/failure": typeof AppBillingFailureRoute
   "/billing/success": typeof AppBillingSuccessRoute
   "/cms-pages/$pageId": typeof AppCmsPagesPageIdRoute
@@ -234,12 +248,14 @@ export interface FileRoutesByTo {
   "/signup": typeof SignupRoute
   "/unauthorized": typeof UnauthorizedRoute
   "/verify-email": typeof VerifyEmailRoute
+  "/addons": typeof AppAddonsRouteWithChildren
   "/team": typeof AppTeamRoute
   "/auth/callback": typeof AuthCallbackRoute
   "/invite/$token": typeof InviteTokenRoute
   "/magic-link/verify": typeof MagicLinkVerifyRoute
   "/": typeof AppIndexRoute
   "/magic-link": typeof MagicLinkIndexRoute
+  "/addons/$addonPath": typeof AppAddonsAddonPathRoute
   "/billing/failure": typeof AppBillingFailureRoute
   "/billing/success": typeof AppBillingSuccessRoute
   "/cms-pages/$pageId": typeof AppCmsPagesPageIdRoute
@@ -266,6 +282,7 @@ export interface FileRoutesById {
   "/signup": typeof SignupRoute
   "/unauthorized": typeof UnauthorizedRoute
   "/verify-email": typeof VerifyEmailRoute
+  "/_app/addons": typeof AppAddonsRouteWithChildren
   "/_app/cms-pages": typeof AppCmsPagesRouteWithChildren
   "/_app/team": typeof AppTeamRoute
   "/auth/callback": typeof AuthCallbackRoute
@@ -273,6 +290,7 @@ export interface FileRoutesById {
   "/magic-link/verify": typeof MagicLinkVerifyRoute
   "/_app/": typeof AppIndexRoute
   "/magic-link/": typeof MagicLinkIndexRoute
+  "/_app/addons/$addonPath": typeof AppAddonsAddonPathRoute
   "/_app/billing/failure": typeof AppBillingFailureRoute
   "/_app/billing/success": typeof AppBillingSuccessRoute
   "/_app/cms-pages/$pageId": typeof AppCmsPagesPageIdRoute
@@ -300,12 +318,14 @@ export interface FileRouteTypes {
     | "/signup"
     | "/unauthorized"
     | "/verify-email"
+    | "/addons"
     | "/cms-pages"
     | "/team"
     | "/auth/callback"
     | "/invite/$token"
     | "/magic-link/verify"
     | "/magic-link/"
+    | "/addons/$addonPath"
     | "/billing/failure"
     | "/billing/success"
     | "/cms-pages/$pageId"
@@ -329,12 +349,14 @@ export interface FileRouteTypes {
     | "/signup"
     | "/unauthorized"
     | "/verify-email"
+    | "/addons"
     | "/team"
     | "/auth/callback"
     | "/invite/$token"
     | "/magic-link/verify"
     | "/"
     | "/magic-link"
+    | "/addons/$addonPath"
     | "/billing/failure"
     | "/billing/success"
     | "/cms-pages/$pageId"
@@ -360,6 +382,7 @@ export interface FileRouteTypes {
     | "/signup"
     | "/unauthorized"
     | "/verify-email"
+    | "/_app/addons"
     | "/_app/cms-pages"
     | "/_app/team"
     | "/auth/callback"
@@ -367,6 +390,7 @@ export interface FileRouteTypes {
     | "/magic-link/verify"
     | "/_app/"
     | "/magic-link/"
+    | "/_app/addons/$addonPath"
     | "/_app/billing/failure"
     | "/_app/billing/success"
     | "/_app/cms-pages/$pageId"
@@ -497,6 +521,13 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof AppIndexRouteImport
       parentRoute: typeof AppRoute
     }
+    "/_app/addons": {
+      id: "/_app/addons"
+      path: "/addons"
+      fullPath: "/addons"
+      preLoaderRoute: typeof AppAddonsRouteImport
+      parentRoute: typeof AppRoute
+    }
     "/_app/cms-pages": {
       id: "/_app/cms-pages"
       path: "/cms-pages"
@@ -538,6 +569,13 @@ declare module "@tanstack/react-router" {
       fullPath: "/magic-link/verify"
       preLoaderRoute: typeof MagicLinkVerifyRouteImport
       parentRoute: typeof MagicLinkRoute
+    }
+    "/_app/addons/$addonPath": {
+      id: "/_app/addons/$addonPath"
+      path: "/$addonPath"
+      fullPath: "/addons/$addonPath"
+      preLoaderRoute: typeof AppAddonsAddonPathRouteImport
+      parentRoute: typeof AppAddonsRoute
     }
     "/_app/billing/": {
       id: "/_app/billing/"
@@ -612,6 +650,18 @@ declare module "@tanstack/react-router" {
   }
 }
 
+interface AppAddonsRouteChildren {
+  AppAddonsAddonPathRoute: typeof AppAddonsAddonPathRoute
+}
+
+const AppAddonsRouteChildren: AppAddonsRouteChildren = {
+  AppAddonsAddonPathRoute: AppAddonsAddonPathRoute,
+}
+
+const AppAddonsRouteWithChildren = AppAddonsRoute._addFileChildren(
+  AppAddonsRouteChildren,
+)
+
 interface AppCmsPagesRouteChildren {
   AppCmsPagesPageIdRoute: typeof AppCmsPagesPageIdRoute
   AppCmsPagesCreateRoute: typeof AppCmsPagesCreateRoute
@@ -629,6 +679,7 @@ const AppCmsPagesRouteWithChildren = AppCmsPagesRoute._addFileChildren(
 )
 
 interface AppRouteChildren {
+  AppAddonsRoute: typeof AppAddonsRouteWithChildren
   AppCmsPagesRoute: typeof AppCmsPagesRouteWithChildren
   AppTeamRoute: typeof AppTeamRoute
   AppIndexRoute: typeof AppIndexRoute
@@ -642,6 +693,7 @@ interface AppRouteChildren {
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppAddonsRoute: AppAddonsRouteWithChildren,
   AppCmsPagesRoute: AppCmsPagesRouteWithChildren,
   AppTeamRoute: AppTeamRoute,
   AppIndexRoute: AppIndexRoute,
