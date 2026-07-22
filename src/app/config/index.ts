@@ -15,3 +15,4 @@ export {
   DEFAULT_FREE_TENANT_ENTITLEMENT,
 } from "./billing";
 export type { BillingFeatureCode } from "./billing";
+export * from "./addons";

@@ -15,6 +15,8 @@ import { routeTree } from "@/routeTree.gen";
 import { theme, cssVariablesResolver } from "./theme";
 import { ErrorBoundary, LoadingOverlay } from "@/shared/ui";
 import { queryClient } from "@/shared/lib/query-client";
+import { httpClient } from "@/shared/api/http-client";
+import { addonRegistry, navigationExtension, widgetExtension } from "./addons";
 
 import "@mantine/core/styles.css";
 import "@mantine/notifications/styles.css";
@@ -58,6 +60,27 @@ export function App() {
       // Hide loader even on error to prevent infinite loading
       setIsInitialLoading(false);
     });
+  }, []);
+
+  useEffect(() => {
+    const initializeAddons = async () => {
+      const { useSession, getAccessToken, getTenantKey } = await import("@/processes/session");
+      await addonRegistry.initializeAll({
+        httpClient,
+        queryClient,
+        session: {
+          useSession,
+          getAccessToken,
+          getTenantKey,
+        },
+        i18n,
+        extensions: {
+          navigation: navigationExtension,
+          widgets: widgetExtension,
+        },
+      });
+    };
+    initializeAddons().catch(console.error);
   }, []);
 
   return (
