@@ -8,9 +8,23 @@ The addon system allows for modular, self-contained feature modules to be dynami
 
 - **Addon Manifest**: Defines addon metadata (id, name, version, description)
 - **Addon Registry**: Manages registered addons
-- **Addon Loader**: Loads enabled addons from configuration
+- **Addon Loader**: Loads enabled addons from configuration (supports both local addons and external npm packages)
 - **Extension Points**: Allow addons to contribute UI (navigation, widgets)
 - **Addon Context**: Provides core services to addons (httpClient, queryClient, session, i18n, extensions)
+
+## Using External Packages as Addons
+
+You can use external npm packages as addons by adding them to `availableAddons` as a string (the package name):
+
+```typescript
+// src/app/addons/addon-loader.ts
+const availableAddons: AvailableAddons = {
+  // External package
+  "@company/my-external-addon": "@company/my-external-addon",
+};
+```
+
+External packages should export an addon as their default export, following the same `Addon` interface as local addons.
 
 ## Directory Structure
 
