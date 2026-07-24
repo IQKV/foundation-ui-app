@@ -57,7 +57,7 @@ src/
 
 ```env
 # Comma-separated list of enabled addon IDs
-VITE_ENABLED_PLATFORM_ADDONS=
+VITE_ENABLED_UI_ADDONS=
 ```
 
 ## Example Addon

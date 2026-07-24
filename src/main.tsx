@@ -22,15 +22,14 @@ async function bootstrap() {
   }
 
   // Load addons (registers them in addonRegistry) …
-  const { loadAddons } = await import("@/app/addons/addon-loader");
+  const { loadAddons, addonRegistry, navigationExtension, widgetExtension } = await import("@/app/addons");
   await loadAddons();
 
   // … then immediately initialize them so extension points (nav items, widgets)
   // are populated before the first React render. This avoids the race where
   // AppNav's useMemo runs before addon.initialize() has been called.
-  const { addonRegistry, navigationExtension, widgetExtension } = await import("@/app/addons");
-  const { httpClient } = await import("@/shared/api/http-client");
-  const { queryClient } = await import("@/shared/lib/query-client");
+  const { httpClient } = await import("@/shared/api");
+  const { queryClient } = await import("@/shared/lib");
   const { i18n } = await import("@lingui/core");
   const { useSession, getAccessToken, getTenantKey } = await import("@/processes/session");
 

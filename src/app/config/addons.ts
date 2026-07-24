@@ -10,8 +10,8 @@ export function getAddonConfig(): AddonConfig {
   // Read from window.* first (runtime config.js injection), fall back to the
   // build-time value so local dev with .env still works.
   const raw: string =
-    (typeof window !== "undefined" && (window as any)["VITE_ENABLED_PLATFORM_ADDONS"]) ||
-    import.meta.env.VITE_ENABLED_PLATFORM_ADDONS ||
+    (typeof window !== "undefined" && (window as any)["VITE_ENABLED_UI_ADDONS"]) ||
+    import.meta.env.VITE_ENABLED_UI_ADDONS ||
     "";
   const enabledAddons = raw
     .split(",")
