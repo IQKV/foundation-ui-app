@@ -22,7 +22,8 @@ async function bootstrap() {
   }
 
   // Load addons (registers them in addonRegistry) …
-  const { loadAddons, addonRegistry, navigationExtension, widgetExtension } = await import("@/app/addons");
+  const { loadAddons, addonRegistry, navigationExtension, widgetExtension } =
+    await import("@/app/addons");
   await loadAddons();
 
   // … then immediately initialize them so extension points (nav items, widgets)
