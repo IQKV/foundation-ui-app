@@ -21,8 +21,8 @@ importers:
         specifier: ^6.6.0
         version: 6.6.0
       '@lingui/react':
-        specifier: ^6.5.0
-        version: 6.5.0(react@19.2.8)
+        specifier: ^6.6.0
+        version: 6.6.0(@babel/core@7.29.7)(@babel/types@7.29.7)(react@19.2.8)
       '@mantine/carousel':
         specifier: ^9.4.2
         version: 9.4.2(@mantine/core@9.4.2(@mantine/hooks@9.4.2(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@mantine/hooks@9.4.2(react@19.2.8))(embla-carousel-react@8.6.0(react@19.2.8))(embla-carousel@8.6.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -1060,8 +1060,8 @@ packages:
     resolution: {integrity: sha512-XkEcuMjIUjq7KZfTe83jP6UWQvKskpae/Ve7E8M8HEJ3TujHIPLzKn/quEmot6pKRtGwYxQzktGRfs2sPcZaqg==}
     engines: {node: '>=22.19.0'}
 
-  '@lingui/react@6.5.0':
-    resolution: {integrity: sha512-Q2jd82chqbCrQAPu8MNl+/PwSNumehWbH2AxXGFNq1/w1v0T3dgbfOXOtQ2sNd0Fq+a5gkuyul8RWbW1CDYw7Q==}
+  '@lingui/react@6.6.0':
+    resolution: {integrity: sha512-oRZvm8nx47wQB7Y4tQ4K78Ba0Ta0wJLRpT7125zW3J1wq++hMfc9XMqemCau2IDVtCMHGHdlLPiBeyFSIq/0Rw==}
     engines: {node: '>=22.19.0'}
     peerDependencies:
       babel-plugin-macros: 2 || 3
@@ -7396,13 +7396,15 @@ snapshots:
       '@messageformat/parser': 5.1.1
       js-sha256: 0.10.1
 
-  '@lingui/react@6.5.0(react@19.2.8)':
+  '@lingui/react@6.6.0(@babel/core@7.29.7)(@babel/types@7.29.7)(react@19.2.8)':
     dependencies:
-      '@lingui/babel-plugin-lingui-macro': 6.5.0
-      '@lingui/core': 6.5.0
+      '@lingui/babel-plugin-lingui-macro': 6.6.0(@babel/core@7.29.7)(@babel/types@7.29.7)
+      '@lingui/core': 6.6.0(@babel/core@7.29.7)(@babel/types@7.29.7)
       react: 19.2.8
+      use-sync-external-store: 1.6.0(react@19.2.8)
     transitivePeerDependencies:
-      - supports-color
+      - '@babel/core'
+      - '@babel/types'
 
   '@lingui/swc-plugin@6.5.1(@lingui/core@6.6.0(@babel/core@7.29.7)(@babel/types@7.29.7))(@swc/core@1.15.46)':
     dependencies:

@@ -52,7 +52,7 @@
     "@hookform/resolvers": "^5.4.0",
     "@lingui/core": "^6.6.0",
     "@lingui/format-po": "^6.6.0",
-    "@lingui/react": "^6.5.0",
+    "@lingui/react": "^6.6.0",
     "@mantine/carousel": "^9.4.2",
     "@mantine/charts": "^9.4.2",
     "@mantine/core": "^9.4.2",
