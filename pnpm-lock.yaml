@@ -208,8 +208,8 @@ importers:
         specifier: ^21.2.0
         version: 21.2.0
       '@lingui/cli':
-        specifier: ^6.5.0
-        version: 6.5.0(rolldown@1.2.0)
+        specifier: ^6.6.0
+        version: 6.6.0(rolldown@1.2.0)
       '@lingui/swc-plugin':
         specifier: ^6.5.1
         version: 6.5.1(@lingui/core@6.6.0(@babel/core@7.29.7)(@babel/types@7.29.7))(@swc/core@1.15.46)
@@ -972,6 +972,10 @@ packages:
     resolution: {integrity: sha512-ZvHG9eekHvfr+qErKgfPG/twfpXfMIiNSQk7iHKr/eSaeUP/c+Syuysx7s5I4WbkZlnzYjovp1K1iS7VHdX93Q==}
     engines: {node: '>=22.19.0'}
 
+  '@lingui/babel-plugin-extract-messages@6.6.0':
+    resolution: {integrity: sha512-QfCS4SjZYvVZFaiF44e/mLsdzCqQvRSGoVJWkb8nc51FkNpOZkwFLiwLtRnWgvm0ce7GeG51czMsG7RFPPCXqw==}
+    engines: {node: '>=22.19.0'}
+
   '@lingui/babel-plugin-lingui-macro@6.5.0':
     resolution: {integrity: sha512-p80TT6WMGXpFnAe9nP9ad/BJsADBxBvTa1QFy07tZqpg/5G5eOxUn641koQjHHr/EQ3yNstLohPV9aAVoKKsiA==}
     engines: {node: '>=22.19.0'}
@@ -990,6 +994,19 @@ packages:
 
   '@lingui/cli@6.5.0':
     resolution: {integrity: sha512-aTvggRa8yUHT6tNmkWuJfNehO/gkShiQA0UTn02hNSTIqqfh3y4avsHiJGFBAEmFx/zpvJ+XcHtZDhTtNMojhA==}
+    engines: {node: '>=22.19.0'}
+    hasBin: true
+    peerDependencies:
+      esbuild: ^0.28.1
+      rolldown: ^1.0.0
+    peerDependenciesMeta:
+      esbuild:
+        optional: true
+      rolldown:
+        optional: true
+
+  '@lingui/cli@6.6.0':
+    resolution: {integrity: sha512-XtsWns8/m5Rtj+Gwr9j3SqPTk9bVztAbdJ6cbDG2qDFwSpGiXLxqxhqbam4cywjlxYMudsyNQ7E6DPPSgL4x8Q==}
     engines: {node: '>=22.19.0'}
     hasBin: true
     peerDependencies:
@@ -7247,6 +7264,10 @@ snapshots:
     dependencies:
       '@lingui/conf': 6.5.0
 
+  '@lingui/babel-plugin-extract-messages@6.6.0':
+    dependencies:
+      '@lingui/conf': 6.6.0
+
   '@lingui/babel-plugin-lingui-macro@6.5.0':
     dependencies:
       '@babel/core': 7.29.7
@@ -7276,6 +7297,35 @@ snapshots:
       '@lingui/core': 6.5.0
       '@lingui/format-po': 6.5.0
       '@lingui/message-utils': 6.5.0
+      chokidar: 5.0.0
+      cli-table3: 0.6.5
+      commander: 14.0.3
+      jiti: 2.7.0
+      micromatch: 4.0.8
+      ms: 2.1.3
+      normalize-path: 3.0.0
+      ora: 9.4.1
+      pseudolocale: 2.2.0
+      source-map: 0.7.6
+      tinypool: 2.1.0
+    optionalDependencies:
+      rolldown: 1.2.0
+    transitivePeerDependencies:
+      - babel-plugin-macros
+      - supports-color
+
+  '@lingui/cli@6.6.0(rolldown@1.2.0)':
+    dependencies:
+      '@babel/core': 7.29.7
+      '@babel/generator': 7.29.7
+      '@babel/parser': 7.29.7
+      '@babel/types': 7.29.7
+      '@lingui/babel-plugin-extract-messages': 6.6.0
+      '@lingui/babel-plugin-lingui-macro': 6.6.0(@babel/core@7.29.7)(@babel/types@7.29.7)
+      '@lingui/conf': 6.6.0
+      '@lingui/core': 6.6.0(@babel/core@7.29.7)(@babel/types@7.29.7)
+      '@lingui/format-po': 6.6.0
+      '@lingui/message-utils': 6.6.0
       chokidar: 5.0.0
       cli-table3: 0.6.5
       commander: 14.0.3
