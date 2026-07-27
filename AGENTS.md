@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-**IQ Key Value Foundation UI App** - A production-ready React application for the IQKV platform. Built with Feature-Sliced Design (FSD) architecture, it handles multi-tenant authentication, IAM, billing, CMS, and organization management.
+**iQ Key Value Foundation UI App** - A production-ready React application for the IQKV platform. Built with Feature-Sliced Design (FSD) architecture, it handles multi-tenant authentication, IAM, billing, CMS, and organization management.
 
 **Key Characteristics:**
 
