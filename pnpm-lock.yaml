@@ -39,8 +39,8 @@ importers:
         specifier: ^9.4.2
         version: 9.4.2(@mantine/core@9.4.2(@mantine/hooks@9.4.2(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@mantine/hooks@9.4.2(react@19.2.8))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@mantine/form':
-        specifier: ^9.4.2
-        version: 9.4.2(react@19.2.8)
+        specifier: ^9.5.0
+        version: 9.5.0(react@19.2.8)
       '@mantine/hooks':
         specifier: ^9.4.2
         version: 9.4.2(react@19.2.8)
@@ -1211,8 +1211,8 @@ packages:
       react: ^19.2.0
       react-dom: ^19.2.0
 
-  '@mantine/form@9.4.2':
-    resolution: {integrity: sha512-rpj43qFQEhas/T5qD0fp2ErCNATV544BuHColyrkko/2UcVf57LUJ52N8KZxT3/mKTQmNqprOJReHrbc42Z59Q==}
+  '@mantine/form@9.5.0':
+    resolution: {integrity: sha512-sYlWMfh2F8L3vBAWhXg597JM06lu4/ermmjC/31ftcl91pjp3vvQxwbIHd3wyQVbTV3f3kgTFqPlrR6BuBYOpw==}
     peerDependencies:
       react: ^19.2.0
 
@@ -7538,7 +7538,7 @@ snapshots:
       react-dom: 19.2.8(react@19.2.8)
       react-dropzone: 15.0.0(react@19.2.8)
 
-  '@mantine/form@9.4.2(react@19.2.8)':
+  '@mantine/form@9.5.0(react@19.2.8)':
     dependencies:
       '@standard-schema/spec': 1.1.0
       fast-deep-equal: 3.1.3
