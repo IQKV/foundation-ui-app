@@ -64,51 +64,49 @@ export const billingApi = {
   /**
    * Create a Stripe Checkout Session for current subject (single tenant mode).
    * Requires TENANT_OWNER authority.
+   * Backend: POST /api/v1/billing/subscriptions/me/checkout
    */
   createCheckoutSessionForMe: (request: CreateCheckoutSessionRequest) =>
     httpClient
-      .post<CheckoutSessionResponse>("/v1/billing/checkout/me", request)
+      .post<CheckoutSessionResponse>("/v1/billing/subscriptions/me/checkout", request)
       .then((r) => r.data),
 
   /**
    * Create a Stripe Checkout Session for a specific tenant.
    * Requires TENANT_OWNER authority.
+   * Backend: POST /api/v1/billing/subscriptions/{tenantKey}/checkout
    */
   createCheckoutSession: (tenantKey: string, request: CreateCheckoutSessionRequest) =>
     httpClient
       .post<CheckoutSessionResponse>(
-        `/v1/billing/checkout/${encodeURIComponent(tenantKey)}`,
+        `/v1/billing/subscriptions/${encodeURIComponent(tenantKey)}/checkout`,
         request,
       )
       .then((r) => r.data),
 
   /**
    * Create a Stripe Customer Portal session for current user (single-tenant mode).
+   * Backend: POST /api/v1/billing/user-settings/portal
    */
   createUserPortalSession: () =>
-    httpClient.post<PortalSessionResponse>("/v1/billing/portal/me").then((r) => r.data),
+    httpClient.post<PortalSessionResponse>("/v1/billing/user-settings/portal").then((r) => r.data),
 
   /**
    * Create a Stripe Customer Portal session for a specific tenant.
+   * Backend: POST /api/v1/billing/settings/{tenantKey}/portal
    */
   createTenantPortalSession: (tenantKey: string) =>
     httpClient
-      .post<PortalSessionResponse>(`/v1/billing/portal/${encodeURIComponent(tenantKey)}`)
+      .post<PortalSessionResponse>(`/v1/billing/settings/${encodeURIComponent(tenantKey)}/portal`)
       .then((r) => r.data),
 
   /**
    * Get entitlements for current subject (resolves to user or tenant based on mode).
+   * Backend: GET /api/v1/billing/entitlements/me
+   * This is the only entitlements endpoint — subject is resolved server-side from the JWT.
    */
   getEntitlements: () =>
     httpClient.get<Entitlements>("/v1/billing/entitlements/me").then((r) => r.data),
-
-  /**
-   * Get entitlements for a specific tenant.
-   */
-  getTenantEntitlements: (tenantKey: string) =>
-    httpClient
-      .get<Entitlements>(`/v1/billing/entitlements/${encodeURIComponent(tenantKey)}`)
-      .then((r) => r.data),
 
   /**
    * List refunds for current user (single-tenant mode).
@@ -134,9 +132,10 @@ export const billingApi = {
 
   /**
    * Get billing settings for current user (single-tenant mode).
+   * Backend: GET /api/v1/billing/user-settings
    */
   getUserBillingSettings: () =>
-    httpClient.get<BillingSettings>("/v1/billing/settings/me").then((r) => r.data),
+    httpClient.get<BillingSettings>("/v1/billing/user-settings").then((r) => r.data),
 
   /**
    * Create billing settings for a specific tenant.
@@ -156,15 +155,17 @@ export const billingApi = {
 
   /**
    * Create billing settings for current user (single-tenant mode).
+   * Backend: POST /api/v1/billing/user-settings
    */
   createUserBillingSettings: (data: CreateBillingSettingsRequest) =>
-    httpClient.post<BillingSettings>("/v1/billing/settings/me", data).then((r) => r.data),
+    httpClient.post<BillingSettings>("/v1/billing/user-settings", data).then((r) => r.data),
 
   /**
    * Update billing settings for current user (single-tenant mode).
+   * Backend: PATCH /api/v1/billing/user-settings
    */
   updateUserBillingSettings: (data: UpdateBillingSettingsRequest) =>
-    httpClient.patch<BillingSettings>("/v1/billing/settings/me", data).then((r) => r.data),
+    httpClient.patch<BillingSettings>("/v1/billing/user-settings", data).then((r) => r.data),
 
   /**
    * List webhook logs for the current subject (tenant in multi-tenant, user in single-tenant).

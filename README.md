@@ -156,24 +156,49 @@ Conditionally renders children when a feature-map code is enabled:
 
 ### UI components (`features/manage-billing`)
 
-| Component / Hook           | Purpose                                                          |
-| -------------------------- | ---------------------------------------------------------------- |
-| `EntitlementsCard`         | Current plan, status, renewal date, and feature list card        |
-| `PlanEntitlement`          | Feature list display (quota badges + boolean icons)              |
-| `PlanCard`                 | Single plan tile with price, features, and select action         |
-| `PlanList`                 | Grid of `PlanCard` components from catalog                       |
-| `CurrentSubscription`      | Active subscription summary                                      |
-| `BillingInfo`              | Billing settings form                                            |
-| `RefundList`               | Refund history table                                             |
-| `WebhookLogList`           | Webhook log history table with search, status filter, pagination |
-| `BillingPortalButton`      | Opens the billing portal (Stripe or Lemon Squeezy)               |
-| `FeatureGate`              | Conditional render by feature code                               |
-| `useEntitlements`          | TanStack Query hook — fetches `/v1/billing/entitlements/me`      |
-| `useHasFeature(code)`      | Boolean check against features map                               |
-| `useQuota(field)`          | Returns typed quota value                                        |
-| `useEntitlementsContext()` | Raw context access                                               |
+| Component / Hook           | Purpose                                                                                                                                   |
+| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `EntitlementsCard`         | Current plan, status, renewal date, and feature list card                                                                                 |
+| `PlanEntitlement`          | Feature list display (quota badges + boolean icons)                                                                                       |
+| `PlanCard`                 | Single plan tile with price, features, and select action                                                                                  |
+| `PlanList`                 | Grid of `PlanCard` components from catalog                                                                                                |
+| `CurrentSubscription`      | Active subscription summary                                                                                                               |
+| `BillingInfo`              | Billing settings form (multi-tenant: `/v1/billing/settings/{key}`; single-tenant: `/v1/billing/user-settings`)                            |
+| `RefundList`               | Refund history table                                                                                                                      |
+| `WebhookLogList`           | Webhook log history table with search, status filter, pagination                                                                          |
+| `BillingPortalButton`      | Opens the billing portal — multi-tenant: `POST /v1/billing/settings/{key}/portal`; single-tenant: `POST /v1/billing/user-settings/portal` |
+| `FeatureGate`              | Conditional render by feature code                                                                                                        |
+| `useEntitlements`          | TanStack Query hook — fetches `GET /v1/billing/entitlements/me`                                                                           |
+| `useHasFeature(code)`      | Boolean check against features map                                                                                                        |
+| `useQuota(field)`          | Returns typed quota value                                                                                                                 |
+| `useEntitlementsContext()` | Raw context access                                                                                                                        |
 
 A working integration example lives at `src/pages/billing-example.tsx`.
+
+### Billing API endpoints
+
+All calls go through `src/shared/api/billing.ts` → `billingApi`. The paths below are relative to `baseURL` (`/api` in dev, `VITE_API_SERVER_URL` in production).
+
+| `billingApi` method          | HTTP  | Path                                       | Mode          |
+| ---------------------------- | ----- | ------------------------------------------ | ------------- |
+| `listPlans`                  | GET   | `/v1/billing/plans`                        | both          |
+| `getActiveSubscription`      | GET   | `/v1/billing/subscriptions/{key}/active`   | multi-tenant  |
+| `getActiveSubscriptionForMe` | GET   | `/v1/billing/subscriptions/me/active`      | single-tenant |
+| `createCheckoutSession`      | POST  | `/v1/billing/subscriptions/{key}/checkout` | multi-tenant  |
+| `createCheckoutSessionForMe` | POST  | `/v1/billing/subscriptions/me/checkout`    | single-tenant |
+| `createTenantPortalSession`  | POST  | `/v1/billing/settings/{key}/portal`        | multi-tenant  |
+| `createUserPortalSession`    | POST  | `/v1/billing/user-settings/portal`         | single-tenant |
+| `getEntitlements`            | GET   | `/v1/billing/entitlements/me`              | both          |
+| `listRefunds`                | GET   | `/v1/billing/payments/{key}/refunds`       | multi-tenant  |
+| `listRefundsForMe`           | GET   | `/v1/billing/payments/me/refunds`          | single-tenant |
+| `getBillingSettings`         | GET   | `/v1/billing/settings/{key}`               | multi-tenant  |
+| `createBillingSettings`      | POST  | `/v1/billing/settings/{key}`               | multi-tenant  |
+| `updateBillingSettings`      | PATCH | `/v1/billing/settings/{key}`               | multi-tenant  |
+| `getUserBillingSettings`     | GET   | `/v1/billing/user-settings`                | single-tenant |
+| `createUserBillingSettings`  | POST  | `/v1/billing/user-settings`                | single-tenant |
+| `updateUserBillingSettings`  | PATCH | `/v1/billing/user-settings`                | single-tenant |
+| `listWebhookLogsForMe`       | GET   | `/v1/billing/webhook-logs/me`              | both          |
+| `getWebhookLogForMe`         | GET   | `/v1/billing/webhook-logs/me/{id}`         | both          |
 
 ---
 
