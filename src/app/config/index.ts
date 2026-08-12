@@ -7,6 +7,22 @@ export {
   isSingleTenantMode,
   rolloutMode,
   paymentGatewayType,
+  isDemoMode,
+  isMagicLinkEnabled,
+  appTitle,
+  appBrandName,
+  appBrandTagline,
+  authSectionLabel,
+  authBadges,
+  authHeadline1,
+  authHeadline2,
+  authTagline,
+  onboardingWelcome,
+  footerCopyright,
+  supportEmail,
+  supportUrl,
+  privacyUrl,
+  termsUrl,
 } from "./runtime-env";
 export { guardMultiTenantRoute } from "./rollout-guards";
 export {

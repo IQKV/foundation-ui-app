@@ -1,6 +1,6 @@
 import { Group, Text, Box, Burger } from "@mantine/core";
 import { IconShieldHalf } from "@tabler/icons-react";
-import { APP_TITLE } from "@/shared/lib/page-title";
+import { appBrandName, appBrandTagline } from "@/app/config/runtime-env";
 
 interface AppNavLogoProps {
   opened: boolean;
@@ -62,7 +62,7 @@ export function AppNavLogo({ opened, onToggle }: AppNavLogoProps) {
             fw={700}
             style={{ color: "#ffffff", letterSpacing: "-0.02em", lineHeight: 1.2 }}
           >
-            {APP_TITLE}
+            {appBrandName}
           </Text>
           <Text
             size="xs"
@@ -74,7 +74,7 @@ export function AppNavLogo({ opened, onToggle }: AppNavLogoProps) {
               lineHeight: 1.4,
             }}
           >
-            Workspace
+            {appBrandTagline}
           </Text>
         </Box>
       </Group>

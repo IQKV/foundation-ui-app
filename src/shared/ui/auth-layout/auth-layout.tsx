@@ -1,10 +1,21 @@
 import type { ReactNode } from "react";
 import { Box, Flex, Group, Stack, Text, Title, useMantineColorScheme } from "@mantine/core";
 import { IconShieldHalf } from "@tabler/icons-react";
-import { Trans } from "@lingui/react/macro";
 import { APP_TITLE } from "@/shared/lib/page-title";
 import { ColorSchemeToggle } from "@/shared/ui/color-scheme-toggle/color-scheme-toggle";
 import { LocaleSwitcher } from "@/shared/ui/locale-switcher/locale-switcher";
+import {
+  authSectionLabel,
+  authBadges,
+  authHeadline1,
+  authHeadline2,
+  authTagline,
+  footerCopyright,
+  supportEmail,
+  supportUrl,
+  privacyUrl,
+  termsUrl,
+} from "@/app/config/runtime-env";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -137,19 +148,92 @@ function BrandPanel({ headline, tagline }: BrandPanelProps) {
           paddingTop: 28,
         }}
       >
-        <Text
-          c="rgba(255,255,255,0.35)"
-          size="xs"
-          style={{ letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 12 }}
-        >
-          <Trans>Trusted by teams worldwide</Trans>
+        {authSectionLabel && (
+          <Text
+            c="rgba(255,255,255,0.35)"
+            size="xs"
+            style={{ letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 12 }}
+          >
+            {authSectionLabel}
+          </Text>
+        )}
+        {authBadges.length > 0 && (
+          <Flex gap="xl" wrap="wrap">
+            {authBadges.map((badge) => (
+              <Text key={badge} c="rgba(255,255,255,0.5)" size="sm" fw={500}>
+                ✦ {badge}
+              </Text>
+            ))}
+          </Flex>
+        )}
+      </Box>
+
+      {/* Footer — copyright + legal/support links */}
+      <Box
+        style={{
+          position: "relative",
+          zIndex: 1,
+          borderTop: "1px solid rgba(255,255,255,0.08)",
+          paddingTop: 20,
+          marginTop: 24,
+        }}
+      >
+        <Text c="rgba(255,255,255,0.30)" size="xs" mb={12}>
+          {footerCopyright}
         </Text>
-        <Flex gap="xl" wrap="wrap">
-          {["SOC 2 Type II", "GDPR Ready"].map((badge) => (
-            <Text key={badge} c="rgba(255,255,255,0.5)" size="sm" fw={500}>
-              ✦ {badge}
+        <Flex gap="lg" wrap="wrap">
+          {privacyUrl && (
+            <Text
+              component="a"
+              href={privacyUrl}
+              c="rgba(255,255,255,0.40)"
+              size="xs"
+              style={{ textDecoration: "none" }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.70)")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.40)")}
+            >
+              Privacy
             </Text>
-          ))}
+          )}
+          {termsUrl && (
+            <Text
+              component="a"
+              href={termsUrl}
+              c="rgba(255,255,255,0.40)"
+              size="xs"
+              style={{ textDecoration: "none" }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.70)")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.40)")}
+            >
+              Terms
+            </Text>
+          )}
+          {supportUrl && (
+            <Text
+              component="a"
+              href={supportUrl}
+              c="rgba(255,255,255,0.40)"
+              size="xs"
+              style={{ textDecoration: "none" }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.70)")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.40)")}
+            >
+              Support
+            </Text>
+          )}
+          {supportEmail && !supportUrl && (
+            <Text
+              component="a"
+              href={`mailto:${supportEmail}`}
+              c="rgba(255,255,255,0.40)"
+              size="xs"
+              style={{ textDecoration: "none" }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.70)")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.40)")}
+            >
+              {supportEmail}
+            </Text>
+          )}
         </Flex>
       </Box>
     </Box>
@@ -213,7 +297,7 @@ function FormPanel({ children }: { children: ReactNode }) {
 function DefaultHeadline() {
   return (
     <>
-      <Trans>Your workspace,</Trans>
+      {authHeadline1}
       <br />
       <Text
         component="span"
@@ -224,19 +308,14 @@ function DefaultHeadline() {
           WebkitTextFillColor: "transparent",
         }}
       >
-        <Trans>always in reach.</Trans>
+        {authHeadline2}
       </Text>
     </>
   );
 }
 
 function DefaultTagline() {
-  return (
-    <Trans>
-      Manage your team, subscriptions, and settings — all from one place, secured by
-      enterprise-grade authentication.
-    </Trans>
-  );
+  return <>{authTagline}</>;
 }
 
 // ─── Layout ───────────────────────────────────────────────────────────────────

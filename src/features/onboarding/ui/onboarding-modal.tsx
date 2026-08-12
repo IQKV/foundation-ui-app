@@ -5,6 +5,7 @@ import { useMutation } from "@tanstack/react-query";
 import { iamApi, authApi } from "@/shared/api";
 import { setTokens, getIsPersonalWorkspace, useSession } from "@/processes/session";
 import { isSingleTenantMode } from "@/app/config";
+import { onboardingWelcome } from "@/app/config/runtime-env";
 
 interface OnboardingModalProps {
   opened: boolean;
@@ -152,11 +153,7 @@ export function OnboardingModal({ opened, onClose }: OnboardingModalProps) {
       onClose={onClose}
       title={
         <Title order={2} ta="center">
-          {isSingleTenantMode ? (
-            <Trans>Welcome!</Trans>
-          ) : (
-            <Trans>Welcome to Key Value Platform!</Trans>
-          )}
+          {isSingleTenantMode ? <Trans>Welcome!</Trans> : <>{onboardingWelcome}</>}
         </Title>
       }
       size="75%"
