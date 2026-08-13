@@ -175,11 +175,7 @@ export function AppTopNavBar() {
           {sections.map((section, idx) => (
             <Box key={section.id}>
               {idx > 0 && (
-                <Box
-                  mx={10}
-                  my={6}
-                  style={{ height: 1, background: "var(--app-nav-divider)" }}
-                />
+                <Box mx={10} my={6} style={{ height: 1, background: "var(--app-nav-divider)" }} />
               )}
               <Box
                 px={14}
@@ -197,11 +193,7 @@ export function AppTopNavBar() {
                 {section.label}
               </Box>
               {section.items.map((item) => (
-                <NavItemRenderer
-                  key={item.to}
-                  item={item}
-                  currentPath={currentPath}
-                />
+                <NavItemRenderer key={item.to} item={item} currentPath={currentPath} />
               ))}
             </Box>
           ))}

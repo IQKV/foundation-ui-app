@@ -86,7 +86,9 @@ export function AppNav() {
       {/* Results / full nav */}
       {filtered ? (
         filtered.length > 0 ? (
-          filtered.map((item) => <NavItemRenderer key={item.to} item={item} currentPath={currentPath} />)
+          filtered.map((item) => (
+            <NavItemRenderer key={item.to} item={item} currentPath={currentPath} />
+          ))
         ) : (
           <Text size="xs" px="md" py="xs" style={{ color: "var(--app-nav-section-label)" }}>
             <Trans>No results</Trans>
@@ -96,7 +98,9 @@ export function AppNav() {
         <>
           {sections.map((section, idx) => (
             <Box key={section.id}>
-              {idx > 0 && <Divider mx={10} my={6} style={{ borderColor: "var(--app-nav-divider)" }} />}
+              {idx > 0 && (
+                <Divider mx={10} my={6} style={{ borderColor: "var(--app-nav-divider)" }} />
+              )}
               <SectionLabel>{section.label}</SectionLabel>
               {section.items.map((item) => (
                 <NavItemRenderer key={item.to} item={item} currentPath={currentPath} />

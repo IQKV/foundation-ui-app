@@ -127,10 +127,7 @@ export function buildNavSections(
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
 /** Returns the ID of the section whose prefixes match the current pathname, or undefined. */
-export function getActiveSection(
-  sections: NavSection[],
-  pathname: string,
-): string | undefined {
+export function getActiveSection(sections: NavSection[], pathname: string): string | undefined {
   const section = sections.find((section) =>
     section.prefixes.some((prefix) =>
       // root "/" must be an exact match; all others are prefix matches
@@ -148,8 +145,5 @@ export function isNavItemActive(item: NavItem, pathname: string): boolean {
 
 /** Derives a stable slug from a route path, e.g. "/billing" → "billing". */
 export function navSlug(to: string): string {
-  return to
-    .replace(/^\//, "")
-    .replace(/\//g, "-")
-    .replace(/^$/, "dashboard");
+  return to.replace(/^\//, "").replace(/\//g, "-").replace(/^$/, "dashboard");
 }
