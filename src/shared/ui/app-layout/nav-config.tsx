@@ -58,16 +58,13 @@ export interface NavSessionFlags {
 /**
  * Returns the full navigation section tree.
  *
- * Accepts session flags for conditional items, and addon items so this module 
+ * Accepts session flags for conditional items, and addon items so this module
  * stays free of React hooks and side-effects — callers own the hook calls.
  *
  * @param flags       Session-derived feature flags that gate conditional items
  * @param addonItems  Extra NavItems appended to the Workspace section
  */
-export function buildNavSections(
-  flags: NavSessionFlags,
-  addonItems: NavItem[] = [],
-): NavSection[] {
+export function buildNavSections(flags: NavSessionFlags, addonItems: NavItem[] = []): NavSection[] {
   const { isMultiTenantMode, isTenantOwner, isPersonalWorkspace, canManagePages } = flags;
 
   const workspaceItems: NavItem[] = [
