@@ -143,6 +143,7 @@ msgstr "Акаунтът е свързан успешно."
 #: src/pages/_app/settings/notifications.tsx
 #: src/pages/_app/settings/organization.tsx
 #: src/pages/_app/settings/security.tsx
+#: src/shared/ui/app-layout/nav-config.tsx
 msgid "Account Settings"
 msgstr "Настройки на акаунта"
 
@@ -326,6 +327,7 @@ msgid "Banning this member will immediately invalidate all their active sessions
 msgstr "Забраняването на този член незабавно ще анулира всички активни сесии, ще отмени достъпа им до наемателя и ще изпрати имейл с известие. Те няма да могат да достъпват наемателя отново, докато не бъдат разблокирани."
 
 #: src/pages/_app/billing/index.tsx
+#: src/shared/ui/app-layout/nav-config.tsx
 msgid "Billing"
 msgstr "Фактуриране"
 
@@ -433,6 +435,7 @@ msgstr "Затвори"
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
 #: src/pages/_app/cms-pages.index.tsx
+#: src/shared/ui/app-layout/nav-config.tsx
 msgid "CMS Pages"
 msgstr "CMS Страници"
 
@@ -701,6 +704,7 @@ msgstr "Дневно"
 
 #: src/pages/_app/addons/$addonPath.tsx
 #: src/pages/_app/index.tsx
+#: src/shared/ui/app-layout/nav-config.tsx
 msgid "Dashboard"
 msgstr "Табло"
 
@@ -1000,6 +1004,7 @@ msgid "Full-screen centered loader shown on first app load (while locale initial
 msgstr "Цялоекранен центриран индикатор при първото зареждане на приложението (докато локалът се инициализира)."
 
 #: src/pages/_app/settings/general.tsx
+#: src/shared/ui/app-layout/nav-config.tsx
 msgid "General"
 msgstr "Общи"
 
@@ -1471,6 +1476,7 @@ msgstr "Не е свързан"
 
 #: src/features/notification-bell/ui/notification-bell.tsx
 #: src/pages/_app/settings/notifications.tsx
+#: src/shared/ui/app-layout/nav-config.tsx
 msgid "Notifications"
 msgstr "Известия"
 
@@ -1572,6 +1578,7 @@ msgstr "Настройки на организацията"
 #: src/pages/_app/settings/general.tsx
 #: src/pages/_app/settings/organization.tsx
 #: src/shared/ui/app-layout/app-header.tsx
+#: src/shared/ui/app-layout/nav-config.tsx
 msgid "Organizations"
 msgstr "Организации"
 
@@ -1973,6 +1980,7 @@ msgid "Secure your account with a strong password and notifications"
 msgstr "Защитете акаунта си с силна парола и известия"
 
 #: src/pages/_app/settings/security.tsx
+#: src/shared/ui/app-layout/nav-config.tsx
 msgid "Security"
 msgstr "Сигурност"
 
@@ -2249,6 +2257,7 @@ msgid "Switch workspace (current: {0})"
 msgstr ""
 
 #: src/pages/_app/team.tsx
+#: src/shared/ui/app-layout/nav-config.tsx
 msgid "Team"
 msgstr "Екип"
 
@@ -2583,9 +2592,9 @@ msgstr "Какво можете да правите"
 msgid "Work email"
 msgstr "Служебен имейл"
 
-#: src/shared/ui/app-layout/app-nav.tsx
-#~ msgid "Workspace"
-#~ msgstr "Работно пространство"
+#: src/shared/ui/app-layout/nav-config.tsx
+msgid "Workspace"
+msgstr "Работно пространство"
 
 #: src/pages/sign-in.tsx
 msgid "Workspace key"

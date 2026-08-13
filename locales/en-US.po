@@ -143,6 +143,7 @@ msgstr "Account linked successfully."
 #: src/pages/_app/settings/notifications.tsx
 #: src/pages/_app/settings/organization.tsx
 #: src/pages/_app/settings/security.tsx
+#: src/shared/ui/app-layout/nav-config.tsx
 msgid "Account Settings"
 msgstr "Account Settings"
 
@@ -326,6 +327,7 @@ msgid "Banning this member will immediately invalidate all their active sessions
 msgstr "Banning this member will immediately invalidate all their active sessions, revoke their access to this tenant, and send them a notification email. They will not be able to access this tenant again until unbanned."
 
 #: src/pages/_app/billing/index.tsx
+#: src/shared/ui/app-layout/nav-config.tsx
 msgid "Billing"
 msgstr "Billing"
 
@@ -433,6 +435,7 @@ msgstr "Close"
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
 #: src/pages/_app/cms-pages.index.tsx
+#: src/shared/ui/app-layout/nav-config.tsx
 msgid "CMS Pages"
 msgstr "CMS Pages"
 
@@ -701,6 +704,7 @@ msgstr "Daily"
 
 #: src/pages/_app/addons/$addonPath.tsx
 #: src/pages/_app/index.tsx
+#: src/shared/ui/app-layout/nav-config.tsx
 msgid "Dashboard"
 msgstr "Dashboard"
 
@@ -1000,6 +1004,7 @@ msgid "Full-screen centered loader shown on first app load (while locale initial
 msgstr "Full-screen centered loader shown on first app load (while locale initializes)."
 
 #: src/pages/_app/settings/general.tsx
+#: src/shared/ui/app-layout/nav-config.tsx
 msgid "General"
 msgstr "General"
 
@@ -1471,6 +1476,7 @@ msgstr "Not connected"
 
 #: src/features/notification-bell/ui/notification-bell.tsx
 #: src/pages/_app/settings/notifications.tsx
+#: src/shared/ui/app-layout/nav-config.tsx
 msgid "Notifications"
 msgstr "Notifications"
 
@@ -1572,6 +1578,7 @@ msgstr "Organization Settings"
 #: src/pages/_app/settings/general.tsx
 #: src/pages/_app/settings/organization.tsx
 #: src/shared/ui/app-layout/app-header.tsx
+#: src/shared/ui/app-layout/nav-config.tsx
 msgid "Organizations"
 msgstr "Organizations"
 
@@ -1973,6 +1980,7 @@ msgid "Secure your account with a strong password and notifications"
 msgstr "Secure your account with a strong password and notifications"
 
 #: src/pages/_app/settings/security.tsx
+#: src/shared/ui/app-layout/nav-config.tsx
 msgid "Security"
 msgstr "Security"
 
@@ -2249,6 +2257,7 @@ msgid "Switch workspace (current: {0})"
 msgstr "Switch workspace (current: {0})"
 
 #: src/pages/_app/team.tsx
+#: src/shared/ui/app-layout/nav-config.tsx
 msgid "Team"
 msgstr "Team"
 
@@ -2583,9 +2592,9 @@ msgstr "What you can do"
 msgid "Work email"
 msgstr "Work email"
 
-#: src/shared/ui/app-layout/app-nav.tsx
-#~ msgid "Workspace"
-#~ msgstr "Workspace"
+#: src/shared/ui/app-layout/nav-config.tsx
+msgid "Workspace"
+msgstr "Workspace"
 
 #: src/pages/sign-in.tsx
 msgid "Workspace key"

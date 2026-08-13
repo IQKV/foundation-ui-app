@@ -11,7 +11,6 @@
 
 import { Group, Box } from "@mantine/core";
 import { useRouterState } from "@tanstack/react-router";
-import { useLingui } from "@lingui/react/macro";
 import { useSession } from "@/processes/session";
 import { isMultiTenantMode } from "@/app/config";
 import { navigationExtension } from "@/app/addons";
@@ -19,7 +18,6 @@ import { buildNavSections, getActiveSection } from "./nav-config";
 import { NavItemRenderer } from "./nav-item-renderer";
 
 export function AppSubNavBar() {
-  const { t } = useLingui();
   const routerState = useRouterState();
   const currentPath = routerState.location.pathname;
   const { isTenantOwner, isPersonalWorkspace, payload } = useSession();
@@ -29,7 +27,6 @@ export function AppSubNavBar() {
   const addonItems = navigationExtension.getNavItems("workspace");
 
   const sections = buildNavSections(
-    t,
     {
       isMultiTenantMode,
       isTenantOwner,

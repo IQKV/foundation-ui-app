@@ -13,7 +13,7 @@
 import { Group, Button, Box, Drawer, UnstyledButton, Burger } from "@mantine/core";
 import { IconPlus } from "@tabler/icons-react";
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
-import { Trans, useLingui } from "@lingui/react/macro";
+import { Trans } from "@lingui/react/macro";
 import { ColorSchemeToggle } from "@/shared/ui/color-scheme-toggle/color-scheme-toggle";
 import { LocaleSwitcher } from "@/shared/ui/locale-switcher/locale-switcher";
 import { NotificationBell } from "@/features/notification-bell";
@@ -28,7 +28,7 @@ import { NavItemRenderer } from "./nav-item-renderer";
 import { useState } from "react";
 
 interface SectionTabProps {
-  label: string;
+  label: React.ReactNode;
   isActive: boolean;
   onClick: () => void;
 }
@@ -53,7 +53,7 @@ function SectionTab({ label, isActive, onClick }: SectionTabProps) {
           background: "rgba(255,255,255,0.06)",
         },
       }}
-      data-testid={`section-tab-${label.toLowerCase().replace(/\s+/g, "-")}`}
+      data-testid={`section-tab-${String(label).toLowerCase().replace(/\s+/g, "-")}`}
     >
       {label}
     </UnstyledButton>
@@ -61,7 +61,6 @@ function SectionTab({ label, isActive, onClick }: SectionTabProps) {
 }
 
 export function AppTopNavBar() {
-  const { t } = useLingui();
   const navigate = useNavigate();
   const routerState = useRouterState();
   const currentPath = routerState.location.pathname;
@@ -73,7 +72,6 @@ export function AppTopNavBar() {
   const addonItems = navigationExtension.getNavItems("workspace");
 
   const sections = buildNavSections(
-    t,
     {
       isMultiTenantMode,
       isTenantOwner,

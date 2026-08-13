@@ -143,6 +143,7 @@ msgstr "Konto erfolgreich verknüpft."
 #: src/pages/_app/settings/notifications.tsx
 #: src/pages/_app/settings/organization.tsx
 #: src/pages/_app/settings/security.tsx
+#: src/shared/ui/app-layout/nav-config.tsx
 msgid "Account Settings"
 msgstr "Kontoeinstellungen"
 
@@ -326,6 +327,7 @@ msgid "Banning this member will immediately invalidate all their active sessions
 msgstr "Das Sperren dieses Mitglieds macht alle aktiven Sitzungen sofort ungültig, entzieht den Zugang zu diesem Mandanten und sendet eine Benachrichtigungs-E-Mail. Das Mitglied kann erst nach Aufhebung der Sperre wieder zugreifen."
 
 #: src/pages/_app/billing/index.tsx
+#: src/shared/ui/app-layout/nav-config.tsx
 msgid "Billing"
 msgstr "Abrechnung"
 
@@ -433,6 +435,7 @@ msgstr "Schließen"
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
 #: src/pages/_app/cms-pages.index.tsx
+#: src/shared/ui/app-layout/nav-config.tsx
 msgid "CMS Pages"
 msgstr "CMS-Seiten"
 
@@ -701,6 +704,7 @@ msgstr "Täglich"
 
 #: src/pages/_app/addons/$addonPath.tsx
 #: src/pages/_app/index.tsx
+#: src/shared/ui/app-layout/nav-config.tsx
 msgid "Dashboard"
 msgstr "Dashboard"
 
@@ -1000,6 +1004,7 @@ msgid "Full-screen centered loader shown on first app load (while locale initial
 msgstr "Vollbild-Ladeanimation beim ersten App-Start (während das Gebietsschema initialisiert wird)."
 
 #: src/pages/_app/settings/general.tsx
+#: src/shared/ui/app-layout/nav-config.tsx
 msgid "General"
 msgstr "Allgemein"
 
@@ -1471,6 +1476,7 @@ msgstr "Nicht verbunden"
 
 #: src/features/notification-bell/ui/notification-bell.tsx
 #: src/pages/_app/settings/notifications.tsx
+#: src/shared/ui/app-layout/nav-config.tsx
 msgid "Notifications"
 msgstr "Benachrichtigungen"
 
@@ -1572,6 +1578,7 @@ msgstr "Organisationseinstellungen"
 #: src/pages/_app/settings/general.tsx
 #: src/pages/_app/settings/organization.tsx
 #: src/shared/ui/app-layout/app-header.tsx
+#: src/shared/ui/app-layout/nav-config.tsx
 msgid "Organizations"
 msgstr "Organisationen"
 
@@ -1973,6 +1980,7 @@ msgid "Secure your account with a strong password and notifications"
 msgstr "Sichern Sie Ihr Konto mit einem starken Passwort und Benachrichtigungen"
 
 #: src/pages/_app/settings/security.tsx
+#: src/shared/ui/app-layout/nav-config.tsx
 msgid "Security"
 msgstr "Sicherheit"
 
@@ -2249,6 +2257,7 @@ msgid "Switch workspace (current: {0})"
 msgstr "Arbeitsbereich wechseln (aktuell: {0})"
 
 #: src/pages/_app/team.tsx
+#: src/shared/ui/app-layout/nav-config.tsx
 msgid "Team"
 msgstr "Team"
 
@@ -2583,9 +2592,9 @@ msgstr "Was Sie tun können"
 msgid "Work email"
 msgstr "Geschäftliche E-Mail"
 
-#: src/shared/ui/app-layout/app-nav.tsx
-#~ msgid "Workspace"
-#~ msgstr "Arbeitsbereich"
+#: src/shared/ui/app-layout/nav-config.tsx
+msgid "Workspace"
+msgstr "Arbeitsbereich"
 
 #: src/pages/sign-in.tsx
 msgid "Workspace key"

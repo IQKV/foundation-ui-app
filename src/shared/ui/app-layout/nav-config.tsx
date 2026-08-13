@@ -14,7 +14,7 @@
  */
 
 import type { ComponentType } from "react";
-import type { MacroMessageDescriptor } from "@lingui/core/macro";
+import { Trans } from "@lingui/react/macro";
 import {
   IconDashboard,
   IconUsers,
@@ -29,7 +29,7 @@ import {
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 export interface NavItem {
-  label: string;
+  label: React.ReactNode;
   /** Tabler icon component — callers size it themselves. */
   icon: ComponentType<{ size?: number }>;
   to: string;
@@ -38,20 +38,11 @@ export interface NavItem {
 export interface NavSection {
   /** Stable machine key — used for active-section matching and test selectors. */
   id: string;
-  label: string;
+  label: React.ReactNode;
   /** Route prefixes that mark this section as "active". */
   prefixes: string[];
   items: NavItem[];
 }
-
-/**
- * The `t` tagged-template function from Lingui's `useLingui()` hook.
- * Typed to match the exact overloaded signature returned by the macro.
- */
-export type LinguiT = {
-  (descriptor: MacroMessageDescriptor): string;
-  (literals: TemplateStringsArray, ...placeholders: any[]): string;
-};
 
 // ─── Session flags ────────────────────────────────────────────────────────────
 
@@ -67,57 +58,54 @@ export interface NavSessionFlags {
 /**
  * Returns the full navigation section tree.
  *
- * Accepts translated labels (via Lingui `t`), session flags for conditional
- * items, and addon items so this module stays free of React hooks and
- * side-effects — callers own the hook calls.
+ * Accepts session flags for conditional items, and addon items so this module 
+ * stays free of React hooks and side-effects — callers own the hook calls.
  *
- * @param t           Lingui `t` tagged-template function from `useLingui()`
  * @param flags       Session-derived feature flags that gate conditional items
  * @param addonItems  Extra NavItems appended to the Workspace section
  */
 export function buildNavSections(
-  t: LinguiT,
   flags: NavSessionFlags,
   addonItems: NavItem[] = [],
 ): NavSection[] {
   const { isMultiTenantMode, isTenantOwner, isPersonalWorkspace, canManagePages } = flags;
 
   const workspaceItems: NavItem[] = [
-    { label: String(t`Dashboard`), icon: IconDashboard, to: "/" },
+    { label: <Trans>Dashboard</Trans>, icon: IconDashboard, to: "/" },
     // Billing: hidden only when multi-tenant AND personal workspace
     ...(!isMultiTenantMode || !isPersonalWorkspace
-      ? [{ label: String(t`Billing`), icon: IconCreditCard, to: "/billing" }]
+      ? [{ label: <Trans>Billing</Trans>, icon: IconCreditCard, to: "/billing" }]
       : []),
     // Team: visible only when multi-tenant AND tenant owner
     ...(isMultiTenantMode && isTenantOwner
-      ? [{ label: String(t`Team`), icon: IconUsers, to: "/team" }]
+      ? [{ label: <Trans>Team</Trans>, icon: IconUsers, to: "/team" }]
       : []),
     // CMS Pages: visible only to users with TENANT_OWNER or ADMIN authority
     ...(canManagePages
-      ? [{ label: String(t`CMS Pages`), icon: IconFileText, to: "/cms-pages" }]
+      ? [{ label: <Trans>CMS Pages</Trans>, icon: IconFileText, to: "/cms-pages" }]
       : []),
     ...addonItems,
   ];
 
   const accountItems: NavItem[] = [
-    { label: String(t`General`), icon: IconUserCircle, to: "/settings/general" },
-    { label: String(t`Security`), icon: IconLock, to: "/settings/security" },
-    { label: String(t`Notifications`), icon: IconBell, to: "/settings/notifications" },
+    { label: <Trans>General</Trans>, icon: IconUserCircle, to: "/settings/general" },
+    { label: <Trans>Security</Trans>, icon: IconLock, to: "/settings/security" },
+    { label: <Trans>Notifications</Trans>, icon: IconBell, to: "/settings/notifications" },
     ...(isMultiTenantMode
-      ? [{ label: String(t`Organizations`), icon: IconBuilding, to: "/settings/organization" }]
+      ? [{ label: <Trans>Organizations</Trans>, icon: IconBuilding, to: "/settings/organization" }]
       : []),
   ];
 
   return [
     {
       id: "workspace",
-      label: String(t`Workspace`),
+      label: <Trans>Workspace</Trans>,
       prefixes: ["/", "/billing", "/team", "/cms-pages", "/addons"],
       items: workspaceItems,
     },
     {
       id: "account",
-      label: String(t`Account Settings`),
+      label: <Trans>Account Settings</Trans>,
       prefixes: ["/settings"],
       items: accountItems,
     },

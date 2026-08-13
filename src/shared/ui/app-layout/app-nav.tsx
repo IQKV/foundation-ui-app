@@ -33,18 +33,17 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 }
 
 export function AppNav() {
-  const { t } = useLingui();
   const { isTenantOwner, isPersonalWorkspace, payload } = useSession();
   const routerState = useRouterState();
   const currentPath = routerState.location.pathname;
   const [search, setSearch] = useState("");
+  const { t } = useLingui();
   const authorities = payload?.authorities ?? [];
   const canManagePages = authorities.includes("TENANT_OWNER") || authorities.includes("ADMIN");
 
   const addonItems = navigationExtension.getNavItems("workspace");
 
   const sections = buildNavSections(
-    t,
     {
       isMultiTenantMode,
       isTenantOwner,
@@ -56,7 +55,11 @@ export function AppNav() {
 
   const allItems = sections.flatMap((s) => s.items);
   const filtered = search.trim()
-    ? allItems.filter((item) => item.label.toLowerCase().includes(search.toLowerCase()))
+    ? allItems.filter((item) => {
+        // Convert ReactNode label to string for searching
+        const labelText = typeof item.label === 'string' ? item.label : String(item.label);
+        return labelText.toLowerCase().includes(search.toLowerCase());
+      })
     : null;
 
   return (
