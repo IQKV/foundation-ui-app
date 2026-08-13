@@ -19,7 +19,7 @@ interface AppHeaderProps {
   onToggle: () => void;
 }
 
-function UserMenu() {
+function AppHeaderUserMenu() {
   const { t } = useLingui();
   const { isLoading, signOut } = useSignOut();
   const navigate = useNavigate();
@@ -127,8 +127,10 @@ export function AppHeader({ opened, onToggle }: AppHeaderProps) {
         <LocaleSwitcher />
         <ColorSchemeToggle />
         <NotificationBell />
-        <UserMenu />
+        <AppHeaderUserMenu />
       </Group>
     </Group>
   );
 }
+
+export { AppHeaderUserMenu };

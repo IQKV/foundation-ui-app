@@ -24,6 +24,7 @@ const ENV_KEYS = [
   "VITE_APP_SUPPORT_URL",
   "VITE_APP_PRIVACY_URL",
   "VITE_APP_TERMS_URL",
+  "VITE_APP_NAV_VARIANT",
 ] as const;
 
 export const clientBuildEnv: Record<string, string | undefined> = Object.fromEntries(
@@ -84,3 +85,5 @@ export const supportUrl = getConfig("VITE_APP_SUPPORT_URL") ?? null;
 export const privacyUrl = getConfig("VITE_APP_PRIVACY_URL") ?? null;
 
 export const termsUrl = getConfig("VITE_APP_TERMS_URL") ?? null;
+
+export const navVariant = getConfig("VITE_APP_NAV_VARIANT", "sidebar") as "sidebar" | "topbar";

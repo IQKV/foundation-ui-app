@@ -143,7 +143,6 @@ msgstr "Compte lié avec succès."
 #: src/pages/_app/settings/notifications.tsx
 #: src/pages/_app/settings/organization.tsx
 #: src/pages/_app/settings/security.tsx
-#: src/shared/ui/app-layout/app-nav.tsx
 msgid "Account Settings"
 msgstr "Paramètres du compte"
 
@@ -218,8 +217,8 @@ msgid "Already have an account? <0>Sign in</0>"
 msgstr "Vous avez déjà un compte ? <0>Se connecter</0>"
 
 #: src/shared/ui/auth-layout/auth-layout.tsx
-msgid "always in reach."
-msgstr "toujours à portée."
+#~ msgid "always in reach."
+#~ msgstr "toujours à portée."
 
 #: src/features/manage-billing/ui/refund-list.tsx
 msgid "Amount"
@@ -327,7 +326,6 @@ msgid "Banning this member will immediately invalidate all their active sessions
 msgstr "Bannir ce membre invalidera immédiatement toutes ses sessions actives, révoquera son accès à ce tenant et lui enverra un e-mail de notification. Il ne pourra plus accéder à ce tenant tant qu'il n'est pas débanni."
 
 #: src/pages/_app/billing/index.tsx
-#: src/shared/ui/app-layout/app-nav.tsx
 msgid "Billing"
 msgstr "Facturation"
 
@@ -435,7 +433,6 @@ msgstr "Fermer"
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
 #: src/pages/_app/cms-pages.index.tsx
-#: src/shared/ui/app-layout/app-nav.tsx
 msgid "CMS Pages"
 msgstr "Pages CMS"
 
@@ -704,7 +701,6 @@ msgstr "Quotidien"
 
 #: src/pages/_app/addons/$addonPath.tsx
 #: src/pages/_app/index.tsx
-#: src/shared/ui/app-layout/app-nav.tsx
 msgid "Dashboard"
 msgstr "Tableau de bord"
 
@@ -1004,7 +1000,6 @@ msgid "Full-screen centered loader shown on first app load (while locale initial
 msgstr "Chargeur plein écran centré affiché au premier chargement de l'application (pendant l'initialisation de la langue)."
 
 #: src/pages/_app/settings/general.tsx
-#: src/shared/ui/app-layout/app-nav.tsx
 msgid "General"
 msgstr "Général"
 
@@ -1172,8 +1167,8 @@ msgid "Key"
 msgstr "Clé"
 
 #: src/pages/_app/addons/$addonPath.tsx
-msgid "Key Value"
-msgstr ""
+#~ msgid "Key Value"
+#~ msgstr ""
 
 #: src/features/complete-profile/ui/complete-profile-form.tsx
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
@@ -1290,8 +1285,8 @@ msgid "Manage your subscription and billing when you are ready"
 msgstr "Gérez votre abonnement et votre facturation quand vous êtes prêt"
 
 #: src/shared/ui/auth-layout/auth-layout.tsx
-msgid "Manage your team, subscriptions, and settings — all from one place, secured by enterprise-grade authentication."
-msgstr "Gérez votre équipe, vos abonnements et vos paramètres — tout depuis un seul endroit, sécurisé par une authentification de niveau entreprise."
+#~ msgid "Manage your team, subscriptions, and settings — all from one place, secured by enterprise-grade authentication."
+#~ msgstr "Gérez votre équipe, vos abonnements et vos paramètres — tout depuis un seul endroit, sécurisé par une authentification de niveau entreprise."
 
 #: src/features/notification-bell/ui/notification-bell.tsx
 #: src/pages/_app/settings/notifications.tsx
@@ -1358,6 +1353,7 @@ msgstr "Nouvelle page CMS"
 
 #: src/features/tenant-switcher/ui/tenant-switcher.tsx
 #: src/shared/ui/app-layout/app-header.tsx
+#: src/shared/ui/app-layout/app-top-nav-bar.tsx
 msgid "New Organization"
 msgstr "Nouvelle organisation"
 
@@ -1475,7 +1471,6 @@ msgstr "Non connecté"
 
 #: src/features/notification-bell/ui/notification-bell.tsx
 #: src/pages/_app/settings/notifications.tsx
-#: src/shared/ui/app-layout/app-nav.tsx
 msgid "Notifications"
 msgstr "Notifications"
 
@@ -1577,7 +1572,6 @@ msgstr "Paramètres de l'organisation"
 #: src/pages/_app/settings/general.tsx
 #: src/pages/_app/settings/organization.tsx
 #: src/shared/ui/app-layout/app-header.tsx
-#: src/shared/ui/app-layout/app-nav.tsx
 msgid "Organizations"
 msgstr "Organisations"
 
@@ -1979,7 +1973,6 @@ msgid "Secure your account with a strong password and notifications"
 msgstr "Sécurisez votre compte avec un mot de passe fort et des notifications"
 
 #: src/pages/_app/settings/security.tsx
-#: src/shared/ui/app-layout/app-nav.tsx
 msgid "Security"
 msgstr "Sécurité"
 
@@ -2256,7 +2249,6 @@ msgid "Switch workspace (current: {0})"
 msgstr "Changer d'espace de travail (actuel : {0})"
 
 #: src/pages/_app/team.tsx
-#: src/shared/ui/app-layout/app-nav.tsx
 msgid "Team"
 msgstr "Équipe"
 
@@ -2416,8 +2408,8 @@ msgid "Trial Status"
 msgstr "Statut de l'essai"
 
 #: src/shared/ui/auth-layout/auth-layout.tsx
-msgid "Trusted by teams worldwide"
-msgstr "Approuvé par des équipes du monde entier"
+#~ msgid "Trusted by teams worldwide"
+#~ msgstr "Approuvé par des équipes du monde entier"
 
 #: src/pages/_app/billing/failure.tsx
 #: src/shared/ui/error-boundary.tsx
@@ -2568,8 +2560,8 @@ msgid "Welcome illustration"
 msgstr "Illustration de bienvenue"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
-msgid "Welcome to Key Value Platform!"
-msgstr "Bienvenue sur Key Value Platform !"
+#~ msgid "Welcome to Key Value Platform!"
+#~ msgstr "Bienvenue sur Key Value Platform !"
 
 #: src/widgets/dashboard-personal-welcome/ui/dashboard-personal-welcome.tsx
 msgid "Welcome, {firstName}!"
@@ -2592,8 +2584,8 @@ msgid "Work email"
 msgstr "E-mail professionnel"
 
 #: src/shared/ui/app-layout/app-nav.tsx
-msgid "Workspace"
-msgstr "Espace de travail"
+#~ msgid "Workspace"
+#~ msgstr "Espace de travail"
 
 #: src/pages/sign-in.tsx
 msgid "Workspace key"
@@ -2708,5 +2700,5 @@ msgid "Your session expired due to inactivity."
 msgstr "Votre session a expiré en raison d'inactivité."
 
 #: src/shared/ui/auth-layout/auth-layout.tsx
-msgid "Your workspace,"
-msgstr "Votre espace de travail,"
+#~ msgid "Your workspace,"
+#~ msgstr "Votre espace de travail,"

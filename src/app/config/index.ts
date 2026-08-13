@@ -23,6 +23,7 @@ export {
   supportUrl,
   privacyUrl,
   termsUrl,
+  navVariant,
 } from "./runtime-env";
 export { guardMultiTenantRoute } from "./rollout-guards";
 export {

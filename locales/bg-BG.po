@@ -143,7 +143,6 @@ msgstr "Акаунтът е свързан успешно."
 #: src/pages/_app/settings/notifications.tsx
 #: src/pages/_app/settings/organization.tsx
 #: src/pages/_app/settings/security.tsx
-#: src/shared/ui/app-layout/app-nav.tsx
 msgid "Account Settings"
 msgstr "Настройки на акаунта"
 
@@ -218,8 +217,8 @@ msgid "Already have an account? <0>Sign in</0>"
 msgstr "Вече имате акаунт? <0>Влезте</0>"
 
 #: src/shared/ui/auth-layout/auth-layout.tsx
-msgid "always in reach."
-msgstr "винаги на разположение."
+#~ msgid "always in reach."
+#~ msgstr "винаги на разположение."
 
 #: src/features/manage-billing/ui/refund-list.tsx
 msgid "Amount"
@@ -327,7 +326,6 @@ msgid "Banning this member will immediately invalidate all their active sessions
 msgstr "Забраняването на този член незабавно ще анулира всички активни сесии, ще отмени достъпа им до наемателя и ще изпрати имейл с известие. Те няма да могат да достъпват наемателя отново, докато не бъдат разблокирани."
 
 #: src/pages/_app/billing/index.tsx
-#: src/shared/ui/app-layout/app-nav.tsx
 msgid "Billing"
 msgstr "Фактуриране"
 
@@ -435,7 +433,6 @@ msgstr "Затвори"
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
 #: src/pages/_app/cms-pages.index.tsx
-#: src/shared/ui/app-layout/app-nav.tsx
 msgid "CMS Pages"
 msgstr "CMS Страници"
 
@@ -704,7 +701,6 @@ msgstr "Дневно"
 
 #: src/pages/_app/addons/$addonPath.tsx
 #: src/pages/_app/index.tsx
-#: src/shared/ui/app-layout/app-nav.tsx
 msgid "Dashboard"
 msgstr "Табло"
 
@@ -1004,7 +1000,6 @@ msgid "Full-screen centered loader shown on first app load (while locale initial
 msgstr "Цялоекранен центриран индикатор при първото зареждане на приложението (докато локалът се инициализира)."
 
 #: src/pages/_app/settings/general.tsx
-#: src/shared/ui/app-layout/app-nav.tsx
 msgid "General"
 msgstr "Общи"
 
@@ -1172,8 +1167,8 @@ msgid "Key"
 msgstr "Ключ"
 
 #: src/pages/_app/addons/$addonPath.tsx
-msgid "Key Value"
-msgstr ""
+#~ msgid "Key Value"
+#~ msgstr ""
 
 #: src/features/complete-profile/ui/complete-profile-form.tsx
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
@@ -1290,8 +1285,8 @@ msgid "Manage your subscription and billing when you are ready"
 msgstr "Управлявайте абонамента и фактурирането, когато сте готови"
 
 #: src/shared/ui/auth-layout/auth-layout.tsx
-msgid "Manage your team, subscriptions, and settings — all from one place, secured by enterprise-grade authentication."
-msgstr "Управлявайте екипа, абонаментите и настройките — на едно място, защитено с корпоративно удостоверяване."
+#~ msgid "Manage your team, subscriptions, and settings — all from one place, secured by enterprise-grade authentication."
+#~ msgstr "Управлявайте екипа, абонаментите и настройките — на едно място, защитено с корпоративно удостоверяване."
 
 #: src/features/notification-bell/ui/notification-bell.tsx
 #: src/pages/_app/settings/notifications.tsx
@@ -1358,6 +1353,7 @@ msgstr "Нова CMS страница"
 
 #: src/features/tenant-switcher/ui/tenant-switcher.tsx
 #: src/shared/ui/app-layout/app-header.tsx
+#: src/shared/ui/app-layout/app-top-nav-bar.tsx
 msgid "New Organization"
 msgstr "Нова организация"
 
@@ -1475,7 +1471,6 @@ msgstr "Не е свързан"
 
 #: src/features/notification-bell/ui/notification-bell.tsx
 #: src/pages/_app/settings/notifications.tsx
-#: src/shared/ui/app-layout/app-nav.tsx
 msgid "Notifications"
 msgstr "Известия"
 
@@ -1577,7 +1572,6 @@ msgstr "Настройки на организацията"
 #: src/pages/_app/settings/general.tsx
 #: src/pages/_app/settings/organization.tsx
 #: src/shared/ui/app-layout/app-header.tsx
-#: src/shared/ui/app-layout/app-nav.tsx
 msgid "Organizations"
 msgstr "Организации"
 
@@ -1979,7 +1973,6 @@ msgid "Secure your account with a strong password and notifications"
 msgstr "Защитете акаунта си с силна парола и известия"
 
 #: src/pages/_app/settings/security.tsx
-#: src/shared/ui/app-layout/app-nav.tsx
 msgid "Security"
 msgstr "Сигурност"
 
@@ -2256,7 +2249,6 @@ msgid "Switch workspace (current: {0})"
 msgstr ""
 
 #: src/pages/_app/team.tsx
-#: src/shared/ui/app-layout/app-nav.tsx
 msgid "Team"
 msgstr "Екип"
 
@@ -2416,8 +2408,8 @@ msgid "Trial Status"
 msgstr "Статус на пробния период"
 
 #: src/shared/ui/auth-layout/auth-layout.tsx
-msgid "Trusted by teams worldwide"
-msgstr "Доверено от екипи по целия свят"
+#~ msgid "Trusted by teams worldwide"
+#~ msgstr "Доверено от екипи по целия свят"
 
 #: src/pages/_app/billing/failure.tsx
 #: src/shared/ui/error-boundary.tsx
@@ -2568,8 +2560,8 @@ msgid "Welcome illustration"
 msgstr "Илюстрация за добре дошли"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
-msgid "Welcome to Key Value Platform!"
-msgstr "Добре дошли в Key Value Platform!"
+#~ msgid "Welcome to Key Value Platform!"
+#~ msgstr "Добре дошли в Key Value Platform!"
 
 #: src/widgets/dashboard-personal-welcome/ui/dashboard-personal-welcome.tsx
 msgid "Welcome, {firstName}!"
@@ -2592,8 +2584,8 @@ msgid "Work email"
 msgstr "Служебен имейл"
 
 #: src/shared/ui/app-layout/app-nav.tsx
-msgid "Workspace"
-msgstr "Работно пространство"
+#~ msgid "Workspace"
+#~ msgstr "Работно пространство"
 
 #: src/pages/sign-in.tsx
 msgid "Workspace key"
@@ -2708,5 +2700,5 @@ msgid "Your session expired due to inactivity."
 msgstr "Сесията ви изтече поради неактивност."
 
 #: src/shared/ui/auth-layout/auth-layout.tsx
-msgid "Your workspace,"
-msgstr "Вашето работно пространство,"
+#~ msgid "Your workspace,"
+#~ msgstr "Вашето работно пространство,"

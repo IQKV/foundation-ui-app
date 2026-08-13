@@ -1,6 +1,6 @@
 import { createFileRoute, isRedirect, Outlet, redirect, useNavigate } from "@tanstack/react-router";
 import { Center, Loader } from "@mantine/core";
-import { AppLayout } from "@/shared/ui";
+import { AppLayout, AppLayoutTopNav } from "@/shared/ui";
 import { httpClient } from "@/shared/api/http-client";
 import { decodeJwt, isTenantSession } from "@/shared/lib/jwt";
 import { authApi } from "@/shared/api/auth";
@@ -15,6 +15,7 @@ import {
 } from "@/processes/session";
 import { useInactivityTimer } from "@/processes/inactivity-timer";
 import { EntitlementsProvider } from "@/features/manage-billing";
+import { navVariant } from "@/app/config";
 
 // ─── Route ────────────────────────────────────────────────────────────────────
 
@@ -123,11 +124,13 @@ function AppLayoutRoute() {
     );
   }
 
+  const Layout = navVariant === "topbar" ? AppLayoutTopNav : AppLayout;
+
   return (
     <EntitlementsProvider>
-      <AppLayout>
+      <Layout>
         <Outlet />
-      </AppLayout>
+      </Layout>
     </EntitlementsProvider>
   );
 }

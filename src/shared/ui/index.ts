@@ -1,4 +1,4 @@
-export { AppLayout } from "./app-layout";
+export { AppLayout, AppLayoutTopNav } from "./app-layout";
 export { AuthLayout } from "./auth-layout";
 export type { AuthLayoutProps } from "./auth-layout";
 export { AuthGuard } from "./auth-guard";

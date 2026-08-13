@@ -1,28 +1,14 @@
-import { NavLink, Stack, Text, Box, TextInput, Divider } from "@mantine/core";
-import {
-  IconDashboard,
-  IconUsers,
-  IconSearch,
-  IconUserCircle,
-  IconCreditCard,
-  IconBuilding,
-  IconLock,
-  IconBell,
-  IconFileText,
-} from "@tabler/icons-react";
-import { Link, useRouterState } from "@tanstack/react-router";
+import { Stack, Text, Box, TextInput, Divider } from "@mantine/core";
+import { IconSearch } from "@tabler/icons-react";
+import { useRouterState } from "@tanstack/react-router";
 import { useState } from "react";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { useSession } from "@/processes/session";
 import { isMultiTenantMode } from "@/app/config";
 import { TenantSwitcher } from "@/features/tenant-switcher";
 import { navigationExtension } from "@/app/addons";
-
-interface NavItem {
-  label: string;
-  icon: React.ReactNode;
-  to: string;
-}
+import { buildNavSections } from "./nav-config";
+import { NavItemRenderer } from "./nav-item-renderer";
 
 /** Uppercase section label styled for the dark sidebar */
 function SectionLabel({ children }: { children: React.ReactNode }) {
@@ -55,90 +41,23 @@ export function AppNav() {
   const authorities = payload?.authorities ?? [];
   const canManagePages = authorities.includes("TENANT_OWNER") || authorities.includes("ADMIN");
 
-  const addonNavItems: NavItem[] = navigationExtension.getNavItems("workspace").map((item) => {
-    const IconComponent = item.icon;
-    return {
-      label: item.label,
-      icon: <IconComponent size={16} />,
-      to: item.to,
-    };
-  });
+  const addonItems = navigationExtension.getNavItems("workspace");
 
-  const baseNavItems: NavItem[] = [
-    { label: t`Dashboard`, icon: <IconDashboard size={16} />, to: "/" },
-    ...(!isMultiTenantMode || !isPersonalWorkspace
-      ? [{ label: t`Billing`, icon: <IconCreditCard size={16} />, to: "/billing" }]
-      : []),
-    ...(isMultiTenantMode && isTenantOwner
-      ? [{ label: t`Team`, icon: <IconUsers size={16} />, to: "/team" }]
-      : []),
-    ...(canManagePages
-      ? [{ label: t`CMS Pages`, icon: <IconFileText size={16} />, to: "/cms-pages" }]
-      : []),
-  ];
+  const sections = buildNavSections(
+    t,
+    {
+      isMultiTenantMode,
+      isTenantOwner,
+      isPersonalWorkspace,
+      canManagePages,
+    },
+    addonItems,
+  );
 
-  const navItems: NavItem[] = [...baseNavItems, ...addonNavItems];
-
-  const accountSubItems: NavItem[] = [
-    { label: t`General`, icon: <IconUserCircle size={14} />, to: "/settings/general" },
-    { label: t`Security`, icon: <IconLock size={14} />, to: "/settings/security" },
-    { label: t`Notifications`, icon: <IconBell size={14} />, to: "/settings/notifications" },
-    ...(isMultiTenantMode
-      ? [
-          {
-            label: t`Organizations`,
-            icon: <IconBuilding size={14} />,
-            to: "/settings/organization",
-          },
-        ]
-      : []),
-  ];
-
+  const allItems = sections.flatMap((s) => s.items);
   const filtered = search.trim()
-    ? [...navItems, ...accountSubItems].filter((item) =>
-        item.label.toLowerCase().includes(search.toLowerCase()),
-      )
+    ? allItems.filter((item) => item.label.toLowerCase().includes(search.toLowerCase()))
     : null;
-
-  const renderItem = (item: NavItem) => {
-    const isActive =
-      item.to === "/"
-        ? currentPath === "/"
-        : currentPath === item.to || currentPath.startsWith(item.to + "/");
-
-    return (
-      <NavLink
-        key={item.to}
-        label={item.label}
-        leftSection={item.icon}
-        active={isActive}
-        component={Link}
-        to={item.to}
-        styles={{
-          root: {
-            borderRadius: "var(--mantine-radius-xs)",
-            marginInline: "8px",
-            paddingBlock: "7px",
-            paddingInline: "10px",
-            background: isActive ? "var(--app-nav-active-bg)" : "transparent",
-            "&:hover": {
-              background: isActive ? "var(--app-nav-active-bg)" : "var(--app-nav-hover-bg)",
-            },
-          },
-          label: {
-            fontSize: "var(--mantine-font-size-sm)",
-            fontWeight: isActive ? 600 : 400,
-            color: isActive ? "var(--app-nav-text-active)" : "var(--app-nav-text)",
-          },
-          section: {
-            width: 20,
-            marginRight: 8,
-            color: isActive ? "var(--app-nav-icon-active)" : "var(--app-nav-icon)",
-          },
-        }}
-      />
-    );
-  };
 
   return (
     <Stack gap={0} py={6}>
@@ -167,7 +86,7 @@ export function AppNav() {
       {/* Results / full nav */}
       {filtered ? (
         filtered.length > 0 ? (
-          filtered.map((item) => renderItem(item))
+          filtered.map((item) => <NavItemRenderer key={item.to} item={item} currentPath={currentPath} />)
         ) : (
           <Text size="xs" px="md" py="xs" style={{ color: "var(--app-nav-section-label)" }}>
             <Trans>No results</Trans>
@@ -175,17 +94,15 @@ export function AppNav() {
         )
       ) : (
         <>
-          <SectionLabel>
-            <Trans>Workspace</Trans>
-          </SectionLabel>
-          {navItems.map((item) => renderItem(item))}
-
-          <Divider mx={10} my={6} style={{ borderColor: "var(--app-nav-divider)" }} />
-
-          <SectionLabel>
-            <Trans>Account Settings</Trans>
-          </SectionLabel>
-          {accountSubItems.map((item) => renderItem(item))}
+          {sections.map((section, idx) => (
+            <Box key={section.id}>
+              {idx > 0 && <Divider mx={10} my={6} style={{ borderColor: "var(--app-nav-divider)" }} />}
+              <SectionLabel>{section.label}</SectionLabel>
+              {section.items.map((item) => (
+                <NavItemRenderer key={item.to} item={item} currentPath={currentPath} />
+              ))}
+            </Box>
+          ))}
         </>
       )}
     </Stack>
