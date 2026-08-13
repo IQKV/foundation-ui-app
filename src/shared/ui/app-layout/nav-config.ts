@@ -83,41 +83,41 @@ export function buildNavSections(
   const { isMultiTenantMode, isTenantOwner, isPersonalWorkspace, canManagePages } = flags;
 
   const workspaceItems: NavItem[] = [
-    { label: t`Dashboard`, icon: IconDashboard, to: "/" },
+    { label: String(t`Dashboard`), icon: IconDashboard, to: "/" },
     // Billing: hidden only when multi-tenant AND personal workspace
     ...(!isMultiTenantMode || !isPersonalWorkspace
-      ? [{ label: t`Billing`, icon: IconCreditCard, to: "/billing" }]
+      ? [{ label: String(t`Billing`), icon: IconCreditCard, to: "/billing" }]
       : []),
     // Team: visible only when multi-tenant AND tenant owner
     ...(isMultiTenantMode && isTenantOwner
-      ? [{ label: t`Team`, icon: IconUsers, to: "/team" }]
+      ? [{ label: String(t`Team`), icon: IconUsers, to: "/team" }]
       : []),
     // CMS Pages: visible only to users with TENANT_OWNER or ADMIN authority
     ...(canManagePages
-      ? [{ label: t`CMS Pages`, icon: IconFileText, to: "/cms-pages" }]
+      ? [{ label: String(t`CMS Pages`), icon: IconFileText, to: "/cms-pages" }]
       : []),
     ...addonItems,
   ];
 
   const accountItems: NavItem[] = [
-    { label: t`General`, icon: IconUserCircle, to: "/settings/general" },
-    { label: t`Security`, icon: IconLock, to: "/settings/security" },
-    { label: t`Notifications`, icon: IconBell, to: "/settings/notifications" },
+    { label: String(t`General`), icon: IconUserCircle, to: "/settings/general" },
+    { label: String(t`Security`), icon: IconLock, to: "/settings/security" },
+    { label: String(t`Notifications`), icon: IconBell, to: "/settings/notifications" },
     ...(isMultiTenantMode
-      ? [{ label: t`Organizations`, icon: IconBuilding, to: "/settings/organization" }]
+      ? [{ label: String(t`Organizations`), icon: IconBuilding, to: "/settings/organization" }]
       : []),
   ];
 
   return [
     {
       id: "workspace",
-      label: t`Workspace`,
+      label: String(t`Workspace`),
       prefixes: ["/", "/billing", "/team", "/cms-pages", "/addons"],
       items: workspaceItems,
     },
     {
       id: "account",
-      label: t`Account Settings`,
+      label: String(t`Account Settings`),
       prefixes: ["/settings"],
       items: accountItems,
     },
