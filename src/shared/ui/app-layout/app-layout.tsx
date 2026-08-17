@@ -6,6 +6,7 @@ import { AppNav } from "./app-nav";
 import { AppNavLogo } from "./app-nav-logo";
 import { OnboardingModal } from "@/features/onboarding";
 import { useSession } from "@/processes/session/use-session";
+import { PageTransition } from "../page-transition";
 import classes from "./app-layout.module.css";
 
 interface AppLayoutProps {
@@ -100,7 +101,7 @@ export function AppLayout({ children }: AppLayoutProps) {
 
           {/* Page content */}
           <Box component="main" p="md" style={{ flex: 1 }}>
-            {children}
+            <PageTransition>{children}</PageTransition>
           </Box>
         </Box>
 

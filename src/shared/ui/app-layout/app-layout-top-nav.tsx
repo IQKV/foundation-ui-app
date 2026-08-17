@@ -13,6 +13,7 @@
 import { AppShell } from "@mantine/core";
 import { AppTopNavBar } from "./app-top-nav-bar";
 import { AppSubNavBar } from "./app-sub-nav-bar";
+import { PageTransition } from "../page-transition";
 
 interface AppLayoutTopNavProps {
   children: React.ReactNode;
@@ -37,7 +38,7 @@ export function AppLayoutTopNav({ children }: AppLayoutTopNavProps) {
 
       <AppShell.Main>
         <AppSubNavBar />
-        {children}
+        <PageTransition>{children}</PageTransition>
       </AppShell.Main>
     </AppShell>
   );
