@@ -1,15 +1,12 @@
 import { defineConfig, coverageConfigDefaults } from "vitest/config";
+import { lingui } from "@lingui/vite-plugin";
 import react from "@vitejs/plugin-react-swc";
 
 export default defineConfig({
   resolve: {
     tsconfigPaths: true,
   },
-  plugins: [
-    react({
-      plugins: [],
-    }),
-  ],
+  plugins: [lingui(), react()],
   test: {
     globals: true,
     environment: "jsdom",
