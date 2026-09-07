@@ -7,7 +7,7 @@ export default defineConfig({
   },
   plugins: [
     react({
-      plugins: [["@lingui/swc-plugin", {}]],
+      plugins: [],
     }),
   ],
   test: {
