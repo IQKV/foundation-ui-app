@@ -78,8 +78,8 @@ importers:
         specifier: ^5.101.4
         version: 5.101.4(react@19.2.8)
       '@tanstack/react-router':
-        specifier: ^1.170.30
-        version: 1.170.30(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        specifier: ^1.170.31
+        version: 1.170.31(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@tiptap/core':
         specifier: 3.27.2
         version: 3.27.2(@tiptap/pm@3.27.2)
@@ -178,7 +178,7 @@ importers:
         version: 0.1.48
       nuqs:
         specifier: ^2.9.5
-        version: 2.9.6(@tanstack/react-router@1.170.30(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react@19.2.8)
+        version: 2.9.6(@tanstack/react-router@1.170.31(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react@19.2.8)
       query-string:
         specifier: ^9.5.0
         version: 9.5.0
@@ -242,10 +242,10 @@ importers:
         version: 5.101.4(@tanstack/react-query@5.101.4(react@19.2.8))(react@19.2.8)
       '@tanstack/react-router-devtools':
         specifier: ^1.167.1
-        version: 1.167.1(@tanstack/react-router@1.170.30(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@tanstack/router-core@1.171.25)(csstype@3.2.3)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        version: 1.167.1(@tanstack/react-router@1.170.31(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@tanstack/router-core@1.171.26)(csstype@3.2.3)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@tanstack/router-plugin':
         specifier: ^1.168.29
-        version: 1.168.32(@tanstack/react-router@1.170.30(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(rolldown@1.2.4)(vite@8.2.1(@types/node@26.2.0)(jiti@2.7.0)(sugarss@5.0.1(postcss@8.5.26))(yaml@2.9.0))
+        version: 1.168.32(@tanstack/react-router@1.170.31(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(rolldown@1.2.4)(vite@8.2.1(@types/node@26.2.0)(jiti@2.7.0)(sugarss@5.0.1(postcss@8.5.26))(yaml@2.9.0))
       '@testing-library/dom':
         specifier: ^10.4.1
         version: 10.4.1
@@ -2203,8 +2203,8 @@ packages:
       '@tanstack/router-core':
         optional: true
 
-  '@tanstack/react-router@1.170.30':
-    resolution: {integrity: sha512-FB3FD6cPPKQFMyYaEsm3Isb8TkIvNAuSeADCS25OzMgKyFXZK/B/Y3m9fpBoKS55pjbvtRPpW87NMY8GVwNPlg==}
+  '@tanstack/react-router@1.170.31':
+    resolution: {integrity: sha512-jqITLcf9Y+es9Wm7fD7XfXFGKk1Fujm+okGqHtr+UhISnQuyLQ8d3frsJlIN0Np1doYoeb5weozSkv72+EZ5bw==}
     engines: {node: '>=20.19'}
     peerDependencies:
       react: '>=18.0.0 || >=19.0.0'
@@ -2220,8 +2220,8 @@ packages:
     resolution: {integrity: sha512-+j+8NmV4QOS+ILNLdXFlLTdKPPbBQIy6mXDZ0QWEKYZ0xQOdlnOCXVHPflyGanD2SWSxjqGkw8CsW0CXXP7fLg==}
     engines: {node: '>=20.19'}
 
-  '@tanstack/router-core@1.171.25':
-    resolution: {integrity: sha512-w74Al2ar8UKx3Xp4ICTxIZD2Vmd6N9Yn4xH8ILq40gI5UqlxzjPPYoR5l2+5cmv9XCWZehxw7saIofmZpf1G4w==}
+  '@tanstack/router-core@1.171.26':
+    resolution: {integrity: sha512-VymmPSs/93szHur/7PBygT6tRbmfcNO1xR46Wn/JVHeBqVduLPCuxBeJEgfVmVq8E4hSklPEh8i6qGXQd6WRqA==}
     engines: {node: '>=20.19'}
 
   '@tanstack/router-devtools-core@1.168.1':
@@ -2548,8 +2548,8 @@ packages:
   '@types/d3-selection@3.0.11':
     resolution: {integrity: sha512-bhAXu23DJWsrI45xafYpkQ4NtcKMwWnAC/vKrd2l+nxMFuvOT3XMYTIj2opv8vq8AO5Yh7Qac/nSeP/3zjTK0w==}
 
-  '@types/d3-shape@3.1.8':
-    resolution: {integrity: sha512-lae0iWfcDeR7qt7rA88BNiqdvPS5pFVPpo5OfjElwNaT2yyekbM0C9vK+yqBqEmHr6lDkRnYNoTBYlAgJa7a4w==}
+  '@types/d3-shape@3.2.0':
+    resolution: {integrity: sha512-kVd74ta9eof3eJOvbNd1vGKS/XERRyQbT26Og63hIsvDO84cjD5gEOhsXf26w3FSoNlPVz84DOFcKv/oou+fMw==}
 
   '@types/d3-time@3.0.4':
     resolution: {integrity: sha512-yuzZug1nkAAaBlBBikKZTgzCeA+k1uy4ZFwWANOfKw5z5LRhV0gNA7gNkKm7HoK+HRN0wX3EkxGk0fpbWhmB7g==}
@@ -8042,22 +8042,22 @@ snapshots:
       '@tanstack/query-core': 5.101.4
       react: 19.2.8
 
-  '@tanstack/react-router-devtools@1.167.1(@tanstack/react-router@1.170.30(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@tanstack/router-core@1.171.25)(csstype@3.2.3)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
+  '@tanstack/react-router-devtools@1.167.1(@tanstack/react-router@1.170.31(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@tanstack/router-core@1.171.26)(csstype@3.2.3)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
-      '@tanstack/react-router': 1.170.30(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
-      '@tanstack/router-devtools-core': 1.168.1(@tanstack/router-core@1.171.25)(csstype@3.2.3)
+      '@tanstack/react-router': 1.170.31(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@tanstack/router-devtools-core': 1.168.1(@tanstack/router-core@1.171.26)(csstype@3.2.3)
       react: 19.2.8
       react-dom: 19.2.8(react@19.2.8)
     optionalDependencies:
-      '@tanstack/router-core': 1.171.25
+      '@tanstack/router-core': 1.171.26
     transitivePeerDependencies:
       - csstype
 
-  '@tanstack/react-router@1.170.30(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
+  '@tanstack/react-router@1.170.31(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
       '@tanstack/history': 1.162.1
       '@tanstack/react-store': 0.9.3(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
-      '@tanstack/router-core': 1.171.25
+      '@tanstack/router-core': 1.171.26
       isbot: 5.2.1
       react: 19.2.8
       react-dom: 19.2.8(react@19.2.8)
@@ -8076,16 +8076,16 @@ snapshots:
       seroval: 1.6.2
       seroval-plugins: 1.6.2(seroval@1.6.2)
 
-  '@tanstack/router-core@1.171.25':
+  '@tanstack/router-core@1.171.26':
     dependencies:
       '@tanstack/history': 1.162.1
       cookie-es: 3.1.1
       seroval: 1.6.2
       seroval-plugins: 1.6.2(seroval@1.6.2)
 
-  '@tanstack/router-devtools-core@1.168.1(@tanstack/router-core@1.171.25)(csstype@3.2.3)':
+  '@tanstack/router-devtools-core@1.168.1(@tanstack/router-core@1.171.26)(csstype@3.2.3)':
     dependencies:
-      '@tanstack/router-core': 1.171.25
+      '@tanstack/router-core': 1.171.26
       clsx: 2.1.1
       goober: 2.1.19(csstype@3.2.3)
     optionalDependencies:
@@ -8104,7 +8104,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@tanstack/router-plugin@1.168.32(@tanstack/react-router@1.170.30(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(rolldown@1.2.4)(vite@8.2.1(@types/node@26.2.0)(jiti@2.7.0)(sugarss@5.0.1(postcss@8.5.26))(yaml@2.9.0))':
+  '@tanstack/router-plugin@1.168.32(@tanstack/react-router@1.170.31(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(rolldown@1.2.4)(vite@8.2.1(@types/node@26.2.0)(jiti@2.7.0)(sugarss@5.0.1(postcss@8.5.26))(yaml@2.9.0))':
     dependencies:
       '@babel/core': 7.29.7
       '@babel/template': 7.29.7
@@ -8116,7 +8116,7 @@ snapshots:
       unplugin: 3.3.0(rolldown@1.2.4)(vite@8.2.1(@types/node@26.2.0)(jiti@2.7.0)(sugarss@5.0.1(postcss@8.5.26))(yaml@2.9.0))
       zod: 4.4.3
     optionalDependencies:
-      '@tanstack/react-router': 1.170.30(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@tanstack/react-router': 1.170.31(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       vite: 8.2.1(@types/node@26.2.0)(jiti@2.7.0)(sugarss@5.0.1(postcss@8.5.26))(yaml@2.9.0)
     transitivePeerDependencies:
       - '@farmfe/core'
@@ -8453,7 +8453,7 @@ snapshots:
 
   '@types/d3-selection@3.0.11': {}
 
-  '@types/d3-shape@3.1.8':
+  '@types/d3-shape@3.2.0':
     dependencies:
       '@types/d3-path': 3.1.1
 
@@ -10873,12 +10873,12 @@ snapshots:
       path-key: 4.0.0
       unicorn-magic: 0.3.0
 
-  nuqs@2.9.6(@tanstack/react-router@1.170.30(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react@19.2.8):
+  nuqs@2.9.6(@tanstack/react-router@1.170.31(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react@19.2.8):
     dependencies:
       '@standard-schema/spec': 1.1.0
       react: 19.2.8
     optionalDependencies:
-      '@tanstack/react-router': 1.170.30(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@tanstack/react-router': 1.170.31(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
 
   nx@23.1.1(@swc/core@1.15.46):
     dependencies:
@@ -12330,7 +12330,7 @@ snapshots:
       '@types/d3-ease': 3.0.2
       '@types/d3-interpolate': 3.0.4
       '@types/d3-scale': 4.0.9
-      '@types/d3-shape': 3.1.8
+      '@types/d3-shape': 3.2.0
       '@types/d3-time': 3.0.4
       '@types/d3-timer': 3.0.2
       d3-array: 3.2.4
