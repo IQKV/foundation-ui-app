@@ -71,18 +71,15 @@
     "@tabler/icons-react": "^3.46.0",
     "@tanstack/react-query": "^5.101.4",
     "@tanstack/react-router": "^1.170.25",
-    "@tiptap/core": "3.27.2",
-    "@tiptap/extension-color": "3.27.2",
-    "@tiptap/extension-image": "3.27.2",
-    "@tiptap/extension-link": "3.27.2",
-    "@tiptap/extension-list": "3.27.2",
-    "@tiptap/extension-text-align": "3.27.2",
-    "@tiptap/extension-text-style": "3.27.2",
-    "@tiptap/extension-underline": "3.27.2",
-    "@tiptap/extensions": "3.27.2",
-    "@tiptap/pm": "3.27.2",
-    "@tiptap/react": "3.27.2",
-    "@tiptap/starter-kit": "3.27.2",
+    "@tiptap/extension-color": "^3.29.2",
+    "@tiptap/extension-image": "^3.29.2",
+    "@tiptap/extension-link": "^3.29.2",
+    "@tiptap/extension-text-align": "^3.29.2",
+    "@tiptap/extension-text-style": "^3.29.2",
+    "@tiptap/extension-underline": "^3.29.2",
+    "@tiptap/pm": "^3.29.2",
+    "@tiptap/react": "^3.29.2",
+    "@tiptap/starter-kit": "^3.29.2",
     "@types/sanitize-html": "^2.16.1",
     "@xyflow/react": "^12.11.2",
     "axios": "^1.19.0",
@@ -95,7 +92,6 @@
     "cross-env": "^10.1.0",
     "dayjs": "^1.11.21",
     "dotenv": "^17.4.2",
-    "framer-motion": "^13.1.0",
     "immer": "^11.1.16",
     "js-cookie": "^3.0.8",
     "jwt-decode": "^4.0.0",
@@ -127,7 +123,7 @@
     "@release-it/conventional-changelog": "^12.0.0",
     "@tanstack/react-query-devtools": "^5.101.4",
     "@tanstack/react-router-devtools": "^1.167.1",
-    "@tanstack/router-plugin": "^1.168.29",
+    "@tanstack/router-plugin": "^1.168.27",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.2",
@@ -150,7 +146,7 @@
     "is-ci": "4.1.0",
     "jiti": "2.7.0",
     "jsdom": "^30.0.1",
-    "knip": "6.32.2",
+    "knip": "6.32.1",
     "lint-staged": "^17.3.0",
     "lru-cache": "^11.5.2",
     "msw": "^2.15.0",
@@ -190,11 +186,6 @@
     }
   },
   "packageManager": "pnpm@10.33.2",
-  "pnpm": {
-    "overrides": {
-      "@swc/core": "1.15.46"
-    }
-  },
   "msw": {
     "workerDirectory": [
       "public"
