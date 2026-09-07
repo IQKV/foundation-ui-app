@@ -95,7 +95,7 @@
     "cross-env": "^10.1.0",
     "dayjs": "^1.11.21",
     "dotenv": "^17.4.2",
-    "framer-motion": "^13.1.0",
+    "framer-motion": "^13.1.1",
     "immer": "^11.1.16",
     "js-cookie": "^3.0.8",
     "jwt-decode": "^4.0.0",
