@@ -31,7 +31,7 @@ export default defineConfig(({ mode }) => {
     plugins: [
       react(),
       lingui(),
-      babel(linguiTransformerBabelPreset()),
+      babel({ presets: [linguiTransformerBabelPreset()] }),
       !isTest && tanstackRouter(),
     ],
     server: {

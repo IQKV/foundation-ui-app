@@ -7,7 +7,7 @@ export default defineConfig({
   resolve: {
     tsconfigPaths: true,
   },
-  plugins: [lingui(), babel(linguiTransformerBabelPreset()), react()],
+  plugins: [lingui(), babel({ presets: [linguiTransformerBabelPreset()] }), react()],
   test: {
     globals: true,
     environment: "jsdom",
