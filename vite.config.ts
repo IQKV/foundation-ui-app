@@ -28,9 +28,7 @@ export default defineConfig(({ mode }) => {
       },
     },
     plugins: [
-      react({
-        plugins: [["@lingui/swc-plugin", {}]],
-      }),
+      react(),
       lingui(),
       !isTest && tanstackRouter(),
     ],
