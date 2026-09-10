@@ -15,4 +15,7 @@ ENV APPLICATION_BUILD_VERSION=${BUILD_VERSION_REFERENCE}
 # from /app/docker/ui-app/ — see compose.yaml volumes.
 COPY dist/ /usr/share/nginx/html
 
+# SPA routing: serve index.html for all unmatched routes
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
