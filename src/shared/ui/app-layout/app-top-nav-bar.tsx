@@ -132,8 +132,24 @@ export function AppTopNavBar() {
           ))}
         </Group>
 
-        {/* Right utility strip */}
-        <Group gap="xs" ml="auto">
+        {/* Right utility strip — force light-on-dark icon colours since the
+            topbar background is always dark regardless of the colour scheme.
+            Mantine's ActionIcon subtle/gray resolves to dark colours in light
+            mode, becoming invisible against the dark bar.  We override the
+            relevant Mantine CSS vars at this container level so every
+            ActionIcon inside inherits white-tinted colours without touching
+            the shared components. */}
+        <Group
+          gap="xs"
+          ml="auto"
+          style={{
+            // ActionIcon subtle: icon colour and hover background
+            "--ai-color": "rgba(255,255,255,0.75)",
+            "--ai-hover": "rgba(255,255,255,0.08)",
+            // ActionIcon/Icon colour used by some variants
+            "--ai-color-hover": "#ffffff",
+          } as React.CSSProperties}
+        >
           {isMultiTenantMode && <TenantSwitcher />}
           {isMultiTenantMode && (
             <Button
