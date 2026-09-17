@@ -36,6 +36,9 @@ coverage
 CLAUDE.local.md
 .release-it.json
 
+# Runtime config override — copy from public/config.js.example, never commit
+/public/config.js
+
 /.playwright/
 /playwright-report/
 /test-results/

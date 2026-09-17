@@ -28,3 +28,16 @@ window.VITE_ROLLOUT_MODE = "MULTI_TENANT";
 window.VITE_DEMO_MODE = "false";
 window.VITE_ENABLE_MAGIC_LINK = "true";
 window.VITE_PAYMENT_GATEWAY_TYPE = "STRIPE";
+window.VITE_APP_NAV_VARIANT = "sidebar";
+
+// ── Branding (optional — defaults are embedded in the build) ──────────────────
+// window.VITE_APP_TITLE = "Key Value";
+// window.VITE_APP_BRAND_NAME = "Key Value";
+// window.VITE_APP_BRAND_TAGLINE = "Workspace";
+
+// ── Auth page copy (optional) ─────────────────────────────────────────────────
+// window.VITE_APP_AUTH_SECTION_LABEL = "Trusted by teams worldwide";
+// window.VITE_APP_AUTH_BADGES = "SOC 2 Type II,GDPR Ready";
+// window.VITE_APP_AUTH_HEADLINE_1 = "Your workspace,";
+// window.VITE_APP_AUTH_HEADLINE_2 = "always in reach.";
+// window.VITE_APP_AUTH_TAGLINE = "Manage your team, subscriptions, and settings.";
