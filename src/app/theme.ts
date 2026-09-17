@@ -173,8 +173,6 @@ export const cssVariablesResolver: CSSVariablesResolver = () => ({
     // ── Topbar — always dark (text colors in AppTopNavBar are hardcoded white) ──
     "--app-topbar-bg": "#1e2433",
     "--app-topbar-border": "rgba(255,255,255,0.06)",
-    "--app-subnav-bg": "#151e30",
-    "--app-subnav-border": "rgba(255,255,255,0.08)",
     "--app-sidebar-logo-bg": "#181d2b",
     "--app-sidebar-border": "rgba(255,255,255,0.06)",
     "--app-sidebar-shadow": "1px 0 0 rgba(0,0,0,0.3)",
@@ -199,11 +197,17 @@ export const cssVariablesResolver: CSSVariablesResolver = () => ({
     "--app-header-bg": "#ffffff",
     "--app-surface-bg": "#ffffff",
     "--app-header-shadow": "0 1px 0 #e4e8ef, 0 2px 8px rgba(17,28,43,0.06)",
+    // Subnav — light gray bar (inverse of dark topbar)
+    "--app-subnav-bg": "#e9ecf0",
+    "--app-subnav-border": "#d0d6e2",
   },
   dark: {
     "--app-shell-bg": "#0f1621",
     "--app-header-bg": "#151d2b",
     "--app-surface-bg": "#1a2436",
     "--app-header-shadow": "0 1px 0 rgba(255,255,255,0.06), 0 2px 8px rgba(0,0,0,0.3)",
+    // Subnav — dark tone slightly lighter than topbar
+    "--app-subnav-bg": "#151e30",
+    "--app-subnav-border": "rgba(255,255,255,0.08)",
   },
 });
