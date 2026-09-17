@@ -170,6 +170,11 @@ export const cssVariablesResolver: CSSVariablesResolver = () => ({
   variables: {
     // ── Sidebar — always dark ──────────────────────────────────────────────
     "--app-sidebar-bg": "#1e2433",
+    // ── Topbar — always dark (text colors in AppTopNavBar are hardcoded white) ──
+    "--app-topbar-bg": "#1e2433",
+    "--app-topbar-border": "rgba(255,255,255,0.06)",
+    "--app-subnav-bg": "#151e30",
+    "--app-subnav-border": "rgba(255,255,255,0.08)",
     "--app-sidebar-logo-bg": "#181d2b",
     "--app-sidebar-border": "rgba(255,255,255,0.06)",
     "--app-sidebar-shadow": "1px 0 0 rgba(0,0,0,0.3)",
