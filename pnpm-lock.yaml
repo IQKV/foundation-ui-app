@@ -18,8 +18,8 @@ importers:
         specifier: 6.6.0
         version: 6.6.0(@babel/core@7.29.7)(@babel/types@7.29.8)
       '@lingui/format-po':
-        specifier: 6.6.0
-        version: 6.6.0
+        specifier: 6.7.0
+        version: 6.7.0
       '@lingui/react':
         specifier: 6.6.0
         version: 6.6.0(@babel/core@7.29.7)(@babel/types@7.29.8)(react@19.2.8)
@@ -1096,6 +1096,10 @@ packages:
 
   '@lingui/format-po@6.6.0':
     resolution: {integrity: sha512-vOUYBYC+81Gl/tJWqEMM2ah+W06M3zWjb78qNwRtl3UhNhoDbduZpNayDQ7RoEA9NtxNQ75Fx7946+0GPnHy7Q==}
+    engines: {node: '>=22.19.0'}
+
+  '@lingui/format-po@6.7.0':
+    resolution: {integrity: sha512-lCVeoANXP9fCdEWXTg2quok4j49wgt1O4hdZMdR7ImoUTxdQP0p/QlpT20QecqghPPATeSNuFfzvtFPS2nr93g==}
     engines: {node: '>=22.19.0'}
 
   '@lingui/message-utils@6.6.0':
@@ -7318,6 +7322,12 @@ snapshots:
     dependencies:
       '@lingui/conf': 6.6.0
       '@lingui/message-utils': 6.6.0
+      pofile-ts: 4.0.3
+
+  '@lingui/format-po@6.7.0':
+    dependencies:
+      '@lingui/conf': 6.7.0
+      '@lingui/message-utils': 6.7.0
       pofile-ts: 4.0.3
 
   '@lingui/message-utils@6.6.0':
