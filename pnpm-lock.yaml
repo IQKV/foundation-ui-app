@@ -13,7 +13,7 @@ importers:
         version: 3.2.3(react@19.2.8)
       '@hookform/resolvers':
         specifier: ^5.7.1
-        version: 5.9.1(@sinclair/typebox@0.27.12)(@standard-schema/spec@1.1.0)(ajv@8.20.0)(react-hook-form@7.87.0(react@19.2.8))(zod@4.6.4)
+        version: 5.9.1(@sinclair/typebox@0.27.12)(@standard-schema/spec@1.1.0)(ajv@8.20.0)(react-hook-form@7.87.0(react@19.2.8))(zod@4.6.5)
       '@lingui/core':
         specifier: 6.6.0
         version: 6.6.0(@babel/core@7.29.7)(@babel/types@7.29.8)
@@ -195,8 +195,8 @@ importers:
         specifier: ^5.9.0
         version: 5.9.0
       zod:
-        specifier: ^4.6.4
-        version: 4.6.4
+        specifier: ^4.6.5
+        version: 4.6.5
       zustand:
         specifier: ^5.0.14
         version: 5.0.15(@types/react@19.2.18)(immer@11.1.18)(react@19.2.8)(use-sync-external-store@1.7.0(react@19.2.8))
@@ -6588,8 +6588,8 @@ packages:
   yuku-parser@0.9.4:
     resolution: {integrity: sha512-VWnoJzdB2g1JjsMEcB2MxSLoDbgISgOiNRsgiR0qrQKiUw2yyzEfYEYkNHSMNhdGkSo7gtmcN+2UOczzGDLAuw==}
 
-  zod@4.6.4:
-    resolution: {integrity: sha512-AXSD6hvGdvRjajG/l1cC+d6IrhH+sjmPKtYeQdJIK8MFJl3LyClzS+o/YsVC+zQZPupAaeH5skwwm8YqYH7BqA==}
+  zod@4.6.5:
+    resolution: {integrity: sha512-v5l/aFXZQeai4awLbOpSoHecE9UiMrnfx75tEXLjNonXVARxQ5mOeipTjROUchszUNCqnE+hqAMujRsRHsut2Q==}
 
   zustand@4.5.7:
     resolution: {integrity: sha512-CHOUy7mu3lbD6o6LJLfllpjkzhHXSBlX8B9+qPddUsIfeF5S/UZ5q0kmCsnRqT1UHFQZchNFDDzMbQsuesHWlw==}
@@ -7062,7 +7062,7 @@ snapshots:
 
   '@floating-ui/utils@0.2.12': {}
 
-  '@hookform/resolvers@5.9.1(@sinclair/typebox@0.27.12)(@standard-schema/spec@1.1.0)(ajv@8.20.0)(react-hook-form@7.87.0(react@19.2.8))(zod@4.6.4)':
+  '@hookform/resolvers@5.9.1(@sinclair/typebox@0.27.12)(@standard-schema/spec@1.1.0)(ajv@8.20.0)(react-hook-form@7.87.0(react@19.2.8))(zod@4.6.5)':
     dependencies:
       '@standard-schema/utils': 0.3.0
       react-hook-form: 7.87.0(react@19.2.8)
@@ -7070,7 +7070,7 @@ snapshots:
       '@sinclair/typebox': 0.27.12
       '@standard-schema/spec': 1.1.0
       ajv: 8.20.0
-      zod: 4.6.4
+      zod: 4.6.5
 
   '@humanfs/core@0.19.2':
     dependencies:
@@ -8187,7 +8187,7 @@ snapshots:
       jiti: 2.7.0
       magic-string: 0.30.21
       prettier: 3.9.6
-      zod: 4.6.4
+      zod: 4.6.5
     transitivePeerDependencies:
       - supports-color
 
@@ -8201,7 +8201,7 @@ snapshots:
       '@tanstack/router-utils': 1.162.2
       chokidar: 5.0.0
       unplugin: 3.3.0(rolldown@1.2.7)(vite@8.3.0(@types/node@26.5.1)(jiti@2.7.0)(sugarss@5.0.1(postcss@8.5.28))(yaml@2.9.1))
-      zod: 4.6.4
+      zod: 4.6.5
     optionalDependencies:
       '@tanstack/react-router': 1.170.35(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       vite: 8.3.0(@types/node@26.5.1)(jiti@2.7.0)(sugarss@5.0.1(postcss@8.5.28))(yaml@2.9.1)
@@ -10584,7 +10584,7 @@ snapshots:
       tinyglobby: 0.2.17
       unbash: 4.0.11
       yaml: 2.9.1
-      zod: 4.6.4
+      zod: 4.6.5
 
   known-css-properties@0.37.0: {}
 
@@ -12634,7 +12634,7 @@ snapshots:
       '@yuku-parser/binding-win32-arm64': 0.9.4
       '@yuku-parser/binding-win32-x64': 0.9.4
 
-  zod@4.6.4: {}
+  zod@4.6.5: {}
 
   zustand@4.5.7(@types/react@19.2.18)(immer@11.1.18)(react@19.2.8):
     dependencies:
