@@ -142,13 +142,15 @@ export function AppTopNavBar() {
         <Group
           gap="xs"
           ml="auto"
-          style={{
-            // ActionIcon subtle: icon colour and hover background
-            "--ai-color": "rgba(255,255,255,0.75)",
-            "--ai-hover": "rgba(255,255,255,0.08)",
-            // ActionIcon/Icon colour used by some variants
-            "--ai-color-hover": "#ffffff",
-          } as React.CSSProperties}
+          style={
+            {
+              // ActionIcon subtle: icon colour and hover background
+              "--ai-color": "rgba(255,255,255,0.75)",
+              "--ai-hover": "rgba(255,255,255,0.08)",
+              // ActionIcon/Icon colour used by some variants
+              "--ai-color-hover": "#ffffff",
+            } as React.CSSProperties
+          }
         >
           {isMultiTenantMode && <TenantSwitcher />}
           {isMultiTenantMode && (
