@@ -64,10 +64,10 @@ importers:
         version: 7.3.0
       '@stripe/react-stripe-js':
         specifier: ^6.10.0
-        version: 6.10.0(@stripe/stripe-js@9.16.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        version: 6.10.0(@stripe/stripe-js@9.17.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@stripe/stripe-js':
-        specifier: ^9.16.0
-        version: 9.16.0
+        specifier: ^9.17.0
+        version: 9.17.0
       '@tabler/icons-react':
         specifier: ^3.47.0
         version: 3.47.0(react@19.2.8)
@@ -2116,8 +2116,8 @@ packages:
       react: '>=16.8.0 <20.0.0'
       react-dom: '>=16.8.0 <20.0.0'
 
-  '@stripe/stripe-js@9.16.0':
-    resolution: {integrity: sha512-PNZmy9hbuiuiyjAsigMlQChzJqrNEzQUtYIL/z5w0dsx27Ha69SBTYa2o8/M0Hbfiz9V2qctqX2DBd5sa57qoA==}
+  '@stripe/stripe-js@9.17.0':
+    resolution: {integrity: sha512-uidL4OJum5kivsOAQnVfQmYLJ2zdgirtmT0zWgskASZ4TPXxpXQ0MNrzW4NsXB90uEqmPHpSEtciLFbF1QQvNA==}
     engines: {node: '>=12.16'}
 
   '@swc/core-darwin-arm64@1.15.46':
@@ -8034,14 +8034,14 @@ snapshots:
 
   '@stomp/stompjs@7.3.0': {}
 
-  '@stripe/react-stripe-js@6.10.0(@stripe/stripe-js@9.16.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
+  '@stripe/react-stripe-js@6.10.0(@stripe/stripe-js@9.17.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
-      '@stripe/stripe-js': 9.16.0
+      '@stripe/stripe-js': 9.17.0
       prop-types: 15.8.1
       react: 19.2.8
       react-dom: 19.2.8(react@19.2.8)
 
-  '@stripe/stripe-js@9.16.0': {}
+  '@stripe/stripe-js@9.17.0': {}
 
   '@swc/core-darwin-arm64@1.15.46':
     optional: true
