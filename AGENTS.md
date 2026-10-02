@@ -858,6 +858,7 @@ pnpm commit   # Interactive commit via cz-conventional-changelog
 ```
 
 For `fix`: describe the symptom and trigger, not the code change:
+
 - ✅ `fix(session): workspace flag lost on page reload`
 - ❌ `fix(session): add missing flag restore call`
 
