@@ -162,6 +162,21 @@ src/
    - Verifies `shared/ui/index.ts` exists
    - Verifies kebab-case naming for pages and shared/ui components
 
+## Execution Discipline
+
+- Root cause first. Fix the real entry point, not a bypass around it.
+- Read complete affected modules, callers, and tests before editing.
+- After two identical failures without new evidence, change approach — do not retry blindly.
+- Check relevant prerequisites early (type-check, arch tests). Parallelize independent work.
+- Behavior proven and required gates green: finish. No speculative scope growth.
+
+## Security
+
+- Keep credentials, tokens, and private config out of commits, logs, and shared text.
+- Flag files likely to contain secrets (`.env`, credential stores) before staging them.
+- Use exact or pinned dependency versions. Flag unusual package names before installing.
+- Never bypass `--no-verify` unless explicitly requested.
+
 ## AI Agent Development Guidelines
 
 ### Code Generation Principles
@@ -841,6 +856,10 @@ Pre-commit hook runs `oxfmt --check` on all staged files and `sort-package-json`
 ```bash
 pnpm commit   # Interactive commit via cz-conventional-changelog
 ```
+
+For `fix`: describe the symptom and trigger, not the code change:
+- ✅ `fix(session): workspace flag lost on page reload`
+- ❌ `fix(session): add missing flag restore call`
 
 Examples:
 
