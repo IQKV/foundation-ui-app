@@ -50,7 +50,7 @@
   "dependencies": {
     "@dr.pogodin/react-helmet": "^3.3.2",
     "@hookform/resolvers": "^5.9.1",
-    "@lingui/core": "6.6.0",
+    "@lingui/core": "6.8.0",
     "@lingui/format-po": "6.8.0",
     "@lingui/react": "6.8.0",
     "@mantine/carousel": "^9.6.3",
