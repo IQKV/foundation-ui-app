@@ -21,8 +21,8 @@ importers:
         specifier: 6.8.0
         version: 6.8.0
       '@lingui/react':
-        specifier: 6.6.0
-        version: 6.6.0(@babel/core@7.29.7)(@babel/types@7.29.8)(react@19.3.0)
+        specifier: 6.8.0
+        version: 6.8.0(@babel/core@7.29.7)(react@19.3.0)
       '@mantine/carousel':
         specifier: ^9.6.3
         version: 9.6.3(@mantine/core@9.6.3(@mantine/hooks@9.6.3(react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(@mantine/hooks@9.6.3(react@19.3.0))(embla-carousel-react@8.6.0(react@19.3.0))(embla-carousel@8.6.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
@@ -1150,8 +1150,8 @@ packages:
     resolution: {integrity: sha512-vT8mcuZ5sC0+xHF1i2iirFeg0rF0AzOEgnb7eOw+RJd4Q9tZhNQdGXxx2BeglopE9hjLM1lxVI0Wg54LSKMVCQ==}
     engines: {node: '>=22.19.0'}
 
-  '@lingui/react@6.6.0':
-    resolution: {integrity: sha512-oRZvm8nx47wQB7Y4tQ4K78Ba0Ta0wJLRpT7125zW3J1wq++hMfc9XMqemCau2IDVtCMHGHdlLPiBeyFSIq/0Rw==}
+  '@lingui/react@6.8.0':
+    resolution: {integrity: sha512-a4NZK+ol/w8z2q8Up9wRlA7rGRibTOaj4Kxe6d5eSRB4zRRaLXv4SzQUs3kPDWcsRbu2HFhoOvJQPFWjAJPRng==}
     engines: {node: '>=22.19.0'}
     peerDependencies:
       babel-plugin-macros: 2 || 3
@@ -7554,15 +7554,14 @@ snapshots:
       '@messageformat/parser': 5.1.1
       js-sha256: 0.10.1
 
-  '@lingui/react@6.6.0(@babel/core@7.29.7)(@babel/types@7.29.8)(react@19.3.0)':
+  '@lingui/react@6.8.0(@babel/core@7.29.7)(react@19.3.0)':
     dependencies:
-      '@lingui/babel-plugin-lingui-macro': 6.6.0(@babel/core@7.29.7)(@babel/types@7.29.8)
-      '@lingui/core': 6.6.0(@babel/core@7.29.7)(@babel/types@7.29.8)
+      '@lingui/babel-plugin-lingui-macro': 6.8.0(@babel/core@7.29.7)
+      '@lingui/core': 6.8.0(@babel/core@7.29.7)
       react: 19.3.0
       use-sync-external-store: 1.7.0(react@19.3.0)
     transitivePeerDependencies:
       - '@babel/core'
-      - '@babel/types'
 
   '@lingui/vite-plugin@6.8.0(@babel/core@7.29.7)(@lingui/babel-plugin-lingui-macro@6.7.0(@babel/core@7.29.7)(@babel/types@7.29.8))(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7)(@babel/runtime@7.29.7)(rolldown@1.2.11)(vite@8.3.1(@types/node@26.6.3)(jiti@2.7.0)(sugarss@5.0.1(postcss@8.5.28))(yaml@2.9.1)))(rolldown@1.2.11)(vite@8.3.1(@types/node@26.6.3)(jiti@2.7.0)(sugarss@5.0.1(postcss@8.5.28))(yaml@2.9.1))':
     dependencies:
