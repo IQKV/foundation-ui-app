@@ -15,7 +15,7 @@ export default {
     extensions.navigation.registerNavItem({
       id: "platform-ai-chat-nav",
       label: "AI Chat",
-      to: "/app/addons/platform-ai-chat",
+      to: "/addons/platform-ai-chat",
       icon: ({ size }) => <IconMessageChatbot size={size} />,
       section: "workspace",
       order: 80,
@@ -23,7 +23,7 @@ export default {
   },
   routes: [
     {
-      path: "/app/addons/platform-ai-chat",
+      path: "/addons/platform-ai-chat",
       component: async () => ({ default: AiChatPage }),
       auth: true,
     },
