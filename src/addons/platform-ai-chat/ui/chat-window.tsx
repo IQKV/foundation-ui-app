@@ -5,7 +5,6 @@ import {
   Group,
   Textarea,
   Button,
-  Select,
   Loader,
   Alert,
   Text,
@@ -24,7 +23,6 @@ interface ChatWindowProps {
 export function ChatWindow({ sessionId, onSessionCreated }: ChatWindowProps) {
   const { t } = useLingui();
   const [content, setContent] = useState("");
-  const [model, setModel] = useState("llama3.2");
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const { data: messagesData } = useMessages(sessionId ?? "");
@@ -47,7 +45,6 @@ export function ChatWindow({ sessionId, onSessionCreated }: ChatWindowProps) {
     sendMutation.mutate({
       sessionId: sessionId ?? undefined,
       content: content.trim(),
-      model,
     });
   }
 
@@ -68,34 +65,22 @@ export function ChatWindow({ sessionId, onSessionCreated }: ChatWindowProps) {
 
       <Paper
         withBorder
-        p="sm"
+        p="md"
         style={{ borderTop: "1px solid var(--mantine-color-gray-3)" }}
         radius={0}
       >
         {sendMutation.error && (
-          <Alert icon={<IconAlertCircle size={16} />} color="red" variant="light" mb="xs">
+          <Alert icon={<IconAlertCircle size={16} />} color="red" variant="light" mb="sm">
             <Trans>Failed to send message. Please try again.</Trans>
           </Alert>
         )}
-        <Group align="flex-end" gap="xs">
-          <Select
-            size="sm"
-            w={130}
-            value={model}
-            onChange={(v) => v && setModel(v)}
-            data={[
-              { value: "llama3.2", label: "Llama 3.2" },
-              { value: "llama3.1", label: "Llama 3.1" },
-              { value: "mistral", label: "Mistral" },
-            ]}
-            data-testid="model-select"
-          />
+        <Group align="flex-end" gap="sm">
           <Textarea
             flex={1}
             autosize
-            minRows={1}
-            maxRows={4}
-            placeholder={t`Type a message…`}
+            minRows={3}
+            maxRows={8}
+            placeholder={t`Type a message… (Enter to send, Shift+Enter for new line)`}
             value={content}
             onChange={(e) => setContent(e.currentTarget.value)}
             onKeyDown={(e) => {
@@ -108,11 +93,12 @@ export function ChatWindow({ sessionId, onSessionCreated }: ChatWindowProps) {
             data-testid="chat-input"
           />
           <Button
+            size="md"
             onClick={handleSubmit}
             disabled={!content.trim() || sendMutation.isPending}
             data-testid="send-btn"
           >
-            {sendMutation.isPending ? <Loader size="xs" color="white" /> : <IconSend size={16} />}
+            {sendMutation.isPending ? <Loader size="xs" color="white" /> : <IconSend size={18} />}
           </Button>
         </Group>
       </Paper>
