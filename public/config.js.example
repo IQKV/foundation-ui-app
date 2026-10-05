@@ -30,6 +30,9 @@ window.VITE_ENABLE_MAGIC_LINK = "true";
 window.VITE_PAYMENT_GATEWAY_TYPE = "STRIPE";
 window.VITE_APP_NAV_VARIANT = "sidebar";
 
+// ── Addons (comma-separated list of addon IDs to activate) ───────────────────
+// window.VITE_ENABLED_UI_ADDONS = "platform-ai-chat";
+
 // ── Branding (optional — defaults are embedded in the build) ──────────────────
 // window.VITE_APP_TITLE = "Key Value";
 // window.VITE_APP_BRAND_NAME = "Key Value";

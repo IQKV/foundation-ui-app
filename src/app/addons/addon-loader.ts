@@ -12,6 +12,7 @@ const availableAddons: AvailableAddons = {
   // "project-management": () => import("@/addons/project-management"),
   // Example external package:
   // "@company/my-external-addon": "@company/my-external-addon",
+  "platform-ai-chat": () => import("@/addons/platform-ai-chat"),
 };
 
 // Helper to load an addon from either local import or external package
