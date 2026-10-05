@@ -64,10 +64,13 @@ export function ChatWindow({ sessionId, onSessionCreated }: ChatWindowProps) {
       </ScrollArea>
 
       <Paper
-        withBorder
         p="md"
-        style={{ borderTop: "1px solid var(--mantine-color-gray-3)" }}
-        radius={0}
+        radius="xl"
+        style={{
+          borderTop: "1px solid var(--mantine-color-gray-3)",
+          borderTopLeftRadius: 0,
+          borderTopRightRadius: 0,
+        }}
       >
         {sendMutation.error && (
           <Alert icon={<IconAlertCircle size={16} />} color="red" variant="light" mb="sm">
