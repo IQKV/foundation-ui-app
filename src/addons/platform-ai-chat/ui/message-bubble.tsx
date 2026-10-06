@@ -34,8 +34,14 @@ export function MessageBubble({ message }: MessageBubbleProps) {
     return (
       <motion.div variants={bubbleVariants} initial="hidden" animate="visible">
         <Group justify="flex-end" data-testid="message-bubble">
-          <Paper bg="blue.6" c="white" p="md" radius="xl" maw="75%"
-            style={{ borderBottomRightRadius: 6 }}>
+          <Paper
+            bg="blue.6"
+            c="white"
+            p="md"
+            radius="xl"
+            maw="75%"
+            style={{ borderBottomRightRadius: 6 }}
+          >
             <Text size="sm">{message.content}</Text>
             <Text size="xs" c="white" opacity={0.7} ta="right" mt={4}>
               {timeStr}
@@ -54,12 +60,19 @@ export function MessageBubble({ message }: MessageBubbleProps) {
           bg="gray.0"
           p="xs"
           radius="xl"
-          style={{ marginTop: 8, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", width: 32, height: 32 }}
+          style={{
+            marginTop: 8,
+            flexShrink: 0,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: 32,
+            height: 32,
+          }}
         >
           <IconRobot size={16} />
         </Paper>
-        <Paper bg="gray.1" p="md" radius="xl" maw="75%"
-          style={{ borderBottomLeftRadius: 6 }}>
+        <Paper bg="gray.1" p="md" radius="xl" maw="75%" style={{ borderBottomLeftRadius: 6 }}>
           <Text size="sm">{message.content}</Text>
           <Text size="xs" c="dimmed" mt={4}>
             {timeStr}
