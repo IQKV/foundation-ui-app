@@ -34,7 +34,10 @@ export function useSendMessage(opts?: { onSuccess?: (r: ChatResponse) => void })
   return useMutation({
     mutationFn: aiChatApi.sendMessage,
     onSuccess: (result) => {
+      // Invalidate sessions (title/updatedAt may have changed)
       void queryClient.invalidateQueries({ queryKey: chatKeys.sessions() });
+      // Invalidate messages for this session so the new USER + ASSISTANT messages appear
+      void queryClient.invalidateQueries({ queryKey: chatKeys.messages(result.sessionId) });
       opts?.onSuccess?.(result);
     },
   });
