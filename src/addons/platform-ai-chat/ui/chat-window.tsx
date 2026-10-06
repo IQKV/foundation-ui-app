@@ -15,6 +15,8 @@ import { Trans, useLingui } from "@lingui/react/macro";
 import { useMessages, useSendMessage } from "../model";
 import { MessageBubble } from "./message-bubble";
 
+const MAX_INPUT_CHARS = 4000;
+
 interface ChatWindowProps {
   sessionId: string | null;
   onSessionCreated: (sessionId: string) => void;
@@ -26,6 +28,9 @@ export function ChatWindow({ sessionId, onSessionCreated }: ChatWindowProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const { data: messagesData } = useMessages(sessionId ?? "");
+
+  const charsLeft = MAX_INPUT_CHARS - content.length;
+  const isOverLimit = charsLeft < 0;
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
@@ -41,7 +46,7 @@ export function ChatWindow({ sessionId, onSessionCreated }: ChatWindowProps) {
   });
 
   function handleSubmit() {
-    if (!content.trim()) return;
+    if (!content.trim() || isOverLimit) return;
     sendMutation.mutate({
       sessionId: sessionId ?? undefined,
       content: content.trim(),
@@ -80,27 +85,36 @@ export function ChatWindow({ sessionId, onSessionCreated }: ChatWindowProps) {
           </Alert>
         )}
         <Group align="flex-end" gap="sm">
-          <Textarea
-            flex={1}
-            autosize
-            minRows={3}
-            maxRows={8}
-            placeholder={t`Type a message… (Enter to send, Shift+Enter for new line)`}
-            value={content}
-            onChange={(e) => setContent(e.currentTarget.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" && !e.shiftKey) {
-                e.preventDefault();
-                handleSubmit();
-              }
-            }}
-            disabled={sendMutation.isPending}
-            data-testid="chat-input"
-          />
+          <Stack flex={1} gap={4}>
+            <Textarea
+              autosize
+              minRows={3}
+              maxRows={8}
+              placeholder={t`Type a message… (Enter to send, Shift+Enter for new line)`}
+              value={content}
+              onChange={(e) => setContent(e.currentTarget.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && !e.shiftKey) {
+                  e.preventDefault();
+                  handleSubmit();
+                }
+              }}
+              disabled={sendMutation.isPending}
+              error={isOverLimit ? t`Message exceeds ${MAX_INPUT_CHARS} character limit` : undefined}
+              data-testid="chat-input"
+            />
+            <Text
+              size="xs"
+              ta="right"
+              c={isOverLimit ? "red" : charsLeft < 200 ? "orange" : "dimmed"}
+            >
+              {charsLeft.toLocaleString()} / {MAX_INPUT_CHARS.toLocaleString()}
+            </Text>
+          </Stack>
           <Button
             size="md"
             onClick={handleSubmit}
-            disabled={!content.trim() || sendMutation.isPending}
+            disabled={!content.trim() || isOverLimit || sendMutation.isPending}
             data-testid="send-btn"
           >
             {sendMutation.isPending ? <Loader size="xs" color="white" /> : <IconSend size={18} />}
