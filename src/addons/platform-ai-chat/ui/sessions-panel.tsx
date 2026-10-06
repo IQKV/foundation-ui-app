@@ -1,6 +1,5 @@
 import {
   Stack,
-  Button,
   Skeleton,
   Text,
   Paper,
@@ -35,16 +34,43 @@ export function SessionsPanel({ selectedSessionId, onSelect }: SessionsPanelProp
 
   return (
     <Stack gap="xs" w={280} data-testid="sessions-panel">
-      <Button
-        fullWidth
-        variant="light"
-        radius="xl"
-        leftSection={<IconPlus size={14} />}
+      <UnstyledButton
         onClick={() => onSelect(null)}
         data-testid="new-chat-btn"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: 6,
+          width: "100%",
+          padding: "8px 16px",
+          borderRadius: "var(--mantine-radius-xl)",
+          border: "1.5px solid #3d4f63",
+          background: "#f1f3f6",
+          color: "#243345",
+          fontWeight: 600,
+          fontSize: "var(--mantine-font-size-sm)",
+          boxShadow: "3px 3px 0px #3d4f63",
+          cursor: "pointer",
+          transition: "transform 0.08s ease, box-shadow 0.08s ease",
+          userSelect: "none",
+        }}
+        onMouseDown={(e) => {
+          (e.currentTarget as HTMLButtonElement).style.transform = "translate(2px, 2px)";
+          (e.currentTarget as HTMLButtonElement).style.boxShadow = "1px 1px 0px #3d4f63";
+        }}
+        onMouseUp={(e) => {
+          (e.currentTarget as HTMLButtonElement).style.transform = "";
+          (e.currentTarget as HTMLButtonElement).style.boxShadow = "3px 3px 0px #3d4f63";
+        }}
+        onMouseLeave={(e) => {
+          (e.currentTarget as HTMLButtonElement).style.transform = "";
+          (e.currentTarget as HTMLButtonElement).style.boxShadow = "3px 3px 0px #3d4f63";
+        }}
       >
+        <IconPlus size={14} />
         <Trans>New Chat</Trans>
-      </Button>
+      </UnstyledButton>
 
       {isLoading && (
         <>
