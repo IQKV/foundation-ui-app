@@ -67,9 +67,11 @@ export function ChatWindow({ sessionId, onSessionCreated }: ChatWindowProps) {
         p="md"
         radius="xl"
         style={{
-          borderTop: "1px solid var(--mantine-color-gray-3)",
+          borderTop: "1px solid rgba(176,186,201,0.5)",
           borderTopLeftRadius: 0,
           borderTopRightRadius: 0,
+          background: "rgba(255,255,255,0.55)",
+          backdropFilter: "blur(8px)",
         }}
       >
         {sendMutation.error && (

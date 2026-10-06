@@ -24,6 +24,8 @@ export function AiChatPage() {
             flexDirection: "column",
             height: "calc(100vh - 160px)",
             overflow: "hidden",
+            background:
+              "radial-gradient(ellipse 120% 100% at 50% 50%, #e4e8ef 0%, #d0d6e2 60%, #b0bac9 100%)",
           }}
         >
           <ChatWindow
