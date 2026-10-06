@@ -44,7 +44,7 @@ export function SessionsPanel({ selectedSessionId, onSelect }: SessionsPanelProp
           gap: 6,
           width: "100%",
           padding: "8px 16px",
-          borderRadius: "var(--mantine-radius-xl)",
+          borderRadius: "var(--mantine-radius-md)",
           border: "1.5px solid #3d4f63",
           background: "#f1f3f6",
           color: "#243345",
@@ -75,7 +75,7 @@ export function SessionsPanel({ selectedSessionId, onSelect }: SessionsPanelProp
       {isLoading && (
         <>
           {Array.from({ length: 5 }).map((_, i) => (
-            <Skeleton key={i} height={52} radius="lg" />
+            <Skeleton key={i} height={52} radius="md" />
           ))}
         </>
       )}
@@ -98,7 +98,7 @@ export function SessionsPanel({ selectedSessionId, onSelect }: SessionsPanelProp
               layout
             >
               <Paper
-                radius="lg"
+                radius="md"
                 style={{ overflow: "hidden" }}
                 bg={session.id === selectedSessionId ? "blue.0" : undefined}
                 withBorder={session.id === selectedSessionId}
@@ -115,7 +115,7 @@ export function SessionsPanel({ selectedSessionId, onSelect }: SessionsPanelProp
                         {session.title ?? "New chat"}
                       </Text>
                       <Group gap="xs">
-                        <Badge size="xs" variant="outline" radius="xl">
+                        <Badge size="xs" variant="outline" radius="sm">
                           {session.model}
                         </Badge>
                         <Text size="xs" c="dimmed">

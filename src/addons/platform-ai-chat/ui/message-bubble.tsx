@@ -139,9 +139,9 @@ export function MessageBubble({ message }: MessageBubbleProps) {
             bg="blue.6"
             c="white"
             p="md"
-            radius="xl"
+            radius="md"
             maw="75%"
-            style={{ borderBottomRightRadius: 6 }}
+            style={{ borderBottomRightRadius: 4 }}
           >
             {/* User messages: preserve whitespace/newlines, no heavy markdown */}
             <Text size="sm" style={{ whiteSpace: "pre-wrap", wordBreak: "break-word" }}>
@@ -176,7 +176,7 @@ export function MessageBubble({ message }: MessageBubbleProps) {
         >
           <IconRobot size={16} />
         </Paper>
-        <Paper bg="gray.1" p="md" radius="xl" maw="75%" style={{ borderBottomLeftRadius: 6 }}>
+        <Paper bg="gray.1" p="md" radius="md" maw="75%" style={{ borderBottomLeftRadius: 4 }}>
           <MarkdownContent content={message.content} />
           <Text size="xs" c="dimmed" mt={6}>
             {timeStr}
