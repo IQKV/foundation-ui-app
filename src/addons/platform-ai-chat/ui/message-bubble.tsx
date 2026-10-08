@@ -33,9 +33,7 @@ function MarkdownContent({ content }: { content: string }) {
       <ReactMarkdown
         components={{
           // Paragraphs — tight margin
-          p: ({ children }) => (
-            <p style={{ margin: "0 0 0.5em 0" }}>{children}</p>
-          ),
+          p: ({ children }) => <p style={{ margin: "0 0 0.5em 0" }}>{children}</p>,
           // Inline code
           code: ({ children, className }) => {
             const isBlock = className?.includes("language-");
@@ -70,9 +68,7 @@ function MarkdownContent({ content }: { content: string }) {
             );
           },
           // Bold
-          strong: ({ children }) => (
-            <strong style={{ fontWeight: 600 }}>{children}</strong>
-          ),
+          strong: ({ children }) => <strong style={{ fontWeight: 600 }}>{children}</strong>,
           // Lists
           ul: ({ children }) => (
             <ul style={{ margin: "0.25em 0", paddingLeft: "1.4em" }}>{children}</ul>
@@ -80,12 +76,12 @@ function MarkdownContent({ content }: { content: string }) {
           ol: ({ children }) => (
             <ol style={{ margin: "0.25em 0", paddingLeft: "1.4em" }}>{children}</ol>
           ),
-          li: ({ children }) => (
-            <li style={{ marginBottom: "0.2em" }}>{children}</li>
-          ),
+          li: ({ children }) => <li style={{ marginBottom: "0.2em" }}>{children}</li>,
           // Headings — scaled down for a chat bubble
           h1: ({ children }) => (
-            <p style={{ fontWeight: 700, fontSize: "1.05em", margin: "0.4em 0 0.2em" }}>{children}</p>
+            <p style={{ fontWeight: 700, fontSize: "1.05em", margin: "0.4em 0 0.2em" }}>
+              {children}
+            </p>
           ),
           h2: ({ children }) => (
             <p style={{ fontWeight: 600, fontSize: "1em", margin: "0.4em 0 0.2em" }}>{children}</p>
@@ -108,7 +104,9 @@ function MarkdownContent({ content }: { content: string }) {
           ),
           // Horizontal rule
           hr: () => (
-            <hr style={{ border: "none", borderTop: "1px solid rgba(0,0,0,0.15)", margin: "0.6em 0" }} />
+            <hr
+              style={{ border: "none", borderTop: "1px solid rgba(0,0,0,0.15)", margin: "0.6em 0" }}
+            />
           ),
         }}
       >

@@ -200,6 +200,10 @@ msgstr "Administrator"
 msgid "Advanced Analytics"
 msgstr "Erweiterte Analysen"
 
+#: src/addons/platform-ai-chat/ui/ai-chat-page.tsx
+msgid "AI Chat"
+msgstr ""
+
 #: src/pages/_app/cms-pages.index.tsx
 msgid "All statuses"
 msgstr "Alle Status"
@@ -947,6 +951,10 @@ msgstr "Rückerstattungsverlauf konnte nicht geladen werden."
 msgid "Failed to load webhook log history."
 msgstr "Webhook-Protokollverlauf konnte nicht geladen werden."
 
+#: src/addons/platform-ai-chat/ui/chat-window.tsx
+msgid "Failed to send message. Please try again."
+msgstr ""
+
 #: src/features/signup/ui/password-strength.tsx
 msgid "Fair"
 msgstr "Ausreichend"
@@ -1319,6 +1327,10 @@ msgstr "Mitglieder-Registrierungen"
 msgid "Members"
 msgstr "Mitglieder"
 
+#: src/addons/platform-ai-chat/ui/chat-window.tsx
+msgid "Message exceeds {MAX_INPUT_CHARS} character limit"
+msgstr ""
+
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "Meta description for search engines"
 msgstr "Meta-Beschreibung für Suchmaschinen"
@@ -1351,6 +1363,10 @@ msgstr "Name ist zu kurz"
 #: src/pages/_app/cms-pages.create.tsx
 msgid "New"
 msgstr "Neu"
+
+#: src/addons/platform-ai-chat/ui/sessions-panel.tsx
+msgid "New Chat"
+msgstr ""
 
 #: src/pages/_app/cms-pages.create.tsx
 msgid "New CMS Page"
@@ -1395,6 +1411,10 @@ msgstr "Für dieses Konto wurden keine aktiven Mandantenmitgliedschaften gefunde
 #: src/features/manage-billing/ui/billing-info.tsx
 msgid "No billing information has been configured yet. Fill in the details below to get started."
 msgstr "Es wurden noch keine Abrechnungsinformationen konfiguriert. Füllen Sie die folgenden Details aus, um zu beginnen."
+
+#: src/addons/platform-ai-chat/ui/sessions-panel.tsx
+msgid "No conversations yet. Start a new chat."
+msgstr ""
 
 #: src/pages/_app/settings/security.tsx
 msgid "No external sign-in providers are enabled by your organization."
@@ -1992,6 +2012,10 @@ msgstr "Sicherheitseinstellungen"
 msgid "See all notifications"
 msgstr "Alle Benachrichtigungen anzeigen"
 
+#: src/addons/platform-ai-chat/ui/chat-window.tsx
+msgid "Select a session or start a new chat."
+msgstr ""
+
 #: src/features/complete-profile/ui/complete-profile-form.tsx
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 #: src/pages/_app/settings/general.tsx
@@ -2424,6 +2448,10 @@ msgstr "Testphasenstatus"
 #: src/shared/ui/error-boundary.tsx
 msgid "Try Again"
 msgstr "Erneut versuchen"
+
+#: src/addons/platform-ai-chat/ui/chat-window.tsx
+msgid "Type a message… (Enter to send, Shift+Enter for new line)"
+msgstr ""
 
 #: src/widgets/dashboard-signup-chart/ui/dashboard-signup-chart.tsx
 msgid "Unable to load signup data."

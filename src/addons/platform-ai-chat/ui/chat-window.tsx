@@ -12,7 +12,7 @@ import {
 } from "@mantine/core";
 import { IconSend, IconAlertCircle } from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { useMessages, useSendMessage } from "../model";
+import { useMessages, useSendMessage, useChatInputHistory } from "../model";
 import { MessageBubble } from "./message-bubble";
 
 const MAX_INPUT_CHARS = 4000;
@@ -28,6 +28,12 @@ export function ChatWindow({ sessionId, onSessionCreated }: ChatWindowProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const { data: messagesData } = useMessages(sessionId ?? "");
+
+  const {
+    addToHistory,
+    handleKeyDown: handleHistoryKeyDown,
+    resetNavigation,
+  } = useChatInputHistory(content, setContent, messagesData?.items);
 
   const charsLeft = MAX_INPUT_CHARS - content.length;
   const isOverLimit = charsLeft < 0;
@@ -47,9 +53,11 @@ export function ChatWindow({ sessionId, onSessionCreated }: ChatWindowProps) {
 
   function handleSubmit() {
     if (!content.trim() || isOverLimit) return;
+    const trimmed = content.trim();
+    addToHistory(trimmed);
     sendMutation.mutate({
       sessionId: sessionId ?? undefined,
-      content: content.trim(),
+      content: trimmed,
     });
   }
 
@@ -92,15 +100,22 @@ export function ChatWindow({ sessionId, onSessionCreated }: ChatWindowProps) {
               maxRows={8}
               placeholder={t`Type a message… (Enter to send, Shift+Enter for new line)`}
               value={content}
-              onChange={(e) => setContent(e.currentTarget.value)}
+              onChange={(e) => {
+                resetNavigation();
+                setContent(e.currentTarget.value);
+              }}
               onKeyDown={(e) => {
                 if (e.key === "Enter" && !e.shiftKey) {
                   e.preventDefault();
                   handleSubmit();
+                  return;
                 }
+                handleHistoryKeyDown(e);
               }}
               disabled={sendMutation.isPending}
-              error={isOverLimit ? t`Message exceeds ${MAX_INPUT_CHARS} character limit` : undefined}
+              error={
+                isOverLimit ? t`Message exceeds ${MAX_INPUT_CHARS} character limit` : undefined
+              }
               data-testid="chat-input"
             />
             <Text

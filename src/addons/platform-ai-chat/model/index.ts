@@ -59,3 +59,5 @@ export function useDeleteSession(opts?: { onSuccess?: () => void }) {
     },
   });
 }
+
+export { useChatInputHistory } from "./use-chat-input-history";
