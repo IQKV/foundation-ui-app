@@ -21,8 +21,8 @@ importers:
         specifier: 6.8.0
         version: 6.8.0
       '@lingui/react':
-        specifier: 6.8.0
-        version: 6.8.0(@babel/core@7.29.7)(react@19.3.0)
+        specifier: 6.9.0
+        version: 6.9.0(@babel/core@7.29.7)(react@19.3.0)
       '@mantine/carousel':
         specifier: ^9.7.0
         version: 9.7.0(@mantine/core@9.7.0(@mantine/hooks@9.7.0(react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(@mantine/hooks@9.7.0(react@19.3.0))(embla-carousel-react@8.6.0(react@19.3.0))(embla-carousel@8.6.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
@@ -1218,8 +1218,8 @@ packages:
     peerDependencies:
       '@lingui/conf': ^6.0.1
 
-  '@lingui/react@6.8.0':
-    resolution: {integrity: sha512-a4NZK+ol/w8z2q8Up9wRlA7rGRibTOaj4Kxe6d5eSRB4zRRaLXv4SzQUs3kPDWcsRbu2HFhoOvJQPFWjAJPRng==}
+  '@lingui/react@6.9.0':
+    resolution: {integrity: sha512-0oSy/GpQUzMrylviy/IiDg6b0DH4HwGusSD8ht2dsDCdunH+wX8bfJ/njo7qtjyaawTjEbdyLCUzlZc2Gd2kVQ==}
     engines: {node: '>=22.19.0'}
     peerDependencies:
       babel-plugin-macros: 2 || 3
@@ -7916,10 +7916,10 @@ snapshots:
       '@lingui/native-tools-win32-arm64-msvc': 0.1.5
       '@lingui/native-tools-win32-x64-msvc': 0.1.5
 
-  '@lingui/react@6.8.0(@babel/core@7.29.7)(react@19.3.0)':
+  '@lingui/react@6.9.0(@babel/core@7.29.7)(react@19.3.0)':
     dependencies:
-      '@lingui/babel-plugin-lingui-macro': 6.8.0(@babel/core@7.29.7)
-      '@lingui/core': 6.8.0(@babel/core@7.29.7)
+      '@lingui/babel-plugin-lingui-macro': 6.9.0(@babel/core@7.29.7)
+      '@lingui/core': 6.9.0(@babel/core@7.29.7)
       react: 19.3.0
       use-sync-external-store: 1.7.0(react@19.3.0)
     transitivePeerDependencies:
