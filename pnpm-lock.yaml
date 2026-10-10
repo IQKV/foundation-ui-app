@@ -214,14 +214,14 @@ importers:
         specifier: ^21.2.3
         version: 21.2.3
       '@lingui/babel-plugin-lingui-macro':
-        specifier: 6.7.0
-        version: 6.7.0(@babel/core@7.29.7)(@babel/types@7.29.8)
+        specifier: 6.9.0
+        version: 6.9.0(@babel/core@7.29.7)
       '@lingui/cli':
         specifier: ^6.9.0
         version: 6.9.0(rolldown@1.2.12)
       '@lingui/vite-plugin':
         specifier: ^6.9.0
-        version: 6.9.0(@babel/core@7.29.7)(@lingui/babel-plugin-lingui-macro@6.7.0(@babel/core@7.29.7)(@babel/types@7.29.8))(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7)(@babel/runtime@7.29.7)(rolldown@1.2.12)(vite@8.3.3(@types/node@26.6.4)(jiti@2.7.0)(sugarss@5.0.1(postcss@8.5.29))(yaml@2.9.1)))(rolldown@1.2.12)(vite@8.3.3(@types/node@26.6.4)(jiti@2.7.0)(sugarss@5.0.1(postcss@8.5.29))(yaml@2.9.1))
+        version: 6.9.0(@babel/core@7.29.7)(@lingui/babel-plugin-lingui-macro@6.9.0(@babel/core@7.29.7))(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7)(@babel/runtime@7.29.7)(rolldown@1.2.12)(vite@8.3.3(@types/node@26.6.4)(jiti@2.7.0)(sugarss@5.0.1(postcss@8.5.29))(yaml@2.9.1)))(rolldown@1.2.12)(vite@8.3.3(@types/node@26.6.4)(jiti@2.7.0)(sugarss@5.0.1(postcss@8.5.29))(yaml@2.9.1))
       '@playwright/test':
         specifier: 1.63.0
         version: 1.63.0
@@ -1061,18 +1061,6 @@ packages:
     resolution: {integrity: sha512-udKlLtGtJ9TjVjqtogIage/Z3merz5Ko5u72uIaHMZ9aPFjSNDnrsglWEfMLWTeSxmkdOrASDpn8YuBMLbhvPA==}
     engines: {node: '>=22.19.0'}
 
-  '@lingui/babel-plugin-lingui-macro@6.7.0':
-    resolution: {integrity: sha512-YY0mxBP6RZ6sHJ0QymQClEsgNYQ46RGXGBpZUsL16cpALwFnC32nj45yfpIN+eYar+g3wT49ptrD45gylYUirA==}
-    engines: {node: '>=22.19.0'}
-    peerDependencies:
-      '@babel/core': ^7.20.12 || ^8.0.0
-      '@babel/types': ^7.20.7 || ^8.0.0
-    peerDependenciesMeta:
-      '@babel/core':
-        optional: true
-      '@babel/types':
-        optional: true
-
   '@lingui/babel-plugin-lingui-macro@6.8.0':
     resolution: {integrity: sha512-/gecQy9KnOo7xTNtHB/DWmweXtV1xd9BFWSmHbIqxKo8k3zcBacyZ4Jt4+RVEJglJ4LvpANjF3fQH3YfHPoqvQ==}
     engines: {node: '>=22.19.0'}
@@ -1103,10 +1091,6 @@ packages:
         optional: true
       rolldown:
         optional: true
-
-  '@lingui/conf@6.7.0':
-    resolution: {integrity: sha512-qZsE98lhJjT+GRTyFLlAnMKmEcTBE3R5foesY0aJP31r2gd8cxKgAPeiznrzhw7n4PDl7wgUgtQhdfDawDUqCQ==}
-    engines: {node: '>=22.19.0'}
 
   '@lingui/conf@6.8.0':
     resolution: {integrity: sha512-igCpJuAA35AYHRB8w1Wy55HpcfVs9jQZCcs+7ovrRcQ0LZD7oJCTH2ZVboaIgr7B/xo4xWDF8osMrBwJf2ffag==}
@@ -1140,10 +1124,6 @@ packages:
 
   '@lingui/format-po@6.9.0':
     resolution: {integrity: sha512-nfeAxAj3An1zq0F8k01fvw+cMgqU4KAIDemylwNnTI+Mamo1x6WUo+vtpaJQjtDDTPBMVKkMoGx9G9fpy5xrtQ==}
-    engines: {node: '>=22.19.0'}
-
-  '@lingui/message-utils@6.7.0':
-    resolution: {integrity: sha512-Rqxb/Hvq+3sWoPLdaJiNywsFNOcYiBSYBGJOrjyRCVbSUE4T9jviR05+vibmqyaABa1w+W0Pw/EhwV+gCSw4wQ==}
     engines: {node: '>=22.19.0'}
 
   '@lingui/message-utils@6.8.0':
@@ -7755,14 +7735,6 @@ snapshots:
     dependencies:
       '@lingui/conf': 6.9.0
 
-  '@lingui/babel-plugin-lingui-macro@6.7.0(@babel/core@7.29.7)(@babel/types@7.29.8)':
-    dependencies:
-      '@lingui/conf': 6.7.0
-      '@lingui/message-utils': 6.7.0
-    optionalDependencies:
-      '@babel/core': 7.29.7
-      '@babel/types': 7.29.8
-
   '@lingui/babel-plugin-lingui-macro@6.8.0(@babel/core@7.29.7)':
     dependencies:
       '@babel/types': 7.29.8
@@ -7809,13 +7781,6 @@ snapshots:
       - babel-plugin-macros
       - supports-color
 
-  '@lingui/conf@6.7.0':
-    dependencies:
-      jest-validate: 29.7.0
-      jiti: 2.7.0
-      lilconfig: 3.1.3
-      normalize-path: 3.0.0
-
   '@lingui/conf@6.8.0':
     dependencies:
       jest-validate: 29.7.0
@@ -7855,12 +7820,6 @@ snapshots:
       '@lingui/conf': 6.9.0
       '@lingui/message-utils': 6.9.0
       pofile-ts: 4.0.3
-
-  '@lingui/message-utils@6.7.0':
-    dependencies:
-      '@messageformat/date-skeleton': 1.1.0
-      '@messageformat/parser': 5.1.1
-      js-sha256: 0.10.1
 
   '@lingui/message-utils@6.8.0':
     dependencies:
@@ -7925,7 +7884,7 @@ snapshots:
     transitivePeerDependencies:
       - '@babel/core'
 
-  '@lingui/vite-plugin@6.9.0(@babel/core@7.29.7)(@lingui/babel-plugin-lingui-macro@6.7.0(@babel/core@7.29.7)(@babel/types@7.29.8))(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7)(@babel/runtime@7.29.7)(rolldown@1.2.12)(vite@8.3.3(@types/node@26.6.4)(jiti@2.7.0)(sugarss@5.0.1(postcss@8.5.29))(yaml@2.9.1)))(rolldown@1.2.12)(vite@8.3.3(@types/node@26.6.4)(jiti@2.7.0)(sugarss@5.0.1(postcss@8.5.29))(yaml@2.9.1))':
+  '@lingui/vite-plugin@6.9.0(@babel/core@7.29.7)(@lingui/babel-plugin-lingui-macro@6.9.0(@babel/core@7.29.7))(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7)(@babel/runtime@7.29.7)(rolldown@1.2.12)(vite@8.3.3(@types/node@26.6.4)(jiti@2.7.0)(sugarss@5.0.1(postcss@8.5.29))(yaml@2.9.1)))(rolldown@1.2.12)(vite@8.3.3(@types/node@26.6.4)(jiti@2.7.0)(sugarss@5.0.1(postcss@8.5.29))(yaml@2.9.1))':
     dependencies:
       '@lingui/cli': 6.9.0(rolldown@1.2.12)
       '@lingui/conf': 6.9.0
@@ -7933,7 +7892,7 @@ snapshots:
       vite: 8.3.3(@types/node@26.6.4)(jiti@2.7.0)(sugarss@5.0.1(postcss@8.5.29))(yaml@2.9.1)
     optionalDependencies:
       '@babel/core': 7.29.7
-      '@lingui/babel-plugin-lingui-macro': 6.7.0(@babel/core@7.29.7)(@babel/types@7.29.8)
+      '@lingui/babel-plugin-lingui-macro': 6.9.0(@babel/core@7.29.7)
       '@rolldown/plugin-babel': 0.2.4(@babel/core@7.29.7)(@babel/runtime@7.29.7)(rolldown@1.2.12)(vite@8.3.3(@types/node@26.6.4)(jiti@2.7.0)(sugarss@5.0.1(postcss@8.5.29))(yaml@2.9.1))
       rolldown: 1.2.12
     transitivePeerDependencies:
