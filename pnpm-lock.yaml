@@ -18,8 +18,8 @@ importers:
         specifier: 6.8.0
         version: 6.8.0(@babel/core@7.29.7)
       '@lingui/format-po':
-        specifier: 6.8.0
-        version: 6.8.0
+        specifier: 6.9.0
+        version: 6.9.0
       '@lingui/react':
         specifier: 6.9.0
         version: 6.9.0(@babel/core@7.29.7)(react@19.3.0)
@@ -1133,10 +1133,6 @@ packages:
     peerDependenciesMeta:
       babel-plugin-macros:
         optional: true
-
-  '@lingui/format-po@6.8.0':
-    resolution: {integrity: sha512-mHTItdc8Tj0AO88aJCRioIIEkbBMhwCSyQduSmzjVCtkzq0sax+SA+SScoizmVf3ecpDNufk5xexWWD4Zf0iWQ==}
-    engines: {node: '>=22.19.0'}
 
   '@lingui/format-po@6.9.0':
     resolution: {integrity: sha512-nfeAxAj3An1zq0F8k01fvw+cMgqU4KAIDemylwNnTI+Mamo1x6WUo+vtpaJQjtDDTPBMVKkMoGx9G9fpy5xrtQ==}
@@ -7843,12 +7839,6 @@ snapshots:
       '@lingui/message-utils': 6.9.0
     transitivePeerDependencies:
       - '@babel/core'
-
-  '@lingui/format-po@6.8.0':
-    dependencies:
-      '@lingui/conf': 6.8.0
-      '@lingui/message-utils': 6.8.0
-      pofile-ts: 4.0.3
 
   '@lingui/format-po@6.9.0':
     dependencies:
