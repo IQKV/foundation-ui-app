@@ -9,5 +9,4 @@ export type {
 
 export interface ChatInputValues {
   content: string;
-  model: string;
 }
