@@ -12,9 +12,9 @@
     "cleanup:all": "pnpm cleanup && pnpm node_modules:cleanup",
     "dev": "vite",
     "e2e": "playwright test",
+    "e2e:a11y": "playwright test tests/a11y --project=chromium",
     "e2e:all-browsers": "cross-env ALL_BROWSERS=true playwright test",
     "e2e:auth": "playwright test tests/auth --project=chromium",
-    "e2e:a11y": "playwright test tests/a11y --project=chromium",
     "e2e:chrome": "playwright test --project=chromium",
     "e2e:debug": "cross-env PWDEBUG=1 playwright test",
     "e2e:firefox": "playwright test --project=firefox",
@@ -47,10 +47,23 @@
     "test:wath": "vitest",
     "type-check": "tsc --noEmit"
   },
+  "lint-staged": {
+    "*": [
+      "oxfmt --write"
+    ],
+    "package.json": [
+      "sort-package-json"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
   "dependencies": {
     "@dr.pogodin/react-helmet": "^3.3.2",
     "@hookform/resolvers": "^5.9.1",
-    "@lingui/core": "6.8.0",
+    "@lingui/core": "6.9.0",
     "@lingui/format-po": "6.9.0",
     "@lingui/react": "6.9.0",
     "@mantine/carousel": "^9.7.0",
@@ -174,19 +187,6 @@
     "vite-plugin-copy": "^0.1.6",
     "vite-plugin-remove-console": "^2.2.0",
     "vitest": "4.1.5"
-  },
-  "lint-staged": {
-    "*": [
-      "oxfmt --write"
-    ],
-    "package.json": [
-      "sort-package-json"
-    ]
-  },
-  "config": {
-    "commitizen": {
-      "path": "cz-conventional-changelog"
-    }
   },
   "packageManager": "pnpm@10.33.2",
   "msw": {
