@@ -118,7 +118,7 @@
     "@axe-core/playwright": "^4.13.0",
     "@commitlint/cli": "^21.2.3",
     "@commitlint/config-conventional": "^21.2.3",
-    "@lingui/babel-plugin-lingui-macro": "6.7.0",
+    "@lingui/babel-plugin-lingui-macro": "6.9.0",
     "@lingui/cli": "^6.9.0",
     "@lingui/vite-plugin": "^6.9.0",
     "@playwright/test": "1.63.0",
