@@ -12,8 +12,31 @@ import {
 } from "@mantine/core";
 import { IconSend, IconAlertCircle } from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
+import { MoodBlob } from "mood-blobs";
 import { useMessages, useSendMessage, useChatInputHistory } from "../model";
 import { MessageBubble } from "./message-bubble";
+
+type BlobMood = "excited" | "happy" | "surprised" | "cool" | "sad";
+
+function resolveMood(opts: {
+  isPending: boolean;
+  isError: boolean;
+  justCreated: boolean;
+}): BlobMood {
+  if (opts.isError) return "sad";
+  if (opts.isPending) return "cool";
+  if (opts.justCreated) return "surprised";
+  return "excited";
+}
+
+// Colors tuned to the app's slate-indigo palette (src/app/theme.ts)
+const BLOB_COLORS: Record<BlobMood, string> = {
+  excited: "#5465f5", // blue-5 — primary, "ready"
+  cool: "#8896aa", // gray-5 — calm slate while sending
+  surprised: "#7280f8", // blue-4 — soft primary for new-session flash
+  sad: "#FF6B6B", // keep coral red — clear error signal
+  happy: "#55EFC4", // mint — warm success (unused path, kept for completeness)
+};
 
 const MAX_INPUT_CHARS = 4000;
 
@@ -25,6 +48,7 @@ interface ChatWindowProps {
 export function ChatWindow({ sessionId, onSessionCreated }: ChatWindowProps) {
   const { t } = useLingui();
   const [content, setContent] = useState("");
+  const [justCreated, setJustCreated] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const { data: messagesData } = useMessages(sessionId ?? "");
@@ -46,6 +70,8 @@ export function ChatWindow({ sessionId, onSessionCreated }: ChatWindowProps) {
     onSuccess: (r) => {
       if (!sessionId) {
         onSessionCreated(r.sessionId);
+        setJustCreated(true);
+        setTimeout(() => setJustCreated(false), 2000);
       }
       setContent("");
     },
@@ -60,6 +86,12 @@ export function ChatWindow({ sessionId, onSessionCreated }: ChatWindowProps) {
       content: trimmed,
     });
   }
+
+  const blobMood = resolveMood({
+    isPending: sendMutation.isPending,
+    isError: !!sendMutation.error,
+    justCreated,
+  });
 
   return (
     <Stack h="100%" gap={0}>
@@ -93,6 +125,12 @@ export function ChatWindow({ sessionId, onSessionCreated }: ChatWindowProps) {
           </Alert>
         )}
         <Group align="flex-end" gap="sm">
+          <MoodBlob
+            mood={blobMood}
+            color={BLOB_COLORS[blobMood]}
+            size="xs"
+            style={{ flexShrink: 0 }}
+          />
           <Stack flex={1} gap={4}>
             <Textarea
               autosize

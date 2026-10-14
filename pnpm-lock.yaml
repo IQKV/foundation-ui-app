@@ -164,6 +164,9 @@ importers:
       miragejs:
         specifier: ^0.1.48
         version: 0.1.48
+      mood-blobs:
+        specifier: ^0.1.0
+        version: 0.1.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       nuqs:
         specifier: ^2.10.1
         version: 2.10.2(@tanstack/react-router@1.170.42(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react@19.3.0)
@@ -5164,6 +5167,12 @@ packages:
 
   moo@0.5.3:
     resolution: {integrity: sha512-m2fmM2dDm7GZQsY7KK2cme8agi+AAljILjQnof7p1ZMDe6dQ4bdnSMx0cPppudoeNv5hEFQirN6u+O4fDE0IWA==}
+
+  mood-blobs@0.1.0:
+    resolution: {integrity: sha512-xMhWg/4vTUccOBc9koR5L7a53BHKwokVdsag1OLiy/LMgmzZShDJO4Ek62wCQcuNPnxNu0PtEBWZ4vEWgk8luQ==}
+    peerDependencies:
+      react: '>=17.0.0'
+      react-dom: '>=17.0.0'
 
   motion-dom@13.5.1:
     resolution: {integrity: sha512-/7CVCD20Mz1KobktorpdgvowV0V41J7UxqE+qWS3GkSJqrRr5ft+2RloOYtEKv+wvBp3JaSFBclhxt4ja8ovHg==}
@@ -11527,6 +11536,11 @@ snapshots:
       ufo: 1.6.4
 
   moo@0.5.3: {}
+
+  mood-blobs@0.1.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0):
+    dependencies:
+      react: 19.3.0
+      react-dom: 19.3.0(react@19.3.0)
 
   motion-dom@13.5.1:
     dependencies:

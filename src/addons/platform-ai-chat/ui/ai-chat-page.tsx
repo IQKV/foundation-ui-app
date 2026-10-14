@@ -12,7 +12,7 @@ export function AiChatPage() {
       <Text fw={700} size="xl">
         <Trans>AI Chat</Trans>
       </Text>
-      <Group align="flex-start" gap="md" style={{ minHeight: "calc(100vh - 220px)" }}>
+      <Group align="flex-start" gap="md" style={{ minHeight: "calc(100vh - 300px)" }}>
         <SessionsPanel selectedSessionId={selectedSessionId} onSelect={setSelectedSessionId} />
         <Paper
           withBorder
@@ -22,7 +22,7 @@ export function AiChatPage() {
             minWidth: 0,
             display: "flex",
             flexDirection: "column",
-            height: "calc(100vh - 220px)",
+            height: "calc(100vh - 300px)",
             overflow: "hidden",
             background:
               "radial-gradient(ellipse 120% 100% at 50% 50%, #f1f3f6 0%, #e4e8ef 60%, #d0d6e2 100%)",
