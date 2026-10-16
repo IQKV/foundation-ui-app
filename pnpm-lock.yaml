@@ -217,14 +217,14 @@ importers:
         specifier: ^21.2.3
         version: 21.2.3
       '@lingui/babel-plugin-lingui-macro':
-        specifier: 6.9.0
-        version: 6.9.0(@babel/core@7.29.7)
+        specifier: 6.9.1
+        version: 6.9.1(@babel/core@7.29.7)
       '@lingui/cli':
         specifier: ^6.9.0
         version: 6.9.1(rolldown@1.2.13)
       '@lingui/vite-plugin':
         specifier: ^6.9.0
-        version: 6.9.1(@babel/core@7.29.7)(@lingui/babel-plugin-lingui-macro@6.9.0(@babel/core@7.29.7))(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7)(@babel/runtime@7.29.10)(rolldown@1.2.13)(vite@8.3.4(@types/node@26.6.5)(jiti@2.7.0)(sugarss@5.0.2(postcss@8.5.29))(yaml@2.9.1)))(rolldown@1.2.13)(vite@8.3.4(@types/node@26.6.5)(jiti@2.7.0)(sugarss@5.0.2(postcss@8.5.29))(yaml@2.9.1))
+        version: 6.9.1(@babel/core@7.29.7)(@lingui/babel-plugin-lingui-macro@6.9.1(@babel/core@7.29.7))(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7)(@babel/runtime@7.29.10)(rolldown@1.2.13)(vite@8.3.4(@types/node@26.6.5)(jiti@2.7.0)(sugarss@5.0.2(postcss@8.5.29))(yaml@2.9.1)))(rolldown@1.2.13)(vite@8.3.4(@types/node@26.6.5)(jiti@2.7.0)(sugarss@5.0.2(postcss@8.5.29))(yaml@2.9.1))
       '@playwright/test':
         specifier: 1.63.0
         version: 1.63.0
@@ -1328,6 +1328,9 @@ packages:
 
   '@messageformat/parser@5.1.1':
     resolution: {integrity: sha512-3p0YRGCcTUCYvBKLIxtDDyrJ0YijGIwrTRu1DT8gIviIDZru8H23+FkY6MJBzM1n9n20CiM4VeDYuBsrrwnLjg==}
+
+  '@messageformat/parser@5.2.0':
+    resolution: {integrity: sha512-sc3hNZ0JtC32GhL5nUgPbh2ilcwji4G+Vmj/vhMd8hZaH//NDOvkfwKK1mFnRWG5h2DpksN8xr/HB5/+vMg3iw==}
 
   '@microsoft/fetch-event-source@2.0.1':
     resolution: {integrity: sha512-W6CLUJ2eBMw3Rec70qrsEW0jOm/3twwJv21mrmj2yORiaVmVYGS4sSS5yUwvQc1ZlDLYGPnClVWmUUMagKNsfA==}
@@ -7719,7 +7722,7 @@ snapshots:
   '@lingui/message-utils@6.9.1':
     dependencies:
       '@messageformat/date-skeleton': 1.1.0
-      '@messageformat/parser': 5.1.1
+      '@messageformat/parser': 5.2.0
       js-sha256: 0.10.1
 
   '@lingui/native-tools-android-arm64@0.1.6':
@@ -7773,7 +7776,7 @@ snapshots:
     transitivePeerDependencies:
       - '@babel/core'
 
-  '@lingui/vite-plugin@6.9.1(@babel/core@7.29.7)(@lingui/babel-plugin-lingui-macro@6.9.0(@babel/core@7.29.7))(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7)(@babel/runtime@7.29.10)(rolldown@1.2.13)(vite@8.3.4(@types/node@26.6.5)(jiti@2.7.0)(sugarss@5.0.2(postcss@8.5.29))(yaml@2.9.1)))(rolldown@1.2.13)(vite@8.3.4(@types/node@26.6.5)(jiti@2.7.0)(sugarss@5.0.2(postcss@8.5.29))(yaml@2.9.1))':
+  '@lingui/vite-plugin@6.9.1(@babel/core@7.29.7)(@lingui/babel-plugin-lingui-macro@6.9.1(@babel/core@7.29.7))(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7)(@babel/runtime@7.29.10)(rolldown@1.2.13)(vite@8.3.4(@types/node@26.6.5)(jiti@2.7.0)(sugarss@5.0.2(postcss@8.5.29))(yaml@2.9.1)))(rolldown@1.2.13)(vite@8.3.4(@types/node@26.6.5)(jiti@2.7.0)(sugarss@5.0.2(postcss@8.5.29))(yaml@2.9.1))':
     dependencies:
       '@lingui/cli': 6.9.1(rolldown@1.2.13)
       '@lingui/conf': 6.9.1
@@ -7781,7 +7784,7 @@ snapshots:
       vite: 8.3.4(@types/node@26.6.5)(jiti@2.7.0)(sugarss@5.0.2(postcss@8.5.29))(yaml@2.9.1)
     optionalDependencies:
       '@babel/core': 7.29.7
-      '@lingui/babel-plugin-lingui-macro': 6.9.0(@babel/core@7.29.7)
+      '@lingui/babel-plugin-lingui-macro': 6.9.1(@babel/core@7.29.7)
       '@rolldown/plugin-babel': 0.2.4(@babel/core@7.29.7)(@babel/runtime@7.29.10)(rolldown@1.2.13)(vite@8.3.4(@types/node@26.6.5)(jiti@2.7.0)(sugarss@5.0.2(postcss@8.5.29))(yaml@2.9.1))
       rolldown: 1.2.13
     transitivePeerDependencies:
@@ -7889,6 +7892,10 @@ snapshots:
   '@messageformat/date-skeleton@1.1.0': {}
 
   '@messageformat/parser@5.1.1':
+    dependencies:
+      moo: 0.5.3
+
+  '@messageformat/parser@5.2.0':
     dependencies:
       moo: 0.5.3
 
