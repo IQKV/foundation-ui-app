@@ -911,6 +911,38 @@ Examples:
 - `test(sign-in): add unit tests for credential validation`
 - `chore(deps): update mantine to v9.4.1`
 
+## Evaluation
+
+How we judge whether an agent task in this repository is actually done. Evaluation is evidence-based — a claim without the command and its observed result is not a pass.
+
+> This section starts minimal and grows with the repository. Add a gate only when a change type repeatedly slips through without it.
+
+### Definition of done
+
+A task is evaluated as done only when all of the following hold:
+
+- Every gate required by the change type below has run and passed.
+- The final report names the exact command(s) run and the observed result (pass/fail) — per Communication & Output Standards.
+- No required gate was skipped silently. A gate that could not run is reported as a gap, never as a pass.
+
+### Required gates by change type
+
+| Change type | Required gates |
+| --- | --- |
+| Any change | `pnpm type-check`, then the narrowest relevant test |
+| Feature slice, widget or page (new or changed) | `pnpm test` (co-located unit tests), then `pnpm test:arch` |
+| Cross-slice or layer import, FSD boundary change | `pnpm test:arch` |
+| API client, auth/session or JWT handling | Unit test for the flow, then `pnpm type-check` |
+| Router or route definition | `pnpm type-check`, then `pnpm test:arch` |
+| i18n message added or changed | `pnpm messages:extract`, then `pnpm messages:compile` |
+| Dependency or build config | `pnpm type-check`, `pnpm test`, `pnpm lint` |
+| CSS or styling only | `pnpm lint:stylelint` |
+| Docs or `AGENTS.md` only | No code gate — state that none applies |
+
+### Ordering
+
+Run the narrowest relevant gate first, then the full set for the change type. On the first failure, stop and report it — do not continue on an unproven base (see Execution Discipline).
+
 ## AI Commit Message Generation (REQUIRED)
 
 After completing tasks involving multiple file changes, generate a commit message in
