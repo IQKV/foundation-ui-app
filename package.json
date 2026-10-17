@@ -125,7 +125,7 @@
     "@playwright/test": "1.63.0",
     "@release-it/conventional-changelog": "^12.0.2",
     "@rolldown/plugin-babel": "0.2.4",
-    "@tanstack/react-query-devtools": "^5.104.1",
+    "@tanstack/react-query-devtools": "^5.104.2",
     "@tanstack/react-router-devtools": "^1.167.2",
     "@tanstack/router-plugin": "^1.168.42",
     "@testing-library/dom": "^10.4.2",
