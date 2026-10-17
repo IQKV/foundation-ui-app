@@ -112,7 +112,7 @@
     "sanitize-html": "^2.18.0",
     "sockjs-client": "^1.6.1",
     "ts-pattern": "^5.9.0",
-    "zod": "^4.6.6",
+    "zod": "^4.6.7",
     "zustand": "^5.0.15"
   },
   "devDependencies": {
