@@ -1,4 +1,4 @@
-import "@testing-library/jest-dom";
+import "@testing-library/jest-dom/vitest";
 import { i18n } from "@lingui/core";
 import { messages } from "../locales/en-US";
 import { server } from "@/shared/mocks/server";
