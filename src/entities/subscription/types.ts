@@ -28,11 +28,17 @@ export interface Subscription {
   canceledAt: string | null;
   gatewayType?: GatewayType;
   externalOrderId?: string | null;
+  /** Deadline of the failed-renewal grace window; null when not in grace. */
+  gracePeriodEnd: string | null;
+  /** True when the subscription is past_due inside its grace window — access still granted. */
+  inGracePeriod: boolean;
+  /** Failed payment attempts recorded by the gateway; null when never retried. */
+  paymentRetryCount: number | null;
 }
 
 // ─── Plan ─────────────────────────────────────────────────────────────────────
 
-export type PricingModel = "FLAT" | "PER_SEAT";
+export type PricingModel = "FLAT" | "PER_SEAT" | "METERED";
 
 export interface Plan {
   id: string;
@@ -48,8 +54,8 @@ export interface Plan {
   externalPriceId?: string | null;
   active: boolean;
   trialPeriodDays?: number;
-  /** Pricing mode: FLAT (fixed price per period) or PER_SEAT (price × quantity). Null for plans
-   *  predating the per-seat feature — treat as FLAT. */
+  /** Pricing mode: FLAT (fixed price per period), PER_SEAT (price × quantity), or METERED
+   *  (usage-based). Null for plans predating the per-seat feature — treat as FLAT. */
   pricingModel?: PricingModel | null;
   gatewayType?: GatewayType;
 }
