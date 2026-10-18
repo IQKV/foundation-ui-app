@@ -124,7 +124,6 @@
     "@lingui/vite-plugin": "^6.10.0",
     "@playwright/test": "1.63.0",
     "@release-it/conventional-changelog": "^12.0.2",
-    "@rolldown/plugin-babel": "0.2.4",
     "@tanstack/react-query-devtools": "^5.104.4",
     "@tanstack/react-router-devtools": "^1.167.2",
     "@tanstack/router-plugin": "^1.168.47",

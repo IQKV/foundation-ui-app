@@ -927,17 +927,17 @@ A task is evaluated as done only when all of the following hold:
 
 ### Required gates by change type
 
-| Change type | Required gates |
-| --- | --- |
-| Any change | `pnpm type-check`, then the narrowest relevant test |
-| Feature slice, widget or page (new or changed) | `pnpm test` (co-located unit tests), then `pnpm test:arch` |
-| Cross-slice or layer import, FSD boundary change | `pnpm test:arch` |
-| API client, auth/session or JWT handling | Unit test for the flow, then `pnpm type-check` |
-| Router or route definition | `pnpm type-check`, then `pnpm test:arch` |
-| i18n message added or changed | `pnpm messages:extract`, then `pnpm messages:compile` |
-| Dependency or build config | `pnpm type-check`, `pnpm test`, `pnpm lint` |
-| CSS or styling only | `pnpm lint:stylelint` |
-| Docs or `AGENTS.md` only | No code gate — state that none applies |
+| Change type                                      | Required gates                                             |
+| ------------------------------------------------ | ---------------------------------------------------------- |
+| Any change                                       | `pnpm type-check`, then the narrowest relevant test        |
+| Feature slice, widget or page (new or changed)   | `pnpm test` (co-located unit tests), then `pnpm test:arch` |
+| Cross-slice or layer import, FSD boundary change | `pnpm test:arch`                                           |
+| API client, auth/session or JWT handling         | Unit test for the flow, then `pnpm type-check`             |
+| Router or route definition                       | `pnpm type-check`, then `pnpm test:arch`                   |
+| i18n message added or changed                    | `pnpm messages:extract`, then `pnpm messages:compile`      |
+| Dependency or build config                       | `pnpm type-check`, `pnpm test`, `pnpm lint`                |
+| CSS or styling only                              | `pnpm lint:stylelint`                                      |
+| Docs or `AGENTS.md` only                         | No code gate — state that none applies                     |
 
 ### Ordering
 
