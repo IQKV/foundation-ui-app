@@ -231,9 +231,6 @@ importers:
       '@release-it/conventional-changelog':
         specifier: ^12.0.2
         version: 12.0.2(conventional-commits-filter@5.0.0)(conventional-commits-parser@6.4.0)(release-it@19.2.4(@types/node@26.6.5))
-      '@rolldown/plugin-babel':
-        specifier: 0.2.4
-        version: 0.2.4(@babel/core@7.29.7)(@babel/runtime@7.29.10)(rolldown@1.2.14)(vite@8.3.4(@types/node@26.6.5)(jiti@2.7.0)(sugarss@5.0.2(postcss@8.5.30))(yaml@2.9.1))
       '@tanstack/react-query-devtools':
         specifier: ^5.104.4
         version: 5.104.4(@tanstack/react-query@5.104.4(@types/react@19.3.0)(react@19.3.1))(@types/react@19.3.0)(csstype@3.2.3)(react@19.3.1)
@@ -6056,8 +6053,8 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
-  seroval-plugins@1.6.10:
-    resolution: {integrity: sha512-zKlRcrRRgB7zeMQreqDFLn9uT/xqPWP7irZqafeN9UFmbUGdN5lQCjxw/c+ZRLm/A6fgdCbFWdj0dWqgtle77g==}
+  seroval-plugins@1.6.11:
+    resolution: {integrity: sha512-LmB3nd8pL39jKHKvnpTUjcjBtNwR8MLty/ydAR8qbfXt5j6/6KqR1atuw8cVmD2/lDxAkvAwq5tI/HsisD9Fqg==}
     engines: {node: '>=10'}
     peerDependencies:
       seroval: ^1.0
@@ -8449,6 +8446,7 @@ snapshots:
     optionalDependencies:
       '@babel/runtime': 7.29.10
       vite: 8.3.4(@types/node@26.6.5)(jiti@2.7.0)(sugarss@5.0.2(postcss@8.5.30))(yaml@2.9.1)
+    optional: true
 
   '@rolldown/pluginutils@1.0.1': {}
 
@@ -8705,7 +8703,7 @@ snapshots:
       '@tanstack/history': 1.162.5
       cookie-es: 3.1.1
       seroval: 1.6.10
-      seroval-plugins: 1.6.10(seroval@1.6.10)
+      seroval-plugins: 1.6.11(seroval@1.6.10)
 
   '@tanstack/router-devtools-core@1.168.2(@tanstack/router-core@1.171.38)(csstype@3.2.3)':
     dependencies:
@@ -12694,7 +12692,7 @@ snapshots:
 
   semver@7.8.5: {}
 
-  seroval-plugins@1.6.10(seroval@1.6.10):
+  seroval-plugins@1.6.11(seroval@1.6.10):
     dependencies:
       seroval: 1.6.10
 
@@ -12763,7 +12761,7 @@ snapshots:
     dependencies:
       csstype: 3.2.3
       seroval: 1.6.10
-      seroval-plugins: 1.6.10(seroval@1.6.10)
+      seroval-plugins: 1.6.11(seroval@1.6.10)
 
   solid-presence@0.2.0(solid-js@1.9.17):
     dependencies:
