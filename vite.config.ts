@@ -30,7 +30,6 @@ export default defineConfig(({ mode }) => {
     plugins: [
       react(),
       lingui({ macroTransform: true }),
-      babel({ presets: [linguiTransformerBabelPreset()] }),
       !isTest && tanstackRouter(),
     ],
     server: {
