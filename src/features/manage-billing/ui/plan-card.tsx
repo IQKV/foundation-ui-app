@@ -83,6 +83,8 @@ export function PlanCard({ plan, isCurrent, onSelect, loading }: PlanCardProps) 
             <Text size="sm" c="dimmed" mb={4}>
               {plan.pricingModel === "PER_SEAT" ? (
                 <Trans>/ seat / {plan.billingPeriod.toLowerCase()}</Trans>
+              ) : plan.pricingModel === "METERED" ? (
+                <Trans>/ unit / {plan.billingPeriod.toLowerCase()}</Trans>
               ) : (
                 <Trans>/ {plan.billingPeriod.toLowerCase()}</Trans>
               )}
