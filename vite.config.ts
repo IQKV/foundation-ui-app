@@ -27,11 +27,7 @@ export default defineConfig(({ mode }) => {
         "@": path.resolve(import.meta.dirname, "./src"),
       },
     },
-    plugins: [
-      react(),
-      lingui({ macroTransform: true }),
-      !isTest && tanstackRouter(),
-    ],
+    plugins: [react(), lingui({ macroTransform: true }), !isTest && tanstackRouter()],
     server: {
       /**
        * Dev proxy — forwards /api/* to the remote API server.
