@@ -15,7 +15,8 @@ export function useUpdateVenue({ venueId, onSuccess }: UseUpdateVenueOptions) {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (values: VenueFormValues) => catalogApi.replaceVenue(venueId, toWriteRequest(values)),
+    mutationFn: (values: VenueFormValues) =>
+      catalogApi.replaceVenue(venueId, toWriteRequest(values)),
     onSuccess: () => {
       notifications.show({
         title: "Venue updated",

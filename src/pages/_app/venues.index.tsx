@@ -687,9 +687,7 @@ function VenuesPage() {
     getInitialValueInEffect: false,
   });
   const sortOrder: SortOrder =
-    storedSortOrder === "name_asc" || storedSortOrder === "name_desc"
-      ? storedSortOrder
-      : "recent";
+    storedSortOrder === "name_asc" || storedSortOrder === "name_desc" ? storedSortOrder : "recent";
   const sortParams =
     sortOrder === "name_asc"
       ? { sortBy: "name" as const, sortDir: "asc" as const }
@@ -786,10 +784,7 @@ function VenuesPage() {
       <PageTitle segments={[t`Venues`]} />
       <PageHeader
         title={<Trans>Venues</Trans>}
-        breadcrumbs={[
-          { label: <Trans>Home</Trans>, to: "/" },
-          { label: <Trans>Venues</Trans> },
-        ]}
+        breadcrumbs={[{ label: <Trans>Home</Trans>, to: "/" }, { label: <Trans>Venues</Trans> }]}
         toolbar={
           canManage ? (
             <Button

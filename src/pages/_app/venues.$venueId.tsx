@@ -144,13 +144,7 @@ function FieldChip({ label, value }: { label: React.ReactNode; value: React.Reac
 
 // ─── Photos tab ───────────────────────────────────────────────────────────────
 
-function PhotosTab({
-  photos,
-  isLoading,
-}: {
-  photos: VenueAssetPublic[];
-  isLoading: boolean;
-}) {
+function PhotosTab({ photos, isLoading }: { photos: VenueAssetPublic[]; isLoading: boolean }) {
   if (isLoading) {
     return (
       <SimpleGrid cols={{ base: 2, sm: 3, md: 4, lg: 5 }} spacing="sm">
@@ -250,10 +244,7 @@ function VenueDetailPage() {
 
   // Photos come from the master-catalog photos endpoint via masterVenueId.
   // Only fetched when the venue is linked to a master catalog record.
-  const {
-    data: photosData,
-    isLoading: photosLoading,
-  } = useQuery({
+  const { data: photosData, isLoading: photosLoading } = useQuery({
     queryKey: ["tenant", "venue", venueId, "photos", venue?.masterVenueId ?? ""],
     queryFn: () => catalogApi.listMasterVenuePhotos(venue!.masterVenueId!),
     enabled: Boolean(venue?.masterVenueId),
@@ -584,7 +575,12 @@ function VenueDetailPage() {
                             {String(venue.locationLat)}, {String(venue.locationLng)}
                           </Text>
                           {mapUrl && (
-                            <Anchor href={mapUrl} target="_blank" rel="noopener noreferrer" size="sm">
+                            <Anchor
+                              href={mapUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              size="sm"
+                            >
                               <Group gap={3} wrap="nowrap">
                                 <IconExternalLink size={11} />
                                 <Trans>Maps</Trans>

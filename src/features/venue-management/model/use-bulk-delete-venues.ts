@@ -17,7 +17,9 @@ export function useBulkDeleteVenues({ onSuccess }: UseBulkDeleteVenuesOptions) {
       notifications.show({
         title: "Venues deleted",
         message:
-          ids.length === 1 ? "The venue has been deleted." : `${ids.length} venues have been deleted.`,
+          ids.length === 1
+            ? "The venue has been deleted."
+            : `${ids.length} venues have been deleted.`,
         color: "green",
         icon: createElement(IconCheck, { size: 16 }),
       });

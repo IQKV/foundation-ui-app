@@ -1,12 +1,4 @@
-import {
-  SimpleGrid,
-  Stack,
-  TextInput,
-  NumberInput,
-  Paper,
-  Group,
-  Text,
-} from "@mantine/core";
+import { SimpleGrid, Stack, TextInput, NumberInput, Paper, Group, Text } from "@mantine/core";
 import type { UseFormReturnType } from "@mantine/form";
 import { useLingui } from "@lingui/react/macro";
 import { IconBuildingStore, IconMapPin, IconLink } from "@tabler/icons-react";

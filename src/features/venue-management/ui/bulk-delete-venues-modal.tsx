@@ -11,7 +11,12 @@ interface BulkDeleteVenuesModalProps {
   onDeleted?: () => void;
 }
 
-export function BulkDeleteVenuesModal({ ids, opened, onClose, onDeleted }: BulkDeleteVenuesModalProps) {
+export function BulkDeleteVenuesModal({
+  ids,
+  opened,
+  onClose,
+  onDeleted,
+}: BulkDeleteVenuesModalProps) {
   const mutation = useBulkDeleteVenues({
     onSuccess: () => {
       onDeleted?.();
