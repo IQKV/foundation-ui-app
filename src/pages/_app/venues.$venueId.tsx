@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import {
   Container,
@@ -18,6 +19,7 @@ import {
   Divider,
   CopyButton,
 } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
 import {
   IconAlertCircle,
   IconArrowLeft,
@@ -28,11 +30,21 @@ import {
   IconAdjustments,
   IconLink,
   IconCheck,
+  IconEdit,
+  IconTrash,
 } from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { PageTitle } from "@/shared/lib/page-title";
+import type { Venue } from "@/entities/venue";
 import { PageHeader } from "@/shared/ui";
-import { useVenue, ACCENT_GRADIENT, SECTION_CARD_STYLES } from "@/features/venue-management";
+import { useSession } from "@/processes/session";
+import {
+  useVenue,
+  ACCENT_GRADIENT,
+  SECTION_CARD_STYLES,
+  EditVenueModal,
+  DeleteVenueModal,
+} from "@/features/venue-management";
 import { dayjs } from "@/shared/lib/date-utils";
 import { TestSelectors } from "@/shared/lib/test-selectors";
 
@@ -102,6 +114,13 @@ function VenueDetailPage() {
   const { t } = useLingui();
   const navigate = useNavigate();
   const { venueId } = Route.useParams();
+  const { payload } = useSession();
+  const authorities = payload?.authorities ?? [];
+  const canManage = authorities.includes("TENANT_OWNER") || authorities.includes("ADMIN");
+
+  const [editOpened, { open: openEdit, close: closeEdit }] = useDisclosure(false);
+  const [deleteOpened, { open: openDelete, close: closeDelete }] = useDisclosure(false);
+  const [deletedVenue, setDeletedVenue] = useState<Venue | null>(null);
 
   const { data: venue, isLoading, isError, refetch, isFetching } = useVenue(venueId);
 
@@ -111,6 +130,8 @@ function VenueDetailPage() {
     venue?.locationLat && venue?.locationLng
       ? `https://maps.google.com/?q=${venue.locationLat},${venue.locationLng}`
       : null;
+
+  const handleDeleteSuccess = () => void navigate({ to: "/venues" });
 
   if (isError) {
     return (
@@ -189,6 +210,34 @@ function VenueDetailPage() {
                 <IconRefresh size={15} />
               </ActionIcon>
             </Tooltip>
+            {canManage && (
+              <>
+                <Button
+                  variant="light"
+                  size="sm"
+                  leftSection={<IconEdit size={15} />}
+                  disabled={!venue}
+                  data-testid={TestSelectors.VENUE_DETAIL_EDIT_BUTTON}
+                  onClick={openEdit}
+                >
+                  <Trans>Edit</Trans>
+                </Button>
+                <Button
+                  variant="light"
+                  color="red"
+                  size="sm"
+                  leftSection={<IconTrash size={15} />}
+                  disabled={!venue}
+                  data-testid={TestSelectors.VENUE_DETAIL_DELETE_BUTTON}
+                  onClick={() => {
+                    setDeletedVenue(venue ?? null);
+                    openDelete();
+                  }}
+                >
+                  <Trans>Delete</Trans>
+                </Button>
+              </>
+            )}
           </Group>
         }
       />
@@ -445,13 +494,7 @@ function VenueDetailPage() {
             <Stack gap={6}>
               <FieldChip
                 label={<Trans>Venue ID</Trans>}
-                value={
-                  venue ? (
-                    <Text size="sm" ff="monospace">
-                      {venue.id}
-                    </Text>
-                  ) : null
-                }
+                value={venue ? <Text size="sm" ff="monospace">{venue.id}</Text> : null}
               />
               <FieldChip
                 label={<Trans>Created</Trans>}
@@ -465,6 +508,18 @@ function VenueDetailPage() {
           </InfoSectionCard>
         </Stack>
       </Stack>
+
+      {canManage && (
+        <>
+          <EditVenueModal venue={venue ?? null} opened={editOpened} onClose={closeEdit} />
+          <DeleteVenueModal
+            venue={deletedVenue}
+            opened={deleteOpened}
+            onClose={closeDelete}
+            onDeleted={handleDeleteSuccess}
+          />
+        </>
+      )}
     </Container>
   );
 }

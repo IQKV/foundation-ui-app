@@ -79,7 +79,13 @@ export type {
 // ─── Catalog (tenant venues) ──────────────────────────────────────────────────
 
 export { catalogApi } from "./catalog";
-export type { Venue, VenueListResponse, ListVenueParams } from "./catalog";
+export type {
+  Venue,
+  VenueListResponse,
+  ListVenueParams,
+  VenueWriteRequest,
+  VenuePatchRequest,
+} from "./catalog";
 
 // ─── Auth ─────────────────────────────────────────────────────────────────────
 

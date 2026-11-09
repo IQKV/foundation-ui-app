@@ -35,6 +35,10 @@ msgstr "{0} – {1}"
 msgid "{0} Days Left"
 msgstr "{0} дни остават"
 
+#: src/pages/_app/venues.index.tsx
+msgid "{selectedCount} selected"
+msgstr ""
+
 #: src/features/manage-billing/ui/plan-card.tsx
 msgid "{trialDays} Days Free Trial"
 msgstr "{trialDays} дни безплатен пробен период"
@@ -197,6 +201,7 @@ msgstr ""
 msgid "Addons"
 msgstr ""
 
+#: src/features/venue-management/ui/venue-fields.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Address"
 msgstr ""
@@ -258,6 +263,15 @@ msgstr "Организация с това наименование вече с�
 #: src/pages/_app/cms-pages.index.tsx
 msgid "Archived"
 msgstr "Архивирано"
+
+#. placeholder {0}: venue?.name ?? ""
+#: src/features/venue-management/ui/delete-venue-modal.tsx
+msgid "Are you sure you want to delete <0>{0}</0>? This action cannot be undone."
+msgstr ""
+
+#: src/features/venue-management/ui/bulk-delete-venues-modal.tsx
+msgid "Are you sure you want to delete <0>{countLabel}</0>? This action cannot be undone."
+msgstr ""
 
 #: src/features/page-admin/ui/delete-page-modal.tsx
 msgid "Are you sure you want to delete <0>{displayName}</0>? This action cannot be undone."
@@ -382,6 +396,10 @@ msgstr "Порталът за фактуриране е недостъпен"
 #: src/features/member-role/ui/transfer-ownership-modal.tsx
 #: src/features/member-role/ui/update-member-authorities-modal.tsx
 #: src/features/page-admin/ui/delete-page-modal.tsx
+#: src/features/venue-management/ui/bulk-delete-venues-modal.tsx
+#: src/features/venue-management/ui/create-venue-modal.tsx
+#: src/features/venue-management/ui/delete-venue-modal.tsx
+#: src/features/venue-management/ui/edit-venue-modal.tsx
 #: src/pages/_app/cms-pages.create.tsx
 msgid "Cancel"
 msgstr "Отказ"
@@ -433,6 +451,7 @@ msgstr "Изберете парола"
 msgid "Choose a strong password with at least 8 characters, including uppercase, lowercase, a number, and a special character."
 msgstr "Изберете силна парола с поне 8 символа, включваща главна буква, малка буква, цифра и специален символ."
 
+#: src/features/venue-management/ui/venue-fields.tsx
 #: src/pages/_app/venues.$venueId.tsx
 #: src/pages/_app/venues.index.tsx
 msgid "City"
@@ -445,6 +464,10 @@ msgstr "Изчисти всички"
 
 #: src/pages/_app/venues.index.tsx
 msgid "Clear filters"
+msgstr ""
+
+#: src/pages/_app/venues.index.tsx
+msgid "Clear selection"
 msgstr ""
 
 #: src/pages/_app/settings/security.tsx
@@ -563,6 +586,7 @@ msgstr "Продължи с Microsoft"
 msgid "Continue with SSO"
 msgstr "Продължи с SSO"
 
+#: src/features/venue-management/ui/venue-fields.tsx
 #: src/pages/_app/venues.$venueId.tsx
 #: src/pages/_app/venues.index.tsx
 msgid "Coordinates"
@@ -591,6 +615,14 @@ msgstr "Не може да се изтрие SSO конфигурацията."
 #: src/features/page-admin/ui/delete-page-modal.tsx
 msgid "Could not delete the page. It may be published."
 msgstr "Не може да се изтрие страницата. Тя може да е публикувана."
+
+#: src/features/venue-management/ui/bulk-delete-venues-modal.tsx
+msgid "Could not delete the selected venues. Please try again."
+msgstr ""
+
+#: src/features/venue-management/ui/delete-venue-modal.tsx
+msgid "Could not delete the venue. Please try again."
+msgstr ""
 
 #: src/pages/_app/cms-pages.index.tsx
 msgid "Could not fetch pages from the API."
@@ -674,6 +706,14 @@ msgstr "Създай страница"
 #: src/pages/-billing-example.tsx
 msgid "Create Project"
 msgstr "Създай проект"
+
+#: src/features/venue-management/ui/create-venue-modal.tsx
+msgid "Create venue"
+msgstr ""
+
+#: src/features/venue-management/ui/create-venue-modal.tsx
+msgid "Create Venue"
+msgstr ""
 
 #: src/pages/create-organization.tsx
 msgid "Create your"
@@ -761,17 +801,27 @@ msgstr "Табло"
 msgid "Date"
 msgstr "Дата"
 
+#: src/features/venue-management/ui/venue-fields.tsx
+msgid "Decimal lat / lng used for map pins and geo search. Leave blank if unknown."
+msgstr ""
+
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "Default locale — required"
 msgstr "Локал по подразбиране — задължителен"
 
 #: src/features/page-admin/ui/delete-page-modal.tsx
+#: src/features/venue-management/ui/bulk-delete-venues-modal.tsx
+#: src/features/venue-management/ui/delete-venue-modal.tsx
 #: src/pages/_app/cms-pages.index.tsx
 #: src/pages/_app/settings/security.tsx
+#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues.index.tsx
 msgid "Delete"
 msgstr "Изтрий"
 
 #: src/features/page-admin/ui/delete-page-modal.tsx
+#: src/features/venue-management/ui/bulk-delete-venues-modal.tsx
+#: src/features/venue-management/ui/delete-venue-modal.tsx
 #: src/pages/_app/settings/security.tsx
 msgid "Delete failed"
 msgstr "Изтриването не успя"
@@ -779,6 +829,18 @@ msgstr "Изтриването не успя"
 #: src/features/page-admin/ui/delete-page-modal.tsx
 msgid "Delete Page"
 msgstr "Изтрий страница"
+
+#: src/pages/_app/venues.index.tsx
+msgid "Delete selected"
+msgstr ""
+
+#: src/features/venue-management/ui/delete-venue-modal.tsx
+msgid "Delete Venue"
+msgstr ""
+
+#: src/features/venue-management/ui/bulk-delete-venues-modal.tsx
+msgid "Delete Venues"
+msgstr ""
 
 #: src/pages/_app/settings/security.tsx
 #: src/shared/ui/tenant-status-badge/tenant-status-badge.tsx
@@ -831,6 +893,7 @@ msgstr "напр. default, landing"
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.index.tsx
 #: src/pages/_app/settings/organization.tsx
+#: src/pages/_app/venues.$venueId.tsx
 msgid "Edit"
 msgstr "Редактирай"
 
@@ -845,6 +908,14 @@ msgstr "Редактирай страница"
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 msgid "Edit Profile"
 msgstr "Редактирай профил"
+
+#: src/pages/_app/venues.index.tsx
+msgid "Edit record"
+msgstr ""
+
+#: src/features/venue-management/ui/edit-venue-modal.tsx
+msgid "Edit Venue"
+msgstr ""
 
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 #: src/features/forgot-password/ui/forgot-password-form.tsx
@@ -963,6 +1034,10 @@ msgstr "Изтича"
 msgid "Expires at (optional)"
 msgstr "Изтича на (по избор)"
 
+#: src/features/venue-management/ui/create-venue-modal.tsx
+msgid "Failed to create venue"
+msgstr ""
+
 #: src/features/manage-billing/ui/billing-info.tsx
 msgid "Failed to load billing settings."
 msgstr "Зареждането на настройките за фактуриране не успя."
@@ -1006,6 +1081,10 @@ msgstr "Зареждането на историята на webhook журнал
 
 #: src/addons/platform-ai-chat/ui/chat-window.tsx
 msgid "Failed to send message. Please try again."
+msgstr ""
+
+#: src/features/venue-management/ui/edit-venue-modal.tsx
+msgid "Failed to update venue"
 msgstr ""
 
 #: src/features/signup/ui/password-strength.tsx
@@ -1148,10 +1227,16 @@ msgstr "https://issuer.example.com"
 msgid "ID"
 msgstr "ID"
 
+#. placeholder {0}: venue.id
+#: src/features/venue-management/ui/edit-venue-modal.tsx
+msgid "ID: {0}"
+msgstr ""
+
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Identifiers & timestamps"
 msgstr ""
 
+#: src/features/venue-management/ui/venue-fields.tsx
 #: src/pages/_app/cms-pages.$pageId.tsx
 msgid "Identity"
 msgstr "Самоличност"
@@ -1281,6 +1366,14 @@ msgstr "Фамилното ime е задължително"
 msgid "Last name is too long"
 msgstr "Фамилното ime е твърде дълго"
 
+#: src/features/venue-management/ui/venue-fields.tsx
+msgid "Latitude"
+msgstr ""
+
+#: src/features/venue-management/model/types.ts
+msgid "Latitude must be a number"
+msgstr ""
+
 #: src/pages/_app/settings/security.tsx
 msgid "Leave blank to keep existing secret"
 msgstr ""
@@ -1348,6 +1441,14 @@ msgstr "Заключен"
 msgid "Locked / Suspended"
 msgstr "Заключен / Спрян"
 
+#: src/features/venue-management/ui/venue-fields.tsx
+msgid "Longitude"
+msgstr ""
+
+#: src/features/venue-management/model/types.ts
+msgid "Longitude must be a number"
+msgstr ""
+
 #: src/features/signup/ui/password-strength.tsx
 msgid "Lowercase letter"
 msgstr "Малка буква"
@@ -1386,6 +1487,7 @@ msgstr ""
 msgid "Mark all as read"
 msgstr "Маркирай всички като прочетени"
 
+#: src/features/venue-management/ui/venue-fields.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Master catalog link"
 msgstr ""
@@ -1397,6 +1499,10 @@ msgstr ""
 
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Master venue"
+msgstr ""
+
+#: src/features/venue-management/ui/venue-fields.tsx
+msgid "Master venue id"
 msgstr ""
 
 #: src/pages/-billing-example.tsx
@@ -1442,12 +1548,21 @@ msgid "Must be a valid email address"
 msgstr "Трябва да е валиден имейл адрес"
 
 #: src/features/page-admin/model/types.ts
+#: src/features/venue-management/model/types.ts
 msgid "Must be a valid UUID"
 msgstr "Трябва да е валиден UUID"
 
 #: src/shared/ui/app-layout/app-header.tsx
 msgid "My Account"
 msgstr "Моят акаунт"
+
+#: src/features/venue-management/ui/venue-fields.tsx
+msgid "Name"
+msgstr ""
+
+#: src/features/venue-management/model/types.ts
+msgid "Name is required"
+msgstr ""
 
 #: src/features/manage-organization/ui/organization-settings.tsx
 msgid "Name is too short"
@@ -1492,6 +1607,10 @@ msgstr "Нова парола"
 #: src/widgets/dashboard-signup-chart/ui/dashboard-signup-chart.tsx
 msgid "New signups"
 msgstr "Нови регистрации"
+
+#: src/pages/_app/venues.index.tsx
+msgid "New venue"
+msgstr ""
 
 #: src/features/manage-billing/ui/current-subscription.tsx
 msgid "Next Billing Date"
@@ -1583,7 +1702,11 @@ msgid "No venues match your filters"
 msgstr ""
 
 #: src/pages/_app/venues.index.tsx
-msgid "No venues yet"
+#~ msgid "No venues yet"
+#~ msgstr ""
+
+#: src/pages/_app/venues.index.tsx
+msgid "No venues yet — add your first one"
 msgstr ""
 
 #: src/features/manage-billing/ui/webhook-log-list.tsx
@@ -1671,6 +1794,10 @@ msgstr "По избор ключ за оформление"
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "Optional translation"
 msgstr "По избор превод"
+
+#: src/features/venue-management/ui/venue-fields.tsx
+msgid "Optional UUID of the matching master-catalog venue. Leave blank if none."
+msgstr ""
 
 #: src/pages/sign-in.tsx
 msgid "or"
@@ -1863,6 +1990,8 @@ msgid "Platform Highlights"
 msgstr "Основни предимства на платформата"
 
 #: src/features/complete-profile/model/use-complete-profile.ts
+#: src/features/venue-management/ui/create-venue-modal.tsx
+#: src/features/venue-management/ui/edit-venue-modal.tsx
 msgid "Please check the form and try again."
 msgstr "Моля, проверете формуляра и опитайте отново."
 
@@ -2081,6 +2210,7 @@ msgid "Save Billing Information"
 msgstr "Запази информацията за фактуриране"
 
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
+#: src/features/venue-management/ui/edit-venue-modal.tsx
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/settings/general.tsx
 msgid "Save changes"
@@ -2141,6 +2271,10 @@ msgstr "Вижте всички известия"
 msgid "Select a session or start a new chat."
 msgstr ""
 
+#: src/pages/_app/venues.index.tsx
+msgid "Select all venues on this page"
+msgstr ""
+
 #: src/features/complete-profile/ui/complete-profile-form.tsx
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 #: src/pages/_app/settings/general.tsx
@@ -2159,6 +2293,10 @@ msgstr "Изберете роля"
 #: src/features/sign-in/ui/sign-in-form.tsx
 msgid "Select the workspace you want to sign in to."
 msgstr "Изберете работното пространство, в което искате да влезете."
+
+#: src/pages/_app/venues.index.tsx
+msgid "Select venue"
+msgstr ""
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Send email verifications, password resets & invitations"
@@ -2469,6 +2607,10 @@ msgstr "Уникалният идентификатор на организац�
 msgid "The venue could not be found or the API is unavailable."
 msgstr ""
 
+#: src/features/venue-management/ui/venue-fields.tsx
+msgid "The venue's name and address as it appears in your workspace."
+msgstr ""
+
 #: src/pages/loading-demo.tsx
 msgid "Theme-aware (respects dark mode and color scheme)"
 msgstr "Отчита темата (поддържа тъмен режим и цветова схема)"
@@ -2700,6 +2842,10 @@ msgstr "Потвърждаване на имейл адреса ви…"
 #: src/pages/_app/team.tsx
 msgid "View details"
 msgstr "Вижте детайлите"
+
+#: src/pages/_app/venues.index.tsx
+msgid "View record"
+msgstr ""
 
 #: src/features/signup/ui/verify-email-prompt.tsx
 msgid "We sent a verification link to <0>{email}</0>. Click it to confirm your email address."

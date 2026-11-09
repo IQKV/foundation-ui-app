@@ -35,6 +35,10 @@ msgstr "{0} – {1}"
 msgid "{0} Days Left"
 msgstr "{0} Days Left"
 
+#: src/pages/_app/venues.index.tsx
+msgid "{selectedCount} selected"
+msgstr "{selectedCount} selected"
+
 #: src/features/manage-billing/ui/plan-card.tsx
 msgid "{trialDays} Days Free Trial"
 msgstr "{trialDays} Days Free Trial"
@@ -197,6 +201,7 @@ msgstr "Addon Page"
 msgid "Addons"
 msgstr "Addons"
 
+#: src/features/venue-management/ui/venue-fields.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Address"
 msgstr "Address"
@@ -258,6 +263,15 @@ msgstr "An organization with this name already exists."
 #: src/pages/_app/cms-pages.index.tsx
 msgid "Archived"
 msgstr "Archived"
+
+#. placeholder {0}: venue?.name ?? ""
+#: src/features/venue-management/ui/delete-venue-modal.tsx
+msgid "Are you sure you want to delete <0>{0}</0>? This action cannot be undone."
+msgstr "Are you sure you want to delete <0>{0}</0>? This action cannot be undone."
+
+#: src/features/venue-management/ui/bulk-delete-venues-modal.tsx
+msgid "Are you sure you want to delete <0>{countLabel}</0>? This action cannot be undone."
+msgstr "Are you sure you want to delete <0>{countLabel}</0>? This action cannot be undone."
 
 #: src/features/page-admin/ui/delete-page-modal.tsx
 msgid "Are you sure you want to delete <0>{displayName}</0>? This action cannot be undone."
@@ -382,6 +396,10 @@ msgstr "Billing Portal Unavailable"
 #: src/features/member-role/ui/transfer-ownership-modal.tsx
 #: src/features/member-role/ui/update-member-authorities-modal.tsx
 #: src/features/page-admin/ui/delete-page-modal.tsx
+#: src/features/venue-management/ui/bulk-delete-venues-modal.tsx
+#: src/features/venue-management/ui/create-venue-modal.tsx
+#: src/features/venue-management/ui/delete-venue-modal.tsx
+#: src/features/venue-management/ui/edit-venue-modal.tsx
 #: src/pages/_app/cms-pages.create.tsx
 msgid "Cancel"
 msgstr "Cancel"
@@ -433,6 +451,7 @@ msgstr "Choose a password"
 msgid "Choose a strong password with at least 8 characters, including uppercase, lowercase, a number, and a special character."
 msgstr "Choose a strong password with at least 8 characters, including uppercase, lowercase, a number, and a special character."
 
+#: src/features/venue-management/ui/venue-fields.tsx
 #: src/pages/_app/venues.$venueId.tsx
 #: src/pages/_app/venues.index.tsx
 msgid "City"
@@ -446,6 +465,10 @@ msgstr "Clear all"
 #: src/pages/_app/venues.index.tsx
 msgid "Clear filters"
 msgstr "Clear filters"
+
+#: src/pages/_app/venues.index.tsx
+msgid "Clear selection"
+msgstr "Clear selection"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Client ID"
@@ -563,6 +586,7 @@ msgstr "Continue with Microsoft"
 msgid "Continue with SSO"
 msgstr "Continue with SSO"
 
+#: src/features/venue-management/ui/venue-fields.tsx
 #: src/pages/_app/venues.$venueId.tsx
 #: src/pages/_app/venues.index.tsx
 msgid "Coordinates"
@@ -591,6 +615,14 @@ msgstr "Could not delete SSO configuration."
 #: src/features/page-admin/ui/delete-page-modal.tsx
 msgid "Could not delete the page. It may be published."
 msgstr "Could not delete the page. It may be published."
+
+#: src/features/venue-management/ui/bulk-delete-venues-modal.tsx
+msgid "Could not delete the selected venues. Please try again."
+msgstr "Could not delete the selected venues. Please try again."
+
+#: src/features/venue-management/ui/delete-venue-modal.tsx
+msgid "Could not delete the venue. Please try again."
+msgstr "Could not delete the venue. Please try again."
 
 #: src/pages/_app/cms-pages.index.tsx
 msgid "Could not fetch pages from the API."
@@ -674,6 +706,14 @@ msgstr "Create page"
 #: src/pages/-billing-example.tsx
 msgid "Create Project"
 msgstr "Create Project"
+
+#: src/features/venue-management/ui/create-venue-modal.tsx
+msgid "Create venue"
+msgstr "Create venue"
+
+#: src/features/venue-management/ui/create-venue-modal.tsx
+msgid "Create Venue"
+msgstr "Create Venue"
 
 #: src/pages/create-organization.tsx
 msgid "Create your"
@@ -761,17 +801,27 @@ msgstr "Dashboard"
 msgid "Date"
 msgstr "Date"
 
+#: src/features/venue-management/ui/venue-fields.tsx
+msgid "Decimal lat / lng used for map pins and geo search. Leave blank if unknown."
+msgstr "Decimal lat / lng used for map pins and geo search. Leave blank if unknown."
+
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "Default locale — required"
 msgstr "Default locale — required"
 
 #: src/features/page-admin/ui/delete-page-modal.tsx
+#: src/features/venue-management/ui/bulk-delete-venues-modal.tsx
+#: src/features/venue-management/ui/delete-venue-modal.tsx
 #: src/pages/_app/cms-pages.index.tsx
 #: src/pages/_app/settings/security.tsx
+#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues.index.tsx
 msgid "Delete"
 msgstr "Delete"
 
 #: src/features/page-admin/ui/delete-page-modal.tsx
+#: src/features/venue-management/ui/bulk-delete-venues-modal.tsx
+#: src/features/venue-management/ui/delete-venue-modal.tsx
 #: src/pages/_app/settings/security.tsx
 msgid "Delete failed"
 msgstr "Delete failed"
@@ -779,6 +829,18 @@ msgstr "Delete failed"
 #: src/features/page-admin/ui/delete-page-modal.tsx
 msgid "Delete Page"
 msgstr "Delete Page"
+
+#: src/pages/_app/venues.index.tsx
+msgid "Delete selected"
+msgstr "Delete selected"
+
+#: src/features/venue-management/ui/delete-venue-modal.tsx
+msgid "Delete Venue"
+msgstr "Delete Venue"
+
+#: src/features/venue-management/ui/bulk-delete-venues-modal.tsx
+msgid "Delete Venues"
+msgstr "Delete Venues"
 
 #: src/pages/_app/settings/security.tsx
 #: src/shared/ui/tenant-status-badge/tenant-status-badge.tsx
@@ -831,6 +893,7 @@ msgstr "e.g. default, landing"
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.index.tsx
 #: src/pages/_app/settings/organization.tsx
+#: src/pages/_app/venues.$venueId.tsx
 msgid "Edit"
 msgstr "Edit"
 
@@ -845,6 +908,14 @@ msgstr "Edit Page"
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 msgid "Edit Profile"
 msgstr "Edit Profile"
+
+#: src/pages/_app/venues.index.tsx
+msgid "Edit record"
+msgstr "Edit record"
+
+#: src/features/venue-management/ui/edit-venue-modal.tsx
+msgid "Edit Venue"
+msgstr "Edit Venue"
 
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 #: src/features/forgot-password/ui/forgot-password-form.tsx
@@ -963,6 +1034,10 @@ msgstr "Expires"
 msgid "Expires at (optional)"
 msgstr "Expires at (optional)"
 
+#: src/features/venue-management/ui/create-venue-modal.tsx
+msgid "Failed to create venue"
+msgstr "Failed to create venue"
+
 #: src/features/manage-billing/ui/billing-info.tsx
 msgid "Failed to load billing settings."
 msgstr "Failed to load billing settings."
@@ -1007,6 +1082,10 @@ msgstr "Failed to load webhook log history."
 #: src/addons/platform-ai-chat/ui/chat-window.tsx
 msgid "Failed to send message. Please try again."
 msgstr "Failed to send message. Please try again."
+
+#: src/features/venue-management/ui/edit-venue-modal.tsx
+msgid "Failed to update venue"
+msgstr "Failed to update venue"
 
 #: src/features/signup/ui/password-strength.tsx
 msgid "Fair"
@@ -1148,10 +1227,16 @@ msgstr "https://issuer.example.com"
 msgid "ID"
 msgstr "ID"
 
+#. placeholder {0}: venue.id
+#: src/features/venue-management/ui/edit-venue-modal.tsx
+msgid "ID: {0}"
+msgstr "ID: {0}"
+
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Identifiers & timestamps"
 msgstr "Identifiers & timestamps"
 
+#: src/features/venue-management/ui/venue-fields.tsx
 #: src/pages/_app/cms-pages.$pageId.tsx
 msgid "Identity"
 msgstr "Identity"
@@ -1281,6 +1366,14 @@ msgstr "Last name is required"
 msgid "Last name is too long"
 msgstr "Last name is too long"
 
+#: src/features/venue-management/ui/venue-fields.tsx
+msgid "Latitude"
+msgstr "Latitude"
+
+#: src/features/venue-management/model/types.ts
+msgid "Latitude must be a number"
+msgstr "Latitude must be a number"
+
 #: src/pages/_app/settings/security.tsx
 msgid "Leave blank to keep existing secret"
 msgstr "Leave blank to keep existing secret"
@@ -1348,6 +1441,14 @@ msgstr "Locked"
 msgid "Locked / Suspended"
 msgstr "Locked / Suspended"
 
+#: src/features/venue-management/ui/venue-fields.tsx
+msgid "Longitude"
+msgstr "Longitude"
+
+#: src/features/venue-management/model/types.ts
+msgid "Longitude must be a number"
+msgstr "Longitude must be a number"
+
 #: src/features/signup/ui/password-strength.tsx
 msgid "Lowercase letter"
 msgstr "Lowercase letter"
@@ -1386,6 +1487,7 @@ msgstr "Maps"
 msgid "Mark all as read"
 msgstr "Mark all as read"
 
+#: src/features/venue-management/ui/venue-fields.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Master catalog link"
 msgstr "Master catalog link"
@@ -1398,6 +1500,10 @@ msgstr "Master linked"
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Master venue"
 msgstr "Master venue"
+
+#: src/features/venue-management/ui/venue-fields.tsx
+msgid "Master venue id"
+msgstr "Master venue id"
 
 #: src/pages/-billing-example.tsx
 msgid "Max Projects:"
@@ -1442,12 +1548,21 @@ msgid "Must be a valid email address"
 msgstr "Must be a valid email address"
 
 #: src/features/page-admin/model/types.ts
+#: src/features/venue-management/model/types.ts
 msgid "Must be a valid UUID"
 msgstr "Must be a valid UUID"
 
 #: src/shared/ui/app-layout/app-header.tsx
 msgid "My Account"
 msgstr "My Account"
+
+#: src/features/venue-management/ui/venue-fields.tsx
+msgid "Name"
+msgstr "Name"
+
+#: src/features/venue-management/model/types.ts
+msgid "Name is required"
+msgstr "Name is required"
 
 #: src/features/manage-organization/ui/organization-settings.tsx
 msgid "Name is too short"
@@ -1492,6 +1607,10 @@ msgstr "New password"
 #: src/widgets/dashboard-signup-chart/ui/dashboard-signup-chart.tsx
 msgid "New signups"
 msgstr "New signups"
+
+#: src/pages/_app/venues.index.tsx
+msgid "New venue"
+msgstr "New venue"
 
 #: src/features/manage-billing/ui/current-subscription.tsx
 msgid "Next Billing Date"
@@ -1583,8 +1702,12 @@ msgid "No venues match your filters"
 msgstr "No venues match your filters"
 
 #: src/pages/_app/venues.index.tsx
-msgid "No venues yet"
-msgstr "No venues yet"
+#~ msgid "No venues yet"
+#~ msgstr "No venues yet"
+
+#: src/pages/_app/venues.index.tsx
+msgid "No venues yet — add your first one"
+msgstr "No venues yet — add your first one"
 
 #: src/features/manage-billing/ui/webhook-log-list.tsx
 msgid "No webhook logs found."
@@ -1671,6 +1794,10 @@ msgstr "Optional layout key"
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "Optional translation"
 msgstr "Optional translation"
+
+#: src/features/venue-management/ui/venue-fields.tsx
+msgid "Optional UUID of the matching master-catalog venue. Leave blank if none."
+msgstr "Optional UUID of the matching master-catalog venue. Leave blank if none."
 
 #: src/pages/sign-in.tsx
 msgid "or"
@@ -1863,6 +1990,8 @@ msgid "Platform Highlights"
 msgstr "Platform Highlights"
 
 #: src/features/complete-profile/model/use-complete-profile.ts
+#: src/features/venue-management/ui/create-venue-modal.tsx
+#: src/features/venue-management/ui/edit-venue-modal.tsx
 msgid "Please check the form and try again."
 msgstr "Please check the form and try again."
 
@@ -2081,6 +2210,7 @@ msgid "Save Billing Information"
 msgstr "Save Billing Information"
 
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
+#: src/features/venue-management/ui/edit-venue-modal.tsx
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/settings/general.tsx
 msgid "Save changes"
@@ -2141,6 +2271,10 @@ msgstr "See all notifications"
 msgid "Select a session or start a new chat."
 msgstr "Select a session or start a new chat."
 
+#: src/pages/_app/venues.index.tsx
+msgid "Select all venues on this page"
+msgstr "Select all venues on this page"
+
 #: src/features/complete-profile/ui/complete-profile-form.tsx
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 #: src/pages/_app/settings/general.tsx
@@ -2159,6 +2293,10 @@ msgstr "Select role"
 #: src/features/sign-in/ui/sign-in-form.tsx
 msgid "Select the workspace you want to sign in to."
 msgstr "Select the workspace you want to sign in to."
+
+#: src/pages/_app/venues.index.tsx
+msgid "Select venue"
+msgstr "Select venue"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Send email verifications, password resets & invitations"
@@ -2469,6 +2607,10 @@ msgstr "The unique identifier for your organization. This cannot be changed."
 msgid "The venue could not be found or the API is unavailable."
 msgstr "The venue could not be found or the API is unavailable."
 
+#: src/features/venue-management/ui/venue-fields.tsx
+msgid "The venue's name and address as it appears in your workspace."
+msgstr "The venue's name and address as it appears in your workspace."
+
 #: src/pages/loading-demo.tsx
 msgid "Theme-aware (respects dark mode and color scheme)"
 msgstr "Theme-aware (respects dark mode and color scheme)"
@@ -2700,6 +2842,10 @@ msgstr "Verifying your email address…"
 #: src/pages/_app/team.tsx
 msgid "View details"
 msgstr "View details"
+
+#: src/pages/_app/venues.index.tsx
+msgid "View record"
+msgstr "View record"
 
 #: src/features/signup/ui/verify-email-prompt.tsx
 msgid "We sent a verification link to <0>{email}</0>. Click it to confirm your email address."

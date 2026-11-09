@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import {
   Container,
@@ -24,8 +24,10 @@ import {
   Center,
   ThemeIcon,
   Divider,
+  Menu,
+  Checkbox,
 } from "@mantine/core";
-import { useDebouncedValue, useLocalStorage } from "@mantine/hooks";
+import { useDisclosure, useDebouncedValue, useLocalStorage } from "@mantine/hooks";
 import {
   IconSearch,
   IconRefresh,
@@ -35,6 +37,12 @@ import {
   IconLayoutGrid,
   IconMapPin,
   IconExternalLink,
+  IconPlus,
+  IconEye,
+  IconEdit,
+  IconTrash,
+  IconDots,
+  IconX,
 } from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { PageTitle } from "@/shared/lib/page-title";
@@ -42,7 +50,13 @@ import type { Venue } from "@/entities/venue";
 import { PageHeader } from "@/shared/ui";
 import { useSession } from "@/processes/session";
 import { dayjs } from "@/shared/lib/date-utils";
-import { useVenues } from "@/features/venue-management";
+import {
+  useVenues,
+  CreateVenueModal,
+  EditVenueModal,
+  DeleteVenueModal,
+  BulkDeleteVenuesModal,
+} from "@/features/venue-management";
 import { TestSelectors } from "@/shared/lib/test-selectors";
 
 export const Route = createFileRoute("/_app/venues/")({
@@ -90,12 +104,32 @@ function VenueThumbnail({
 
 // ── Grid card ─────────────────────────────────────────────────────────────────
 
-function VenueCard({ venue, onView }: { venue: Venue; onView: () => void }) {
+interface VenueCardProps {
+  venue: Venue;
+  selected: boolean;
+  canManage: boolean;
+  onToggleSelect: () => void;
+  onView: () => void;
+  onEdit: () => void;
+  onDelete: () => void;
+}
+
+function VenueCard({
+  venue,
+  selected,
+  canManage,
+  onToggleSelect,
+  onView,
+  onEdit,
+  onDelete,
+}: VenueCardProps) {
+  const { t } = useLingui();
   return (
     <Card
       padding="sm"
       radius="md"
       withBorder
+      data-selected={selected || undefined}
       onClick={onView}
       style={{ position: "relative", cursor: "pointer" }}
       styles={{
@@ -121,12 +155,86 @@ function VenueCard({ venue, onView }: { venue: Venue; onView: () => void }) {
             boxShadow: "0 16px 32px -16px rgba(34,139,230,0.55)",
           },
           "&:hover::after": { opacity: 1 },
+          "&[data-selected]": {
+            borderColor: "var(--mantine-color-blue-5)",
+            boxShadow: "0 0 0 2px rgba(34,139,230,0.3)",
+          },
+          "&[data-selected]::after": { opacity: 1 },
         },
       }}
     >
       <Card.Section style={{ cursor: "pointer" }}>
         <VenueThumbnail url={venue.primaryPhotoUrl} name={venue.name} height={148} />
       </Card.Section>
+
+      {/* selection + master-linked badge overlay */}
+      {canManage && (
+        <Box
+          style={{ position: "absolute", top: 8, left: 8, zIndex: 1 }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <Group gap={6} wrap="nowrap">
+            <Checkbox
+              size="xs"
+              checked={selected}
+              onChange={onToggleSelect}
+              aria-label={t`Select venue`}
+              data-testid={TestSelectors.VENUE_SELECT_CHECKBOX(venue.id)}
+            />
+            {venue.masterVenueId && (
+              <Badge variant="light" color="indigo" size="xs" tt="none">
+                <Trans>Master linked</Trans>
+              </Badge>
+            )}
+          </Group>
+        </Box>
+      )}
+
+      {/* dots menu */}
+      {canManage && (
+        <Box
+          style={{ position: "absolute", top: 8, right: 8, zIndex: 1 }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <Menu shadow="md" width={160} position="bottom-end">
+            <Menu.Target>
+              <ActionIcon
+                variant="white"
+                size="sm"
+                radius="sm"
+                style={{ boxShadow: "var(--mantine-shadow-xs)" }}
+              >
+                <IconDots size={14} />
+              </ActionIcon>
+            </Menu.Target>
+            <Menu.Dropdown>
+              <Menu.Item
+                leftSection={<IconEye size={13} />}
+                data-testid={TestSelectors.VENUE_VIEW_BUTTON(venue.id)}
+                onClick={onView}
+              >
+                {t`View record`}
+              </Menu.Item>
+              <Menu.Item
+                leftSection={<IconEdit size={13} />}
+                data-testid={TestSelectors.VENUE_EDIT_BUTTON(venue.id)}
+                onClick={onEdit}
+              >
+                {t`Edit record`}
+              </Menu.Item>
+              <Menu.Divider />
+              <Menu.Item
+                color="red"
+                leftSection={<IconTrash size={13} />}
+                data-testid={TestSelectors.VENUE_DELETE_BUTTON(venue.id)}
+                onClick={onDelete}
+              >
+                {t`Delete`}
+              </Menu.Item>
+            </Menu.Dropdown>
+          </Menu>
+        </Box>
+      )}
 
       <Stack gap={6} mt="xs">
         <Text
@@ -150,7 +258,7 @@ function VenueCard({ venue, onView }: { venue: Venue; onView: () => void }) {
             </Text>
           </Group>
         )}
-        {venue.masterVenueId && (
+        {!canManage && venue.masterVenueId && (
           <Badge variant="outline" color="indigo" size="xs" tt="none">
             <Trans>Master linked</Trans>
           </Badge>
@@ -165,7 +273,16 @@ function VenueCard({ venue, onView }: { venue: Venue; onView: () => void }) {
 
 // ── List row ──────────────────────────────────────────────────────────────────
 
-function VenueRow({ venue, onView }: { venue: Venue; onView: () => void }) {
+function VenueRow({
+  venue,
+  selected,
+  canManage,
+  onToggleSelect,
+  onView,
+  onEdit,
+  onDelete,
+}: VenueCardProps) {
+  const { t } = useLingui();
   const hasCoordinates = venue.locationLat != null && venue.locationLng != null;
   const coordinates = hasCoordinates ? `${venue.locationLat}, ${venue.locationLng}` : null;
   const mapUrl = hasCoordinates
@@ -178,6 +295,7 @@ function VenueRow({ venue, onView }: { venue: Venue; onView: () => void }) {
       padding={0}
       radius="md"
       withBorder
+      data-selected={selected || undefined}
       onClick={onView}
       style={{ display: "flex", flexDirection: "row", cursor: "pointer" }}
       styles={{
@@ -203,6 +321,11 @@ function VenueRow({ venue, onView }: { venue: Venue; onView: () => void }) {
             boxShadow: "0 12px 28px -18px rgba(34,139,230,0.6)",
           },
           "&:hover::before": { opacity: 1 },
+          "&[data-selected]": {
+            borderColor: "var(--mantine-color-blue-5)",
+            boxShadow: "0 0 0 2px rgba(34,139,230,0.3)",
+          },
+          "&[data-selected]::before": { opacity: 1 },
         },
       }}
     >
@@ -309,6 +432,60 @@ function VenueRow({ venue, onView }: { venue: Venue; onView: () => void }) {
           </Group>
         </Stack>
       </Group>
+
+      {canManage && (
+        <Stack
+          justify="flex-start"
+          align="center"
+          py="sm"
+          px="xs"
+          style={{
+            flexShrink: 0,
+            borderLeft: "1px solid var(--mantine-color-default-border)",
+          }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <Checkbox
+            size="sm"
+            checked={selected}
+            onChange={onToggleSelect}
+            aria-label={t`Select venue`}
+            data-testid={TestSelectors.VENUE_SELECT_CHECKBOX(venue.id)}
+          />
+          <Menu shadow="md" width={160} position="bottom-end">
+            <Menu.Target>
+              <ActionIcon variant="subtle" size="md" color="gray">
+                <IconDots size={16} />
+              </ActionIcon>
+            </Menu.Target>
+            <Menu.Dropdown>
+              <Menu.Item
+                leftSection={<IconEye size={13} />}
+                data-testid={TestSelectors.VENUE_VIEW_BUTTON(venue.id)}
+                onClick={onView}
+              >
+                {t`View record`}
+              </Menu.Item>
+              <Menu.Item
+                leftSection={<IconEdit size={13} />}
+                data-testid={TestSelectors.VENUE_EDIT_BUTTON(venue.id)}
+                onClick={onEdit}
+              >
+                {t`Edit record`}
+              </Menu.Item>
+              <Menu.Divider />
+              <Menu.Item
+                color="red"
+                leftSection={<IconTrash size={13} />}
+                data-testid={TestSelectors.VENUE_DELETE_BUTTON(venue.id)}
+                onClick={onDelete}
+              >
+                {t`Delete`}
+              </Menu.Item>
+            </Menu.Dropdown>
+          </Menu>
+        </Stack>
+      )}
     </Card>
   );
 }
@@ -426,7 +603,7 @@ function FilterSidebar({
               data-testid={TestSelectors.VENUES_CLEAR_FILTERS_BUTTON}
               onClick={onReset}
             >
-              <IconRefresh size={11} />
+              <IconX size={11} />
             </ActionIcon>
           )}
         </Group>
@@ -478,6 +655,9 @@ type ViewMode = "grid" | "list";
 function VenuesPage() {
   const { t } = useLingui();
   const navigate = useNavigate();
+  const { payload } = useSession();
+  const authorities = payload?.authorities ?? [];
+  const canManage = authorities.includes("TENANT_OWNER") || authorities.includes("ADMIN");
   const { tenantKey } = useSession();
 
   const [page, setPage] = useState(1);
@@ -494,6 +674,13 @@ function VenuesPage() {
   });
   const viewMode: ViewMode = storedViewMode === "list" ? "list" : "grid";
 
+  const [createOpened, { open: openCreate, close: closeCreate }] = useDisclosure(false);
+  const [editOpened, { open: openEdit, close: closeEdit }] = useDisclosure(false);
+  const [deleteOpened, { open: openDelete, close: closeDelete }] = useDisclosure(false);
+  const [bulkDeleteOpened, { open: openBulkDelete, close: closeBulkDelete }] = useDisclosure(false);
+  const [selectedVenue, setSelectedVenue] = useState<Venue | null>(null);
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+
   const offset = (page - 1) * PAGE_SIZE;
 
   const { data, isLoading, isError, refetch, isFetching } = useVenues({
@@ -509,6 +696,32 @@ function VenuesPage() {
   const rangeStart = totalElements === 0 ? 0 : offset + 1;
   const rangeEnd = Math.min(offset + PAGE_SIZE, totalElements);
 
+  // Bulk selection is scoped to the current page: it covers only the rows
+  // already loaded, and is reset whenever the page or the filters change.
+  const selectedCount = selectedIds.size;
+  const allOnPageSelected = items.length > 0 && items.every((v) => selectedIds.has(v.id));
+  const someOnPageSelected = items.some((v) => selectedIds.has(v.id));
+
+  useEffect(() => {
+    setSelectedIds(new Set());
+  }, [page, debouncedSearch, cityFilter]);
+
+  const handleToggleSelect = (id: string) => {
+    setSelectedIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  };
+
+  const handleToggleSelectAll = () => {
+    setSelectedIds((prev) => {
+      const allSelected = items.length > 0 && items.every((v) => prev.has(v.id));
+      return allSelected ? new Set() : new Set(items.map((v) => v.id));
+    });
+  };
+
   // shortcut: city options come from the loaded page only (no city-list endpoint); upgrade when one exists.
   const cityOptions = useMemo(() => {
     const cities = new Set<string>();
@@ -519,6 +732,25 @@ function VenuesPage() {
     return [...cities].sort().map((c) => ({ value: c, label: c }));
   }, [items, cityFilter]);
 
+  const handleEdit = (venue: Venue) => {
+    setSelectedVenue(venue);
+    openEdit();
+  };
+  const handleDelete = (venue: Venue) => {
+    setSelectedVenue(venue);
+    openDelete();
+  };
+  const handleCloseEdit = () => {
+    closeEdit();
+    setTimeout(() => setSelectedVenue(null), 300);
+  };
+  const handleCloseDelete = () => {
+    closeDelete();
+    setTimeout(() => setSelectedVenue(null), 300);
+  };
+  const handleBulkDeleted = () => {
+    setSelectedIds(new Set());
+  };
   const handleReset = () => {
     setSearch("");
     setCityFilter(null);
@@ -530,7 +762,22 @@ function VenuesPage() {
       <PageTitle segments={[t`Venues`]} />
       <PageHeader
         title={<Trans>Venues</Trans>}
-        breadcrumbs={[{ label: <Trans>Home</Trans>, to: "/" }, { label: <Trans>Venues</Trans> }]}
+        breadcrumbs={[
+          { label: <Trans>Home</Trans>, to: "/" },
+          { label: <Trans>Venues</Trans> },
+        ]}
+        toolbar={
+          canManage ? (
+            <Button
+              leftSection={<IconPlus size={14} />}
+              size="sm"
+              data-testid={TestSelectors.VENUES_NEW_BUTTON}
+              onClick={openCreate}
+            >
+              <Trans>New venue</Trans>
+            </Button>
+          ) : undefined
+        }
       />
 
       {tenantKey && (
@@ -581,6 +828,16 @@ function VenuesPage() {
           {/* toolbar */}
           <Group justify="space-between" wrap="wrap" gap="sm">
             <Group gap="sm" wrap="nowrap">
+              {canManage && !isLoading && items.length > 0 && (
+                <Checkbox
+                  size="xs"
+                  checked={allOnPageSelected}
+                  indeterminate={someOnPageSelected && !allOnPageSelected}
+                  onChange={handleToggleSelectAll}
+                  aria-label={t`Select all venues on this page`}
+                  data-testid={TestSelectors.VENUES_SELECT_ALL_CHECKBOX}
+                />
+              )}
               <Text fw={600} size="sm">
                 <Trans>Venues</Trans>
               </Text>
@@ -597,24 +854,54 @@ function VenuesPage() {
               )}
             </Group>
 
+            {totalPages > 1 && items.length > 10 && (
+              <Group gap={4} align="center" style={{ flex: 1, justifyContent: "center" }}>
+                {!isLoading && totalElements > 0 && (
+                  <Text size="xs" c="dimmed" lh={1}>
+                    <Trans>
+                      Showing {rangeStart}–{rangeEnd} of {totalElements}
+                    </Trans>
+                  </Text>
+                )}
+                <Pagination
+                  withPages={false}
+                  total={totalPages}
+                  value={page}
+                  onChange={setPage}
+                  size="xs"
+                />
+              </Group>
+            )}
+
             <Group gap="xs" style={{ marginLeft: "auto" }}>
-              {totalPages > 1 && items.length > 10 && (
-                <Group gap={4} align="center" style={{ flex: 1, justifyContent: "center" }}>
-                  {!isLoading && totalElements > 0 && (
-                    <Text size="xs" c="dimmed" lh={1}>
-                      <Trans>
-                        Showing {rangeStart}–{rangeEnd} of {totalElements}
-                      </Trans>
-                    </Text>
-                  )}
-                  <Pagination
-                    withPages={false}
-                    total={totalPages}
-                    value={page}
-                    onChange={setPage}
+              {canManage && selectedCount > 0 && (
+                <>
+                  <Text size="xs" c="dimmed">
+                    <Trans>{selectedCount} selected</Trans>
+                  </Text>
+                  <Button
                     size="xs"
-                  />
-                </Group>
+                    color="red"
+                    variant="light"
+                    leftSection={<IconTrash size={14} />}
+                    data-testid={TestSelectors.VENUES_BULK_DELETE_BUTTON}
+                    onClick={openBulkDelete}
+                  >
+                    <Trans>Delete selected</Trans>
+                  </Button>
+                  <Tooltip label={t`Clear selection`} withArrow>
+                    <ActionIcon
+                      variant="subtle"
+                      color="gray"
+                      size="sm"
+                      aria-label={t`Clear selection`}
+                      data-testid={TestSelectors.VENUES_CLEAR_SELECTION_BUTTON}
+                      onClick={() => setSelectedIds(new Set())}
+                    >
+                      <IconX size={15} />
+                    </ActionIcon>
+                  </Tooltip>
+                </>
               )}
               <Tooltip label={t`Refresh`} withArrow>
                 <ActionIcon
@@ -683,14 +970,23 @@ function VenuesPage() {
                   {hasActiveFilters ? (
                     <Trans>No venues match your filters</Trans>
                   ) : (
-                    <Trans>No venues yet</Trans>
+                    <Trans>No venues yet — add your first one</Trans>
                   )}
                 </Text>
-                {hasActiveFilters && (
+                {hasActiveFilters ? (
                   <Button variant="light" color="gray" size="sm" onClick={handleReset}>
                     <Trans>Clear filters</Trans>
                   </Button>
-                )}
+                ) : canManage ? (
+                  <Button
+                    variant="light"
+                    leftSection={<IconPlus size={14} />}
+                    size="sm"
+                    onClick={openCreate}
+                  >
+                    <Trans>New venue</Trans>
+                  </Button>
+                ) : null}
               </Stack>
             </Center>
           ) : viewMode === "grid" ? (
@@ -699,12 +995,17 @@ function VenuesPage() {
                 <VenueCard
                   key={venue.id}
                   venue={venue}
+                  selected={selectedIds.has(venue.id)}
+                  canManage={canManage}
+                  onToggleSelect={() => handleToggleSelect(venue.id)}
                   onView={() =>
                     void navigate({
                       to: "/venues/$venueId",
                       params: { venueId: venue.id },
                     })
                   }
+                  onEdit={() => handleEdit(venue)}
+                  onDelete={() => handleDelete(venue)}
                 />
               ))}
             </SimpleGrid>
@@ -714,12 +1015,17 @@ function VenuesPage() {
                 <VenueRow
                   key={venue.id}
                   venue={venue}
+                  selected={selectedIds.has(venue.id)}
+                  canManage={canManage}
+                  onToggleSelect={() => handleToggleSelect(venue.id)}
                   onView={() =>
                     void navigate({
                       to: "/venues/$venueId",
                       params: { venueId: venue.id },
                     })
                   }
+                  onEdit={() => handleEdit(venue)}
+                  onDelete={() => handleDelete(venue)}
                 />
               ))}
             </Stack>
@@ -741,6 +1047,24 @@ function VenuesPage() {
           )}
         </Stack>
       </Group>
+
+      {canManage && (
+        <>
+          <CreateVenueModal opened={createOpened} onClose={closeCreate} />
+          <EditVenueModal venue={selectedVenue} opened={editOpened} onClose={handleCloseEdit} />
+          <DeleteVenueModal
+            venue={selectedVenue}
+            opened={deleteOpened}
+            onClose={handleCloseDelete}
+          />
+          <BulkDeleteVenuesModal
+            ids={[...selectedIds]}
+            opened={bulkDeleteOpened}
+            onClose={closeBulkDelete}
+            onDeleted={handleBulkDeleted}
+          />
+        </>
+      )}
     </Container>
   );
 }
