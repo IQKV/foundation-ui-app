@@ -26,6 +26,7 @@ import { Route as AppIndexRouteImport } from "./pages/_app/index";
 import { Route as AppAddonsRouteImport } from "./pages/_app/addons";
 import { Route as AppCmsPagesRouteImport } from "./pages/_app/cms-pages";
 import { Route as AppTeamRouteImport } from "./pages/_app/team";
+import { Route as AppVenuesRouteImport } from "./pages/_app/venues";
 import { Route as AuthCallbackRouteImport } from "./pages/auth.callback";
 import { Route as InviteTokenRouteImport } from "./pages/invite.$token";
 import { Route as MagicLinkIndexRouteImport } from "./pages/magic-link.index";
@@ -41,6 +42,8 @@ import { Route as AppSettingsGeneralRouteImport } from "./pages/_app/settings/ge
 import { Route as AppSettingsNotificationsRouteImport } from "./pages/_app/settings/notifications";
 import { Route as AppSettingsOrganizationRouteImport } from "./pages/_app/settings/organization";
 import { Route as AppSettingsSecurityRouteImport } from "./pages/_app/settings/security";
+import { Route as AppVenuesIndexRouteImport } from "./pages/_app/venues.index";
+import { Route as AppVenuesVenueIdRouteImport } from "./pages/_app/venues.$venueId";
 
 const R404Route = R404RouteImport.update({
   id: "/404",
@@ -126,6 +129,11 @@ const AppTeamRoute = AppTeamRouteImport.update({
   path: "/team",
   getParentRoute: () => AppRoute,
 } as any);
+const AppVenuesRoute = AppVenuesRouteImport.update({
+  id: "/venues",
+  path: "/venues",
+  getParentRoute: () => AppRoute,
+} as any);
 const AuthCallbackRoute = AuthCallbackRouteImport.update({
   id: "/auth/callback",
   path: "/auth/callback",
@@ -201,6 +209,16 @@ const AppSettingsSecurityRoute = AppSettingsSecurityRouteImport.update({
   path: "/settings/security",
   getParentRoute: () => AppRoute,
 } as any);
+const AppVenuesIndexRoute = AppVenuesIndexRouteImport.update({
+  id: "/",
+  path: "/",
+  getParentRoute: () => AppVenuesRoute,
+} as any);
+const AppVenuesVenueIdRoute = AppVenuesVenueIdRouteImport.update({
+  id: "/$venueId",
+  path: "/$venueId",
+  getParentRoute: () => AppVenuesRoute,
+} as any);
 
 export interface FileRoutesByFullPath {
   "/404": typeof R404Route;
@@ -219,6 +237,7 @@ export interface FileRoutesByFullPath {
   "/addons": typeof AppAddonsRouteWithChildren;
   "/cms-pages": typeof AppCmsPagesRouteWithChildren;
   "/team": typeof AppTeamRoute;
+  "/venues": typeof AppVenuesRouteWithChildren;
   "/auth/callback": typeof AuthCallbackRoute;
   "/invite/$token": typeof InviteTokenRoute;
   "/magic-link/verify": typeof MagicLinkVerifyRoute;
@@ -232,8 +251,10 @@ export interface FileRoutesByFullPath {
   "/settings/notifications": typeof AppSettingsNotificationsRoute;
   "/settings/organization": typeof AppSettingsOrganizationRoute;
   "/settings/security": typeof AppSettingsSecurityRoute;
+  "/venues/$venueId": typeof AppVenuesVenueIdRoute;
   "/billing/": typeof AppBillingIndexRoute;
   "/cms-pages/": typeof AppCmsPagesIndexRoute;
+  "/venues/": typeof AppVenuesIndexRoute;
 }
 export interface FileRoutesByTo {
   "/404": typeof R404Route;
@@ -263,8 +284,10 @@ export interface FileRoutesByTo {
   "/settings/notifications": typeof AppSettingsNotificationsRoute;
   "/settings/organization": typeof AppSettingsOrganizationRoute;
   "/settings/security": typeof AppSettingsSecurityRoute;
+  "/venues/$venueId": typeof AppVenuesVenueIdRoute;
   "/billing": typeof AppBillingIndexRoute;
   "/cms-pages": typeof AppCmsPagesIndexRoute;
+  "/venues": typeof AppVenuesIndexRoute;
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport;
@@ -284,6 +307,7 @@ export interface FileRoutesById {
   "/_app/addons": typeof AppAddonsRouteWithChildren;
   "/_app/cms-pages": typeof AppCmsPagesRouteWithChildren;
   "/_app/team": typeof AppTeamRoute;
+  "/_app/venues": typeof AppVenuesRouteWithChildren;
   "/auth/callback": typeof AuthCallbackRoute;
   "/invite/$token": typeof InviteTokenRoute;
   "/magic-link/verify": typeof MagicLinkVerifyRoute;
@@ -298,8 +322,10 @@ export interface FileRoutesById {
   "/_app/settings/notifications": typeof AppSettingsNotificationsRoute;
   "/_app/settings/organization": typeof AppSettingsOrganizationRoute;
   "/_app/settings/security": typeof AppSettingsSecurityRoute;
+  "/_app/venues/$venueId": typeof AppVenuesVenueIdRoute;
   "/_app/billing/": typeof AppBillingIndexRoute;
   "/_app/cms-pages/": typeof AppCmsPagesIndexRoute;
+  "/_app/venues/": typeof AppVenuesIndexRoute;
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath;
@@ -320,6 +346,7 @@ export interface FileRouteTypes {
     | "/addons"
     | "/cms-pages"
     | "/team"
+    | "/venues"
     | "/auth/callback"
     | "/invite/$token"
     | "/magic-link/verify"
@@ -333,8 +360,10 @@ export interface FileRouteTypes {
     | "/settings/notifications"
     | "/settings/organization"
     | "/settings/security"
+    | "/venues/$venueId"
     | "/billing/"
-    | "/cms-pages/";
+    | "/cms-pages/"
+    | "/venues/";
   fileRoutesByTo: FileRoutesByTo;
   to:
     | "/404"
@@ -364,8 +393,10 @@ export interface FileRouteTypes {
     | "/settings/notifications"
     | "/settings/organization"
     | "/settings/security"
+    | "/venues/$venueId"
     | "/billing"
-    | "/cms-pages";
+    | "/cms-pages"
+    | "/venues";
   id:
     | "__root__"
     | "/404"
@@ -384,6 +415,7 @@ export interface FileRouteTypes {
     | "/_app/addons"
     | "/_app/cms-pages"
     | "/_app/team"
+    | "/_app/venues"
     | "/auth/callback"
     | "/invite/$token"
     | "/magic-link/verify"
@@ -398,8 +430,10 @@ export interface FileRouteTypes {
     | "/_app/settings/notifications"
     | "/_app/settings/organization"
     | "/_app/settings/security"
+    | "/_app/venues/$venueId"
     | "/_app/billing/"
-    | "/_app/cms-pages/";
+    | "/_app/cms-pages/"
+    | "/_app/venues/";
   fileRoutesById: FileRoutesById;
 }
 export interface RootRouteChildren {
@@ -541,6 +575,13 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof AppTeamRouteImport;
       parentRoute: typeof AppRoute;
     };
+    "/_app/venues": {
+      id: "/_app/venues";
+      path: "/venues";
+      fullPath: "/venues";
+      preLoaderRoute: typeof AppVenuesRouteImport;
+      parentRoute: typeof AppRoute;
+    };
     "/auth/callback": {
       id: "/auth/callback";
       path: "/auth/callback";
@@ -646,6 +687,20 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof AppSettingsSecurityRouteImport;
       parentRoute: typeof AppRoute;
     };
+    "/_app/venues/": {
+      id: "/_app/venues/";
+      path: "/";
+      fullPath: "/venues/";
+      preLoaderRoute: typeof AppVenuesIndexRouteImport;
+      parentRoute: typeof AppVenuesRoute;
+    };
+    "/_app/venues/$venueId": {
+      id: "/_app/venues/$venueId";
+      path: "/$venueId";
+      fullPath: "/venues/$venueId";
+      preLoaderRoute: typeof AppVenuesVenueIdRouteImport;
+      parentRoute: typeof AppVenuesRoute;
+    };
   }
 }
 
@@ -673,10 +728,23 @@ const AppCmsPagesRouteChildren: AppCmsPagesRouteChildren = {
 
 const AppCmsPagesRouteWithChildren = AppCmsPagesRoute._addFileChildren(AppCmsPagesRouteChildren);
 
+interface AppVenuesRouteChildren {
+  AppVenuesVenueIdRoute: typeof AppVenuesVenueIdRoute;
+  AppVenuesIndexRoute: typeof AppVenuesIndexRoute;
+}
+
+const AppVenuesRouteChildren: AppVenuesRouteChildren = {
+  AppVenuesVenueIdRoute: AppVenuesVenueIdRoute,
+  AppVenuesIndexRoute: AppVenuesIndexRoute,
+};
+
+const AppVenuesRouteWithChildren = AppVenuesRoute._addFileChildren(AppVenuesRouteChildren);
+
 interface AppRouteChildren {
   AppAddonsRoute: typeof AppAddonsRouteWithChildren;
   AppCmsPagesRoute: typeof AppCmsPagesRouteWithChildren;
   AppTeamRoute: typeof AppTeamRoute;
+  AppVenuesRoute: typeof AppVenuesRouteWithChildren;
   AppIndexRoute: typeof AppIndexRoute;
   AppBillingFailureRoute: typeof AppBillingFailureRoute;
   AppBillingSuccessRoute: typeof AppBillingSuccessRoute;
@@ -691,6 +759,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppAddonsRoute: AppAddonsRouteWithChildren,
   AppCmsPagesRoute: AppCmsPagesRouteWithChildren,
   AppTeamRoute: AppTeamRoute,
+  AppVenuesRoute: AppVenuesRouteWithChildren,
   AppIndexRoute: AppIndexRoute,
   AppBillingFailureRoute: AppBillingFailureRoute,
   AppBillingSuccessRoute: AppBillingSuccessRoute,

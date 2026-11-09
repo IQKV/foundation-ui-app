@@ -197,6 +197,14 @@ msgstr ""
 msgid "Addons"
 msgstr ""
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Address"
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Address & coordinates"
+msgstr ""
+
 #: src/features/invite-member/model/types.ts
 msgid "Admin"
 msgstr "Administrator"
@@ -207,6 +215,10 @@ msgstr "Erweiterte Analysen"
 
 #: src/addons/platform-ai-chat/ui/ai-chat-page.tsx
 msgid "AI Chat"
+msgstr ""
+
+#: src/pages/_app/venues.index.tsx
+msgid "All cities"
 msgstr ""
 
 #: src/pages/_app/cms-pages.index.tsx
@@ -309,6 +321,7 @@ msgstr "Zurück zur <0>Anmeldung</0>"
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
+#: src/pages/_app/venues.$venueId.tsx
 msgid "Back to list"
 msgstr "Zurück zur Liste"
 
@@ -420,10 +433,19 @@ msgstr "Passwort wählen"
 msgid "Choose a strong password with at least 8 characters, including uppercase, lowercase, a number, and a special character."
 msgstr "Wählen Sie ein starkes Passwort mit mindestens 8 Zeichen, einschließlich Groß- und Kleinbuchstaben, einer Zahl und einem Sonderzeichen."
 
+#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues.index.tsx
+msgid "City"
+msgstr ""
+
 #: src/features/notification-bell/ui/notification-bell.tsx
 #: src/pages/_app/settings/notifications.tsx
 msgid "Clear all"
 msgstr "Alle löschen"
+
+#: src/pages/_app/venues.index.tsx
+msgid "Clear filters"
+msgstr ""
 
 #: src/pages/_app/settings/security.tsx
 msgid "Client ID"
@@ -541,6 +563,11 @@ msgstr "Weiter mit Microsoft"
 msgid "Continue with SSO"
 msgstr "Weiter mit SSO"
 
+#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues.index.tsx
+msgid "Coordinates"
+msgstr ""
+
 #: src/features/sign-in/ui/demo-credentials-hint.tsx
 msgid "Copied!"
 msgstr "Kopiert!"
@@ -548,6 +575,10 @@ msgstr "Kopiert!"
 #: src/features/sign-in/ui/demo-credentials-hint.tsx
 msgid "Copy"
 msgstr "Kopieren"
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Copy master venue id"
+msgstr ""
 
 #: src/pages/_app/cms-pages.create.tsx
 msgid "Could not create the page. Please check the form and try again."
@@ -568,6 +599,10 @@ msgstr "Seiten konnten nicht von der API abgerufen werden."
 #: src/pages/_app/cms-pages.$pageId.tsx
 msgid "Could not fetch the page details."
 msgstr "Seitendetails konnten nicht abgerufen werden."
+
+#: src/pages/_app/venues.index.tsx
+msgid "Could not fetch venues from the API."
+msgstr ""
 
 #: src/pages/_app/settings/general.tsx
 #: src/pages/_app/settings/security.tsx
@@ -667,6 +702,11 @@ msgstr "Organisation erstellen"
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Create, manage & invite teams to your workspace"
 msgstr "Teams erstellen, verwalten und in Ihren Workspace einladen"
+
+#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues.index.tsx
+msgid "Created"
+msgstr ""
 
 #: src/features/signup/ui/provisioning-wait.tsx
 msgid "Creating your account"
@@ -952,6 +992,14 @@ msgstr "Profil konnte nicht geladen werden"
 msgid "Failed to load refund history."
 msgstr "Rückerstattungsverlauf konnte nicht geladen werden."
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Failed to load the venue"
+msgstr ""
+
+#: src/pages/_app/venues.index.tsx
+msgid "Failed to load venues"
+msgstr ""
+
 #: src/features/manage-billing/ui/webhook-log-list.tsx
 msgid "Failed to load webhook log history."
 msgstr "Webhook-Protokollverlauf konnte nicht geladen werden."
@@ -975,6 +1023,10 @@ msgstr "Beispiele zur Feature-Nutzung"
 #: src/features/manage-billing/ui/current-subscription.tsx
 msgid "Features"
 msgstr "Funktionen"
+
+#: src/pages/_app/venues.index.tsx
+msgid "Filters"
+msgstr ""
 
 #: src/features/complete-profile/ui/complete-profile-form.tsx
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
@@ -1056,6 +1108,10 @@ msgstr "Gut"
 msgid "Google"
 msgstr "Google"
 
+#: src/pages/_app/venues.index.tsx
+msgid "Grid view"
+msgstr ""
+
 #: src/widgets/dashboard-personal-welcome/ui/dashboard-personal-welcome.tsx
 msgid "Here's what you can do from your personal workspace:"
 msgstr "Das können Sie in Ihrem persönlichen Workspace tun:"
@@ -1075,6 +1131,8 @@ msgstr "Hierarchie"
 #: src/pages/_app/settings/organization.tsx
 #: src/pages/_app/settings/security.tsx
 #: src/pages/_app/team.tsx
+#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues.index.tsx
 msgid "Home"
 msgstr "Startseite"
 
@@ -1089,6 +1147,10 @@ msgstr "https://aussteller.beispiel.de"
 #: src/pages/_app/cms-pages.$pageId.tsx
 msgid "ID"
 msgstr "ID"
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Identifiers & timestamps"
+msgstr ""
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 msgid "Identity"
@@ -1239,6 +1301,10 @@ msgstr "Externe Konten für schnelle Anmeldung verknüpfen"
 msgid "Link failed"
 msgstr "Verknüpfung fehlgeschlagen"
 
+#: src/pages/_app/venues.index.tsx
+msgid "List view"
+msgstr ""
+
 #: src/pages/_app/billing/index.tsx
 msgid "Loading billing information…"
 msgstr "Abrechnungsinformationen werden geladen…"
@@ -1268,6 +1334,10 @@ msgstr "Wird geladen…"
 #: src/features/page-admin/model/types.ts
 msgid "Locale is required"
 msgstr "Gebietsschema ist erforderlich"
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Location"
+msgstr ""
 
 #: src/shared/ui/user-status-badge/user-status-badge.tsx
 #: src/widgets/dashboard-signup-chart/ui/dashboard-signup-chart.tsx
@@ -1306,10 +1376,28 @@ msgstr "Verwalten Sie Ihr Abonnement und Ihre Abrechnung, wenn Sie bereit sind"
 #~ msgid "Manage your team, subscriptions, and settings — all from one place, secured by enterprise-grade authentication."
 #~ msgstr "Verwalten Sie Ihr Team, Abonnements und Einstellungen — alles an einem Ort, gesichert durch Unternehmensauthentifizierung."
 
+#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues.index.tsx
+msgid "Maps"
+msgstr ""
+
 #: src/features/notification-bell/ui/notification-bell.tsx
 #: src/pages/_app/settings/notifications.tsx
 msgid "Mark all as read"
 msgstr "Alle als gelesen markieren"
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Master catalog link"
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues.index.tsx
+msgid "Master linked"
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Master venue"
+msgstr ""
 
 #: src/pages/-billing-example.tsx
 msgid "Max Projects:"
@@ -1365,6 +1453,10 @@ msgstr "Mein Konto"
 msgid "Name is too short"
 msgstr "Name ist zu kurz"
 
+#: src/pages/_app/venues.index.tsx
+msgid "Name or city…"
+msgstr ""
+
 #: src/pages/_app/cms-pages.create.tsx
 msgid "New"
 msgstr "Neu"
@@ -1412,6 +1504,10 @@ msgstr "Kein aktives Abonnement gefunden. Abonnieren Sie einen Tarif, um auf Pla
 #: src/features/sign-in/model/use-sign-in.ts
 msgid "No active tenant memberships found for this account"
 msgstr "Für dieses Konto wurden keine aktiven Mandantenmitgliedschaften gefunden"
+
+#: src/pages/_app/venues.index.tsx
+msgid "No address on record"
+msgstr ""
 
 #: src/features/manage-billing/ui/billing-info.tsx
 msgid "No billing information has been configured yet. Fill in the details below to get started."
@@ -1482,6 +1578,14 @@ msgstr "Keine Rollen zugewiesen."
 msgid "No translations added. At least the default locale is required."
 msgstr "Keine Übersetzungen hinzugefügt. Mindestens das Standard-Gebietsschema ist erforderlich."
 
+#: src/pages/_app/venues.index.tsx
+msgid "No venues match your filters"
+msgstr ""
+
+#: src/pages/_app/venues.index.tsx
+msgid "No venues yet"
+msgstr ""
+
 #: src/features/manage-billing/ui/webhook-log-list.tsx
 msgid "No webhook logs found."
 msgstr "Keine Webhook-Protokolle gefunden."
@@ -1498,6 +1602,10 @@ msgstr "Keine (oberste Ebene)"
 #: src/pages/_app/settings/security.tsx
 msgid "Not connected"
 msgstr "Nicht verbunden"
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Not linked to a master catalog record."
+msgstr ""
 
 #: src/features/notification-bell/ui/notification-bell.tsx
 #: src/pages/_app/settings/notifications.tsx
@@ -1845,6 +1953,10 @@ msgstr "Grund (optional)"
 msgid "Received At"
 msgstr "Empfangen am"
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Record"
+msgstr ""
+
 #: src/features/magic-link/ui/magic-link-exchange-form.tsx
 msgid "Redirecting to your workspace..."
 msgstr "Weiterleitung zu Ihrem Workspace..."
@@ -1852,12 +1964,18 @@ msgstr "Weiterleitung zu Ihrem Workspace..."
 #: src/pages/_app/cms-pages.index.tsx
 #: src/pages/_app/settings/organization.tsx
 #: src/pages/_app/team.tsx
+#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues.index.tsx
 msgid "Refresh"
 msgstr "Aktualisieren"
 
 #: src/features/manage-billing/ui/refund-list.tsx
 msgid "Refund History"
 msgstr "Rückerstattungsverlauf"
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Relations"
+msgstr ""
 
 #: src/features/forgot-password/ui/forgot-password-form.tsx
 #: src/features/reset-password/ui/reset-password-form.tsx
@@ -1926,6 +2044,8 @@ msgstr "Zugang wiederherstellen"
 #: src/pages/_app/settings/general.tsx
 #: src/pages/_app/settings/security.tsx
 #: src/pages/_app/team.tsx
+#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues.index.tsx
 msgid "Retry"
 msgstr "Erneut versuchen"
 
@@ -2115,6 +2235,10 @@ msgstr "Ihr Workspace wird eingerichtet"
 #: src/features/notification-bell/ui/notification-bell.tsx
 msgid "Showing {0} of {1}"
 msgstr "Zeige {0} von {1}"
+
+#: src/pages/_app/venues.index.tsx
+msgid "Showing {rangeStart}–{rangeEnd} of {totalElements}"
+msgstr ""
 
 #: src/pages/sign-in.tsx
 msgid "Sign In"
@@ -2341,6 +2465,10 @@ msgstr "Der Anbieter wurde getrennt."
 msgid "The unique identifier for your organization. This cannot be changed."
 msgstr "Der eindeutige Bezeichner Ihrer Organisation. Dieser kann nicht geändert werden."
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "The venue could not be found or the API is unavailable."
+msgstr ""
+
 #: src/pages/loading-demo.tsx
 msgid "Theme-aware (respects dark mode and color scheme)"
 msgstr "Thema-bewusst (berücksichtigt Dunkelmodus und Farbschema)"
@@ -2504,6 +2632,8 @@ msgid "Update your profile and preferences in account settings"
 msgstr "Aktualisieren Sie Ihr Profil und Ihre Einstellungen in den Kontoeinstellungen"
 
 #: src/pages/_app/cms-pages.index.tsx
+#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues.index.tsx
 msgid "Updated"
 msgstr "Aktualisiert"
 
@@ -2540,6 +2670,20 @@ msgstr "Verwendet die <0>LoadingOverlay</0>-Komponente für Vollbild-Laden"
 #: src/pages/sign-in.tsx
 msgid "Using a corporate identity provider? <0>Sign in with Enterprise SSO</0>"
 msgstr "Verwenden Sie einen Unternehmensidentitätsanbieter? <0>Mit Enterprise-SSO anmelden</0>"
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Venue"
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Venue ID"
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues.index.tsx
+#: src/shared/ui/app-layout/nav-config.tsx
+msgid "Venues"
+msgstr ""
 
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 msgid "Verified"
@@ -2634,6 +2778,7 @@ msgid "Workspace key"
 msgstr "Arbeitsbereich-Schlüssel"
 
 #: src/pages/_app/cms-pages.index.tsx
+#: src/pages/_app/venues.index.tsx
 msgid "Workspace:"
 msgstr "Arbeitsbereich:"
 

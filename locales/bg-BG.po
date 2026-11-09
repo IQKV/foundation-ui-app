@@ -197,6 +197,14 @@ msgstr ""
 msgid "Addons"
 msgstr ""
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Address"
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Address & coordinates"
+msgstr ""
+
 #: src/features/invite-member/model/types.ts
 msgid "Admin"
 msgstr "Администратор"
@@ -207,6 +215,10 @@ msgstr "Разширена аналитика"
 
 #: src/addons/platform-ai-chat/ui/ai-chat-page.tsx
 msgid "AI Chat"
+msgstr ""
+
+#: src/pages/_app/venues.index.tsx
+msgid "All cities"
 msgstr ""
 
 #: src/pages/_app/cms-pages.index.tsx
@@ -309,6 +321,7 @@ msgstr "Обратно към <0>Вход</0>"
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
+#: src/pages/_app/venues.$venueId.tsx
 msgid "Back to list"
 msgstr "Обратно към списъка"
 
@@ -420,10 +433,19 @@ msgstr "Изберете парола"
 msgid "Choose a strong password with at least 8 characters, including uppercase, lowercase, a number, and a special character."
 msgstr "Изберете силна парола с поне 8 символа, включваща главна буква, малка буква, цифра и специален символ."
 
+#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues.index.tsx
+msgid "City"
+msgstr ""
+
 #: src/features/notification-bell/ui/notification-bell.tsx
 #: src/pages/_app/settings/notifications.tsx
 msgid "Clear all"
 msgstr "Изчисти всички"
+
+#: src/pages/_app/venues.index.tsx
+msgid "Clear filters"
+msgstr ""
 
 #: src/pages/_app/settings/security.tsx
 msgid "Client ID"
@@ -541,6 +563,11 @@ msgstr "Продължи с Microsoft"
 msgid "Continue with SSO"
 msgstr "Продължи с SSO"
 
+#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues.index.tsx
+msgid "Coordinates"
+msgstr ""
+
 #: src/features/sign-in/ui/demo-credentials-hint.tsx
 msgid "Copied!"
 msgstr "Копирано!"
@@ -548,6 +575,10 @@ msgstr "Копирано!"
 #: src/features/sign-in/ui/demo-credentials-hint.tsx
 msgid "Copy"
 msgstr "Копирай"
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Copy master venue id"
+msgstr ""
 
 #: src/pages/_app/cms-pages.create.tsx
 msgid "Could not create the page. Please check the form and try again."
@@ -568,6 +599,10 @@ msgstr "Не може да се извлекат страниците от API."
 #: src/pages/_app/cms-pages.$pageId.tsx
 msgid "Could not fetch the page details."
 msgstr "Не може да се извлекат детайлите на страницата."
+
+#: src/pages/_app/venues.index.tsx
+msgid "Could not fetch venues from the API."
+msgstr ""
 
 #: src/pages/_app/settings/general.tsx
 #: src/pages/_app/settings/security.tsx
@@ -667,6 +702,11 @@ msgstr "Създайте организацията си"
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Create, manage & invite teams to your workspace"
 msgstr "Създавайте, управлявайте и каните екипи в работното си пространство"
+
+#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues.index.tsx
+msgid "Created"
+msgstr ""
 
 #: src/features/signup/ui/provisioning-wait.tsx
 msgid "Creating your account"
@@ -952,6 +992,14 @@ msgstr "Зареждането на профила не успя"
 msgid "Failed to load refund history."
 msgstr "Зареждането на историята на възстановяванията не успя."
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Failed to load the venue"
+msgstr ""
+
+#: src/pages/_app/venues.index.tsx
+msgid "Failed to load venues"
+msgstr ""
+
 #: src/features/manage-billing/ui/webhook-log-list.tsx
 msgid "Failed to load webhook log history."
 msgstr "Зареждането на историята на webhook журнала не успя."
@@ -975,6 +1023,10 @@ msgstr "Примери за използване на функции"
 #: src/features/manage-billing/ui/current-subscription.tsx
 msgid "Features"
 msgstr "Функции"
+
+#: src/pages/_app/venues.index.tsx
+msgid "Filters"
+msgstr ""
 
 #: src/features/complete-profile/ui/complete-profile-form.tsx
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
@@ -1056,6 +1108,10 @@ msgstr "Добра"
 msgid "Google"
 msgstr "Google"
 
+#: src/pages/_app/venues.index.tsx
+msgid "Grid view"
+msgstr ""
+
 #: src/widgets/dashboard-personal-welcome/ui/dashboard-personal-welcome.tsx
 msgid "Here's what you can do from your personal workspace:"
 msgstr "Ето какво можете да направите от личното си работно пространство:"
@@ -1075,6 +1131,8 @@ msgstr "Йерархия"
 #: src/pages/_app/settings/organization.tsx
 #: src/pages/_app/settings/security.tsx
 #: src/pages/_app/team.tsx
+#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues.index.tsx
 msgid "Home"
 msgstr "Начало"
 
@@ -1089,6 +1147,10 @@ msgstr "https://issuer.example.com"
 #: src/pages/_app/cms-pages.$pageId.tsx
 msgid "ID"
 msgstr "ID"
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Identifiers & timestamps"
+msgstr ""
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 msgid "Identity"
@@ -1239,6 +1301,10 @@ msgstr ""
 msgid "Link failed"
 msgstr "Свързването не успя"
 
+#: src/pages/_app/venues.index.tsx
+msgid "List view"
+msgstr ""
+
 #: src/pages/_app/billing/index.tsx
 msgid "Loading billing information…"
 msgstr "Зареждане на информацията за фактуриране…"
@@ -1268,6 +1334,10 @@ msgstr "Зареждане…"
 #: src/features/page-admin/model/types.ts
 msgid "Locale is required"
 msgstr "Локалът е задължителен"
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Location"
+msgstr ""
 
 #: src/shared/ui/user-status-badge/user-status-badge.tsx
 #: src/widgets/dashboard-signup-chart/ui/dashboard-signup-chart.tsx
@@ -1306,10 +1376,28 @@ msgstr "Управлявайте абонамента и фактуриране�
 #~ msgid "Manage your team, subscriptions, and settings — all from one place, secured by enterprise-grade authentication."
 #~ msgstr "Управлявайте екипа, абонаментите и настройките — на едно място, защитено с корпоративно удостоверяване."
 
+#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues.index.tsx
+msgid "Maps"
+msgstr ""
+
 #: src/features/notification-bell/ui/notification-bell.tsx
 #: src/pages/_app/settings/notifications.tsx
 msgid "Mark all as read"
 msgstr "Маркирай всички като прочетени"
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Master catalog link"
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues.index.tsx
+msgid "Master linked"
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Master venue"
+msgstr ""
 
 #: src/pages/-billing-example.tsx
 msgid "Max Projects:"
@@ -1365,6 +1453,10 @@ msgstr "Моят акаунт"
 msgid "Name is too short"
 msgstr "Наименованието е твърде кратко"
 
+#: src/pages/_app/venues.index.tsx
+msgid "Name or city…"
+msgstr ""
+
 #: src/pages/_app/cms-pages.create.tsx
 msgid "New"
 msgstr "Нова"
@@ -1412,6 +1504,10 @@ msgstr "Не е намерен активен абонамент. Абонира
 #: src/features/sign-in/model/use-sign-in.ts
 msgid "No active tenant memberships found for this account"
 msgstr "Не са намерени активни членства за наематели за този акаунт"
+
+#: src/pages/_app/venues.index.tsx
+msgid "No address on record"
+msgstr ""
 
 #: src/features/manage-billing/ui/billing-info.tsx
 msgid "No billing information has been configured yet. Fill in the details below to get started."
@@ -1482,6 +1578,14 @@ msgstr "Не са присвоени роли."
 msgid "No translations added. At least the default locale is required."
 msgstr "Не са добавени преводи. Необходим е поне локалът по подразбиране."
 
+#: src/pages/_app/venues.index.tsx
+msgid "No venues match your filters"
+msgstr ""
+
+#: src/pages/_app/venues.index.tsx
+msgid "No venues yet"
+msgstr ""
+
 #: src/features/manage-billing/ui/webhook-log-list.tsx
 msgid "No webhook logs found."
 msgstr "Не са намерени записи на webhook."
@@ -1498,6 +1602,10 @@ msgstr "Няма (горно ниво)"
 #: src/pages/_app/settings/security.tsx
 msgid "Not connected"
 msgstr "Не е свързан"
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Not linked to a master catalog record."
+msgstr ""
 
 #: src/features/notification-bell/ui/notification-bell.tsx
 #: src/pages/_app/settings/notifications.tsx
@@ -1845,6 +1953,10 @@ msgstr "Причина (по избор)"
 msgid "Received At"
 msgstr "Получено на"
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Record"
+msgstr ""
+
 #: src/features/magic-link/ui/magic-link-exchange-form.tsx
 msgid "Redirecting to your workspace..."
 msgstr "Пренасочване към работното ви пространство..."
@@ -1852,12 +1964,18 @@ msgstr "Пренасочване към работното ви простран
 #: src/pages/_app/cms-pages.index.tsx
 #: src/pages/_app/settings/organization.tsx
 #: src/pages/_app/team.tsx
+#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues.index.tsx
 msgid "Refresh"
 msgstr "Обнови"
 
 #: src/features/manage-billing/ui/refund-list.tsx
 msgid "Refund History"
 msgstr "История на възстановяванията"
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Relations"
+msgstr ""
 
 #: src/features/forgot-password/ui/forgot-password-form.tsx
 #: src/features/reset-password/ui/reset-password-form.tsx
@@ -1926,6 +2044,8 @@ msgstr "Възстанови достъпа"
 #: src/pages/_app/settings/general.tsx
 #: src/pages/_app/settings/security.tsx
 #: src/pages/_app/team.tsx
+#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues.index.tsx
 msgid "Retry"
 msgstr "Опитай отново"
 
@@ -2115,6 +2235,10 @@ msgstr "Настройване на работното ви пространст
 #: src/features/notification-bell/ui/notification-bell.tsx
 msgid "Showing {0} of {1}"
 msgstr "Показване на {0} от {1}"
+
+#: src/pages/_app/venues.index.tsx
+msgid "Showing {rangeStart}–{rangeEnd} of {totalElements}"
+msgstr ""
 
 #: src/pages/sign-in.tsx
 msgid "Sign In"
@@ -2341,6 +2465,10 @@ msgstr "Доставчикът беше разкачен."
 msgid "The unique identifier for your organization. This cannot be changed."
 msgstr "Уникалният идентификатор на организацията ви. Не може да бъде променян."
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "The venue could not be found or the API is unavailable."
+msgstr ""
+
 #: src/pages/loading-demo.tsx
 msgid "Theme-aware (respects dark mode and color scheme)"
 msgstr "Отчита темата (поддържа тъмен режим и цветова схема)"
@@ -2504,6 +2632,8 @@ msgid "Update your profile and preferences in account settings"
 msgstr "Актуализирайте профила и предпочитанията си в настройките на акаунта"
 
 #: src/pages/_app/cms-pages.index.tsx
+#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues.index.tsx
 msgid "Updated"
 msgstr "Актуализирано"
 
@@ -2539,6 +2669,20 @@ msgstr "Използва компонента <0>LoadingOverlay</0> за цял�
 
 #: src/pages/sign-in.tsx
 msgid "Using a corporate identity provider? <0>Sign in with Enterprise SSO</0>"
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Venue"
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Venue ID"
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues.index.tsx
+#: src/shared/ui/app-layout/nav-config.tsx
+msgid "Venues"
 msgstr ""
 
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
@@ -2634,6 +2778,7 @@ msgid "Workspace key"
 msgstr "Ключ на работното пространство"
 
 #: src/pages/_app/cms-pages.index.tsx
+#: src/pages/_app/venues.index.tsx
 msgid "Workspace:"
 msgstr "Работно пространство:"
 

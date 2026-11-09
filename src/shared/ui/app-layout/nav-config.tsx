@@ -24,6 +24,7 @@ import {
   IconBell,
   IconBuilding,
   IconFileText,
+  IconBuildingStore,
 } from "@tabler/icons-react";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -69,6 +70,8 @@ export function buildNavSections(flags: NavSessionFlags, addonItems: NavItem[] =
 
   const workspaceItems: NavItem[] = [
     { label: <Trans>Dashboard</Trans>, icon: IconDashboard, to: "/" },
+    // Venues: read-only tenant venue catalog — visible to all tenant members.
+    { label: <Trans>Venues</Trans>, icon: IconBuildingStore, to: "/venues" },
     // Billing: hidden only when multi-tenant AND personal workspace
     ...(!isMultiTenantMode || !isPersonalWorkspace
       ? [{ label: <Trans>Billing</Trans>, icon: IconCreditCard, to: "/billing" }]
@@ -97,7 +100,7 @@ export function buildNavSections(flags: NavSessionFlags, addonItems: NavItem[] =
     {
       id: "workspace",
       label: <Trans>Workspace</Trans>,
-      prefixes: ["/", "/billing", "/team", "/cms-pages", "/addons"],
+      prefixes: ["/", "/venues", "/billing", "/team", "/cms-pages", "/addons"],
       items: workspaceItems,
     },
     {

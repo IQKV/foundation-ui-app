@@ -76,6 +76,11 @@ export type {
   ListCmsPageParams,
 } from "./cms";
 
+// ─── Catalog (tenant venues) ──────────────────────────────────────────────────
+
+export { catalogApi } from "./catalog";
+export type { Venue, VenueListResponse, ListVenueParams } from "./catalog";
+
 // ─── Auth ─────────────────────────────────────────────────────────────────────
 
 export { authApi } from "./auth";

@@ -361,6 +361,21 @@ export const TestSelectors = {
   CMS_PAGE_EDIT_PARENT_SELECT: "cms-pages-edit-page-parent-select",
   CMS_PAGE_EDIT_SAVE_BUTTON: "cms-pages-edit-page-save-button",
   CMS_PAGE_EDIT_CANCEL_BUTTON: "cms-pages-edit-page-cancel-button",
+
+  // Venues
+  VENUES_INDEX: "venues-index-page",
+  VENUES_REFRESH_BUTTON: "venues-refresh-button",
+  VENUES_SEARCH_INPUT: "venues-search-input",
+  VENUES_CITY_FILTER_SELECT: "venues-city-filter-select",
+  VENUES_CLEAR_FILTERS_BUTTON: "venues-clear-filters-button",
+  VENUES_SEARCH_CLEAR_BUTTON: "venues-search-clear-button",
+  VENUES_TOTAL_COUNT: "venues-total-count",
+  VENUE_DETAIL_HERO: "venue-detail-hero",
+  VENUE_DETAIL_NAME: "venue-detail-name",
+  VENUE_DETAIL_CITY: "venue-detail-city",
+  VENUE_DETAIL_BACK_BUTTON: "venue-detail-back-button",
+  VENUE_DETAIL_REFRESH_BUTTON: "venue-detail-refresh-button",
+  VENUE_DETAIL_ERROR_RETRY_BUTTON: "venue-detail-error-retry-button",
 } as const;
 
 /**
