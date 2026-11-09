@@ -25,3 +25,22 @@ export const SECTION_CARD_STYLES = {
     },
   },
 } as const;
+
+/** Hairline gradient bar along the leading edge of a list row (e.g. photo asset rows). */
+export const ASSET_ROW_STYLES = {
+  root: {
+    position: "relative",
+    overflow: "hidden",
+    "&::before": {
+      content: '""',
+      position: "absolute",
+      top: 0,
+      bottom: 0,
+      left: 0,
+      width: 3,
+      background: ACCENT_GRADIENT,
+      opacity: 0.65,
+      pointerEvents: "none",
+    },
+  },
+} as const;

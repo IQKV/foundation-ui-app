@@ -1,8 +1,20 @@
 import { httpClient } from "./http-client";
-import type { Venue, VenueListResponse, ListVenueParams } from "@/entities/venue";
+import type {
+  Venue,
+  VenueListResponse,
+  ListVenueParams,
+  VenueAssetPublic,
+  VenueAssetListResponse,
+} from "@/entities/venue";
 
 // Re-export entity types so existing imports from "@/shared/api" keep working.
-export type { Venue, VenueListResponse, ListVenueParams };
+export type {
+  Venue,
+  VenueListResponse,
+  ListVenueParams,
+  VenueAssetPublic,
+  VenueAssetListResponse,
+} from "@/entities/venue";
 
 // ─── Tenant-scoped Catalog API ────────────────────────────────────────────────
 // Endpoints live at /v1/catalog/venues — tenant context comes from the JWT
@@ -55,4 +67,11 @@ export const catalogApi = {
   // The backend caps the list at 100 ids and silently ignores unknown ids.
   bulkDeleteVenues: (ids: string[]) =>
     httpClient.delete("/v1/catalog/venues", { data: { ids } }).then(() => undefined),
+
+  // Master-catalog photos are accessible to MEMBER via /master-venues/{id}/photos.
+  // Used by the venue detail Photos tab when masterVenueId is present.
+  listMasterVenuePhotos: (masterVenueId: string) =>
+    httpClient
+      .get<VenueAssetListResponse>(`/v1/catalog/master-venues/${masterVenueId}/photos`)
+      .then((r) => r.data),
 };

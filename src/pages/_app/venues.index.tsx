@@ -674,6 +674,29 @@ function VenuesPage() {
   });
   const viewMode: ViewMode = storedViewMode === "list" ? "list" : "grid";
 
+  // ── Sort order ──────────────────────────────────────────────────────────────
+  type SortOrder = "recent" | "name_asc" | "name_desc";
+  const SORT_OPTIONS: { value: SortOrder; label: string }[] = [
+    { value: "recent", label: t`Recently Added` },
+    { value: "name_asc", label: t`Name A → Z` },
+    { value: "name_desc", label: t`Name Z → A` },
+  ];
+  const [storedSortOrder, setStoredSortOrder] = useLocalStorage<SortOrder>({
+    key: "iqkv_venues_sort_order",
+    defaultValue: "recent",
+    getInitialValueInEffect: false,
+  });
+  const sortOrder: SortOrder =
+    storedSortOrder === "name_asc" || storedSortOrder === "name_desc"
+      ? storedSortOrder
+      : "recent";
+  const sortParams =
+    sortOrder === "name_asc"
+      ? { sortBy: "name" as const, sortDir: "asc" as const }
+      : sortOrder === "name_desc"
+        ? { sortBy: "name" as const, sortDir: "desc" as const }
+        : {};
+
   const [createOpened, { open: openCreate, close: closeCreate }] = useDisclosure(false);
   const [editOpened, { open: openEdit, close: closeEdit }] = useDisclosure(false);
   const [deleteOpened, { open: openDelete, close: closeDelete }] = useDisclosure(false);
@@ -688,6 +711,7 @@ function VenuesPage() {
     city: cityFilter || undefined,
     limit: PAGE_SIZE,
     offset,
+    ...sortParams,
   });
 
   const items = data?.items ?? [];
@@ -941,6 +965,16 @@ function VenuesPage() {
                     ),
                   },
                 ]}
+              />
+              <Select
+                data={SORT_OPTIONS}
+                value={sortOrder}
+                onChange={(v) => {
+                  if (v) setStoredSortOrder(v as SortOrder);
+                }}
+                size="xs"
+                w={140}
+                allowDeselect={false}
               />
             </Group>
           </Group>

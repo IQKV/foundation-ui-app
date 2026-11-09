@@ -25,9 +25,32 @@ export interface VenueListResponse {
   totalElements: number;
 }
 
+/** Lightweight photo returned by the master-venue photos sub-resource. */
+export interface VenueAssetPublic {
+  id: string;
+  assetType: string;
+  displayOrder: number | null;
+  label: string | null;
+  fileName: string | null;
+  contentType: string | null;
+  sizeBytes: number | null;
+  sourceUrl: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface VenueAssetListResponse {
+  items: VenueAssetPublic[];
+  totalElements: number;
+}
+
 export interface ListVenueParams {
   search?: string;
   city?: string;
   limit?: number;
   offset?: number;
+  /** Sort field — "name" or omit for recently added (default). */
+  sortBy?: string;
+  /** Sort direction — "asc" or "desc". */
+  sortDir?: string;
 }

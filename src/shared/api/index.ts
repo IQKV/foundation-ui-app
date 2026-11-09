@@ -83,6 +83,8 @@ export type {
   Venue,
   VenueListResponse,
   ListVenueParams,
+  VenueAssetPublic,
+  VenueAssetListResponse,
   VenueWriteRequest,
   VenuePatchRequest,
 } from "./catalog";

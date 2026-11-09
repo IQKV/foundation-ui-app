@@ -13,6 +13,8 @@ import {
   Button,
   ActionIcon,
   Tooltip,
+  Tabs,
+  SimpleGrid,
   Anchor,
   Center,
   ThemeIcon,
@@ -20,6 +22,7 @@ import {
   CopyButton,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
+import { useQuery } from "@tanstack/react-query";
 import {
   IconAlertCircle,
   IconArrowLeft,
@@ -30,18 +33,22 @@ import {
   IconAdjustments,
   IconLink,
   IconCheck,
+  IconAlertTriangle,
   IconEdit,
   IconTrash,
+  IconPhoto,
 } from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { PageTitle } from "@/shared/lib/page-title";
-import type { Venue } from "@/entities/venue";
+import type { Venue, VenueAssetPublic } from "@/entities/venue";
 import { PageHeader } from "@/shared/ui";
 import { useSession } from "@/processes/session";
+import { catalogApi } from "@/shared/api";
 import {
   useVenue,
   ACCENT_GRADIENT,
   SECTION_CARD_STYLES,
+  ASSET_ROW_STYLES,
   EditVenueModal,
   DeleteVenueModal,
 } from "@/features/venue-management";
@@ -52,16 +59,27 @@ export const Route = createFileRoute("/_app/venues/$venueId")({
   component: VenueDetailPage,
 });
 
-// ─── Section card ────────────────────────────────────────────────────────────
+// ─── Section card ─────────────────────────────────────────────────────────────
 
 interface InfoSectionCardProps {
   title: React.ReactNode;
   icon: React.ReactNode;
-  children: React.ReactNode;
+  /** Number of populated fields — shown as completeness badge when total > 0. */
+  filled?: number;
+  total?: number;
   isLoading?: boolean;
+  children: React.ReactNode;
 }
 
-function InfoSectionCard({ title, icon, children, isLoading }: InfoSectionCardProps) {
+function InfoSectionCard({
+  title,
+  icon,
+  filled,
+  total,
+  isLoading,
+  children,
+}: InfoSectionCardProps) {
+  const allFilled = filled != null && total != null && filled === total && total > 0;
   return (
     <Paper withBorder radius="md" p="lg" shadow="sm" styles={SECTION_CARD_STYLES}>
       <Group justify="space-between" align="flex-start" mb="sm">
@@ -73,6 +91,22 @@ function InfoSectionCard({ title, icon, children, isLoading }: InfoSectionCardPr
             {title}
           </Text>
         </Group>
+        {filled != null && total != null && total > 0 && (
+          <Badge
+            variant="light"
+            color={allFilled ? "teal" : "gray"}
+            size="xs"
+            leftSection={
+              allFilled ? (
+                <IconCheck size={10} style={{ marginTop: 1 }} />
+              ) : (
+                <IconAlertTriangle size={10} style={{ marginTop: 1 }} />
+              )
+            }
+          >
+            {filled}/{total}
+          </Badge>
+        )}
       </Group>
       <Divider mb="sm" />
       {isLoading ? (
@@ -108,6 +142,96 @@ function FieldChip({ label, value }: { label: React.ReactNode; value: React.Reac
   );
 }
 
+// ─── Photos tab ───────────────────────────────────────────────────────────────
+
+function PhotosTab({
+  photos,
+  isLoading,
+}: {
+  photos: VenueAssetPublic[];
+  isLoading: boolean;
+}) {
+  if (isLoading) {
+    return (
+      <SimpleGrid cols={{ base: 2, sm: 3, md: 4, lg: 5 }} spacing="sm">
+        {Array.from({ length: 5 }).map((_, i) => (
+          <Skeleton key={i} height={130} radius="sm" />
+        ))}
+      </SimpleGrid>
+    );
+  }
+  if (photos.length === 0) {
+    return (
+      <Paper
+        withBorder
+        p="xl"
+        radius="md"
+        style={{ textAlign: "center", background: "var(--mantine-color-gray-0)" }}
+      >
+        <Stack align="center" gap="sm">
+          <IconPhoto size={40} color="var(--mantine-color-gray-4)" />
+          <Text size="sm" c="dimmed">
+            <Trans>No photos for this venue.</Trans>
+          </Text>
+        </Stack>
+      </Paper>
+    );
+  }
+  return (
+    <SimpleGrid cols={{ base: 2, sm: 3, md: 4, lg: 5 }} spacing="sm">
+      {photos.map((photo, i) => (
+        <Box key={photo.id} style={{ position: "relative" }}>
+          {photo.sourceUrl ? (
+            <img
+              src={photo.sourceUrl}
+              alt={photo.label ?? photo.fileName ?? ""}
+              style={{
+                width: "100%",
+                height: 130,
+                objectFit: "cover",
+                display: "block",
+                borderRadius: "var(--mantine-radius-sm)",
+              }}
+            />
+          ) : (
+            <Group
+              justify="center"
+              align="center"
+              style={{
+                height: 130,
+                background: "var(--mantine-color-gray-1)",
+                borderRadius: "var(--mantine-radius-sm)",
+              }}
+            >
+              <IconPhoto size={24} color="var(--mantine-color-gray-4)" />
+            </Group>
+          )}
+          <Box style={{ position: "absolute", top: 6, right: 6 }}>
+            <Badge variant="filled" color="dark" size="xs" radius="sm" style={{ opacity: 0.75 }}>
+              #{i + 1}
+            </Badge>
+          </Box>
+          {photo.label && (
+            <Text size="xs" c="dimmed" lineClamp={1} mt={4}>
+              {photo.label}
+            </Text>
+          )}
+        </Box>
+      ))}
+    </SimpleGrid>
+  );
+}
+
+// ─── Tab label styles — mirrors bigTabStyles in admin ────────────────────────
+
+const bigTabStyles = {
+  tab: {
+    fontSize: "var(--mantine-font-size-lg)",
+    fontWeight: 600,
+    padding: "var(--mantine-spacing-md) var(--mantine-spacing-xl)",
+  },
+};
+
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 function VenueDetailPage() {
@@ -124,6 +248,19 @@ function VenueDetailPage() {
 
   const { data: venue, isLoading, isError, refetch, isFetching } = useVenue(venueId);
 
+  // Photos come from the master-catalog photos endpoint via masterVenueId.
+  // Only fetched when the venue is linked to a master catalog record.
+  const {
+    data: photosData,
+    isLoading: photosLoading,
+  } = useQuery({
+    queryKey: ["tenant", "venue", venueId, "photos", venue?.masterVenueId ?? ""],
+    queryFn: () => catalogApi.listMasterVenuePhotos(venue!.masterVenueId!),
+    enabled: Boolean(venue?.masterVenueId),
+  });
+
+  const photos = photosData?.items ?? [];
+
   const hasPhoto = Boolean(venue?.primaryPhotoUrl);
 
   const mapUrl =
@@ -132,6 +269,9 @@ function VenueDetailPage() {
       : null;
 
   const handleDeleteSuccess = () => void navigate({ to: "/venues" });
+
+  // Completeness counts for section cards
+  const locationFilled = [venue?.address, venue?.city, venue?.locationLat].filter(Boolean).length;
 
   if (isError) {
     return (
@@ -353,7 +493,7 @@ function VenueDetailPage() {
             )}
           </Box>
 
-          {/* soft gradient rim — replaces the hard border on the hero edge */}
+          {/* soft gradient rim */}
           <Box
             aria-hidden
             style={{
@@ -371,142 +511,201 @@ function VenueDetailPage() {
           />
         </Box>
 
-        {/* ── Details ──────────────────────────────────────────────────── */}
-        <Stack gap="xs" pt="sm">
-          <Divider
-            label={
-              <Text
-                size="xs"
-                fw={700}
-                tt="uppercase"
-                c="dimmed"
-                style={{ letterSpacing: "0.07em" }}
-              >
-                <Trans>Location</Trans>
-              </Text>
-            }
-            labelPosition="left"
-            my="sm"
-          />
-
-          <InfoSectionCard
-            title={<Trans>Address & coordinates</Trans>}
-            icon={<IconMapPin size={14} />}
-            isLoading={isLoading}
+        {/* ── Tabs — mirrors admin VenueProfileWidget tab structure ─────── */}
+        <Tabs defaultValue="details" keepMounted={false}>
+          <Tabs.List
+            styles={{
+              list: {
+                gap: 8,
+                borderBottomWidth: 2,
+              },
+            }}
           >
-            <Stack gap={6}>
-              <FieldChip label={<Trans>Address</Trans>} value={venue?.address} />
-              <FieldChip label={<Trans>City</Trans>} value={venue?.city} />
-              <FieldChip
-                label={<Trans>Coordinates</Trans>}
-                value={
-                  venue?.locationLat && venue?.locationLng ? (
-                    <Group gap={6} wrap="nowrap">
-                      <Text size="sm">
-                        {String(venue.locationLat)}, {String(venue.locationLng)}
-                      </Text>
-                      {mapUrl && (
-                        <Anchor href={mapUrl} target="_blank" rel="noopener noreferrer" size="sm">
-                          <Group gap={3} wrap="nowrap">
-                            <IconExternalLink size={11} />
-                            <Trans>Maps</Trans>
-                          </Group>
-                        </Anchor>
-                      )}
-                    </Group>
-                  ) : null
+            <Tabs.Tab
+              value="details"
+              leftSection={<IconAdjustments size={20} />}
+              styles={bigTabStyles}
+            >
+              <Trans>Details</Trans>
+            </Tabs.Tab>
+            {venue?.masterVenueId && (
+              <Tabs.Tab
+                value="photos"
+                leftSection={<IconPhoto size={20} />}
+                styles={bigTabStyles}
+                rightSection={
+                  !photosLoading && photos.length > 0 ? (
+                    <Badge size="xl" variant="filled" color="blue" circle>
+                      {photos.length}
+                    </Badge>
+                  ) : undefined
                 }
-              />
-            </Stack>
-          </InfoSectionCard>
-
-          <Divider
-            label={
-              <Text
-                size="xs"
-                fw={700}
-                tt="uppercase"
-                c="dimmed"
-                style={{ letterSpacing: "0.07em" }}
               >
-                <Trans>Relations</Trans>
-              </Text>
-            }
-            labelPosition="left"
-            my="sm"
-          />
-
-          <InfoSectionCard
-            title={<Trans>Master catalog link</Trans>}
-            icon={<IconLink size={14} />}
-            isLoading={isLoading}
-          >
-            {venue?.masterVenueId ? (
-              <Group gap="xs" wrap="nowrap">
-                <Text size="sm" c="dimmed" style={{ flexShrink: 0 }}>
-                  <Trans>Master venue</Trans>:
-                </Text>
-                <Badge variant="light" color="indigo" size="sm" ff="monospace" tt="none">
-                  {venue.masterVenueId}
-                </Badge>
-                <CopyButton value={venue.masterVenueId} timeout={2000}>
-                  {({ copied, copy }) => (
-                    <ActionIcon
-                      color={copied ? "teal" : "gray"}
-                      variant="subtle"
-                      size="sm"
-                      onClick={copy}
-                      aria-label={t`Copy master venue id`}
-                    >
-                      {copied ? <IconCheck size={13} /> : <IconLink size={13} />}
-                    </ActionIcon>
-                  )}
-                </CopyButton>
-              </Group>
-            ) : (
-              <Text size="sm" c="dimmed" fs="italic">
-                <Trans>Not linked to a master catalog record.</Trans>
-              </Text>
+                <Trans>Photos</Trans>
+              </Tabs.Tab>
             )}
-          </InfoSectionCard>
+          </Tabs.List>
 
-          <Divider
-            label={
-              <Text
-                size="xs"
-                fw={700}
-                tt="uppercase"
-                c="dimmed"
-                style={{ letterSpacing: "0.07em" }}
+          {/* ── Details tab ──────────────────────────────────────────────── */}
+          <Tabs.Panel value="details">
+            <Stack gap="xs" pt="sm">
+              <Divider
+                label={
+                  <Text
+                    size="xs"
+                    fw={700}
+                    tt="uppercase"
+                    c="dimmed"
+                    style={{ letterSpacing: "0.07em" }}
+                  >
+                    <Trans>Location</Trans>
+                  </Text>
+                }
+                labelPosition="left"
+                my="sm"
+              />
+
+              <InfoSectionCard
+                title={<Trans>Address & coordinates</Trans>}
+                icon={<IconMapPin size={14} />}
+                filled={locationFilled}
+                total={3}
+                isLoading={isLoading}
               >
-                <Trans>Record</Trans>
-              </Text>
-            }
-            labelPosition="left"
-            my="sm"
-          />
+                <Stack gap={6}>
+                  <FieldChip label={<Trans>Address</Trans>} value={venue?.address} />
+                  <FieldChip label={<Trans>City</Trans>} value={venue?.city} />
+                  <FieldChip
+                    label={<Trans>Coordinates</Trans>}
+                    value={
+                      venue?.locationLat && venue?.locationLng ? (
+                        <Group gap={6} wrap="nowrap">
+                          <Text size="sm">
+                            {String(venue.locationLat)}, {String(venue.locationLng)}
+                          </Text>
+                          {mapUrl && (
+                            <Anchor href={mapUrl} target="_blank" rel="noopener noreferrer" size="sm">
+                              <Group gap={3} wrap="nowrap">
+                                <IconExternalLink size={11} />
+                                <Trans>Maps</Trans>
+                              </Group>
+                            </Anchor>
+                          )}
+                        </Group>
+                      ) : null
+                    }
+                  />
+                </Stack>
+              </InfoSectionCard>
 
-          <InfoSectionCard
-            title={<Trans>Identifiers & timestamps</Trans>}
-            icon={<IconAdjustments size={14} />}
-            isLoading={isLoading}
-          >
-            <Stack gap={6}>
-              <FieldChip
-                label={<Trans>Venue ID</Trans>}
-                value={venue ? <Text size="sm" ff="monospace">{venue.id}</Text> : null}
+              <Divider
+                label={
+                  <Text
+                    size="xs"
+                    fw={700}
+                    tt="uppercase"
+                    c="dimmed"
+                    style={{ letterSpacing: "0.07em" }}
+                  >
+                    <Trans>Relations</Trans>
+                  </Text>
+                }
+                labelPosition="left"
+                my="sm"
               />
-              <FieldChip
-                label={<Trans>Created</Trans>}
-                value={venue?.createdAt ? dayjs(venue.createdAt).format("MMM D, YYYY HH:mm") : null}
+
+              <InfoSectionCard
+                title={<Trans>Master catalog link</Trans>}
+                icon={<IconLink size={14} />}
+                filled={venue?.masterVenueId ? 1 : 0}
+                total={1}
+                isLoading={isLoading}
+              >
+                {venue?.masterVenueId ? (
+                  <Group gap="xs" wrap="nowrap">
+                    <Text size="sm" c="dimmed" style={{ flexShrink: 0 }}>
+                      <Trans>Master venue</Trans>:
+                    </Text>
+                    <Badge variant="light" color="indigo" size="sm" ff="monospace" tt="none">
+                      {venue.masterVenueId}
+                    </Badge>
+                    <CopyButton value={venue.masterVenueId} timeout={2000}>
+                      {({ copied, copy }) => (
+                        <ActionIcon
+                          color={copied ? "teal" : "gray"}
+                          variant="subtle"
+                          size="sm"
+                          onClick={copy}
+                          aria-label={t`Copy master venue id`}
+                        >
+                          {copied ? <IconCheck size={13} /> : <IconLink size={13} />}
+                        </ActionIcon>
+                      )}
+                    </CopyButton>
+                  </Group>
+                ) : (
+                  <Text size="sm" c="dimmed" fs="italic">
+                    <Trans>Not linked to a master catalog record.</Trans>
+                  </Text>
+                )}
+              </InfoSectionCard>
+
+              <Divider
+                label={
+                  <Text
+                    size="xs"
+                    fw={700}
+                    tt="uppercase"
+                    c="dimmed"
+                    style={{ letterSpacing: "0.07em" }}
+                  >
+                    <Trans>Record</Trans>
+                  </Text>
+                }
+                labelPosition="left"
+                my="sm"
               />
-              <FieldChip
-                label={<Trans>Updated</Trans>}
-                value={venue?.updatedAt ? dayjs(venue.updatedAt).format("MMM D, YYYY HH:mm") : null}
-              />
+
+              <InfoSectionCard
+                title={<Trans>Identifiers & timestamps</Trans>}
+                icon={<IconAdjustments size={14} />}
+                isLoading={isLoading}
+              >
+                <Stack gap={6}>
+                  <FieldChip
+                    label={<Trans>Venue ID</Trans>}
+                    value={
+                      venue ? (
+                        <Text size="sm" ff="monospace">
+                          {venue.id}
+                        </Text>
+                      ) : null
+                    }
+                  />
+                  <FieldChip
+                    label={<Trans>Created</Trans>}
+                    value={
+                      venue?.createdAt ? dayjs(venue.createdAt).format("MMM D, YYYY HH:mm") : null
+                    }
+                  />
+                  <FieldChip
+                    label={<Trans>Updated</Trans>}
+                    value={
+                      venue?.updatedAt ? dayjs(venue.updatedAt).format("MMM D, YYYY HH:mm") : null
+                    }
+                  />
+                </Stack>
+              </InfoSectionCard>
             </Stack>
-          </InfoSectionCard>
-        </Stack>
+          </Tabs.Panel>
+
+          {/* ── Photos tab (only when masterVenueId is set) ───────────── */}
+          {venue?.masterVenueId && (
+            <Tabs.Panel value="photos" pt="sm">
+              <PhotosTab photos={photos} isLoading={photosLoading} />
+            </Tabs.Panel>
+          )}
+        </Tabs>
       </Stack>
 
       {canManage && (

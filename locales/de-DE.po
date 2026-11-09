@@ -860,6 +860,10 @@ msgstr "Demo Ladeüberlagerung (2 Sek.)"
 msgid "Demo Progress Bar"
 msgstr "Demo-Fortschrittsbalken"
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Details"
+msgstr ""
+
 #: src/features/signup/ui/verify-email-prompt.tsx
 msgid "Didn't receive it? Check your spam folder or"
 msgstr "Nichts erhalten? Prüfen Sie Ihren Spam-Ordner oder"
@@ -1560,6 +1564,10 @@ msgstr "Mein Konto"
 msgid "Name"
 msgstr ""
 
+#: src/pages/_app/venues.index.tsx
+msgid "Name A → Z"
+msgstr ""
+
 #: src/features/venue-management/model/types.ts
 msgid "Name is required"
 msgstr ""
@@ -1570,6 +1578,10 @@ msgstr "Name ist zu kurz"
 
 #: src/pages/_app/venues.index.tsx
 msgid "Name or city…"
+msgstr ""
+
+#: src/pages/_app/venues.index.tsx
+msgid "Name Z → A"
 msgstr ""
 
 #: src/pages/_app/cms-pages.create.tsx
@@ -1680,6 +1692,10 @@ msgstr "Kein Passwort? <0>Anmeldelink per E-Mail senden</0>"
 #: src/pages/_app/team.tsx
 msgid "No pending invitations."
 msgstr "Keine ausstehenden Einladungen."
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "No photos for this venue."
+msgstr ""
 
 #: src/features/manage-billing/ui/plan-list.tsx
 msgid "No plans available at the moment."
@@ -1972,6 +1988,10 @@ msgstr "Ihrem Konto zugewiesene Berechtigungen"
 msgid "Personal Workspace"
 msgstr "Persönlicher Workspace"
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Photos"
+msgstr ""
+
 #: src/features/ban-user/ui/ban-member-modal.tsx
 msgid "Pick a date and time"
 msgstr "Datum und Uhrzeit auswählen"
@@ -2081,6 +2101,10 @@ msgstr "Grund (optional)"
 #: src/features/manage-billing/ui/webhook-log-list.tsx
 msgid "Received At"
 msgstr "Empfangen am"
+
+#: src/pages/_app/venues.index.tsx
+msgid "Recently Added"
+msgstr ""
 
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Record"
