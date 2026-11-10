@@ -9,21 +9,66 @@ import {
   Button,
   Group,
   ThemeIcon,
+  Progress,
+  Badge,
 } from "@mantine/core";
 import { Dropzone } from "@mantine/dropzone";
-import { IconFileText, IconPencil, IconUpload, IconX, IconPhoto } from "@tabler/icons-react";
+import {
+  IconFileText,
+  IconPencil,
+  IconUpload,
+  IconX,
+  IconCheck,
+  IconAlertCircle,
+} from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { notifications } from "@mantine/notifications";
 import { PageTitle } from "@/shared/lib/page-title";
 import { TestSelectors } from "@/shared/lib/test-selectors";
+import { useUploadVenueDocument } from "@/features/manage-venue";
 
 export const Route = createFileRoute("/_app/venues/add")({
   component: AddVenuePage,
 });
 
+const STAGE_LABELS = {
+  idle: "",
+  "creating-venue": "Creating venue record…",
+  "initiating-upload": "Preparing upload…",
+  uploading: "Uploading…",
+  confirming: "Finalising…",
+  done: "Done",
+  error: "Upload failed",
+} as const;
+
+const ACCEPTED_TYPES = [
+  "application/pdf",
+  "application/vnd.ms-excel",
+  "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+  "text/csv",
+  "image/jpeg",
+  "image/png",
+  "image/webp",
+  "image/gif",
+];
+
 function AddVenuePage() {
   const { t } = useLingui();
   const navigate = useNavigate();
+  const { stage, progress, venueId, upload, reset } = useUploadVenueDocument();
+
+  const isActive = stage !== "idle" && stage !== "done" && stage !== "error";
+  const isDone = stage === "done";
+  const isError = stage === "error";
+
+  const handleDrop = async (files: File[]) => {
+    const file = files[0];
+    if (!file) return;
+    const resultVenueId = await upload(file);
+    if (resultVenueId) {
+      // Navigate to detail whether success or partial failure — user can retry upload there.
+      void navigate({ to: "/venues/$venueId", params: { venueId: resultVenueId } });
+    }
+  };
 
   return (
     <Container size="lg" py="xl">
@@ -46,21 +91,11 @@ function AddVenuePage() {
       <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="lg">
         {/* ── File upload option ───────────────────────────────────────── */}
         <Dropzone
-          onDrop={(files) => {
-            // shortcut: file processing not yet wired to backend; show feedback for now
-            notifications.show({
-              title: t`File received`,
-              message: files[0]?.name ?? t`Your file`,
-              color: "blue",
-            });
-          }}
-          accept={[
-            "application/pdf",
-            "image/*",
-            "application/vnd.ms-excel",
-            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-            "text/csv",
-          ]}
+          onDrop={(files) => void handleDrop(files)}
+          accept={ACCEPTED_TYPES}
+          disabled={isActive}
+          loading={isActive}
+          maxFiles={1}
           data-testid={TestSelectors.VENUES_ADD_CHOOSE_FILE}
           styles={{
             root: {
@@ -87,9 +122,19 @@ function AddVenuePage() {
               </ThemeIcon>
             </Dropzone.Reject>
             <Dropzone.Idle>
-              <ThemeIcon size={56} radius="xl" variant="light" color="gray">
-                <IconFileText size={28} />
-              </ThemeIcon>
+              {isDone ? (
+                <ThemeIcon size={56} radius="xl" variant="light" color="green">
+                  <IconCheck size={28} />
+                </ThemeIcon>
+              ) : isError ? (
+                <ThemeIcon size={56} radius="xl" variant="light" color="red">
+                  <IconAlertCircle size={28} />
+                </ThemeIcon>
+              ) : (
+                <ThemeIcon size={56} radius="xl" variant="light" color="gray">
+                  <IconFileText size={28} />
+                </ThemeIcon>
+              )}
             </Dropzone.Idle>
 
             <Stack gap={6}>
@@ -98,20 +143,51 @@ function AddVenuePage() {
               </Text>
               <Text size="sm" c="dimmed" maw={340}>
                 <Trans>
-                  Floor plans, capacity sheets, rate cards or brochures — PDF, image or spreadsheet.
-                  We read capacity, pricing, catering and technical detail into the library.
+                  Floor plans, capacity sheets, rate cards or brochures — PDF, image or
+                  spreadsheet. We read capacity, pricing, catering and technical detail into the
+                  library.
                 </Trans>
               </Text>
             </Stack>
 
-            <Button
-              variant="default"
-              leftSection={<IconPhoto size={14} />}
-              size="sm"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <Trans>Choose a file</Trans>
-            </Button>
+            {/* Progress feedback */}
+            {isActive && (
+              <Stack gap={6} w="100%" maw={300}>
+                <Group justify="space-between" gap="xs">
+                  <Text size="xs" c="dimmed">
+                    {STAGE_LABELS[stage]}
+                  </Text>
+                  {stage === "uploading" && (
+                    <Badge variant="light" color="blue" size="xs">
+                      {progress}%
+                    </Badge>
+                  )}
+                </Group>
+                <Progress
+                  value={stage === "uploading" ? progress : undefined}
+                  animated={stage !== "uploading"}
+                  size="sm"
+                  radius="xl"
+                />
+              </Stack>
+            )}
+
+            {isError && (
+              <Button size="xs" variant="light" color="red" onClick={reset}>
+                <Trans>Try again</Trans>
+              </Button>
+            )}
+
+            {!isActive && !isDone && !isError && (
+              <Button
+                variant="default"
+                leftSection={<IconUpload size={14} />}
+                size="sm"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <Trans>Choose a file</Trans>
+              </Button>
+            )}
           </Stack>
         </Dropzone>
 
@@ -143,6 +219,7 @@ function AddVenuePage() {
                 variant="default"
                 size="sm"
                 data-testid={TestSelectors.VENUES_ADD_BLANK_BUTTON}
+                disabled={isActive}
                 onClick={() => void navigate({ to: "/venues/create" })}
               >
                 <Trans>Start from a blank venue</Trans>

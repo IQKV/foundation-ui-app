@@ -5,6 +5,8 @@ export { useCreateVenue } from "./use-create-venue";
 export { useUpdateVenue } from "./use-update-venue";
 export { useDeleteVenue } from "./use-delete-venue";
 export { useBulkDeleteVenues } from "./use-bulk-delete-venues";
+export { useUploadVenueDocument } from "./use-upload-venue-document";
+export type { UploadStage, UseUploadVenueDocumentResult } from "./use-upload-venue-document";
 export { METADATA_SECTIONS, METADATA_TABS } from "./metadata-spec";
 export type {
   MetadataFieldDefinition,

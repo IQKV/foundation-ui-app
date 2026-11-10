@@ -120,3 +120,82 @@ export const catalogApi = {
       .get<VenueAssetListResponse>(`/v1/catalog/venues/${venueId}/assets/photos`)
       .then((r) => r.data),
 };
+
+// ─── Venue asset upload ───────────────────────────────────────────────────────
+// Two-phase presigned flow: initiate → PUT to presigned URL → confirm.
+// The presigned PUT goes directly to MinIO (bypasses our API), so XHR is used
+// for progress events on large files. The backend reads size/content-type back
+// from the stored object at confirm time.
+
+export interface InitiateAssetUploadRequest {
+  fileName: string;
+  contentType: string;
+  sizeBytes: number;
+}
+
+export interface InitiateAssetUploadResponse {
+  assetId: string;
+  presignedUploadUrl: string;
+  objectKey: string;
+  expiresInMinutes: number;
+}
+
+export interface ConfirmAssetUploadRequest {
+  objectKey: string;
+  fileName: string;
+  assetType: string;
+  photoCategory?: string | null;
+  displayOrder?: number | null;
+  label?: string | null;
+}
+
+export interface VenueAssetResponse {
+  id: string;
+  venueId: string;
+  assetType: string;
+  photoCategory: string | null;
+  displayOrder: number | null;
+  label: string | null;
+  fileName: string;
+  contentType: string;
+  sizeBytes: number;
+  s3Key: string;
+  uploadedBy: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export const venueAssetApi = {
+  initiateUpload: (venueId: string, data: InitiateAssetUploadRequest) =>
+    httpClient
+      .post<InitiateAssetUploadResponse>(`/v1/catalog/venues/${venueId}/assets/initiate`, data)
+      .then((r) => r.data),
+
+  confirmUpload: (venueId: string, assetId: string, data: ConfirmAssetUploadRequest) =>
+    httpClient
+      .post<VenueAssetResponse>(`/v1/catalog/venues/${venueId}/assets/${assetId}/confirm`, data)
+      .then((r) => r.data),
+};
+
+/**
+ * PUT a file to a presigned S3/MinIO URL with upload-progress callbacks.
+ * Uses XHR so the browser fires real progress events; axios does not support
+ * upload progress for PUT out of the box when the body is a File/Blob.
+ */
+export function uploadFileToPresignedUrl(
+  presignedUrl: string,
+  file: File,
+  onProgress: (pct: number) => void,
+): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open("PUT", presignedUrl);
+    xhr.setRequestHeader("Content-Type", file.type);
+    xhr.upload.onprogress = (e) => {
+      if (e.lengthComputable) onProgress(Math.round((e.loaded / e.total) * 100));
+    };
+    xhr.onload = () => (xhr.status >= 200 && xhr.status < 300 ? resolve() : reject(new Error(`Upload failed: ${xhr.status}`)));
+    xhr.onerror = () => reject(new Error("Network error during upload"));
+    xhr.send(file);
+  });
+}

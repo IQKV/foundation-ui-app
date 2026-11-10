@@ -78,7 +78,7 @@ export type {
 
 // ─── Catalog (tenant venues) ──────────────────────────────────────────────────
 
-export { catalogApi } from "./catalog";
+export { catalogApi, venueAssetApi, uploadFileToPresignedUrl } from "./catalog";
 export type {
   Venue,
   VenueListResponse,
@@ -91,6 +91,10 @@ export type {
   SemanticSearchFilters,
   SemanticSearchResponse,
   SemanticSearchParams,
+  InitiateAssetUploadRequest,
+  InitiateAssetUploadResponse,
+  ConfirmAssetUploadRequest,
+  VenueAssetResponse,
 } from "./catalog";
 
 // ─── Auth ─────────────────────────────────────────────────────────────────────
