@@ -751,7 +751,7 @@ function VenueDetailPage() {
                       {rawJsonOpened ? t`Hide raw JSON` : t`Show raw JSON`}
                     </Button>
                   </Group>
-                  <Collapse in={rawJsonOpened}>
+                  <Collapse opened={rawJsonOpened}>
                     <Divider my="sm" />
                     {isLoading ? (
                       <Skeleton height={120} radius="sm" />

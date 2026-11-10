@@ -24,7 +24,7 @@ function CreateVenuePage() {
   });
 
   const mutation = useCreateVenue({
-    onSuccess: () => void navigate({ to: "/venues/" }),
+    onSuccess: () => void navigate({ to: "/venues" }),
   });
 
   const handleSubmit = form.onSubmit((values) => {

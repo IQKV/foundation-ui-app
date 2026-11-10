@@ -164,7 +164,7 @@ function AddVenuePage() {
                   )}
                 </Group>
                 <Progress
-                  value={stage === "uploading" ? progress : undefined}
+                  value={stage === "uploading" ? progress : 100}
                   animated={stage !== "uploading"}
                   size="sm"
                   radius="xl"
