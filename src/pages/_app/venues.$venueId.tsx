@@ -771,9 +771,14 @@ function VenueDetailPage() {
                           maxHeight: 400,
                         }}
                       >
-                        {venue.metadata
-                          ? JSON.stringify(JSON.parse(venue.metadata), null, 2)
-                          : t`— no metadata —`}
+                        {(() => {
+                          if (!venue.metadata) return t`— no metadata —`;
+                          try {
+                            return JSON.stringify(JSON.parse(venue.metadata), null, 2);
+                          } catch {
+                            return venue.metadata;
+                          }
+                        })()}
                       </Box>
                     )}
                   </Collapse>
