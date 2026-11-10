@@ -201,7 +201,7 @@ msgstr ""
 msgid "Addons"
 msgstr ""
 
-#: src/features/venue-management/ui/venue-fields.tsx
+#: src/features/manage-venue/ui/venue-fields.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Address"
 msgstr ""
@@ -265,11 +265,11 @@ msgid "Archived"
 msgstr "Архивирано"
 
 #. placeholder {0}: venue?.name ?? ""
-#: src/features/venue-management/ui/delete-venue-modal.tsx
+#: src/features/manage-venue/ui/delete-venue-modal.tsx
 msgid "Are you sure you want to delete <0>{0}</0>? This action cannot be undone."
 msgstr ""
 
-#: src/features/venue-management/ui/bulk-delete-venues-modal.tsx
+#: src/features/manage-venue/ui/bulk-delete-venues-modal.tsx
 msgid "Are you sure you want to delete <0>{countLabel}</0>? This action cannot be undone."
 msgstr ""
 
@@ -396,10 +396,10 @@ msgstr "Порталът за фактуриране е недостъпен"
 #: src/features/member-role/ui/transfer-ownership-modal.tsx
 #: src/features/member-role/ui/update-member-authorities-modal.tsx
 #: src/features/page-admin/ui/delete-page-modal.tsx
-#: src/features/venue-management/ui/bulk-delete-venues-modal.tsx
-#: src/features/venue-management/ui/create-venue-modal.tsx
-#: src/features/venue-management/ui/delete-venue-modal.tsx
-#: src/features/venue-management/ui/edit-venue-modal.tsx
+#: src/features/manage-venue/ui/bulk-delete-venues-modal.tsx
+#: src/features/manage-venue/ui/create-venue-modal.tsx
+#: src/features/manage-venue/ui/delete-venue-modal.tsx
+#: src/features/manage-venue/ui/edit-venue-modal.tsx
 #: src/pages/_app/cms-pages.create.tsx
 msgid "Cancel"
 msgstr "Отказ"
@@ -451,7 +451,7 @@ msgstr "Изберете парола"
 msgid "Choose a strong password with at least 8 characters, including uppercase, lowercase, a number, and a special character."
 msgstr "Изберете силна парола с поне 8 символа, включваща главна буква, малка буква, цифра и специален символ."
 
-#: src/features/venue-management/ui/venue-fields.tsx
+#: src/features/manage-venue/ui/venue-fields.tsx
 #: src/pages/_app/venues.$venueId.tsx
 #: src/pages/_app/venues.index.tsx
 msgid "City"
@@ -586,7 +586,7 @@ msgstr "Продължи с Microsoft"
 msgid "Continue with SSO"
 msgstr "Продължи с SSO"
 
-#: src/features/venue-management/ui/venue-fields.tsx
+#: src/features/manage-venue/ui/venue-fields.tsx
 #: src/pages/_app/venues.$venueId.tsx
 #: src/pages/_app/venues.index.tsx
 msgid "Coordinates"
@@ -616,11 +616,11 @@ msgstr "Не може да се изтрие SSO конфигурацията."
 msgid "Could not delete the page. It may be published."
 msgstr "Не може да се изтрие страницата. Тя може да е публикувана."
 
-#: src/features/venue-management/ui/bulk-delete-venues-modal.tsx
+#: src/features/manage-venue/ui/bulk-delete-venues-modal.tsx
 msgid "Could not delete the selected venues. Please try again."
 msgstr ""
 
-#: src/features/venue-management/ui/delete-venue-modal.tsx
+#: src/features/manage-venue/ui/delete-venue-modal.tsx
 msgid "Could not delete the venue. Please try again."
 msgstr ""
 
@@ -707,11 +707,11 @@ msgstr "Създай страница"
 msgid "Create Project"
 msgstr "Създай проект"
 
-#: src/features/venue-management/ui/create-venue-modal.tsx
+#: src/features/manage-venue/ui/create-venue-modal.tsx
 msgid "Create venue"
 msgstr ""
 
-#: src/features/venue-management/ui/create-venue-modal.tsx
+#: src/features/manage-venue/ui/create-venue-modal.tsx
 msgid "Create Venue"
 msgstr ""
 
@@ -801,7 +801,7 @@ msgstr "Табло"
 msgid "Date"
 msgstr "Дата"
 
-#: src/features/venue-management/ui/venue-fields.tsx
+#: src/features/manage-venue/ui/venue-fields.tsx
 msgid "Decimal lat / lng used for map pins and geo search. Leave blank if unknown."
 msgstr ""
 
@@ -810,8 +810,8 @@ msgid "Default locale — required"
 msgstr "Локал по подразбиране — задължителен"
 
 #: src/features/page-admin/ui/delete-page-modal.tsx
-#: src/features/venue-management/ui/bulk-delete-venues-modal.tsx
-#: src/features/venue-management/ui/delete-venue-modal.tsx
+#: src/features/manage-venue/ui/bulk-delete-venues-modal.tsx
+#: src/features/manage-venue/ui/delete-venue-modal.tsx
 #: src/pages/_app/cms-pages.index.tsx
 #: src/pages/_app/settings/security.tsx
 #: src/pages/_app/venues.$venueId.tsx
@@ -820,8 +820,8 @@ msgid "Delete"
 msgstr "Изтрий"
 
 #: src/features/page-admin/ui/delete-page-modal.tsx
-#: src/features/venue-management/ui/bulk-delete-venues-modal.tsx
-#: src/features/venue-management/ui/delete-venue-modal.tsx
+#: src/features/manage-venue/ui/bulk-delete-venues-modal.tsx
+#: src/features/manage-venue/ui/delete-venue-modal.tsx
 #: src/pages/_app/settings/security.tsx
 msgid "Delete failed"
 msgstr "Изтриването не успя"
@@ -834,11 +834,11 @@ msgstr "Изтрий страница"
 msgid "Delete selected"
 msgstr ""
 
-#: src/features/venue-management/ui/delete-venue-modal.tsx
+#: src/features/manage-venue/ui/delete-venue-modal.tsx
 msgid "Delete Venue"
 msgstr ""
 
-#: src/features/venue-management/ui/bulk-delete-venues-modal.tsx
+#: src/features/manage-venue/ui/bulk-delete-venues-modal.tsx
 msgid "Delete Venues"
 msgstr ""
 
@@ -917,7 +917,7 @@ msgstr "Редактирай профил"
 msgid "Edit record"
 msgstr ""
 
-#: src/features/venue-management/ui/edit-venue-modal.tsx
+#: src/features/manage-venue/ui/edit-venue-modal.tsx
 msgid "Edit Venue"
 msgstr ""
 
@@ -1038,7 +1038,7 @@ msgstr "Изтича"
 msgid "Expires at (optional)"
 msgstr "Изтича на (по избор)"
 
-#: src/features/venue-management/ui/create-venue-modal.tsx
+#: src/features/manage-venue/ui/create-venue-modal.tsx
 msgid "Failed to create venue"
 msgstr ""
 
@@ -1087,7 +1087,7 @@ msgstr "Зареждането на историята на webhook журнал
 msgid "Failed to send message. Please try again."
 msgstr ""
 
-#: src/features/venue-management/ui/edit-venue-modal.tsx
+#: src/features/manage-venue/ui/edit-venue-modal.tsx
 msgid "Failed to update venue"
 msgstr ""
 
@@ -1232,7 +1232,7 @@ msgid "ID"
 msgstr "ID"
 
 #. placeholder {0}: venue.id
-#: src/features/venue-management/ui/edit-venue-modal.tsx
+#: src/features/manage-venue/ui/edit-venue-modal.tsx
 msgid "ID: {0}"
 msgstr ""
 
@@ -1240,7 +1240,7 @@ msgstr ""
 msgid "Identifiers & timestamps"
 msgstr ""
 
-#: src/features/venue-management/ui/venue-fields.tsx
+#: src/features/manage-venue/ui/venue-fields.tsx
 #: src/pages/_app/cms-pages.$pageId.tsx
 msgid "Identity"
 msgstr "Самоличност"
@@ -1370,11 +1370,11 @@ msgstr "Фамилното ime е задължително"
 msgid "Last name is too long"
 msgstr "Фамилното ime е твърде дълго"
 
-#: src/features/venue-management/ui/venue-fields.tsx
+#: src/features/manage-venue/ui/venue-fields.tsx
 msgid "Latitude"
 msgstr ""
 
-#: src/features/venue-management/model/types.ts
+#: src/features/manage-venue/model/types.ts
 msgid "Latitude must be a number"
 msgstr ""
 
@@ -1445,11 +1445,11 @@ msgstr "Заключен"
 msgid "Locked / Suspended"
 msgstr "Заключен / Спрян"
 
-#: src/features/venue-management/ui/venue-fields.tsx
+#: src/features/manage-venue/ui/venue-fields.tsx
 msgid "Longitude"
 msgstr ""
 
-#: src/features/venue-management/model/types.ts
+#: src/features/manage-venue/model/types.ts
 msgid "Longitude must be a number"
 msgstr ""
 
@@ -1491,7 +1491,7 @@ msgstr ""
 msgid "Mark all as read"
 msgstr "Маркирай всички като прочетени"
 
-#: src/features/venue-management/ui/venue-fields.tsx
+#: src/features/manage-venue/ui/venue-fields.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Master catalog link"
 msgstr ""
@@ -1505,7 +1505,7 @@ msgstr ""
 msgid "Master venue"
 msgstr ""
 
-#: src/features/venue-management/ui/venue-fields.tsx
+#: src/features/manage-venue/ui/venue-fields.tsx
 msgid "Master venue id"
 msgstr ""
 
@@ -1552,7 +1552,7 @@ msgid "Must be a valid email address"
 msgstr "Трябва да е валиден имейл адрес"
 
 #: src/features/page-admin/model/types.ts
-#: src/features/venue-management/model/types.ts
+#: src/features/manage-venue/model/types.ts
 msgid "Must be a valid UUID"
 msgstr "Трябва да е валиден UUID"
 
@@ -1560,7 +1560,7 @@ msgstr "Трябва да е валиден UUID"
 msgid "My Account"
 msgstr "Моят акаунт"
 
-#: src/features/venue-management/ui/venue-fields.tsx
+#: src/features/manage-venue/ui/venue-fields.tsx
 msgid "Name"
 msgstr ""
 
@@ -1568,7 +1568,7 @@ msgstr ""
 msgid "Name A → Z"
 msgstr ""
 
-#: src/features/venue-management/model/types.ts
+#: src/features/manage-venue/model/types.ts
 msgid "Name is required"
 msgstr ""
 
@@ -1811,7 +1811,7 @@ msgstr "По избор ключ за оформление"
 msgid "Optional translation"
 msgstr "По избор превод"
 
-#: src/features/venue-management/ui/venue-fields.tsx
+#: src/features/manage-venue/ui/venue-fields.tsx
 msgid "Optional UUID of the matching master-catalog venue. Leave blank if none."
 msgstr ""
 
@@ -2010,8 +2010,8 @@ msgid "Platform Highlights"
 msgstr "Основни предимства на платформата"
 
 #: src/features/complete-profile/model/use-complete-profile.ts
-#: src/features/venue-management/ui/create-venue-modal.tsx
-#: src/features/venue-management/ui/edit-venue-modal.tsx
+#: src/features/manage-venue/ui/create-venue-modal.tsx
+#: src/features/manage-venue/ui/edit-venue-modal.tsx
 msgid "Please check the form and try again."
 msgstr "Моля, проверете формуляра и опитайте отново."
 
@@ -2234,7 +2234,7 @@ msgid "Save Billing Information"
 msgstr "Запази информацията за фактуриране"
 
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
-#: src/features/venue-management/ui/edit-venue-modal.tsx
+#: src/features/manage-venue/ui/edit-venue-modal.tsx
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/settings/general.tsx
 msgid "Save changes"
@@ -2631,7 +2631,7 @@ msgstr "Уникалният идентификатор на организац�
 msgid "The venue could not be found or the API is unavailable."
 msgstr ""
 
-#: src/features/venue-management/ui/venue-fields.tsx
+#: src/features/manage-venue/ui/venue-fields.tsx
 msgid "The venue's name and address as it appears in your workspace."
 msgstr ""
 

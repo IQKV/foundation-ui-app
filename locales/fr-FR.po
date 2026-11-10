@@ -201,7 +201,7 @@ msgstr ""
 msgid "Addons"
 msgstr ""
 
-#: src/features/venue-management/ui/venue-fields.tsx
+#: src/features/manage-venue/ui/venue-fields.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Address"
 msgstr ""
@@ -265,11 +265,11 @@ msgid "Archived"
 msgstr "Archivé"
 
 #. placeholder {0}: venue?.name ?? ""
-#: src/features/venue-management/ui/delete-venue-modal.tsx
+#: src/features/manage-venue/ui/delete-venue-modal.tsx
 msgid "Are you sure you want to delete <0>{0}</0>? This action cannot be undone."
 msgstr ""
 
-#: src/features/venue-management/ui/bulk-delete-venues-modal.tsx
+#: src/features/manage-venue/ui/bulk-delete-venues-modal.tsx
 msgid "Are you sure you want to delete <0>{countLabel}</0>? This action cannot be undone."
 msgstr ""
 
@@ -396,10 +396,10 @@ msgstr "Portail de facturation indisponible"
 #: src/features/member-role/ui/transfer-ownership-modal.tsx
 #: src/features/member-role/ui/update-member-authorities-modal.tsx
 #: src/features/page-admin/ui/delete-page-modal.tsx
-#: src/features/venue-management/ui/bulk-delete-venues-modal.tsx
-#: src/features/venue-management/ui/create-venue-modal.tsx
-#: src/features/venue-management/ui/delete-venue-modal.tsx
-#: src/features/venue-management/ui/edit-venue-modal.tsx
+#: src/features/manage-venue/ui/bulk-delete-venues-modal.tsx
+#: src/features/manage-venue/ui/create-venue-modal.tsx
+#: src/features/manage-venue/ui/delete-venue-modal.tsx
+#: src/features/manage-venue/ui/edit-venue-modal.tsx
 #: src/pages/_app/cms-pages.create.tsx
 msgid "Cancel"
 msgstr "Annuler"
@@ -451,7 +451,7 @@ msgstr "Choisissez un mot de passe"
 msgid "Choose a strong password with at least 8 characters, including uppercase, lowercase, a number, and a special character."
 msgstr "Choisissez un mot de passe fort d'au moins 8 caractères, incluant des majuscules, des minuscules, un chiffre et un caractère spécial."
 
-#: src/features/venue-management/ui/venue-fields.tsx
+#: src/features/manage-venue/ui/venue-fields.tsx
 #: src/pages/_app/venues.$venueId.tsx
 #: src/pages/_app/venues.index.tsx
 msgid "City"
@@ -586,7 +586,7 @@ msgstr "Continuer avec Microsoft"
 msgid "Continue with SSO"
 msgstr "Continuer avec SSO"
 
-#: src/features/venue-management/ui/venue-fields.tsx
+#: src/features/manage-venue/ui/venue-fields.tsx
 #: src/pages/_app/venues.$venueId.tsx
 #: src/pages/_app/venues.index.tsx
 msgid "Coordinates"
@@ -616,11 +616,11 @@ msgstr "Impossible de supprimer la configuration SSO."
 msgid "Could not delete the page. It may be published."
 msgstr "Impossible de supprimer la page. Elle est peut-être publiée."
 
-#: src/features/venue-management/ui/bulk-delete-venues-modal.tsx
+#: src/features/manage-venue/ui/bulk-delete-venues-modal.tsx
 msgid "Could not delete the selected venues. Please try again."
 msgstr ""
 
-#: src/features/venue-management/ui/delete-venue-modal.tsx
+#: src/features/manage-venue/ui/delete-venue-modal.tsx
 msgid "Could not delete the venue. Please try again."
 msgstr ""
 
@@ -707,11 +707,11 @@ msgstr "Créer une page"
 msgid "Create Project"
 msgstr "Create Project"
 
-#: src/features/venue-management/ui/create-venue-modal.tsx
+#: src/features/manage-venue/ui/create-venue-modal.tsx
 msgid "Create venue"
 msgstr ""
 
-#: src/features/venue-management/ui/create-venue-modal.tsx
+#: src/features/manage-venue/ui/create-venue-modal.tsx
 msgid "Create Venue"
 msgstr ""
 
@@ -801,7 +801,7 @@ msgstr "Tableau de bord"
 msgid "Date"
 msgstr "Date"
 
-#: src/features/venue-management/ui/venue-fields.tsx
+#: src/features/manage-venue/ui/venue-fields.tsx
 msgid "Decimal lat / lng used for map pins and geo search. Leave blank if unknown."
 msgstr ""
 
@@ -810,8 +810,8 @@ msgid "Default locale — required"
 msgstr "Langue par défaut — requise"
 
 #: src/features/page-admin/ui/delete-page-modal.tsx
-#: src/features/venue-management/ui/bulk-delete-venues-modal.tsx
-#: src/features/venue-management/ui/delete-venue-modal.tsx
+#: src/features/manage-venue/ui/bulk-delete-venues-modal.tsx
+#: src/features/manage-venue/ui/delete-venue-modal.tsx
 #: src/pages/_app/cms-pages.index.tsx
 #: src/pages/_app/settings/security.tsx
 #: src/pages/_app/venues.$venueId.tsx
@@ -820,8 +820,8 @@ msgid "Delete"
 msgstr "Supprimer"
 
 #: src/features/page-admin/ui/delete-page-modal.tsx
-#: src/features/venue-management/ui/bulk-delete-venues-modal.tsx
-#: src/features/venue-management/ui/delete-venue-modal.tsx
+#: src/features/manage-venue/ui/bulk-delete-venues-modal.tsx
+#: src/features/manage-venue/ui/delete-venue-modal.tsx
 #: src/pages/_app/settings/security.tsx
 msgid "Delete failed"
 msgstr "La suppression a échoué"
@@ -834,11 +834,11 @@ msgstr "Supprimer la page"
 msgid "Delete selected"
 msgstr ""
 
-#: src/features/venue-management/ui/delete-venue-modal.tsx
+#: src/features/manage-venue/ui/delete-venue-modal.tsx
 msgid "Delete Venue"
 msgstr ""
 
-#: src/features/venue-management/ui/bulk-delete-venues-modal.tsx
+#: src/features/manage-venue/ui/bulk-delete-venues-modal.tsx
 msgid "Delete Venues"
 msgstr ""
 
@@ -917,7 +917,7 @@ msgstr "Modifier le profil"
 msgid "Edit record"
 msgstr ""
 
-#: src/features/venue-management/ui/edit-venue-modal.tsx
+#: src/features/manage-venue/ui/edit-venue-modal.tsx
 msgid "Edit Venue"
 msgstr ""
 
@@ -1038,7 +1038,7 @@ msgstr "Expire"
 msgid "Expires at (optional)"
 msgstr "Expire le (optionnel)"
 
-#: src/features/venue-management/ui/create-venue-modal.tsx
+#: src/features/manage-venue/ui/create-venue-modal.tsx
 msgid "Failed to create venue"
 msgstr ""
 
@@ -1087,7 +1087,7 @@ msgstr "Échec du chargement de l'historique des logs webhook."
 msgid "Failed to send message. Please try again."
 msgstr ""
 
-#: src/features/venue-management/ui/edit-venue-modal.tsx
+#: src/features/manage-venue/ui/edit-venue-modal.tsx
 msgid "Failed to update venue"
 msgstr ""
 
@@ -1232,7 +1232,7 @@ msgid "ID"
 msgstr "ID"
 
 #. placeholder {0}: venue.id
-#: src/features/venue-management/ui/edit-venue-modal.tsx
+#: src/features/manage-venue/ui/edit-venue-modal.tsx
 msgid "ID: {0}"
 msgstr ""
 
@@ -1240,7 +1240,7 @@ msgstr ""
 msgid "Identifiers & timestamps"
 msgstr ""
 
-#: src/features/venue-management/ui/venue-fields.tsx
+#: src/features/manage-venue/ui/venue-fields.tsx
 #: src/pages/_app/cms-pages.$pageId.tsx
 msgid "Identity"
 msgstr "Identité"
@@ -1370,11 +1370,11 @@ msgstr "Le nom de famille est requis"
 msgid "Last name is too long"
 msgstr "Le nom de famille est trop long"
 
-#: src/features/venue-management/ui/venue-fields.tsx
+#: src/features/manage-venue/ui/venue-fields.tsx
 msgid "Latitude"
 msgstr ""
 
-#: src/features/venue-management/model/types.ts
+#: src/features/manage-venue/model/types.ts
 msgid "Latitude must be a number"
 msgstr ""
 
@@ -1445,11 +1445,11 @@ msgstr "Verrouillé"
 msgid "Locked / Suspended"
 msgstr "Verrouillé / Suspendu"
 
-#: src/features/venue-management/ui/venue-fields.tsx
+#: src/features/manage-venue/ui/venue-fields.tsx
 msgid "Longitude"
 msgstr ""
 
-#: src/features/venue-management/model/types.ts
+#: src/features/manage-venue/model/types.ts
 msgid "Longitude must be a number"
 msgstr ""
 
@@ -1491,7 +1491,7 @@ msgstr ""
 msgid "Mark all as read"
 msgstr "Tout marquer comme lu"
 
-#: src/features/venue-management/ui/venue-fields.tsx
+#: src/features/manage-venue/ui/venue-fields.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Master catalog link"
 msgstr ""
@@ -1505,7 +1505,7 @@ msgstr ""
 msgid "Master venue"
 msgstr ""
 
-#: src/features/venue-management/ui/venue-fields.tsx
+#: src/features/manage-venue/ui/venue-fields.tsx
 msgid "Master venue id"
 msgstr ""
 
@@ -1552,7 +1552,7 @@ msgid "Must be a valid email address"
 msgstr "Doit être une adresse email valide"
 
 #: src/features/page-admin/model/types.ts
-#: src/features/venue-management/model/types.ts
+#: src/features/manage-venue/model/types.ts
 msgid "Must be a valid UUID"
 msgstr "Doit être un UUID valide"
 
@@ -1560,7 +1560,7 @@ msgstr "Doit être un UUID valide"
 msgid "My Account"
 msgstr "Mon compte"
 
-#: src/features/venue-management/ui/venue-fields.tsx
+#: src/features/manage-venue/ui/venue-fields.tsx
 msgid "Name"
 msgstr ""
 
@@ -1568,7 +1568,7 @@ msgstr ""
 msgid "Name A → Z"
 msgstr ""
 
-#: src/features/venue-management/model/types.ts
+#: src/features/manage-venue/model/types.ts
 msgid "Name is required"
 msgstr ""
 
@@ -1811,7 +1811,7 @@ msgstr "Clé de mise en page facultative"
 msgid "Optional translation"
 msgstr "Traduction facultative"
 
-#: src/features/venue-management/ui/venue-fields.tsx
+#: src/features/manage-venue/ui/venue-fields.tsx
 msgid "Optional UUID of the matching master-catalog venue. Leave blank if none."
 msgstr ""
 
@@ -2010,8 +2010,8 @@ msgid "Platform Highlights"
 msgstr "Points forts de la plateforme"
 
 #: src/features/complete-profile/model/use-complete-profile.ts
-#: src/features/venue-management/ui/create-venue-modal.tsx
-#: src/features/venue-management/ui/edit-venue-modal.tsx
+#: src/features/manage-venue/ui/create-venue-modal.tsx
+#: src/features/manage-venue/ui/edit-venue-modal.tsx
 msgid "Please check the form and try again."
 msgstr "Veuillez vérifier le formulaire et réessayer."
 
@@ -2234,7 +2234,7 @@ msgid "Save Billing Information"
 msgstr "Enregistrer les informations de facturation"
 
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
-#: src/features/venue-management/ui/edit-venue-modal.tsx
+#: src/features/manage-venue/ui/edit-venue-modal.tsx
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/settings/general.tsx
 msgid "Save changes"
@@ -2631,7 +2631,7 @@ msgstr "L'identifiant unique de votre organisation. Ceci ne peut pas être modif
 msgid "The venue could not be found or the API is unavailable."
 msgstr ""
 
-#: src/features/venue-management/ui/venue-fields.tsx
+#: src/features/manage-venue/ui/venue-fields.tsx
 msgid "The venue's name and address as it appears in your workspace."
 msgstr ""
 

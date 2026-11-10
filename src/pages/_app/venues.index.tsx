@@ -56,7 +56,7 @@ import {
   EditVenueModal,
   DeleteVenueModal,
   BulkDeleteVenuesModal,
-} from "@/features/venue-management";
+} from "@/features/manage-venue";
 import { TestSelectors } from "@/shared/lib/test-selectors";
 
 export const Route = createFileRoute("/_app/venues/")({
