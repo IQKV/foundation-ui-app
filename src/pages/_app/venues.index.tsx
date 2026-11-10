@@ -54,12 +54,7 @@ import { useSession } from "@/processes/session";
 import { dayjs } from "@/shared/lib/date-utils";
 import { catalogApi } from "@/shared/api";
 import type { SemanticSearchFilters } from "@/shared/api";
-import {
-  CreateVenueModal,
-  EditVenueModal,
-  DeleteVenueModal,
-  BulkDeleteVenuesModal,
-} from "@/features/manage-venue";
+import { EditVenueModal, DeleteVenueModal, BulkDeleteVenuesModal } from "@/features/manage-venue";
 import {
   VenueSemanticSearchWidget,
   SemanticSearchFiltersSummary,
@@ -714,7 +709,6 @@ function VenuesPage() {
         ? { sortBy: "name" as const, sortDir: "desc" as const }
         : {};
 
-  const [createOpened, { open: openCreate, close: closeCreate }] = useDisclosure(false);
   const [editOpened, { open: openEdit, close: closeEdit }] = useDisclosure(false);
   const [deleteOpened, { open: openDelete, close: closeDelete }] = useDisclosure(false);
   const [bulkDeleteOpened, { open: openBulkDelete, close: closeBulkDelete }] = useDisclosure(false);
@@ -827,7 +821,7 @@ function VenuesPage() {
               leftSection={<IconPlus size={14} />}
               size="sm"
               data-testid={TestSelectors.VENUES_NEW_BUTTON}
-              onClick={openCreate}
+              onClick={() => void navigate({ to: "/venues/add" })}
             >
               <Trans>New venue</Trans>
             </Button>
@@ -1071,7 +1065,7 @@ function VenuesPage() {
                     variant="light"
                     leftSection={<IconPlus size={14} />}
                     size="sm"
-                    onClick={openCreate}
+                    onClick={() => void navigate({ to: "/venues/add" })}
                   >
                     <Trans>New venue</Trans>
                   </Button>
@@ -1139,7 +1133,6 @@ function VenuesPage() {
 
       {canManage && (
         <>
-          <CreateVenueModal opened={createOpened} onClose={closeCreate} />
           <EditVenueModal venue={selectedVenue} opened={editOpened} onClose={handleCloseEdit} />
           <DeleteVenueModal
             venue={selectedVenue}
