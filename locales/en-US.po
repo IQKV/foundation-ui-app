@@ -35,6 +35,14 @@ msgstr "{0} – {1}"
 msgid "{0} Days Left"
 msgstr "{0} Days Left"
 
+#: src/features/venue-semantic-search/ui/SemanticSearchFiltersSummary.tsx
+msgid "{min}–{max} guests"
+msgstr "{min}–{max} guests"
+
+#: src/features/venue-semantic-search/ui/SemanticSearchFiltersSummary.tsx
+msgid "{min}+ guests"
+msgstr "{min}+ guests"
+
 #: src/pages/_app/venues.index.tsx
 msgid "{selectedCount} selected"
 msgstr "{selectedCount} selected"
@@ -222,6 +230,14 @@ msgstr "Advanced Analytics"
 msgid "AI Chat"
 msgstr "AI Chat"
 
+#: src/features/venue-semantic-search/ui/SemanticSearchFiltersSummary.tsx
+msgid "AI filters"
+msgstr "AI filters"
+
+#: src/pages/_app/venues.index.tsx
+msgid "AI Ranked"
+msgstr "AI Ranked"
+
 #: src/pages/_app/venues.index.tsx
 msgid "All cities"
 msgstr "All cities"
@@ -246,6 +262,10 @@ msgstr "Already have an account? <0>Sign in</0>"
 #: src/shared/ui/auth-layout/auth-layout.tsx
 #~ msgid "always in reach."
 #~ msgstr "always in reach."
+
+#: src/features/venue-semantic-search/ui/SemanticSearchFiltersSummary.tsx
+msgid "Amenity: {amenity}"
+msgstr "Amenity: {amenity}"
 
 #: src/features/manage-billing/ui/refund-list.tsx
 msgid "Amount"
@@ -362,6 +382,10 @@ msgstr "Ban Member"
 msgid "Banning this member will immediately invalidate all their active sessions, revoke their access to this tenant, and send them a notification email. They will not be able to access this tenant again until unbanned."
 msgstr "Banning this member will immediately invalidate all their active sessions, revoke their access to this tenant, and send them a notification email. They will not be able to access this tenant again until unbanned."
 
+#: src/features/venue-semantic-search/ui/VenueSemanticSearchWidget.tsx
+msgid "Beta"
+msgstr "Beta"
+
 #: src/pages/_app/billing/index.tsx
 #: src/shared/ui/app-layout/nav-config.tsx
 msgid "Billing"
@@ -393,13 +417,13 @@ msgstr "Billing Portal Unavailable"
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 #: src/features/invite-member/ui/send-invitation-modal.tsx
 #: src/features/manage-organization/ui/member-actions.tsx
-#: src/features/member-role/ui/transfer-ownership-modal.tsx
-#: src/features/member-role/ui/update-member-authorities-modal.tsx
-#: src/features/page-admin/ui/delete-page-modal.tsx
 #: src/features/manage-venue/ui/bulk-delete-venues-modal.tsx
 #: src/features/manage-venue/ui/create-venue-modal.tsx
 #: src/features/manage-venue/ui/delete-venue-modal.tsx
 #: src/features/manage-venue/ui/edit-venue-modal.tsx
+#: src/features/member-role/ui/transfer-ownership-modal.tsx
+#: src/features/member-role/ui/update-member-authorities-modal.tsx
+#: src/features/page-admin/ui/delete-page-modal.tsx
 #: src/pages/_app/cms-pages.create.tsx
 msgid "Cancel"
 msgstr "Cancel"
@@ -411,6 +435,10 @@ msgstr "Cancels on"
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "Canonical URL"
 msgstr "Canonical URL"
+
+#: src/features/venue-semantic-search/ui/SemanticSearchFiltersSummary.tsx
+msgid "Catering: {policy}"
+msgstr "Catering: {policy}"
 
 #: src/features/member-role/ui/update-member-authorities-modal.tsx
 msgid "Change Member Role"
@@ -456,6 +484,15 @@ msgstr "Choose a strong password with at least 8 characters, including uppercase
 #: src/pages/_app/venues.index.tsx
 msgid "City"
 msgstr "City"
+
+#: src/features/venue-semantic-search/ui/SemanticSearchFiltersSummary.tsx
+msgid "City: {city}"
+msgstr "City: {city}"
+
+#: src/features/venue-semantic-search/ui/SemanticSearchFiltersSummary.tsx
+#: src/features/venue-semantic-search/ui/VenueSemanticSearchWidget.tsx
+msgid "Clear AI search"
+msgstr "Clear AI search"
 
 #: src/features/notification-bell/ui/notification-bell.tsx
 #: src/pages/_app/settings/notifications.tsx
@@ -809,9 +846,9 @@ msgstr "Decimal lat / lng used for map pins and geo search. Leave blank if unkno
 msgid "Default locale — required"
 msgstr "Default locale — required"
 
-#: src/features/page-admin/ui/delete-page-modal.tsx
 #: src/features/manage-venue/ui/bulk-delete-venues-modal.tsx
 #: src/features/manage-venue/ui/delete-venue-modal.tsx
+#: src/features/page-admin/ui/delete-page-modal.tsx
 #: src/pages/_app/cms-pages.index.tsx
 #: src/pages/_app/settings/security.tsx
 #: src/pages/_app/venues.$venueId.tsx
@@ -819,9 +856,9 @@ msgstr "Default locale — required"
 msgid "Delete"
 msgstr "Delete"
 
-#: src/features/page-admin/ui/delete-page-modal.tsx
 #: src/features/manage-venue/ui/bulk-delete-venues-modal.tsx
 #: src/features/manage-venue/ui/delete-venue-modal.tsx
+#: src/features/page-admin/ui/delete-page-modal.tsx
 #: src/pages/_app/settings/security.tsx
 msgid "Delete failed"
 msgstr "Delete failed"
@@ -888,6 +925,10 @@ msgstr "Don't have an account? <0>Create one</0>"
 #: src/pages/_app/cms-pages.index.tsx
 msgid "Draft"
 msgstr "Draft"
+
+#: src/features/venue-semantic-search/ui/VenueSemanticSearchWidget.tsx
+msgid "e.g. \"Find venues in Berlin with a rooftop terrace and space for 200 guests\""
+msgstr "e.g. \"Find venues in Berlin with a rooftop terrace and space for 200 guests\""
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
@@ -1551,8 +1592,8 @@ msgstr "Monthly"
 msgid "Must be a valid email address"
 msgstr "Must be a valid email address"
 
-#: src/features/page-admin/model/types.ts
 #: src/features/manage-venue/model/types.ts
+#: src/features/page-admin/model/types.ts
 msgid "Must be a valid UUID"
 msgstr "Must be a valid UUID"
 
@@ -2031,6 +2072,10 @@ msgstr "Please wait while we verify your magic link."
 msgid "Portal error"
 msgstr "Portal error"
 
+#: src/features/venue-semantic-search/ui/VenueSemanticSearchWidget.tsx
+msgid "Press Enter to search"
+msgstr "Press Enter to search"
+
 #: src/features/manage-billing/ui/plan-entitlement.tsx
 msgid "Priority Support"
 msgstr "Priority Support"
@@ -2046,6 +2091,10 @@ msgstr "Priority Support Available"
 #: src/pages/-billing-example.tsx
 msgid "Priority Support:"
 msgstr "Priority Support:"
+
+#: src/features/venue-semantic-search/ui/VenueSemanticSearchWidget.tsx
+msgid "Pro tip: You can search by vibe, amenities, capacity, or specific location details."
+msgstr "Pro tip: You can search by vibe, amenities, capacity, or specific location details."
 
 #: src/pages/_app/settings/general.tsx
 msgid "Profile Information"
@@ -2321,6 +2370,10 @@ msgstr "Select the workspace you want to sign in to."
 #: src/pages/_app/venues.index.tsx
 msgid "Select venue"
 msgstr "Select venue"
+
+#: src/features/venue-semantic-search/ui/VenueSemanticSearchWidget.tsx
+msgid "Semantic Search — Ask anything about your venues in natural language"
+msgstr "Semantic Search — Ask anything about your venues in natural language"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Send email verifications, password resets & invitations"
@@ -2752,6 +2805,10 @@ msgstr "Try Again"
 msgid "Type a message… (Enter to send, Shift+Enter for new line)"
 msgstr "Type a message… (Enter to send, Shift+Enter for new line)"
 
+#: src/features/venue-semantic-search/ui/SemanticSearchFiltersSummary.tsx
+msgid "Type: {label}"
+msgstr "Type: {label}"
+
 #: src/widgets/dashboard-signup-chart/ui/dashboard-signup-chart.tsx
 msgid "Unable to load signup data."
 msgstr "Unable to load signup data."
@@ -2788,6 +2845,10 @@ msgstr "Unlink failed"
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 msgid "Unverified"
 msgstr "Unverified"
+
+#: src/features/venue-semantic-search/ui/SemanticSearchFiltersSummary.tsx
+msgid "up to {max} guests"
+msgstr "up to {max} guests"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Update your password to keep your account secure"
@@ -2934,6 +2995,10 @@ msgstr "Welcome! Your account is ready — start using the app right away."
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "What you can do"
 msgstr "What you can do"
+
+#: src/features/venue-semantic-search/ui/SemanticSearchFiltersSummary.tsx
+msgid "Wheelchair accessible"
+msgstr "Wheelchair accessible"
 
 #: src/features/signup/ui/signup-form.tsx
 msgid "Work email"

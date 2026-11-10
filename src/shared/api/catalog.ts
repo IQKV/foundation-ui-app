@@ -44,9 +44,49 @@ export interface VenuePatchRequest {
   masterVenueId?: string | null;
 }
 
+// ─── Semantic (AI) search ─────────────────────────────────────────────────────
+
+/** A ranked venue — the safe projection plus its cosine similarity score. */
+export interface SemanticSearchResult extends Venue {
+  similarity: number;
+}
+
+/**
+ * Hard filters the AI query planner extracted from the natural-language query.
+ * Empty/null members mean the planner did not derive that constraint.
+ */
+export interface SemanticSearchFilters {
+  city: string | null;
+  venueTypes: string[];
+  minCapacity: number | null;
+  maxCapacity: number | null;
+  cateringPolicy: string | null;
+  amenities: string[];
+  accessible: boolean | null;
+}
+
+export interface SemanticSearchResponse {
+  items: SemanticSearchResult[];
+  totalElements: number;
+  appliedFilters: SemanticSearchFilters;
+}
+
+export interface SemanticSearchParams {
+  q: string;
+  city?: string;
+  limit?: number;
+}
+
 export const catalogApi = {
   listVenues: (params: ListVenueParams = {}) =>
     httpClient.get<VenueListResponse>("/v1/catalog/venues", { params }).then((r) => r.data),
+
+  // Semantic (AI) search over the tenant's own venues; returns the safe projection
+  // ranked by similarity plus the hard filters the query planner derived.
+  semanticSearch: (params: SemanticSearchParams) =>
+    httpClient
+      .get<SemanticSearchResponse>("/v1/catalog/venues/search/semantic", { params })
+      .then((r) => r.data),
 
   getVenue: (id: string) => httpClient.get<Venue>(`/v1/catalog/venues/${id}`).then((r) => r.data),
 

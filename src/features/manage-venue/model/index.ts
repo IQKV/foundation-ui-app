@@ -1,4 +1,3 @@
-export { useVenues } from "./use-venues";
 export { useVenue } from "./use-venue";
 export type { VenueFormValues } from "./types";
 export { buildVenueSchema, emptyVenueFormValues, toVenueFormValues, toWriteRequest } from "./types";

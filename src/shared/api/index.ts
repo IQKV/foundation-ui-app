@@ -87,6 +87,10 @@ export type {
   VenueAssetListResponse,
   VenueWriteRequest,
   VenuePatchRequest,
+  SemanticSearchResult,
+  SemanticSearchFilters,
+  SemanticSearchResponse,
+  SemanticSearchParams,
 } from "./catalog";
 
 // ─── Auth ─────────────────────────────────────────────────────────────────────

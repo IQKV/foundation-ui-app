@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useQuery } from "@tanstack/react-query";
 import {
   Container,
   Text,
@@ -43,6 +44,7 @@ import {
   IconTrash,
   IconDots,
   IconX,
+  IconSparkles,
 } from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { PageTitle } from "@/shared/lib/page-title";
@@ -50,13 +52,18 @@ import type { Venue } from "@/entities/venue";
 import { PageHeader } from "@/shared/ui";
 import { useSession } from "@/processes/session";
 import { dayjs } from "@/shared/lib/date-utils";
+import { catalogApi } from "@/shared/api";
+import type { SemanticSearchFilters } from "@/shared/api";
 import {
-  useVenues,
   CreateVenueModal,
   EditVenueModal,
   DeleteVenueModal,
   BulkDeleteVenuesModal,
 } from "@/features/manage-venue";
+import {
+  VenueSemanticSearchWidget,
+  SemanticSearchFiltersSummary,
+} from "@/features/venue-semantic-search";
 import { TestSelectors } from "@/shared/lib/test-selectors";
 
 export const Route = createFileRoute("/_app/venues/")({
@@ -68,6 +75,14 @@ const PAGE_SIZE = 20;
 /** Blue→cyan accent shared by the card, row and sidebar borders. */
 const ACCENT_GRADIENT =
   "linear-gradient(135deg, var(--mantine-color-blue-4) 0%, var(--mantine-color-cyan-4) 100%)";
+
+/**
+ * Narrows the list-vs-semantic union: only the semantic-search response carries the
+ * AI-derived filters, so the presence of the property is the discriminator.
+ */
+function hasAppliedFilters(value: unknown): value is { appliedFilters: SemanticSearchFilters } {
+  return typeof value === "object" && value !== null && "appliedFilters" in value;
+}
 
 // ── Venue thumbnail ───────────────────────────────────────────────────────────
 
@@ -662,8 +677,14 @@ function VenuesPage() {
   const [search, setSearch] = useState("");
   const [debouncedSearch] = useDebouncedValue(search, 300);
   const [cityFilter, setCityFilter] = useState<string | null>(null);
+  const [semanticQuery, setSemanticQuery] = useState("");
+
+  const isSemanticSearchActive = semanticQuery.trim().length > 0;
 
   const hasActiveFilters = debouncedSearch !== "" || cityFilter !== null;
+  // Covers semantic search too, so a zero-result AI query shows "no match" copy
+  // rather than the "add your first venue" onboarding state.
+  const isSearching = hasActiveFilters || isSemanticSearchActive;
 
   const [storedViewMode, setStoredViewMode] = useLocalStorage<ViewMode>({
     key: "iqkv_venues_view_mode",
@@ -702,17 +723,33 @@ function VenuesPage() {
 
   const offset = (page - 1) * PAGE_SIZE;
 
-  const { data, isLoading, isError, refetch, isFetching } = useVenues({
-    search: debouncedSearch || undefined,
-    city: cityFilter || undefined,
-    limit: PAGE_SIZE,
-    offset,
-    ...sortParams,
+  const { data, isLoading, isError, refetch, isFetching } = useQuery({
+    queryKey: ["tenant", "venues", page, debouncedSearch, cityFilter, semanticQuery, sortOrder],
+    queryFn: () => {
+      if (isSemanticSearchActive) {
+        return catalogApi.semanticSearch({
+          q: semanticQuery,
+          city: cityFilter || undefined,
+          limit: PAGE_SIZE,
+        });
+      }
+      return catalogApi.listVenues({
+        search: debouncedSearch || undefined,
+        city: cityFilter || undefined,
+        limit: PAGE_SIZE,
+        offset,
+        ...sortParams,
+      });
+    },
   });
 
   const items = data?.items ?? [];
   const totalElements = data?.totalElements ?? 0;
-  const totalPages = Math.ceil(totalElements / PAGE_SIZE);
+  // Only the semantic-search response carries the AI-derived filters; the plain list response
+  // does not, so narrow on the property rather than asserting the type.
+  const appliedFilters =
+    isSemanticSearchActive && hasAppliedFilters(data) ? data.appliedFilters : null;
+  const totalPages = isSemanticSearchActive ? 1 : Math.ceil(totalElements / PAGE_SIZE);
   const rangeStart = totalElements === 0 ? 0 : offset + 1;
   const rangeEnd = Math.min(offset + PAGE_SIZE, totalElements);
 
@@ -724,7 +761,7 @@ function VenuesPage() {
 
   useEffect(() => {
     setSelectedIds(new Set());
-  }, [page, debouncedSearch, cityFilter]);
+  }, [page, debouncedSearch, cityFilter, semanticQuery]);
 
   const handleToggleSelect = (id: string) => {
     setSelectedIds((prev) => {
@@ -774,6 +811,7 @@ function VenuesPage() {
   const handleReset = () => {
     setSearch("");
     setCityFilter(null);
+    setSemanticQuery("");
     setPage(1);
   };
 
@@ -823,13 +861,26 @@ function VenuesPage() {
         </Alert>
       )}
 
+      <VenueSemanticSearchWidget
+        onSearch={setSemanticQuery}
+        onClear={() => setSemanticQuery("")}
+        isSearching={isFetching && isSemanticSearchActive}
+      />
+
+      {isSemanticSearchActive && (
+        <SemanticSearchFiltersSummary
+          filters={appliedFilters}
+          onClear={() => setSemanticQuery("")}
+        />
+      )}
+
       {/* ── Two-column layout ─────────────────────────────────────────── */}
       <Group align="flex-start" gap="lg" wrap="nowrap">
         <FilterSidebar
           search={search}
           cityFilter={cityFilter}
           cityOptions={cityOptions}
-          hasActiveFilters={hasActiveFilters}
+          hasActiveFilters={isSearching}
           onSearchChange={(v) => {
             setSearch(v);
             setPage(1);
@@ -867,6 +918,16 @@ function VenuesPage() {
                   data-testid={TestSelectors.VENUES_TOTAL_COUNT}
                 >
                   {totalElements}
+                </Badge>
+              )}
+              {!isLoading && isSemanticSearchActive && (
+                <Badge
+                  variant="light"
+                  color="blue"
+                  size="xs"
+                  leftSection={<IconSparkles size={10} />}
+                >
+                  <Trans>AI Ranked</Trans>
                 </Badge>
               )}
             </Group>
@@ -968,6 +1029,7 @@ function VenuesPage() {
                 size="xs"
                 w={140}
                 allowDeselect={false}
+                disabled={isSemanticSearchActive}
               />
             </Group>
           </Group>
@@ -994,13 +1056,13 @@ function VenuesPage() {
                   <IconBuildingStore size={24} />
                 </ThemeIcon>
                 <Text c="dimmed" size="sm">
-                  {hasActiveFilters ? (
+                  {isSearching ? (
                     <Trans>No venues match your filters</Trans>
                   ) : (
                     <Trans>No venues yet — add your first one</Trans>
                   )}
                 </Text>
-                {hasActiveFilters ? (
+                {isSearching ? (
                   <Button variant="light" color="gray" size="sm" onClick={handleReset}>
                     <Trans>Clear filters</Trans>
                   </Button>
