@@ -7,7 +7,6 @@ import type {
   VenueAssetListResponse,
 } from "@/entities/venue";
 
-// Re-export entity types so existing imports from "@/shared/api" keep working.
 export type {
   Venue,
   VenueListResponse,
@@ -42,6 +41,11 @@ export interface VenuePatchRequest {
   locationLat?: number | null;
   locationLng?: number | null;
   masterVenueId?: string | null;
+}
+
+/** Metadata-only patch — the full serialised MetadataDocument JSON string. */
+export interface VenueMetadataPatchRequest {
+  metadata: string;
 }
 
 // ─── Semantic (AI) search ─────────────────────────────────────────────────────
@@ -98,6 +102,9 @@ export const catalogApi = {
 
   patchVenue: (id: string, data: VenuePatchRequest) =>
     httpClient.patch<Venue>(`/v1/catalog/venues/${id}`, data).then((r) => r.data),
+
+  patchVenueMetadata: (id: string, data: VenueMetadataPatchRequest) =>
+    httpClient.patch<Venue>(`/v1/catalog/venues/${id}/metadata`, data).then((r) => r.data),
 
   deleteVenue: (id: string) => httpClient.delete(`/v1/catalog/venues/${id}`).then(() => undefined),
 

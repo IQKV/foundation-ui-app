@@ -15,6 +15,11 @@ export interface Venue {
   locationLng: number | null;
   /** Optional relation to a master-catalog record. */
   masterVenueId: string | null;
+  /**
+   * Serialised MetadataDocument JSON string. Returned by the backend on the safe projection so
+   * tenants can read and edit their own venue metadata.
+   */
+  metadata: string | null;
   /** Primary photo URL when the venue has one; null when no photo is available. */
   primaryPhotoUrl: string | null;
   createdAt: string;

@@ -1,7 +1,7 @@
 import { SimpleGrid, Stack, TextInput, NumberInput, Paper, Group, Text } from "@mantine/core";
 import type { UseFormReturnType } from "@mantine/form";
 import { useLingui } from "@lingui/react/macro";
-import { IconBuildingStore, IconMapPin, IconLink } from "@tabler/icons-react";
+import { IconBuildingStore, IconMapPin } from "@tabler/icons-react";
 import { TestSelectors } from "@/shared/lib/test-selectors";
 import type { VenueFormValues } from "../model";
 import { SECTION_CARD_STYLES } from "./section-accent";
@@ -105,18 +105,6 @@ export function VenueFields({ form }: VenueFieldsProps) {
             }
           />
         </SimpleGrid>
-      </SectionCard>
-
-      <SectionCard
-        icon={<IconLink size={18} color="var(--mantine-color-blue-6)" />}
-        title={t`Master catalog link`}
-        hint={t`Optional UUID of the matching master-catalog venue. Leave blank if none.`}
-      >
-        <TextInput
-          label={t`Master venue id`}
-          data-testid={TestSelectors.VENUE_MASTER_VENUE_ID_INPUT}
-          {...form.getInputProps("masterVenueId")}
-        />
       </SectionCard>
     </Stack>
   );

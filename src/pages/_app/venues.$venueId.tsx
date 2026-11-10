@@ -20,6 +20,7 @@ import {
   ThemeIcon,
   Divider,
   CopyButton,
+  Collapse,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useQuery } from "@tanstack/react-query";
@@ -37,6 +38,8 @@ import {
   IconEdit,
   IconTrash,
   IconPhoto,
+  IconDatabase,
+  IconPaperclip,
 } from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { PageTitle } from "@/shared/lib/page-title";
@@ -51,6 +54,7 @@ import {
   ASSET_ROW_STYLES,
   EditVenueModal,
   DeleteVenueModal,
+  VenueMetadataSections,
 } from "@/features/manage-venue";
 import { dayjs } from "@/shared/lib/date-utils";
 import { TestSelectors } from "@/shared/lib/test-selectors";
@@ -238,6 +242,7 @@ function VenueDetailPage() {
   const [editOpened, { open: openEdit, close: closeEdit }] = useDisclosure(false);
   const [deleteOpened, { open: openDelete, close: closeDelete }] = useDisclosure(false);
   const [deletedVenue, setDeletedVenue] = useState<Venue | null>(null);
+  const [rawJsonOpened, { toggle: toggleRawJson }] = useDisclosure(false);
 
   const { data: venue, isLoading, isError, refetch, isFetching } = useVenue(venueId);
 
@@ -534,6 +539,15 @@ function VenueDetailPage() {
                 <Trans>Photos</Trans>
               </Tabs.Tab>
             )}
+            {canManage && venue && (
+              <Tabs.Tab
+                value="metadata"
+                leftSection={<IconDatabase size={20} />}
+                styles={bigTabStyles}
+              >
+                <Trans>Metadata</Trans>
+              </Tabs.Tab>
+            )}
           </Tabs.List>
 
           {/* ── Details tab ──────────────────────────────────────────────── */}
@@ -698,6 +712,73 @@ function VenueDetailPage() {
           {venue && (
             <Tabs.Panel value="photos" pt="sm">
               <PhotosTab photos={photos} isLoading={photosLoading} />
+            </Tabs.Panel>
+          )}
+
+          {/* ── Metadata tab (TENANT_OWNER / ADMIN only) ─────────────────── */}
+          {canManage && venue && (
+            <Tabs.Panel value="metadata" pt="sm">
+              <Stack gap="md">
+                <VenueMetadataSections
+                  venueId={venueId}
+                  metadata={venue.metadata ?? null}
+                  isLoading={isLoading}
+                />
+
+                {/* Raw JSON fallback — read-only, collapsible */}
+                <Paper withBorder radius="md" p="lg" shadow="sm" styles={SECTION_CARD_STYLES}>
+                  <Group justify="space-between" align="flex-start" wrap="nowrap" gap="md">
+                    <Group gap={8}>
+                      <ThemeIcon size={28} radius="sm" variant="light" color="gray">
+                        <IconPaperclip size={14} />
+                      </ThemeIcon>
+                      <Stack gap={0}>
+                        <Text size="md" fw={700}>
+                          <Trans>Raw JSON document</Trans>
+                        </Text>
+                        <Text size="xs" c="dimmed">
+                          <Trans>Read-only view of the full metadata string.</Trans>
+                        </Text>
+                      </Stack>
+                    </Group>
+                    <Button
+                      variant="subtle"
+                      color="gray"
+                      size="compact-sm"
+                      style={{ flexShrink: 0 }}
+                      onClick={toggleRawJson}
+                    >
+                      {rawJsonOpened ? t`Hide raw JSON` : t`Show raw JSON`}
+                    </Button>
+                  </Group>
+                  <Collapse in={rawJsonOpened}>
+                    <Divider my="sm" />
+                    {isLoading ? (
+                      <Skeleton height={120} radius="sm" />
+                    ) : (
+                      <Box
+                        component="pre"
+                        style={{
+                          margin: 0,
+                          padding: "var(--mantine-spacing-sm)",
+                          background: "var(--mantine-color-gray-0)",
+                          borderRadius: "var(--mantine-radius-sm)",
+                          fontFamily: "var(--mantine-font-family-monospace)",
+                          fontSize: "var(--mantine-font-size-xs)",
+                          whiteSpace: "pre-wrap",
+                          wordBreak: "break-all",
+                          overflowY: "auto",
+                          maxHeight: 400,
+                        }}
+                      >
+                        {venue.metadata
+                          ? JSON.stringify(JSON.parse(venue.metadata), null, 2)
+                          : t`— no metadata —`}
+                      </Box>
+                    )}
+                  </Collapse>
+                </Paper>
+              </Stack>
             </Tabs.Panel>
           )}
         </Tabs>

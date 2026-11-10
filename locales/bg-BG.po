@@ -1532,7 +1532,6 @@ msgstr ""
 msgid "Mark all as read"
 msgstr "Маркирай всички като прочетени"
 
-#: src/features/manage-venue/ui/venue-fields.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Master catalog link"
 msgstr ""
@@ -1547,8 +1546,8 @@ msgid "Master venue"
 msgstr ""
 
 #: src/features/manage-venue/ui/venue-fields.tsx
-msgid "Master venue id"
-msgstr ""
+#~ msgid "Master venue id"
+#~ msgstr ""
 
 #: src/pages/-billing-example.tsx
 msgid "Max Projects:"
@@ -1853,8 +1852,8 @@ msgid "Optional translation"
 msgstr "По избор превод"
 
 #: src/features/manage-venue/ui/venue-fields.tsx
-msgid "Optional UUID of the matching master-catalog venue. Leave blank if none."
-msgstr ""
+#~ msgid "Optional UUID of the matching master-catalog venue. Leave blank if none."
+#~ msgstr ""
 
 #: src/pages/sign-in.tsx
 msgid "or"
