@@ -3,7 +3,8 @@
  *
  * Per the catalog service contract, the safe projection omits `metadata`,
  * `confidence` and `source`, and keeps the optional `masterVenueId` relation
- * key. There are no per-venue asset/photo sub-resources on the tenant surface.
+ * key. Per-venue photos and assets are available via the /venues/{id}/assets
+ * sub-resource (TENANT_OWNER / MEMBER).
  */
 export interface Venue {
   id: string;

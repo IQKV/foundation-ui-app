@@ -232,9 +232,8 @@ function VenueDetailPage() {
   const { t } = useLingui();
   const navigate = useNavigate();
   const { venueId } = Route.useParams();
-  const { payload } = useSession();
-  const authorities = payload?.authorities ?? [];
-  const canManage = authorities.includes("TENANT_OWNER") || authorities.includes("ADMIN");
+  const { payload, isTenantOwner } = useSession();
+  const canManage = isTenantOwner;
 
   const [editOpened, { open: openEdit, close: closeEdit }] = useDisclosure(false);
   const [deleteOpened, { open: openDelete, close: closeDelete }] = useDisclosure(false);
@@ -242,12 +241,12 @@ function VenueDetailPage() {
 
   const { data: venue, isLoading, isError, refetch, isFetching } = useVenue(venueId);
 
-  // Photos come from the master-catalog photos endpoint via masterVenueId.
-  // Only fetched when the venue is linked to a master catalog record.
+  // Photos come from the tenant venue asset photos endpoint.
+  // Fetched unconditionally for this venue once the venue is loaded.
   const { data: photosData, isLoading: photosLoading } = useQuery({
-    queryKey: ["tenant", "venue", venueId, "photos", venue?.masterVenueId ?? ""],
-    queryFn: () => catalogApi.listMasterVenuePhotos(venue!.masterVenueId!),
-    enabled: Boolean(venue?.masterVenueId),
+    queryKey: ["tenant", "venue", venueId, "photos"],
+    queryFn: () => catalogApi.listVenueAssetPhotos(venueId),
+    enabled: Boolean(venue),
   });
 
   const photos = photosData?.items ?? [];
@@ -519,7 +518,7 @@ function VenueDetailPage() {
             >
               <Trans>Details</Trans>
             </Tabs.Tab>
-            {venue?.masterVenueId && (
+            {venue && (
               <Tabs.Tab
                 value="photos"
                 leftSection={<IconPhoto size={20} />}
@@ -695,8 +694,8 @@ function VenueDetailPage() {
             </Stack>
           </Tabs.Panel>
 
-          {/* ── Photos tab (only when masterVenueId is set) ───────────── */}
-          {venue?.masterVenueId && (
+          {/* ── Photos tab ───────────────────────────── */}
+          {venue && (
             <Tabs.Panel value="photos" pt="sm">
               <PhotosTab photos={photos} isLoading={photosLoading} />
             </Tabs.Panel>

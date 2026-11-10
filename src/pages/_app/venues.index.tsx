@@ -655,10 +655,8 @@ type ViewMode = "grid" | "list";
 function VenuesPage() {
   const { t } = useLingui();
   const navigate = useNavigate();
-  const { payload } = useSession();
-  const authorities = payload?.authorities ?? [];
-  const canManage = authorities.includes("TENANT_OWNER") || authorities.includes("ADMIN");
-  const { tenantKey } = useSession();
+  const { payload, isTenantOwner, tenantKey } = useSession();
+  const canManage = isTenantOwner;
 
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");

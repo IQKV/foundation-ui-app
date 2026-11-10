@@ -66,10 +66,10 @@ export const catalogApi = {
   bulkDeleteVenues: (ids: string[]) =>
     httpClient.delete("/v1/catalog/venues", { data: { ids } }).then(() => undefined),
 
-  // Master-catalog photos are accessible to MEMBER via /master-venues/{id}/photos.
-  // Used by the venue detail Photos tab when masterVenueId is present.
-  listMasterVenuePhotos: (masterVenueId: string) =>
+  // Tenant venue asset photos — TENANT_OWNER / MEMBER.
+  // Used by the venue detail Photos tab.
+  listVenueAssetPhotos: (venueId: string) =>
     httpClient
-      .get<VenueAssetListResponse>(`/v1/catalog/master-venues/${masterVenueId}/photos`)
+      .get<VenueAssetListResponse>(`/v1/catalog/venues/${venueId}/assets/photos`)
       .then((r) => r.data),
 };
