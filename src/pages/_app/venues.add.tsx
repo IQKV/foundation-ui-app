@@ -179,12 +179,7 @@ function AddVenuePage() {
             )}
 
             {!isActive && !isDone && !isError && (
-              <Button
-                variant="default"
-                leftSection={<IconUpload size={14} />}
-                size="sm"
-                onClick={(e) => e.stopPropagation()}
-              >
+              <Button variant="default" leftSection={<IconUpload size={14} />} size="sm">
                 <Trans>Choose a file</Trans>
               </Button>
             )}
