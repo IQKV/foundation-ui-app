@@ -78,7 +78,12 @@ export type {
 
 // ─── Catalog (tenant venues) ──────────────────────────────────────────────────
 
-export { catalogApi, venueAssetApi, venueAssetImportApi, uploadFileToPresignedUrl } from "./catalog";
+export {
+  catalogApi,
+  venueAssetApi,
+  venueAssetImportApi,
+  uploadFileToPresignedUrl,
+} from "./catalog";
 export type {
   Venue,
   VenueListResponse,

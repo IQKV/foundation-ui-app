@@ -21,6 +21,9 @@ export interface UseUploadVenueDocumentResult {
   stage: UploadStage;
   progress: number; // 0–100, meaningful only during "uploading"
   venueId: string | null;
+  fileName: string | null;
+  fileSize: number | null; // bytes
+  errorMessage: string | null;
   upload: (file: File) => Promise<string | null>; // resolves when done or timed-out
   reset: () => void;
 }
@@ -51,6 +54,9 @@ export function useUploadVenueDocument(): UseUploadVenueDocumentResult {
   const [stage, setStage] = useState<UploadStage>("idle");
   const [progress, setProgress] = useState(0);
   const [venueId, setVenueId] = useState<string | null>(null);
+  const [fileName, setFileName] = useState<string | null>(null);
+  const [fileSize, setFileSize] = useState<number | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   // Refs survive closure captures across async steps and interval/effect callbacks.
   const assetIdRef = useRef<string | null>(null);
@@ -65,6 +71,9 @@ export function useUploadVenueDocument(): UseUploadVenueDocumentResult {
     setStage("idle");
     setProgress(0);
     setVenueId(null);
+    setFileName(null);
+    setFileSize(null);
+    setErrorMessage(null);
     assetIdRef.current = null;
     resolveRef.current = null;
   };
@@ -75,10 +84,12 @@ export function useUploadVenueDocument(): UseUploadVenueDocumentResult {
     if (!assetId || stageRef.current !== "processing") return;
 
     if (Date.now() - pollStartRef.current > POLL_TIMEOUT_MS) {
+      const msg = "The venue is still being processed — check back shortly.";
+      setErrorMessage(msg);
       setStage("error");
       notifications.show({
         title: "Processing timed out",
-        message: "The venue is still being processed — check back shortly.",
+        message: msg,
         color: "orange",
         icon: createElement(IconX, { size: 16 }),
       });
@@ -101,10 +112,12 @@ export function useUploadVenueDocument(): UseUploadVenueDocumentResult {
           });
           resolveRef.current?.(asset.venueId);
         } else if (asset.status === "FAILED") {
+          const msg = asset.failureReason ?? "Could not extract venue data from the document.";
+          setErrorMessage(msg);
           setStage("error");
           notifications.show({
             title: "Processing failed",
-            message: asset.failureReason ?? "Could not extract venue data from the document.",
+            message: msg,
             color: "red",
             icon: createElement(IconX, { size: 16 }),
           });
@@ -145,6 +158,9 @@ export function useUploadVenueDocument(): UseUploadVenueDocumentResult {
         void (async () => {
           try {
             // ── 1. Initiate ────────────────────────────────────────────────────
+            setFileName(file.name);
+            setFileSize(file.size);
+            setErrorMessage(null);
             setStage("initiating-upload");
             const initResponse = await venueAssetImportApi.initiateUpload({
               fileName: file.name,
@@ -170,8 +186,13 @@ export function useUploadVenueDocument(): UseUploadVenueDocumentResult {
             setStage("processing");
             pollStartRef.current = Date.now();
             fallbackInterval.start();
-          } catch {
+          } catch (err) {
             fallbackInterval.stop();
+            const msg =
+              err instanceof Error
+                ? err.message
+                : "Could not complete the document upload. Please try again.";
+            setErrorMessage(msg);
             setStage("error");
             notifications.show({
               title: "Upload failed",
@@ -187,5 +208,5 @@ export function useUploadVenueDocument(): UseUploadVenueDocumentResult {
     [fallbackInterval],
   );
 
-  return { stage, progress, venueId, upload, reset };
+  return { stage, progress, venueId, fileName, fileSize, errorMessage, upload, reset };
 }

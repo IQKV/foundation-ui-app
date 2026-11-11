@@ -1,27 +1,31 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import {
-  Container,
-  Title,
-  Text,
-  SimpleGrid,
-  Paper,
-  Stack,
-  Button,
-  Group,
-  ThemeIcon,
-  Progress,
+  Anchor,
   Badge,
+  Button,
+  Container,
+  Group,
+  Paper,
+  Progress,
+  SimpleGrid,
+  Stack,
+  Text,
+  ThemeIcon,
+  Title,
 } from "@mantine/core";
+import { useInterval } from "@mantine/hooks";
 import { Dropzone } from "@mantine/dropzone";
 import {
+  IconAlertCircle,
+  IconCheck,
+  IconExternalLink,
   IconFileText,
   IconPencil,
   IconUpload,
   IconX,
-  IconCheck,
-  IconAlertCircle,
 } from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
+import { useEffect, useState } from "react";
 import { PageTitle } from "@/shared/lib/page-title";
 import { TestSelectors } from "@/shared/lib/test-selectors";
 import { useUploadVenueDocument } from "@/features/manage-venue";
@@ -30,18 +34,13 @@ export const Route = createFileRoute("/_app/venues/add")({
   component: AddVenuePage,
 });
 
-const STAGE_LABELS = {
-  idle: "",
-  "initiating-upload": "Preparing upload…",
-  uploading: "Uploading…",
-  confirming: "Finalising…",
-  processing: "Extracting venue data…",
-  done: "Done",
-  error: "Failed",
-} as const;
+/** 5 MB — mirrors the backend upload policy. */
+const MAX_FILE_SIZE = 5 * 1024 * 1024;
 
 const ACCEPTED_TYPES = [
   "application/pdf",
+  "application/msword",
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
   "application/vnd.ms-excel",
   "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
   "text/csv",
@@ -51,23 +50,54 @@ const ACCEPTED_TYPES = [
   "image/gif",
 ];
 
+const STAGE_LABELS: Record<string, string> = {
+  "initiating-upload": "Preparing upload…",
+  uploading: "Uploading…",
+  confirming: "Finalising…",
+  processing: "Extracting venue data…",
+  done: "Done",
+  error: "Failed",
+};
+
+/** Formats bytes as a human-readable size string. */
+function formatBytes(bytes: number): string {
+  if (bytes < 1024) return `${bytes} B`;
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(0)} KB`;
+  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+}
+
 function AddVenuePage() {
   const { t } = useLingui();
   const navigate = useNavigate();
-  const { stage, progress, venueId, upload, reset } = useUploadVenueDocument();
+  const { stage, progress, venueId, fileName, fileSize, errorMessage, upload, reset } =
+    useUploadVenueDocument();
+
+  // ── Elapsed seconds counter during the AI processing stage ──────────────
+  const [elapsedSeconds, setElapsedSeconds] = useState(0);
+  const elapsedTimer = useInterval(() => setElapsedSeconds((s) => s + 1), 1_000);
+
+  useEffect(() => {
+    if (stage === "processing") {
+      setElapsedSeconds(0);
+      elapsedTimer.start();
+    } else {
+      elapsedTimer.stop();
+    }
+    return () => elapsedTimer.stop();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [stage]);
 
   const isActive = stage !== "idle" && stage !== "done" && stage !== "error";
   const isDone = stage === "done";
   const isError = stage === "error";
+  const isProcessing = stage === "processing";
+  const isUploading = stage === "uploading";
 
   const handleDrop = async (files: File[]) => {
     const file = files[0];
     if (!file) return;
-    const resultVenueId = await upload(file);
-    if (resultVenueId) {
-      void navigate({ to: "/venues/$venueId", params: { venueId: resultVenueId } });
-    }
-    // null result (timeout or error) — stay on the page so user can retry
+    await upload(file);
+    // Navigation happens via the "View venue" button in done state — no auto-redirect
   };
 
   return (
@@ -86,6 +116,9 @@ function AddVenuePage() {
             Upload the venue's own document and we'll structure it — or enter the details by hand.
           </Trans>
         </Text>
+        <Text size="xs" c="dimmed">
+          <Trans>Accepted formats: PDF, Word, Excel, CSV, JPEG, PNG, WebP · Max 5 MB</Trans>
+        </Text>
       </Stack>
 
       <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="lg">
@@ -93,8 +126,9 @@ function AddVenuePage() {
         <Dropzone
           onDrop={(files) => void handleDrop(files)}
           accept={ACCEPTED_TYPES}
+          maxSize={MAX_FILE_SIZE}
           disabled={isActive}
-          loading={isActive}
+          loading={isActive && !isProcessing}
           maxFiles={1}
           data-testid={TestSelectors.VENUES_ADD_CHOOSE_FILE}
           styles={{
@@ -111,6 +145,7 @@ function AddVenuePage() {
           }}
         >
           <Stack align="center" gap="md" ta="center">
+            {/* ── Icon area ───────────────────────────────────────────── */}
             <Dropzone.Accept>
               <ThemeIcon size={56} radius="xl" variant="light" color="blue">
                 <IconUpload size={28} />
@@ -137,53 +172,100 @@ function AddVenuePage() {
               )}
             </Dropzone.Idle>
 
-            <Stack gap={6}>
-              <Text fw={600} size="md">
-                <Trans>Drop a venue file to structure it</Trans>
-              </Text>
-              <Text size="sm" c="dimmed" maw={340}>
-                <Trans>
-                  Floor plans, capacity sheets, rate cards or brochures — PDF, image or
-                  spreadsheet. We read capacity, pricing, catering and technical detail into the
-                  library.
-                </Trans>
-              </Text>
-            </Stack>
+            {/* ── Static description ──────────────────────────────────── */}
+            {!isActive && !isDone && !isError && (
+              <Stack gap={6}>
+                <Text fw={600} size="md">
+                  <Trans>Drop a venue file to structure it</Trans>
+                </Text>
+                <Text size="sm" c="dimmed" maw={340}>
+                  <Trans>
+                    Floor plans, capacity sheets, rate cards or brochures — PDF, image or
+                    spreadsheet. We read capacity, pricing, catering and technical detail into the
+                    library.
+                  </Trans>
+                </Text>
+              </Stack>
+            )}
 
-            {/* Progress feedback */}
+            {/* ── File identity — shown once a file is in flight or done ─ */}
+            {(isActive || isDone || isError) && fileName && (
+              <Group gap={6} justify="center">
+                <IconFileText size={14} style={{ opacity: 0.5 }} />
+                <Text size="sm" fw={500} lineClamp={1} maw={240}>
+                  {fileName}
+                </Text>
+                {fileSize != null && (
+                  <Text size="xs" c="dimmed">
+                    {formatBytes(fileSize)}
+                  </Text>
+                )}
+              </Group>
+            )}
+
+            {/* ── Active: stage label + progress / AI spinner ─────────── */}
             {isActive && (
               <Stack gap={6} w="100%" maw={300}>
                 <Group justify="space-between" gap="xs">
                   <Text size="xs" c="dimmed">
-                    {STAGE_LABELS[stage]}
+                    {STAGE_LABELS[stage] ?? stage}
                   </Text>
-                  {stage === "uploading" && (
+                  {isUploading && (
                     <Badge variant="light" color="blue" size="xs">
                       {progress}%
                     </Badge>
                   )}
-                  {stage === "processing" && (
-                    <Badge variant="light" color="violet" size="xs">
-                      <Trans>AI</Trans>
-                    </Badge>
+                  {isProcessing && (
+                    <Group gap={4}>
+                      <Badge variant="light" color="violet" size="xs">
+                        <Trans>AI</Trans>
+                      </Badge>
+                      <Text size="xs" c="dimmed">
+                        {elapsedSeconds}s
+                      </Text>
+                    </Group>
                   )}
                 </Group>
-                <Progress
-                  value={stage === "uploading" ? progress : 100}
-                  animated={stage !== "uploading"}
-                  size="sm"
-                  radius="xl"
-                  color={stage === "processing" ? "violet" : "blue"}
-                />
+
+                {/* Show real progress bar only during byte transfer; pulse otherwise */}
+                {isUploading ? (
+                  <Progress value={progress} size="sm" radius="xl" color="blue" />
+                ) : isProcessing ? (
+                  <Progress value={100} animated size="sm" radius="xl" color="violet" />
+                ) : (
+                  <Progress value={100} animated size="sm" radius="xl" color="blue" />
+                )}
               </Stack>
             )}
 
-            {isError && (
-              <Button size="xs" variant="light" color="red" onClick={reset}>
-                <Trans>Try again</Trans>
+            {/* ── Done: venue link ─────────────────────────────────────── */}
+            {isDone && venueId && (
+              <Button
+                variant="filled"
+                color="green"
+                size="sm"
+                rightSection={<IconExternalLink size={14} />}
+                onClick={() => void navigate({ to: "/venues/$venueId", params: { venueId } })}
+              >
+                <Trans>View venue</Trans>
               </Button>
             )}
 
+            {/* ── Error: message + retry ───────────────────────────────── */}
+            {isError && (
+              <Stack gap={6} align="center">
+                {errorMessage && (
+                  <Text size="xs" c="red" maw={300} ta="center">
+                    {errorMessage}
+                  </Text>
+                )}
+                <Button size="xs" variant="light" color="red" onClick={reset}>
+                  <Trans>Try again</Trans>
+                </Button>
+              </Stack>
+            )}
+
+            {/* ── Idle: choose file button ─────────────────────────────── */}
             {!isActive && !isDone && !isError && (
               <Button variant="default" leftSection={<IconUpload size={14} />} size="sm">
                 <Trans>Choose a file</Trans>
@@ -226,6 +308,13 @@ function AddVenuePage() {
                 <Trans>Start from a blank venue</Trans>
               </Button>
             </Group>
+
+            {/* Done: also offer a secondary link to add another */}
+            {isDone && (
+              <Anchor size="xs" c="dimmed" component="button" onClick={reset}>
+                <Trans>Upload another file</Trans>
+              </Anchor>
+            )}
           </Stack>
         </Paper>
       </SimpleGrid>
