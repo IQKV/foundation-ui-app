@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useInterval } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
@@ -6,6 +6,7 @@ import { createElement } from "react";
 import { IconCheck, IconX } from "@tabler/icons-react";
 import { venueAssetImportApi, uploadFileToPresignedUrl } from "@/shared/api";
 import type { VenueAssetImportResponse } from "@/shared/api";
+import { useNotificationStore } from "@/features/notification-bell";
 
 export type UploadStage =
   | "idle"
@@ -24,32 +25,41 @@ export interface UseUploadVenueDocumentResult {
   reset: () => void;
 }
 
-/** Poll interval while the worker processes the asset (ms). */
-const POLL_INTERVAL_MS = 2_000;
-/** Give up polling after 5 minutes; the worker may retry on its own. */
+/** Fallback poll interval — fires when WebSocket push does not arrive (ms). */
+const FALLBACK_POLL_MS = 5_000;
+/** Give up after 5 minutes; the worker may retry on its own. */
 const POLL_TIMEOUT_MS = 5 * 60 * 1_000;
 
 /**
- * Venue-less document import flow — uploads a file to the new tenant import
- * endpoint and polls for the processing worker's result.
+ * Venue-less document import flow — uploads a file to the tenant import endpoint, then
+ * waits for the processing worker's result.
  *
  *   1. Initiate — POST /v1/catalog/venue-assets/initiate (presigned URL + assetId)
  *   2. Upload   — PUT to MinIO with XHR progress events
  *   3. Confirm  — POST /v1/catalog/venue-assets/{assetId}/confirm (status: UPLOADED)
- *   4. Poll     — GET /v1/catalog/venue-assets/{assetId} until EXTRACTED or FAILED
+ *   4. Wait     — primary: pushSeq from STOMP WebSocket; fallback: 5-second poll
  *
- * shortcut: polling is client-driven; upgrade to SSE when the backend ships it.
+ * When the processing worker finishes it publishes a UserPushNotificationEvent to
+ * notification.iam.push → IAM persists the row → pushes via STOMP → NotificationBell
+ * bumps pushSeq → the useEffect below fires a single GET to confirm the final status.
+ * The useInterval fallback covers environments where messaging is disabled.
  */
 export function useUploadVenueDocument(): UseUploadVenueDocumentResult {
   const queryClient = useQueryClient();
+  const pushSeq = useNotificationStore((s) => s.pushSeq);
+
   const [stage, setStage] = useState<UploadStage>("idle");
   const [progress, setProgress] = useState(0);
   const [venueId, setVenueId] = useState<string | null>(null);
 
-  // Refs survive closure captures across async steps and interval callbacks.
+  // Refs survive closure captures across async steps and interval/effect callbacks.
   const assetIdRef = useRef<string | null>(null);
   const pollStartRef = useRef<number>(0);
   const resolveRef = useRef<((id: string | null) => void) | null>(null);
+  const stageRef = useRef<UploadStage>("idle");
+
+  // Keep stageRef in sync so callbacks read the latest stage without stale closures.
+  stageRef.current = stage;
 
   const reset = () => {
     setStage("idle");
@@ -59,13 +69,12 @@ export function useUploadVenueDocument(): UseUploadVenueDocumentResult {
     resolveRef.current = null;
   };
 
-  // ── Polling interval — active only during "processing" stage ───────────────
-  const interval = useInterval(() => {
+  /** Shared settle logic — called from both the WebSocket effect and the fallback interval. */
+  const checkAsset = useCallback(() => {
     const assetId = assetIdRef.current;
-    if (!assetId) return;
+    if (!assetId || stageRef.current !== "processing") return;
 
     if (Date.now() - pollStartRef.current > POLL_TIMEOUT_MS) {
-      interval.stop();
       setStage("error");
       notifications.show({
         title: "Processing timed out",
@@ -81,7 +90,6 @@ export function useUploadVenueDocument(): UseUploadVenueDocumentResult {
       .getAsset(assetId)
       .then((asset: VenueAssetImportResponse) => {
         if (asset.status === "EXTRACTED" && asset.venueId) {
-          interval.stop();
           setVenueId(asset.venueId);
           setStage("done");
           void queryClient.invalidateQueries({ queryKey: ["tenant", "venues"] });
@@ -93,7 +101,6 @@ export function useUploadVenueDocument(): UseUploadVenueDocumentResult {
           });
           resolveRef.current?.(asset.venueId);
         } else if (asset.status === "FAILED") {
-          interval.stop();
           setStage("error");
           notifications.show({
             title: "Processing failed",
@@ -103,12 +110,32 @@ export function useUploadVenueDocument(): UseUploadVenueDocumentResult {
           });
           resolveRef.current?.(null);
         }
-        // UPLOADED / PARSING → keep polling
+        // UPLOADED / PARSING → not done yet, wait for next signal
       })
       .catch(() => {
-        // Network blip — keep polling; timeout guard above will eventually stop it.
+        // Network blip — ignore; next push or fallback poll will retry
       });
-  }, POLL_INTERVAL_MS);
+  }, [queryClient]);
+
+  // ── Primary: react to WebSocket pushes ────────────────────────────────────
+  // pushSeq increments each time any STOMP message arrives on /user/queue/notifications.
+  // We only act during the "processing" stage; all other stages ignore the signal.
+  useEffect(() => {
+    if (stageRef.current === "processing") {
+      checkAsset();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pushSeq]);
+
+  // ── Fallback: slow poll for environments without messaging ─────────────────
+  // Active only during "processing"; stops itself once the stage changes.
+  const fallbackInterval = useInterval(() => {
+    if (stageRef.current !== "processing") {
+      fallbackInterval.stop();
+      return;
+    }
+    checkAsset();
+  }, FALLBACK_POLL_MS);
 
   const upload = useCallback(
     (file: File): Promise<string | null> => {
@@ -139,12 +166,12 @@ export function useUploadVenueDocument(): UseUploadVenueDocumentResult {
               assetType: file.type.startsWith("image/") ? "PHOTO" : "DOCUMENT",
             });
 
-            // ── 4. Poll for processing result ──────────────────────────────────
+            // ── 4. Wait for processing result ──────────────────────────────────
             setStage("processing");
             pollStartRef.current = Date.now();
-            interval.start();
+            fallbackInterval.start();
           } catch {
-            interval.stop();
+            fallbackInterval.stop();
             setStage("error");
             notifications.show({
               title: "Upload failed",
@@ -157,7 +184,7 @@ export function useUploadVenueDocument(): UseUploadVenueDocumentResult {
         })();
       });
     },
-    [interval],
+    [fallbackInterval],
   );
 
   return { stage, progress, venueId, upload, reset };
