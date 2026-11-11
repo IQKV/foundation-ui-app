@@ -230,81 +230,20 @@ function PhotosTab({ photos, isLoading }: { photos: VenueAssetPublic[]; isLoadin
 // ─── Assets tab ───────────────────────────────────────────────────────────────
 
 function AssetsTab({
-  venueId,
   assets,
   isLoading,
   previewUrls,
 }: {
-  venueId: string;
   assets: VenueAsset[];
   isLoading: boolean;
   /** Presigned image URL per asset id — only photos have one. */
   previewUrls: Map<string, string>;
 }) {
   const { t } = useLingui();
-  const queryClient = useQueryClient();
   const [preview, setPreview] = useState<{ url: string; title: string } | null>(null);
-  const [uploading, setUploading] = useState(false);
-  const fileInputRef = useRef<HTMLInputElement>(null);
-
-  /** Initiate → PUT to MinIO → confirm, then refresh the venue's asset queries. */
-  const handleUpload = async (file: File) => {
-    setUploading(true);
-    try {
-      const init = await venueAssetApi.initiateUpload(venueId, {
-        fileName: file.name,
-        contentType: file.type || "application/octet-stream",
-        sizeBytes: file.size,
-      });
-      await uploadFileToPresignedUrl(init.presignedUploadUrl, file, () => {});
-      await venueAssetApi.confirmUpload(venueId, init.assetId, {
-        objectKey: init.objectKey,
-        fileName: file.name,
-        assetType: file.type.startsWith("image/") ? "PHOTO" : "DOCUMENT",
-      });
-      await queryClient.invalidateQueries({ queryKey: ["tenant", "venue", venueId] });
-      notifications.show({
-        message: t`Asset uploaded.`,
-        color: "green",
-        icon: <IconCheck size={16} />,
-      });
-    } catch (err) {
-      notifications.show({
-        message:
-          err instanceof Error ? err.message : t`Could not upload the asset. Please try again.`,
-        color: "red",
-        icon: <IconAlertTriangle size={16} />,
-      });
-    } finally {
-      setUploading(false);
-      if (fileInputRef.current) fileInputRef.current.value = "";
-    }
-  };
 
   return (
     <>
-      <Group justify="flex-end" mb="sm">
-        <Button
-          size="sm"
-          variant="light"
-          leftSection={<IconUpload size={15} />}
-          loading={uploading}
-          data-testid={TestSelectors.VENUE_DETAIL_ASSET_UPLOAD_BUTTON}
-          onClick={() => fileInputRef.current?.click()}
-        >
-          <Trans>Upload asset</Trans>
-        </Button>
-        <input
-          ref={fileInputRef}
-          type="file"
-          hidden
-          onChange={(e) => {
-            const file = e.currentTarget.files?.[0];
-            if (file) void handleUpload(file);
-          }}
-        />
-      </Group>
-
       {isLoading ? (
         <Skeleton height={200} radius="md" />
       ) : assets.length === 0 ? (
@@ -418,6 +357,10 @@ function VenueDetailPage() {
   const [deletedVenue, setDeletedVenue] = useState<Venue | null>(null);
   const [rawJsonOpened, { toggle: toggleRawJson }] = useDisclosure(false);
 
+  const queryClient = useQueryClient();
+  const [uploadingAsset, setUploadingAsset] = useState(false);
+  const assetFileInputRef = useRef<HTMLInputElement>(null);
+
   const { data: venue, isLoading, isError, refetch, isFetching } = useVenue(venueId);
 
   // Photos come from the tenant venue asset photos endpoint.
@@ -454,6 +397,40 @@ function VenueDetailPage() {
       : null;
 
   const handleDeleteSuccess = () => void navigate({ to: "/venues" });
+
+  /** Initiate → PUT to MinIO → confirm, then refresh the venue's asset queries. */
+  const handleUploadAsset = async (file: File) => {
+    setUploadingAsset(true);
+    try {
+      const init = await venueAssetApi.initiateUpload(venueId, {
+        fileName: file.name,
+        contentType: file.type || "application/octet-stream",
+        sizeBytes: file.size,
+      });
+      await uploadFileToPresignedUrl(init.presignedUploadUrl, file, () => {});
+      await venueAssetApi.confirmUpload(venueId, init.assetId, {
+        objectKey: init.objectKey,
+        fileName: file.name,
+        assetType: file.type.startsWith("image/") ? "PHOTO" : "DOCUMENT",
+      });
+      await queryClient.invalidateQueries({ queryKey: ["tenant", "venue", venueId] });
+      notifications.show({
+        message: t`Asset uploaded.`,
+        color: "green",
+        icon: <IconCheck size={16} />,
+      });
+    } catch (err) {
+      notifications.show({
+        message:
+          err instanceof Error ? err.message : t`Could not upload the asset. Please try again.`,
+        color: "red",
+        icon: <IconAlertTriangle size={16} />,
+      });
+    } finally {
+      setUploadingAsset(false);
+      if (assetFileInputRef.current) assetFileInputRef.current.value = "";
+    }
+  };
 
   // Completeness counts for section cards
   const locationFilled = [venue?.address, venue?.city, venue?.locationLat].filter(Boolean).length;
@@ -552,6 +529,26 @@ function VenueDetailPage() {
                   >
                     <Trans>Edit</Trans>
                   </Button>
+                  <Button
+                    variant="light"
+                    size="sm"
+                    leftSection={<IconUpload size={15} />}
+                    disabled={!venue}
+                    loading={uploadingAsset}
+                    data-testid={TestSelectors.VENUE_DETAIL_ASSET_UPLOAD_BUTTON}
+                    onClick={() => assetFileInputRef.current?.click()}
+                  >
+                    <Trans>Upload asset</Trans>
+                  </Button>
+                  <input
+                    ref={assetFileInputRef}
+                    type="file"
+                    hidden
+                    onChange={(e) => {
+                      const file = e.currentTarget.files?.[0];
+                      if (file) void handleUploadAsset(file);
+                    }}
+                  />
                   <Button
                     variant="light"
                     color="red"
@@ -929,12 +926,7 @@ function VenueDetailPage() {
             {/* ── Assets tab ───────────────────────────── */}
             {venue && (
               <Tabs.Panel value="assets" pt="sm">
-                <AssetsTab
-                  venueId={venueId}
-                  assets={assets}
-                  isLoading={assetsLoading}
-                  previewUrls={photoUrlById}
-                />
+                <AssetsTab assets={assets} isLoading={assetsLoading} previewUrls={photoUrlById} />
               </Tabs.Panel>
             )}
 
