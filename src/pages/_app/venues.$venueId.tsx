@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { z } from "zod";
+import { motion } from "framer-motion";
 import {
   Container,
   Text,
@@ -60,6 +62,7 @@ import { dayjs } from "@/shared/lib/date-utils";
 import { TestSelectors } from "@/shared/lib/test-selectors";
 
 export const Route = createFileRoute("/_app/venues/$venueId")({
+  validateSearch: z.object({ fromUpload: z.boolean().optional() }),
   component: VenueDetailPage,
 });
 
@@ -236,6 +239,7 @@ function VenueDetailPage() {
   const { t } = useLingui();
   const navigate = useNavigate();
   const { venueId } = Route.useParams();
+  const { fromUpload } = Route.useSearch();
   const { payload, isTenantOwner } = useSession();
   const canManage = isTenantOwner;
 
@@ -305,6 +309,11 @@ function VenueDetailPage() {
   }
 
   return (
+    <motion.div
+      initial={fromUpload ? { opacity: 0, y: 24 } : false}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+    >
     <Container size="xl" py={0}>
       <PageTitle
         segments={[
@@ -801,5 +810,6 @@ function VenueDetailPage() {
         </>
       )}
     </Container>
+    </motion.div>
   );
 }
