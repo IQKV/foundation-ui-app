@@ -78,13 +78,14 @@ export type {
 
 // ─── Catalog (tenant venues) ──────────────────────────────────────────────────
 
-export { catalogApi, venueAssetApi, uploadFileToPresignedUrl } from "./catalog";
+export { catalogApi, venueAssetApi, venueAssetImportApi, uploadFileToPresignedUrl } from "./catalog";
 export type {
   Venue,
   VenueListResponse,
   ListVenueParams,
   VenueAssetPublic,
   VenueAssetListResponse,
+  VenueAssetImportStatus,
   VenueWriteRequest,
   VenuePatchRequest,
   SemanticSearchResult,
@@ -95,6 +96,7 @@ export type {
   InitiateAssetUploadResponse,
   ConfirmAssetUploadRequest,
   VenueAssetResponse,
+  VenueAssetImportResponse,
 } from "./catalog";
 
 // ─── Auth ─────────────────────────────────────────────────────────────────────

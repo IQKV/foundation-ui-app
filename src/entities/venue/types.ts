@@ -50,6 +50,12 @@ export interface VenueAssetListResponse {
   totalElements: number;
 }
 
+/**
+ * Processing status of a venue-less imported asset.
+ * Set by the catalog service and advanced by the processing worker.
+ */
+export type VenueAssetImportStatus = "UPLOADED" | "PARSING" | "EXTRACTED" | "FAILED";
+
 export interface ListVenueParams {
   search?: string;
   city?: string;

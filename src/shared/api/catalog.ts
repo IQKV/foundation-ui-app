@@ -5,6 +5,7 @@ import type {
   ListVenueParams,
   VenueAssetPublic,
   VenueAssetListResponse,
+  VenueAssetImportStatus,
 } from "@/entities/venue";
 
 export type {
@@ -13,6 +14,7 @@ export type {
   ListVenueParams,
   VenueAssetPublic,
   VenueAssetListResponse,
+  VenueAssetImportStatus,
 } from "@/entities/venue";
 
 // ─── Tenant-scoped Catalog API ────────────────────────────────────────────────
@@ -199,3 +201,45 @@ export function uploadFileToPresignedUrl(
     xhr.send(file);
   });
 }
+
+// ─── Venue-less asset import ──────────────────────────────────────────────────
+// Two-phase presigned flow on the venue-less import surface:
+//   POST /v1/catalog/venue-assets/initiate  → presigned URL + assetId
+//   PUT to presigned URL (XHR, same uploadFileToPresignedUrl helper)
+//   POST /v1/catalog/venue-assets/{id}/confirm
+//   GET  /v1/catalog/venue-assets/{id}       — polled until EXTRACTED or FAILED
+
+/** Full shape returned by the import surface (includes processing status). */
+export interface VenueAssetImportResponse {
+  id: string;
+  /** Null until the processing worker links the derived venue. */
+  venueId: string | null;
+  status: VenueAssetImportStatus;
+  /** Populated when status === "FAILED". */
+  failureReason: string | null;
+  assetType: string;
+  fileName: string;
+  contentType: string;
+  sizeBytes: number;
+  s3Key: string;
+  uploadedBy: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export const venueAssetImportApi = {
+  initiateUpload: (data: InitiateAssetUploadRequest) =>
+    httpClient
+      .post<InitiateAssetUploadResponse>("/v1/catalog/venue-assets/initiate", data)
+      .then((r) => r.data),
+
+  confirmUpload: (assetId: string, data: ConfirmAssetUploadRequest) =>
+    httpClient
+      .post<VenueAssetImportResponse>(`/v1/catalog/venue-assets/${assetId}/confirm`, data)
+      .then((r) => r.data),
+
+  getAsset: (assetId: string) =>
+    httpClient
+      .get<VenueAssetImportResponse>(`/v1/catalog/venue-assets/${assetId}`)
+      .then((r) => r.data),
+};

@@ -32,12 +32,12 @@ export const Route = createFileRoute("/_app/venues/add")({
 
 const STAGE_LABELS = {
   idle: "",
-  "creating-venue": "Creating venue record…",
   "initiating-upload": "Preparing upload…",
   uploading: "Uploading…",
   confirming: "Finalising…",
+  processing: "Extracting venue data…",
   done: "Done",
-  error: "Upload failed",
+  error: "Failed",
 } as const;
 
 const ACCEPTED_TYPES = [
@@ -65,9 +65,9 @@ function AddVenuePage() {
     if (!file) return;
     const resultVenueId = await upload(file);
     if (resultVenueId) {
-      // Navigate to detail whether success or partial failure — user can retry upload there.
       void navigate({ to: "/venues/$venueId", params: { venueId: resultVenueId } });
     }
+    // null result (timeout or error) — stay on the page so user can retry
   };
 
   return (
@@ -162,12 +162,18 @@ function AddVenuePage() {
                       {progress}%
                     </Badge>
                   )}
+                  {stage === "processing" && (
+                    <Badge variant="light" color="violet" size="xs">
+                      <Trans>AI</Trans>
+                    </Badge>
+                  )}
                 </Group>
                 <Progress
                   value={stage === "uploading" ? progress : 100}
                   animated={stage !== "uploading"}
                   size="sm"
                   radius="xl"
+                  color={stage === "processing" ? "violet" : "blue"}
                 />
               </Stack>
             )}
