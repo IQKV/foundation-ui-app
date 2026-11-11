@@ -90,6 +90,8 @@ export type {
   ListVenueParams,
   VenueAssetPublic,
   VenueAssetListResponse,
+  VenueAsset,
+  VenueAssetFullListResponse,
   VenueAssetImportStatus,
   VenueWriteRequest,
   VenuePatchRequest,

@@ -13,6 +13,10 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "— no metadata —"
+msgstr "— no metadata —"
+
 #: src/pages/_app/cms-pages.index.tsx
 msgid "(no title)"
 msgstr "(no title)"
@@ -140,6 +144,10 @@ msgstr "Accept your invitation to join a workspace."
 msgid "Accepted"
 msgstr "Accepted"
 
+#: src/pages/_app/venues.add.tsx
+msgid "Accepted formats: PDF, Word, Excel, CSV, JPEG, PNG, WebP · Max 5 MB"
+msgstr "Accepted formats: PDF, Word, Excel, CSV, JPEG, PNG, WebP · Max 5 MB"
+
 #: src/pages/unauthorized.tsx
 msgid "Access Denied"
 msgstr "Access Denied"
@@ -197,9 +205,18 @@ msgstr "ACTIVE"
 msgid "Active members"
 msgstr "Active members"
 
+#: src/pages/_app/venues.add.tsx
+msgid "Add a venue"
+msgstr "Add a venue"
+
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "Add locale"
 msgstr "Add locale"
+
+#: src/pages/_app/venues.add.tsx
+#: src/pages/_app/venues.create.tsx
+msgid "Add to catalog"
+msgstr "Add to catalog"
 
 #: src/pages/_app/addons/$addonPath.tsx
 msgid "Addon Page"
@@ -279,6 +296,10 @@ msgstr "An account with this email already exists."
 msgid "An organization with this name already exists."
 msgstr "An organization with this name already exists."
 
+#: src/features/manage-venue/ui/venue-metadata-sections.tsx
+msgid "Apply"
+msgstr "Apply"
+
 #: src/features/page-admin/model/types.ts
 #: src/pages/_app/cms-pages.index.tsx
 msgid "Archived"
@@ -307,6 +328,10 @@ msgstr "Are you sure you want to remove <0>{0} {1}</0> from this organization? T
 #: src/features/member-role/ui/transfer-ownership-modal.tsx
 msgid "Are you sure?"
 msgstr "Are you sure?"
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Assets"
+msgstr "Assets"
 
 #: src/features/reset-password/ui/reset-password-form.tsx
 #: src/features/signup/ui/password-strength.tsx
@@ -345,6 +370,7 @@ msgstr "Automatic router integration via <0>router.subscribe()</0>"
 msgid "Available Plans"
 msgstr "Available Plans"
 
+#: src/pages/_app/venues.create.tsx
 #: src/pages/create-organization.tsx
 msgid "Back"
 msgstr "Back"
@@ -421,6 +447,7 @@ msgstr "Billing Portal Unavailable"
 #: src/features/manage-venue/ui/create-venue-modal.tsx
 #: src/features/manage-venue/ui/delete-venue-modal.tsx
 #: src/features/manage-venue/ui/edit-venue-modal.tsx
+#: src/features/manage-venue/ui/venue-metadata-sections.tsx
 #: src/features/member-role/ui/transfer-ownership-modal.tsx
 #: src/features/member-role/ui/update-member-authorities-modal.tsx
 #: src/features/page-admin/ui/delete-page-modal.tsx
@@ -466,6 +493,10 @@ msgstr "Check your email"
 #: src/features/signup/ui/verify-email-prompt.tsx
 msgid "Check your inbox"
 msgstr "Check your inbox"
+
+#: src/pages/_app/venues.add.tsx
+msgid "Choose a file"
+msgstr "Choose a file"
 
 #: src/pages/reset-password.tsx
 msgid "Choose a new password"
@@ -745,6 +776,7 @@ msgid "Create Project"
 msgstr "Create Project"
 
 #: src/features/manage-venue/ui/create-venue-modal.tsx
+#: src/pages/_app/venues.create.tsx
 msgid "Create venue"
 msgstr "Create venue"
 
@@ -926,6 +958,10 @@ msgstr "Don't have an account? <0>Create one</0>"
 msgid "Draft"
 msgstr "Draft"
 
+#: src/pages/_app/venues.add.tsx
+msgid "Drop a venue file to structure it"
+msgstr "Drop a venue file to structure it"
+
 #: src/features/venue-semantic-search/ui/VenueSemanticSearchWidget.tsx
 msgid "e.g. \"Find venues in Berlin with a rooftop terrace and space for 200 guests\""
 msgstr "e.g. \"Find venues in Berlin with a rooftop terrace and space for 200 guests\""
@@ -942,9 +978,19 @@ msgstr "e.g. default, landing"
 msgid "Edit"
 msgstr "Edit"
 
+#. placeholder {0}: section.label
+#: src/features/manage-venue/ui/venue-metadata-sections.tsx
+msgid "Edit — {0}"
+msgstr "Edit — {0}"
+
 #: src/pages/_app/cms-pages.$pageId.tsx
 msgid "Edit — {defaultTitle}"
 msgstr "Edit — {defaultTitle}"
+
+#. placeholder {0}: section.label
+#: src/features/manage-venue/ui/venue-metadata-sections.tsx
+msgid "Edit {0}"
+msgstr "Edit {0}"
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 msgid "Edit Page"
@@ -1080,6 +1126,7 @@ msgid "Expires at (optional)"
 msgstr "Expires at (optional)"
 
 #: src/features/manage-venue/ui/create-venue-modal.tsx
+#: src/pages/_app/venues.create.tsx
 msgid "Failed to create venue"
 msgstr "Failed to create venue"
 
@@ -1136,6 +1183,10 @@ msgstr "Failed to update venue"
 msgid "Fair"
 msgstr "Fair"
 
+#: src/pages/_app/venues.add.tsx
+msgid "Faster when you already know the space — you can add the venue file later."
+msgstr "Faster when you already know the space — you can add the venue file later."
+
 #: src/pages/-billing-example.tsx
 msgid "Feature Gate Examples"
 msgstr "Feature Gate Examples"
@@ -1147,6 +1198,10 @@ msgstr "Feature Usage Examples"
 #: src/features/manage-billing/ui/current-subscription.tsx
 msgid "Features"
 msgstr "Features"
+
+#: src/pages/_app/venues.create.tsx
+msgid "Fill in the details below. You can add photos and files after saving."
+msgstr "Fill in the details below. You can add photos and files after saving."
 
 #: src/pages/_app/venues.index.tsx
 msgid "Filters"
@@ -1171,6 +1226,10 @@ msgstr "First name is required"
 #: src/features/signup/model/use-signup.ts
 msgid "First name is too long"
 msgstr "First name is too long"
+
+#: src/pages/_app/venues.add.tsx
+msgid "Floor plans, capacity sheets, rate cards or brochures — PDF, image or spreadsheet. We read capacity, pricing, catering and technical detail into the library."
+msgstr "Floor plans, capacity sheets, rate cards or brochures — PDF, image or spreadsheet. We read capacity, pricing, catering and technical detail into the library."
 
 #: src/pages/forgot-password.tsx
 msgid "Forgot Password"
@@ -1239,6 +1298,10 @@ msgstr "Grid view"
 #: src/widgets/dashboard-personal-welcome/ui/dashboard-personal-welcome.tsx
 msgid "Here's what you can do from your personal workspace:"
 msgstr "Here's what you can do from your personal workspace:"
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Hide raw JSON"
+msgstr "Hide raw JSON"
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
@@ -1578,6 +1641,14 @@ msgstr "Message exceeds {MAX_INPUT_CHARS} character limit"
 msgid "Meta description for search engines"
 msgstr "Meta description for search engines"
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Metadata"
+msgstr "Metadata"
+
+#: src/features/manage-venue/ui/venue-metadata-sections.tsx
+msgid "Metadata is not a supported document — section editing is disabled. Use the raw viewer below."
+msgstr "Metadata is not a supported document — section editing is disabled. Use the raw viewer below."
+
 #: src/pages/_app/settings/security.tsx
 msgid "Microsoft"
 msgstr "Microsoft"
@@ -1660,6 +1731,7 @@ msgstr "New password"
 msgid "New signups"
 msgstr "New signups"
 
+#: src/pages/_app/venues.create.tsx
 #: src/pages/_app/venues.index.tsx
 msgid "New venue"
 msgstr "New venue"
@@ -1680,6 +1752,10 @@ msgstr "No active tenant memberships found for this account"
 msgid "No address on record"
 msgstr "No address on record"
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "No assets for this venue."
+msgstr "No assets for this venue."
+
 #: src/features/manage-billing/ui/billing-info.tsx
 msgid "No billing information has been configured yet. Fill in the details below to get started."
 msgstr "No billing information has been configured yet. Fill in the details below to get started."
@@ -1687,6 +1763,10 @@ msgstr "No billing information has been configured yet. Fill in the details belo
 #: src/addons/platform-ai-chat/ui/sessions-panel.tsx
 msgid "No conversations yet. Start a new chat."
 msgstr "No conversations yet. Start a new chat."
+
+#: src/features/manage-venue/ui/venue-metadata-sections.tsx
+msgid "No data yet — click Edit to add."
+msgstr "No data yet — click Edit to add."
 
 #: src/pages/_app/settings/security.tsx
 msgid "No external sign-in providers are enabled by your organization."
@@ -1858,6 +1938,10 @@ msgstr "Optional translation"
 #: src/pages/sign-in.tsx
 msgid "or"
 msgstr "or"
+
+#: src/pages/_app/venues.add.tsx
+msgid "Or enter it yourself"
+msgstr "Or enter it yourself"
 
 #: src/pages/create-organization.tsx
 msgid "organization"
@@ -2052,6 +2136,7 @@ msgstr "Platform Highlights"
 #: src/features/complete-profile/model/use-complete-profile.ts
 #: src/features/manage-venue/ui/create-venue-modal.tsx
 #: src/features/manage-venue/ui/edit-venue-modal.tsx
+#: src/pages/_app/venues.create.tsx
 msgid "Please check the form and try again."
 msgstr "Please check the form and try again."
 
@@ -2132,6 +2217,10 @@ msgstr "Published"
 msgid "quick step."
 msgstr "quick step."
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Raw JSON document"
+msgstr "Raw JSON document"
+
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 #: src/pages/_app/settings/general.tsx
 #: src/pages/invite.$token.tsx
@@ -2141,6 +2230,10 @@ msgstr "read-only"
 #: src/pages/_app/cms-pages.$pageId.tsx
 msgid "Read-only"
 msgstr "Read-only"
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Read-only view of the full metadata string."
+msgstr "Read-only view of the full metadata string."
 
 #: src/features/ban-user/ui/ban-member-modal.tsx
 msgid "Reason (optional)"
@@ -2444,6 +2537,10 @@ msgstr "Sets your preferred language for notifications and emails."
 msgid "Setting up your workspace"
 msgstr "Setting up your workspace"
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Show raw JSON"
+msgstr "Show raw JSON"
+
 #. placeholder {0}: notifications.length
 #. placeholder {1}: listData?.totalElements ?? 0
 #: src/features/notification-bell/ui/notification-bell.tsx
@@ -2528,6 +2625,10 @@ msgstr "Slug must be lowercase alphanumeric with hyphens (e.g. about-us or blog/
 msgid "Smith"
 msgstr "Smith"
 
+#: src/features/manage-venue/ui/venue-metadata-sections.tsx
+msgid "Some fields could not be saved. Please try again."
+msgstr "Some fields could not be saved. Please try again."
+
 #: src/pages/signup.tsx
 msgid "something great."
 msgstr "something great."
@@ -2569,6 +2670,10 @@ msgstr "Start"
 #: src/pages/signup.tsx
 msgid "Start building"
 msgstr "Start building"
+
+#: src/pages/_app/venues.add.tsx
+msgid "Start from a blank venue"
+msgstr "Start from a blank venue"
 
 #: src/features/invite-member/ui/invitation-details-modal.tsx
 #: src/features/manage-billing/ui/refund-list.tsx
@@ -2795,6 +2900,10 @@ msgstr "Trial Status"
 #~ msgid "Trusted by teams worldwide"
 #~ msgstr "Trusted by teams worldwide"
 
+#: src/pages/_app/venues.add.tsx
+msgid "Try again"
+msgstr "Try again"
+
 #: src/pages/_app/billing/failure.tsx
 #: src/shared/ui/error-boundary.tsx
 msgid "Try Again"
@@ -2863,9 +2972,17 @@ msgstr "Update your profile and preferences in account settings"
 msgid "Updated"
 msgstr "Updated"
 
+#: src/pages/_app/venues.add.tsx
+msgid "Upload another file"
+msgstr "Upload another file"
+
 #: src/features/avatar/ui/avatar-upload.tsx
 msgid "Upload avatar"
 msgstr "Upload avatar"
+
+#: src/pages/_app/venues.add.tsx
+msgid "Upload the venue's own document and we'll structure it — or enter the details by hand."
+msgstr "Upload the venue's own document and we'll structure it — or enter the details by hand."
 
 #: src/features/change-password/ui/change-password-modal.tsx
 #: src/pages/_app/settings/security.tsx
@@ -2906,6 +3023,8 @@ msgid "Venue ID"
 msgstr "Venue ID"
 
 #: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues.add.tsx
+#: src/pages/_app/venues.create.tsx
 #: src/pages/_app/venues.index.tsx
 #: src/shared/ui/app-layout/nav-config.tsx
 msgid "Venues"
@@ -2930,6 +3049,10 @@ msgstr "View details"
 #: src/pages/_app/venues.index.tsx
 msgid "View record"
 msgstr "View record"
+
+#: src/pages/_app/venues.add.tsx
+msgid "View venue"
+msgstr "View venue"
 
 #: src/features/signup/ui/verify-email-prompt.tsx
 msgid "We sent a verification link to <0>{email}</0>. Click it to confirm your email address."

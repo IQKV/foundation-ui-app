@@ -70,6 +70,11 @@ function formatBytes(bytes: number): string {
 }
 
 const KEYFRAMES = `
+@property --vau-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
 @keyframes vau-pulse-ring {
   0%   { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(91,107,245,0.55); }
   70%  { transform: scale(1);    box-shadow: 0 0 0 16px rgba(91,107,245,0); }
@@ -83,6 +88,47 @@ const KEYFRAMES = `
 @keyframes vau-sparkle {
   0%, 100% { opacity: 0.3; transform: scale(0.9) rotate(0deg); }
   50%       { opacity: 1;   transform: scale(1.15) rotate(20deg); }
+}
+/* Rotating conic highlight that travels around the border while active. */
+@keyframes vau-border-spin {
+  to { --vau-angle: 360deg; }
+}
+/* Pulsing outer bloom so the card edge breathes a soft glow. */
+@keyframes vau-border-bloom {
+  0%, 100% { box-shadow: 0 0 0 1px rgba(91,107,245,0.5), 0 0 12px 0 rgba(91,107,245,0.18), 0 4px 16px rgba(0,0,0,0.12); }
+  50%      { box-shadow: 0 0 0 1px rgba(91,107,245,0.7), 0 0 30px 4px rgba(91,107,245,0.45), 0 4px 16px rgba(0,0,0,0.12); }
+}
+.vau-glow-ring::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(
+    from var(--vau-angle),
+    transparent 0deg,
+    rgba(59,78,240,0.9) 80deg,
+    rgba(91,107,245,0.95) 150deg,
+    transparent 240deg
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  animation: vau-border-spin 2.6s linear infinite;
+  pointer-events: none;
+  z-index: 2;
+}
+.vau-glow-ring--pro::before {
+  padding: 2px;
+  background: conic-gradient(
+    from var(--vau-angle),
+    transparent 0deg,
+    rgba(139,92,246,0.95) 80deg,
+    rgba(91,107,245,0.95) 150deg,
+    transparent 240deg
+  );
+  animation-duration: 3s;
 }
 `;
 
@@ -175,7 +221,11 @@ function AddVenuePage() {
       : `0 0 0 1px ${dropzoneBorder},0 4px 16px rgba(0,0,0,${dark ? "0.3" : "0.06"})`;
 
   const iconRingStyle: React.CSSProperties = isProcessing
-    ? { animation: "vau-pulse-ring 2s ease-in-out infinite", borderRadius: "50%", display: "inline-flex" }
+    ? {
+        animation: "vau-pulse-ring 2s ease-in-out infinite",
+        borderRadius: "50%",
+        display: "inline-flex",
+      }
     : {};
 
   return (
@@ -202,7 +252,6 @@ function AddVenuePage() {
         </Stack>
 
         <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="lg" style={{ alignItems: "stretch" }}>
-
           {/* ── File upload card — exits on navigate ─────────────────────── */}
           <AnimatePresence mode="wait">
             {!isExiting ? (
@@ -221,6 +270,11 @@ function AddVenuePage() {
                   loading={false}
                   maxFiles={1}
                   data-testid={TestSelectors.VENUES_ADD_CHOOSE_FILE}
+                  className={
+                    isActive
+                      ? `vau-glow-ring${isProcessing ? " vau-glow-ring--pro" : ""}`
+                      : undefined
+                  }
                   styles={{
                     root: {
                       borderRadius: "var(--mantine-radius-lg)",
@@ -239,6 +293,9 @@ function AddVenuePage() {
                       overflow: "hidden",
                       position: "relative",
                       flex: 1,
+                      animation: isActive
+                        ? "vau-border-bloom 2.4s ease-in-out infinite"
+                        : undefined,
                     },
                   }}
                 >
@@ -258,42 +315,77 @@ function AddVenuePage() {
                     />
                   )}
 
-                  <Stack align="center" gap="md" ta="center" style={{ position: "relative", zIndex: 1 }}>
+                  <Stack
+                    align="center"
+                    gap="md"
+                    ta="center"
+                    style={{ position: "relative", zIndex: 1 }}
+                  >
                     {/* Icons */}
                     <Dropzone.Accept>
-                      <ThemeIcon size={64} radius="xl" variant="gradient" gradient={{ from: "blue", to: "indigo" }}>
+                      <ThemeIcon
+                        size={64}
+                        radius="xl"
+                        variant="gradient"
+                        gradient={{ from: "blue", to: "indigo" }}
+                      >
                         <IconUpload size={30} />
                       </ThemeIcon>
                     </Dropzone.Accept>
                     <Dropzone.Reject>
-                      <ThemeIcon size={64} radius="xl" variant="gradient" gradient={{ from: "red.5", to: "red.7" }}>
+                      <ThemeIcon
+                        size={64}
+                        radius="xl"
+                        variant="gradient"
+                        gradient={{ from: "red.5", to: "red.7" }}
+                      >
                         <IconX size={30} />
                       </ThemeIcon>
                     </Dropzone.Reject>
                     <Dropzone.Idle>
                       {isDone ? (
-                        <ThemeIcon size={64} radius="xl" variant="gradient"
+                        <ThemeIcon
+                          size={64}
+                          radius="xl"
+                          variant="gradient"
                           gradient={{ from: "teal", to: "green" }}
-                          style={{ boxShadow: "0 0 20px rgba(47,158,68,0.35)" }}>
+                          style={{ boxShadow: "0 0 20px rgba(47,158,68,0.35)" }}
+                        >
                           <IconCheck size={30} />
                         </ThemeIcon>
                       ) : isError ? (
-                        <ThemeIcon size={64} radius="xl" variant="light" color="red"
-                          style={{ boxShadow: "0 0 16px rgba(224,49,49,0.25)" }}>
+                        <ThemeIcon
+                          size={64}
+                          radius="xl"
+                          variant="light"
+                          color="red"
+                          style={{ boxShadow: "0 0 16px rgba(224,49,49,0.25)" }}
+                        >
                           <IconAlertCircle size={30} />
                         </ThemeIcon>
                       ) : isProcessing ? (
                         <Box style={iconRingStyle}>
-                          <ThemeIcon size={64} radius="xl" variant="gradient"
+                          <ThemeIcon
+                            size={64}
+                            radius="xl"
+                            variant="gradient"
                             gradient={{ from: "#5b6bf5", to: "#8b5cf6" }}
-                            style={{ boxShadow: "0 0 24px rgba(91,107,245,0.4)" }}>
-                            <IconSparkles size={30} style={{ animation: "vau-sparkle 2s ease-in-out infinite" }} />
+                            style={{ boxShadow: "0 0 24px rgba(91,107,245,0.4)" }}
+                          >
+                            <IconSparkles
+                              size={30}
+                              style={{ animation: "vau-sparkle 2s ease-in-out infinite" }}
+                            />
                           </ThemeIcon>
                         </Box>
                       ) : isActive ? (
-                        <ThemeIcon size={64} radius="xl" variant="gradient"
+                        <ThemeIcon
+                          size={64}
+                          radius="xl"
+                          variant="gradient"
                           gradient={{ from: "blue", to: "indigo" }}
-                          style={{ boxShadow: "0 0 20px rgba(59,78,240,0.3)" }}>
+                          style={{ boxShadow: "0 0 20px rgba(59,78,240,0.3)" }}
+                        >
                           <IconUpload size={30} />
                         </ThemeIcon>
                       ) : (
@@ -321,12 +413,14 @@ function AddVenuePage() {
 
                     {/* File identity chip */}
                     {(isActive || isDone || isError) && fileName && (
-                      <Box style={{
-                        background: dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)",
-                        border: `1px solid ${dark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)"}`,
-                        borderRadius: "var(--mantine-radius-sm)",
-                        padding: "6px 12px",
-                      }}>
+                      <Box
+                        style={{
+                          background: dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)",
+                          border: `1px solid ${dark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)"}`,
+                          borderRadius: "var(--mantine-radius-sm)",
+                          padding: "6px 12px",
+                        }}
+                      >
                         <Group gap={6} justify="center">
                           <IconFileText size={13} style={{ opacity: 0.5, flexShrink: 0 }} />
                           <Text size="sm" fw={500} lineClamp={1} maw={220}>
@@ -345,19 +439,33 @@ function AddVenuePage() {
                     {isActive && (
                       <Stack gap={8} w="100%" maw={300}>
                         <Group justify="space-between" gap="xs">
-                          <Text size="xs" c={isProcessing ? "violet.4" : "dimmed"} fw={isProcessing ? 600 : 400}>
+                          <Text
+                            size="xs"
+                            c={isProcessing ? "violet.4" : "dimmed"}
+                            fw={isProcessing ? 600 : 400}
+                          >
                             {STAGE_LABELS[stage] ?? stage}
                           </Text>
                           <Group gap={6}>
                             {isUploading && (
-                              <Badge variant="light" color="blue" size="xs">{progress}%</Badge>
+                              <Badge variant="light" color="blue" size="xs">
+                                {progress}%
+                              </Badge>
                             )}
                             {isProcessing && (
                               <>
-                                <Badge variant="gradient" gradient={{ from: "#5b6bf5", to: "#8b5cf6" }} size="xs">
+                                <Badge
+                                  variant="gradient"
+                                  gradient={{ from: "#5b6bf5", to: "#8b5cf6" }}
+                                  size="xs"
+                                >
                                   AI
                                 </Badge>
-                                <Text size="xs" c="dimmed" style={{ fontVariantNumeric: "tabular-nums" }}>
+                                <Text
+                                  size="xs"
+                                  c="dimmed"
+                                  style={{ fontVariantNumeric: "tabular-nums" }}
+                                >
                                   {elapsedSeconds}s
                                 </Text>
                               </>
@@ -366,21 +474,34 @@ function AddVenuePage() {
                         </Group>
 
                         {isUploading ? (
-                          <Progress value={progress} size="md" radius="xl" color="blue"
-                            style={{ boxShadow: "0 0 8px rgba(59,78,240,0.3)" }} />
+                          <Progress
+                            value={progress}
+                            size="md"
+                            radius="xl"
+                            color="blue"
+                            style={{ boxShadow: "0 0 8px rgba(59,78,240,0.3)" }}
+                          />
                         ) : isProcessing ? (
-                          <Box style={{
-                            height: 6, borderRadius: 999, overflow: "hidden",
-                            background: dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)",
-                          }}>
-                            <Box style={{
-                              height: "100%", width: "100%",
-                              background: "linear-gradient(90deg,#5b6bf5,#8b5cf6,#3b82f6,#5b6bf5)",
-                              backgroundSize: "200% 100%",
-                              animation: "vau-glow-sweep 2s linear infinite",
+                          <Box
+                            style={{
+                              height: 6,
                               borderRadius: 999,
-                              boxShadow: "0 0 10px rgba(91,107,245,0.5)",
-                            }} />
+                              overflow: "hidden",
+                              background: dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)",
+                            }}
+                          >
+                            <Box
+                              style={{
+                                height: "100%",
+                                width: "100%",
+                                background:
+                                  "linear-gradient(90deg,#5b6bf5,#8b5cf6,#3b82f6,#5b6bf5)",
+                                backgroundSize: "200% 100%",
+                                animation: "vau-glow-sweep 2s linear infinite",
+                                borderRadius: 999,
+                                boxShadow: "0 0 10px rgba(91,107,245,0.5)",
+                              }}
+                            />
                           </Box>
                         ) : (
                           <Progress value={100} animated size="md" radius="xl" color="blue" />
@@ -406,10 +527,17 @@ function AddVenuePage() {
                     {isError && (
                       <Stack gap={6} align="center">
                         {errorMessage && (
-                          <Text size="xs" c="red.4" maw={300} ta="center">{errorMessage}</Text>
+                          <Text size="xs" c="red.4" maw={300} ta="center">
+                            {errorMessage}
+                          </Text>
                         )}
-                        <Button size="xs" variant="light" color="red" onClick={reset}
-                          style={{ boxShadow: "0 2px 8px rgba(224,49,49,0.2)" }}>
+                        <Button
+                          size="xs"
+                          variant="light"
+                          color="red"
+                          onClick={reset}
+                          style={{ boxShadow: "0 2px 8px rgba(224,49,49,0.2)" }}
+                        >
                           <Trans>Try again</Trans>
                         </Button>
                       </Stack>
@@ -456,16 +584,23 @@ function AddVenuePage() {
             }}
           >
             <Stack gap="md">
-              <ThemeIcon size={48} radius="xl" variant="light" color="gray"
+              <ThemeIcon
+                size={48}
+                radius="xl"
+                variant="light"
+                color="gray"
                 style={{
                   background: dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)",
                   border: `1px solid ${dark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)"}`,
-                }}>
+                }}
+              >
                 <IconPencil size={22} />
               </ThemeIcon>
 
               <Stack gap={6}>
-                <Text fw={700} size="md"><Trans>Or enter it yourself</Trans></Text>
+                <Text fw={700} size="md">
+                  <Trans>Or enter it yourself</Trans>
+                </Text>
                 <Text size="sm" c="dimmed" maw={300}>
                   <Trans>
                     Faster when you already know the space — you can add the venue file later.

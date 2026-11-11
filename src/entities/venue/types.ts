@@ -51,6 +51,36 @@ export interface VenueAssetListResponse {
 }
 
 /**
+ * Full venue asset as returned by the venue assets sub-resource
+ * (GET /venues/{id}/assets) — photos and attachments alike.
+ *
+ * Unlike {@link VenueAssetPublic} it carries no presigned `sourceUrl`; the
+ * storage key (`s3Key`) and pipeline `status` are surfaced instead.
+ */
+export interface VenueAsset {
+  id: string;
+  venueId: string;
+  assetType: string;
+  photoCategory: string | null;
+  displayOrder: number | null;
+  label: string | null;
+  fileName: string | null;
+  contentType: string | null;
+  sizeBytes: number | null;
+  s3Key: string | null;
+  uploadedBy: string | null;
+  status: string | null;
+  failureReason: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface VenueAssetFullListResponse {
+  items: VenueAsset[];
+  totalElements: number;
+}
+
+/**
  * Processing status of a venue-less imported asset.
  * Set by the catalog service and advanced by the processing worker.
  */

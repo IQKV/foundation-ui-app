@@ -13,6 +13,10 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "— no metadata —"
+msgstr ""
+
 #: src/pages/_app/cms-pages.index.tsx
 msgid "(no title)"
 msgstr "(kein Titel)"
@@ -140,6 +144,10 @@ msgstr "Nehmen Sie Ihre Einladung an, einem Workspace beizutreten."
 msgid "Accepted"
 msgstr "Angenommen"
 
+#: src/pages/_app/venues.add.tsx
+msgid "Accepted formats: PDF, Word, Excel, CSV, JPEG, PNG, WebP · Max 5 MB"
+msgstr ""
+
 #: src/pages/unauthorized.tsx
 msgid "Access Denied"
 msgstr "Zugriff verweigert"
@@ -197,9 +205,18 @@ msgstr "AKTIV"
 msgid "Active members"
 msgstr "Aktive Mitglieder"
 
+#: src/pages/_app/venues.add.tsx
+msgid "Add a venue"
+msgstr ""
+
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "Add locale"
 msgstr "Gebietsschema hinzufügen"
+
+#: src/pages/_app/venues.add.tsx
+#: src/pages/_app/venues.create.tsx
+msgid "Add to catalog"
+msgstr ""
 
 #: src/pages/_app/addons/$addonPath.tsx
 msgid "Addon Page"
@@ -279,6 +296,10 @@ msgstr "Ein Konto mit dieser E-Mail-Adresse existiert bereits."
 msgid "An organization with this name already exists."
 msgstr "Eine Organisation mit diesem Namen existiert bereits."
 
+#: src/features/manage-venue/ui/venue-metadata-sections.tsx
+msgid "Apply"
+msgstr ""
+
 #: src/features/page-admin/model/types.ts
 #: src/pages/_app/cms-pages.index.tsx
 msgid "Archived"
@@ -307,6 +328,10 @@ msgstr "Möchten Sie <0>{0} {1}</0> wirklich aus dieser Organisation entfernen? 
 #: src/features/member-role/ui/transfer-ownership-modal.tsx
 msgid "Are you sure?"
 msgstr "Sind Sie sicher?"
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Assets"
+msgstr ""
 
 #: src/features/reset-password/ui/reset-password-form.tsx
 #: src/features/signup/ui/password-strength.tsx
@@ -345,6 +370,7 @@ msgstr "Automatische Router-Integration über <0>router.subscribe()</0>"
 msgid "Available Plans"
 msgstr "Verfügbare Tarife"
 
+#: src/pages/_app/venues.create.tsx
 #: src/pages/create-organization.tsx
 msgid "Back"
 msgstr "Zurück"
@@ -421,6 +447,7 @@ msgstr "Abrechnungsportal nicht verfügbar"
 #: src/features/manage-venue/ui/create-venue-modal.tsx
 #: src/features/manage-venue/ui/delete-venue-modal.tsx
 #: src/features/manage-venue/ui/edit-venue-modal.tsx
+#: src/features/manage-venue/ui/venue-metadata-sections.tsx
 #: src/features/member-role/ui/transfer-ownership-modal.tsx
 #: src/features/member-role/ui/update-member-authorities-modal.tsx
 #: src/features/page-admin/ui/delete-page-modal.tsx
@@ -466,6 +493,10 @@ msgstr "E-Mail prüfen"
 #: src/features/signup/ui/verify-email-prompt.tsx
 msgid "Check your inbox"
 msgstr "Posteingang prüfen"
+
+#: src/pages/_app/venues.add.tsx
+msgid "Choose a file"
+msgstr ""
 
 #: src/pages/reset-password.tsx
 msgid "Choose a new password"
@@ -745,6 +776,7 @@ msgid "Create Project"
 msgstr "Projekt erstellen"
 
 #: src/features/manage-venue/ui/create-venue-modal.tsx
+#: src/pages/_app/venues.create.tsx
 msgid "Create venue"
 msgstr ""
 
@@ -926,6 +958,10 @@ msgstr "Kein Konto? <0>Jetzt erstellen</0>"
 msgid "Draft"
 msgstr "Entwurf"
 
+#: src/pages/_app/venues.add.tsx
+msgid "Drop a venue file to structure it"
+msgstr ""
+
 #: src/features/venue-semantic-search/ui/VenueSemanticSearchWidget.tsx
 msgid "e.g. \"Find venues in Berlin with a rooftop terrace and space for 200 guests\""
 msgstr ""
@@ -942,9 +978,19 @@ msgstr "z. B. default, landing"
 msgid "Edit"
 msgstr "Bearbeiten"
 
+#. placeholder {0}: section.label
+#: src/features/manage-venue/ui/venue-metadata-sections.tsx
+msgid "Edit — {0}"
+msgstr ""
+
 #: src/pages/_app/cms-pages.$pageId.tsx
 msgid "Edit — {defaultTitle}"
 msgstr "Bearbeiten — {defaultTitle}"
+
+#. placeholder {0}: section.label
+#: src/features/manage-venue/ui/venue-metadata-sections.tsx
+msgid "Edit {0}"
+msgstr ""
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 msgid "Edit Page"
@@ -1080,6 +1126,7 @@ msgid "Expires at (optional)"
 msgstr "Läuft ab am (optional)"
 
 #: src/features/manage-venue/ui/create-venue-modal.tsx
+#: src/pages/_app/venues.create.tsx
 msgid "Failed to create venue"
 msgstr ""
 
@@ -1136,6 +1183,10 @@ msgstr ""
 msgid "Fair"
 msgstr "Ausreichend"
 
+#: src/pages/_app/venues.add.tsx
+msgid "Faster when you already know the space — you can add the venue file later."
+msgstr ""
+
 #: src/pages/-billing-example.tsx
 msgid "Feature Gate Examples"
 msgstr "Beispiele für Feature-Gates"
@@ -1147,6 +1198,10 @@ msgstr "Beispiele zur Feature-Nutzung"
 #: src/features/manage-billing/ui/current-subscription.tsx
 msgid "Features"
 msgstr "Funktionen"
+
+#: src/pages/_app/venues.create.tsx
+msgid "Fill in the details below. You can add photos and files after saving."
+msgstr ""
 
 #: src/pages/_app/venues.index.tsx
 msgid "Filters"
@@ -1171,6 +1226,10 @@ msgstr "Vorname ist erforderlich"
 #: src/features/signup/model/use-signup.ts
 msgid "First name is too long"
 msgstr "Vorname ist zu lang"
+
+#: src/pages/_app/venues.add.tsx
+msgid "Floor plans, capacity sheets, rate cards or brochures — PDF, image or spreadsheet. We read capacity, pricing, catering and technical detail into the library."
+msgstr ""
 
 #: src/pages/forgot-password.tsx
 msgid "Forgot Password"
@@ -1239,6 +1298,10 @@ msgstr ""
 #: src/widgets/dashboard-personal-welcome/ui/dashboard-personal-welcome.tsx
 msgid "Here's what you can do from your personal workspace:"
 msgstr "Das können Sie in Ihrem persönlichen Workspace tun:"
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Hide raw JSON"
+msgstr ""
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
@@ -1578,6 +1641,14 @@ msgstr ""
 msgid "Meta description for search engines"
 msgstr "Meta-Beschreibung für Suchmaschinen"
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Metadata"
+msgstr ""
+
+#: src/features/manage-venue/ui/venue-metadata-sections.tsx
+msgid "Metadata is not a supported document — section editing is disabled. Use the raw viewer below."
+msgstr ""
+
 #: src/pages/_app/settings/security.tsx
 msgid "Microsoft"
 msgstr "Microsoft"
@@ -1660,6 +1731,7 @@ msgstr "Neues Passwort"
 msgid "New signups"
 msgstr "Neue Registrierungen"
 
+#: src/pages/_app/venues.create.tsx
 #: src/pages/_app/venues.index.tsx
 msgid "New venue"
 msgstr ""
@@ -1680,12 +1752,20 @@ msgstr "Für dieses Konto wurden keine aktiven Mandantenmitgliedschaften gefunde
 msgid "No address on record"
 msgstr ""
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "No assets for this venue."
+msgstr ""
+
 #: src/features/manage-billing/ui/billing-info.tsx
 msgid "No billing information has been configured yet. Fill in the details below to get started."
 msgstr "Es wurden noch keine Abrechnungsinformationen konfiguriert. Füllen Sie die folgenden Details aus, um zu beginnen."
 
 #: src/addons/platform-ai-chat/ui/sessions-panel.tsx
 msgid "No conversations yet. Start a new chat."
+msgstr ""
+
+#: src/features/manage-venue/ui/venue-metadata-sections.tsx
+msgid "No data yet — click Edit to add."
 msgstr ""
 
 #: src/pages/_app/settings/security.tsx
@@ -1858,6 +1938,10 @@ msgstr "Optionale Übersetzung"
 #: src/pages/sign-in.tsx
 msgid "or"
 msgstr "oder"
+
+#: src/pages/_app/venues.add.tsx
+msgid "Or enter it yourself"
+msgstr ""
 
 #: src/pages/create-organization.tsx
 msgid "organization"
@@ -2052,6 +2136,7 @@ msgstr "Plattform-Highlights"
 #: src/features/complete-profile/model/use-complete-profile.ts
 #: src/features/manage-venue/ui/create-venue-modal.tsx
 #: src/features/manage-venue/ui/edit-venue-modal.tsx
+#: src/pages/_app/venues.create.tsx
 msgid "Please check the form and try again."
 msgstr "Bitte überprüfen Sie das Formular und versuchen Sie es erneut."
 
@@ -2132,6 +2217,10 @@ msgstr "Veröffentlicht"
 msgid "quick step."
 msgstr "kurzer Schritt."
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Raw JSON document"
+msgstr ""
+
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 #: src/pages/_app/settings/general.tsx
 #: src/pages/invite.$token.tsx
@@ -2141,6 +2230,10 @@ msgstr "schreibgeschützt"
 #: src/pages/_app/cms-pages.$pageId.tsx
 msgid "Read-only"
 msgstr "Schreibgeschützt"
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Read-only view of the full metadata string."
+msgstr ""
 
 #: src/features/ban-user/ui/ban-member-modal.tsx
 msgid "Reason (optional)"
@@ -2444,6 +2537,10 @@ msgstr "Legt Ihre bevorzugte Sprache für Benachrichtigungen und E-Mails fest."
 msgid "Setting up your workspace"
 msgstr "Ihr Workspace wird eingerichtet"
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Show raw JSON"
+msgstr ""
+
 #. placeholder {0}: notifications.length
 #. placeholder {1}: listData?.totalElements ?? 0
 #: src/features/notification-bell/ui/notification-bell.tsx
@@ -2528,6 +2625,10 @@ msgstr "Slug muss alphanumerische Kleinbuchstaben mit Bindestrichen enthalten (z
 msgid "Smith"
 msgstr "Müller"
 
+#: src/features/manage-venue/ui/venue-metadata-sections.tsx
+msgid "Some fields could not be saved. Please try again."
+msgstr ""
+
 #: src/pages/signup.tsx
 msgid "something great."
 msgstr "etwas Großartiges."
@@ -2569,6 +2670,10 @@ msgstr "Start"
 #: src/pages/signup.tsx
 msgid "Start building"
 msgstr "Beginnen Sie zu bauen"
+
+#: src/pages/_app/venues.add.tsx
+msgid "Start from a blank venue"
+msgstr ""
 
 #: src/features/invite-member/ui/invitation-details-modal.tsx
 #: src/features/manage-billing/ui/refund-list.tsx
@@ -2795,6 +2900,10 @@ msgstr "Testphasenstatus"
 #~ msgid "Trusted by teams worldwide"
 #~ msgstr "Von Teams weltweit vertraut"
 
+#: src/pages/_app/venues.add.tsx
+msgid "Try again"
+msgstr ""
+
 #: src/pages/_app/billing/failure.tsx
 #: src/shared/ui/error-boundary.tsx
 msgid "Try Again"
@@ -2863,9 +2972,17 @@ msgstr "Aktualisieren Sie Ihr Profil und Ihre Einstellungen in den Kontoeinstell
 msgid "Updated"
 msgstr "Aktualisiert"
 
+#: src/pages/_app/venues.add.tsx
+msgid "Upload another file"
+msgstr ""
+
 #: src/features/avatar/ui/avatar-upload.tsx
 msgid "Upload avatar"
 msgstr "Avatar hochladen"
+
+#: src/pages/_app/venues.add.tsx
+msgid "Upload the venue's own document and we'll structure it — or enter the details by hand."
+msgstr ""
 
 #: src/features/change-password/ui/change-password-modal.tsx
 #: src/pages/_app/settings/security.tsx
@@ -2906,6 +3023,8 @@ msgid "Venue ID"
 msgstr ""
 
 #: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues.add.tsx
+#: src/pages/_app/venues.create.tsx
 #: src/pages/_app/venues.index.tsx
 #: src/shared/ui/app-layout/nav-config.tsx
 msgid "Venues"
@@ -2929,6 +3048,10 @@ msgstr "Details anzeigen"
 
 #: src/pages/_app/venues.index.tsx
 msgid "View record"
+msgstr ""
+
+#: src/pages/_app/venues.add.tsx
+msgid "View venue"
 msgstr ""
 
 #: src/features/signup/ui/verify-email-prompt.tsx

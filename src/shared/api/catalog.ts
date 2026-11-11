@@ -5,6 +5,8 @@ import type {
   ListVenueParams,
   VenueAssetPublic,
   VenueAssetListResponse,
+  VenueAsset,
+  VenueAssetFullListResponse,
   VenueAssetImportStatus,
 } from "@/entities/venue";
 
@@ -14,6 +16,8 @@ export type {
   ListVenueParams,
   VenueAssetPublic,
   VenueAssetListResponse,
+  VenueAsset,
+  VenueAssetFullListResponse,
   VenueAssetImportStatus,
 } from "@/entities/venue";
 
@@ -120,6 +124,13 @@ export const catalogApi = {
   listVenueAssetPhotos: (venueId: string) =>
     httpClient
       .get<VenueAssetListResponse>(`/v1/catalog/venues/${venueId}/assets/photos`)
+      .then((r) => r.data),
+
+  // All assets of a venue — photos and attachments — TENANT_OWNER / MEMBER.
+  // Used by the venue detail Assets tab.
+  listVenueAssets: (venueId: string) =>
+    httpClient
+      .get<VenueAssetFullListResponse>(`/v1/catalog/venues/${venueId}/assets`)
       .then((r) => r.data),
 };
 
