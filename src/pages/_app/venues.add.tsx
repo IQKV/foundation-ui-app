@@ -2,6 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import {
   Anchor,
   Badge,
+  Box,
   Button,
   Container,
   Group,
@@ -12,6 +13,7 @@ import {
   Text,
   ThemeIcon,
   Title,
+  useMantineColorScheme,
 } from "@mantine/core";
 import { useInterval } from "@mantine/hooks";
 import { Dropzone } from "@mantine/dropzone";
@@ -21,6 +23,7 @@ import {
   IconExternalLink,
   IconFileText,
   IconPencil,
+  IconSparkles,
   IconUpload,
   IconX,
 } from "@tabler/icons-react";
@@ -59,20 +62,46 @@ const STAGE_LABELS: Record<string, string> = {
   error: "Failed",
 };
 
-/** Formats bytes as a human-readable size string. */
 function formatBytes(bytes: number): string {
   if (bytes < 1024) return `${bytes} B`;
   if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(0)} KB`;
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
 }
 
+// ── Keyframe style block injected once ────────────────────────────────────────
+const KEYFRAMES = `
+@keyframes vau-spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes vau-pulse-ring {
+  0%   { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(91,107,245,0.55); }
+  70%  { transform: scale(1);    box-shadow: 0 0 0 16px rgba(91,107,245,0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(91,107,245,0); }
+}
+@keyframes vau-glow-sweep {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes vau-sparkle {
+  0%, 100% { opacity: 0.3; transform: scale(0.9) rotate(0deg); }
+  50%       { opacity: 1;   transform: scale(1.15) rotate(20deg); }
+}
+`;
+
+function InjectKeyframes() {
+  return <style>{KEYFRAMES}</style>;
+}
+
 function AddVenuePage() {
   const { t } = useLingui();
   const navigate = useNavigate();
+  const { colorScheme } = useMantineColorScheme();
+  const dark = colorScheme === "dark";
+
   const { stage, progress, venueId, fileName, fileSize, errorMessage, upload, reset } =
     useUploadVenueDocument();
 
-  // ── Elapsed seconds counter during the AI processing stage ──────────────
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
   const elapsedTimer = useInterval(() => setElapsedSeconds((s) => s + 1), 1_000);
 
@@ -97,227 +126,407 @@ function AddVenuePage() {
     const file = files[0];
     if (!file) return;
     await upload(file);
-    // Navigation happens via the "View venue" button in done state — no auto-redirect
   };
 
+  // ── Dynamic dropzone border / background based on state ──────────────────
+  const dropzoneGradient = isProcessing
+    ? dark
+      ? "linear-gradient(135deg, #1a1b2e 0%, #1e1a36 50%, #1a2436 100%)"
+      : "linear-gradient(135deg, #f0f1ff 0%, #f5f0ff 50%, #eef4ff 100%)"
+    : isDone
+      ? dark
+        ? "linear-gradient(135deg, #0f2318 0%, #0d2520 100%)"
+        : "linear-gradient(135deg, #f0fff4 0%, #e6ffed 100%)"
+      : isError
+        ? dark
+          ? "linear-gradient(135deg, #2b1515 0%, #231111 100%)"
+          : "linear-gradient(135deg, #fff5f5 0%, #ffe8e8 100%)"
+        : isActive
+          ? dark
+            ? "linear-gradient(135deg, #161c2e 0%, #1a2140 100%)"
+            : "linear-gradient(135deg, #f0f3ff 0%, #e8edff 100%)"
+          : "none";
+
+  const dropzoneBorderColor = isProcessing
+    ? "rgba(91,107,245,0.6)"
+    : isDone
+      ? "rgba(47,158,68,0.6)"
+      : isError
+        ? "rgba(224,49,49,0.5)"
+        : isActive
+          ? "rgba(91,107,245,0.4)"
+          : dark
+            ? "rgba(255,255,255,0.12)"
+            : "rgba(0,0,0,0.12)";
+
+  const dropzoneShadow = isProcessing
+    ? `0 0 0 1px ${dropzoneBorderColor}, 0 0 24px rgba(91,107,245,0.18), 0 4px 24px rgba(0,0,0,0.12)`
+    : isDone
+      ? `0 0 0 1px ${dropzoneBorderColor}, 0 0 20px rgba(47,158,68,0.15), 0 4px 20px rgba(0,0,0,0.08)`
+      : isError
+        ? `0 0 0 1px ${dropzoneBorderColor}, 0 4px 16px rgba(0,0,0,0.08)`
+        : isActive
+          ? `0 0 0 1px ${dropzoneBorderColor}, 0 4px 20px rgba(0,0,0,0.1)`
+          : dark
+            ? "0 2px 12px rgba(0,0,0,0.3)"
+            : "0 2px 12px rgba(0,0,0,0.06)";
+
+  // ── Icon ring effect ──────────────────────────────────────────────────────
+  const iconRingStyle: React.CSSProperties = isProcessing
+    ? {
+        animation: "vau-pulse-ring 2s ease-in-out infinite",
+        borderRadius: "50%",
+        display: "inline-flex",
+      }
+    : {};
+
   return (
-    <Container size="lg" py="xl">
-      <PageTitle segments={[t`Add a venue`, t`Venues`]} />
+    <>
+      <InjectKeyframes />
+      <Container size="lg" py="xl">
+        <PageTitle segments={[t`Add a venue`, t`Venues`]} />
 
-      <Stack gap={4} mb="xl">
-        <Text size="xs" fw={600} tt="uppercase" c="red.6" style={{ letterSpacing: "0.07em" }}>
-          <Trans>Add to catalog</Trans>
-        </Text>
-        <Title order={1} fw={700} size="h1">
-          <Trans>Add a venue</Trans>
-        </Title>
-        <Text c="dimmed" size="sm" mt={2}>
-          <Trans>
-            Upload the venue's own document and we'll structure it — or enter the details by hand.
-          </Trans>
-        </Text>
-        <Text size="xs" c="dimmed">
-          <Trans>Accepted formats: PDF, Word, Excel, CSV, JPEG, PNG, WebP · Max 5 MB</Trans>
-        </Text>
-      </Stack>
+        <Stack gap={4} mb="xl">
+          <Text size="xs" fw={600} tt="uppercase" c="red.6" style={{ letterSpacing: "0.07em" }}>
+            <Trans>Add to catalog</Trans>
+          </Text>
+          <Title order={1} fw={700} size="h1">
+            <Trans>Add a venue</Trans>
+          </Title>
+          <Text c="dimmed" size="sm" mt={2}>
+            <Trans>
+              Upload the venue's own document and we'll structure it — or enter the details by hand.
+            </Trans>
+          </Text>
+          <Text size="xs" c="dimmed">
+            <Trans>Accepted formats: PDF, Word, Excel, CSV, JPEG, PNG, WebP · Max 5 MB</Trans>
+          </Text>
+        </Stack>
 
-      <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="lg">
-        {/* ── File upload option ───────────────────────────────────────── */}
-        <Dropzone
-          onDrop={(files) => void handleDrop(files)}
-          accept={ACCEPTED_TYPES}
-          maxSize={MAX_FILE_SIZE}
-          disabled={isActive}
-          loading={isActive && !isProcessing}
-          maxFiles={1}
-          data-testid={TestSelectors.VENUES_ADD_CHOOSE_FILE}
-          styles={{
-            root: {
-              borderRadius: "var(--mantine-radius-md)",
-              borderStyle: "dashed",
-              borderWidth: 1.5,
-              padding: "var(--mantine-spacing-xl)",
-              height: "100%",
+        <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="lg" style={{ alignItems: "stretch" }}>
+          {/* ── File upload dropzone ─────────────────────────────────────── */}
+          <Dropzone
+            onDrop={(files) => void handleDrop(files)}
+            accept={ACCEPTED_TYPES}
+            maxSize={MAX_FILE_SIZE}
+            disabled={isActive}
+            loading={false}
+            maxFiles={1}
+            data-testid={TestSelectors.VENUES_ADD_CHOOSE_FILE}
+            styles={{
+              root: {
+                borderRadius: "var(--mantine-radius-lg)",
+                borderStyle: "solid",
+                borderWidth: 1,
+                borderColor: dropzoneBorderColor,
+                padding: "var(--mantine-spacing-xl)",
+                minHeight: 320,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                background: dropzoneGradient,
+                boxShadow: dropzoneShadow,
+                transition: "border-color 0.3s, box-shadow 0.3s, background 0.4s",
+                cursor: isActive ? "default" : "pointer",
+                overflow: "hidden",
+                position: "relative",
+              },
+            }}
+          >
+            {/* ── Animated gradient sweep overlay during processing ────── */}
+            {isProcessing && (
+              <Box
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  background:
+                    "linear-gradient(270deg, rgba(91,107,245,0.07), rgba(139,92,246,0.07), rgba(59,130,246,0.07), rgba(91,107,245,0.07))",
+                  backgroundSize: "400% 400%",
+                  animation: "vau-glow-sweep 4s ease infinite",
+                  pointerEvents: "none",
+                  borderRadius: "inherit",
+                }}
+              />
+            )}
+
+            <Stack align="center" gap="md" ta="center" style={{ position: "relative", zIndex: 1 }}>
+              {/* ── State icons ──────────────────────────────────────────── */}
+              <Dropzone.Accept>
+                <ThemeIcon size={64} radius="xl" variant="gradient" gradient={{ from: "blue", to: "indigo" }}>
+                  <IconUpload size={30} />
+                </ThemeIcon>
+              </Dropzone.Accept>
+              <Dropzone.Reject>
+                <ThemeIcon size={64} radius="xl" variant="gradient" gradient={{ from: "red.5", to: "red.7" }}>
+                  <IconX size={30} />
+                </ThemeIcon>
+              </Dropzone.Reject>
+              <Dropzone.Idle>
+                {isDone ? (
+                  <Box style={iconRingStyle}>
+                    <ThemeIcon size={64} radius="xl" variant="gradient" gradient={{ from: "teal", to: "green" }}
+                      style={{ boxShadow: "0 0 20px rgba(47,158,68,0.35)" }}>
+                      <IconCheck size={30} />
+                    </ThemeIcon>
+                  </Box>
+                ) : isError ? (
+                  <ThemeIcon size={64} radius="xl" variant="light" color="red"
+                    style={{ boxShadow: "0 0 16px rgba(224,49,49,0.25)" }}>
+                    <IconAlertCircle size={30} />
+                  </ThemeIcon>
+                ) : isProcessing ? (
+                  <Box style={iconRingStyle}>
+                    <ThemeIcon size={64} radius="xl" variant="gradient"
+                      gradient={{ from: "#5b6bf5", to: "#8b5cf6" }}
+                      style={{ boxShadow: "0 0 24px rgba(91,107,245,0.4)" }}>
+                      <IconSparkles
+                        size={30}
+                        style={{ animation: "vau-sparkle 2s ease-in-out infinite" }}
+                      />
+                    </ThemeIcon>
+                  </Box>
+                ) : isActive ? (
+                  <ThemeIcon size={64} radius="xl" variant="gradient"
+                    gradient={{ from: "blue", to: "indigo" }}
+                    style={{ boxShadow: "0 0 20px rgba(59,78,240,0.3)" }}>
+                    <IconUpload size={30} />
+                  </ThemeIcon>
+                ) : (
+                  <ThemeIcon size={64} radius="xl" variant="light" color="gray">
+                    <IconFileText size={30} />
+                  </ThemeIcon>
+                )}
+              </Dropzone.Idle>
+
+              {/* ── Idle description ────────────────────────────────────── */}
+              {!isActive && !isDone && !isError && (
+                <Stack gap={6}>
+                  <Text fw={700} size="md">
+                    <Trans>Drop a venue file to structure it</Trans>
+                  </Text>
+                  <Text size="sm" c="dimmed" maw={340}>
+                    <Trans>
+                      Floor plans, capacity sheets, rate cards or brochures — PDF, image or
+                      spreadsheet. We read capacity, pricing, catering and technical detail into the
+                      library.
+                    </Trans>
+                  </Text>
+                </Stack>
+              )}
+
+              {/* ── File identity ───────────────────────────────────────── */}
+              {(isActive || isDone || isError) && fileName && (
+                <Box
+                  style={{
+                    background: dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)",
+                    border: `1px solid ${dark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)"}`,
+                    borderRadius: "var(--mantine-radius-sm)",
+                    padding: "6px 12px",
+                  }}
+                >
+                  <Group gap={6} justify="center">
+                    <IconFileText size={13} style={{ opacity: 0.5, flexShrink: 0 }} />
+                    <Text size="sm" fw={500} lineClamp={1} maw={220} style={{ fontVariantNumeric: "tabular-nums" }}>
+                      {fileName}
+                    </Text>
+                    {fileSize != null && (
+                      <Text size="xs" c="dimmed" style={{ flexShrink: 0 }}>
+                        {formatBytes(fileSize)}
+                      </Text>
+                    )}
+                  </Group>
+                </Box>
+              )}
+
+              {/* ── Active: stage label + progress bar ──────────────────── */}
+              {isActive && (
+                <Stack gap={8} w="100%" maw={300}>
+                  <Group justify="space-between" gap="xs">
+                    <Text
+                      size="xs"
+                      c={isProcessing ? "violet.4" : "dimmed"}
+                      fw={isProcessing ? 600 : 400}
+                    >
+                      {STAGE_LABELS[stage] ?? stage}
+                    </Text>
+                    <Group gap={6}>
+                      {isUploading && (
+                        <Badge variant="light" color="blue" size="xs">
+                          {progress}%
+                        </Badge>
+                      )}
+                      {isProcessing && (
+                        <>
+                          <Badge
+                            variant="gradient"
+                            gradient={{ from: "#5b6bf5", to: "#8b5cf6" }}
+                            size="xs"
+                          >
+                            AI
+                          </Badge>
+                          <Text size="xs" c="dimmed" style={{ fontVariantNumeric: "tabular-nums" }}>
+                            {elapsedSeconds}s
+                          </Text>
+                        </>
+                      )}
+                    </Group>
+                  </Group>
+
+                  {isUploading ? (
+                    <Progress
+                      value={progress}
+                      size="md"
+                      radius="xl"
+                      color="blue"
+                      style={{ boxShadow: "0 0 8px rgba(59,78,240,0.3)" }}
+                    />
+                  ) : isProcessing ? (
+                    <Box
+                      style={{
+                        height: 6,
+                        borderRadius: 999,
+                        overflow: "hidden",
+                        background: dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)",
+                      }}
+                    >
+                      <Box
+                        style={{
+                          height: "100%",
+                          width: "100%",
+                          background:
+                            "linear-gradient(90deg, #5b6bf5, #8b5cf6, #3b82f6, #5b6bf5)",
+                          backgroundSize: "200% 100%",
+                          animation: "vau-glow-sweep 2s linear infinite",
+                          borderRadius: 999,
+                          boxShadow: "0 0 10px rgba(91,107,245,0.5)",
+                        }}
+                      />
+                    </Box>
+                  ) : (
+                    <Progress value={100} animated size="md" radius="xl" color="blue" />
+                  )}
+                </Stack>
+              )}
+
+              {/* ── Done: view venue button ──────────────────────────────── */}
+              {isDone && venueId && (
+                <Button
+                  variant="gradient"
+                  gradient={{ from: "teal", to: "green", deg: 135 }}
+                  size="sm"
+                  rightSection={<IconExternalLink size={14} />}
+                  style={{ boxShadow: "0 4px 16px rgba(47,158,68,0.3)" }}
+                  onClick={() => void navigate({ to: "/venues/$venueId", params: { venueId } })}
+                >
+                  <Trans>View venue</Trans>
+                </Button>
+              )}
+
+              {/* ── Error: message + retry ───────────────────────────────── */}
+              {isError && (
+                <Stack gap={6} align="center">
+                  {errorMessage && (
+                    <Text size="xs" c="red.4" maw={300} ta="center">
+                      {errorMessage}
+                    </Text>
+                  )}
+                  <Button
+                    size="xs"
+                    variant="light"
+                    color="red"
+                    onClick={reset}
+                    style={{ boxShadow: "0 2px 8px rgba(224,49,49,0.2)" }}
+                  >
+                    <Trans>Try again</Trans>
+                  </Button>
+                </Stack>
+              )}
+
+              {/* ── Idle: choose file button ─────────────────────────────── */}
+              {!isActive && !isDone && !isError && (
+                <Button
+                  variant="gradient"
+                  gradient={{ from: "blue", to: "indigo", deg: 135 }}
+                  leftSection={<IconUpload size={14} />}
+                  size="sm"
+                  style={{ boxShadow: "0 4px 16px rgba(59,78,240,0.3)" }}
+                >
+                  <Trans>Choose a file</Trans>
+                </Button>
+              )}
+            </Stack>
+          </Dropzone>
+
+          {/* ── Manual entry card ─────────────────────────────────────────── */}
+          <Paper
+            withBorder
+            radius="lg"
+            p="xl"
+            style={{
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-            },
-          }}
-        >
-          <Stack align="center" gap="md" ta="center">
-            {/* ── Icon area ───────────────────────────────────────────── */}
-            <Dropzone.Accept>
-              <ThemeIcon size={56} radius="xl" variant="light" color="blue">
-                <IconUpload size={28} />
+              minHeight: 320,
+              background: dark
+                ? "linear-gradient(135deg, #1a2436 0%, #1e2744 100%)"
+                : "linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%)",
+              boxShadow: dark
+                ? "0 2px 16px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.04)"
+                : "0 2px 16px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.8)",
+              borderColor: dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)",
+            }}
+          >
+            <Stack gap="md">
+              <ThemeIcon
+                size={48}
+                radius="xl"
+                variant="light"
+                color="gray"
+                style={{
+                  background: dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)",
+                  border: `1px solid ${dark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)"}`,
+                }}
+              >
+                <IconPencil size={22} />
               </ThemeIcon>
-            </Dropzone.Accept>
-            <Dropzone.Reject>
-              <ThemeIcon size={56} radius="xl" variant="light" color="red">
-                <IconX size={28} />
-              </ThemeIcon>
-            </Dropzone.Reject>
-            <Dropzone.Idle>
-              {isDone ? (
-                <ThemeIcon size={56} radius="xl" variant="light" color="green">
-                  <IconCheck size={28} />
-                </ThemeIcon>
-              ) : isError ? (
-                <ThemeIcon size={56} radius="xl" variant="light" color="red">
-                  <IconAlertCircle size={28} />
-                </ThemeIcon>
-              ) : (
-                <ThemeIcon size={56} radius="xl" variant="light" color="gray">
-                  <IconFileText size={28} />
-                </ThemeIcon>
-              )}
-            </Dropzone.Idle>
 
-            {/* ── Static description ──────────────────────────────────── */}
-            {!isActive && !isDone && !isError && (
               <Stack gap={6}>
-                <Text fw={600} size="md">
-                  <Trans>Drop a venue file to structure it</Trans>
+                <Text fw={700} size="md">
+                  <Trans>Or enter it yourself</Trans>
                 </Text>
-                <Text size="sm" c="dimmed" maw={340}>
+                <Text size="sm" c="dimmed" maw={300}>
                   <Trans>
-                    Floor plans, capacity sheets, rate cards or brochures — PDF, image or
-                    spreadsheet. We read capacity, pricing, catering and technical detail into the
-                    library.
+                    Faster when you already know the space — you can add the venue file later.
                   </Trans>
                 </Text>
               </Stack>
-            )}
 
-            {/* ── File identity — shown once a file is in flight or done ─ */}
-            {(isActive || isDone || isError) && fileName && (
-              <Group gap={6} justify="center">
-                <IconFileText size={14} style={{ opacity: 0.5 }} />
-                <Text size="sm" fw={500} lineClamp={1} maw={240}>
-                  {fileName}
-                </Text>
-                {fileSize != null && (
-                  <Text size="xs" c="dimmed">
-                    {formatBytes(fileSize)}
-                  </Text>
-                )}
-              </Group>
-            )}
-
-            {/* ── Active: stage label + progress / AI spinner ─────────── */}
-            {isActive && (
-              <Stack gap={6} w="100%" maw={300}>
-                <Group justify="space-between" gap="xs">
-                  <Text size="xs" c="dimmed">
-                    {STAGE_LABELS[stage] ?? stage}
-                  </Text>
-                  {isUploading && (
-                    <Badge variant="light" color="blue" size="xs">
-                      {progress}%
-                    </Badge>
-                  )}
-                  {isProcessing && (
-                    <Group gap={4}>
-                      <Badge variant="light" color="violet" size="xs">
-                        <Trans>AI</Trans>
-                      </Badge>
-                      <Text size="xs" c="dimmed">
-                        {elapsedSeconds}s
-                      </Text>
-                    </Group>
-                  )}
-                </Group>
-
-                {/* Show real progress bar only during byte transfer; pulse otherwise */}
-                {isUploading ? (
-                  <Progress value={progress} size="sm" radius="xl" color="blue" />
-                ) : isProcessing ? (
-                  <Progress value={100} animated size="sm" radius="xl" color="violet" />
-                ) : (
-                  <Progress value={100} animated size="sm" radius="xl" color="blue" />
-                )}
-              </Stack>
-            )}
-
-            {/* ── Done: venue link ─────────────────────────────────────── */}
-            {isDone && venueId && (
-              <Button
-                variant="filled"
-                color="green"
-                size="sm"
-                rightSection={<IconExternalLink size={14} />}
-                onClick={() => void navigate({ to: "/venues/$venueId", params: { venueId } })}
-              >
-                <Trans>View venue</Trans>
-              </Button>
-            )}
-
-            {/* ── Error: message + retry ───────────────────────────────── */}
-            {isError && (
-              <Stack gap={6} align="center">
-                {errorMessage && (
-                  <Text size="xs" c="red" maw={300} ta="center">
-                    {errorMessage}
-                  </Text>
-                )}
-                <Button size="xs" variant="light" color="red" onClick={reset}>
-                  <Trans>Try again</Trans>
+              <Group>
+                <Button
+                  variant="default"
+                  size="sm"
+                  data-testid={TestSelectors.VENUES_ADD_BLANK_BUTTON}
+                  disabled={isActive}
+                  onClick={() => void navigate({ to: "/venues/create" })}
+                  style={{
+                    boxShadow: dark
+                      ? "0 1px 4px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.06)"
+                      : "0 1px 4px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.9)",
+                  }}
+                >
+                  <Trans>Start from a blank venue</Trans>
                 </Button>
-              </Stack>
-            )}
+              </Group>
 
-            {/* ── Idle: choose file button ─────────────────────────────── */}
-            {!isActive && !isDone && !isError && (
-              <Button variant="default" leftSection={<IconUpload size={14} />} size="sm">
-                <Trans>Choose a file</Trans>
-              </Button>
-            )}
-          </Stack>
-        </Dropzone>
-
-        {/* ── Manual entry option ──────────────────────────────────────── */}
-        <Paper
-          withBorder
-          radius="md"
-          p="xl"
-          style={{ display: "flex", alignItems: "center", justifyContent: "center" }}
-        >
-          <Stack gap="md">
-            <ThemeIcon size={40} radius="xl" variant="light" color="gray">
-              <IconPencil size={20} />
-            </ThemeIcon>
-
-            <Stack gap={6}>
-              <Text fw={600} size="md">
-                <Trans>Or enter it yourself</Trans>
-              </Text>
-              <Text size="sm" c="dimmed" maw={300}>
-                <Trans>
-                  Faster when you already know the space — you can add the venue file later.
-                </Trans>
-              </Text>
+              {isDone && (
+                <Anchor size="xs" c="dimmed" component="button" onClick={reset}>
+                  <Trans>Upload another file</Trans>
+                </Anchor>
+              )}
             </Stack>
-
-            <Group>
-              <Button
-                variant="default"
-                size="sm"
-                data-testid={TestSelectors.VENUES_ADD_BLANK_BUTTON}
-                disabled={isActive}
-                onClick={() => void navigate({ to: "/venues/create" })}
-              >
-                <Trans>Start from a blank venue</Trans>
-              </Button>
-            </Group>
-
-            {/* Done: also offer a secondary link to add another */}
-            {isDone && (
-              <Anchor size="xs" c="dimmed" component="button" onClick={reset}>
-                <Trans>Upload another file</Trans>
-              </Anchor>
-            )}
-          </Stack>
-        </Paper>
-      </SimpleGrid>
-    </Container>
+          </Paper>
+        </SimpleGrid>
+      </Container>
+    </>
   );
 }
