@@ -410,6 +410,7 @@ export const TestSelectors = {
   VENUE_DETAIL_BACK_BUTTON: "venue-detail-back-button",
   VENUE_DETAIL_REFRESH_BUTTON: "venue-detail-refresh-button",
   VENUE_DETAIL_ERROR_RETRY_BUTTON: "venue-detail-error-retry-button",
+  VENUE_DETAIL_ASSET_UPLOAD_BUTTON: "venue-detail-asset-upload-button",
 } as const;
 
 /**

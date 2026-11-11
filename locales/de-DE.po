@@ -330,6 +330,10 @@ msgid "Are you sure?"
 msgstr "Sind Sie sicher?"
 
 #: src/pages/_app/venues.$venueId.tsx
+msgid "Asset uploaded."
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.tsx
 msgid "Assets"
 msgstr ""
 
@@ -748,6 +752,10 @@ msgstr "Dieser Anbieter konnte nicht getrennt werden."
 #: src/pages/_app/settings/security.tsx
 msgid "Could not update SSO configuration."
 msgstr "SSO-Konfiguration konnte nicht aktualisiert werden."
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Could not upload the asset. Please try again."
+msgstr ""
 
 #: src/features/signup/ui/signup-form.tsx
 #: src/pages/signup.tsx
@@ -2160,6 +2168,10 @@ msgstr "Portalfehler"
 msgid "Press Enter to search"
 msgstr ""
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Preview"
+msgstr ""
+
 #: src/features/manage-billing/ui/plan-entitlement.tsx
 msgid "Priority Support"
 msgstr "Prioritätssupport"
@@ -2974,6 +2986,10 @@ msgstr "Aktualisiert"
 
 #: src/pages/_app/venues.add.tsx
 msgid "Upload another file"
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Upload asset"
 msgstr ""
 
 #: src/features/avatar/ui/avatar-upload.tsx
