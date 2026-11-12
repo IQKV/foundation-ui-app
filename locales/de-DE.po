@@ -1211,6 +1211,10 @@ msgstr "Beispiele zur Feature-Nutzung"
 msgid "Features"
 msgstr "Funktionen"
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "File"
+msgstr ""
+
 #: src/pages/_app/venues.create.tsx
 msgid "Fill in the details below. You can add photos and files after saving."
 msgstr ""
@@ -1913,6 +1917,10 @@ msgstr "Ein Klick und Sie sind startklar."
 msgid "One last"
 msgstr "Noch ein letzter"
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Open"
+msgstr ""
+
 #: src/features/manage-billing/ui/billing-portal-button.tsx
 msgid "Open Billing Portal"
 msgstr "Abrechnungsportal öffnen"
@@ -2167,6 +2175,10 @@ msgstr "Bitte warten Sie, während Ihr Magic Link verifiziert wird."
 #: src/features/manage-billing/model/use-billing-portal.ts
 msgid "Portal error"
 msgstr "Portalfehler"
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Preparing the preview…"
+msgstr ""
 
 #: src/features/venue-semantic-search/ui/VenueSemanticSearchWidget.tsx
 msgid "Press Enter to search"

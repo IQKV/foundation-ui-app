@@ -1211,6 +1211,10 @@ msgstr "Feature Usage Examples"
 msgid "Features"
 msgstr "Features"
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "File"
+msgstr "File"
+
 #: src/pages/_app/venues.create.tsx
 msgid "Fill in the details below. You can add photos and files after saving."
 msgstr "Fill in the details below. You can add photos and files after saving."
@@ -1913,6 +1917,10 @@ msgstr "One click and you're all set."
 msgid "One last"
 msgstr "One last"
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Open"
+msgstr "Open"
+
 #: src/features/manage-billing/ui/billing-portal-button.tsx
 msgid "Open Billing Portal"
 msgstr "Open Billing Portal"
@@ -2167,6 +2175,10 @@ msgstr "Please wait while we verify your magic link."
 #: src/features/manage-billing/model/use-billing-portal.ts
 msgid "Portal error"
 msgstr "Portal error"
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Preparing the preview…"
+msgstr "Preparing the preview…"
 
 #: src/features/venue-semantic-search/ui/VenueSemanticSearchWidget.tsx
 msgid "Press Enter to search"

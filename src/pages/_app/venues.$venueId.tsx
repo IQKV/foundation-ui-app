@@ -18,7 +18,6 @@ import {
   Tabs,
   SimpleGrid,
   Anchor,
-  Center,
   Loader,
   ThemeIcon,
   Divider,
@@ -237,6 +236,64 @@ function isPreviewable(contentType: string | null): boolean {
   );
 }
 
+/**
+ * Design tokens for the asset preview dialog: a hairline-framed card with a
+ * 7px radius, a soft shadow, an accent-tinted icon tile and a quiet canvas
+ * behind the rendered object.
+ */
+const PREVIEW_TOKENS = {
+  border: "var(--mantine-color-gray-3)",
+  borderSubtle: "var(--mantine-color-gray-2)",
+  accentText: "var(--mantine-color-blue-8)",
+  /** accent at 12% over transparent — the tile behind the loading icon */
+  accentTile: "color-mix(in oklab, var(--mantine-color-blue-6) 12%, transparent)",
+  /** neutral canvas behind the object, quieter than the dialog chrome */
+  canvas: "color-mix(in oklab, var(--mantine-color-gray-1) 55%, var(--app-surface-bg))",
+  radius: 7,
+  radiusL: 10,
+} as const;
+
+/** Dialog chrome: hairline frame, rounded corners and a header rule. */
+const PREVIEW_MODAL_STYLES = {
+  content: {
+    borderRadius: PREVIEW_TOKENS.radiusL,
+    border: `1px solid ${PREVIEW_TOKENS.border}`,
+    boxShadow: "0 16px 40px rgba(17,28,43,0.18), 0 2px 8px rgba(17,28,43,0.08)",
+    overflow: "hidden",
+  },
+  header: {
+    padding: "10px 16px",
+    borderBottom: `1px solid ${PREVIEW_TOKENS.borderSubtle}`,
+    background: "var(--app-surface-bg)",
+  },
+  title: { fontWeight: 700, fontSize: "var(--mantine-font-size-md)" },
+  body: { padding: 0 },
+} as const;
+
+/** The panel that holds the rendered object. */
+const PREVIEW_SURFACE_STYLES = {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  minHeight: 320,
+  overflow: "hidden",
+  border: `1px solid ${PREVIEW_TOKENS.border}`,
+  borderRadius: PREVIEW_TOKENS.radius,
+  background: "var(--app-surface-bg)",
+} as const;
+
+/** The 56px accent tile of the loading / empty state. */
+const PREVIEW_ICON_TILE_STYLES = {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  width: 56,
+  height: 56,
+  borderRadius: PREVIEW_TOKENS.radius,
+  background: PREVIEW_TOKENS.accentTile,
+  color: PREVIEW_TOKENS.accentText,
+} as const;
+
 function AssetsTab({
   venueId,
   assets,
@@ -252,10 +309,11 @@ function AssetsTab({
     name: string;
     url: string | null;
     contentType: string | null;
+    sizeBytes: number | null;
   } | null>(null);
 
   const openPreview = async (asset: VenueAsset, name: string) => {
-    setPreview({ name, url: null, contentType: asset.contentType });
+    setPreview({ name, url: null, contentType: asset.contentType, sizeBytes: asset.sizeBytes });
     try {
       const result = await venueAssetApi.previewUrl(venueId, asset.id);
       setPreview((current) =>
@@ -340,32 +398,95 @@ function AssetsTab({
         onClose={() => setPreview(null)}
         size="xl"
         centered
-        title={preview?.name}
-      >
-        {preview && !preview.url ? (
-          <Center h={240}>
-            <Loader size="lg" />
-          </Center>
-        ) : preview?.contentType === "application/pdf" ? (
-          <iframe
-            src={preview.url ?? ""}
-            title={preview.name}
-            style={{ width: "100%", height: "75vh", border: 0 }}
-          />
-        ) : (
+        styles={PREVIEW_MODAL_STYLES}
+        title={
           preview && (
-            <img
-              src={preview.url ?? ""}
-              alt={preview.name}
-              style={{
-                width: "100%",
-                maxHeight: "75vh",
-                objectFit: "contain",
-                display: "block",
-                borderRadius: "var(--mantine-radius-sm)",
-              }}
-            />
+            <Stack gap={0}>
+              <Text fw={700} size="sm" lineClamp={1}>
+                {preview.name}
+              </Text>
+              <Text size="xs" c="dimmed" lineClamp={1}>
+                {preview.contentType ?? t`File`}
+              </Text>
+            </Stack>
           )
+        }
+      >
+        {preview && (
+          <Box>
+            {/* Meta strip: the content-type chip and size, plus a way to the raw file. */}
+            <Group
+              gap="sm"
+              px="md"
+              py={8}
+              wrap="nowrap"
+              justify="space-between"
+              style={{ borderBottom: `1px solid ${PREVIEW_TOKENS.borderSubtle}` }}
+            >
+              <Group gap="sm" wrap="nowrap" style={{ minWidth: 0 }}>
+                <Badge variant="light" color="blue" radius="sm" size="sm">
+                  {preview.contentType?.split("/").pop()?.toUpperCase() ?? t`File`}
+                </Badge>
+                {preview.sizeBytes != null && (
+                  <Text size="xs" c="dimmed">
+                    {Math.round(preview.sizeBytes / 1024)} KB
+                  </Text>
+                )}
+              </Group>
+              {preview.url && (
+                <Anchor
+                  href={preview.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  size="xs"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 4,
+                    fontWeight: 600,
+                    flexShrink: 0,
+                  }}
+                >
+                  <IconExternalLink size={13} />
+                  <Trans>Open</Trans>
+                </Anchor>
+              )}
+            </Group>
+
+            {/* The sunken canvas that holds the rendered object. */}
+            <Box p="md" style={{ background: PREVIEW_TOKENS.canvas }}>
+              <Box style={PREVIEW_SURFACE_STYLES}>
+                {!preview.url ? (
+                  <Stack align="center" gap="sm" py="xl">
+                    <Box style={PREVIEW_ICON_TILE_STYLES}>
+                      <IconPhoto size={26} />
+                    </Box>
+                    <Loader size="sm" />
+                    <Text size="xs" c="dimmed">
+                      <Trans>Preparing the preview…</Trans>
+                    </Text>
+                  </Stack>
+                ) : preview.contentType === "application/pdf" ? (
+                  <iframe
+                    src={preview.url}
+                    title={preview.name}
+                    style={{ width: "100%", height: "72vh", border: 0, display: "block" }}
+                  />
+                ) : (
+                  <img
+                    src={preview.url}
+                    alt={preview.name}
+                    style={{
+                      maxWidth: "100%",
+                      maxHeight: "72vh",
+                      objectFit: "contain",
+                      display: "block",
+                    }}
+                  />
+                )}
+              </Box>
+            </Box>
+          </Box>
         )}
       </Modal>
     </>
