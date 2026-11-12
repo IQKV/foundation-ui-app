@@ -320,7 +320,11 @@ function AssetsTab({
     onSuccess: () => {
       setDeletingId(null);
       void queryClient.invalidateQueries({ queryKey: ["tenant", "venue", venueId] });
-      notifications.show({ message: t`Asset deleted.`, color: "green", icon: <IconCheck size={16} /> });
+      notifications.show({
+        message: t`Asset deleted.`,
+        color: "green",
+        icon: <IconCheck size={16} />,
+      });
     },
     onError: (err) => {
       notifications.show({
@@ -429,16 +433,27 @@ function AssetsTab({
                       </Popover.Target>
                       <Popover.Dropdown>
                         <Stack gap={8}>
-                          <Text size="sm" fw={600}><Trans>Delete asset?</Trans></Text>
-                          <Text size="xs" c="dimmed" lineClamp={2}>{name}</Text>
+                          <Text size="sm" fw={600}>
+                            <Trans>Delete asset?</Trans>
+                          </Text>
+                          <Text size="xs" c="dimmed" lineClamp={2}>
+                            {name}
+                          </Text>
                           <Group gap={6} justify="flex-end">
-                            <Button size="compact-xs" variant="subtle" color="gray"
-                              onClick={() => setDeletingId(null)}>
+                            <Button
+                              size="compact-xs"
+                              variant="subtle"
+                              color="gray"
+                              onClick={() => setDeletingId(null)}
+                            >
                               <Trans>Cancel</Trans>
                             </Button>
-                            <Button size="compact-xs" color="red"
+                            <Button
+                              size="compact-xs"
+                              color="red"
                               loading={deleteMutation.isPending}
-                              onClick={() => deleteMutation.mutate(asset.id)}>
+                              onClick={() => deleteMutation.mutate(asset.id)}
+                            >
                               <Trans>Delete</Trans>
                             </Button>
                           </Group>

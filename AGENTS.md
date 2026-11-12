@@ -14,6 +14,7 @@
 - Comprehensive testing with Vitest and Playwright
 - Runtime configuration override support via `public/config.js` (window globals)
 - Multi-tenant and single-tenant rollout modes (`VITE_ROLLOUT_MODE`)
+- Pluggable addon system with registry, loader, and extension points
 
 ## Tech Stack
 
@@ -79,6 +80,8 @@ The project strictly follows FSD with automated compliance tests (`src/architect
 ```
 src/
 ├── app/          # Application layer (providers, routing, global styles, config)
+│   ├── addons/   # Addon system (registry, loader, extension points)
+│   └── config/   # Runtime env, rollout guards, billing config, addon config
 ├── processes/    # Process layer (cross-feature business processes)
 ├── pages/        # Page layer (TanStack Router file-based route components)
 ├── widgets/      # Widget layer (complex UI blocks composed from features)
@@ -89,6 +92,7 @@ src/
 │   ├── lib/      # Utilities (jwt, rollout, zod-form-validation, etc.)
 │   ├── ui/       # Shared UI components
 │   └── types/    # Global TypeScript types
+├── addons/       # Addon layer (optional pluggable modules)
 └── architecture.test.ts  # Automated FSD compliance tests
 ```
 
@@ -102,25 +106,28 @@ src/
 
 **Features** (`src/features/`): `accept-invitation`, `avatar`, `ban-user`, `change-password`,
 `complete-profile`, `create-organization`, `edit-profile`, `forgot-password`, `invite-member`,
-`magic-link`, `manage-billing`, `manage-organization`, `member-role`, `notification-bell`,
-`onboarding`, `page-admin`, `reset-password`, `sign-in`, `sign-out`, `signup`, `tenant-switcher`
+`magic-link`, `manage-billing`, `manage-organization`, `manage-venue`, `member-role`,
+`notification-bell`, `onboarding`, `page-admin`, `reset-password`, `sign-in`, `sign-out`,
+`signup`, `tenant-switcher`, `venue-semantic-search`
 
 **Entities** (`src/entities/`): `cms-page`, `invitation`, `notification`, `refund`,
-`subscription`, `tenant`, `user`, `webhook-log`
+`subscription`, `tenant`, `user`, `venue`, `webhook-log`
 
 **Widgets** (`src/widgets/`): `dashboard-personal-welcome`, `dashboard-signup-chart`,
 `dashboard-stat-card`
 
-**Shared UI** (`src/shared/ui/`): `AppLayout`, `AuthLayout`, `AuthGuard`, `TenantOwnerOnly`,
+**Shared UI** (`src/shared/ui/`): `AppLayout`, `AuthLayout`, `AuthGuard`,
 `LoadingOverlay`, `ErrorBoundary`, `UserStatusBadge`, `TenantStatusBadge`,
-`InvitationStatusBadge`, `PageHeader`, `ColorSchemeToggle`, `LocaleSwitcher`
+`InvitationStatusBadge`, `PageHeader`, `PageTransition`, `ColorSchemeToggle`, `LocaleSwitcher`
 
 **Shared API** (`src/shared/api/`): `httpClient`, `authApi`, `iamApi`, `billingApi`, `cmsApi`,
-`oauth2Api`, `passwordResetApi`, `signupApi`, `auth-interceptor` (side-effect import)
+`catalogApi`, `oauth2Api`, `passwordResetApi`, `signupApi`, `auth-interceptor` (side-effect import)
 
 **Shared Lib** (`src/shared/lib/`): `validateWithZod`, `queryClient`, `decodeJwt`,
 `isTenantOwner`, `isTenantSession`, `rollout` helpers, `color-utils`, `date-utils`,
-`page-title`, `oauth2-post-auth`, `test-selectors`
+`page-title`, `motion`, `oauth2-post-auth`, `test-selectors`
+
+**Addons** (`src/addons/`): `platform-ai-chat`
 
 ### FSD Layer Rules (CRITICAL — ENFORCED BY TESTS)
 
@@ -150,12 +157,30 @@ src/
    Note: `processes/` slices may be flat files (e.g., `session.store.ts`) rather than using
    `model/` subfolders — both are valid.
 
-5. **Naming Conventions (ENFORCED BY TESTS)**:
+   Addon slices follow the same structure plus `api/` and `types/` segments:
+
+   ```
+   addon-name/
+   ├── api/      # Addon-specific API calls
+   ├── model/    # Business logic, stores
+   ├── types/    # Addon-specific TypeScript types
+   ├── ui/       # React components
+   └── index.tsx # Public API exports (REQUIRED)
+   ```
+
+5. **Addon System**: Addons are optional pluggable modules registered at startup
+   - Each addon lives in `src/addons/<addon-name>/`
+   - Addons register via `app/addons/addon-registry.ts`; loading controlled by `app/config/addons.ts`
+   - Extension points (`navigation`, `widgets`) defined in `app/addons/extension-points/`
+   - Addon pages served under `pages/_app/addons/$addonPath.tsx`
+   - `addons/` can import from `features`, `entities`, and `shared` (peer to `processes`)
+
+6. **Naming Conventions (ENFORCED BY TESTS)**:
    - Pages: kebab-case `.tsx` files (e.g., `sign-in.tsx`, `forgot-password.tsx`)
    - Shared UI components: kebab-case folders (e.g., `auth-guard/`, `loading-overlay/`)
    - Features: kebab-case folders (e.g., `sign-in/`, `reset-password/`)
 
-6. **Architecture Testing**: Run `pnpm test:arch` to verify FSD compliance
+7. **Architecture Testing**: Run `pnpm test:arch` to verify FSD compliance
    - Verifies all FSD layers exist
    - Verifies all slices in `features/`, `widgets/`, `processes/` have `index.ts`
    - Verifies `shared/` has `api/`, `lib/`, `ui/`, `types/` segments
@@ -572,8 +597,9 @@ export const authApi = {
 
 - `httpClient` — base Axios instance
 - `authApi` — sign-in, sign-out, tenant discovery, magic link, token exchange
-- `iamApi`, `localesApi`, `notificationApi` — IAM, locale, notifications
+- `iamApi` — IAM user and member management
 - `billingApi` — plans, subscriptions, checkout, portal
+- `catalogApi` — plan catalog
 - `cmsApi` — CMS pages CRUD
 - `oauth2Api` — OAuth2/OIDC provider integrations
 - `passwordResetApi` — forgot password, reset password
@@ -612,12 +638,15 @@ route-level protection and can be used directly in page components.
 import { isMultiTenantMode, isSingleTenantMode } from "@/app/config";
 // MULTI_TENANT (default): full tenant picker, org management visible
 // SINGLE_TENANT: auto-selects platform tenant, no org UI
+// rollout-guards.ts provides route-level guards for rollout mode
 ```
 
 **Feature flags:**
 
 ```ts
 import { isDemoMode, isMagicLinkEnabled, paymentGatewayType } from "@/app/config/runtime-env";
+// billing.ts — billing-specific config (payment gateway type, etc.)
+// addons.ts — which addons are enabled
 ```
 
 ### JWT Utilities (`shared/lib/jwt.ts`)
@@ -931,6 +960,7 @@ A task is evaluated as done only when all of the following hold:
 | ------------------------------------------------ | ---------------------------------------------------------- |
 | Any change                                       | `pnpm type-check`, then the narrowest relevant test        |
 | Feature slice, widget or page (new or changed)   | `pnpm test` (co-located unit tests), then `pnpm test:arch` |
+| Addon slice (new or changed)                     | `pnpm test` (co-located unit tests), then `pnpm test:arch` |
 | Cross-slice or layer import, FSD boundary change | `pnpm test:arch`                                           |
 | API client, auth/session or JWT handling         | Unit test for the flow, then `pnpm type-check`             |
 | Router or route definition                       | `pnpm type-check`, then `pnpm test:arch`                   |
@@ -1088,14 +1118,29 @@ src/pages/
 ├── __root.tsx             # Root layout (wraps everything)
 ├── _app.tsx               # Authenticated area layout + auth guard
 ├── _app/                  # Authenticated routes
-│   ├── index.tsx          # Dashboard
-│   ├── team.tsx           # Team management
-│   ├── cms-pages.tsx      # CMS pages layout
+│   ├── addons/
+│   │   └── $addonPath.tsx # Addon-rendered pages
+│   ├── billing/
+│   │   ├── index.tsx
+│   │   ├── success.tsx
+│   │   └── failure.tsx
+│   ├── settings/
+│   │   ├── general.tsx
+│   │   ├── notifications.tsx
+│   │   ├── organization.tsx
+│   │   └── security.tsx
+│   ├── addons.tsx         # Addons landing page
+│   ├── cms-pages.tsx
 │   ├── cms-pages.index.tsx
 │   ├── cms-pages.$pageId.tsx
 │   ├── cms-pages.create.tsx
-│   ├── billing/           # Billing sub-routes
-│   └── settings/          # Settings sub-routes
+│   ├── index.tsx          # Dashboard
+│   ├── team.tsx           # Team management
+│   ├── venues.tsx
+│   ├── venues.index.tsx
+│   ├── venues.$venueId.tsx
+│   ├── venues.add.tsx
+│   └── venues.create.tsx
 ├── sign-in.tsx
 ├── signup.tsx
 ├── forgot-password.tsx
@@ -1108,6 +1153,7 @@ src/pages/
 ├── complete-profile.tsx
 ├── create-organization.tsx
 ├── verify-email.tsx
+├── loading-demo.tsx
 ├── unauthorized.tsx
 ├── 404.tsx
 └── 500.tsx
@@ -1151,17 +1197,17 @@ is shown until the locale is loaded to prevent flash of untranslated content.
 
 All exported from `@/shared/ui`:
 
-| Component               | Purpose                                            |
-| ----------------------- | -------------------------------------------------- |
-| `AppLayout`             | Authenticated app shell with nav sidebar           |
-| `AuthLayout`            | Centered card layout for auth pages                |
-| `AuthGuard`             | Redirects unauthenticated users to `/sign-in`      |
-| `TenantOwnerOnly`       | Renders children only for `TENANT_OWNER` authority |
-| `LoadingOverlay`        | Full-screen or container loading overlay           |
-| `ErrorBoundary`         | React error boundary with retry button             |
-| `UserStatusBadge`       | Badge for user status (active, banned, etc.)       |
-| `TenantStatusBadge`     | Badge for tenant status                            |
-| `InvitationStatusBadge` | Badge for invitation status                        |
-| `PageHeader`            | Page title with breadcrumbs                        |
-| `ColorSchemeToggle`     | Light/dark/auto toggle button                      |
-| `LocaleSwitcher`        | Locale selector dropdown                           |
+| Component               | Purpose                                       |
+| ----------------------- | --------------------------------------------- |
+| `AppLayout`             | Authenticated app shell with nav sidebar      |
+| `AuthLayout`            | Centered card layout for auth pages           |
+| `AuthGuard`             | Redirects unauthenticated users to `/sign-in` |
+| `LoadingOverlay`        | Full-screen or container loading overlay      |
+| `ErrorBoundary`         | React error boundary with retry button        |
+| `UserStatusBadge`       | Badge for user status (active, banned, etc.)  |
+| `TenantStatusBadge`     | Badge for tenant status                       |
+| `InvitationStatusBadge` | Badge for invitation status                   |
+| `PageHeader`            | Page title with breadcrumbs                   |
+| `PageTransition`        | Animated page transition wrapper              |
+| `ColorSchemeToggle`     | Light/dark/auto toggle button                 |
+| `LocaleSwitcher`        | Locale selector dropdown                      |
