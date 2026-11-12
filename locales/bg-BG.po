@@ -725,6 +725,10 @@ msgstr "Не може да се заредят членовете."
 msgid "Could not load organizations."
 msgstr "Не може да се заредят организациите."
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Could not load the preview."
+msgstr ""
+
 #: src/features/manage-billing/model/use-billing-portal.ts
 msgid "Could not open the billing portal. Please try again."
 msgstr "Не може да се отвори порталът за фактуриране. Моля, опитайте отново."

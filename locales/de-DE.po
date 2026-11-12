@@ -725,6 +725,10 @@ msgstr "Mitglieder konnten nicht geladen werden."
 msgid "Could not load organizations."
 msgstr "Organisationen konnten nicht geladen werden."
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Could not load the preview."
+msgstr ""
+
 #: src/features/manage-billing/model/use-billing-portal.ts
 msgid "Could not open the billing portal. Please try again."
 msgstr "Abrechnungsportal konnte nicht geöffnet werden. Bitte versuchen Sie es erneut."

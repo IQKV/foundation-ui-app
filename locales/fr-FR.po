@@ -725,6 +725,10 @@ msgstr "Impossible de charger les membres."
 msgid "Could not load organizations."
 msgstr "Impossible de charger les organisations."
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Could not load the preview."
+msgstr ""
+
 #: src/features/manage-billing/model/use-billing-portal.ts
 msgid "Could not open the billing portal. Please try again."
 msgstr "Impossible d'ouvrir le portail de facturation. Veuillez réessayer."

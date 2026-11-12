@@ -92,6 +92,7 @@ export type {
   VenueAssetListResponse,
   VenueAsset,
   VenueAssetFullListResponse,
+  VenueAssetPreviewUrlResponse,
   VenueAssetImportStatus,
   VenueWriteRequest,
   VenuePatchRequest,

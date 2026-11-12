@@ -19,6 +19,7 @@ import {
   SimpleGrid,
   Anchor,
   Center,
+  Loader,
   ThemeIcon,
   Divider,
   CopyButton,
@@ -229,18 +230,46 @@ function PhotosTab({ photos, isLoading }: { photos: VenueAssetPublic[]; isLoadin
 
 // ─── Assets tab ───────────────────────────────────────────────────────────────
 
+/** Content types the preview modal can render inline. */
+function isPreviewable(contentType: string | null): boolean {
+  return (
+    Boolean(contentType) && (contentType!.startsWith("image/") || contentType === "application/pdf")
+  );
+}
+
 function AssetsTab({
+  venueId,
   assets,
   isLoading,
-  previewUrls,
 }: {
+  venueId: string;
   assets: VenueAsset[];
   isLoading: boolean;
-  /** Presigned image URL per asset id — only photos have one. */
-  previewUrls: Map<string, string>;
 }) {
   const { t } = useLingui();
-  const [preview, setPreview] = useState<{ url: string; title: string } | null>(null);
+  // `url === null` while the presigned URL is still being minted.
+  const [preview, setPreview] = useState<{
+    name: string;
+    url: string | null;
+    contentType: string | null;
+  } | null>(null);
+
+  const openPreview = async (asset: VenueAsset, name: string) => {
+    setPreview({ name, url: null, contentType: asset.contentType });
+    try {
+      const result = await venueAssetApi.previewUrl(venueId, asset.id);
+      setPreview((current) =>
+        current ? { ...current, url: result.url, contentType: result.contentType } : current,
+      );
+    } catch {
+      setPreview(null);
+      notifications.show({
+        message: t`Could not load the preview.`,
+        color: "red",
+        icon: <IconAlertTriangle size={16} />,
+      });
+    }
+  };
 
   return (
     <>
@@ -261,7 +290,6 @@ function AssetsTab({
       ) : (
         <Stack gap={6}>
           {assets.map((asset) => {
-            const previewUrl = previewUrls.get(asset.id);
             const name = asset.label ?? asset.fileName ?? asset.id;
             return (
               <Paper key={asset.id} withBorder p="sm" radius="md" styles={ASSET_ROW_STYLES}>
@@ -289,13 +317,13 @@ function AssetsTab({
                       </Text>
                     </Stack>
                   </Group>
-                  {previewUrl && (
+                  {isPreviewable(asset.contentType) && (
                     <Button
                       size="compact-sm"
                       variant="subtle"
                       leftSection={<IconEye size={14} />}
                       style={{ flexShrink: 0 }}
-                      onClick={() => setPreview({ url: previewUrl, title: name })}
+                      onClick={() => void openPreview(asset, name)}
                     >
                       <Trans>Preview</Trans>
                     </Button>
@@ -312,20 +340,32 @@ function AssetsTab({
         onClose={() => setPreview(null)}
         size="xl"
         centered
-        title={preview?.title}
+        title={preview?.name}
       >
-        {preview && (
-          <img
-            src={preview.url}
-            alt={preview.title}
-            style={{
-              width: "100%",
-              maxHeight: "75vh",
-              objectFit: "contain",
-              display: "block",
-              borderRadius: "var(--mantine-radius-sm)",
-            }}
+        {preview && !preview.url ? (
+          <Center h={240}>
+            <Loader size="lg" />
+          </Center>
+        ) : preview?.contentType === "application/pdf" ? (
+          <iframe
+            src={preview.url ?? ""}
+            title={preview.name}
+            style={{ width: "100%", height: "75vh", border: 0 }}
           />
+        ) : (
+          preview && (
+            <img
+              src={preview.url ?? ""}
+              alt={preview.name}
+              style={{
+                width: "100%",
+                maxHeight: "75vh",
+                objectFit: "contain",
+                display: "block",
+                borderRadius: "var(--mantine-radius-sm)",
+              }}
+            />
+          )
         )}
       </Modal>
     </>
@@ -381,13 +421,6 @@ function VenueDetailPage() {
   });
 
   const assets = assetsData?.items ?? [];
-
-  // Presigned image URL per asset id — only photos carry a `sourceUrl`, so this
-  // lets the Assets tab preview photo rows through their big-image modal.
-  const photoUrlById = new Map<string, string>();
-  for (const photo of photos) {
-    if (photo.sourceUrl) photoUrlById.set(photo.id, photo.sourceUrl);
-  }
 
   const hasPhoto = Boolean(venue?.primaryPhotoUrl);
 
@@ -926,7 +959,7 @@ function VenueDetailPage() {
             {/* ── Assets tab ───────────────────────────── */}
             {venue && (
               <Tabs.Panel value="assets" pt="sm">
-                <AssetsTab assets={assets} isLoading={assetsLoading} previewUrls={photoUrlById} />
+                <AssetsTab venueId={venueId} assets={assets} isLoading={assetsLoading} />
               </Tabs.Panel>
             )}
 

@@ -81,6 +81,19 @@ export interface VenueAssetFullListResponse {
 }
 
 /**
+ * Presigned preview URL for one asset
+ * (GET /venues/{id}/assets/{assetId}/preview-url) — lets the browser render the stored object
+ * inline, images and PDFs alike.
+ */
+export interface VenueAssetPreviewUrlResponse {
+  assetId: string;
+  url: string;
+  contentType: string | null;
+  fileName: string | null;
+  expiresInMinutes: number;
+}
+
+/**
  * Processing status of a venue-less imported asset.
  * Set by the catalog service and advanced by the processing worker.
  */

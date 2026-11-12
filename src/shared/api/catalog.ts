@@ -7,6 +7,7 @@ import type {
   VenueAssetListResponse,
   VenueAsset,
   VenueAssetFullListResponse,
+  VenueAssetPreviewUrlResponse,
   VenueAssetImportStatus,
 } from "@/entities/venue";
 
@@ -18,6 +19,7 @@ export type {
   VenueAssetListResponse,
   VenueAsset,
   VenueAssetFullListResponse,
+  VenueAssetPreviewUrlResponse,
   VenueAssetImportStatus,
 } from "@/entities/venue";
 
@@ -131,6 +133,15 @@ export const catalogApi = {
   listVenueAssets: (venueId: string) =>
     httpClient
       .get<VenueAssetFullListResponse>(`/v1/catalog/venues/${venueId}/assets`)
+      .then((r) => r.data),
+
+  // Presigned GET URL for one asset — TENANT_OWNER / MEMBER.
+  // Lets the browser render the object inline in the Assets tab preview modal.
+  previewUrl: (venueId: string, assetId: string) =>
+    httpClient
+      .get<VenueAssetPreviewUrlResponse>(
+        `/v1/catalog/venues/${venueId}/assets/${assetId}/preview-url`,
+      )
       .then((r) => r.data),
 };
 
