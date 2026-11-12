@@ -199,6 +199,11 @@ export const venueAssetApi = {
         `/v1/catalog/venues/${venueId}/assets/${assetId}/preview-url`,
       )
       .then((r) => r.data),
+
+  deleteAsset: (venueId: string, assetId: string): Promise<void> =>
+    httpClient
+      .delete(`/v1/catalog/venues/${venueId}/assets/${assetId}`)
+      .then(() => undefined),
 };
 
 /**
