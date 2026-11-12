@@ -385,6 +385,7 @@ export const TestSelectors = {
   VENUES_ADD_PAGE: "venues-add-page",
   VENUES_ADD_CHOOSE_FILE: "venues-add-choose-file",
   VENUES_ADD_BLANK_BUTTON: "venues-add-blank-button",
+  VENUES_ADD_BACK_BUTTON: "venues-add-back-button",
   VENUES_CREATE_PAGE: "venues-create-page",
   VENUES_CREATE_SUBMIT_BUTTON: "venues-create-submit-button",
   VENUES_CREATE_BACK_BUTTON: "venues-create-back-button",

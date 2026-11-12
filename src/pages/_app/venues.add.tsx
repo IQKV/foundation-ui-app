@@ -19,6 +19,7 @@ import { useInterval } from "@mantine/hooks";
 import { Dropzone } from "@mantine/dropzone";
 import {
   IconAlertCircle,
+  IconArrowLeft,
   IconCheck,
   IconExternalLink,
   IconFileText,
@@ -165,6 +166,19 @@ function AddVenuePage() {
   return (
     <Container size="lg" py="xl">
       <PageTitle segments={[t`Add a venue`, t`Venues`]} />
+
+      <Button
+        variant="subtle"
+        color="gray"
+        size="sm"
+        px={0}
+        leftSection={<IconArrowLeft size={14} />}
+        data-testid={TestSelectors.VENUES_ADD_BACK_BUTTON}
+        onClick={() => void navigate({ to: "/venues" })}
+        mb="md"
+      >
+        <Trans>Back to list</Trans>
+      </Button>
 
       <Stack gap={4} mb="xl">
         <Text size="xs" fw={600} tt="uppercase" c="red.6" style={{ letterSpacing: "0.07em" }}>
