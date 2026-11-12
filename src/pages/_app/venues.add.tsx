@@ -28,7 +28,7 @@ import {
   IconX,
 } from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { PageTitle } from "@/shared/lib/page-title";
 import { TestSelectors } from "@/shared/lib/test-selectors";
@@ -69,74 +69,17 @@ function formatBytes(bytes: number): string {
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
 }
 
-const KEYFRAMES = `
-@property --vau-angle {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
-}
-@keyframes vau-pulse-ring {
-  0%   { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(91,107,245,0.55); }
-  70%  { transform: scale(1);    box-shadow: 0 0 0 16px rgba(91,107,245,0); }
-  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(91,107,245,0); }
-}
-@keyframes vau-glow-sweep {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-@keyframes vau-sparkle {
-  0%, 100% { opacity: 0.3; transform: scale(0.9) rotate(0deg); }
-  50%       { opacity: 1;   transform: scale(1.15) rotate(20deg); }
-}
-/* Rotating conic highlight that travels around the border while active. */
-@keyframes vau-border-spin {
-  to { --vau-angle: 360deg; }
-}
-/* Pulsing outer bloom so the card edge breathes a soft glow. */
-@keyframes vau-border-bloom {
-  0%, 100% { box-shadow: 0 0 0 1px rgba(91,107,245,0.5), 0 0 12px 0 rgba(91,107,245,0.18), 0 4px 16px rgba(0,0,0,0.12); }
-  50%      { box-shadow: 0 0 0 1px rgba(91,107,245,0.7), 0 0 30px 4px rgba(91,107,245,0.45), 0 4px 16px rgba(0,0,0,0.12); }
-}
-.vau-glow-ring::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1.5px;
-  background: conic-gradient(
-    from var(--vau-angle),
-    transparent 0deg,
-    rgba(59,78,240,0.9) 80deg,
-    rgba(91,107,245,0.95) 150deg,
-    transparent 240deg
-  );
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask-composite: exclude;
-  animation: vau-border-spin 2.6s linear infinite;
-  pointer-events: none;
-  z-index: 2;
-}
-.vau-glow-ring--pro::before {
-  padding: 2px;
-  background: conic-gradient(
-    from var(--vau-angle),
-    transparent 0deg,
-    rgba(139,92,246,0.95) 80deg,
-    rgba(91,107,245,0.95) 150deg,
-    transparent 240deg
-  );
-  animation-duration: 3s;
-}
-`;
+// Card shadows reused from the semantic-search widget so the upload/processing card
+// shares the same "alive" choreography while work is in flight.
+const REST_SHADOW = "0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.1)";
+const ACTIVE_SHADOW = "0 8px 24px rgba(34,139,230,0.22), 0 2px 6px rgba(34,139,230,0.14)";
 
 function AddVenuePage() {
   const { t } = useLingui();
   const navigate = useNavigate();
   const { colorScheme } = useMantineColorScheme();
   const dark = colorScheme === "dark";
+  const reduceMotion = useReducedMotion();
 
   const { stage, progress, venueId, fileName, fileSize, errorMessage, upload, reset } =
     useUploadVenueDocument();
@@ -163,6 +106,8 @@ function AddVenuePage() {
   const isError = stage === "error";
   const isProcessing = stage === "processing";
   const isUploading = stage === "uploading";
+  // Only run the looping card choreography while work is in flight and motion is allowed.
+  const isAnimating = isActive && !reduceMotion;
 
   const handleDrop = async (files: File[]) => {
     const file = files[0];
@@ -214,426 +159,469 @@ function AddVenuePage() {
             ? "rgba(255,255,255,0.12)"
             : "rgba(0,0,0,0.12)";
 
-  const dropzoneShadow = isProcessing
-    ? `0 0 0 1px ${dropzoneBorder},0 0 24px rgba(91,107,245,0.18),0 4px 24px rgba(0,0,0,0.12)`
-    : isDone
-      ? `0 0 0 1px ${dropzoneBorder},0 0 20px rgba(47,158,68,0.15),0 4px 20px rgba(0,0,0,0.08)`
-      : `0 0 0 1px ${dropzoneBorder},0 4px 16px rgba(0,0,0,${dark ? "0.3" : "0.06"})`;
-
-  const iconRingStyle: React.CSSProperties = isProcessing
-    ? {
-        animation: "vau-pulse-ring 2s ease-in-out infinite",
-        borderRadius: "50%",
-        display: "inline-flex",
-      }
-    : {};
-
   return (
-    <>
-      <style>{KEYFRAMES}</style>
-      <Container size="lg" py="xl">
-        <PageTitle segments={[t`Add a venue`, t`Venues`]} />
+    <Container size="lg" py="xl">
+      <PageTitle segments={[t`Add a venue`, t`Venues`]} />
 
-        <Stack gap={4} mb="xl">
-          <Text size="xs" fw={600} tt="uppercase" c="red.6" style={{ letterSpacing: "0.07em" }}>
-            <Trans>Add to catalog</Trans>
-          </Text>
-          <Title order={1} fw={700} size="h1">
-            <Trans>Add a venue</Trans>
-          </Title>
-          <Text c="dimmed" size="sm" mt={2}>
-            <Trans>
-              Upload the venue's own document and we'll structure it — or enter the details by hand.
-            </Trans>
-          </Text>
-          <Text size="xs" c="dimmed">
-            <Trans>Accepted formats: PDF, Word, Excel, CSV, JPEG, PNG, WebP · Max 5 MB</Trans>
-          </Text>
-        </Stack>
+      <Stack gap={4} mb="xl">
+        <Text size="xs" fw={600} tt="uppercase" c="red.6" style={{ letterSpacing: "0.07em" }}>
+          <Trans>Add to catalog</Trans>
+        </Text>
+        <Title order={1} fw={700} size="h1">
+          <Trans>Add a venue</Trans>
+        </Title>
+        <Text c="dimmed" size="sm" mt={2}>
+          <Trans>
+            Upload the venue's own document and we'll structure it — or enter the details by hand.
+          </Trans>
+        </Text>
+        <Text size="xs" c="dimmed">
+          <Trans>Accepted formats: PDF, Word, Excel, CSV, JPEG, PNG, WebP · Max 5 MB</Trans>
+        </Text>
+      </Stack>
 
-        <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="lg" style={{ alignItems: "stretch" }}>
-          {/* ── File upload card — exits on navigate ─────────────────────── */}
-          <AnimatePresence mode="wait">
-            {!isExiting ? (
-              <motion.div
-                key="dropzone-card"
-                initial={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.94, y: -10 }}
-                transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
-                style={{ display: "flex", flexDirection: "column" }}
+      <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="lg" style={{ alignItems: "stretch" }}>
+        {/* ── File upload card — exits on navigate ─────────────────────── */}
+        <AnimatePresence mode="wait">
+          {!isExiting ? (
+            <motion.div
+              key="dropzone-card"
+              initial={{ opacity: 1, scale: 1, y: 0 }}
+              animate={{
+                opacity: 1,
+                scale: 1,
+                y: 0,
+                boxShadow: isAnimating ? [REST_SHADOW, ACTIVE_SHADOW, REST_SHADOW] : REST_SHADOW,
+              }}
+              exit={{ opacity: 0, scale: 0.94, y: -10 }}
+              transition={{
+                duration: 0.35,
+                ease: [0.4, 0, 0.2, 1],
+                boxShadow: isAnimating
+                  ? { duration: 2.2, repeat: Infinity, ease: "easeInOut" }
+                  : { duration: 0.4, ease: "easeOut" },
+              }}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                borderRadius: "var(--mantine-radius-lg)",
+              }}
+            >
+              <Dropzone
+                onDrop={(files) => void handleDrop(files)}
+                accept={ACCEPTED_TYPES}
+                maxSize={MAX_FILE_SIZE}
+                disabled={isActive}
+                loading={false}
+                maxFiles={1}
+                data-testid={TestSelectors.VENUES_ADD_CHOOSE_FILE}
+                styles={{
+                  root: {
+                    borderRadius: "var(--mantine-radius-lg)",
+                    borderStyle: "solid",
+                    borderWidth: 1,
+                    borderColor: dropzoneBorder,
+                    padding: "var(--mantine-spacing-xl)",
+                    minHeight: 320,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    background: dropzoneGradient,
+                    transition: "border-color 0.3s, background 0.4s",
+                    cursor: isActive ? "default" : "pointer",
+                    overflow: "hidden",
+                    position: "relative",
+                    flex: 1,
+                  },
+                }}
               >
-                <Dropzone
-                  onDrop={(files) => void handleDrop(files)}
-                  accept={ACCEPTED_TYPES}
-                  maxSize={MAX_FILE_SIZE}
-                  disabled={isActive}
-                  loading={false}
-                  maxFiles={1}
-                  data-testid={TestSelectors.VENUES_ADD_CHOOSE_FILE}
-                  className={
-                    isActive
-                      ? `vau-glow-ring${isProcessing ? " vau-glow-ring--pro" : ""}`
-                      : undefined
+                {/* Flowing gradient accent bar on the left edge */}
+                <motion.div
+                  animate={
+                    isAnimating
+                      ? { backgroundPosition: ["0% 0%", "0% 200%"] }
+                      : { backgroundPosition: "0% 0%" }
                   }
-                  styles={{
-                    root: {
-                      borderRadius: "var(--mantine-radius-lg)",
-                      borderStyle: "solid",
-                      borderWidth: 1,
-                      borderColor: dropzoneBorder,
-                      padding: "var(--mantine-spacing-xl)",
-                      minHeight: 320,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      background: dropzoneGradient,
-                      boxShadow: dropzoneShadow,
-                      transition: "border-color 0.3s, box-shadow 0.3s, background 0.4s",
-                      cursor: isActive ? "default" : "pointer",
-                      overflow: "hidden",
-                      position: "relative",
-                      flex: 1,
-                      animation: isActive
-                        ? "vau-border-bloom 2.4s ease-in-out infinite"
-                        : undefined,
-                    },
+                  transition={
+                    isAnimating
+                      ? { duration: 2.2, repeat: Infinity, ease: "linear" }
+                      : { duration: 0.6, ease: "easeOut" }
+                  }
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    bottom: 0,
+                    width: 4,
+                    zIndex: 1,
+                    backgroundImage:
+                      "linear-gradient(180deg, var(--mantine-color-blue-filled) 0%, var(--mantine-color-cyan-filled) 50%, var(--mantine-color-blue-filled) 100%)",
+                    backgroundSize: "100% 200%",
                   }}
-                >
-                  {/* Animated sweep overlay during AI processing */}
-                  {isProcessing && (
-                    <Box
-                      style={{
-                        position: "absolute",
-                        inset: 0,
-                        background:
-                          "linear-gradient(270deg,rgba(91,107,245,0.07),rgba(139,92,246,0.07),rgba(59,130,246,0.07),rgba(91,107,245,0.07))",
-                        backgroundSize: "400% 400%",
-                        animation: "vau-glow-sweep 4s ease infinite",
-                        pointerEvents: "none",
-                        borderRadius: "inherit",
-                      }}
-                    />
-                  )}
+                />
 
-                  <Stack
-                    align="center"
-                    gap="md"
-                    ta="center"
-                    style={{ position: "relative", zIndex: 1 }}
-                  >
-                    {/* Icons */}
-                    <Dropzone.Accept>
+                {/* Light sweep that travels across the card while work is running */}
+                {isAnimating && (
+                  <motion.div
+                    initial={{ x: "-150%" }}
+                    animate={{ x: "400%" }}
+                    transition={{
+                      duration: 1.8,
+                      repeat: Infinity,
+                      repeatDelay: 0.3,
+                      ease: "easeInOut",
+                    }}
+                    style={{
+                      position: "absolute",
+                      top: 0,
+                      bottom: 0,
+                      width: "35%",
+                      zIndex: 0,
+                      pointerEvents: "none",
+                      background:
+                        "linear-gradient(90deg, transparent, rgba(34,139,230,0.12), transparent)",
+                    }}
+                  />
+                )}
+
+                <Stack
+                  align="center"
+                  gap="md"
+                  ta="center"
+                  style={{ position: "relative", zIndex: 1 }}
+                >
+                  {/* Icons */}
+                  <Dropzone.Accept>
+                    <ThemeIcon
+                      size={64}
+                      radius="xl"
+                      variant="gradient"
+                      gradient={{ from: "blue", to: "indigo" }}
+                    >
+                      <IconUpload size={30} />
+                    </ThemeIcon>
+                  </Dropzone.Accept>
+                  <Dropzone.Reject>
+                    <ThemeIcon
+                      size={64}
+                      radius="xl"
+                      variant="gradient"
+                      gradient={{ from: "red.5", to: "red.7" }}
+                    >
+                      <IconX size={30} />
+                    </ThemeIcon>
+                  </Dropzone.Reject>
+                  <Dropzone.Idle>
+                    {isDone ? (
+                      <ThemeIcon
+                        size={64}
+                        radius="xl"
+                        variant="gradient"
+                        gradient={{ from: "teal", to: "green" }}
+                        style={{ boxShadow: "0 0 20px rgba(47,158,68,0.35)" }}
+                      >
+                        <IconCheck size={30} />
+                      </ThemeIcon>
+                    ) : isError ? (
+                      <ThemeIcon
+                        size={64}
+                        radius="xl"
+                        variant="light"
+                        color="red"
+                        style={{ boxShadow: "0 0 16px rgba(224,49,49,0.25)" }}
+                      >
+                        <IconAlertCircle size={30} />
+                      </ThemeIcon>
+                    ) : isProcessing ? (
+                      <motion.div
+                        animate={
+                          isAnimating
+                            ? { rotate: [0, 14, -8, 0], scale: [1, 1.18, 1] }
+                            : { rotate: 0, scale: 1 }
+                        }
+                        transition={
+                          isAnimating
+                            ? { duration: 2.4, repeat: Infinity, ease: "easeInOut" }
+                            : { type: "spring", stiffness: 400, damping: 20 }
+                        }
+                        style={{ display: "inline-flex" }}
+                      >
+                        <ThemeIcon
+                          size={64}
+                          radius="xl"
+                          variant="gradient"
+                          gradient={{ from: "#5b6bf5", to: "#8b5cf6" }}
+                          style={{ boxShadow: "0 0 24px rgba(91,107,245,0.4)" }}
+                        >
+                          <IconSparkles size={30} />
+                        </ThemeIcon>
+                      </motion.div>
+                    ) : isActive ? (
                       <ThemeIcon
                         size={64}
                         radius="xl"
                         variant="gradient"
                         gradient={{ from: "blue", to: "indigo" }}
+                        style={{ boxShadow: "0 0 20px rgba(59,78,240,0.3)" }}
                       >
                         <IconUpload size={30} />
                       </ThemeIcon>
-                    </Dropzone.Accept>
-                    <Dropzone.Reject>
-                      <ThemeIcon
-                        size={64}
-                        radius="xl"
-                        variant="gradient"
-                        gradient={{ from: "red.5", to: "red.7" }}
-                      >
-                        <IconX size={30} />
+                    ) : (
+                      <ThemeIcon size={64} radius="xl" variant="light" color="gray">
+                        <IconFileText size={30} />
                       </ThemeIcon>
-                    </Dropzone.Reject>
-                    <Dropzone.Idle>
-                      {isDone ? (
-                        <ThemeIcon
-                          size={64}
-                          radius="xl"
-                          variant="gradient"
-                          gradient={{ from: "teal", to: "green" }}
-                          style={{ boxShadow: "0 0 20px rgba(47,158,68,0.35)" }}
-                        >
-                          <IconCheck size={30} />
-                        </ThemeIcon>
-                      ) : isError ? (
-                        <ThemeIcon
-                          size={64}
-                          radius="xl"
-                          variant="light"
-                          color="red"
-                          style={{ boxShadow: "0 0 16px rgba(224,49,49,0.25)" }}
-                        >
-                          <IconAlertCircle size={30} />
-                        </ThemeIcon>
-                      ) : isProcessing ? (
-                        <Box style={iconRingStyle}>
-                          <ThemeIcon
-                            size={64}
-                            radius="xl"
-                            variant="gradient"
-                            gradient={{ from: "#5b6bf5", to: "#8b5cf6" }}
-                            style={{ boxShadow: "0 0 24px rgba(91,107,245,0.4)" }}
-                          >
-                            <IconSparkles
-                              size={30}
-                              style={{ animation: "vau-sparkle 2s ease-in-out infinite" }}
-                            />
-                          </ThemeIcon>
-                        </Box>
-                      ) : isActive ? (
-                        <ThemeIcon
-                          size={64}
-                          radius="xl"
-                          variant="gradient"
-                          gradient={{ from: "blue", to: "indigo" }}
-                          style={{ boxShadow: "0 0 20px rgba(59,78,240,0.3)" }}
-                        >
-                          <IconUpload size={30} />
-                        </ThemeIcon>
-                      ) : (
-                        <ThemeIcon size={64} radius="xl" variant="light" color="gray">
-                          <IconFileText size={30} />
-                        </ThemeIcon>
-                      )}
-                    </Dropzone.Idle>
-
-                    {/* Idle description */}
-                    {!isActive && !isDone && !isError && (
-                      <Stack gap={6}>
-                        <Text fw={700} size="md">
-                          <Trans>Drop a venue file to structure it</Trans>
-                        </Text>
-                        <Text size="sm" c="dimmed" maw={340}>
-                          <Trans>
-                            Floor plans, capacity sheets, rate cards or brochures — PDF, image or
-                            spreadsheet. We read capacity, pricing, catering and technical detail
-                            into the library.
-                          </Trans>
-                        </Text>
-                      </Stack>
                     )}
+                  </Dropzone.Idle>
 
-                    {/* File identity chip */}
-                    {(isActive || isDone || isError) && fileName && (
-                      <Box
-                        style={{
-                          background: dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)",
-                          border: `1px solid ${dark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)"}`,
-                          borderRadius: "var(--mantine-radius-sm)",
-                          padding: "6px 12px",
-                        }}
-                      >
-                        <Group gap={6} justify="center">
-                          <IconFileText size={13} style={{ opacity: 0.5, flexShrink: 0 }} />
-                          <Text size="sm" fw={500} lineClamp={1} maw={220}>
-                            {fileName}
+                  {/* Idle description */}
+                  {!isActive && !isDone && !isError && (
+                    <Stack gap={6}>
+                      <Text fw={700} size="md">
+                        <Trans>Drop a venue file to structure it</Trans>
+                      </Text>
+                      <Text size="sm" c="dimmed" maw={340}>
+                        <Trans>
+                          Floor plans, capacity sheets, rate cards or brochures — PDF, image or
+                          spreadsheet. We read capacity, pricing, catering and technical detail into
+                          the library.
+                        </Trans>
+                      </Text>
+                    </Stack>
+                  )}
+
+                  {/* File identity chip */}
+                  {(isActive || isDone || isError) && fileName && (
+                    <Box
+                      style={{
+                        background: dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)",
+                        border: `1px solid ${dark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)"}`,
+                        borderRadius: "var(--mantine-radius-sm)",
+                        padding: "6px 12px",
+                      }}
+                    >
+                      <Group gap={6} justify="center">
+                        <IconFileText size={13} style={{ opacity: 0.5, flexShrink: 0 }} />
+                        <Text size="sm" fw={500} lineClamp={1} maw={220}>
+                          {fileName}
+                        </Text>
+                        {fileSize != null && (
+                          <Text size="xs" c="dimmed" style={{ flexShrink: 0 }}>
+                            {formatBytes(fileSize)}
                           </Text>
-                          {fileSize != null && (
-                            <Text size="xs" c="dimmed" style={{ flexShrink: 0 }}>
-                              {formatBytes(fileSize)}
-                            </Text>
+                        )}
+                      </Group>
+                    </Box>
+                  )}
+
+                  {/* Progress area */}
+                  {isActive && (
+                    <Stack gap={8} w="100%" maw={300}>
+                      <Group justify="space-between" gap="xs">
+                        <Text
+                          size="xs"
+                          c={isProcessing ? "violet.4" : "dimmed"}
+                          fw={isProcessing ? 600 : 400}
+                        >
+                          {STAGE_LABELS[stage] ?? stage}
+                        </Text>
+                        <Group gap={6}>
+                          {isUploading && (
+                            <Badge variant="light" color="blue" size="xs">
+                              {progress}%
+                            </Badge>
+                          )}
+                          {isProcessing && (
+                            <>
+                              <Badge
+                                variant="gradient"
+                                gradient={{ from: "#5b6bf5", to: "#8b5cf6" }}
+                                size="xs"
+                              >
+                                AI
+                              </Badge>
+                              <Text
+                                size="xs"
+                                c="dimmed"
+                                style={{ fontVariantNumeric: "tabular-nums" }}
+                              >
+                                {elapsedSeconds}s
+                              </Text>
+                            </>
                           )}
                         </Group>
-                      </Box>
-                    )}
+                      </Group>
 
-                    {/* Progress area */}
-                    {isActive && (
-                      <Stack gap={8} w="100%" maw={300}>
-                        <Group justify="space-between" gap="xs">
-                          <Text
-                            size="xs"
-                            c={isProcessing ? "violet.4" : "dimmed"}
-                            fw={isProcessing ? 600 : 400}
-                          >
-                            {STAGE_LABELS[stage] ?? stage}
-                          </Text>
-                          <Group gap={6}>
-                            {isUploading && (
-                              <Badge variant="light" color="blue" size="xs">
-                                {progress}%
-                              </Badge>
-                            )}
-                            {isProcessing && (
-                              <>
-                                <Badge
-                                  variant="gradient"
-                                  gradient={{ from: "#5b6bf5", to: "#8b5cf6" }}
-                                  size="xs"
-                                >
-                                  AI
-                                </Badge>
-                                <Text
-                                  size="xs"
-                                  c="dimmed"
-                                  style={{ fontVariantNumeric: "tabular-nums" }}
-                                >
-                                  {elapsedSeconds}s
-                                </Text>
-                              </>
-                            )}
-                          </Group>
-                        </Group>
-
-                        {isUploading ? (
-                          <Progress
-                            value={progress}
-                            size="md"
-                            radius="xl"
-                            color="blue"
-                            style={{ boxShadow: "0 0 8px rgba(59,78,240,0.3)" }}
-                          />
-                        ) : isProcessing ? (
-                          <Box
-                            style={{
-                              height: 6,
-                              borderRadius: 999,
-                              overflow: "hidden",
-                              background: dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)",
-                            }}
-                          >
-                            <Box
-                              style={{
-                                height: "100%",
-                                width: "100%",
-                                background:
-                                  "linear-gradient(90deg,#5b6bf5,#8b5cf6,#3b82f6,#5b6bf5)",
-                                backgroundSize: "200% 100%",
-                                animation: "vau-glow-sweep 2s linear infinite",
-                                borderRadius: 999,
-                                boxShadow: "0 0 10px rgba(91,107,245,0.5)",
-                              }}
-                            />
-                          </Box>
-                        ) : (
-                          <Progress value={100} animated size="md" radius="xl" color="blue" />
-                        )}
-                      </Stack>
-                    )}
-
-                    {/* Done: view venue */}
-                    {isDone && venueId && (
-                      <Button
-                        variant="gradient"
-                        gradient={{ from: "teal", to: "green", deg: 135 }}
-                        size="sm"
-                        rightSection={<IconExternalLink size={14} />}
-                        style={{ boxShadow: "0 4px 16px rgba(47,158,68,0.3)" }}
-                        onClick={() => handleViewVenue(venueId)}
-                      >
-                        <Trans>View venue</Trans>
-                      </Button>
-                    )}
-
-                    {/* Error: reason + retry */}
-                    {isError && (
-                      <Stack gap={6} align="center">
-                        {errorMessage && (
-                          <Text size="xs" c="red.4" maw={300} ta="center">
-                            {errorMessage}
-                          </Text>
-                        )}
-                        <Button
-                          size="xs"
-                          variant="light"
-                          color="red"
-                          onClick={reset}
-                          style={{ boxShadow: "0 2px 8px rgba(224,49,49,0.2)" }}
+                      {isUploading ? (
+                        <Progress
+                          value={progress}
+                          size="md"
+                          radius="xl"
+                          color="blue"
+                          style={{ boxShadow: "0 0 8px rgba(59,78,240,0.3)" }}
+                        />
+                      ) : isProcessing ? (
+                        <Box
+                          style={{
+                            height: 6,
+                            borderRadius: 999,
+                            overflow: "hidden",
+                            background: dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)",
+                          }}
                         >
-                          <Trans>Try again</Trans>
-                        </Button>
-                      </Stack>
-                    )}
+                          <motion.div
+                            animate={
+                              reduceMotion
+                                ? { backgroundPosition: "0% 50%" }
+                                : {
+                                    backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                                  }
+                            }
+                            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                            style={{
+                              height: "100%",
+                              width: "100%",
+                              background: "linear-gradient(90deg,#5b6bf5,#8b5cf6,#3b82f6,#5b6bf5)",
+                              backgroundSize: "200% 100%",
+                              borderRadius: 999,
+                              boxShadow: "0 0 10px rgba(91,107,245,0.5)",
+                            }}
+                          />
+                        </Box>
+                      ) : (
+                        <Progress value={100} animated size="md" radius="xl" color="blue" />
+                      )}
+                    </Stack>
+                  )}
 
-                    {/* Idle: choose file */}
-                    {!isActive && !isDone && !isError && (
+                  {/* Done: view venue */}
+                  {isDone && venueId && (
+                    <Button
+                      variant="gradient"
+                      gradient={{ from: "teal", to: "green", deg: 135 }}
+                      size="sm"
+                      rightSection={<IconExternalLink size={14} />}
+                      style={{ boxShadow: "0 4px 16px rgba(47,158,68,0.3)" }}
+                      onClick={(event) => {
+                        // The dropzone root opens the file picker on click — don't let the
+                        // "View venue" click bubble into it.
+                        event.stopPropagation();
+                        handleViewVenue(venueId);
+                      }}
+                    >
+                      <Trans>View venue</Trans>
+                    </Button>
+                  )}
+
+                  {/* Error: reason + retry */}
+                  {isError && (
+                    <Stack gap={6} align="center">
+                      {errorMessage && (
+                        <Text size="xs" c="red.4" maw={300} ta="center">
+                          {errorMessage}
+                        </Text>
+                      )}
                       <Button
-                        variant="gradient"
-                        gradient={{ from: "blue", to: "indigo", deg: 135 }}
-                        leftSection={<IconUpload size={14} />}
-                        size="sm"
-                        style={{ boxShadow: "0 4px 16px rgba(59,78,240,0.3)" }}
+                        size="xs"
+                        variant="light"
+                        color="red"
+                        onClick={reset}
+                        style={{ boxShadow: "0 2px 8px rgba(224,49,49,0.2)" }}
                       >
-                        <Trans>Choose a file</Trans>
+                        <Trans>Try again</Trans>
                       </Button>
-                    )}
-                  </Stack>
-                </Dropzone>
-              </motion.div>
-            ) : (
-              // Placeholder keeps the grid stable while exit plays
-              <div style={{ minHeight: 320 }} />
-            )}
-          </AnimatePresence>
+                    </Stack>
+                  )}
 
-          {/* ── Manual entry card ─────────────────────────────────────────── */}
-          <Paper
-            withBorder
-            radius="lg"
-            p="xl"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              minHeight: 320,
-              background: dark
-                ? "linear-gradient(135deg,#1a2436 0%,#1e2744 100%)"
-                : "linear-gradient(135deg,#ffffff 0%,#f8f9ff 100%)",
-              boxShadow: dark
-                ? "0 2px 16px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.04)"
-                : "0 2px 16px rgba(0,0,0,0.06),inset 0 1px 0 rgba(255,255,255,0.8)",
-              borderColor: dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)",
-            }}
-          >
-            <Stack gap="md">
-              <ThemeIcon
-                size={48}
-                radius="xl"
-                variant="light"
-                color="gray"
+                  {/* Idle: choose file */}
+                  {!isActive && !isDone && !isError && (
+                    <Button
+                      variant="gradient"
+                      gradient={{ from: "blue", to: "indigo", deg: 135 }}
+                      leftSection={<IconUpload size={14} />}
+                      size="sm"
+                      style={{ boxShadow: "0 4px 16px rgba(59,78,240,0.3)" }}
+                    >
+                      <Trans>Choose a file</Trans>
+                    </Button>
+                  )}
+                </Stack>
+              </Dropzone>
+            </motion.div>
+          ) : (
+            // Placeholder keeps the grid stable while exit plays
+            <div style={{ minHeight: 320 }} />
+          )}
+        </AnimatePresence>
+
+        {/* ── Manual entry card ─────────────────────────────────────────── */}
+        <Paper
+          withBorder
+          radius="lg"
+          p="xl"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            minHeight: 320,
+            background: dark
+              ? "linear-gradient(135deg,#1a2436 0%,#1e2744 100%)"
+              : "linear-gradient(135deg,#ffffff 0%,#f8f9ff 100%)",
+            boxShadow: dark
+              ? "0 2px 16px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.04)"
+              : "0 2px 16px rgba(0,0,0,0.06),inset 0 1px 0 rgba(255,255,255,0.8)",
+            borderColor: dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)",
+          }}
+        >
+          <Stack gap="md">
+            <ThemeIcon
+              size={48}
+              radius="xl"
+              variant="light"
+              color="gray"
+              style={{
+                background: dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)",
+                border: `1px solid ${dark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)"}`,
+              }}
+            >
+              <IconPencil size={22} />
+            </ThemeIcon>
+
+            <Stack gap={6}>
+              <Text fw={700} size="md">
+                <Trans>Or enter it yourself</Trans>
+              </Text>
+              <Text size="sm" c="dimmed" maw={300}>
+                <Trans>
+                  Faster when you already know the space — you can add the venue file later.
+                </Trans>
+              </Text>
+            </Stack>
+
+            <Group>
+              <Button
+                variant="default"
+                size="sm"
+                data-testid={TestSelectors.VENUES_ADD_BLANK_BUTTON}
+                disabled={isActive}
+                onClick={() => void navigate({ to: "/venues/create" })}
                 style={{
-                  background: dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)",
-                  border: `1px solid ${dark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)"}`,
+                  boxShadow: dark
+                    ? "0 1px 4px rgba(0,0,0,0.4),inset 0 1px 0 rgba(255,255,255,0.06)"
+                    : "0 1px 4px rgba(0,0,0,0.08),inset 0 1px 0 rgba(255,255,255,0.9)",
                 }}
               >
-                <IconPencil size={22} />
-              </ThemeIcon>
+                <Trans>Start from a blank venue</Trans>
+              </Button>
+            </Group>
 
-              <Stack gap={6}>
-                <Text fw={700} size="md">
-                  <Trans>Or enter it yourself</Trans>
-                </Text>
-                <Text size="sm" c="dimmed" maw={300}>
-                  <Trans>
-                    Faster when you already know the space — you can add the venue file later.
-                  </Trans>
-                </Text>
-              </Stack>
-
-              <Group>
-                <Button
-                  variant="default"
-                  size="sm"
-                  data-testid={TestSelectors.VENUES_ADD_BLANK_BUTTON}
-                  disabled={isActive}
-                  onClick={() => void navigate({ to: "/venues/create" })}
-                  style={{
-                    boxShadow: dark
-                      ? "0 1px 4px rgba(0,0,0,0.4),inset 0 1px 0 rgba(255,255,255,0.06)"
-                      : "0 1px 4px rgba(0,0,0,0.08),inset 0 1px 0 rgba(255,255,255,0.9)",
-                  }}
-                >
-                  <Trans>Start from a blank venue</Trans>
-                </Button>
-              </Group>
-
-              {isDone && (
-                <Anchor size="xs" c="dimmed" component="button" onClick={reset}>
-                  <Trans>Upload another file</Trans>
-                </Anchor>
-              )}
-            </Stack>
-          </Paper>
-        </SimpleGrid>
-      </Container>
-    </>
+            {isDone && (
+              <Anchor size="xs" c="dimmed" component="button" onClick={reset}>
+                <Trans>Upload another file</Trans>
+              </Anchor>
+            )}
+          </Stack>
+        </Paper>
+      </SimpleGrid>
+    </Container>
   );
 }
