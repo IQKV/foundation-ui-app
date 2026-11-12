@@ -134,15 +134,6 @@ export const catalogApi = {
     httpClient
       .get<VenueAssetFullListResponse>(`/v1/catalog/venues/${venueId}/assets`)
       .then((r) => r.data),
-
-  // Presigned GET URL for one asset — TENANT_OWNER / MEMBER.
-  // Lets the browser render the object inline in the Assets tab preview modal.
-  previewUrl: (venueId: string, assetId: string) =>
-    httpClient
-      .get<VenueAssetPreviewUrlResponse>(
-        `/v1/catalog/venues/${venueId}/assets/${assetId}/preview-url`,
-      )
-      .then((r) => r.data),
 };
 
 // ─── Venue asset upload ───────────────────────────────────────────────────────
@@ -198,6 +189,15 @@ export const venueAssetApi = {
   confirmUpload: (venueId: string, assetId: string, data: ConfirmAssetUploadRequest) =>
     httpClient
       .post<VenueAssetResponse>(`/v1/catalog/venues/${venueId}/assets/${assetId}/confirm`, data)
+      .then((r) => r.data),
+
+  // Presigned GET URL for one asset — TENANT_OWNER / MEMBER.
+  // Lets the browser render the object inline in the Assets tab preview modal.
+  previewUrl: (venueId: string, assetId: string) =>
+    httpClient
+      .get<VenueAssetPreviewUrlResponse>(
+        `/v1/catalog/venues/${venueId}/assets/${assetId}/preview-url`,
+      )
       .then((r) => r.data),
 };
 
