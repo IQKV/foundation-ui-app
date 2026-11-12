@@ -330,6 +330,10 @@ msgid "Are you sure?"
 msgstr "Sind Sie sicher?"
 
 #: src/pages/_app/venues.$venueId.tsx
+msgid "Asset deleted."
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.tsx
 msgid "Asset uploaded."
 msgstr ""
 
@@ -386,6 +390,7 @@ msgstr "Zurück zur <0>Anmeldung</0>"
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
 #: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues.add.tsx
 msgid "Back to list"
 msgstr "Zurück zur Liste"
 
@@ -456,6 +461,7 @@ msgstr "Abrechnungsportal nicht verfügbar"
 #: src/features/member-role/ui/update-member-authorities-modal.tsx
 #: src/features/page-admin/ui/delete-page-modal.tsx
 #: src/pages/_app/cms-pages.create.tsx
+#: src/pages/_app/venues.$venueId.tsx
 msgid "Cancel"
 msgstr "Abbrechen"
 
@@ -488,6 +494,10 @@ msgstr "Passwort ändern"
 #: src/features/manage-organization/ui/member-actions.tsx
 msgid "Change Role"
 msgstr "Rolle ändern"
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "characters"
+msgstr ""
 
 #: src/features/magic-link/ui/magic-link-initiate-form.tsx
 msgid "Check your email"
@@ -683,6 +693,10 @@ msgstr "Seite konnte nicht erstellt werden. Bitte überprüfen Sie das Formular 
 #: src/pages/_app/settings/security.tsx
 msgid "Could not delete SSO configuration."
 msgstr "SSO-Konfiguration konnte nicht gelöscht werden."
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Could not delete the asset."
+msgstr ""
 
 #: src/features/page-admin/ui/delete-page-modal.tsx
 msgid "Could not delete the page. It may be published."
@@ -899,6 +913,14 @@ msgstr "Standard-Gebietsschema — erforderlich"
 #: src/pages/_app/venues.index.tsx
 msgid "Delete"
 msgstr "Löschen"
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Delete asset"
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Delete asset?"
+msgstr ""
 
 #: src/features/manage-venue/ui/bulk-delete-venues-modal.tsx
 #: src/features/manage-venue/ui/delete-venue-modal.tsx
@@ -1845,6 +1867,10 @@ msgstr "Keine Ergebnisse"
 msgid "No roles assigned."
 msgstr "Keine Rollen zugewiesen."
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "No sources for this venue."
+msgstr ""
+
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "No translations added. At least the default locale is required."
 msgstr "Keine Übersetzungen hinzugefügt. Mindestens das Standard-Gebietsschema ist erforderlich."
@@ -2679,6 +2705,10 @@ msgstr "Bei Ihrer Zahlung ist ein Fehler aufgetreten. Bitte versuchen Sie es ern
 msgid "Something went wrong. Please try again."
 msgstr "Etwas ist schief gelaufen. Bitte versuchen Sie es erneut."
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Sources"
+msgstr ""
+
 #: src/features/signup/ui/password-strength.tsx
 msgid "Special character"
 msgstr "Sonderzeichen"
@@ -2799,6 +2829,10 @@ msgstr "Mandanten-SSO-Konfiguration"
 #: src/features/invite-member/ui/send-invitation-modal.tsx
 msgid "TENANT_OWNER cannot be granted via invitation"
 msgstr "TENANT_OWNER kann nicht per Einladung vergeben werden"
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Text"
+msgstr ""
 
 #: src/pages/_app/billing/success.tsx
 msgid "Thank you for your subscription. Your account has been upgraded."

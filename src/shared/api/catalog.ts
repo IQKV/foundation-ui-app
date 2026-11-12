@@ -9,6 +9,8 @@ import type {
   VenueAssetFullListResponse,
   VenueAssetPreviewUrlResponse,
   VenueAssetImportStatus,
+  VenueTextContent,
+  VenueTextContentListResponse,
 } from "@/entities/venue";
 
 export type {
@@ -21,6 +23,8 @@ export type {
   VenueAssetFullListResponse,
   VenueAssetPreviewUrlResponse,
   VenueAssetImportStatus,
+  VenueTextContent,
+  VenueTextContentListResponse,
 } from "@/entities/venue";
 
 // ─── Tenant-scoped Catalog API ────────────────────────────────────────────────
@@ -133,6 +137,13 @@ export const catalogApi = {
   listVenueAssets: (venueId: string) =>
     httpClient
       .get<VenueAssetFullListResponse>(`/v1/catalog/venues/${venueId}/assets`)
+      .then((r) => r.data),
+
+  // Text-content rows (extracted source chunks) linked to a venue — TENANT_OWNER / MEMBER.
+  // Used by the venue detail Sources tab.
+  listVenueTextContents: (venueId: string) =>
+    httpClient
+      .get<VenueTextContentListResponse>(`/v1/catalog/venue-text-contents/venue/${venueId}`)
       .then((r) => r.data),
 };
 

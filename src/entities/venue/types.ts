@@ -81,6 +81,24 @@ export interface VenueAssetFullListResponse {
 }
 
 /**
+ * One venue text-content row (`VenueTextContentResponse`) — a raw or markdown
+ * text chunk extracted from a venue source document.
+ */
+export interface VenueTextContent {
+  id: string;
+  venueId: string | null;
+  sourceAssetId: string | null;
+  content: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface VenueTextContentListResponse {
+  items: VenueTextContent[];
+  totalElements: number;
+}
+
+/**
  * Presigned preview URL for one asset
  * (GET /venues/{id}/assets/{assetId}/preview-url) — lets the browser render the stored object
  * inline, images and PDFs alike.

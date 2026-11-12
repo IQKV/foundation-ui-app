@@ -330,6 +330,10 @@ msgid "Are you sure?"
 msgstr "Сигурни ли сте?"
 
 #: src/pages/_app/venues.$venueId.tsx
+msgid "Asset deleted."
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.tsx
 msgid "Asset uploaded."
 msgstr ""
 
@@ -386,6 +390,7 @@ msgstr "Обратно към <0>Вход</0>"
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
 #: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues.add.tsx
 msgid "Back to list"
 msgstr "Обратно към списъка"
 
@@ -456,6 +461,7 @@ msgstr "Порталът за фактуриране е недостъпен"
 #: src/features/member-role/ui/update-member-authorities-modal.tsx
 #: src/features/page-admin/ui/delete-page-modal.tsx
 #: src/pages/_app/cms-pages.create.tsx
+#: src/pages/_app/venues.$venueId.tsx
 msgid "Cancel"
 msgstr "Отказ"
 
@@ -488,6 +494,10 @@ msgstr "Промяна на парола"
 #: src/features/manage-organization/ui/member-actions.tsx
 msgid "Change Role"
 msgstr "Промяна на роля"
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "characters"
+msgstr ""
 
 #: src/features/magic-link/ui/magic-link-initiate-form.tsx
 msgid "Check your email"
@@ -683,6 +693,10 @@ msgstr "Не може да се създаде страницата. Моля, �
 #: src/pages/_app/settings/security.tsx
 msgid "Could not delete SSO configuration."
 msgstr "Не може да се изтрие SSO конфигурацията."
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Could not delete the asset."
+msgstr ""
 
 #: src/features/page-admin/ui/delete-page-modal.tsx
 msgid "Could not delete the page. It may be published."
@@ -899,6 +913,14 @@ msgstr "Локал по подразбиране — задължителен"
 #: src/pages/_app/venues.index.tsx
 msgid "Delete"
 msgstr "Изтрий"
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Delete asset"
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Delete asset?"
+msgstr ""
 
 #: src/features/manage-venue/ui/bulk-delete-venues-modal.tsx
 #: src/features/manage-venue/ui/delete-venue-modal.tsx
@@ -1845,6 +1867,10 @@ msgstr "Няма резултати"
 msgid "No roles assigned."
 msgstr "Не са присвоени роли."
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "No sources for this venue."
+msgstr ""
+
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "No translations added. At least the default locale is required."
 msgstr "Не са добавени преводи. Необходим е поне локалът по подразбиране."
@@ -2679,6 +2705,10 @@ msgstr "Нещо се обърка с плащането ви. Моля, опи�
 msgid "Something went wrong. Please try again."
 msgstr "Нещо се обърка. Моля, опитайте отново."
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Sources"
+msgstr ""
+
 #: src/features/signup/ui/password-strength.tsx
 msgid "Special character"
 msgstr "Специален символ"
@@ -2799,6 +2829,10 @@ msgstr ""
 #: src/features/invite-member/ui/send-invitation-modal.tsx
 msgid "TENANT_OWNER cannot be granted via invitation"
 msgstr "TENANT_OWNER не може да бъде предоставен чрез покана"
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Text"
+msgstr ""
 
 #: src/pages/_app/billing/success.tsx
 msgid "Thank you for your subscription. Your account has been upgraded."
