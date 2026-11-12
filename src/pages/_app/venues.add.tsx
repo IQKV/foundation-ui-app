@@ -89,6 +89,9 @@ function AddVenuePage() {
   // isExiting drives the framer-motion exit animation before navigate
   const [isExiting, setIsExiting] = useState(false);
   const exitTargetRef = useRef<string | null>(null);
+  // Controls inside the zone open the picker through this, because the zone's own
+  // click handler deliberately ignores clicks that land on a button.
+  const openFileDialogRef = useRef<(() => void) | null>(null);
 
   useEffect(() => {
     if (stage === "processing") {
@@ -214,6 +217,14 @@ function AddVenuePage() {
                 disabled={isActive}
                 loading={false}
                 maxFiles={1}
+                openRef={openFileDialogRef}
+                // The zone's built-in handler opens the picker for any click that
+                // bubbles into it; this one only reacts to the zone itself, so
+                // buttons such as "View venue" never open the file dialog.
+                onClick={(event) => {
+                  if ((event.target as HTMLElement).closest("button, a, input, label")) return;
+                  openFileDialogRef.current?.();
+                }}
                 data-testid={TestSelectors.VENUES_ADD_CHOOSE_FILE}
                 styles={{
                   root: {
@@ -501,12 +512,7 @@ function AddVenuePage() {
                       size="sm"
                       rightSection={<IconExternalLink size={14} />}
                       style={{ boxShadow: "0 4px 16px rgba(47,158,68,0.3)" }}
-                      onClick={(event) => {
-                        // The dropzone root opens the file picker on click — don't let the
-                        // "View venue" click bubble into it.
-                        event.stopPropagation();
-                        handleViewVenue(venueId);
-                      }}
+                      onClick={() => handleViewVenue(venueId)}
                     >
                       <Trans>View venue</Trans>
                     </Button>
@@ -539,6 +545,7 @@ function AddVenuePage() {
                       gradient={{ from: "blue", to: "indigo", deg: 135 }}
                       leftSection={<IconUpload size={14} />}
                       size="sm"
+                      onClick={() => openFileDialogRef.current?.()}
                       style={{ boxShadow: "0 4px 16px rgba(59,78,240,0.3)" }}
                     >
                       <Trans>Choose a file</Trans>
