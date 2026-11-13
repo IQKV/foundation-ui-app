@@ -26,6 +26,10 @@ import {
   Collapse,
   Modal,
   ScrollArea,
+  Grid,
+  RingProgress,
+  Center,
+  Progress,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
@@ -60,11 +64,11 @@ import {
   ACCENT_GRADIENT,
   SECTION_CARD_STYLES,
   ASSET_ROW_STYLES,
-  CompletenessRing,
   EditVenueModal,
   DeleteVenueModal,
   VenueCompletenessCard,
   VenueMetadataSections,
+  completenessColor,
   overallCompleteness,
   parseMetadata,
 } from "@/features/manage-venue";
@@ -716,6 +720,67 @@ const bigTabStyles = {
   },
 };
 
+// ─── Quality control bar — slim banner at the top of the right column ─────────
+
+interface QualityControlBarProps {
+  percent: number;
+  filled: number;
+  total: number;
+  isLoading?: boolean;
+  onEdit: () => void;
+}
+
+function QualityControlBar({
+  percent,
+  filled,
+  total,
+  isLoading = false,
+  onEdit,
+}: QualityControlBarProps) {
+  const { t } = useLingui();
+  const color = completenessColor(percent);
+
+  return (
+    <Paper withBorder radius="md" p="sm" shadow="sm" styles={SECTION_CARD_STYLES}>
+      <Group justify="space-between" wrap="nowrap" gap="md">
+        <Group gap="md" wrap="nowrap" style={{ flex: 1, minWidth: 0 }}>
+          {isLoading ? (
+            <Skeleton circle height={44} width={44} />
+          ) : (
+            <RingProgress
+              size={44}
+              thickness={5}
+              roundCaps
+              sections={[{ value: percent, color }]}
+              label={
+                <Center>
+                  <Text size="xs" fw={700} c={color} lh={1}>
+                    {percent}%
+                  </Text>
+                </Center>
+              }
+            />
+          )}
+          <Stack gap={4} style={{ flex: 1, minWidth: 0 }}>
+            <Group gap={8} wrap="nowrap">
+              <Text size="sm" fw={700}>
+                {t`Profile ${percent}% completed`}
+              </Text>
+              <Text size="xs" c="dimmed">
+                {t`${filled} of ${total} fields`}
+              </Text>
+            </Group>
+            <Progress value={percent} color={color} size="sm" radius="xl" />
+          </Stack>
+        </Group>
+        <Button size="sm" variant="light" leftSection={<IconEdit size={14} />} onClick={onEdit}>
+          <Trans>Finish now</Trans>
+        </Button>
+      </Group>
+    </Paper>
+  );
+}
+
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 function VenueDetailPage() {
@@ -856,7 +921,7 @@ function VenueDetailPage() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
     >
-      <Container size="xl" py={0}>
+      <Container size="100%" px="md" py={0} style={{ maxWidth: 1600 }}>
         <PageTitle
           segments={[
             t`Venues`,
@@ -948,479 +1013,460 @@ function VenueDetailPage() {
           }
         />
 
-        <Stack gap="md">
-          {/* ── Hero ─────────────────────────────────────────────────────── */}
-          <Box
-            style={{
-              position: "relative",
-              borderRadius: "var(--mantine-radius-lg)",
-              overflow: "hidden",
-            }}
-            data-testid={TestSelectors.VENUE_DETAIL_HERO}
-          >
-            <Box
-              style={{
-                height: 300,
-                background: hasPhoto
-                  ? `url(${venue!.primaryPhotoUrl}) center/cover no-repeat`
-                  : "linear-gradient(135deg, var(--mantine-color-gray-2) 0%, var(--mantine-color-gray-4) 100%)",
-                position: "relative",
-              }}
-            >
-              {isLoading && <Skeleton height={300} radius={0} />}
+        <Grid gap="lg">
+          {/* ── Left column: profile + info cards ──────────────────────── */}
+          <Grid.Col span={{ base: 12, lg: 4 }}>
+            <Stack gap="md">
+              {/* Profile card */}
+              <Paper
+                withBorder
+                radius="md"
+                shadow="sm"
+                style={{ overflow: "hidden" }}
+                styles={SECTION_CARD_STYLES}
+                data-testid={TestSelectors.VENUE_DETAIL_HERO}
+              >
+                <Box style={{ position: "relative", height: 160 }}>
+                  <Box
+                    style={{
+                      height: "100%",
+                      background: hasPhoto
+                        ? `url(${venue!.primaryPhotoUrl}) center/cover no-repeat`
+                        : "linear-gradient(135deg, var(--mantine-color-gray-2) 0%, var(--mantine-color-gray-4) 100%)",
+                    }}
+                  />
+                  {isLoading && <Skeleton height={160} radius={0} />}
+                  {!isLoading && !hasPhoto && (
+                    <Group
+                      justify="center"
+                      align="center"
+                      style={{
+                        position: "absolute",
+                        inset: 0,
+                        opacity: 0.2,
+                      }}
+                    >
+                      <IconBuildingStore size={64} color="var(--mantine-color-gray-7)" />
+                    </Group>
+                  )}
+                  {!isLoading && (
+                    <Box
+                      style={{
+                        position: "absolute",
+                        inset: 0,
+                        background: hasPhoto
+                          ? "linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.28) 50%, transparent 100%)"
+                          : "linear-gradient(to top, rgba(0,0,0,0.08) 0%, transparent 60%)",
+                      }}
+                    />
+                  )}
+                  {!isLoading && (
+                    <Box
+                      style={{
+                        position: "absolute",
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        padding: "var(--mantine-spacing-md)",
+                      }}
+                    >
+                      <Stack gap={4}>
+                        {venue?.masterVenueId && (
+                          <Badge
+                            variant="filled"
+                            color="indigo"
+                            size="sm"
+                            tt="none"
+                            style={{
+                              background: hasPhoto ? "rgba(255,255,255,0.2)" : undefined,
+                              backdropFilter: "blur(4px)",
+                              width: "fit-content",
+                            }}
+                          >
+                            <Group gap={4} wrap="nowrap">
+                              <IconLink size={11} />
+                              <Trans>Master linked</Trans>
+                            </Group>
+                          </Badge>
+                        )}
+                        <Group gap="sm" align="center" wrap="nowrap">
+                          <Text
+                            fw={800}
+                            style={{
+                              color: hasPhoto ? "#ffffff" : "var(--mantine-color-dark-9)",
+                              lineHeight: 1.15,
+                              letterSpacing: "-0.02em",
+                              textShadow: hasPhoto ? "0 1px 4px rgba(0,0,0,0.4)" : "none",
+                              fontSize: "clamp(1.2rem, 2vw, 1.6rem)",
+                            }}
+                            data-testid={TestSelectors.VENUE_DETAIL_NAME}
+                          >
+                            {venue?.name}
+                          </Text>
+                        </Group>
+                        {(venue?.address || venue?.city) && (
+                          <Group gap={5} wrap="nowrap">
+                            <IconMapPin
+                              size={13}
+                              color={
+                                hasPhoto ? "rgba(255,255,255,0.75)" : "var(--mantine-color-gray-6)"
+                              }
+                            />
+                            <Text
+                              size="sm"
+                              style={{
+                                color: hasPhoto
+                                  ? "rgba(255,255,255,0.85)"
+                                  : "var(--mantine-color-gray-7)",
+                              }}
+                              data-testid={TestSelectors.VENUE_DETAIL_CITY}
+                            >
+                              {[venue?.address, venue?.city].filter(Boolean).join(", ")}
+                            </Text>
+                          </Group>
+                        )}
+                      </Stack>
+                    </Box>
+                  )}
+                </Box>
 
-              {!isLoading && !hasPhoto && (
-                <Group justify="center" align="center" style={{ height: "100%", opacity: 0.2 }}>
-                  <IconBuildingStore size={96} color="var(--mantine-color-gray-7)" />
-                </Group>
-              )}
-
-              {!isLoading && (
+                {/* soft gradient rim */}
                 <Box
+                  aria-hidden
                   style={{
                     position: "absolute",
                     inset: 0,
-                    background: hasPhoto
-                      ? "linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.28) 50%, transparent 100%)"
-                      : "linear-gradient(to top, rgba(0,0,0,0.08) 0%, transparent 60%)",
+                    borderRadius: "var(--mantine-radius-md)",
+                    padding: 1,
+                    background: ACCENT_GRADIENT,
+                    WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                    WebkitMaskComposite: "xor",
+                    maskComposite: "exclude",
+                    opacity: 0.75,
+                    pointerEvents: "none",
                   }}
                 />
-              )}
+              </Paper>
 
-              {!isLoading && (
-                <Box
-                  style={{
-                    position: "absolute",
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    padding:
-                      "var(--mantine-spacing-xl) var(--mantine-spacing-xl) var(--mantine-spacing-lg)",
-                  }}
-                >
-                  <Group justify="space-between" align="flex-end" wrap="wrap" gap="md">
-                    <Stack gap={6}>
-                      {venue?.masterVenueId && (
-                        <Badge
-                          variant="filled"
-                          color="indigo"
-                          size="sm"
-                          tt="none"
-                          style={{
-                            background: hasPhoto ? "rgba(255,255,255,0.2)" : undefined,
-                            backdropFilter: "blur(4px)",
-                            width: "fit-content",
-                          }}
-                        >
-                          <Group gap={4} wrap="nowrap">
-                            <IconLink size={11} />
-                            <Trans>Master linked</Trans>
-                          </Group>
-                        </Badge>
-                      )}
-                      <Group gap="sm" align="center" wrap="nowrap">
-                        <Text
-                          fw={800}
-                          style={{
-                            color: hasPhoto ? "#ffffff" : "var(--mantine-color-dark-9)",
-                            lineHeight: 1.15,
-                            letterSpacing: "-0.02em",
-                            textShadow: hasPhoto ? "0 1px 4px rgba(0,0,0,0.4)" : "none",
-                            fontSize: "clamp(1.4rem, 2.5vw, 2rem)",
-                          }}
-                          data-testid={TestSelectors.VENUE_DETAIL_NAME}
-                        >
-                          {venue?.name}
-                        </Text>
-                        {(venue || isLoading) && (
-                          <CompletenessRing percent={completeness.percent} isLoading={isLoading} />
-                        )}
-                      </Group>
+              {/* Quality control — detailed completeness breakdown */}
+              <VenueCompletenessCard completeness={completeness} isLoading={isLoading} />
 
-                      {(venue?.address || venue?.city) && (
-                        <Group gap={5} wrap="nowrap">
-                          <IconMapPin
-                            size={13}
-                            color={
-                              hasPhoto ? "rgba(255,255,255,0.75)" : "var(--mantine-color-gray-6)"
-                            }
-                          />
-                          <Text
-                            size="sm"
-                            style={{
-                              color: hasPhoto
-                                ? "rgba(255,255,255,0.85)"
-                                : "var(--mantine-color-gray-7)",
-                            }}
-                            data-testid={TestSelectors.VENUE_DETAIL_CITY}
-                          >
-                            {[venue?.address, venue?.city].filter(Boolean).join(", ")}
-                          </Text>
-                        </Group>
-                      )}
-                    </Stack>
-                  </Group>
-                </Box>
-              )}
-            </Box>
-
-            {/* soft gradient rim */}
-            <Box
-              aria-hidden
-              style={{
-                position: "absolute",
-                inset: 0,
-                borderRadius: "var(--mantine-radius-lg)",
-                padding: 1,
-                background: ACCENT_GRADIENT,
-                WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-                WebkitMaskComposite: "xor",
-                maskComposite: "exclude",
-                opacity: 0.75,
-                pointerEvents: "none",
-              }}
-            />
-          </Box>
-
-          {/* ── Tabs — mirrors admin VenueProfileWidget tab structure ─────── */}
-          <Tabs defaultValue="details" keepMounted={false}>
-            <Tabs.List
-              styles={{
-                list: {
-                  gap: 8,
-                  borderBottomWidth: 2,
-                },
-              }}
-            >
-              <Tabs.Tab
-                value="details"
-                leftSection={<IconAdjustments size={20} />}
-                styles={bigTabStyles}
+              {/* Location */}
+              <InfoSectionCard
+                title={<Trans>Address & coordinates</Trans>}
+                icon={<IconMapPin size={14} />}
+                filled={locationFilled}
+                total={3}
+                isLoading={isLoading}
               >
-                <Trans>Details</Trans>
-              </Tabs.Tab>
-              {venue && (
-                <Tabs.Tab
-                  value="photos"
-                  leftSection={<IconPhoto size={20} />}
-                  styles={bigTabStyles}
-                  rightSection={
-                    !photosLoading && photos.length > 0 ? (
-                      <Badge size="xl" variant="filled" color="blue" circle>
-                        {photos.length}
-                      </Badge>
-                    ) : undefined
-                  }
-                >
-                  <Trans>Photos</Trans>
-                </Tabs.Tab>
-              )}
-              {venue && (
-                <Tabs.Tab
-                  value="assets"
-                  leftSection={<IconPaperclip size={20} />}
-                  styles={bigTabStyles}
-                  rightSection={
-                    !assetsLoading && assets.length > 0 ? (
-                      <Badge size="xl" variant="filled" color="blue" circle>
-                        {assets.length}
-                      </Badge>
-                    ) : undefined
-                  }
-                >
-                  <Trans>Assets</Trans>
-                </Tabs.Tab>
-              )}
-              {venue && (
-                <Tabs.Tab
-                  value="sources"
-                  leftSection={<IconFileText size={20} />}
-                  styles={bigTabStyles}
-                  rightSection={
-                    !sourcesLoading && sources.length > 0 ? (
-                      <Badge size="xl" variant="filled" color="blue" circle>
-                        {sources.length}
-                      </Badge>
-                    ) : undefined
-                  }
-                >
-                  <Trans>Sources</Trans>
-                </Tabs.Tab>
-              )}
-            </Tabs.List>
-
-            {/* ── Details tab ──────────────────────────────────────────────── */}
-            <Tabs.Panel value="details">
-              <Stack gap="xs" pt="sm">
-                <Box pt="md">
-                  <VenueCompletenessCard completeness={completeness} isLoading={isLoading} />
-                </Box>
-
-                <Divider
-                  label={
-                    <Text
-                      size="xs"
-                      fw={700}
-                      tt="uppercase"
-                      c="dimmed"
-                      style={{ letterSpacing: "0.07em" }}
-                    >
-                      <Trans>Location</Trans>
-                    </Text>
-                  }
-                  labelPosition="left"
-                  my="sm"
-                />
-
-                <InfoSectionCard
-                  title={<Trans>Address & coordinates</Trans>}
-                  icon={<IconMapPin size={14} />}
-                  filled={locationFilled}
-                  total={3}
-                  isLoading={isLoading}
-                >
-                  <Stack gap={6}>
-                    <FieldChip label={<Trans>Address</Trans>} value={venue?.address} />
-                    <FieldChip label={<Trans>City</Trans>} value={venue?.city} />
-                    <FieldChip
-                      label={<Trans>Coordinates</Trans>}
-                      value={
-                        venue?.locationLat && venue?.locationLng ? (
-                          <Group gap={6} wrap="nowrap">
-                            <Text size="sm">
-                              {String(venue.locationLat)}, {String(venue.locationLng)}
-                            </Text>
-                            {mapUrl && (
-                              <Anchor
-                                href={mapUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                size="sm"
-                              >
-                                <Group gap={3} wrap="nowrap">
-                                  <IconExternalLink size={11} />
-                                  <Trans>Maps</Trans>
-                                </Group>
-                              </Anchor>
-                            )}
-                          </Group>
-                        ) : null
-                      }
-                    />
-                  </Stack>
-                </InfoSectionCard>
-
-                <Divider
-                  label={
-                    <Text
-                      size="xs"
-                      fw={700}
-                      tt="uppercase"
-                      c="dimmed"
-                      style={{ letterSpacing: "0.07em" }}
-                    >
-                      <Trans>Relations</Trans>
-                    </Text>
-                  }
-                  labelPosition="left"
-                  my="sm"
-                />
-
-                <InfoSectionCard
-                  title={<Trans>Master catalog link</Trans>}
-                  icon={<IconLink size={14} />}
-                  filled={venue?.masterVenueId ? 1 : 0}
-                  total={1}
-                  isLoading={isLoading}
-                >
-                  {venue?.masterVenueId ? (
-                    <Group gap="xs" wrap="nowrap">
-                      <Text size="sm" c="dimmed" style={{ flexShrink: 0 }}>
-                        <Trans>Master venue</Trans>:
-                      </Text>
-                      <Badge variant="light" color="indigo" size="sm" ff="monospace" tt="none">
-                        {venue.masterVenueId}
-                      </Badge>
-                      <CopyButton value={venue.masterVenueId} timeout={2000}>
-                        {({ copied, copy }) => (
-                          <ActionIcon
-                            color={copied ? "teal" : "gray"}
-                            variant="subtle"
-                            size="sm"
-                            onClick={copy}
-                            aria-label={t`Copy master venue id`}
-                          >
-                            {copied ? <IconCheck size={13} /> : <IconLink size={13} />}
-                          </ActionIcon>
-                        )}
-                      </CopyButton>
-                    </Group>
-                  ) : (
-                    <Text size="sm" c="dimmed" fs="italic">
-                      <Trans>Not linked to a master catalog record.</Trans>
-                    </Text>
-                  )}
-                </InfoSectionCard>
-
-                <Divider
-                  label={
-                    <Text
-                      size="xs"
-                      fw={700}
-                      tt="uppercase"
-                      c="dimmed"
-                      style={{ letterSpacing: "0.07em" }}
-                    >
-                      <Trans>Record</Trans>
-                    </Text>
-                  }
-                  labelPosition="left"
-                  my="sm"
-                />
-
-                <InfoSectionCard
-                  title={<Trans>Identifiers & timestamps</Trans>}
-                  icon={<IconAdjustments size={14} />}
-                  isLoading={isLoading}
-                >
-                  <Stack gap={6}>
-                    <FieldChip
-                      label={<Trans>Venue ID</Trans>}
-                      value={
-                        venue ? (
-                          <Text size="sm" ff="monospace">
-                            {venue.id}
+                <Stack gap={6}>
+                  <FieldChip label={<Trans>Address</Trans>} value={venue?.address} />
+                  <FieldChip label={<Trans>City</Trans>} value={venue?.city} />
+                  <FieldChip
+                    label={<Trans>Coordinates</Trans>}
+                    value={
+                      venue?.locationLat && venue?.locationLng ? (
+                        <Group gap={6} wrap="nowrap">
+                          <Text size="sm">
+                            {String(venue.locationLat)}, {String(venue.locationLng)}
                           </Text>
-                        ) : null
-                      }
-                    />
-                    <FieldChip
-                      label={<Trans>Created</Trans>}
-                      value={
-                        venue?.createdAt ? dayjs(venue.createdAt).format("MMM D, YYYY HH:mm") : null
-                      }
-                    />
-                    <FieldChip
-                      label={<Trans>Updated</Trans>}
-                      value={
-                        venue?.updatedAt ? dayjs(venue.updatedAt).format("MMM D, YYYY HH:mm") : null
-                      }
-                    />
-                  </Stack>
-                </InfoSectionCard>
-
-                {/* ── Metadata (TENANT_OWNER / ADMIN only) ───────────────── */}
-                {canManage && venue && (
-                  <>
-                    <Divider
-                      label={
-                        <Text
-                          size="xs"
-                          fw={700}
-                          tt="uppercase"
-                          c="dimmed"
-                          style={{ letterSpacing: "0.07em" }}
-                        >
-                          <Trans>Metadata</Trans>
-                        </Text>
-                      }
-                      labelPosition="left"
-                      my="sm"
-                    />
-
-                    <Stack gap="md">
-                      <VenueMetadataSections
-                        venueId={venueId}
-                        metadata={venue.metadata ?? null}
-                        isLoading={isLoading}
-                      />
-
-                      {/* Raw JSON fallback — read-only, collapsible */}
-                      <Paper withBorder radius="md" p="lg" shadow="sm" styles={SECTION_CARD_STYLES}>
-                        <Group justify="space-between" align="flex-start" wrap="nowrap" gap="md">
-                          <Group gap={8}>
-                            <ThemeIcon size={28} radius="sm" variant="light" color="gray">
-                              <IconPaperclip size={14} />
-                            </ThemeIcon>
-                            <Stack gap={0}>
-                              <Text size="md" fw={700}>
-                                <Trans>Raw JSON document</Trans>
-                              </Text>
-                              <Text size="xs" c="dimmed">
-                                <Trans>Read-only view of the full metadata string.</Trans>
-                              </Text>
-                            </Stack>
-                          </Group>
-                          <Button
-                            variant="subtle"
-                            color="gray"
-                            size="compact-sm"
-                            style={{ flexShrink: 0 }}
-                            onClick={toggleRawJson}
-                          >
-                            {rawJsonOpened ? t`Hide raw JSON` : t`Show raw JSON`}
-                          </Button>
-                        </Group>
-                        <Collapse expanded={rawJsonOpened}>
-                          <Divider my="sm" />
-                          {isLoading ? (
-                            <Skeleton height={120} radius="sm" />
-                          ) : (
-                            <Box
-                              component="pre"
-                              style={{
-                                margin: 0,
-                                padding: "var(--mantine-spacing-sm)",
-                                background: "var(--mantine-color-gray-0)",
-                                borderRadius: "var(--mantine-radius-sm)",
-                                fontFamily: "var(--mantine-font-family-monospace)",
-                                fontSize: "var(--mantine-font-size-xs)",
-                                whiteSpace: "pre-wrap",
-                                wordBreak: "break-all",
-                                overflowY: "auto",
-                                maxHeight: 400,
-                              }}
+                          {mapUrl && (
+                            <Anchor
+                              href={mapUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              size="sm"
                             >
-                              {(() => {
-                                if (!venue.metadata) return t`— no metadata —`;
-                                try {
-                                  return JSON.stringify(JSON.parse(venue.metadata), null, 2);
-                                } catch {
-                                  return venue.metadata;
-                                }
-                              })()}
-                            </Box>
+                              <Group gap={3} wrap="nowrap">
+                                <IconExternalLink size={11} />
+                                <Trans>Maps</Trans>
+                              </Group>
+                            </Anchor>
                           )}
-                        </Collapse>
-                      </Paper>
-                    </Stack>
-                  </>
+                        </Group>
+                      ) : null
+                    }
+                  />
+                </Stack>
+              </InfoSectionCard>
+
+              {/* Relations */}
+              <InfoSectionCard
+                title={<Trans>Master catalog link</Trans>}
+                icon={<IconLink size={14} />}
+                filled={venue?.masterVenueId ? 1 : 0}
+                total={1}
+                isLoading={isLoading}
+              >
+                {venue?.masterVenueId ? (
+                  <Group gap="xs" wrap="nowrap">
+                    <Text size="sm" c="dimmed" style={{ flexShrink: 0 }}>
+                      <Trans>Master venue</Trans>:
+                    </Text>
+                    <Badge variant="light" color="indigo" size="sm" ff="monospace" tt="none">
+                      {venue.masterVenueId}
+                    </Badge>
+                    <CopyButton value={venue.masterVenueId} timeout={2000}>
+                      {({ copied, copy }) => (
+                        <ActionIcon
+                          color={copied ? "teal" : "gray"}
+                          variant="subtle"
+                          size="sm"
+                          onClick={copy}
+                          aria-label={t`Copy master venue id`}
+                        >
+                          {copied ? <IconCheck size={13} /> : <IconLink size={13} />}
+                        </ActionIcon>
+                      )}
+                    </CopyButton>
+                  </Group>
+                ) : (
+                  <Text size="sm" c="dimmed" fs="italic">
+                    <Trans>Not linked to a master catalog record.</Trans>
+                  </Text>
                 )}
-              </Stack>
-            </Tabs.Panel>
+              </InfoSectionCard>
 
-            {/* ── Photos tab ───────────────────────────── */}
-            {venue && (
-              <Tabs.Panel value="photos" pt="sm">
-                <PhotosTab photos={photos} isLoading={photosLoading} />
-              </Tabs.Panel>
-            )}
+              {/* Record */}
+              <InfoSectionCard
+                title={<Trans>Identifiers & timestamps</Trans>}
+                icon={<IconAdjustments size={14} />}
+                isLoading={isLoading}
+              >
+                <Stack gap={6}>
+                  <FieldChip
+                    label={<Trans>Venue ID</Trans>}
+                    value={
+                      venue ? (
+                        <Text size="sm" ff="monospace">
+                          {venue.id}
+                        </Text>
+                      ) : null
+                    }
+                  />
+                  <FieldChip
+                    label={<Trans>Created</Trans>}
+                    value={
+                      venue?.createdAt ? dayjs(venue.createdAt).format("MMM D, YYYY HH:mm") : null
+                    }
+                  />
+                  <FieldChip
+                    label={<Trans>Updated</Trans>}
+                    value={
+                      venue?.updatedAt ? dayjs(venue.updatedAt).format("MMM D, YYYY HH:mm") : null
+                    }
+                  />
+                </Stack>
+              </InfoSectionCard>
+            </Stack>
+          </Grid.Col>
 
-            {/* ── Assets tab ───────────────────────────── */}
-            {venue && (
-              <Tabs.Panel value="assets" pt="sm">
-                <AssetsTab venueId={venueId} assets={assets} isLoading={assetsLoading} />
-              </Tabs.Panel>
-            )}
+          {/* ── Right column: quality bar + tabs ───────────────────────── */}
+          <Grid.Col span={{ base: 12, lg: 8 }}>
+            <Stack gap="md">
+              <QualityControlBar
+                percent={completeness.percent}
+                filled={completeness.filled}
+                total={completeness.total}
+                isLoading={isLoading}
+                onEdit={openEdit}
+              />
 
-            {/* ── Sources tab ──────────────────────────── */}
-            {venue && (
-              <Tabs.Panel value="sources" pt="sm">
-                <SourcesTab sources={sources} isLoading={sourcesLoading} />
-              </Tabs.Panel>
-            )}
-          </Tabs>
-        </Stack>
+              {/* ── Tabs — mirrors admin VenueProfileWidget tab structure ─────── */}
+              <Tabs defaultValue="details" keepMounted={false}>
+                <Tabs.List
+                  styles={{
+                    list: {
+                      gap: 8,
+                      borderBottomWidth: 2,
+                    },
+                  }}
+                >
+                  <Tabs.Tab
+                    value="details"
+                    leftSection={<IconAdjustments size={20} />}
+                    styles={bigTabStyles}
+                  >
+                    <Trans>Details</Trans>
+                  </Tabs.Tab>
+                  {venue && (
+                    <Tabs.Tab
+                      value="photos"
+                      leftSection={<IconPhoto size={20} />}
+                      styles={bigTabStyles}
+                      rightSection={
+                        !photosLoading && photos.length > 0 ? (
+                          <Badge size="xl" variant="filled" color="blue" circle>
+                            {photos.length}
+                          </Badge>
+                        ) : undefined
+                      }
+                    >
+                      <Trans>Photos</Trans>
+                    </Tabs.Tab>
+                  )}
+                  {venue && (
+                    <Tabs.Tab
+                      value="assets"
+                      leftSection={<IconPaperclip size={20} />}
+                      styles={bigTabStyles}
+                      rightSection={
+                        !assetsLoading && assets.length > 0 ? (
+                          <Badge size="xl" variant="filled" color="blue" circle>
+                            {assets.length}
+                          </Badge>
+                        ) : undefined
+                      }
+                    >
+                      <Trans>Assets</Trans>
+                    </Tabs.Tab>
+                  )}
+                  {venue && (
+                    <Tabs.Tab
+                      value="sources"
+                      leftSection={<IconFileText size={20} />}
+                      styles={bigTabStyles}
+                      rightSection={
+                        !sourcesLoading && sources.length > 0 ? (
+                          <Badge size="xl" variant="filled" color="blue" circle>
+                            {sources.length}
+                          </Badge>
+                        ) : undefined
+                      }
+                    >
+                      <Trans>Sources</Trans>
+                    </Tabs.Tab>
+                  )}
+                </Tabs.List>
+
+                {/* ── Details tab ──────────────────────────────────────────────── */}
+                <Tabs.Panel value="details">
+                  <Stack gap="md" pt="sm">
+                    {/* ── Metadata (TENANT_OWNER / ADMIN only) ───────────────── */}
+                    {canManage && venue && (
+                      <>
+                        <Divider
+                          label={
+                            <Text
+                              size="xs"
+                              fw={700}
+                              tt="uppercase"
+                              c="dimmed"
+                              style={{ letterSpacing: "0.07em" }}
+                            >
+                              <Trans>Metadata</Trans>
+                            </Text>
+                          }
+                          labelPosition="left"
+                          my="sm"
+                        />
+
+                        <Stack gap="md">
+                          <VenueMetadataSections
+                            venueId={venueId}
+                            metadata={venue.metadata ?? null}
+                            isLoading={isLoading}
+                          />
+
+                          {/* Raw JSON fallback — read-only, collapsible */}
+                          <Paper
+                            withBorder
+                            radius="md"
+                            p="lg"
+                            shadow="sm"
+                            styles={SECTION_CARD_STYLES}
+                          >
+                            <Group
+                              justify="space-between"
+                              align="flex-start"
+                              wrap="nowrap"
+                              gap="md"
+                            >
+                              <Group gap={8}>
+                                <ThemeIcon size={28} radius="sm" variant="light" color="gray">
+                                  <IconPaperclip size={14} />
+                                </ThemeIcon>
+                                <Stack gap={0}>
+                                  <Text size="md" fw={700}>
+                                    <Trans>Raw JSON document</Trans>
+                                  </Text>
+                                  <Text size="xs" c="dimmed">
+                                    <Trans>Read-only view of the full metadata string.</Trans>
+                                  </Text>
+                                </Stack>
+                              </Group>
+                              <Button
+                                variant="subtle"
+                                color="gray"
+                                size="compact-sm"
+                                style={{ flexShrink: 0 }}
+                                onClick={toggleRawJson}
+                              >
+                                {rawJsonOpened ? t`Hide raw JSON` : t`Show raw JSON`}
+                              </Button>
+                            </Group>
+                            <Collapse expanded={rawJsonOpened}>
+                              <Divider my="sm" />
+                              {isLoading ? (
+                                <Skeleton height={120} radius="sm" />
+                              ) : (
+                                <Box
+                                  component="pre"
+                                  style={{
+                                    margin: 0,
+                                    padding: "var(--mantine-spacing-sm)",
+                                    background: "var(--mantine-color-gray-0)",
+                                    borderRadius: "var(--mantine-radius-sm)",
+                                    fontFamily: "var(--mantine-font-family-monospace)",
+                                    fontSize: "var(--mantine-font-size-xs)",
+                                    whiteSpace: "pre-wrap",
+                                    wordBreak: "break-all",
+                                    overflowY: "auto",
+                                    maxHeight: 400,
+                                  }}
+                                >
+                                  {(() => {
+                                    if (!venue.metadata) return t`— no metadata —`;
+                                    try {
+                                      return JSON.stringify(JSON.parse(venue.metadata), null, 2);
+                                    } catch {
+                                      return venue.metadata;
+                                    }
+                                  })()}
+                                </Box>
+                              )}
+                            </Collapse>
+                          </Paper>
+                        </Stack>
+                      </>
+                    )}
+                  </Stack>
+                </Tabs.Panel>
+
+                {/* ── Photos tab ───────────────────────────── */}
+                {venue && (
+                  <Tabs.Panel value="photos" pt="sm">
+                    <PhotosTab photos={photos} isLoading={photosLoading} />
+                  </Tabs.Panel>
+                )}
+
+                {/* ── Assets tab ───────────────────────────── */}
+                {venue && (
+                  <Tabs.Panel value="assets" pt="sm">
+                    <AssetsTab venueId={venueId} assets={assets} isLoading={assetsLoading} />
+                  </Tabs.Panel>
+                )}
+
+                {/* ── Sources tab ──────────────────────────── */}
+                {venue && (
+                  <Tabs.Panel value="sources" pt="sm">
+                    <SourcesTab sources={sources} isLoading={sourcesLoading} />
+                  </Tabs.Panel>
+                )}
+              </Tabs>
+            </Stack>
+          </Grid.Col>
+        </Grid>
 
         {canManage && (
           <>

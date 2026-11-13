@@ -39,6 +39,10 @@ msgstr "{0} – {1}"
 msgid "{0} Days Left"
 msgstr "{0} Tage verbleibend"
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "{filled} of {total} fields"
+msgstr ""
+
 #: src/features/manage-venue/ui/venue-completeness.tsx
 msgid "{filled} of {total} fields filled"
 msgstr ""
@@ -1249,6 +1253,10 @@ msgstr ""
 msgid "Filters"
 msgstr ""
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Finish now"
+msgstr ""
+
 #: src/features/complete-profile/ui/complete-profile-form.tsx
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 #: src/features/signup/ui/signup-form.tsx
@@ -1579,8 +1587,8 @@ msgid "Locale is required"
 msgstr "Gebietsschema ist erforderlich"
 
 #: src/pages/_app/venues.$venueId.tsx
-msgid "Location"
-msgstr ""
+#~ msgid "Location"
+#~ msgstr ""
 
 #: src/shared/ui/user-status-badge/user-status-badge.tsx
 #: src/widgets/dashboard-signup-chart/ui/dashboard-signup-chart.tsx
@@ -2242,6 +2250,10 @@ msgstr "Prioritätssupport:"
 msgid "Pro tip: You can search by vibe, amenities, capacity, or specific location details."
 msgstr ""
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Profile {percent}% completed"
+msgstr ""
+
 #: src/features/manage-venue/ui/venue-completeness.tsx
 msgid "Profile completeness"
 msgstr ""
@@ -2318,8 +2330,8 @@ msgid "Recently Added"
 msgstr ""
 
 #: src/pages/_app/venues.$venueId.tsx
-msgid "Record"
-msgstr ""
+#~ msgid "Record"
+#~ msgstr ""
 
 #: src/features/magic-link/ui/magic-link-exchange-form.tsx
 msgid "Redirecting to your workspace..."
@@ -2338,8 +2350,8 @@ msgid "Refund History"
 msgstr "Rückerstattungsverlauf"
 
 #: src/pages/_app/venues.$venueId.tsx
-msgid "Relations"
-msgstr ""
+#~ msgid "Relations"
+#~ msgstr ""
 
 #: src/features/forgot-password/ui/forgot-password-form.tsx
 #: src/features/reset-password/ui/reset-password-form.tsx

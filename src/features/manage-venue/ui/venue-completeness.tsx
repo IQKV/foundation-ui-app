@@ -23,7 +23,7 @@ import type { MetadataCompleteness } from "../model";
 import { SECTION_CARD_STYLES } from "./section-accent";
 
 /** Green ≥ 80%, orange ≥ 50%, red below — same thresholds as the admin confidence ring. */
-function completenessColor(percent: number): string {
+export function completenessColor(percent: number): string {
   if (percent >= 80) return "green";
   if (percent >= 50) return "orange";
   return "red";

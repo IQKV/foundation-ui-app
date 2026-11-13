@@ -5,4 +5,4 @@ export { EditVenueModal } from "./edit-venue-modal";
 export { DeleteVenueModal } from "./delete-venue-modal";
 export { BulkDeleteVenuesModal } from "./bulk-delete-venues-modal";
 export { VenueMetadataSections } from "./venue-metadata-sections";
-export { CompletenessRing, VenueCompletenessCard } from "./venue-completeness";
+export { CompletenessRing, VenueCompletenessCard, completenessColor } from "./venue-completeness";

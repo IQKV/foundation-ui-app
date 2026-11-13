@@ -39,6 +39,10 @@ msgstr "{0} – {1}"
 msgid "{0} Days Left"
 msgstr "{0} Days Left"
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "{filled} of {total} fields"
+msgstr "{filled} of {total} fields"
+
 #: src/features/manage-venue/ui/venue-completeness.tsx
 msgid "{filled} of {total} fields filled"
 msgstr "{filled} of {total} fields filled"
@@ -1249,6 +1253,10 @@ msgstr "Fill in the details below. You can add photos and files after saving."
 msgid "Filters"
 msgstr "Filters"
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Finish now"
+msgstr "Finish now"
+
 #: src/features/complete-profile/ui/complete-profile-form.tsx
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 #: src/features/signup/ui/signup-form.tsx
@@ -1579,8 +1587,8 @@ msgid "Locale is required"
 msgstr "Locale is required"
 
 #: src/pages/_app/venues.$venueId.tsx
-msgid "Location"
-msgstr "Location"
+#~ msgid "Location"
+#~ msgstr "Location"
 
 #: src/shared/ui/user-status-badge/user-status-badge.tsx
 #: src/widgets/dashboard-signup-chart/ui/dashboard-signup-chart.tsx
@@ -2242,6 +2250,10 @@ msgstr "Priority Support:"
 msgid "Pro tip: You can search by vibe, amenities, capacity, or specific location details."
 msgstr "Pro tip: You can search by vibe, amenities, capacity, or specific location details."
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Profile {percent}% completed"
+msgstr "Profile {percent}% completed"
+
 #: src/features/manage-venue/ui/venue-completeness.tsx
 msgid "Profile completeness"
 msgstr "Profile completeness"
@@ -2318,8 +2330,8 @@ msgid "Recently Added"
 msgstr "Recently Added"
 
 #: src/pages/_app/venues.$venueId.tsx
-msgid "Record"
-msgstr "Record"
+#~ msgid "Record"
+#~ msgstr "Record"
 
 #: src/features/magic-link/ui/magic-link-exchange-form.tsx
 msgid "Redirecting to your workspace..."
@@ -2338,8 +2350,8 @@ msgid "Refund History"
 msgstr "Refund History"
 
 #: src/pages/_app/venues.$venueId.tsx
-msgid "Relations"
-msgstr "Relations"
+#~ msgid "Relations"
+#~ msgstr "Relations"
 
 #: src/features/forgot-password/ui/forgot-password-form.tsx
 #: src/features/reset-password/ui/reset-password-form.tsx
