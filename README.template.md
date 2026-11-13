@@ -26,20 +26,20 @@ Describe the purpose of the app, the platform surface it covers, and the primary
 
 ## Feature Status
 
-| Feature | Status | Notes |
-| ------- | ------ | ----- |
-| Sign in / Sign out | ✅ Live | JWT, silent refresh, multi-tenant picker |
-| Magic link auth | ✅ Live | Email link → token exchange |
-| OAuth2 / OIDC | ✅ Live | Callback handler, provider integrations |
-| Signup & onboarding | ✅ Live | Registration, profile completion, org creation |
-| Team management | ✅ Live | Invite, role change, ban member |
-| Billing | ✅ Live | Plans, Stripe/Lemon Squeezy checkout, portal |
-| CMS pages | ✅ Live | CRUD, rich-text editor |
-| Venue list | ✅ Live | Keyword search, semantic (AI) search, bulk delete |
-| Venue detail & edit | ✅ Live | See [Venue Detail Page](#venue-detail-page) |
-| Venue AI enrichment | ✅ Live | Fill-with-AI chat, inline diff suggestions, atomic apply |
-| Settings | ✅ Live | Profile, security, notifications, organisation |
-| Platform AI Chat addon | ✅ Live | Pluggable addon, extension-point nav entry |
+| Feature                | Status  | Notes                                                    |
+| ---------------------- | ------- | -------------------------------------------------------- |
+| Sign in / Sign out     | ✅ Live | JWT, silent refresh, multi-tenant picker                 |
+| Magic link auth        | ✅ Live | Email link → token exchange                              |
+| OAuth2 / OIDC          | ✅ Live | Callback handler, provider integrations                  |
+| Signup & onboarding    | ✅ Live | Registration, profile completion, org creation           |
+| Team management        | ✅ Live | Invite, role change, ban member                          |
+| Billing                | ✅ Live | Plans, Stripe/Lemon Squeezy checkout, portal             |
+| CMS pages              | ✅ Live | CRUD, rich-text editor                                   |
+| Venue list             | ✅ Live | Keyword search, semantic (AI) search, bulk delete        |
+| Venue detail & edit    | ✅ Live | See [Venue Detail Page](#venue-detail-page)              |
+| Venue AI enrichment    | ✅ Live | Fill-with-AI chat, inline diff suggestions, atomic apply |
+| Settings               | ✅ Live | Profile, security, notifications, organisation           |
+| Platform AI Chat addon | ✅ Live | Pluggable addon, extension-point nav entry               |
 
 ## Tech Stack
 
@@ -137,18 +137,21 @@ Roles: `TENANT_OWNER`, `MEMBER` (read); `TENANT_OWNER`, `MEMBER` (write via AI a
 The page uses a two-column grid (`lg: 4 / 8`).
 
 **Left column**
+
 - Hero card — primary photo banner, venue name and city
 - `VenueCompletenessCard` — per-section completeness breakdown with a ring chart
 - Address & coordinates card with a Google Maps link
 - Identifiers & timestamps card
 
 **Right column**
+
 - Sticky "Fill with AI" button at the top (hidden when profile is 100% complete)
 - Tabs: Details · Photos · Assets · Sources
 
 ### Details tab
 
 Shows the full structured metadata document via `VenueMetadataSections`. Each section renders as a card with:
+
 - Current field values as read chips
 - A pencil icon that opens a right-anchored drawer (`SectionFieldsForm`) for manual editing
 - Inline AI suggestion chips (violet) when enrichment suggestions are active — each chip shows the AI-suggested value with individual Accept ✓ and Dismiss ✗ controls
@@ -168,22 +171,22 @@ A collapsible raw JSON viewer is available below the sections.
 
 ### Header toolbar
 
-| Button | Role required | Action |
-| ------ | ------------- | ------ |
+| Button        | Role required  | Action                                                    |
+| ------------- | -------------- | --------------------------------------------------------- |
 | Edit Manually | `TENANT_OWNER` | Opens `EditVenueModal` (name, address, city, coordinates) |
-| Upload asset | `TENANT_OWNER` | Presigned two-phase upload to MinIO |
-| Delete | `TENANT_OWNER` | Opens `DeleteVenueModal` with confirmation |
+| Upload asset  | `TENANT_OWNER` | Presigned two-phase upload to MinIO                       |
+| Delete        | `TENANT_OWNER` | Opens `DeleteVenueModal` with confirmation                |
 
 ### Key hooks & components
 
-| Symbol | Location | Purpose |
-| ------ | -------- | ------- |
-| `useVenueEnrichment` | `features/manage-venue/model` | Manages chat history, pending patches, suggest + apply mutations |
-| `VenueAiEnrichModal` | `features/manage-venue/ui` | Chat modal with reply bubbles and per-patch diff chips |
-| `VenueMetadataSections` | `features/manage-venue/ui` | Structured metadata view with inline suggestion chips |
-| `VenueCompletenessCard` | `features/manage-venue/ui` | Per-section completeness ring |
-| `catalogApi.venueEnrichmentSuggestions` | `shared/api` | `POST /v1/catalog/venues/{id}/enrichment/suggestions` |
-| `catalogApi.venueEnrichmentApply` | `shared/api` | `POST /v1/catalog/venues/{id}/enrichment/apply` |
+| Symbol                                  | Location                      | Purpose                                                          |
+| --------------------------------------- | ----------------------------- | ---------------------------------------------------------------- |
+| `useVenueEnrichment`                    | `features/manage-venue/model` | Manages chat history, pending patches, suggest + apply mutations |
+| `VenueAiEnrichModal`                    | `features/manage-venue/ui`    | Chat modal with reply bubbles and per-patch diff chips           |
+| `VenueMetadataSections`                 | `features/manage-venue/ui`    | Structured metadata view with inline suggestion chips            |
+| `VenueCompletenessCard`                 | `features/manage-venue/ui`    | Per-section completeness ring                                    |
+| `catalogApi.venueEnrichmentSuggestions` | `shared/api`                  | `POST /v1/catalog/venues/{id}/enrichment/suggestions`            |
+| `catalogApi.venueEnrichmentApply`       | `shared/api`                  | `POST /v1/catalog/venues/{id}/enrichment/apply`                  |
 
 ## License
 

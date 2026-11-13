@@ -8,7 +8,6 @@ import {
   Group,
   Paper,
   Progress,
-  SimpleGrid,
   Stack,
   Text,
   ThemeIcon,
@@ -197,7 +196,18 @@ function AddVenuePage() {
         </Text>
       </Stack>
 
-      <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="lg" style={{ alignItems: "stretch" }}>
+      {/* Two equal cards side by side (they stack when narrow). While a file is in
+          flight the manual-entry card collapses and the upload card owns the row. */}
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          alignItems: "stretch",
+          rowGap: "var(--mantine-spacing-lg)",
+          columnGap: isActive ? 0 : "var(--mantine-spacing-lg)",
+          transition: reduceMotion ? undefined : "column-gap 420ms cubic-bezier(0.4, 0, 0.2, 1)",
+        }}
+      >
         {/* ── File upload card — exits on navigate ─────────────────────── */}
         <AnimatePresence mode="wait">
           {!isExiting ? (
@@ -221,6 +231,8 @@ function AddVenuePage() {
               style={{
                 display: "flex",
                 flexDirection: "column",
+                flex: "1 1 320px",
+                minWidth: 0,
                 borderRadius: "var(--mantine-radius-lg)",
               }}
             >
@@ -569,80 +581,103 @@ function AddVenuePage() {
               </Dropzone>
             </motion.div>
           ) : (
-            // Placeholder keeps the grid stable while exit plays
-            <div style={{ minHeight: 320 }} />
+            // Placeholder keeps the row stable while exit plays
+            <div style={{ flex: "1 1 320px", minHeight: 320 }} />
           )}
         </AnimatePresence>
 
-        {/* ── Manual entry card ─────────────────────────────────────────── */}
-        <Paper
-          withBorder
-          radius="lg"
-          p="xl"
+        {/* ── Manual entry card — slides out of the row while a file is in flight ── */}
+        <div
+          aria-hidden={isActive}
+          inert={isActive || undefined}
           style={{
+            flexGrow: isActive ? 0 : 1,
+            flexBasis: isActive ? 0 : 320,
+            flexShrink: 1,
+            minWidth: 0,
+            // Also collapses the card when it has wrapped onto its own row (narrow screens)
+            maxHeight: isActive ? 0 : 1000,
+            overflow: "hidden",
+            opacity: isActive ? 0 : 1,
+            transform: isActive ? "translateX(32px)" : "none",
+            pointerEvents: isActive ? "none" : "auto",
             display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            minHeight: 320,
-            background: dark
-              ? "linear-gradient(135deg,#1a2436 0%,#1e2744 100%)"
-              : "linear-gradient(135deg,#ffffff 0%,#f8f9ff 100%)",
-            boxShadow: dark
-              ? "0 2px 16px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.04)"
-              : "0 2px 16px rgba(0,0,0,0.06),inset 0 1px 0 rgba(255,255,255,0.8)",
-            borderColor: dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)",
+            transition: reduceMotion
+              ? undefined
+              : "flex-grow 420ms cubic-bezier(0.4, 0, 0.2, 1), flex-basis 420ms cubic-bezier(0.4, 0, 0.2, 1), max-height 420ms cubic-bezier(0.4, 0, 0.2, 1), opacity 260ms ease, transform 420ms cubic-bezier(0.4, 0, 0.2, 1)",
           }}
         >
-          <Stack gap="md">
-            <ThemeIcon
-              size={48}
-              radius="xl"
-              variant="light"
-              color="gray"
-              style={{
-                background: dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)",
-                border: `1px solid ${dark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)"}`,
-              }}
-            >
-              <IconPencil size={22} />
-            </ThemeIcon>
-
-            <Stack gap={6}>
-              <Text fw={700} size="md">
-                <Trans>Or enter it yourself</Trans>
-              </Text>
-              <Text size="sm" c="dimmed" maw={300}>
-                <Trans>
-                  Faster when you already know the space — you can add the venue file later.
-                </Trans>
-              </Text>
-            </Stack>
-
-            <Group>
-              <Button
-                variant="default"
-                size="sm"
-                data-testid={TestSelectors.VENUES_ADD_BLANK_BUTTON}
-                disabled={isActive}
-                onClick={() => void navigate({ to: "/venues/create" })}
+          <Paper
+            withBorder
+            radius="lg"
+            p="xl"
+            style={{
+              flex: 1,
+              minWidth: 0,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              minHeight: 320,
+              background: dark
+                ? "linear-gradient(135deg,#1a2436 0%,#1e2744 100%)"
+                : "linear-gradient(135deg,#ffffff 0%,#f8f9ff 100%)",
+              boxShadow: dark
+                ? "0 2px 16px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.04)"
+                : "0 2px 16px rgba(0,0,0,0.06),inset 0 1px 0 rgba(255,255,255,0.8)",
+              borderColor: dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)",
+            }}
+          >
+            <Stack gap="md">
+              <ThemeIcon
+                size={48}
+                radius="xl"
+                variant="light"
+                color="gray"
                 style={{
-                  boxShadow: dark
-                    ? "0 1px 4px rgba(0,0,0,0.4),inset 0 1px 0 rgba(255,255,255,0.06)"
-                    : "0 1px 4px rgba(0,0,0,0.08),inset 0 1px 0 rgba(255,255,255,0.9)",
+                  background: dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)",
+                  border: `1px solid ${dark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)"}`,
                 }}
               >
-                <Trans>Start from a blank venue</Trans>
-              </Button>
-            </Group>
+                <IconPencil size={22} />
+              </ThemeIcon>
 
-            {isDone && (
-              <Anchor size="xs" c="dimmed" component="button" onClick={reset}>
-                <Trans>Upload another file</Trans>
-              </Anchor>
-            )}
-          </Stack>
-        </Paper>
-      </SimpleGrid>
+              <Stack gap={6}>
+                <Text fw={700} size="md">
+                  <Trans>Or enter it yourself</Trans>
+                </Text>
+                <Text size="sm" c="dimmed" maw={300}>
+                  <Trans>
+                    Faster when you already know the space — you can add the venue file later.
+                  </Trans>
+                </Text>
+              </Stack>
+
+              <Group>
+                <Button
+                  variant="default"
+                  size="sm"
+                  data-testid={TestSelectors.VENUES_ADD_BLANK_BUTTON}
+                  disabled={isActive}
+                  onClick={() => void navigate({ to: "/venues/create" })}
+                  style={{
+                    boxShadow: dark
+                      ? "0 1px 4px rgba(0,0,0,0.4),inset 0 1px 0 rgba(255,255,255,0.06)"
+                      : "0 1px 4px rgba(0,0,0,0.08),inset 0 1px 0 rgba(255,255,255,0.9)",
+                  }}
+                >
+                  <Trans>Start from a blank venue</Trans>
+                </Button>
+              </Group>
+
+              {isDone && (
+                <Anchor size="xs" c="dimmed" component="button" onClick={reset}>
+                  <Trans>Upload another file</Trans>
+                </Anchor>
+              )}
+            </Stack>
+          </Paper>
+        </div>
+      </div>
     </Container>
   );
 }
