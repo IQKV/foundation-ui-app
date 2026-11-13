@@ -3,7 +3,6 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { z } from "zod";
 import { motion } from "framer-motion";
 import {
-  Affix,
   Container,
   Text,
   Stack,
@@ -1151,6 +1150,22 @@ function VenueDetailPage() {
           {/* ── Right column: tabs ─────────────────────────────────────── */}
           <Grid.Col span={{ base: 12, lg: 8 }}>
             <Stack gap="md">
+              {/* Fill with AI — sticky at column top, clears the drawer trigger zone */}
+              {canManage && venue && completeness.percent < 100 && (
+                <Box style={{ position: "sticky", top: 16, zIndex: 100 }}>
+                  <Button
+                    size="sm"
+                    variant="gradient"
+                    gradient={{ from: "violet", to: "blue" }}
+                    leftSection={<IconSparkles size={15} />}
+                    radius="xl"
+                    onClick={openAiEnrich}
+                    aria-label={t`Fill with AI`}
+                  >
+                    <Trans>Fill with AI</Trans>
+                  </Button>
+                </Box>
+              )}
               {/* ── Tabs — mirrors admin VenueProfileWidget tab structure ─────── */}
               <Tabs defaultValue="details" keepMounted={false}>
                 <Tabs.List
@@ -1368,23 +1383,6 @@ function VenueDetailPage() {
               currentMetadata={venue?.metadata ?? null}
             />
           </>
-        )}
-
-        {/* Floating Fill with AI button — only when venue is loaded and profile is incomplete */}
-        {canManage && venue && completeness.percent < 100 && (
-          <Affix position={{ bottom: 24, right: 24 }}>
-            <Button
-              size="md"
-              variant="gradient"
-              gradient={{ from: "violet", to: "blue" }}
-              leftSection={<IconSparkles size={16} />}
-              radius="xl"
-              onClick={openAiEnrich}
-              aria-label={t`Fill with AI`}
-            >
-              <Trans>Fill with AI</Trans>
-            </Button>
-          </Affix>
         )}
       </Container>
     </motion.div>
