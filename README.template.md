@@ -42,7 +42,7 @@ Architecture follows [Feature-Sliced Design](AGENTS.md).
 
 ## Prerequisites
 
-- Node.js `>=24.0.0`
+- Node.js `>=20.19.0` (22.12+ or 24+ also supported)
 - pnpm `10.33.2`
 
 ## Quick Start
@@ -62,12 +62,17 @@ pnpm dev
 
 ## Environment Variables
 
-| Variable              | Default (`.env.example`) | Description                                      |
-| --------------------- | ------------------------ | ------------------------------------------------ |
-| `VITE_API_SERVER_URL` |                          | API base URL (production; dev uses `/api` proxy) |
-| `VITE_LOG_LEVEL`      | `info`                   | Client log level: `silent`, `info`, `debug`      |
-| `VITE_ROLLOUT_MODE`   | `MULTI_TENANT`           | `MULTI_TENANT` or `SINGLE_TENANT`                |
-| `VITE_DEMO_MODE`      | `false`                  | Show demo helpers in auth flows                  |
+| Variable                    | Default (`.env.example`) | Description                                      |
+| --------------------------- | ------------------------ | ------------------------------------------------ |
+| `VITE_API_SERVER_URL`       |                          | API base URL (production; dev uses `/api` proxy) |
+| `VITE_LOG_LEVEL`            | `info`                   | Client log level: `silent`, `info`, `debug`      |
+| `VITE_ROLLOUT_MODE`         | `MULTI_TENANT`           | `MULTI_TENANT` or `SINGLE_TENANT`                |
+| `VITE_DEMO_MODE`            | `false`                  | Show demo helpers in auth flows                  |
+| `VITE_ENABLE_MAGIC_LINK`    | `true`                   | Enable magic link auth routes                    |
+| `VITE_PAYMENT_GATEWAY_TYPE` | `STRIPE`                 | `STRIPE` or `LEMON_SQUEEZY`                      |
+| `VITE_ENABLED_UI_ADDONS`    |                          | Comma-separated addon IDs to enable              |
+| `VITE_APP_NAV_VARIANT`      | `sidebar`                | `sidebar` or `topbar`                            |
+| `VITE_APP_TITLE`            |                          | App name; source for all branding defaults       |
 
 Copy `.env.example` to `.env.local`. For runtime overrides without a rebuild copy `public/config.js.example` to `public/config.js` and set `window.VITE_*` values.
 
@@ -90,13 +95,14 @@ pnpm messages:compile     # Compile PO catalogs
 
 ```
 src/
-├── app/           # Providers, theme, runtime config
+├── app/           # Providers, theme, runtime config, addon registry
 ├── processes/     # Session store, inactivity timer, theme
 ├── pages/         # File-based routes (TanStack Router)
 ├── widgets/       # Composed UI blocks
 ├── features/      # User scenarios and business logic
 ├── entities/      # Business entities and data models
 ├── shared/        # API clients, UI kit, locales, utilities
+├── addons/        # Optional pluggable modules
 └── architecture.test.ts
 ```
 

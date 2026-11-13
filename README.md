@@ -21,61 +21,80 @@ This is the tenant surface of the platform — separate from `foundation-ui-plat
 | **Billing**            | Billing portal access (Stripe or Lemon Squeezy), current subscription view, plan catalog, billing info, refunds list, webhook logs; **plan-based feature access control** with entitlements API integration                                                                   |
 | **Tenant Settings**    | Organization metadata editing                                                                                                                                                                                                                                                 |
 | **Notifications**      | In-app notifications with WebSocket support; notification bell UI                                                                                                                                                                                                             |
+| **Venues**             | Venue list with semantic search; create/edit/delete and bulk delete; tabbed metadata sections with completeness scoring; document upload via presigned URLs; AI enrichment assistant                                                                                          |
+| **CMS pages**          | Publish and edit CMS pages with per-locale translations and a rich-text (Tiptap) editor                                                                                                                                                                                       |
 | **Session security**   | Access token in memory; refresh token + tenant key in `sessionStorage`; silent refresh on 401; 30-minute inactivity sign-out                                                                                                                                                  |
-| **UX**                 | Light/dark theme, Lingui i18n (English catalog), locale cookie, navigation progress, error boundaries                                                                                                                                                                         |
+| **UX**                 | Light/dark theme, Lingui i18n (`en-US`, `bg-BG`, `de-DE`, `fr-FR`) with locale cookie, navigation progress, error boundaries                                                                                                                                                  |
 
 ## Routes
 
-| Path                              | Access        | Description                                  |
-| --------------------------------- | ------------- | -------------------------------------------- |
-| `/sign-in`                        | Public        | Tenant sign-in with optional redirect        |
-| `/auth/callback`                  | Public        | OAuth2/OIDC callback handler                 |
-| `/signup`                         | Public        | New user + tenant registration               |
-| `/forgot-password`                | Public        | Request password reset email                 |
-| `/reset-password`                 | Public        | Set new password from email token            |
-| `/verify-email`                   | Public        | Confirm email from link token                |
-| `/invite/:token`                  | Public        | Preview and accept workspace invitation      |
-| `/magic-link`                     | Public        | Magic link entry (feature-flagged)           |
-| `/magic-link/verify`              | Public        | Exchange magic link token for session        |
-| `/create-organization`            | Authenticated | Create a new organization                    |
-| `/`                               | Authenticated | Dashboard                                    |
-| `/team`                           | Authenticated | Members and invitations                      |
-| `/billing`                        | Authenticated | Billing portal, plans, refunds, webhook logs |
-| `/account/settings/general`       | Authenticated | General account settings                     |
-| `/account/settings/organization`  | Authenticated | Organization settings                        |
-| `/account/settings/security`      | Authenticated | Security settings                            |
-| `/account/settings/notifications` | Authenticated | Notification settings                        |
-| `/unauthorized`                   | Public        | Shown when JWT is not a tenant session       |
-| `/404`, `/500`                    | Public        | Error pages                                  |
+| Path                                   | Access        | Description                                  |
+| -------------------------------------- | ------------- | -------------------------------------------- |
+| `/sign-in`                             | Public        | Tenant sign-in with optional redirect        |
+| `/auth/callback`                       | Public        | OAuth2/OIDC callback handler                 |
+| `/signup`                              | Public        | New user + tenant registration               |
+| `/forgot-password`                     | Public        | Request password reset email                 |
+| `/reset-password`                      | Public        | Set new password from email token            |
+| `/verify-email`                        | Public        | Confirm email from link token                |
+| `/invite/:token`                       | Public        | Preview and accept workspace invitation      |
+| `/magic-link`                          | Public        | Magic link entry (feature-flagged)           |
+| `/magic-link/verify`                   | Public        | Exchange magic link token for session        |
+| `/complete-profile`                    | Authenticated | Onboarding profile completion                |
+| `/create-organization`                 | Authenticated | Create a new organization                    |
+| `/`                                    | Authenticated | Dashboard                                    |
+| `/team`                                | Authenticated | Members and invitations                      |
+| `/venues`                              | Authenticated | Venue list with semantic search              |
+| `/venues/create`, `/venues/add`        | Authenticated | Create a venue (form / import flow)          |
+| `/venues/:venueId`                     | Authenticated | Venue detail and metadata                    |
+| `/cms-pages`                           | Authenticated | CMS page list                                |
+| `/cms-pages/create`                    | Authenticated | Create a CMS page                            |
+| `/cms-pages/:pageId`                   | Authenticated | Edit a CMS page                              |
+| `/addons`                              | Authenticated | Addons landing page                          |
+| `/addons/:addonPath`                   | Authenticated | Addon-rendered page                          |
+| `/billing`                             | Authenticated | Billing portal, plans, refunds, webhook logs |
+| `/billing/success`, `/billing/failure` | Authenticated | Checkout result pages                        |
+| `/settings/general`                    | Authenticated | General account settings                     |
+| `/settings/organization`               | Authenticated | Organization settings                        |
+| `/settings/security`                   | Authenticated | Security settings                            |
+| `/settings/notifications`              | Authenticated | Notification settings                        |
+| `/loading-demo`                        | Public        | Standalone loading-indicator demo            |
+| `/unauthorized`                        | Public        | Shown when JWT is not a tenant session       |
+| `/404`, `/500`                         | Public        | Error pages                                  |
 
 Authenticated routes live under the `/_app` layout, which enforces a valid tenant JWT (or silent refresh) before rendering.
 
 ## Feature status
 
-| Feature                                 | Status              |
-| --------------------------------------- | ------------------- |
-| Sign-in with tenant discovery           | Done                |
-| OAuth2/OIDC sign-in                     | Done                |
-| Enterprise SSO (tenant OIDC)            | Done                |
-| OAuth2 provider link/unlink             | Done                |
-| Tenant SSO configuration                | Done (TENANT_OWNER) |
-| Sign-up with tenant provisioning        | Done                |
-| Forgot / reset password                 | Done                |
-| Email verification                      | Done                |
-| Accept invitation                       | Done                |
-| Dashboard                               | Done (basic stats)  |
-| Team — member list                      | Done                |
-| Team — invitations (send, list, revoke) | Done (TENANT_OWNER) |
-| Profile & change password               | Done                |
-| Billing self-service                    | Done                |
-| Webhook logs (tenant)                   | Done                |
-| Plan-based feature access control       | Done                |
-| Tenant settings                         | Done                |
-| Notifications                           | Done                |
-| Member role editing                     | Done (TENANT_OWNER) |
-| Member ban/unban                        | Done (TENANT_OWNER) |
-| Member transfer ownership               | Done (TENANT_OWNER) |
-| Magic link authentication               | Done (feature flag) |
+| Feature                                  | Status              |
+| ---------------------------------------- | ------------------- |
+| Sign-in with tenant discovery            | Done                |
+| OAuth2/OIDC sign-in                      | Done                |
+| Enterprise SSO (tenant OIDC)             | Done                |
+| OAuth2 provider link/unlink              | Done                |
+| Tenant SSO configuration                 | Done (TENANT_OWNER) |
+| Sign-up with tenant provisioning         | Done                |
+| Forgot / reset password                  | Done                |
+| Email verification                       | Done                |
+| Accept invitation                        | Done                |
+| Dashboard                                | Done (basic stats)  |
+| Team — member list                       | Done                |
+| Team — invitations (send, list, revoke)  | Done (TENANT_OWNER) |
+| Profile & change password                | Done                |
+| Billing self-service                     | Done                |
+| Webhook logs (tenant)                    | Done                |
+| Plan-based feature access control        | Done                |
+| Tenant settings                          | Done                |
+| Notifications                            | Done                |
+| Venues — CRUD & bulk delete              | Done                |
+| Venues — metadata & completeness scoring | Done                |
+| Venues — document upload (presigned URL) | Done                |
+| Venues — semantic search                 | Done                |
+| Venues — AI enrichment assistant         | Done                |
+| CMS pages (per-locale, rich text)        | Done                |
+| Member role editing                      | Done (TENANT_OWNER) |
+| Member ban/unban                         | Done (TENANT_OWNER) |
+| Member transfer ownership                | Done (TENANT_OWNER) |
+| Magic link authentication                | Done (feature flag) |
 
 ## Billing & Entitlements
 
@@ -173,7 +192,7 @@ Conditionally renders children when a feature-map code is enabled:
 | `useQuota(field)`          | Returns typed quota value                                                                                                                 |
 | `useEntitlementsContext()` | Raw context access                                                                                                                        |
 
-A working integration example lives at `src/pages/billing-example.tsx`.
+A working integration example lives at `src/pages/-billing-example.tsx`.
 
 ### Billing API endpoints
 
@@ -207,7 +226,7 @@ All calls go through `src/shared/api/billing.ts` → `billingApi`. The paths bel
 - React 19, TypeScript 6, Vite 8 (SWC)
 - Mantine UI 9, Tabler Icons, mantine-datatable
 - TanStack Router (file-based routes) + TanStack Query
-- Zustand (session + theme), React Hook Form + Zod
+- Zustand (session + theme), Mantine Form + Zod
 - Lingui 6 (PO catalogs, lazy locale load)
 - Axios with request/response interceptors
 - Vitest + Testing Library, Playwright (E2E)
@@ -247,6 +266,23 @@ In development, the app uses `baseURL: /api` and Vite proxies to `VITE_API_SERVE
 | `VITE_DEMO_MODE`            | `false`                     | Show demo helpers in auth flows (non-production only) |
 | `VITE_ENABLE_MAGIC_LINK`    | `true`                      | Enable magic link auth routes (`/magic-link/*`)       |
 | `VITE_PAYMENT_GATEWAY_TYPE` | `STRIPE`                    | Billing UI mode: `STRIPE` or `LEMON_SQUEEZY`          |
+| `VITE_ENABLED_UI_ADDONS`    | `platform-ai-chat`          | Comma-separated addon IDs to enable at startup        |
+| `VITE_APP_NAV_VARIANT`      | `sidebar`                   | Navigation layout: `sidebar` (default) or `topbar`    |
+
+### Whitelabeling / branding
+
+Set `VITE_APP_TITLE` and every other brand string derives from it. All branding variables are
+optional; see `.env.example` for the full list and defaults.
+
+| Variable                                                   | Purpose                                       |
+| ---------------------------------------------------------- | --------------------------------------------- |
+| `VITE_APP_TITLE`                                           | App name; source for all branding defaults    |
+| `VITE_APP_BRAND_NAME`, `VITE_APP_BRAND_TAGLINE`            | Sidebar logo label and tagline                |
+| `VITE_APP_AUTH_SECTION_LABEL`, `VITE_APP_AUTH_BADGES`      | Auth-panel label and trust badges             |
+| `VITE_APP_AUTH_HEADLINE_1/2`, `VITE_APP_AUTH_TAGLINE`      | Auth-panel headline (two lines) and paragraph |
+| `VITE_APP_ONBOARDING_WELCOME`, `VITE_APP_FOOTER_COPYRIGHT` | Onboarding modal heading and footer copyright |
+| `VITE_APP_SUPPORT_EMAIL`, `VITE_APP_SUPPORT_URL`           | Support link in the auth footer               |
+| `VITE_APP_PRIVACY_URL`, `VITE_APP_TERMS_URL`               | Legal links in the auth footer                |
 
 Copy `.env.example` to `.env.local` for local overrides. For runtime overrides without a rebuild, copy `public/config.js.example` to `public/config.js` and set `window.VITE_*` values.
 
@@ -293,7 +329,9 @@ pnpm messages:compile     # Compile PO catalogs for runtime
 
 ## Internationalization
 
-[Lingui](https://lingui.dev/) drives all user-visible strings. The active catalog is **English** (`locales/en`). To add a locale: add it to `lingui.config.ts` and `src/shared/locales/index.ts`, run `pnpm messages:extract`, translate the `.po` file, then `pnpm messages:compile`.
+[Lingui](https://lingui.dev/) drives all user-visible strings. The app ships four locales — `en-US` (source) plus `bg-BG`, `de-DE`, and `fr-FR` — declared in `lingui.config.ts` and `src/shared/locales/index.ts`. Each locale has a PO source (`locales/<locale>.po`) and a compiled TypeScript catalog (`locales/<locale>.ts`).
+
+To add a locale: add it to `lingui.config.ts` and the `availableLocales` list in `src/shared/locales/index.ts`, run `pnpm messages:extract`, translate the `.po` file, then `pnpm messages:compile`.
 
 The locale switcher persists choice in a `locale` cookie. API requests send `Accept-Language` from the active Lingui locale.
 
@@ -301,14 +339,18 @@ The locale switcher persists choice in a `locale` cookie. API requests send `Acc
 
 ```
 src/
-├── app/           # Providers, theme, runtime config
+├── app/           # Providers, theme, runtime config, addon registry
 ├── processes/     # Session store, inactivity timer, theme
 ├── pages/         # File-based routes (TanStack Router)
-├── features/      # sign-in, signup, invite-member, edit-profile, …
-├── widgets/       # (reserved for composed blocks)
+├── widgets/       # Dashboard welcome, signup chart, stat card
+├── features/      # sign-in, signup, invite-member, manage-venue, manage-billing, …
+├── entities/      # Tenant, user, venue, subscription, notification, cms-page, …
 ├── shared/        # UI kit, API clients, locales, utilities
+├── addons/        # Optional pluggable modules (platform-ai-chat)
 └── architecture.test.ts
 ```
+
+Lingui PO sources and compiled catalogs live in the top-level `locales/` directory.
 
 ## Authorization
 

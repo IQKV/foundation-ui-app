@@ -9,7 +9,7 @@
 - Type-safe development with TypeScript 6 strict configuration
 - Feature-Sliced Design with enforced layer boundaries (automated architecture tests)
 - Modern build tooling with Vite 8 and SWC compiler
-- Internationalization with Lingui 6 (lazy-loaded translations for `en-US`, `bg-BG`)
+- Internationalization with Lingui 6 (lazy-loaded translations for `en-US`, `bg-BG`, `de-DE`, `fr-FR`)
 - MSW v2 for API mocking in development and testing
 - Comprehensive testing with Vitest and Playwright
 - Runtime configuration override support via `public/config.js` (window globals)
@@ -55,8 +55,8 @@
 
 ### Development & Quality
 
-- **Vitest 4** - Fast unit testing with coverage reports and UI
-- **Playwright 1.61** - End-to-end testing (Chromium, Firefox, WebKit)
+- **Vitest 5** - Fast unit testing with coverage reports and UI
+- **Playwright 1.64** - End-to-end testing (Chromium, Firefox, WebKit)
 - **Testing Library** - React component testing utilities
 - **OxLint** - Ultra-fast linting with type-aware rules
 - **OxFmt** - Fast opinionated code formatting
@@ -68,7 +68,8 @@
 ### Internationalization & DevOps
 
 - **Lingui 6** - Modern i18n with macro support and pluralization
-- **Locales** - `en-US` (source locale) and `bg-BG`, PO-based catalogs in `locales/`
+- **Locales** - `en-US` (source locale), `bg-BG`, `de-DE`, `fr-FR` — PO sources in `locales/<locale>.po`,
+  compiled TypeScript catalogs in `locales/<locale>.ts`
 - **GitHub Actions** - CI/CD workflows for build, test, and PR validation
 - **Dependabot** - Automated dependency updates
 - **Release-it** - Automated versioning and changelog generation
@@ -116,12 +117,14 @@ src/
 **Widgets** (`src/widgets/`): `dashboard-personal-welcome`, `dashboard-signup-chart`,
 `dashboard-stat-card`
 
-**Shared UI** (`src/shared/ui/`): `AppLayout`, `AuthLayout`, `AuthGuard`,
-`LoadingOverlay`, `ErrorBoundary`, `UserStatusBadge`, `TenantStatusBadge`,
+**Shared UI** (`src/shared/ui/`): `AppLayout`, `AppLayoutTopNav`, `AuthLayout`, `AuthGuard`,
+`TenantOwnerOnly`, `LoadingOverlay`, `ErrorBoundary`, `UserStatusBadge`, `TenantStatusBadge`,
 `InvitationStatusBadge`, `PageHeader`, `PageTransition`, `ColorSchemeToggle`, `LocaleSwitcher`
 
-**Shared API** (`src/shared/api/`): `httpClient`, `authApi`, `iamApi`, `billingApi`, `cmsApi`,
-`catalogApi`, `oauth2Api`, `passwordResetApi`, `signupApi`, `auth-interceptor` (side-effect import)
+**Shared API** (`src/shared/api/`): `httpClient`, `authApi`, `iamApi`, `localesApi`,
+`notificationApi`, `billingApi`, `cmsApi`, `catalogApi`, `venueAssetApi`, `venueAssetImportApi`,
+`uploadFileToPresignedUrl`, `oauth2Api`, `passwordResetApi`, `signupApi`, `auth-interceptor`
+(side-effect import)
 
 **Shared Lib** (`src/shared/lib/`): `validateWithZod`, `queryClient`, `decodeJwt`,
 `isTenantOwner`, `isTenantSession`, `rollout` helpers, `color-utils`, `date-utils`,
@@ -598,9 +601,12 @@ export const authApi = {
 - `httpClient` — base Axios instance
 - `authApi` — sign-in, sign-out, tenant discovery, magic link, token exchange
 - `iamApi` — IAM user and member management
-- `billingApi` — plans, subscriptions, checkout, portal
+- `localesApi` — tenant locale/translation settings
+- `notificationApi` — in-app notifications
+- `billingApi` — plans, subscriptions, checkout, portal, entitlements, refunds, webhook logs
 - `catalogApi` — plan catalog
 - `cmsApi` — CMS pages CRUD
+- `venueAssetApi` / `venueAssetImportApi` / `uploadFileToPresignedUrl` — venue documents and assets
 - `oauth2Api` — OAuth2/OIDC provider integrations
 - `passwordResetApi` — forgot password, reset password
 - `signupApi` — user registration
@@ -664,7 +670,7 @@ const payload = decodeJwt(accessToken); // JwtPayload | null
 
 ### Development Requirements
 
-- **Node.js**: >= 24.0.0
+- **Node.js**: >= 20.19.0 (Vite 8 requirement; 22.12+ and 24+ also supported — CI runs 24.x)
 - **Package Manager**: pnpm 10.33.2 (required — specified in `packageManager` field)
 - **Editor**: VS Code with recommended extensions
 
@@ -685,6 +691,21 @@ VITE_ROLLOUT_MODE=MULTI_TENANT                  # MULTI_TENANT (default) or SING
 VITE_DEMO_MODE=false                            # Show demo credential hints
 VITE_ENABLE_MAGIC_LINK=true                     # Enable magic link sign-in
 VITE_PAYMENT_GATEWAY_TYPE=STRIPE               # STRIPE (default) or LEMON_SQUEEZY
+
+# Addons & layout
+VITE_ENABLED_UI_ADDONS=platform-ai-chat        # Comma-separated enabled addon IDs
+VITE_APP_NAV_VARIANT=sidebar                   # 'sidebar' (default) or 'topbar'
+
+# Whitelabeling / branding (everything derives from VITE_APP_TITLE)
+VITE_APP_TITLE=Key Value                        # App name; source for all branding defaults
+VITE_APP_BRAND_NAME=Key Value                   # Sidebar logo label (defaults to TITLE)
+VITE_APP_BRAND_TAGLINE=Workspace                # Sidebar tagline
+VITE_APP_AUTH_HEADLINE_1=Your workspace,        # Auth panel headline (line 1)
+VITE_APP_AUTH_HEADLINE_2=always in reach.       # Auth panel headline (line 2, gradient)
+VITE_APP_SUPPORT_EMAIL=support@example.com      # Auth footer support link
+# Also available: VITE_APP_AUTH_SECTION_LABEL, VITE_APP_AUTH_BADGES, VITE_APP_AUTH_TAGLINE,
+# VITE_APP_ONBOARDING_WELCOME, VITE_APP_FOOTER_COPYRIGHT, VITE_APP_SUPPORT_URL,
+# VITE_APP_PRIVACY_URL, VITE_APP_TERMS_URL — see .env.example for defaults
 ```
 
 ### Runtime Configuration Override
@@ -741,8 +762,9 @@ pnpm cleanup:all           # Full cleanup including node_modules
 
 ## Internationalization with Lingui 6
 
-**Locales**: `en-US` (source) and `bg-BG`. Catalog files live in `locales/en-US.ts` and
-`locales/bg-BG.ts` (compiled from `locales/en-US/` and `locales/bg-BG/` PO files).
+**Locales**: `en-US` (source), `bg-BG`, `de-DE`, `fr-FR` — configured in `lingui.config.ts` and
+listed in `shared/locales/index.ts` (`availableLocales`). Catalog files live in `locales/<locale>.ts`
+(compiled from `locales/<locale>.po` PO sources).
 
 ### Locale Detection
 
@@ -923,9 +945,16 @@ Pre-commit hook runs `oxfmt --check` on all staged files and `sort-package-json`
 
 ### Commit Standards
 
+There is no `commit` npm script. Commitizen is configured with `cz-conventional-changelog`
+and `gitzy` is available as a CLI:
+
 ```bash
-pnpm commit   # Interactive commit via cz-conventional-changelog
+pnpm exec cz      # interactive commit via commitizen (cz-conventional-changelog)
+pnpm exec gitzy   # alternative conventional-commit CLI
 ```
+
+Commitlint (`@commitlint/config-conventional`, via the Husky `commit-msg` hook) validates the
+final message — never bypass it with `--no-verify`.
 
 For `fix`: describe the symptom and trigger, not the code change:
 
