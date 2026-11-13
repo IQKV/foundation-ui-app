@@ -1,15 +1,19 @@
 /**
  * Shared surface accents for venue detail screens.
- * Deliberately quieter than the catalog list accents: lighter tones, no motion.
+ * Colour strength matches the semantic-search toolbar bar so the accent reads the same
+ * everywhere; it must stay clearly stronger than the neutral marker to signal the state.
  */
 
 /** Blue→cyan accent shared by the detail section cards. */
 export const ACCENT_GRADIENT =
-  "linear-gradient(135deg, var(--mantine-color-blue-3) 0%, var(--mantine-color-cyan-3) 100%)";
+  "linear-gradient(135deg, var(--mantine-color-blue-filled) 0%, var(--mantine-color-cyan-filled) 100%)";
 
-/** Neutral tone for the leading-edge marker on a record that is not enriched yet. */
+/**
+ * Neutral tone for the leading-edge marker on a record that is not enriched yet.
+ * Must differ from `--mantine-color-default-border`, or it disappears into the card border.
+ */
 export const UNLINKED_MARKER =
-  "light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4))";
+  "light-dark(var(--mantine-color-gray-4), var(--mantine-color-dark-3))";
 
 /** Hairline gradient strip along the top edge of a section card. */
 export const SECTION_CARD_STYLES = {
@@ -22,9 +26,9 @@ export const SECTION_CARD_STYLES = {
       top: 0,
       left: 0,
       right: 0,
-      height: 2,
+      height: 3,
       background: ACCENT_GRADIENT,
-      opacity: 0.7,
+      opacity: 0.85,
       pointerEvents: "none",
     },
   },
@@ -41,9 +45,9 @@ export const ASSET_ROW_STYLES = {
       top: 0,
       bottom: 0,
       left: 0,
-      width: 3,
+      width: 4,
       background: ACCENT_GRADIENT,
-      opacity: 0.65,
+      opacity: 0.8,
       pointerEvents: "none",
     },
   },
@@ -56,7 +60,7 @@ const EDGE_MARKER = {
   top: 0,
   bottom: 0,
   left: 0,
-  width: 4,
+  width: 5,
   pointerEvents: "none",
 } as const;
 

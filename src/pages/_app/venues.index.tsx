@@ -69,10 +69,13 @@ const PAGE_SIZE = 20;
 
 /** Blue→cyan accent shared by the card, row and sidebar borders. */
 const ACCENT_GRADIENT =
-  "linear-gradient(135deg, var(--mantine-color-blue-4) 0%, var(--mantine-color-cyan-4) 100%)";
+  "linear-gradient(135deg, var(--mantine-color-blue-filled) 0%, var(--mantine-color-cyan-filled) 100%)";
 
-/** Left-edge marker for a record with no master-catalog link. */
-const UNLINKED_MARKER = "light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4))";
+/**
+ * Left-edge marker for a record with no master-catalog link.
+ * Must differ from `--mantine-color-default-border`, or it disappears into the card border.
+ */
+const UNLINKED_MARKER = "light-dark(var(--mantine-color-gray-4), var(--mantine-color-dark-3))";
 
 /**
  * Narrows the list-vs-semantic union: only the semantic-search response carries the
@@ -156,7 +159,7 @@ function VenueCard({
             top: 0,
             bottom: 0,
             left: 0,
-            width: 4,
+            width: 5,
             background: venue.masterVenueId ? ACCENT_GRADIENT : UNLINKED_MARKER,
             pointerEvents: "none",
           },
@@ -321,10 +324,8 @@ function VenueRow({
             top: 0,
             bottom: 0,
             left: 0,
-            width: 4,
+            width: 5,
             background: venue.masterVenueId ? ACCENT_GRADIENT : UNLINKED_MARKER,
-            opacity: venue.masterVenueId ? 0.55 : 1,
-            transition: "opacity 180ms ease",
             pointerEvents: "none",
           },
           "&:hover": {
@@ -332,7 +333,6 @@ function VenueRow({
             borderColor: "var(--mantine-color-blue-3)",
             boxShadow: "0 12px 28px -18px rgba(34,139,230,0.6)",
           },
-          "&:hover::before": { opacity: 1 },
           "&[data-selected]": {
             borderColor: "var(--mantine-color-blue-5)",
             boxShadow: "0 0 0 2px rgba(34,139,230,0.3)",
