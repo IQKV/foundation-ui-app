@@ -990,8 +990,12 @@ msgid "Demo Progress Bar"
 msgstr "Demo Progress Bar"
 
 #: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
-msgid "Describe your venue and I'll suggest which profile fields to fill in. You can review and accept each suggestion before it's saved."
-msgstr "Describe your venue and I'll suggest which profile fields to fill in. You can review and accept each suggestion before it's saved."
+msgid "Describe your venue and I'll suggest which profile fields to fill in. Review and accept each suggestion before it's saved."
+msgstr "Describe your venue and I'll suggest which profile fields to fill in. Review and accept each suggestion before it's saved."
+
+#: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
+#~ msgid "Describe your venue and I'll suggest which profile fields to fill in. You can review and accept each suggestion before it's saved."
+#~ msgstr "Describe your venue and I'll suggest which profile fields to fill in. You can review and accept each suggestion before it's saved."
 
 #: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
 msgid "Describe your venue, e.g. \"500-person rooftop bar in London with in-house catering\""
@@ -1140,6 +1144,10 @@ msgstr "Enter new password"
 #: src/features/forgot-password/ui/forgot-password-form.tsx
 msgid "Enter the email address associated with your account and we'll send you a link to reset your password."
 msgstr "Enter the email address associated with your account and we'll send you a link to reset your password."
+
+#: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
+msgid "Enter to send · Shift + Enter for a new line"
+msgstr "Enter to send · Shift + Enter for a new line"
 
 #: src/features/change-password/ui/change-password-modal.tsx
 #: src/pages/_app/settings/security.tsx

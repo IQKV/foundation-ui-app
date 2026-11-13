@@ -332,17 +332,19 @@ export function VenueAiEnrichModal({
         style={{ flex: 1 }}
       >
         {history.length === 0 ? (
-          <Stack align="center" gap="xs" py="xl">
-            <ThemeIcon size={48} radius="xl" variant="light" color="violet">
-              <IconRobot size={26} />
-            </ThemeIcon>
-            <Text size="sm" c="dimmed" ta="center" maw={320}>
+          <Group gap={6} wrap="nowrap" align="flex-start" px={4} py={4}>
+            <IconRobot
+              size={13}
+              color="var(--mantine-color-violet-6)"
+              style={{ flexShrink: 0, marginTop: 3 }}
+            />
+            <Text size="xs" c="dimmed">
               <Trans>
-                Describe your venue and I'll suggest which profile fields to fill in. You can review
-                and accept each suggestion before it's saved.
+                Describe your venue and I'll suggest which profile fields to fill in. Review and
+                accept each suggestion before it's saved.
               </Trans>
             </Text>
-          </Stack>
+          </Group>
         ) : (
           <Stack gap="md" px={4} pb={4}>
             {history.map((turn, i) => (
@@ -422,21 +424,11 @@ export function VenueAiEnrichModal({
         </>
       )}
 
-      <Divider />
-
-      {/* Input row */}
-      <Stack gap="xs">
-        <Select
-          size="xs"
-          data={FIELD_HINT_OPTIONS}
-          value={fieldHint}
-          onChange={(v) => setFieldHint(v ?? "")}
-          label={t`Focus on`}
-          styles={{ root: { maxWidth: 180 } }}
-        />
-        <Group align="flex-end" gap="xs" wrap="nowrap">
+      {/* Composer — the primary control surface of the dialog */}
+      <Paper withBorder radius="md" p="sm" style={{ background: "var(--mantine-color-gray-0)" }}>
+        <Stack gap="xs">
           <Textarea
-            style={{ flex: 1 }}
+            size="md"
             placeholder={t`Describe your venue, e.g. "500-person rooftop bar in London with in-house catering"`}
             value={message}
             onChange={(e) => setMessage(e.currentTarget.value)}
@@ -446,25 +438,40 @@ export function VenueAiEnrichModal({
                 handleSend();
               }
             }}
-            minRows={2}
-            maxRows={4}
+            minRows={4}
+            maxRows={8}
             autosize
             disabled={isSuggesting}
             aria-label={t`Message to AI enrichment assistant`}
           />
-          <ActionIcon
-            size="lg"
-            variant="filled"
-            color="blue"
-            aria-label={t`Send`}
-            loading={isSuggesting}
-            disabled={!message.trim()}
-            onClick={handleSend}
-          >
-            <IconSend size={16} />
-          </ActionIcon>
-        </Group>
-      </Stack>
+          <Group justify="space-between" align="flex-end" gap="sm" wrap="nowrap">
+            <Select
+              size="sm"
+              label={t`Focus on`}
+              data={FIELD_HINT_OPTIONS}
+              value={fieldHint}
+              onChange={(v) => setFieldHint(v ?? "")}
+              styles={{ root: { flex: "0 0 auto", minWidth: 170 } }}
+            />
+            <Group gap="sm" align="center" wrap="nowrap">
+              <Text size="xs" c="dimmed" visibleFrom="sm">
+                <Trans>Enter to send · Shift + Enter for a new line</Trans>
+              </Text>
+              <Button
+                size="md"
+                variant="filled"
+                color="blue"
+                leftSection={<IconSend size={16} />}
+                loading={isSuggesting}
+                disabled={!message.trim()}
+                onClick={handleSend}
+              >
+                <Trans>Send</Trans>
+              </Button>
+            </Group>
+          </Group>
+        </Stack>
+      </Paper>
     </Modal>
   );
 }

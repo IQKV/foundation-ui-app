@@ -990,8 +990,12 @@ msgid "Demo Progress Bar"
 msgstr "Демо лента за напредък"
 
 #: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
-msgid "Describe your venue and I'll suggest which profile fields to fill in. You can review and accept each suggestion before it's saved."
+msgid "Describe your venue and I'll suggest which profile fields to fill in. Review and accept each suggestion before it's saved."
 msgstr ""
+
+#: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
+#~ msgid "Describe your venue and I'll suggest which profile fields to fill in. You can review and accept each suggestion before it's saved."
+#~ msgstr ""
 
 #: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
 msgid "Describe your venue, e.g. \"500-person rooftop bar in London with in-house catering\""
@@ -1140,6 +1144,10 @@ msgstr "Въведете нова парола"
 #: src/features/forgot-password/ui/forgot-password-form.tsx
 msgid "Enter the email address associated with your account and we'll send you a link to reset your password."
 msgstr "Въведете имейл адреса, свързан с акаунта ви, и ще ви изпратим връзка за нулиране на паролата."
+
+#: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
+msgid "Enter to send · Shift + Enter for a new line"
+msgstr ""
 
 #: src/features/change-password/ui/change-password-modal.tsx
 #: src/pages/_app/settings/security.tsx
