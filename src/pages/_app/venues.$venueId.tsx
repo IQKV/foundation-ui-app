@@ -22,7 +22,6 @@ import {
   Loader,
   ThemeIcon,
   Divider,
-  CopyButton,
   Collapse,
   Modal,
   ScrollArea,
@@ -42,7 +41,6 @@ import {
   IconMapPin,
   IconExternalLink,
   IconAdjustments,
-  IconLink,
   IconCheck,
   IconAlertTriangle,
   IconEdit,
@@ -1071,24 +1069,6 @@ function VenueDetailPage() {
                       }}
                     >
                       <Stack gap={4}>
-                        {venue?.masterVenueId && (
-                          <Badge
-                            variant="filled"
-                            color="indigo"
-                            size="sm"
-                            tt="none"
-                            style={{
-                              background: hasPhoto ? "rgba(255,255,255,0.2)" : undefined,
-                              backdropFilter: "blur(4px)",
-                              width: "fit-content",
-                            }}
-                          >
-                            <Group gap={4} wrap="nowrap">
-                              <IconLink size={11} />
-                              <Trans>Master linked</Trans>
-                            </Group>
-                          </Badge>
-                        )}
                         <Group gap="sm" align="center" wrap="nowrap">
                           <Text
                             fw={800}
@@ -1188,43 +1168,6 @@ function VenueDetailPage() {
                     }
                   />
                 </Stack>
-              </InfoSectionCard>
-
-              {/* Relations */}
-              <InfoSectionCard
-                title={<Trans>Master catalog link</Trans>}
-                icon={<IconLink size={14} />}
-                filled={venue?.masterVenueId ? 1 : 0}
-                total={1}
-                isLoading={isLoading}
-              >
-                {venue?.masterVenueId ? (
-                  <Group gap="xs" wrap="nowrap">
-                    <Text size="sm" c="dimmed" style={{ flexShrink: 0 }}>
-                      <Trans>Master venue</Trans>:
-                    </Text>
-                    <Badge variant="light" color="indigo" size="sm" ff="monospace" tt="none">
-                      {venue.masterVenueId}
-                    </Badge>
-                    <CopyButton value={venue.masterVenueId} timeout={2000}>
-                      {({ copied, copy }) => (
-                        <ActionIcon
-                          color={copied ? "teal" : "gray"}
-                          variant="subtle"
-                          size="sm"
-                          onClick={copy}
-                          aria-label={t`Copy master venue id`}
-                        >
-                          {copied ? <IconCheck size={13} /> : <IconLink size={13} />}
-                        </ActionIcon>
-                      )}
-                    </CopyButton>
-                  </Group>
-                ) : (
-                  <Text size="sm" c="dimmed" fs="italic">
-                    <Trans>Not linked to a master catalog record.</Trans>
-                  </Text>
-                )}
               </InfoSectionCard>
 
               {/* Record */}
