@@ -1704,8 +1704,8 @@ msgstr "Tout marquer comme lu"
 #~ msgstr ""
 
 #: src/pages/_app/venues.index.tsx
-msgid "Master linked"
-msgstr ""
+#~ msgid "Master linked"
+#~ msgstr ""
 
 #: src/pages/_app/venues.$venueId.tsx
 #~ msgid "Master venue"

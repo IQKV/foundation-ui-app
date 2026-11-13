@@ -1704,8 +1704,8 @@ msgstr "Mark all as read"
 #~ msgstr "Master catalog link"
 
 #: src/pages/_app/venues.index.tsx
-msgid "Master linked"
-msgstr "Master linked"
+#~ msgid "Master linked"
+#~ msgstr "Master linked"
 
 #: src/pages/_app/venues.$venueId.tsx
 #~ msgid "Master venue"

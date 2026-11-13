@@ -71,6 +71,9 @@ const PAGE_SIZE = 20;
 const ACCENT_GRADIENT =
   "linear-gradient(135deg, var(--mantine-color-blue-4) 0%, var(--mantine-color-cyan-4) 100%)";
 
+/** Left-edge marker for a record with no master-catalog link. */
+const UNLINKED_MARKER = "light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4))";
+
 /**
  * Narrows the list-vs-semantic union: only the semantic-search response carries the
  * AI-derived filters, so the presence of the property is the discriminator.
@@ -146,6 +149,17 @@ function VenueCard({
         root: {
           overflow: "hidden",
           transition: "box-shadow 180ms ease, transform 180ms ease, border-color 180ms ease",
+          // Left edge carries the master-link state as a colour marker.
+          "&::before": {
+            content: '""',
+            position: "absolute",
+            top: 0,
+            bottom: 0,
+            left: 0,
+            width: 4,
+            background: venue.masterVenueId ? ACCENT_GRADIENT : UNLINKED_MARKER,
+            pointerEvents: "none",
+          },
           "&::after": {
             content: '""',
             position: "absolute",
@@ -177,26 +191,19 @@ function VenueCard({
         <VenueThumbnail url={venue.primaryPhotoUrl} name={venue.name} height={148} />
       </Card.Section>
 
-      {/* selection + master-linked badge overlay */}
+      {/* selection overlay */}
       {canManage && (
         <Box
           style={{ position: "absolute", top: 8, left: 8, zIndex: 1 }}
           onClick={(e) => e.stopPropagation()}
         >
-          <Group gap={6} wrap="nowrap">
-            <Checkbox
-              size="xs"
-              checked={selected}
-              onChange={onToggleSelect}
-              aria-label={t`Select venue`}
-              data-testid={TestSelectors.VENUE_SELECT_CHECKBOX(venue.id)}
-            />
-            {venue.masterVenueId && (
-              <Badge variant="light" color="indigo" size="xs" tt="none">
-                <Trans>Master linked</Trans>
-              </Badge>
-            )}
-          </Group>
+          <Checkbox
+            size="xs"
+            checked={selected}
+            onChange={onToggleSelect}
+            aria-label={t`Select venue`}
+            data-testid={TestSelectors.VENUE_SELECT_CHECKBOX(venue.id)}
+          />
         </Box>
       )}
 
@@ -268,11 +275,6 @@ function VenueCard({
             </Text>
           </Group>
         )}
-        {!canManage && venue.masterVenueId && (
-          <Badge variant="outline" color="indigo" size="xs" tt="none">
-            <Trans>Master linked</Trans>
-          </Badge>
-        )}
         <Text size="xs" c="dimmed" style={{ marginLeft: "auto" }}>
           {dayjs(venue.updatedAt).format("MMM D, YYYY")}
         </Text>
@@ -320,8 +322,8 @@ function VenueRow({
             bottom: 0,
             left: 0,
             width: 4,
-            background: ACCENT_GRADIENT,
-            opacity: 0.55,
+            background: venue.masterVenueId ? ACCENT_GRADIENT : UNLINKED_MARKER,
+            opacity: venue.masterVenueId ? 0.55 : 1,
             transition: "opacity 180ms ease",
             pointerEvents: "none",
           },
@@ -353,23 +355,16 @@ function VenueRow({
         }}
       >
         <Stack gap={5} style={{ flex: 1, minWidth: 0 }}>
-          <Group gap="xs" wrap="nowrap">
-            <Text
-              fw={700}
-              size="md"
-              lineClamp={1}
-              styles={{
-                root: { cursor: "pointer", "&:hover": { color: "var(--mantine-color-blue-6)" } },
-              }}
-            >
-              {venue.name}
-            </Text>
-            {venue.masterVenueId && (
-              <Badge variant="outline" color="indigo" size="xs" tt="none" style={{ flexShrink: 0 }}>
-                <Trans>Master linked</Trans>
-              </Badge>
-            )}
-          </Group>
+          <Text
+            fw={700}
+            size="md"
+            lineClamp={1}
+            styles={{
+              root: { cursor: "pointer", "&:hover": { color: "var(--mantine-color-blue-6)" } },
+            }}
+          >
+            {venue.name}
+          </Text>
 
           <Group gap={4} wrap="nowrap">
             <IconMapPin size={13} color="var(--mantine-color-gray-5)" style={{ flexShrink: 0 }} />
