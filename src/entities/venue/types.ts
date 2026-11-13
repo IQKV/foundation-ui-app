@@ -9,6 +9,8 @@
 export interface Venue {
   id: string;
   name: string;
+  /** Brief "About" line — what the venue is and offers, shown under its name. */
+  description: string | null;
   address: string | null;
   city: string | null;
   locationLat: number | null;

@@ -394,6 +394,7 @@ export const TestSelectors = {
   VENUE_DELETE_CONFIRM_BUTTON: "venue-delete-confirm-button",
   VENUE_BULK_DELETE_CONFIRM_BUTTON: "venue-bulk-delete-confirm-button",
   VENUE_NAME_INPUT: "venue-name-input",
+  VENUE_DESCRIPTION_INPUT: "venue-description-input",
   VENUE_ADDRESS_INPUT: "venue-address-input",
   VENUE_CITY_INPUT: "venue-city-input",
   VENUE_LATITUDE_INPUT: "venue-latitude-input",

@@ -1001,6 +1001,10 @@ msgstr ""
 msgid "Describe your venue, e.g. \"500-person rooftop bar in London with in-house catering\""
 msgstr ""
 
+#: src/features/manage-venue/ui/venue-fields.tsx
+msgid "Description"
+msgstr ""
+
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Details"
 msgstr ""
@@ -2683,6 +2687,10 @@ msgstr "Définit votre langue préférée pour les notifications et les e-mails.
 #: src/features/signup/ui/provisioning-wait.tsx
 msgid "Setting up your workspace"
 msgstr "Configuration de votre espace de travail"
+
+#: src/features/manage-venue/ui/venue-fields.tsx
+msgid "Short \"About\" line shown under the venue's name."
+msgstr ""
 
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Show raw JSON"

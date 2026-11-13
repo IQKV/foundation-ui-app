@@ -1,4 +1,13 @@
-import { SimpleGrid, Stack, TextInput, NumberInput, Paper, Group, Text } from "@mantine/core";
+import {
+  SimpleGrid,
+  Stack,
+  TextInput,
+  Textarea,
+  NumberInput,
+  Paper,
+  Group,
+  Text,
+} from "@mantine/core";
 import type { UseFormReturnType } from "@mantine/form";
 import { useLingui } from "@lingui/react/macro";
 import { IconBuildingStore, IconMapPin } from "@tabler/icons-react";
@@ -67,6 +76,15 @@ export function VenueFields({ form }: VenueFieldsProps) {
           withAsterisk
           data-testid={TestSelectors.VENUE_NAME_INPUT}
           {...form.getInputProps("name")}
+        />
+        <Textarea
+          label={t`Description`}
+          description={t`Short "About" line shown under the venue's name.`}
+          autosize
+          minRows={2}
+          maxRows={5}
+          data-testid={TestSelectors.VENUE_DESCRIPTION_INPUT}
+          {...form.getInputProps("description")}
         />
         <TextInput
           label={t`Address`}

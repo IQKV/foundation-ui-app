@@ -1261,6 +1261,14 @@ function VenueDetailPage() {
                   </Button>
                 </Box>
               )}
+              {/* Brief venue description — only rendered when the venue has one. */}
+              {venue?.description && (
+                <Box pl="md" style={{ borderLeft: "3px solid var(--mantine-color-blue-4)" }}>
+                  <Text size="lg" lh={1.55} style={{ whiteSpace: "pre-line" }}>
+                    {venue.description}
+                  </Text>
+                </Box>
+              )}
               {/* ── Tabs — mirrors admin VenueProfileWidget tab structure ─────── */}
               <Tabs defaultValue="details" keepMounted={false}>
                 <Tabs.List

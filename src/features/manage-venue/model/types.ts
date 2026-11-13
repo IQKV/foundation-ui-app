@@ -10,6 +10,7 @@ const optionalNumeric = (message: string) =>
 export function buildVenueSchema() {
   return z.object({
     name: z.string().min(1, t`Name is required`),
+    description: z.string(),
     address: z.string(),
     city: z.string(),
     locationLat: optionalNumeric(t`Latitude must be a number`),
@@ -31,6 +32,7 @@ export type VenueFormValues = z.infer<ReturnType<typeof buildVenueSchema>>;
 export function emptyVenueFormValues(): VenueFormValues {
   return {
     name: "",
+    description: "",
     address: "",
     city: "",
     locationLat: "",
@@ -42,6 +44,7 @@ export function emptyVenueFormValues(): VenueFormValues {
 export function toVenueFormValues(venue: Venue): VenueFormValues {
   return {
     name: venue.name,
+    description: venue.description ?? "",
     address: venue.address ?? "",
     city: venue.city ?? "",
     locationLat: venue.locationLat === null ? "" : String(venue.locationLat),
@@ -63,6 +66,7 @@ function toOptionalString(value: string): string | null {
 export function toWriteRequest(values: VenueFormValues): VenueWriteRequest {
   return {
     name: values.name.trim(),
+    description: toOptionalString(values.description),
     address: toOptionalString(values.address),
     city: toOptionalString(values.city),
     locationLat: toOptionalNumber(values.locationLat),

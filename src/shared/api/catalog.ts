@@ -46,6 +46,7 @@ export type {
 
 export interface VenueWriteRequest {
   name: string;
+  description?: string | null;
   address?: string | null;
   city?: string | null;
   locationLat?: number | null;
@@ -56,6 +57,7 @@ export interface VenueWriteRequest {
 
 export interface VenuePatchRequest {
   name?: string | null;
+  description?: string | null;
   address?: string | null;
   city?: string | null;
   locationLat?: number | null;
