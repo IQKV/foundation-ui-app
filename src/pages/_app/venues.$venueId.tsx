@@ -1436,7 +1436,6 @@ function VenueDetailPage() {
               gradient={{ from: "violet", to: "blue" }}
               leftSection={<IconSparkles size={16} />}
               radius="xl"
-              shadow="lg"
               onClick={openAiEnrich}
               aria-label={t`Fill with AI`}
             >
