@@ -60,9 +60,13 @@ import {
   ACCENT_GRADIENT,
   SECTION_CARD_STYLES,
   ASSET_ROW_STYLES,
+  CompletenessRing,
   EditVenueModal,
   DeleteVenueModal,
+  VenueCompletenessCard,
   VenueMetadataSections,
+  overallCompleteness,
+  parseMetadata,
 } from "@/features/manage-venue";
 import { dayjs } from "@/shared/lib/date-utils";
 import { TestSelectors } from "@/shared/lib/test-selectors";
@@ -733,6 +737,9 @@ function VenueDetailPage() {
 
   const { data: venue, isLoading, isError, refetch, isFetching } = useVenue(venueId);
 
+  // Client-side profile completeness, derived from the raw metadata document.
+  const completeness = overallCompleteness(parseMetadata(venue?.metadata ?? null));
+
   // Photos come from the tenant venue asset photos endpoint.
   // Fetched unconditionally for this venue once the venue is loaded.
   const { data: photosData, isLoading: photosLoading } = useQuery({
@@ -1011,19 +1018,24 @@ function VenueDetailPage() {
                           </Group>
                         </Badge>
                       )}
-                      <Text
-                        fw={800}
-                        style={{
-                          color: hasPhoto ? "#ffffff" : "var(--mantine-color-dark-9)",
-                          lineHeight: 1.15,
-                          letterSpacing: "-0.02em",
-                          textShadow: hasPhoto ? "0 1px 4px rgba(0,0,0,0.4)" : "none",
-                          fontSize: "clamp(1.4rem, 2.5vw, 2rem)",
-                        }}
-                        data-testid={TestSelectors.VENUE_DETAIL_NAME}
-                      >
-                        {venue?.name}
-                      </Text>
+                      <Group gap="sm" align="center" wrap="nowrap">
+                        <Text
+                          fw={800}
+                          style={{
+                            color: hasPhoto ? "#ffffff" : "var(--mantine-color-dark-9)",
+                            lineHeight: 1.15,
+                            letterSpacing: "-0.02em",
+                            textShadow: hasPhoto ? "0 1px 4px rgba(0,0,0,0.4)" : "none",
+                            fontSize: "clamp(1.4rem, 2.5vw, 2rem)",
+                          }}
+                          data-testid={TestSelectors.VENUE_DETAIL_NAME}
+                        >
+                          {venue?.name}
+                        </Text>
+                        {(venue || isLoading) && (
+                          <CompletenessRing percent={completeness.percent} isLoading={isLoading} />
+                        )}
+                      </Group>
 
                       {(venue?.address || venue?.city) && (
                         <Group gap={5} wrap="nowrap">
@@ -1140,6 +1152,10 @@ function VenueDetailPage() {
             {/* ── Details tab ──────────────────────────────────────────────── */}
             <Tabs.Panel value="details">
               <Stack gap="xs" pt="sm">
+                <Box pt="md">
+                  <VenueCompletenessCard completeness={completeness} isLoading={isLoading} />
+                </Box>
+
                 <Divider
                   label={
                     <Text

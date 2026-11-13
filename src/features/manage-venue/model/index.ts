@@ -16,11 +16,16 @@ export type {
 } from "./metadata-spec";
 export {
   isFieldEmpty,
+  overallCompleteness,
   parseMetadata,
   resolveFieldValue,
   sectionCompleteness,
   setFieldValue,
 } from "./metadata-utils";
-export type { MetadataDocument } from "./metadata-utils";
+export type {
+  MetadataCompleteness,
+  MetadataDocument,
+  MetadataSectionCompleteness,
+} from "./metadata-utils";
 export { useUpdateVenueMetadata } from "./use-update-venue-metadata";
 export type { SaveVenueMetadataPayload, VenueMetadataChange } from "./use-update-venue-metadata";

@@ -1,4 +1,9 @@
-import type { MetadataFieldDefinition, MetadataFieldType } from "./metadata-spec";
+import { METADATA_SECTIONS } from "./metadata-spec";
+import type {
+  MetadataFieldDefinition,
+  MetadataFieldType,
+  MetadataSectionDefinition,
+} from "./metadata-spec";
 
 const DEFAULT_SCHEMA_VERSION = 1;
 
@@ -113,4 +118,44 @@ export function sectionCompleteness(
     (field) => !isFieldEmpty(resolveFieldValue(metadata, field)),
   ).length;
   return { filled, total: editable.length };
+}
+
+/** Per-section completeness row. */
+export interface MetadataSectionCompleteness {
+  key: string;
+  label: string;
+  filled: number;
+  total: number;
+}
+
+/** Overall completeness of a metadata document, for the profile completeness display. */
+export interface MetadataCompleteness {
+  filled: number;
+  total: number;
+  /** Whole percent, `0` when the spec has no editable fields. */
+  percent: number;
+  sections: MetadataSectionCompleteness[];
+}
+
+/**
+ * Roll `sectionCompleteness` up across every section. Read-only fields (e.g. `contacts`)
+ * count towards neither numerator nor denominator.
+ */
+export function overallCompleteness(
+  metadata: MetadataDocument | null,
+  sections: readonly MetadataSectionDefinition[] = METADATA_SECTIONS,
+): MetadataCompleteness {
+  const rows = sections.map((section) => ({
+    key: section.key,
+    label: section.label,
+    ...sectionCompleteness(section.fields, metadata),
+  }));
+  const filled = rows.reduce((sum, row) => sum + row.filled, 0);
+  const total = rows.reduce((sum, row) => sum + row.total, 0);
+  return {
+    filled,
+    total,
+    percent: total === 0 ? 0 : Math.round((filled / total) * 100),
+    sections: rows,
+  };
 }

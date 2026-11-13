@@ -39,6 +39,10 @@ msgstr "{0} – {1}"
 msgid "{0} Days Left"
 msgstr "{0} Tage verbleibend"
 
+#: src/features/manage-venue/ui/venue-completeness.tsx
+msgid "{filled} of {total} fields filled"
+msgstr ""
+
 #: src/features/venue-semantic-search/ui/SemanticSearchFiltersSummary.tsx
 msgid "{min}–{max} guests"
 msgstr ""
@@ -2198,6 +2202,10 @@ msgstr "Bitte warten Sie, während die Anmeldung abgeschlossen wird."
 msgid "Please wait while we verify your magic link."
 msgstr "Bitte warten Sie, während Ihr Magic Link verifiziert wird."
 
+#: src/features/manage-venue/ui/venue-completeness.tsx
+msgid "Populated fields across the venue profile."
+msgstr ""
+
 #: src/features/manage-billing/model/use-billing-portal.ts
 msgid "Portal error"
 msgstr "Portalfehler"
@@ -2232,6 +2240,10 @@ msgstr "Prioritätssupport:"
 
 #: src/features/venue-semantic-search/ui/VenueSemanticSearchWidget.tsx
 msgid "Pro tip: You can search by vibe, amenities, capacity, or specific location details."
+msgstr ""
+
+#: src/features/manage-venue/ui/venue-completeness.tsx
+msgid "Profile completeness"
 msgstr ""
 
 #: src/pages/_app/settings/general.tsx
@@ -2284,6 +2296,10 @@ msgstr "schreibgeschützt"
 #: src/pages/_app/cms-pages.$pageId.tsx
 msgid "Read-only"
 msgstr "Schreibgeschützt"
+
+#: src/features/manage-venue/ui/venue-completeness.tsx
+msgid "Read-only fields are not counted."
+msgstr ""
 
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Read-only view of the full metadata string."

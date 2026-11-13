@@ -39,6 +39,10 @@ msgstr "{0} – {1}"
 msgid "{0} Days Left"
 msgstr "{0} Days Left"
 
+#: src/features/manage-venue/ui/venue-completeness.tsx
+msgid "{filled} of {total} fields filled"
+msgstr "{filled} of {total} fields filled"
+
 #: src/features/venue-semantic-search/ui/SemanticSearchFiltersSummary.tsx
 msgid "{min}–{max} guests"
 msgstr "{min}–{max} guests"
@@ -2198,6 +2202,10 @@ msgstr "Please wait while we finish signing you in."
 msgid "Please wait while we verify your magic link."
 msgstr "Please wait while we verify your magic link."
 
+#: src/features/manage-venue/ui/venue-completeness.tsx
+msgid "Populated fields across the venue profile."
+msgstr "Populated fields across the venue profile."
+
 #: src/features/manage-billing/model/use-billing-portal.ts
 msgid "Portal error"
 msgstr "Portal error"
@@ -2233,6 +2241,10 @@ msgstr "Priority Support:"
 #: src/features/venue-semantic-search/ui/VenueSemanticSearchWidget.tsx
 msgid "Pro tip: You can search by vibe, amenities, capacity, or specific location details."
 msgstr "Pro tip: You can search by vibe, amenities, capacity, or specific location details."
+
+#: src/features/manage-venue/ui/venue-completeness.tsx
+msgid "Profile completeness"
+msgstr "Profile completeness"
 
 #: src/pages/_app/settings/general.tsx
 msgid "Profile Information"
@@ -2284,6 +2296,10 @@ msgstr "read-only"
 #: src/pages/_app/cms-pages.$pageId.tsx
 msgid "Read-only"
 msgstr "Read-only"
+
+#: src/features/manage-venue/ui/venue-completeness.tsx
+msgid "Read-only fields are not counted."
+msgstr "Read-only fields are not counted."
 
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Read-only view of the full metadata string."
