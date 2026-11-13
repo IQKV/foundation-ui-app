@@ -39,9 +39,19 @@ msgstr "{0} – {1}"
 msgid "{0} Days Left"
 msgstr "{0} jours restants"
 
-#: src/pages/_app/venues.$venueId.tsx
-msgid "{filled} of {total} fields"
+#. placeholder {0}: pendingPatches.length
+#: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
+msgid "{0} suggestion(s) — accept individually or apply all"
 msgstr ""
+
+#. placeholder {0}: pendingPatches.length
+#: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
+msgid "{acceptedCount} of {0} suggestions accepted"
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.tsx
+#~ msgid "{filled} of {total} fields"
+#~ msgstr ""
 
 #: src/features/manage-venue/ui/venue-completeness.tsx
 msgid "{filled} of {total} fields filled"
@@ -306,6 +316,14 @@ msgstr "Une organisation avec ce nom existe déjà."
 
 #: src/features/manage-venue/ui/venue-metadata-sections.tsx
 msgid "Apply"
+msgstr ""
+
+#: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
+msgid "Apply accepted ({acceptedCount})"
+msgstr ""
+
+#: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
+msgid "Apply all"
 msgstr ""
 
 #: src/features/page-admin/model/types.ts
@@ -691,8 +709,8 @@ msgid "Copy"
 msgstr "Copier"
 
 #: src/pages/_app/venues.$venueId.tsx
-msgid "Copy master venue id"
-msgstr ""
+#~ msgid "Copy master venue id"
+#~ msgstr ""
 
 #: src/pages/_app/cms-pages.create.tsx
 msgid "Could not create the page. Please check the form and try again."
@@ -971,6 +989,14 @@ msgstr "Chargement de démonstration (2s)"
 msgid "Demo Progress Bar"
 msgstr "Barre de progression de démonstration"
 
+#: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
+msgid "Describe your venue and I'll suggest which profile fields to fill in. You can review and accept each suggestion before it's saved."
+msgstr ""
+
+#: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
+msgid "Describe your venue, e.g. \"500-person rooftop bar in London with in-house catering\""
+msgstr ""
+
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Details"
 msgstr ""
@@ -1016,7 +1042,6 @@ msgstr "par ex. default, landing"
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.index.tsx
 #: src/pages/_app/settings/organization.tsx
-#: src/pages/_app/venues.$venueId.tsx
 msgid "Edit"
 msgstr "Modifier"
 
@@ -1032,6 +1057,10 @@ msgstr "Modifier — {defaultTitle}"
 #. placeholder {0}: section.label
 #: src/features/manage-venue/ui/venue-metadata-sections.tsx
 msgid "Edit {0}"
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Edit Manually"
 msgstr ""
 
 #: src/pages/_app/cms-pages.$pageId.tsx
@@ -1249,13 +1278,18 @@ msgstr ""
 msgid "Fill in the details below. You can add photos and files after saving."
 msgstr ""
 
+#: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Fill with AI"
+msgstr ""
+
 #: src/pages/_app/venues.index.tsx
 msgid "Filters"
 msgstr ""
 
 #: src/pages/_app/venues.$venueId.tsx
-msgid "Finish now"
-msgstr ""
+#~ msgid "Finish now"
+#~ msgstr ""
 
 #: src/features/complete-profile/ui/complete-profile-form.tsx
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
@@ -1279,6 +1313,10 @@ msgstr "Le prénom est trop long"
 
 #: src/pages/_app/venues.add.tsx
 msgid "Floor plans, capacity sheets, rate cards or brochures — PDF, image or spreadsheet. We read capacity, pricing, catering and technical detail into the library."
+msgstr ""
+
+#: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
+msgid "Focus on"
 msgstr ""
 
 #: src/pages/forgot-password.tsx
@@ -1646,17 +1684,16 @@ msgid "Mark all as read"
 msgstr "Tout marquer comme lu"
 
 #: src/pages/_app/venues.$venueId.tsx
-msgid "Master catalog link"
-msgstr ""
+#~ msgid "Master catalog link"
+#~ msgstr ""
 
-#: src/pages/_app/venues.$venueId.tsx
 #: src/pages/_app/venues.index.tsx
 msgid "Master linked"
 msgstr ""
 
 #: src/pages/_app/venues.$venueId.tsx
-msgid "Master venue"
-msgstr ""
+#~ msgid "Master venue"
+#~ msgstr ""
 
 #: src/features/manage-venue/ui/venue-fields.tsx
 #~ msgid "Master venue id"
@@ -1685,6 +1722,10 @@ msgstr "Membres"
 
 #: src/addons/platform-ai-chat/ui/chat-window.tsx
 msgid "Message exceeds {MAX_INPUT_CHARS} character limit"
+msgstr ""
+
+#: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
+msgid "Message to AI enrichment assistant"
 msgstr ""
 
 #: src/features/page-admin/ui/page-translation-fields.tsx
@@ -1917,8 +1958,8 @@ msgid "Not connected"
 msgstr "Non connecté"
 
 #: src/pages/_app/venues.$venueId.tsx
-msgid "Not linked to a master catalog record."
-msgstr ""
+#~ msgid "Not linked to a master catalog record."
+#~ msgstr ""
 
 #: src/features/notification-bell/ui/notification-bell.tsx
 #: src/pages/_app/settings/notifications.tsx
@@ -2251,8 +2292,8 @@ msgid "Pro tip: You can search by vibe, amenities, capacity, or specific locatio
 msgstr ""
 
 #: src/pages/_app/venues.$venueId.tsx
-msgid "Profile {percent}% completed"
-msgstr ""
+#~ msgid "Profile {percent}% completed"
+#~ msgstr ""
 
 #: src/features/manage-venue/ui/venue-completeness.tsx
 msgid "Profile completeness"
@@ -2549,6 +2590,10 @@ msgstr ""
 msgid "Semantic Search — Ask anything about your venues in natural language"
 msgstr ""
 
+#: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
+msgid "Send"
+msgstr ""
+
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Send email verifications, password resets & invitations"
 msgstr "Envoyer des vérifications par email, des réinitialisations de mot de passe et des invitations"
@@ -2728,6 +2773,7 @@ msgstr "Quelque chose s'est mal passé avec votre paiement. Veuillez réessayer 
 #: src/features/create-organization/model/use-create-organization.ts
 #: src/features/forgot-password/model/use-forgot-password.ts
 #: src/features/magic-link/model/use-magic-link-initiate.ts
+#: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
 #: src/features/reset-password/model/use-reset-password.ts
 #: src/features/signup/model/use-signup.ts
 msgid "Something went wrong. Please try again."
@@ -2885,6 +2931,10 @@ msgstr ""
 #: src/pages/loading-demo.tsx
 msgid "Theme-aware (respects dark mode and color scheme)"
 msgstr "Thème adaptatif (respecte le mode sombre et le schéma de couleurs)"
+
+#: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
+msgid "Thinking…"
+msgstr ""
 
 #: src/features/manage-billing/ui/feature-gate.tsx
 msgid "This feature requires an active subscription. Please upgrade your plan to access this functionality."

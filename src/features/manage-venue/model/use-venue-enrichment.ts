@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { catalogApi } from "@/shared/api";
-import type { VenueEnrichmentSuggestion, VenueEnrichmentSuggestionResponse } from "@/entities/venue";
+import type {
+  VenueEnrichmentSuggestion,
+  VenueEnrichmentSuggestionResponse,
+} from "@/entities/venue";
 
 export interface EnrichmentTurn {
   message: string;
@@ -61,7 +64,11 @@ export function useVenueEnrichment(venueId: string): UseVenueEnrichmentResult {
 
   function send(message: string, fieldHint?: string) {
     // Pass current metadata from the last cached venue so the backend can skip already-filled fields.
-    const cached = queryClient.getQueryData<{ metadata?: string | null }>(["tenant", "venue", venueId]);
+    const cached = queryClient.getQueryData<{ metadata?: string | null }>([
+      "tenant",
+      "venue",
+      venueId,
+    ]);
     suggestMutation.mutate({ message, fieldHint, currentMetadata: cached?.metadata ?? null });
   }
 

@@ -67,18 +67,18 @@ function PatchChip({
       py={6}
       radius="sm"
       style={{
-        borderColor: accepted
-          ? "var(--mantine-color-teal-4)"
-          : "var(--mantine-color-blue-3)",
-        background: accepted
-          ? "var(--mantine-color-teal-0)"
-          : "var(--mantine-color-blue-0)",
+        borderColor: accepted ? "var(--mantine-color-teal-4)" : "var(--mantine-color-blue-3)",
+        background: accepted ? "var(--mantine-color-teal-0)" : "var(--mantine-color-blue-0)",
         opacity: accepted ? 0.7 : 1,
       }}
     >
       <Group justify="space-between" wrap="nowrap" gap="xs">
         <Group gap={6} wrap="nowrap" style={{ minWidth: 0 }}>
-          <IconChevronRight size={12} color="var(--mantine-color-blue-6)" style={{ flexShrink: 0 }} />
+          <IconChevronRight
+            size={12}
+            color="var(--mantine-color-blue-6)"
+            style={{ flexShrink: 0 }}
+          />
           <Stack gap={0} style={{ minWidth: 0 }}>
             <Text size="xs" c="dimmed" style={{ flexShrink: 0 }}>
               {label}
@@ -150,7 +150,13 @@ function ChatTurn({
           }}
         >
           <Group gap={6} wrap="nowrap" align="flex-start">
-            <ThemeIcon size={18} radius="xl" color="blue" variant="filled" style={{ flexShrink: 0, marginTop: 1 }}>
+            <ThemeIcon
+              size={18}
+              radius="xl"
+              color="blue"
+              variant="filled"
+              style={{ flexShrink: 0, marginTop: 1 }}
+            >
               <IconUser size={11} />
             </ThemeIcon>
             <Text size="sm" style={{ color: "#fff", wordBreak: "break-word" }}>
@@ -162,7 +168,13 @@ function ChatTurn({
 
       {/* AI bubble */}
       <Group justify="flex-start" align="flex-start">
-        <ThemeIcon size={24} radius="xl" color="violet" variant="light" style={{ flexShrink: 0, marginTop: 2 }}>
+        <ThemeIcon
+          size={24}
+          radius="xl"
+          color="violet"
+          variant="light"
+          style={{ flexShrink: 0, marginTop: 2 }}
+        >
           <IconRobot size={14} />
         </ThemeIcon>
         <Stack gap={6} style={{ flex: 1, minWidth: 0 }}>
@@ -221,7 +233,18 @@ export function VenueAiEnrichModal({
   const [acceptedKeys, setAcceptedKeys] = useState<Set<string>>(new Set());
   const viewport = useRef<HTMLDivElement>(null);
 
-  const { history, pendingPatches, dismissPatch, isSuggesting, isApplying, suggestError, applyError, send, applyPatches, reset } = enrichment;
+  const {
+    history,
+    pendingPatches,
+    dismissPatch,
+    isSuggesting,
+    isApplying,
+    suggestError,
+    applyError,
+    send,
+    applyPatches,
+    reset,
+  } = enrichment;
 
   function handleSend() {
     const trimmed = message.trim();
@@ -229,7 +252,10 @@ export function VenueAiEnrichModal({
     send(trimmed, fieldHint || undefined);
     setMessage("");
     // Scroll to bottom after render.
-    setTimeout(() => viewport.current?.scrollTo({ top: viewport.current.scrollHeight, behavior: "smooth" }), 100);
+    setTimeout(
+      () => viewport.current?.scrollTo({ top: viewport.current.scrollHeight, behavior: "smooth" }),
+      100,
+    );
   }
 
   function handleAcceptPatch(patch: VenueEnrichmentSuggestion) {
@@ -264,7 +290,9 @@ export function VenueAiEnrichModal({
     onClose();
   }
 
-  const acceptedCount = pendingPatches.filter((p) => acceptedKeys.has(`${p.group}.${p.field}`)).length;
+  const acceptedCount = pendingPatches.filter((p) =>
+    acceptedKeys.has(`${p.group}.${p.field}`),
+  ).length;
   const hasPatches = pendingPatches.length > 0;
 
   return (
@@ -273,7 +301,12 @@ export function VenueAiEnrichModal({
       onClose={handleClose}
       title={
         <Group gap={8}>
-          <ThemeIcon size={24} radius="sm" variant="gradient" gradient={{ from: "violet", to: "blue" }}>
+          <ThemeIcon
+            size={24}
+            radius="sm"
+            variant="gradient"
+            gradient={{ from: "violet", to: "blue" }}
+          >
             <IconSparkles size={14} />
           </ThemeIcon>
           <Text fw={700} size="sm">
@@ -284,7 +317,12 @@ export function VenueAiEnrichModal({
       size="lg"
       centered
       styles={{
-        body: { display: "flex", flexDirection: "column", gap: "var(--mantine-spacing-sm)", padding: "var(--mantine-spacing-md)" },
+        body: {
+          display: "flex",
+          flexDirection: "column",
+          gap: "var(--mantine-spacing-sm)",
+          padding: "var(--mantine-spacing-md)",
+        },
       }}
     >
       {/* Chat history */}
@@ -347,9 +385,13 @@ export function VenueAiEnrichModal({
           <Group justify="space-between" wrap="nowrap">
             <Text size="xs" c="dimmed">
               {acceptedCount > 0 ? (
-                <Trans>{acceptedCount} of {pendingPatches.length} suggestions accepted</Trans>
+                <Trans>
+                  {acceptedCount} of {pendingPatches.length} suggestions accepted
+                </Trans>
               ) : (
-                <Trans>{pendingPatches.length} suggestion(s) — accept individually or apply all</Trans>
+                <Trans>
+                  {pendingPatches.length} suggestion(s) — accept individually or apply all
+                </Trans>
               )}
             </Text>
             <Group gap="xs">

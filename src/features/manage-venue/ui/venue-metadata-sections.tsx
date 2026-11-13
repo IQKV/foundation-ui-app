@@ -22,7 +22,15 @@ import {
   ThemeIcon,
   Tooltip,
 } from "@mantine/core";
-import { IconAlertCircle, IconAlertTriangle, IconCheck, IconChevronRight, IconPencil, IconSparkles, IconX } from "@tabler/icons-react";
+import {
+  IconAlertCircle,
+  IconAlertTriangle,
+  IconCheck,
+  IconChevronRight,
+  IconPencil,
+  IconSparkles,
+  IconX,
+} from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
 import {
   isFieldEmpty,
@@ -428,7 +436,6 @@ function MetadataSectionCard({
                 </Badge>
               )}
             </Group>
-
             {!hasAny && suggestions.length === 0 ? (
               <Text size="xs" c="dimmed" fs="italic">
                 <Trans>No data yet — click Edit to add.</Trans>
@@ -481,7 +488,8 @@ function MetadataSectionCard({
                   </Stack>
                 )}
               </Stack>
-            )}          </Stack>
+            )}{" "}
+          </Stack>
 
           {editable.length > 0 && (
             <Tooltip label={t`Edit ${section.label}`} withArrow position="left">
@@ -609,11 +617,10 @@ export function VenueMetadataSections({
                 venueId={venueId}
                 metadata={parsed}
                 section={section}
-                suggestions={suggestions.filter(
-                  (s) =>
-                    section.fields.some(
-                      (f) => f.key === `${s.group}.${s.field}` || f.key === s.field,
-                    ),
+                suggestions={suggestions.filter((s) =>
+                  section.fields.some(
+                    (f) => f.key === `${s.group}.${s.field}` || f.key === s.field,
+                  ),
                 )}
                 onAcceptSuggestion={onAcceptSuggestion ?? (() => {})}
                 onDismissSuggestion={onDismissSuggestion ?? (() => {})}
