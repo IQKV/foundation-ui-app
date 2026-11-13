@@ -48,6 +48,7 @@ import {
   IconUpload,
   IconFileText,
   IconSparkles,
+  IconMaximize,
 } from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { PageTitle } from "@/shared/lib/page-title";
@@ -162,7 +163,14 @@ function FieldChip({ label, value }: { label: React.ReactNode; value: React.Reac
 
 // ─── Photos tab ───────────────────────────────────────────────────────────────
 
-function PhotoGrid({ photos }: { photos: VenueAssetPublic[] }) {
+function PhotoGrid({
+  photos,
+  onPreview,
+}: {
+  photos: VenueAssetPublic[];
+  onPreview: (photo: VenueAssetPublic) => void;
+}) {
+  const { t } = useLingui();
   return (
     <SimpleGrid cols={{ base: 2, sm: 3, md: 4, lg: 5 }} spacing="sm">
       {photos.map((photo, i) => (
@@ -192,11 +200,24 @@ function PhotoGrid({ photos }: { photos: VenueAssetPublic[] }) {
               <IconPhoto size={24} color="var(--mantine-color-gray-4)" />
             </Group>
           )}
-          <Box style={{ position: "absolute", top: 6, right: 6 }}>
+          <Group gap={4} wrap="nowrap" style={{ position: "absolute", top: 6, right: 6 }}>
+            {photo.sourceUrl && (
+              <ActionIcon
+                size="sm"
+                variant="filled"
+                color="dark"
+                radius="sm"
+                aria-label={t`Open larger preview`}
+                onClick={() => onPreview(photo)}
+                style={{ opacity: 0.85 }}
+              >
+                <IconMaximize size={14} />
+              </ActionIcon>
+            )}
             <Badge variant="filled" color="dark" size="xs" radius="sm" style={{ opacity: 0.75 }}>
               #{i + 1}
             </Badge>
-          </Box>
+          </Group>
           {photo.label && (
             <Text size="xs" c="dimmed" lineClamp={1} mt={4}>
               {photo.label}
@@ -223,6 +244,8 @@ function PhotosTab({
   isLoading: boolean;
   masterLoading: boolean;
 }) {
+  const { t } = useLingui();
+  const [preview, setPreview] = useState<VenueAssetPublic | null>(null);
   if (isLoading) {
     return (
       <SimpleGrid cols={{ base: 2, sm: 3, md: 4, lg: 5 }} spacing="sm">
@@ -249,32 +272,47 @@ function PhotosTab({
   }
   return (
     <Stack gap="md">
-      {photos.length > 0 && <PhotoGrid photos={photos} />}
+      {photos.length > 0 && <PhotoGrid photos={photos} onPreview={setPreview} />}
       {(masterLoading || masterPhotos.length > 0) && (
         <Stack gap="sm">
           {/* Reference photos adopted from the linked master-catalog venue. */}
-          <Divider
-            label={
-              <Text
-                size="xs"
-                fw={700}
-                tt="uppercase"
-                c="dimmed"
-                style={{ letterSpacing: "0.07em" }}
-              >
-                <Trans>From master catalog</Trans>
-              </Text>
-            }
-          />
+          <Divider size="md" color="gray.5" my="xs" />
           {masterLoading ? (
             <SimpleGrid cols={{ base: 2, sm: 3, md: 4, lg: 5 }} spacing="sm">
               {PHOTO_GRID_SKELETON}
             </SimpleGrid>
           ) : (
-            <PhotoGrid photos={masterPhotos} />
+            <PhotoGrid photos={masterPhotos} onPreview={setPreview} />
           )}
         </Stack>
       )}
+
+      <Modal
+        opened={preview !== null}
+        onClose={() => setPreview(null)}
+        size="xl"
+        centered
+        styles={PREVIEW_MODAL_STYLES}
+        title={
+          preview && (
+            <Text fw={700} size="sm" lineClamp={1}>
+              {preview.label ?? preview.fileName ?? t`Photo`}
+            </Text>
+          )
+        }
+      >
+        {preview?.sourceUrl && (
+          <Box p="md" style={{ background: PREVIEW_TOKENS.canvas }}>
+            <Box style={PREVIEW_SURFACE_STYLES}>
+              <img
+                src={preview.sourceUrl}
+                alt={preview.label ?? preview.fileName ?? ""}
+                style={{ maxWidth: "100%", maxHeight: "72vh", display: "block" }}
+              />
+            </Box>
+          </Box>
+        )}
+      </Modal>
     </Stack>
   );
 }
@@ -810,6 +848,9 @@ function VenueDetailPage() {
 
   const masterPhotos = masterPhotosData?.items ?? [];
 
+  // Tab counter: the venue's own photos plus the master-catalog reference photos.
+  const photoCount = photos.length + masterPhotos.length;
+
   // All assets (photos and attachments) come from the venue assets endpoint.
   const { data: assetsData, isLoading: assetsLoading } = useQuery({
     queryKey: ["tenant", "venue", venueId, "assets"],
@@ -1243,9 +1284,9 @@ function VenueDetailPage() {
                       leftSection={<IconPhoto size={20} />}
                       styles={bigTabStyles}
                       rightSection={
-                        !photosLoading && photos.length > 0 ? (
+                        !photosLoading && photoCount > 0 ? (
                           <Badge size="xl" variant="filled" color="blue" circle>
-                            {photos.length}
+                            {photoCount}
                           </Badge>
                         ) : undefined
                       }

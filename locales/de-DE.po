@@ -1344,8 +1344,8 @@ msgid "Free"
 msgstr "Kostenlos"
 
 #: src/pages/_app/venues.$venueId.tsx
-msgid "From master catalog"
-msgstr ""
+#~ msgid "From master catalog"
+#~ msgstr ""
 
 #: src/pages/loading-demo.tsx
 msgid "Full-screen centered loader shown on first app load (while locale initializes)."
@@ -2024,6 +2024,10 @@ msgstr "Open-Graph-Beschreibung"
 msgid "Open Graph title"
 msgstr "Open-Graph-Titel"
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Open larger preview"
+msgstr ""
+
 #: src/pages/_app/settings/security.tsx
 msgid "openid profile email"
 msgstr "openid profile email"
@@ -2222,6 +2226,10 @@ msgstr "Ihrem Konto zugewiesene Berechtigungen"
 #: src/widgets/dashboard-personal-welcome/ui/dashboard-personal-welcome.tsx
 msgid "Personal Workspace"
 msgstr "Persönlicher Workspace"
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Photo"
+msgstr ""
 
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Photos"
