@@ -27,9 +27,6 @@ import {
   Modal,
   ScrollArea,
   Grid,
-  RingProgress,
-  Center,
-  Progress,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
@@ -69,7 +66,6 @@ import {
   VenueCompletenessCard,
   VenueMetadataSections,
   VenueAiEnrichModal,
-  completenessColor,
   overallCompleteness,
   parseMetadata,
   useVenueEnrichment,
@@ -724,52 +720,6 @@ const bigTabStyles = {
 
 // ─── Quality control bar — slim banner at the top of the right column ─────────
 
-interface QualityControlBarProps {
-  percent: number;
-  filled: number;
-  total: number;
-  isLoading?: boolean;
-}
-
-function QualityControlBar({ percent, filled, total, isLoading = false }: QualityControlBarProps) {
-  const color = completenessColor(percent);
-
-  return (
-    <Paper withBorder radius="md" p="sm" shadow="sm" styles={SECTION_CARD_STYLES}>
-      <Group gap="md" wrap="nowrap">
-        {isLoading ? (
-          <Skeleton circle height={44} width={44} />
-        ) : (
-          <RingProgress
-            size={44}
-            thickness={5}
-            roundCaps
-            sections={[{ value: percent, color }]}
-            label={
-              <Center>
-                <Text size="xs" fw={700} c={color} lh={1}>
-                  {percent}%
-                </Text>
-              </Center>
-            }
-          />
-        )}
-        <Stack gap={4} style={{ flex: 1, minWidth: 0 }}>
-          <Group gap={8} wrap="nowrap">
-            <Text size="sm" fw={700}>
-              {`Profile ${percent}% completed`}
-            </Text>
-            <Text size="xs" c="dimmed">
-              {`${filled} of ${total} fields`}
-            </Text>
-          </Group>
-          <Progress value={percent} color={color} size="sm" radius="xl" />
-        </Stack>
-      </Group>
-    </Paper>
-  );
-}
-
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 function VenueDetailPage() {
@@ -1198,16 +1148,9 @@ function VenueDetailPage() {
             </Stack>
           </Grid.Col>
 
-          {/* ── Right column: quality bar + tabs ───────────────────────── */}
+          {/* ── Right column: tabs ─────────────────────────────────────── */}
           <Grid.Col span={{ base: 12, lg: 8 }}>
             <Stack gap="md">
-              <QualityControlBar
-                percent={completeness.percent}
-                filled={completeness.filled}
-                total={completeness.total}
-                isLoading={isLoading}
-              />
-
               {/* ── Tabs — mirrors admin VenueProfileWidget tab structure ─────── */}
               <Tabs defaultValue="details" keepMounted={false}>
                 <Tabs.List
