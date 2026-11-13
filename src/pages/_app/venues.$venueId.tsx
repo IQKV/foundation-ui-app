@@ -60,6 +60,9 @@ import {
   useVenue,
   ACCENT_GRADIENT,
   SECTION_CARD_STYLES,
+  LINKED_CARD_STYLES,
+  UNLINKED_CARD_STYLES,
+  UNLINKED_MARKER,
   ASSET_ROW_STYLES,
   EditVenueModal,
   DeleteVenueModal,
@@ -871,6 +874,9 @@ function VenueDetailPage() {
 
   const hasPhoto = Boolean(venue?.primaryPhotoUrl);
 
+  /** Drives the profile card's leading-edge marker and rim colour. */
+  const isMasterLinked = Boolean(venue?.masterVenueId);
+
   const mapUrl =
     venue?.locationLat && venue?.locationLng
       ? `https://maps.google.com/?q=${venue.locationLat},${venue.locationLng}`
@@ -1059,7 +1065,7 @@ function VenueDetailPage() {
                 radius="md"
                 shadow="sm"
                 style={{ overflow: "hidden" }}
-                styles={SECTION_CARD_STYLES}
+                styles={isMasterLinked ? LINKED_CARD_STYLES : UNLINKED_CARD_STYLES}
                 data-testid={TestSelectors.VENUE_DETAIL_HERO}
               >
                 <Box style={{ position: "relative", height: 160 }}>
@@ -1148,7 +1154,7 @@ function VenueDetailPage() {
                   )}
                 </Box>
 
-                {/* soft gradient rim */}
+                {/* soft gradient rim — follows the master-link state */}
                 <Box
                   aria-hidden
                   style={{
@@ -1156,7 +1162,7 @@ function VenueDetailPage() {
                     inset: 0,
                     borderRadius: "var(--mantine-radius-md)",
                     padding: 1,
-                    background: ACCENT_GRADIENT,
+                    background: isMasterLinked ? ACCENT_GRADIENT : UNLINKED_MARKER,
                     WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
                     WebkitMaskComposite: "xor",
                     maskComposite: "exclude",
