@@ -22,7 +22,7 @@ import {
   ThemeIcon,
   Tooltip,
 } from "@mantine/core";
-import { IconAlertCircle, IconAlertTriangle, IconCheck, IconPencil } from "@tabler/icons-react";
+import { IconAlertCircle, IconAlertTriangle, IconCheck, IconChevronRight, IconPencil, IconSparkles, IconX } from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
 import {
   isFieldEmpty,
@@ -38,10 +38,48 @@ import type {
   MetadataFieldDefinition,
   MetadataSectionDefinition,
 } from "../model";
+import type { VenueEnrichmentSuggestion } from "@/entities/venue";
 import { SECTION_CARD_STYLES } from "./section-accent";
 
-// ── Field chips ───────────────────────────────────────────────────────────────
+// ── AI suggestion chip (inline, per-field) ────────────────────────────────────
 
+function SuggestionChip({
+  suggestion,
+  onAccept,
+  onDismiss,
+}: {
+  suggestion: VenueEnrichmentSuggestion;
+  onAccept: () => void;
+  onDismiss: () => void;
+}) {
+  return (
+    <Group
+      gap={6}
+      wrap="nowrap"
+      mt={2}
+      px={8}
+      py={4}
+      style={{
+        borderRadius: "var(--mantine-radius-sm)",
+        background: "var(--mantine-color-violet-0)",
+        border: "1px solid var(--mantine-color-violet-3)",
+      }}
+    >
+      <IconSparkles size={11} color="var(--mantine-color-violet-6)" style={{ flexShrink: 0 }} />
+      <Text size="xs" c="violet" fw={500} style={{ flex: 1, minWidth: 0, wordBreak: "break-word" }}>
+        {suggestion.value}
+      </Text>
+      <ActionIcon size="xs" variant="subtle" color="teal" aria-label="Accept" onClick={onAccept}>
+        <IconCheck size={11} />
+      </ActionIcon>
+      <ActionIcon size="xs" variant="subtle" color="gray" aria-label="Dismiss" onClick={onDismiss}>
+        <IconX size={11} />
+      </ActionIcon>
+    </Group>
+  );
+}
+
+// ── Field chips ───────────────────────────────────────────────────────────────
 function formatFieldValue(definition: MetadataFieldDefinition, value: unknown): string | null {
   if (isFieldEmpty(value)) return null;
   if (definition.type === "enum") {
@@ -339,10 +377,16 @@ function MetadataSectionCard({
   venueId,
   metadata,
   section,
+  suggestions,
+  onAcceptSuggestion,
+  onDismissSuggestion,
 }: {
   venueId: string;
   metadata: MetadataDocument;
   section: MetadataSectionDefinition;
+  suggestions: VenueEnrichmentSuggestion[];
+  onAcceptSuggestion: (s: VenueEnrichmentSuggestion) => void;
+  onDismissSuggestion: (s: VenueEnrichmentSuggestion) => void;
 }) {
   const { t } = useLingui();
   const [opened, setOpened] = useState(false);
@@ -385,7 +429,7 @@ function MetadataSectionCard({
               )}
             </Group>
 
-            {!hasAny ? (
+            {!hasAny && suggestions.length === 0 ? (
               <Text size="xs" c="dimmed" fs="italic">
                 <Trans>No data yet — click Edit to add.</Trans>
               </Text>
@@ -424,9 +468,20 @@ function MetadataSectionCard({
                     ))}
                   </Box>
                 )}
+                {suggestions.length > 0 && (
+                  <Stack gap={4} mt={4}>
+                    {suggestions.map((s) => (
+                      <SuggestionChip
+                        key={`${s.group}.${s.field}`}
+                        suggestion={s}
+                        onAccept={() => onAcceptSuggestion(s)}
+                        onDismiss={() => onDismissSuggestion(s)}
+                      />
+                    ))}
+                  </Stack>
+                )}
               </Stack>
-            )}
-          </Stack>
+            )}          </Stack>
 
           {editable.length > 0 && (
             <Tooltip label={t`Edit ${section.label}`} withArrow position="left">
@@ -482,16 +537,24 @@ interface VenueMetadataSectionsProps {
   venueId: string;
   metadata: string | null;
   isLoading?: boolean;
+  suggestions?: VenueEnrichmentSuggestion[];
+  onAcceptSuggestion?: (s: VenueEnrichmentSuggestion) => void;
+  onDismissSuggestion?: (s: VenueEnrichmentSuggestion) => void;
 }
 
 /**
  * Structured view of the venue metadata document — one card per spec section,
  * grouped under tab dividers, each editable through a right-anchored drawer.
+ * When AI enrichment suggestions are active they are threaded down to each
+ * matching section card as inline diff chips.
  */
 export function VenueMetadataSections({
   venueId,
   metadata,
   isLoading,
+  suggestions = [],
+  onAcceptSuggestion,
+  onDismissSuggestion,
 }: VenueMetadataSectionsProps) {
   const parsed = useMemo(() => parseMetadata(metadata), [metadata]);
 
@@ -546,6 +609,14 @@ export function VenueMetadataSections({
                 venueId={venueId}
                 metadata={parsed}
                 section={section}
+                suggestions={suggestions.filter(
+                  (s) =>
+                    section.fields.some(
+                      (f) => f.key === `${s.group}.${s.field}` || f.key === s.field,
+                    ),
+                )}
+                onAcceptSuggestion={onAcceptSuggestion ?? (() => {})}
+                onDismissSuggestion={onDismissSuggestion ?? (() => {})}
               />
             ))}
           </Stack>

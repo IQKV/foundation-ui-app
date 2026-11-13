@@ -11,6 +11,10 @@ import type {
   VenueAssetImportStatus,
   VenueTextContent,
   VenueTextContentListResponse,
+  VenueEnrichmentSuggestion,
+  VenueEnrichmentSuggestionRequest,
+  VenueEnrichmentSuggestionResponse,
+  VenueEnrichmentApplyRequest,
 } from "@/entities/venue";
 
 export type {
@@ -25,6 +29,10 @@ export type {
   VenueAssetImportStatus,
   VenueTextContent,
   VenueTextContentListResponse,
+  VenueEnrichmentSuggestion,
+  VenueEnrichmentSuggestionRequest,
+  VenueEnrichmentSuggestionResponse,
+  VenueEnrichmentApplyRequest,
 } from "@/entities/venue";
 
 // ─── Tenant-scoped Catalog API ────────────────────────────────────────────────
@@ -144,6 +152,20 @@ export const catalogApi = {
   listVenueTextContents: (venueId: string) =>
     httpClient
       .get<VenueTextContentListResponse>(`/v1/catalog/venue-text-contents/venue/${venueId}`)
+      .then((r) => r.data),
+
+  // AI enrichment — suggestions and atomic apply.
+  venueEnrichmentSuggestions: (venueId: string, data: VenueEnrichmentSuggestionRequest) =>
+    httpClient
+      .post<VenueEnrichmentSuggestionResponse>(
+        `/v1/catalog/venues/${venueId}/enrichment/suggestions`,
+        data,
+      )
+      .then((r) => r.data),
+
+  venueEnrichmentApply: (venueId: string, data: VenueEnrichmentApplyRequest) =>
+    httpClient
+      .post<Venue>(`/v1/catalog/venues/${venueId}/enrichment/apply`, data)
       .then((r) => r.data),
 };
 

@@ -122,8 +122,30 @@ export interface ListVenueParams {
   city?: string;
   limit?: number;
   offset?: number;
-  /** Sort field — "name" or omit for recently added (default). */
   sortBy?: string;
-  /** Sort direction — "asc" or "desc". */
   sortDir?: string;
+}
+
+// ─── Enrichment ───────────────────────────────────────────────────────────────
+
+/** One AI-suggested metadata field patch — mirrors the backend VenueEnrichmentSuggestion. */
+export interface VenueEnrichmentSuggestion {
+  group: string;
+  field: string;
+  value: string;
+}
+
+export interface VenueEnrichmentSuggestionRequest {
+  message: string;
+  fieldHint?: string | null;
+  currentMetadata?: string | null;
+}
+
+export interface VenueEnrichmentSuggestionResponse {
+  reply: string;
+  suggestedPatches: VenueEnrichmentSuggestion[];
+}
+
+export interface VenueEnrichmentApplyRequest {
+  patches: VenueEnrichmentSuggestion[];
 }

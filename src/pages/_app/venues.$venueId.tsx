@@ -3,6 +3,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { z } from "zod";
 import { motion } from "framer-motion";
 import {
+  Affix,
   Container,
   Text,
   Stack,
@@ -50,6 +51,7 @@ import {
   IconEye,
   IconUpload,
   IconFileText,
+  IconSparkles,
 } from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { PageTitle } from "@/shared/lib/page-title";
@@ -66,9 +68,11 @@ import {
   DeleteVenueModal,
   VenueCompletenessCard,
   VenueMetadataSections,
+  VenueAiEnrichModal,
   completenessColor,
   overallCompleteness,
   parseMetadata,
+  useVenueEnrichment,
 } from "@/features/manage-venue";
 import { dayjs } from "@/shared/lib/date-utils";
 import { TestSelectors } from "@/shared/lib/test-selectors";
@@ -725,55 +729,42 @@ interface QualityControlBarProps {
   filled: number;
   total: number;
   isLoading?: boolean;
-  onEdit: () => void;
 }
 
-function QualityControlBar({
-  percent,
-  filled,
-  total,
-  isLoading = false,
-  onEdit,
-}: QualityControlBarProps) {
-  const { t } = useLingui();
+function QualityControlBar({ percent, filled, total, isLoading = false }: QualityControlBarProps) {
   const color = completenessColor(percent);
 
   return (
     <Paper withBorder radius="md" p="sm" shadow="sm" styles={SECTION_CARD_STYLES}>
-      <Group justify="space-between" wrap="nowrap" gap="md">
-        <Group gap="md" wrap="nowrap" style={{ flex: 1, minWidth: 0 }}>
-          {isLoading ? (
-            <Skeleton circle height={44} width={44} />
-          ) : (
-            <RingProgress
-              size={44}
-              thickness={5}
-              roundCaps
-              sections={[{ value: percent, color }]}
-              label={
-                <Center>
-                  <Text size="xs" fw={700} c={color} lh={1}>
-                    {percent}%
-                  </Text>
-                </Center>
-              }
-            />
-          )}
-          <Stack gap={4} style={{ flex: 1, minWidth: 0 }}>
-            <Group gap={8} wrap="nowrap">
-              <Text size="sm" fw={700}>
-                {t`Profile ${percent}% completed`}
-              </Text>
-              <Text size="xs" c="dimmed">
-                {t`${filled} of ${total} fields`}
-              </Text>
-            </Group>
-            <Progress value={percent} color={color} size="sm" radius="xl" />
-          </Stack>
-        </Group>
-        <Button size="sm" variant="light" leftSection={<IconEdit size={14} />} onClick={onEdit}>
-          <Trans>Finish now</Trans>
-        </Button>
+      <Group gap="md" wrap="nowrap">
+        {isLoading ? (
+          <Skeleton circle height={44} width={44} />
+        ) : (
+          <RingProgress
+            size={44}
+            thickness={5}
+            roundCaps
+            sections={[{ value: percent, color }]}
+            label={
+              <Center>
+                <Text size="xs" fw={700} c={color} lh={1}>
+                  {percent}%
+                </Text>
+              </Center>
+            }
+          />
+        )}
+        <Stack gap={4} style={{ flex: 1, minWidth: 0 }}>
+          <Group gap={8} wrap="nowrap">
+            <Text size="sm" fw={700}>
+              {`Profile ${percent}% completed`}
+            </Text>
+            <Text size="xs" c="dimmed">
+              {`${filled} of ${total} fields`}
+            </Text>
+          </Group>
+          <Progress value={percent} color={color} size="sm" radius="xl" />
+        </Stack>
       </Group>
     </Paper>
   );
@@ -793,6 +784,9 @@ function VenueDetailPage() {
   const [deleteOpened, { open: openDelete, close: closeDelete }] = useDisclosure(false);
   const [deletedVenue, setDeletedVenue] = useState<Venue | null>(null);
   const [rawJsonOpened, { toggle: toggleRawJson }] = useDisclosure(false);
+  const [aiEnrichOpened, { open: openAiEnrich, close: closeAiEnrich }] = useDisclosure(false);
+
+  const enrichment = useVenueEnrichment(venueId);
 
   const queryClient = useQueryClient();
   const [uploadingAsset, setUploadingAsset] = useState(false);
@@ -969,7 +963,7 @@ function VenueDetailPage() {
                     data-testid={TestSelectors.VENUE_DETAIL_EDIT_BUTTON}
                     onClick={openEdit}
                   >
-                    <Trans>Edit</Trans>
+                    <Trans>Edit Manually</Trans>
                   </Button>
                   <Button
                     variant="light"
@@ -1212,7 +1206,6 @@ function VenueDetailPage() {
                 filled={completeness.filled}
                 total={completeness.total}
                 isLoading={isLoading}
-                onEdit={openEdit}
               />
 
               {/* ── Tabs — mirrors admin VenueProfileWidget tab structure ─────── */}
@@ -1309,6 +1302,11 @@ function VenueDetailPage() {
                             venueId={venueId}
                             metadata={venue.metadata ?? null}
                             isLoading={isLoading}
+                            suggestions={enrichment.pendingPatches}
+                            onAcceptSuggestion={(s) =>
+                              enrichment.applyPatches([s], venue.metadata ?? null)
+                            }
+                            onDismissSuggestion={(s) => enrichment.dismissPatch(s)}
                           />
 
                           {/* Raw JSON fallback — read-only, collapsible */}
@@ -1420,7 +1418,31 @@ function VenueDetailPage() {
               onClose={closeDelete}
               onDeleted={handleDeleteSuccess}
             />
+            <VenueAiEnrichModal
+              opened={aiEnrichOpened}
+              onClose={closeAiEnrich}
+              enrichment={enrichment}
+              currentMetadata={venue?.metadata ?? null}
+            />
           </>
+        )}
+
+        {/* Floating Fill with AI button — only when venue is loaded and profile is incomplete */}
+        {canManage && venue && completeness.percent < 100 && (
+          <Affix position={{ bottom: 24, right: 24 }}>
+            <Button
+              size="md"
+              variant="gradient"
+              gradient={{ from: "violet", to: "blue" }}
+              leftSection={<IconSparkles size={16} />}
+              radius="xl"
+              shadow="lg"
+              onClick={openAiEnrich}
+              aria-label={t`Fill with AI`}
+            >
+              <Trans>Fill with AI</Trans>
+            </Button>
+          </Affix>
         )}
       </Container>
     </motion.div>
