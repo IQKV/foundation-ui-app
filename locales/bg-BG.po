@@ -1343,6 +1343,10 @@ msgstr "Забравихте"
 msgid "Free"
 msgstr "Безплатен"
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "From master catalog"
+msgstr ""
+
 #: src/pages/loading-demo.tsx
 msgid "Full-screen centered loader shown on first app load (while locale initializes)."
 msgstr "Цялоекранен центриран индикатор при първото зареждане на приложението (докато локалът се инициализира)."

@@ -140,6 +140,13 @@ export const catalogApi = {
       .get<VenueAssetListResponse>(`/v1/catalog/venues/${venueId}/assets/photos`)
       .then((r) => r.data),
 
+  // Photos of the master-catalog venue this venue is linked to, when it has one —
+  // TENANT_OWNER / MEMBER. Shown beneath the venue's own photos. Empty when unlinked.
+  listVenueMasterPhotos: (venueId: string) =>
+    httpClient
+      .get<VenueAssetListResponse>(`/v1/catalog/venues/${venueId}/assets/master-photos`)
+      .then((r) => r.data),
+
   // All assets of a venue — photos and attachments — TENANT_OWNER / MEMBER.
   // Used by the venue detail Assets tab.
   listVenueAssets: (venueId: string) =>

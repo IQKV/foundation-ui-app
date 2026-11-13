@@ -162,33 +162,7 @@ function FieldChip({ label, value }: { label: React.ReactNode; value: React.Reac
 
 // ─── Photos tab ───────────────────────────────────────────────────────────────
 
-function PhotosTab({ photos, isLoading }: { photos: VenueAssetPublic[]; isLoading: boolean }) {
-  if (isLoading) {
-    return (
-      <SimpleGrid cols={{ base: 2, sm: 3, md: 4, lg: 5 }} spacing="sm">
-        {Array.from({ length: 5 }).map((_, i) => (
-          <Skeleton key={i} height={130} radius="sm" />
-        ))}
-      </SimpleGrid>
-    );
-  }
-  if (photos.length === 0) {
-    return (
-      <Paper
-        withBorder
-        p="xl"
-        radius="md"
-        style={{ textAlign: "center", background: "var(--mantine-color-gray-0)" }}
-      >
-        <Stack align="center" gap="sm">
-          <IconPhoto size={40} color="var(--mantine-color-gray-4)" />
-          <Text size="sm" c="dimmed">
-            <Trans>No photos for this venue.</Trans>
-          </Text>
-        </Stack>
-      </Paper>
-    );
-  }
+function PhotoGrid({ photos }: { photos: VenueAssetPublic[] }) {
   return (
     <SimpleGrid cols={{ base: 2, sm: 3, md: 4, lg: 5 }} spacing="sm">
       {photos.map((photo, i) => (
@@ -231,6 +205,77 @@ function PhotosTab({ photos, isLoading }: { photos: VenueAssetPublic[]; isLoadin
         </Box>
       ))}
     </SimpleGrid>
+  );
+}
+
+const PHOTO_GRID_SKELETON = Array.from({ length: 5 }).map((_, i) => (
+  <Skeleton key={i} height={130} radius="sm" />
+));
+
+function PhotosTab({
+  photos,
+  masterPhotos,
+  isLoading,
+  masterLoading,
+}: {
+  photos: VenueAssetPublic[];
+  masterPhotos: VenueAssetPublic[];
+  isLoading: boolean;
+  masterLoading: boolean;
+}) {
+  if (isLoading) {
+    return (
+      <SimpleGrid cols={{ base: 2, sm: 3, md: 4, lg: 5 }} spacing="sm">
+        {PHOTO_GRID_SKELETON}
+      </SimpleGrid>
+    );
+  }
+  if (photos.length === 0 && masterPhotos.length === 0 && !masterLoading) {
+    return (
+      <Paper
+        withBorder
+        p="xl"
+        radius="md"
+        style={{ textAlign: "center", background: "var(--mantine-color-gray-0)" }}
+      >
+        <Stack align="center" gap="sm">
+          <IconPhoto size={40} color="var(--mantine-color-gray-4)" />
+          <Text size="sm" c="dimmed">
+            <Trans>No photos for this venue.</Trans>
+          </Text>
+        </Stack>
+      </Paper>
+    );
+  }
+  return (
+    <Stack gap="md">
+      {photos.length > 0 && <PhotoGrid photos={photos} />}
+      {(masterLoading || masterPhotos.length > 0) && (
+        <Stack gap="sm">
+          {/* Reference photos adopted from the linked master-catalog venue. */}
+          <Divider
+            label={
+              <Text
+                size="xs"
+                fw={700}
+                tt="uppercase"
+                c="dimmed"
+                style={{ letterSpacing: "0.07em" }}
+              >
+                <Trans>From master catalog</Trans>
+              </Text>
+            }
+          />
+          {masterLoading ? (
+            <SimpleGrid cols={{ base: 2, sm: 3, md: 4, lg: 5 }} spacing="sm">
+              {PHOTO_GRID_SKELETON}
+            </SimpleGrid>
+          ) : (
+            <PhotoGrid photos={masterPhotos} />
+          )}
+        </Stack>
+      )}
+    </Stack>
   );
 }
 
@@ -755,6 +800,15 @@ function VenueDetailPage() {
   });
 
   const photos = photosData?.items ?? [];
+
+  // Reference photos from the linked master-catalog venue, when this venue has one.
+  const { data: masterPhotosData, isLoading: masterPhotosLoading } = useQuery({
+    queryKey: ["tenant", "venue", venueId, "master-photos"],
+    queryFn: () => catalogApi.listVenueMasterPhotos(venueId),
+    enabled: Boolean(venue?.masterVenueId),
+  });
+
+  const masterPhotos = masterPhotosData?.items ?? [];
 
   // All assets (photos and attachments) come from the venue assets endpoint.
   const { data: assetsData, isLoading: assetsLoading } = useQuery({
@@ -1345,7 +1399,12 @@ function VenueDetailPage() {
                 {/* ── Photos tab ───────────────────────────── */}
                 {venue && (
                   <Tabs.Panel value="photos" pt="sm">
-                    <PhotosTab photos={photos} isLoading={photosLoading} />
+                    <PhotosTab
+                      photos={photos}
+                      masterPhotos={masterPhotos}
+                      isLoading={photosLoading}
+                      masterLoading={masterPhotosLoading}
+                    />
                   </Tabs.Panel>
                 )}
 

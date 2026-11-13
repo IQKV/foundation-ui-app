@@ -1343,6 +1343,10 @@ msgstr "Forgot your"
 msgid "Free"
 msgstr "Free"
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "From master catalog"
+msgstr "From master catalog"
+
 #: src/pages/loading-demo.tsx
 msgid "Full-screen centered loader shown on first app load (while locale initializes)."
 msgstr "Full-screen centered loader shown on first app load (while locale initializes)."
