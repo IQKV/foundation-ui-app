@@ -1012,6 +1012,18 @@ function VenueDetailPage() {
                   >
                     <Trans>Edit Manually</Trans>
                   </Button>
+                  {sources.length > 0 && completeness.percent < 100 && (
+                    <Button
+                      variant="light"
+                      color="violet"
+                      size="sm"
+                      leftSection={<IconSparkles size={15} />}
+                      disabled={!venue}
+                      onClick={openAiEnrich}
+                    >
+                      <Trans>Fill empty fields</Trans>
+                    </Button>
+                  )}
                   <Button
                     variant="light"
                     size="sm"
@@ -1244,22 +1256,6 @@ function VenueDetailPage() {
           {/* ── Right column: tabs ─────────────────────────────────────── */}
           <Grid.Col span={{ base: 12, lg: 8 }}>
             <Stack gap="md">
-              {/* Fill with AI — sticky at column top, clears the drawer trigger zone */}
-              {canManage && venue && completeness.percent < 100 && (
-                <Box style={{ position: "sticky", top: 16, zIndex: 100 }}>
-                  <Button
-                    size="sm"
-                    variant="gradient"
-                    gradient={{ from: "violet", to: "blue" }}
-                    leftSection={<IconSparkles size={15} />}
-                    radius="xl"
-                    onClick={openAiEnrich}
-                    aria-label={t`Fill with AI`}
-                  >
-                    <Trans>Fill with AI</Trans>
-                  </Button>
-                </Box>
-              )}
               {/* Brief venue description — only rendered when the venue has one. */}
               {venue?.description && (
                 <Box pl="md" style={{ borderLeft: "3px solid var(--mantine-color-blue-4)" }}>
@@ -1362,11 +1358,13 @@ function VenueDetailPage() {
                             venueId={venueId}
                             metadata={venue.metadata ?? null}
                             isLoading={isLoading}
+                            sources={sources}
                             suggestions={enrichment.pendingPatches}
                             onAcceptSuggestion={(s) =>
                               enrichment.applyPatches([s], venue.metadata ?? null)
                             }
                             onDismissSuggestion={(s) => enrichment.dismissPatch(s)}
+                            enrichment={enrichment}
                           />
 
                           {/* Raw JSON fallback — read-only, collapsible */}
@@ -1488,6 +1486,7 @@ function VenueDetailPage() {
               onClose={closeAiEnrich}
               enrichment={enrichment}
               currentMetadata={venue?.metadata ?? null}
+              sources={sources}
             />
           </>
         )}

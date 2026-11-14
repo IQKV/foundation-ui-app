@@ -15,6 +15,8 @@ import type {
   VenueEnrichmentSuggestionRequest,
   VenueEnrichmentSuggestionResponse,
   VenueEnrichmentApplyRequest,
+  VenueFieldExtractionRequest,
+  VenueFieldExtractionResponse,
 } from "@/entities/venue";
 
 export type {
@@ -33,6 +35,8 @@ export type {
   VenueEnrichmentSuggestionRequest,
   VenueEnrichmentSuggestionResponse,
   VenueEnrichmentApplyRequest,
+  VenueFieldExtractionRequest,
+  VenueFieldExtractionResponse,
 } from "@/entities/venue";
 
 // ─── Tenant-scoped Catalog API ────────────────────────────────────────────────
@@ -175,6 +179,14 @@ export const catalogApi = {
   venueEnrichmentApply: (venueId: string, data: VenueEnrichmentApplyRequest) =>
     httpClient
       .post<Venue>(`/v1/catalog/venues/${venueId}/enrichment/apply`, data)
+      .then((r) => r.data),
+
+  // Single-field extraction from a preloaded source document.
+  // Returns found=false instead of erroring when the model is unavailable or the
+  // source has no value for the field.
+  venueEnrichmentExtract: (venueId: string, data: VenueFieldExtractionRequest) =>
+    httpClient
+      .post<VenueFieldExtractionResponse>(`/v1/catalog/venues/${venueId}/enrichment/extract`, data)
       .then((r) => r.data),
 };
 

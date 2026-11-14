@@ -151,3 +151,25 @@ export interface VenueEnrichmentSuggestionResponse {
 export interface VenueEnrichmentApplyRequest {
   patches: VenueEnrichmentSuggestion[];
 }
+
+// ─── Single-field extraction (per-source) ────────────────────────────────────
+
+/** Request body for POST /venues/{venueId}/enrichment/extract */
+export interface VenueFieldExtractionRequest {
+  group: string;
+  field: string;
+  fieldLabel?: string | null;
+  valueType?: string | null;
+  allowedValues?: string[] | null;
+  sourceTextId: string;
+  currentValue?: string | null;
+}
+
+/** Response from POST /venues/{venueId}/enrichment/extract */
+export interface VenueFieldExtractionResponse {
+  group: string;
+  field: string;
+  value: string | null;
+  evidence: string | null;
+  found: boolean;
+}

@@ -8,9 +8,11 @@ import {
   Divider,
   Drawer,
   Group,
+  Loader,
   MultiSelect,
   NumberInput,
   Paper,
+  Popover,
   Select,
   Skeleton,
   Stack,
@@ -26,7 +28,6 @@ import {
   IconAlertCircle,
   IconAlertTriangle,
   IconCheck,
-  IconChevronRight,
   IconPencil,
   IconSparkles,
   IconX,
@@ -46,10 +47,11 @@ import type {
   MetadataFieldDefinition,
   MetadataSectionDefinition,
 } from "../model";
-import type { VenueEnrichmentSuggestion } from "@/entities/venue";
+import type { VenueEnrichmentSuggestion, VenueTextContent } from "@/entities/venue";
+import type { FieldExtractResult, UseVenueEnrichmentResult } from "../model";
 import { SECTION_CARD_STYLES } from "./section-accent";
 
-// ── AI suggestion chip (inline, per-field) ────────────────────────────────────
+// ── AI suggestion chip (inline, per-field, from chat flow) ───────────────────
 
 function SuggestionChip({
   suggestion,
@@ -87,7 +89,86 @@ function SuggestionChip({
   );
 }
 
+// ── Extract result chip (per-section extraction flow) ────────────────────────
+
+function ExtractResultChip({
+  result,
+  onAccept,
+  onSkip,
+}: {
+  result: FieldExtractResult;
+  onAccept: () => void;
+  onSkip: () => void;
+}) {
+  const fieldDef = METADATA_SECTIONS.flatMap((s) => s.fields).find(
+    (f) => f.key === `${result.group}.${result.field}` || f.key === result.field,
+  );
+  const label = fieldDef?.label ?? `${result.group} / ${result.field}`;
+
+  return (
+    <Paper
+      withBorder
+      px="sm"
+      py={6}
+      radius="sm"
+      style={{
+        borderColor: "var(--mantine-color-violet-3)",
+        background: "var(--mantine-color-violet-0)",
+      }}
+    >
+      <Stack gap={4}>
+        <Group justify="space-between" wrap="nowrap" gap="xs">
+          <Stack gap={0} style={{ minWidth: 0, flex: 1 }}>
+            <Group gap={5} wrap="nowrap">
+              <IconSparkles
+                size={11}
+                color="var(--mantine-color-violet-6)"
+                style={{ flexShrink: 0 }}
+              />
+              <Text size="xs" c="dimmed" style={{ flexShrink: 0 }}>
+                {label}
+              </Text>
+            </Group>
+            <Text size="sm" fw={600} c="violet.8" style={{ wordBreak: "break-word" }}>
+              {result.value}
+            </Text>
+          </Stack>
+          <Group gap={4} style={{ flexShrink: 0 }}>
+            <ActionIcon
+              size="xs"
+              variant="light"
+              color="teal"
+              aria-label="Accept"
+              onClick={onAccept}
+            >
+              <IconCheck size={11} />
+            </ActionIcon>
+            <ActionIcon size="xs" variant="light" color="gray" aria-label="Skip" onClick={onSkip}>
+              <IconX size={11} />
+            </ActionIcon>
+          </Group>
+        </Group>
+        {result.evidence && (
+          <Text
+            size="xs"
+            c="dimmed"
+            fs="italic"
+            style={{
+              borderLeft: "2px solid var(--mantine-color-violet-3)",
+              paddingLeft: 6,
+              wordBreak: "break-word",
+            }}
+          >
+            "{result.evidence}"
+          </Text>
+        )}
+      </Stack>
+    </Paper>
+  );
+}
+
 // ── Field chips ───────────────────────────────────────────────────────────────
+
 function formatFieldValue(definition: MetadataFieldDefinition, value: unknown): string | null {
   if (isFieldEmpty(value)) return null;
   if (definition.type === "enum") {
@@ -154,7 +235,6 @@ function BooleanChip({
 
 // ── Single-field input ────────────────────────────────────────────────────────
 
-/** Render a metadata value as text input content; non-primitives render empty. */
 function toInputText(value: unknown): string {
   if (typeof value === "string") return value;
   if (typeof value === "number" || typeof value === "boolean") return String(value);
@@ -286,7 +366,7 @@ function FieldInput({
   );
 }
 
-// ── Section editor (drawer body) ──────────────────────────────────────────────
+// ── Section editor drawer ─────────────────────────────────────────────────────
 
 interface SectionFieldsFormProps {
   venueId: string;
@@ -296,11 +376,6 @@ interface SectionFieldsFormProps {
   onClose: () => void;
 }
 
-/**
- * Edit drawer body for a single metadata section. Keeps a local draft, and on
- * apply sends only the changed fields merged into one PATCH. Stays open on
- * failure so the draft is not lost.
- */
 function SectionFieldsForm({
   venueId,
   metadata,
@@ -379,25 +454,146 @@ function SectionFieldsForm({
   );
 }
 
+// ── Source picker popover (extract trigger) ───────────────────────────────────
+
+function ExtractPopover({
+  section,
+  sources,
+  enrichment,
+  metadata,
+  onResults,
+}: {
+  section: MetadataSectionDefinition;
+  sources: VenueTextContent[];
+  enrichment: UseVenueEnrichmentResult;
+  metadata: MetadataDocument;
+  onResults: (results: FieldExtractResult[]) => void;
+}) {
+  const { t } = useLingui();
+  const [opened, setOpened] = useState(false);
+  const [sourceId, setSourceId] = useState<string | null>(null);
+  const [running, setRunning] = useState(false);
+  const [progress, setProgress] = useState<string | null>(null);
+
+  const sourceOptions = sources.map((s) => ({
+    value: s.id,
+    label: s.content.trim().replace(/\s+/g, " ").slice(0, 60) + (s.content.length > 60 ? "…" : ""),
+  }));
+
+  async function handleExtract() {
+    if (!sourceId) return;
+    setRunning(true);
+    setProgress(null);
+    const collected: FieldExtractResult[] = [];
+
+    // Serialise current metadata back to JSON for the hook.
+    const rawMeta = JSON.stringify(metadata);
+
+    await enrichment.extractSection(section.key, sourceId, rawMeta, (result, fieldKey, done) => {
+      const def = section.fields.find((f) => f.key === fieldKey);
+      setProgress(def?.label ?? fieldKey);
+      if (result) collected.push(result);
+      if (done) {
+        setRunning(false);
+        setProgress(null);
+        setOpened(false);
+        onResults(collected);
+      }
+    });
+  }
+
+  return (
+    <Popover
+      opened={opened}
+      onChange={setOpened}
+      position="left-start"
+      withArrow
+      shadow="md"
+      width={280}
+    >
+      <Popover.Target>
+        <Tooltip label={t`Fill with AI`} withArrow position="left">
+          <ActionIcon
+            variant="subtle"
+            color="violet"
+            size="sm"
+            style={{ flexShrink: 0 }}
+            onClick={() => setOpened((o) => !o)}
+            aria-label={t`Fill section with AI`}
+          >
+            <IconSparkles size={14} />
+          </ActionIcon>
+        </Tooltip>
+      </Popover.Target>
+      <Popover.Dropdown>
+        <Stack gap="sm">
+          <Group gap={6} wrap="nowrap">
+            <IconSparkles size={13} color="var(--mantine-color-violet-6)" />
+            <Text size="sm" fw={600}>
+              <Trans>Fill with AI</Trans>
+            </Text>
+          </Group>
+          <Select
+            size="xs"
+            label={t`Source document`}
+            placeholder={t`Pick a source…`}
+            data={sourceOptions}
+            value={sourceId}
+            onChange={setSourceId}
+            disabled={running}
+          />
+          {running && progress && (
+            <Group gap={6} wrap="nowrap">
+              <Loader size="xs" color="violet" />
+              <Text size="xs" c="dimmed" lineClamp={1}>
+                {progress}
+              </Text>
+            </Group>
+          )}
+          <Button
+            size="xs"
+            variant="light"
+            color="violet"
+            leftSection={running ? <Loader size={12} color="violet" /> : <IconSparkles size={13} />}
+            disabled={!sourceId || running}
+            onClick={() => void handleExtract()}
+            fullWidth
+          >
+            {running ? <Trans>Extracting…</Trans> : <Trans>Extract</Trans>}
+          </Button>
+        </Stack>
+      </Popover.Dropdown>
+    </Popover>
+  );
+}
+
 // ── Section card ──────────────────────────────────────────────────────────────
 
 function MetadataSectionCard({
   venueId,
   metadata,
   section,
+  sources,
   suggestions,
   onAcceptSuggestion,
   onDismissSuggestion,
+  enrichment,
+  onAcceptExtracted,
 }: {
   venueId: string;
   metadata: MetadataDocument;
   section: MetadataSectionDefinition;
+  sources: VenueTextContent[];
   suggestions: VenueEnrichmentSuggestion[];
   onAcceptSuggestion: (s: VenueEnrichmentSuggestion) => void;
   onDismissSuggestion: (s: VenueEnrichmentSuggestion) => void;
+  enrichment: UseVenueEnrichmentResult;
+  onAcceptExtracted: (results: VenueEnrichmentSuggestion[]) => void;
 }) {
   const { t } = useLingui();
-  const [opened, setOpened] = useState(false);
+  const [drawerOpened, setDrawerOpened] = useState(false);
+  // Pending extract results for this section.
+  const [extractResults, setExtractResults] = useState<FieldExtractResult[]>([]);
 
   const editable = section.fields.filter((field) => !field.readOnly);
   const readOnly = section.fields.filter((field) => field.readOnly);
@@ -406,9 +602,35 @@ function MetadataSectionCard({
 
   const { filled, total } = sectionCompleteness(section.fields, metadata);
   const allFilled = total > 0 && filled === total;
+  const hasEmptyFields = filled < total;
 
   const hasAny =
     filled > 0 || readOnly.some((field) => !isFieldEmpty(resolveFieldValue(metadata, field)));
+
+  function handleExtractResults(results: FieldExtractResult[]) {
+    // Merge: replace any existing result for the same field.
+    setExtractResults((prev) => {
+      const next = [...prev];
+      for (const r of results) {
+        const idx = next.findIndex((x) => x.group === r.group && x.field === r.field);
+        if (idx >= 0) {
+          next[idx] = r;
+        } else {
+          next.push(r);
+        }
+      }
+      return next;
+    });
+  }
+
+  function dismissExtractResult(r: FieldExtractResult) {
+    setExtractResults((prev) => prev.filter((x) => !(x.group === r.group && x.field === r.field)));
+  }
+
+  function acceptExtractResult(r: FieldExtractResult) {
+    onAcceptExtracted([{ group: r.group, field: r.field, value: r.value }]);
+    dismissExtractResult(r);
+  }
 
   return (
     <>
@@ -436,7 +658,8 @@ function MetadataSectionCard({
                 </Badge>
               )}
             </Group>
-            {!hasAny && suggestions.length === 0 ? (
+
+            {!hasAny && suggestions.length === 0 && extractResults.length === 0 ? (
               <Text size="xs" c="dimmed" fs="italic">
                 <Trans>No data yet — click Edit to add.</Trans>
               </Text>
@@ -475,6 +698,7 @@ function MetadataSectionCard({
                     ))}
                   </Box>
                 )}
+                {/* Chat-flow suggestion chips */}
                 {suggestions.length > 0 && (
                   <Stack gap={4} mt={4}>
                     {suggestions.map((s) => (
@@ -487,29 +711,54 @@ function MetadataSectionCard({
                     ))}
                   </Stack>
                 )}
+                {/* Per-section extract result chips */}
+                {extractResults.length > 0 && (
+                  <Stack gap={4} mt={4}>
+                    {extractResults.map((r) => (
+                      <ExtractResultChip
+                        key={`${r.group}.${r.field}`}
+                        result={r}
+                        onAccept={() => acceptExtractResult(r)}
+                        onSkip={() => dismissExtractResult(r)}
+                      />
+                    ))}
+                  </Stack>
+                )}
               </Stack>
-            )}{" "}
+            )}
           </Stack>
 
-          {editable.length > 0 && (
-            <Tooltip label={t`Edit ${section.label}`} withArrow position="left">
-              <ActionIcon
-                variant="subtle"
-                color="gray"
-                size="sm"
-                style={{ flexShrink: 0 }}
-                onClick={() => setOpened(true)}
-              >
-                <IconPencil size={14} />
-              </ActionIcon>
-            </Tooltip>
-          )}
+          <Group gap={4} style={{ flexShrink: 0 }}>
+            {/* AI extract button — only shown when sources exist and section has empty fields */}
+            {sources.length > 0 && hasEmptyFields && editable.length > 0 && (
+              <ExtractPopover
+                section={section}
+                sources={sources}
+                enrichment={enrichment}
+                metadata={metadata}
+                onResults={handleExtractResults}
+              />
+            )}
+            {editable.length > 0 && (
+              <Tooltip label={t`Edit ${section.label}`} withArrow position="left">
+                <ActionIcon
+                  variant="subtle"
+                  color="gray"
+                  size="sm"
+                  style={{ flexShrink: 0 }}
+                  onClick={() => setDrawerOpened(true)}
+                >
+                  <IconPencil size={14} />
+                </ActionIcon>
+              </Tooltip>
+            )}
+          </Group>
         </Group>
       </Paper>
 
       <Drawer
-        opened={opened}
-        onClose={() => setOpened(false)}
+        opened={drawerOpened}
+        onClose={() => setDrawerOpened(false)}
         position="right"
         size="md"
         title={
@@ -532,7 +781,7 @@ function MetadataSectionCard({
           metadata={metadata}
           fields={editable}
           sectionLabel={section.label}
-          onClose={() => setOpened(false)}
+          onClose={() => setDrawerOpened(false)}
         />
       </Drawer>
     </>
@@ -545,24 +794,34 @@ interface VenueMetadataSectionsProps {
   venueId: string;
   metadata: string | null;
   isLoading?: boolean;
+  sources?: VenueTextContent[];
   suggestions?: VenueEnrichmentSuggestion[];
   onAcceptSuggestion?: (s: VenueEnrichmentSuggestion) => void;
   onDismissSuggestion?: (s: VenueEnrichmentSuggestion) => void;
+  enrichment?: UseVenueEnrichmentResult;
 }
 
 /**
  * Structured view of the venue metadata document — one card per spec section,
  * grouped under tab dividers, each editable through a right-anchored drawer.
- * When AI enrichment suggestions are active they are threaded down to each
- * matching section card as inline diff chips.
+ *
+ * When the venue has preloaded source documents, each section card with empty
+ * fields shows a sparkle button that opens a source picker popover. Selecting
+ * a source and clicking Extract runs the per-field extraction endpoint for all
+ * empty fields in that section; each result appears as an evidence-backed chip
+ * the user accepts or skips individually.
+ *
+ * Chat-flow AI suggestion patches are threaded down as before when present.
  */
 export function VenueMetadataSections({
   venueId,
   metadata,
   isLoading,
+  sources = [],
   suggestions = [],
   onAcceptSuggestion,
   onDismissSuggestion,
+  enrichment,
 }: VenueMetadataSectionsProps) {
   const parsed = useMemo(() => parseMetadata(metadata), [metadata]);
 
@@ -617,6 +876,7 @@ export function VenueMetadataSections({
                 venueId={venueId}
                 metadata={parsed}
                 section={section}
+                sources={sources}
                 suggestions={suggestions.filter((s) =>
                   section.fields.some(
                     (f) => f.key === `${s.group}.${s.field}` || f.key === s.field,
@@ -624,6 +884,12 @@ export function VenueMetadataSections({
                 )}
                 onAcceptSuggestion={onAcceptSuggestion ?? (() => {})}
                 onDismissSuggestion={onDismissSuggestion ?? (() => {})}
+                enrichment={enrichment ?? ({} as UseVenueEnrichmentResult)}
+                onAcceptExtracted={(patches) => {
+                  if (enrichment && patches.length > 0) {
+                    enrichment.applyPatches(patches, metadata);
+                  }
+                }}
               />
             ))}
           </Stack>

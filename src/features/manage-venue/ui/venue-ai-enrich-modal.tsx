@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import {
   ActionIcon,
   Alert,
@@ -8,86 +8,86 @@ import {
   Divider,
   Group,
   Modal,
-  Paper,
+  Progress,
+  RingProgress,
   ScrollArea,
   Select,
   Stack,
   Text,
-  Textarea,
   ThemeIcon,
 } from "@mantine/core";
-import {
-  IconAlertCircle,
-  IconCheck,
-  IconChevronRight,
-  IconRobot,
-  IconSend,
-  IconSparkles,
-  IconUser,
-  IconX,
-} from "@tabler/icons-react";
+import { IconAlertCircle, IconCheck, IconSparkles, IconX } from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
-import type { VenueEnrichmentSuggestion } from "@/entities/venue";
+import type { VenueTextContent } from "@/entities/venue";
 import { METADATA_SECTIONS } from "../model";
-import type { UseVenueEnrichmentResult } from "../model";
+import type { FieldExtractResult, UseVenueEnrichmentResult } from "../model";
 
-// ─── Field hint options derived from the metadata spec ───────────────────────
+// ─── Types ────────────────────────────────────────────────────────────────────
 
-const FIELD_HINT_OPTIONS = [
-  { value: "", label: "All fields" },
-  ...Array.from(new Set(METADATA_SECTIONS.map((s) => s.tab))).map((tab) => ({
-    value: tab,
-    label: tab.charAt(0).toUpperCase() + tab.slice(1),
-  })),
-];
+interface SectionResult {
+  sectionKey: string;
+  sectionLabel: string;
+  results: FieldExtractResult[];
+  done: boolean;
+  /** Field label currently being extracted, while in progress. */
+  currentField: string | null;
+}
 
-// ─── Patch diff chip ──────────────────────────────────────────────────────────
+// ─── Result row (per-field inside a section block) ───────────────────────────
 
-function PatchChip({
-  patch,
-  onAccept,
-  onDismiss,
+function ResultRow({
+  result,
   accepted,
+  onAccept,
+  onSkip,
 }: {
-  patch: VenueEnrichmentSuggestion;
-  onAccept: () => void;
-  onDismiss: () => void;
+  result: FieldExtractResult;
   accepted: boolean;
+  onAccept: () => void;
+  onSkip: () => void;
 }) {
-  // Resolve a human-readable field label from the metadata spec.
   const fieldDef = METADATA_SECTIONS.flatMap((s) => s.fields).find(
-    (f) => f.key === `${patch.group}.${patch.field}` || f.key === patch.field,
+    (f) => f.key === `${result.group}.${result.field}` || f.key === result.field,
   );
-  const label = fieldDef?.label ?? `${patch.group} / ${patch.field}`;
+  const label = fieldDef?.label ?? `${result.group} / ${result.field}`;
 
   return (
-    <Paper
-      withBorder
+    <Box
       px="sm"
       py={6}
-      radius="sm"
       style={{
-        borderColor: accepted ? "var(--mantine-color-teal-4)" : "var(--mantine-color-blue-3)",
-        background: accepted ? "var(--mantine-color-teal-0)" : "var(--mantine-color-blue-0)",
-        opacity: accepted ? 0.7 : 1,
+        borderRadius: "var(--mantine-radius-sm)",
+        background: accepted ? "var(--mantine-color-teal-0)" : "var(--mantine-color-violet-0)",
+        border: `1px solid ${accepted ? "var(--mantine-color-teal-3)" : "var(--mantine-color-violet-3)"}`,
+        opacity: accepted ? 0.75 : 1,
+        transition: "opacity 0.15s",
       }}
     >
       <Group justify="space-between" wrap="nowrap" gap="xs">
-        <Group gap={6} wrap="nowrap" style={{ minWidth: 0 }}>
-          <IconChevronRight
-            size={12}
-            color="var(--mantine-color-blue-6)"
-            style={{ flexShrink: 0 }}
-          />
-          <Stack gap={0} style={{ minWidth: 0 }}>
-            <Text size="xs" c="dimmed" style={{ flexShrink: 0 }}>
-              {label}
+        <Stack gap={2} style={{ minWidth: 0, flex: 1 }}>
+          <Text size="xs" c="dimmed">
+            {label}
+          </Text>
+          <Text
+            size="sm"
+            fw={600}
+            c={accepted ? "teal.7" : "violet.8"}
+            style={{ wordBreak: "break-word" }}
+          >
+            {result.value}
+          </Text>
+          {result.evidence && (
+            <Text
+              size="xs"
+              c="dimmed"
+              fs="italic"
+              lineClamp={2}
+              style={{ borderLeft: "2px solid var(--mantine-color-violet-3)", paddingLeft: 6 }}
+            >
+              "{result.evidence}"
             </Text>
-            <Text size="sm" fw={500} style={{ wordBreak: "break-word" }}>
-              {patch.value}
-            </Text>
-          </Stack>
-        </Group>
+          )}
+        </Stack>
         {accepted ? (
           <ThemeIcon size={20} radius="xl" color="teal" variant="light" style={{ flexShrink: 0 }}>
             <IconCheck size={12} />
@@ -98,115 +98,74 @@ function PatchChip({
               size="xs"
               variant="light"
               color="teal"
-              aria-label="Accept suggestion"
+              aria-label="Accept"
               onClick={onAccept}
             >
               <IconCheck size={11} />
             </ActionIcon>
-            <ActionIcon
-              size="xs"
-              variant="light"
-              color="gray"
-              aria-label="Dismiss suggestion"
-              onClick={onDismiss}
-            >
+            <ActionIcon size="xs" variant="light" color="gray" aria-label="Skip" onClick={onSkip}>
               <IconX size={11} />
             </ActionIcon>
           </Group>
         )}
       </Group>
-    </Paper>
+    </Box>
   );
 }
 
-// ─── Chat turn ────────────────────────────────────────────────────────────────
+// ─── Section block ────────────────────────────────────────────────────────────
 
-function ChatTurn({
-  message,
-  reply,
-  patches,
-  onAcceptPatch,
-  onDismissPatch,
+function SectionBlock({
+  sr,
   acceptedKeys,
+  onAccept,
+  onSkip,
 }: {
-  message: string;
-  reply: string;
-  patches: VenueEnrichmentSuggestion[];
-  onAcceptPatch: (patch: VenueEnrichmentSuggestion) => void;
-  onDismissPatch: (patch: VenueEnrichmentSuggestion) => void;
+  sr: SectionResult;
   acceptedKeys: Set<string>;
+  onAccept: (r: FieldExtractResult) => void;
+  onSkip: (r: FieldExtractResult) => void;
 }) {
-  return (
-    <Stack gap="xs">
-      {/* User bubble */}
-      <Group justify="flex-end">
-        <Paper
-          px="sm"
-          py={6}
-          radius="md"
-          style={{
-            background: "var(--mantine-color-blue-6)",
-            maxWidth: "75%",
-          }}
-        >
-          <Group gap={6} wrap="nowrap" align="flex-start">
-            <ThemeIcon
-              size={18}
-              radius="xl"
-              color="blue"
-              variant="filled"
-              style={{ flexShrink: 0, marginTop: 1 }}
-            >
-              <IconUser size={11} />
-            </ThemeIcon>
-            <Text size="sm" style={{ color: "#fff", wordBreak: "break-word" }}>
-              {message}
-            </Text>
-          </Group>
-        </Paper>
-      </Group>
+  const foundCount = sr.results.length;
 
-      {/* AI bubble */}
-      <Group justify="flex-start" align="flex-start">
-        <ThemeIcon
-          size={24}
-          radius="xl"
-          color="violet"
-          variant="light"
-          style={{ flexShrink: 0, marginTop: 2 }}
-        >
-          <IconRobot size={14} />
-        </ThemeIcon>
-        <Stack gap={6} style={{ flex: 1, minWidth: 0 }}>
-          <Paper
-            px="sm"
-            py={6}
-            radius="md"
-            withBorder
-            style={{ background: "var(--mantine-color-gray-0)" }}
-          >
-            <Text size="sm" style={{ whiteSpace: "pre-wrap", wordBreak: "break-word" }}>
-              {reply}
-            </Text>
-          </Paper>
-          {patches.length > 0 && (
-            <Stack gap={4}>
-              {patches.map((patch) => {
-                const key = `${patch.group}.${patch.field}`;
-                return (
-                  <PatchChip
-                    key={key}
-                    patch={patch}
-                    accepted={acceptedKeys.has(key)}
-                    onAccept={() => onAcceptPatch(patch)}
-                    onDismiss={() => onDismissPatch(patch)}
-                  />
-                );
-              })}
-            </Stack>
-          )}
-        </Stack>
+  return (
+    <Stack gap={6}>
+      <Group gap={6} align="center">
+        <Text size="sm" fw={700}>
+          {sr.sectionLabel}
+        </Text>
+        {sr.done && foundCount === 0 && (
+          <Badge size="xs" color="gray" variant="light">
+            <Trans>Nothing found</Trans>
+          </Badge>
+        )}
+        {sr.done && foundCount > 0 && (
+          <Badge size="xs" color="violet" variant="light">
+            {foundCount}
+          </Badge>
+        )}
+        {!sr.done && sr.currentField && (
+          <Text size="xs" c="dimmed" fs="italic">
+            {sr.currentField}…
+          </Text>
+        )}
       </Group>
+      {sr.results.length > 0 && (
+        <Stack gap={4}>
+          {sr.results.map((r) => {
+            const key = `${r.group}.${r.field}`;
+            return (
+              <ResultRow
+                key={key}
+                result={r}
+                accepted={acceptedKeys.has(key)}
+                onAccept={() => onAccept(r)}
+                onSkip={() => onSkip(r)}
+              />
+            );
+          })}
+        </Stack>
+      )}
     </Stack>
   );
 }
@@ -218,6 +177,7 @@ interface VenueAiEnrichModalProps {
   onClose: () => void;
   enrichment: UseVenueEnrichmentResult;
   currentMetadata: string | null;
+  sources: VenueTextContent[];
 }
 
 export function VenueAiEnrichModal({
@@ -225,80 +185,162 @@ export function VenueAiEnrichModal({
   onClose,
   enrichment,
   currentMetadata,
+  sources,
 }: VenueAiEnrichModalProps) {
   const { t } = useLingui();
-  const [message, setMessage] = useState("");
-  const [fieldHint, setFieldHint] = useState("");
-  // Track which patches from history turns have been individually accepted.
+  const [sourceId, setSourceId] = useState<string | null>(null);
+  const [running, setRunning] = useState(false);
+  const [sectionResults, setSectionResults] = useState<SectionResult[]>([]);
   const [acceptedKeys, setAcceptedKeys] = useState<Set<string>>(new Set());
-  const viewport = useRef<HTMLDivElement>(null);
+  const [doneCount, setDoneCount] = useState(0);
 
-  const {
-    history,
-    pendingPatches,
-    dismissPatch,
-    isSuggesting,
-    isApplying,
-    suggestError,
-    applyError,
-    send,
-    applyPatches,
-    reset,
-  } = enrichment;
+  const sourceOptions = sources.map((s) => ({
+    value: s.id,
+    label: s.content.trim().replace(/\s+/g, " ").slice(0, 72) + (s.content.length > 72 ? "…" : ""),
+  }));
 
-  function handleSend() {
-    const trimmed = message.trim();
-    if (!trimmed || isSuggesting) return;
-    send(trimmed, fieldHint || undefined);
-    setMessage("");
-    // Scroll to bottom after render.
-    setTimeout(
-      () => viewport.current?.scrollTo({ top: viewport.current.scrollHeight, behavior: "smooth" }),
-      100,
+  // Sections that have at least one empty editable field.
+  const sectionsWithGaps = METADATA_SECTIONS.filter((section) => {
+    const editable = section.fields.filter((f) => !f.readOnly);
+    if (editable.length === 0) return false;
+    // Parse current metadata to check emptiness.
+    if (!currentMetadata) return true;
+    try {
+      const doc = JSON.parse(currentMetadata) as {
+        items?: { group: string; field: string; value: unknown }[];
+      };
+      if (!doc?.items) return true;
+      return editable.some((f) => {
+        const parts = f.key.split(".").filter(Boolean);
+        const grp = parts[0] ?? f.key;
+        const fld = parts.length > 1 ? parts.slice(1).join(".") : f.key;
+        const rows = doc.items!.filter((i) => i.group === grp && i.field === fld);
+        if (rows.length === 0) return true;
+        const val = rows[0]?.value;
+        return val === null || val === undefined || val === "";
+      });
+    } catch {
+      return true;
+    }
+  });
+
+  const totalSections = sectionsWithGaps.length;
+  const progressPct = totalSections === 0 ? 100 : Math.round((doneCount / totalSections) * 100);
+
+  async function handleRun() {
+    if (!sourceId || running) return;
+    setRunning(true);
+    setDoneCount(0);
+    setSectionResults([]);
+    setAcceptedKeys(new Set());
+
+    // Initialise all section slots so they appear immediately (in order).
+    setSectionResults(
+      sectionsWithGaps.map((s) => ({
+        sectionKey: s.key,
+        sectionLabel: s.label,
+        results: [],
+        done: false,
+        currentField: null,
+      })),
+    );
+
+    for (const section of sectionsWithGaps) {
+      await enrichment.extractSection(
+        section.key,
+        sourceId,
+        currentMetadata,
+        (result, fieldKey, done) => {
+          const def = section.fields.find((f) => f.key === fieldKey);
+          setSectionResults((prev) =>
+            prev.map((sr) => {
+              if (sr.sectionKey !== section.key) return sr;
+              const newResults = result
+                ? [
+                    ...sr.results.filter(
+                      (r) => !(r.group === result.group && r.field === result.field),
+                    ),
+                    result,
+                  ]
+                : sr.results;
+              return {
+                ...sr,
+                results: newResults,
+                done,
+                currentField: done ? null : (def?.label ?? fieldKey),
+              };
+            }),
+          );
+          if (done) {
+            setDoneCount((c) => c + 1);
+          }
+        },
+      );
+    }
+
+    setRunning(false);
+  }
+
+  function handleAccept(r: FieldExtractResult) {
+    setAcceptedKeys((prev) => new Set([...prev, `${r.group}.${r.field}`]));
+  }
+
+  function handleSkip(r: FieldExtractResult) {
+    setAcceptedKeys((prev) => {
+      const next = new Set(prev);
+      next.delete(`${r.group}.${r.field}`);
+      return next;
+    });
+    setSectionResults((prev) =>
+      prev.map((sr) => ({
+        ...sr,
+        results: sr.results.filter((x) => !(x.group === r.group && x.field === r.field)),
+      })),
     );
   }
 
-  function handleAcceptPatch(patch: VenueEnrichmentSuggestion) {
-    const key = `${patch.group}.${patch.field}`;
-    setAcceptedKeys((prev) => new Set([...prev, key]));
-  }
-
-  function handleDismissPatch(patch: VenueEnrichmentSuggestion) {
-    dismissPatch(patch);
-    const key = `${patch.group}.${patch.field}`;
-    setAcceptedKeys((prev) => {
-      const next = new Set(prev);
-      next.delete(key);
-      return next;
-    });
-  }
-
   function handleApplyAccepted() {
-    const accepted = pendingPatches.filter((p) => acceptedKeys.has(`${p.group}.${p.field}`));
-    applyPatches(accepted, currentMetadata);
+    const allResults = sectionResults.flatMap((sr) => sr.results);
+    const accepted = allResults.filter((r) => acceptedKeys.has(`${r.group}.${r.field}`));
+    if (accepted.length > 0) {
+      enrichment.applyPatches(
+        accepted.map((r) => ({ group: r.group, field: r.field, value: r.value })),
+        currentMetadata,
+      );
+    }
+    handleClose();
   }
 
   function handleApplyAll() {
-    applyPatches(pendingPatches, currentMetadata);
+    const allResults = sectionResults.flatMap((sr) => sr.results);
+    if (allResults.length > 0) {
+      enrichment.applyPatches(
+        allResults.map((r) => ({ group: r.group, field: r.field, value: r.value })),
+        currentMetadata,
+      );
+    }
+    handleClose();
   }
 
   function handleClose() {
-    reset();
-    setMessage("");
-    setFieldHint("");
+    if (running) return;
+    setRunning(false);
+    setSectionResults([]);
     setAcceptedKeys(new Set());
+    setDoneCount(0);
     onClose();
   }
 
-  const acceptedCount = pendingPatches.filter((p) =>
-    acceptedKeys.has(`${p.group}.${p.field}`),
-  ).length;
-  const hasPatches = pendingPatches.length > 0;
+  const totalFound = sectionResults.reduce((n, sr) => n + sr.results.length, 0);
+  const acceptedCount = acceptedKeys.size;
+  const allDone = !running && doneCount === totalSections && totalSections > 0;
 
   return (
     <Modal
       opened={opened}
       onClose={handleClose}
+      closeOnClickOutside={!running}
+      closeOnEscape={!running}
       title={
         <Group gap={8}>
           <ThemeIcon
@@ -310,168 +352,178 @@ export function VenueAiEnrichModal({
             <IconSparkles size={14} />
           </ThemeIcon>
           <Text fw={700} size="sm">
-            <Trans>Fill with AI</Trans>
+            <Trans>Fill empty fields with AI</Trans>
           </Text>
         </Group>
       }
       size="lg"
       centered
-      styles={{
-        body: {
-          display: "flex",
-          flexDirection: "column",
-          gap: "var(--mantine-spacing-sm)",
-          padding: "var(--mantine-spacing-md)",
-        },
-      }}
     >
-      {/* Chat history */}
-      <ScrollArea
-        viewportRef={viewport}
-        h={history.length === 0 ? undefined : 320}
-        style={{ flex: 1 }}
-      >
-        {history.length === 0 ? (
-          <Group gap={6} wrap="nowrap" align="flex-start" px={4} py={4}>
-            <IconRobot
-              size={13}
-              color="var(--mantine-color-violet-6)"
-              style={{ flexShrink: 0, marginTop: 3 }}
-            />
-            <Text size="xs" c="dimmed">
+      <Stack gap="md" p="md" pt={0}>
+        {/* Source picker + run */}
+        {!running && sectionResults.length === 0 && (
+          <Stack gap="sm">
+            <Text size="sm" c="dimmed">
               <Trans>
-                Describe your venue and I'll suggest which profile fields to fill in. Review and
-                accept each suggestion before it's saved.
+                Pick a source document. The AI reads it and suggests values for every empty profile
+                field — you review and apply each one.
               </Trans>
             </Text>
-          </Group>
-        ) : (
-          <Stack gap="md" px={4} pb={4}>
-            {history.map((turn, i) => (
-              <ChatTurn
-                key={i}
-                message={turn.message}
-                reply={turn.response.reply}
-                patches={turn.response.suggestedPatches ?? []}
-                onAcceptPatch={handleAcceptPatch}
-                onDismissPatch={handleDismissPatch}
-                acceptedKeys={acceptedKeys}
-              />
-            ))}
-            {isSuggesting && (
-              <Group gap={6} pl={30}>
-                <ThemeIcon size={24} radius="xl" color="violet" variant="light">
-                  <IconRobot size={14} />
-                </ThemeIcon>
-                <Text size="sm" c="dimmed" fs="italic">
-                  <Trans>Thinking…</Trans>
+            {sources.length === 0 ? (
+              <Alert
+                icon={<IconAlertCircle size={14} />}
+                color="orange"
+                variant="light"
+                radius="sm"
+              >
+                <Text size="xs">
+                  <Trans>
+                    No source documents yet. Upload a PDF or paste text in the Sources tab first.
+                  </Trans>
                 </Text>
-              </Group>
+              </Alert>
+            ) : (
+              <>
+                <Select
+                  label={t`Source document`}
+                  placeholder={t`Pick a source…`}
+                  data={sourceOptions}
+                  value={sourceId}
+                  onChange={setSourceId}
+                />
+                <Group justify="space-between" align="center" wrap="nowrap">
+                  <Text size="xs" c="dimmed">
+                    {sectionsWithGaps.length === 0 ? (
+                      <Trans>All fields are already filled.</Trans>
+                    ) : (
+                      <Trans>{sectionsWithGaps.length} sections with empty fields</Trans>
+                    )}
+                  </Text>
+                  <Button
+                    size="sm"
+                    variant="gradient"
+                    gradient={{ from: "violet", to: "blue" }}
+                    leftSection={<IconSparkles size={15} />}
+                    disabled={!sourceId || sectionsWithGaps.length === 0}
+                    onClick={() => void handleRun()}
+                  >
+                    <Trans>Run</Trans>
+                  </Button>
+                </Group>
+              </>
             )}
           </Stack>
         )}
-      </ScrollArea>
 
-      {(suggestError ?? applyError) && (
-        <Alert icon={<IconAlertCircle size={14} />} color="red" variant="light" radius="sm">
-          <Text size="xs">
-            <Trans>Something went wrong. Please try again.</Trans>
-          </Text>
-        </Alert>
-      )}
-
-      {/* Apply bar — shown when there are pending patches */}
-      {hasPatches && (
-        <>
-          <Divider />
-          <Group justify="space-between" wrap="nowrap">
-            <Text size="xs" c="dimmed">
-              {acceptedCount > 0 ? (
-                <Trans>
-                  {acceptedCount} of {pendingPatches.length} suggestions accepted
-                </Trans>
-              ) : (
-                <Trans>
-                  {pendingPatches.length} suggestion(s) — accept individually or apply all
-                </Trans>
+        {/* Progress bar while running */}
+        {(running || (allDone && sectionResults.length > 0)) && (
+          <Stack gap={4}>
+            <Group justify="space-between" wrap="nowrap">
+              <Text size="xs" c="dimmed">
+                {running ? (
+                  <Trans>
+                    {doneCount} / {totalSections} sections
+                  </Trans>
+                ) : (
+                  <Trans>Done — {totalFound} suggestions</Trans>
+                )}
+              </Text>
+              {allDone && (
+                <Group gap={6}>
+                  <RingProgress
+                    size={28}
+                    thickness={3}
+                    sections={[{ value: 100, color: "teal" }]}
+                    rootColor="var(--mantine-color-teal-1)"
+                  />
+                </Group>
               )}
+            </Group>
+            <Progress
+              value={progressPct}
+              color={allDone ? "teal" : "violet"}
+              animated={running}
+              radius="xl"
+              size="sm"
+            />
+          </Stack>
+        )}
+
+        {/* Results */}
+        {sectionResults.length > 0 && (
+          <ScrollArea.Autosize mah={420}>
+            <Stack gap="md" pr={4}>
+              {sectionResults.map((sr) => (
+                <SectionBlock
+                  key={sr.sectionKey}
+                  sr={sr}
+                  acceptedKeys={acceptedKeys}
+                  onAccept={handleAccept}
+                  onSkip={handleSkip}
+                />
+              ))}
+            </Stack>
+          </ScrollArea.Autosize>
+        )}
+
+        {enrichment.applyError && (
+          <Alert icon={<IconAlertCircle size={14} />} color="red" variant="light" radius="sm">
+            <Text size="xs">
+              <Trans>Could not save. Please try again.</Trans>
             </Text>
-            <Group gap="xs">
-              {acceptedCount > 0 && (
+          </Alert>
+        )}
+
+        {/* Apply bar */}
+        {allDone && totalFound > 0 && (
+          <>
+            <Divider />
+            <Group justify="space-between" wrap="nowrap">
+              <Text size="xs" c="dimmed">
+                {acceptedCount > 0 ? (
+                  <Trans>
+                    {acceptedCount} of {totalFound} accepted
+                  </Trans>
+                ) : (
+                  <Trans>{totalFound} suggestions — accept individually or apply all</Trans>
+                )}
+              </Text>
+              <Group gap="xs">
+                {acceptedCount > 0 && (
+                  <Button
+                    size="xs"
+                    variant="light"
+                    color="teal"
+                    leftSection={<IconCheck size={13} />}
+                    loading={enrichment.isApplying}
+                    onClick={handleApplyAccepted}
+                  >
+                    <Trans>Apply accepted ({acceptedCount})</Trans>
+                  </Button>
+                )}
                 <Button
                   size="xs"
-                  variant="light"
-                  color="teal"
-                  leftSection={<IconCheck size={13} />}
-                  loading={isApplying}
-                  onClick={handleApplyAccepted}
+                  variant="filled"
+                  color="violet"
+                  leftSection={<IconSparkles size={13} />}
+                  loading={enrichment.isApplying}
+                  onClick={handleApplyAll}
                 >
-                  <Trans>Apply accepted ({acceptedCount})</Trans>
+                  <Trans>Apply all ({totalFound})</Trans>
                 </Button>
-              )}
-              <Button
-                size="xs"
-                variant="filled"
-                color="blue"
-                leftSection={<IconSparkles size={13} />}
-                loading={isApplying}
-                onClick={handleApplyAll}
-              >
-                <Trans>Apply all</Trans>
-              </Button>
+              </Group>
             </Group>
-          </Group>
-        </>
-      )}
+          </>
+        )}
 
-      {/* Composer — the primary control surface of the dialog */}
-      <Paper withBorder radius="md" p="sm" style={{ background: "var(--mantine-color-gray-0)" }}>
-        <Stack gap="xs">
-          <Textarea
-            size="md"
-            placeholder={t`Describe your venue, e.g. "500-person rooftop bar in London with in-house catering"`}
-            value={message}
-            onChange={(e) => setMessage(e.currentTarget.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" && !e.shiftKey) {
-                e.preventDefault();
-                handleSend();
-              }
-            }}
-            minRows={4}
-            maxRows={8}
-            autosize
-            disabled={isSuggesting}
-            aria-label={t`Message to AI enrichment assistant`}
-          />
-          <Group justify="space-between" align="flex-end" gap="sm" wrap="nowrap">
-            <Select
-              size="sm"
-              label={t`Focus on`}
-              data={FIELD_HINT_OPTIONS}
-              value={fieldHint}
-              onChange={(v) => setFieldHint(v ?? "")}
-              styles={{ root: { flex: "0 0 auto", minWidth: 170 } }}
-            />
-            <Group gap="sm" align="center" wrap="nowrap">
-              <Text size="xs" c="dimmed" visibleFrom="sm">
-                <Trans>Enter to send · Shift + Enter for a new line</Trans>
-              </Text>
-              <Button
-                size="md"
-                variant="filled"
-                color="blue"
-                leftSection={<IconSend size={16} />}
-                loading={isSuggesting}
-                disabled={!message.trim()}
-                onClick={handleSend}
-              >
-                <Trans>Send</Trans>
-              </Button>
-            </Group>
+        {allDone && totalFound === 0 && (
+          <Group justify="flex-end">
+            <Button size="xs" variant="subtle" color="gray" onClick={handleClose}>
+              <Trans>Close</Trans>
+            </Button>
           </Group>
-        </Stack>
-      </Paper>
+        )}
+      </Stack>
     </Modal>
   );
 }

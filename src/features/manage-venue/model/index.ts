@@ -30,4 +30,8 @@ export type {
 export { useUpdateVenueMetadata } from "./use-update-venue-metadata";
 export type { SaveVenueMetadataPayload, VenueMetadataChange } from "./use-update-venue-metadata";
 export { useVenueEnrichment } from "./use-venue-enrichment";
-export type { EnrichmentTurn, UseVenueEnrichmentResult } from "./use-venue-enrichment";
+export type {
+  EnrichmentTurn,
+  FieldExtractResult,
+  UseVenueEnrichmentResult,
+} from "./use-venue-enrichment";
