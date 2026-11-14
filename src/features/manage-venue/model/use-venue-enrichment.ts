@@ -193,7 +193,9 @@ export function useVenueEnrichment(venueId: string): UseVenueEnrichmentResult {
     if (!section) return;
 
     // Determine which fields are currently empty.
-    let parsed: { items: { group: string; field: string; value: unknown }[] } | null = null;
+    interface MetaRow { group: string; field: string; value: unknown }
+    interface ParsedMeta { items: MetaRow[] }
+    let parsed: ParsedMeta | null = null;
     if (currentMetadataRaw) {
       try {
         const doc = JSON.parse(currentMetadataRaw) as unknown;
@@ -202,7 +204,7 @@ export function useVenueEnrichment(venueId: string): UseVenueEnrichmentResult {
           typeof doc === "object" &&
           Array.isArray((doc as { items?: unknown }).items)
         ) {
-          parsed = doc as typeof parsed;
+          parsed = doc as ParsedMeta;
         }
       } catch {
         // ignore parse errors — treat all fields as empty
@@ -211,7 +213,7 @@ export function useVenueEnrichment(venueId: string): UseVenueEnrichmentResult {
 
     const isValueEmpty = (group: string, field: string): boolean => {
       if (!parsed) return true;
-      const rows = parsed.items.filter((i) => i.group === group && i.field === field);
+      const rows = parsed.items.filter((i: MetaRow) => i.group === group && i.field === field);
       if (rows.length === 0) return true;
       const val = rows[0]?.value;
       return val === null || val === undefined || val === "";
