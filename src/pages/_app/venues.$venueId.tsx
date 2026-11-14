@@ -1294,7 +1294,7 @@ function VenueDetailPage() {
                         ) : undefined
                       }
                     >
-                      <Trans>Photos</Trans>
+                      <Trans>Gallery</Trans>
                     </Tabs.Tab>
                   )}
                   {venue && (
