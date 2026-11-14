@@ -168,17 +168,20 @@ export const catalogApi = {
       .then((r) => r.data),
 
   // AI enrichment — suggestions and atomic apply.
+  // LLM calls can take up to ~2 min on cold Ollama instances; override the
+  // global 30 s timeout for all three AI endpoints.
   venueEnrichmentSuggestions: (venueId: string, data: VenueEnrichmentSuggestionRequest) =>
     httpClient
       .post<VenueEnrichmentSuggestionResponse>(
         `/v1/catalog/venues/${venueId}/enrichment/suggestions`,
         data,
+        { timeout: 120_000 },
       )
       .then((r) => r.data),
 
   venueEnrichmentApply: (venueId: string, data: VenueEnrichmentApplyRequest) =>
     httpClient
-      .post<Venue>(`/v1/catalog/venues/${venueId}/enrichment/apply`, data)
+      .post<Venue>(`/v1/catalog/venues/${venueId}/enrichment/apply`, data, { timeout: 120_000 })
       .then((r) => r.data),
 
   // Single-field extraction from a preloaded source document.
@@ -186,7 +189,11 @@ export const catalogApi = {
   // source has no value for the field.
   venueEnrichmentExtract: (venueId: string, data: VenueFieldExtractionRequest) =>
     httpClient
-      .post<VenueFieldExtractionResponse>(`/v1/catalog/venues/${venueId}/enrichment/extract`, data)
+      .post<VenueFieldExtractionResponse>(
+        `/v1/catalog/venues/${venueId}/enrichment/extract`,
+        data,
+        { timeout: 120_000 },
+      )
       .then((r) => r.data),
 };
 
