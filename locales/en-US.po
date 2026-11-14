@@ -1715,6 +1715,10 @@ msgstr "Mark all as read"
 #~ msgid "Master venue id"
 #~ msgstr "Master venue id"
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Matched to a master catalog record"
+msgstr "Matched to a master catalog record"
+
 #: src/pages/-billing-example.tsx
 msgid "Max Projects:"
 msgstr "Max Projects:"
@@ -1878,6 +1882,10 @@ msgstr "No data yet — click Edit to add."
 #: src/pages/_app/settings/security.tsx
 msgid "No external sign-in providers are enabled by your organization."
 msgstr "No external sign-in providers are enabled by your organization."
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "No master catalog record matched"
+msgstr "No master catalog record matched"
 
 #: src/pages/_app/settings/organization.tsx
 msgid "No matches."

@@ -67,15 +67,9 @@ export const Route = createFileRoute("/_app/venues/")({
 
 const PAGE_SIZE = 20;
 
-/** Blue→cyan accent shared by the card, row and sidebar borders. */
+/** Blue→cyan accent shared by the card and toolbar borders. */
 const ACCENT_GRADIENT =
-  "linear-gradient(135deg, var(--mantine-color-blue-filled) 0%, var(--mantine-color-cyan-filled) 100%)";
-
-/**
- * Left-edge marker for a record with no master-catalog link.
- * Must differ from `--mantine-color-default-border`, or it disappears into the card border.
- */
-const UNLINKED_MARKER = "light-dark(var(--mantine-color-gray-4), var(--mantine-color-dark-3))";
+  "linear-gradient(135deg, var(--mantine-color-blue-4) 0%, var(--mantine-color-cyan-4) 100%)";
 
 /**
  * Narrows the list-vs-semantic union: only the semantic-search response carries the
@@ -152,17 +146,6 @@ function VenueCard({
         root: {
           overflow: "hidden",
           transition: "box-shadow 180ms ease, transform 180ms ease, border-color 180ms ease",
-          // Left edge carries the master-link state as a colour marker.
-          "&::before": {
-            content: '""',
-            position: "absolute",
-            top: 0,
-            bottom: 0,
-            left: 0,
-            width: 5,
-            background: venue.masterVenueId ? ACCENT_GRADIENT : UNLINKED_MARKER,
-            pointerEvents: "none",
-          },
           "&::after": {
             content: '""',
             position: "absolute",
@@ -316,18 +299,7 @@ function VenueRow({
       styles={{
         root: {
           overflow: "hidden",
-          position: "relative",
           transition: "box-shadow 180ms ease, transform 180ms ease, border-color 180ms ease",
-          "&::before": {
-            content: '""',
-            position: "absolute",
-            top: 0,
-            bottom: 0,
-            left: 0,
-            width: 5,
-            background: venue.masterVenueId ? ACCENT_GRADIENT : UNLINKED_MARKER,
-            pointerEvents: "none",
-          },
           "&:hover": {
             transform: "translateX(2px)",
             borderColor: "var(--mantine-color-blue-3)",
@@ -337,7 +309,6 @@ function VenueRow({
             borderColor: "var(--mantine-color-blue-5)",
             boxShadow: "0 0 0 2px rgba(34,139,230,0.3)",
           },
-          "&[data-selected]::before": { opacity: 1 },
         },
       }}
     >

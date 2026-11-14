@@ -1715,6 +1715,10 @@ msgstr "Маркирай всички като прочетени"
 #~ msgid "Master venue id"
 #~ msgstr ""
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Matched to a master catalog record"
+msgstr ""
+
 #: src/pages/-billing-example.tsx
 msgid "Max Projects:"
 msgstr "Макс. проекти:"
@@ -1877,6 +1881,10 @@ msgstr ""
 
 #: src/pages/_app/settings/security.tsx
 msgid "No external sign-in providers are enabled by your organization."
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "No master catalog record matched"
 msgstr ""
 
 #: src/pages/_app/settings/organization.tsx

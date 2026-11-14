@@ -20,7 +20,6 @@ import {
 import { IconAlertTriangle, IconCheck, IconClipboardCheck } from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
 import type { MetadataCompleteness } from "../model";
-import { LINKED_CARD_STYLES, UNLINKED_CARD_STYLES } from "./section-accent";
 
 /** Green ≥ 80%, orange ≥ 50%, red below — same thresholds as the admin confidence ring. */
 export function completenessColor(percent: number): string {
@@ -75,13 +74,7 @@ export function VenueCompletenessCard({
   const allFilled = total > 0 && filled === total;
 
   return (
-    <Paper
-      withBorder
-      radius="md"
-      p="lg"
-      shadow="sm"
-      styles={allFilled ? LINKED_CARD_STYLES : UNLINKED_CARD_STYLES}
-    >
+    <Paper withBorder radius="md" p="lg" shadow="sm">
       <Group justify="space-between" align="flex-start" wrap="nowrap" gap="md">
         <Group gap={8}>
           <ThemeIcon size={28} radius="sm" variant="light" color="blue">

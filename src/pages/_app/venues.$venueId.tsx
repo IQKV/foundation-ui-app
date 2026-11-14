@@ -49,6 +49,7 @@ import {
   IconFileText,
   IconSparkles,
   IconMaximize,
+  IconLink,
 } from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { PageTitle } from "@/shared/lib/page-title";
@@ -58,11 +59,7 @@ import { useSession } from "@/processes/session";
 import { catalogApi, venueAssetApi, uploadFileToPresignedUrl } from "@/shared/api";
 import {
   useVenue,
-  ACCENT_GRADIENT,
   SECTION_CARD_STYLES,
-  LINKED_CARD_STYLES,
-  UNLINKED_CARD_STYLES,
-  UNLINKED_MARKER,
   ASSET_ROW_STYLES,
   EditVenueModal,
   DeleteVenueModal,
@@ -874,7 +871,7 @@ function VenueDetailPage() {
 
   const hasPhoto = Boolean(venue?.primaryPhotoUrl);
 
-  /** Drives the profile card's leading-edge marker and rim colour. */
+  /** Drives the master-match icon in the profile card header. */
   const isMasterLinked = Boolean(venue?.masterVenueId);
 
   const mapUrl =
@@ -1065,7 +1062,6 @@ function VenueDetailPage() {
                 radius="md"
                 shadow="sm"
                 style={{ overflow: "hidden" }}
-                styles={isMasterLinked ? LINKED_CARD_STYLES : UNLINKED_CARD_STYLES}
                 data-testid={TestSelectors.VENUE_DETAIL_HERO}
               >
                 <Box style={{ position: "relative", height: 160 }}>
@@ -1127,6 +1123,20 @@ function VenueDetailPage() {
                           >
                             {venue?.name}
                           </Text>
+                          <ThemeIcon
+                            role="img"
+                            aria-label={
+                              isMasterLinked
+                                ? t`Matched to a master catalog record`
+                                : t`No master catalog record matched`
+                            }
+                            size={22}
+                            radius="xl"
+                            variant={isMasterLinked ? "filled" : "light"}
+                            color={isMasterLinked ? "blue" : "gray"}
+                          >
+                            <IconLink size={12} />
+                          </ThemeIcon>
                         </Group>
                         {(venue?.address || venue?.city) && (
                           <Group gap={5} wrap="nowrap">
@@ -1153,23 +1163,6 @@ function VenueDetailPage() {
                     </Box>
                   )}
                 </Box>
-
-                {/* soft gradient rim — follows the master-link state */}
-                <Box
-                  aria-hidden
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    borderRadius: "var(--mantine-radius-md)",
-                    padding: 2,
-                    background: isMasterLinked ? ACCENT_GRADIENT : UNLINKED_MARKER,
-                    WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-                    WebkitMaskComposite: "xor",
-                    maskComposite: "exclude",
-                    opacity: 0.9,
-                    pointerEvents: "none",
-                  }}
-                />
               </Paper>
 
               {/* Quality control — detailed completeness breakdown */}
