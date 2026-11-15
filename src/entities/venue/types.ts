@@ -90,6 +90,8 @@ export interface VenueTextContent {
   id: string;
   venueId: string | null;
   sourceAssetId: string | null;
+  /** Title or source file name; null when the source has no name. */
+  label: string | null;
   content: string;
   createdAt: string;
   updatedAt: string;

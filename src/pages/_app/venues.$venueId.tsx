@@ -709,7 +709,7 @@ function SourcesTab({ sources, isLoading }: { sources: VenueTextContent[]; isLoa
                   </ThemeIcon>
                   <Stack gap={0} style={{ minWidth: 0 }}>
                     <Text size="sm" fw={500} lineClamp={1}>
-                      {sourceLabel(source.content)}
+                      {source.label ?? sourceLabel(source.content)}
                     </Text>
                     <Text size="xs" c="dimmed">
                       {source.content.length} <Trans>characters</Trans>
@@ -743,7 +743,7 @@ function SourcesTab({ sources, isLoading }: { sources: VenueTextContent[]; isLoa
           preview && (
             <Stack gap={0}>
               <Text fw={700} size="sm" lineClamp={1}>
-                {sourceLabel(preview.content)}
+                {preview.label ?? sourceLabel(preview.content)}
               </Text>
               <Text size="xs" c="dimmed" lineClamp={1}>
                 {dayjs(preview.createdAt).format("MMM D, YYYY HH:mm")}
