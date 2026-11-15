@@ -38,8 +38,8 @@ export const Route = createFileRoute("/_app/venues/add")({
   component: AddVenuePage,
 });
 
-/** 5 MB — mirrors the backend upload policy. */
-const MAX_FILE_SIZE = 5 * 1024 * 1024;
+/** 20 MB — mirrors the backend upload policy. */
+const MAX_FILE_SIZE = 20 * 1024 * 1024;
 
 const ACCEPTED_TYPES = [
   "application/pdf",
@@ -192,7 +192,7 @@ function AddVenuePage() {
           </Trans>
         </Text>
         <Text size="xs" c="dimmed">
-          <Trans>Accepted formats: PDF, Word, Excel, CSV, JPEG, PNG, WebP · Max 5 MB</Trans>
+          <Trans>Accepted formats: PDF, Word, Excel, CSV, JPEG, PNG, WebP · Max 20 MB</Trans>
         </Text>
       </Stack>
 
