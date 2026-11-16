@@ -475,10 +475,11 @@ function ExtractPopover({
   const [running, setRunning] = useState(false);
   const [progress, setProgress] = useState<string | null>(null);
 
-  const sourceOptions = sources.map((s) => ({
-    value: s.id,
-    label: s.content.trim().replace(/\s+/g, " ").slice(0, 60) + (s.content.length > 60 ? "…" : ""),
-  }));
+  // Prefer the venue text row's own label (title / file name); fall back to a content snippet.
+  const sourceOptions = sources.map((s) => {
+    const label = s.label?.trim() || s.content.trim().replace(/\s+/g, " ");
+    return { value: s.id, label: label.slice(0, 60) + (label.length > 60 ? "…" : "") };
+  });
 
   async function handleExtract() {
     if (!sourceId) return;

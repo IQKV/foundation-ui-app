@@ -194,10 +194,11 @@ export function VenueAiEnrichModal({
   const [acceptedKeys, setAcceptedKeys] = useState<Set<string>>(new Set());
   const [doneCount, setDoneCount] = useState(0);
 
-  const sourceOptions = sources.map((s) => ({
-    value: s.id,
-    label: s.content.trim().replace(/\s+/g, " ").slice(0, 72) + (s.content.length > 72 ? "…" : ""),
-  }));
+  // Prefer the venue text row's own label (title / file name); fall back to a content snippet.
+  const sourceOptions = sources.map((s) => {
+    const label = s.label?.trim() || s.content.trim().replace(/\s+/g, " ");
+    return { value: s.id, label: label.slice(0, 72) + (label.length > 72 ? "…" : "") };
+  });
 
   // Sections that have at least one empty editable field.
   const sectionsWithGaps = METADATA_SECTIONS.filter((section) => {
