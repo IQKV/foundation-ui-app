@@ -88,6 +88,9 @@ function AddVenuePage() {
   const elapsedTimer = useInterval(() => setElapsedSeconds((s) => s + 1), 1_000);
   // isExiting drives the framer-motion exit animation before navigate
   const [isExiting, setIsExiting] = useState(false);
+  // Sticky once a file enters the flow: the manual-entry card must not slide back in
+  // when processing finishes — the user stays on the upload card until they open the venue.
+  const [flowStarted, setFlowStarted] = useState(false);
   const exitTargetRef = useRef<string | null>(null);
   // Controls inside the zone open the picker through this, because the zone's own
   // click handler deliberately ignores clicks that land on a button.
@@ -111,10 +114,14 @@ function AddVenuePage() {
   const isUploading = stage === "uploading";
   // Only run the looping card choreography while work is in flight and motion is allowed.
   const isAnimating = isActive && !reduceMotion;
+  // The upload card keeps the whole row once a file has entered the flow — even after
+  // "done" — so the manual-entry card never slides back in before the visit.
+  const isRowCollapsed = isActive || flowStarted;
 
   const handleDrop = async (files: File[]) => {
     const file = files[0];
     if (!file) return;
+    setFlowStarted(true);
     await upload(file);
   };
 
@@ -204,7 +211,7 @@ function AddVenuePage() {
           flexWrap: "wrap",
           alignItems: "stretch",
           rowGap: "var(--mantine-spacing-lg)",
-          columnGap: isActive ? 0 : "var(--mantine-spacing-lg)",
+          columnGap: isRowCollapsed ? 0 : "var(--mantine-spacing-lg)",
           transition: reduceMotion ? undefined : "column-gap 420ms cubic-bezier(0.4, 0, 0.2, 1)",
         }}
       >
@@ -586,21 +593,21 @@ function AddVenuePage() {
           )}
         </AnimatePresence>
 
-        {/* ── Manual entry card — slides out of the row while a file is in flight ── */}
+        {/* ── Manual entry card — leaves the row once a file enters the flow ── */}
         <div
-          aria-hidden={isActive}
-          inert={isActive || undefined}
+          aria-hidden={isRowCollapsed}
+          inert={isRowCollapsed || undefined}
           style={{
-            flexGrow: isActive ? 0 : 1,
-            flexBasis: isActive ? 0 : 320,
+            flexGrow: isRowCollapsed ? 0 : 1,
+            flexBasis: isRowCollapsed ? 0 : 320,
             flexShrink: 1,
             minWidth: 0,
             // Also collapses the card when it has wrapped onto its own row (narrow screens)
-            maxHeight: isActive ? 0 : 1000,
+            maxHeight: isRowCollapsed ? 0 : 1000,
             overflow: "hidden",
-            opacity: isActive ? 0 : 1,
-            transform: isActive ? "translateX(32px)" : "none",
-            pointerEvents: isActive ? "none" : "auto",
+            opacity: isRowCollapsed ? 0 : 1,
+            transform: isRowCollapsed ? "translateX(32px)" : "none",
+            pointerEvents: isRowCollapsed ? "none" : "auto",
             display: "flex",
             transition: reduceMotion
               ? undefined
