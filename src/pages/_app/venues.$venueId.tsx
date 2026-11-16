@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { z } from "zod";
 import { motion } from "framer-motion";
@@ -388,10 +388,13 @@ function AssetsTab({
   venueId,
   assets,
   isLoading,
+  extractingAssetId,
 }: {
   venueId: string;
   assets: VenueAsset[];
   isLoading: boolean;
+  /** Asset whose text is still being extracted by the worker, if any. */
+  extractingAssetId?: string | null;
 }) {
   const { t } = useLingui();
   const queryClient = useQueryClient();
@@ -486,6 +489,17 @@ function AssetsTab({
                           : ""}
                       </Text>
                     </Stack>
+                    {asset.id === extractingAssetId && (
+                      <Badge
+                        variant="light"
+                        color="blue"
+                        size="xs"
+                        radius="sm"
+                        style={{ flexShrink: 0 }}
+                      >
+                        <Trans>Extracting…</Trans>
+                      </Badge>
+                    )}
                   </Group>
                   <Group gap={4} wrap="nowrap" style={{ flexShrink: 0 }}>
                     {isPreviewable(asset.contentType) && (
@@ -672,7 +686,16 @@ const PREVIEW_TEXT_SURFACE_STYLES = {
   padding: "var(--mantine-spacing-md)",
 } as const;
 
-function SourcesTab({ sources, isLoading }: { sources: VenueTextContent[]; isLoading: boolean }) {
+function SourcesTab({
+  sources,
+  isLoading,
+  extractingFileName,
+}: {
+  sources: VenueTextContent[];
+  isLoading: boolean;
+  /** File name whose text is still being extracted by the worker, if any. */
+  extractingFileName?: string | null;
+}) {
   const { t } = useLingui();
   const [preview, setPreview] = useState<VenueTextContent | null>(null);
 
@@ -680,7 +703,7 @@ function SourcesTab({ sources, isLoading }: { sources: VenueTextContent[]; isLoa
     <>
       {isLoading ? (
         <Skeleton height={200} radius="md" />
-      ) : sources.length === 0 ? (
+      ) : sources.length === 0 && !extractingFileName ? (
         <Paper
           withBorder
           p="xl"
@@ -694,6 +717,21 @@ function SourcesTab({ sources, isLoading }: { sources: VenueTextContent[]; isLoa
         </Paper>
       ) : (
         <Stack gap={6}>
+          {extractingFileName && (
+            <Paper withBorder p="sm" radius="md" styles={ASSET_ROW_STYLES}>
+              <Group gap="sm" wrap="nowrap">
+                <Loader size={18} />
+                <Stack gap={0} style={{ minWidth: 0 }}>
+                  <Text size="sm" fw={500} lineClamp={1}>
+                    <Trans>Extracting text…</Trans>
+                  </Text>
+                  <Text size="xs" c="dimmed" lineClamp={1}>
+                    {extractingFileName}
+                  </Text>
+                </Stack>
+              </Group>
+            </Paper>
+          )}
           {sources.map((source) => (
             <Paper key={source.id} withBorder p="sm" radius="md" styles={ASSET_ROW_STYLES}>
               <Group justify="space-between" wrap="nowrap">
@@ -804,6 +842,11 @@ const bigTabStyles = {
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
+/** How often the Sources list is re-checked while the worker extracts text (ms). */
+const EXTRACT_POLL_MS = 5_000;
+/** Stop waiting for the extracted source after this long (ms). */
+const EXTRACT_TIMEOUT_MS = 2 * 60 * 1_000;
+
 function VenueDetailPage() {
   const { t } = useLingui();
   const navigate = useNavigate();
@@ -822,6 +865,8 @@ function VenueDetailPage() {
 
   const queryClient = useQueryClient();
   const [uploadingAsset, setUploadingAsset] = useState(false);
+  // Set after a document upload; cleared once its extracted source row lands.
+  const [extracting, setExtracting] = useState<{ assetId: string; fileName: string } | null>(null);
   const assetFileInputRef = useRef<HTMLInputElement>(null);
 
   const { data: venue, isLoading, isError, refetch, isFetching } = useVenue(venueId);
@@ -881,6 +926,51 @@ function VenueDetailPage() {
 
   const handleDeleteSuccess = () => void navigate({ to: "/venues" });
 
+  // Wait for the processing worker to text-mine an uploaded document, then refresh the tabs.
+  // The worker extracts asynchronously, so the Sources row is not there right after confirm.
+  // shortcut: polls the full sources list; move to a lightweight status endpoint if a venue
+  // accumulates many large sources.
+  useEffect(() => {
+    if (!extracting) return;
+    let cancelled = false;
+    const startedAt = Date.now();
+    const timer = window.setInterval(() => {
+      void (async () => {
+        if (Date.now() - startedAt > EXTRACT_TIMEOUT_MS) {
+          window.clearInterval(timer);
+          if (cancelled) return;
+          setExtracting(null);
+          notifications.show({
+            message: t`Text extraction is taking longer than expected — refresh the Sources tab shortly.`,
+            color: "orange",
+            icon: <IconAlertTriangle size={16} />,
+          });
+          return;
+        }
+        try {
+          const { items } = await catalogApi.listVenueTextContents(venueId);
+          if (cancelled) return;
+          if (items.some((s) => s.sourceAssetId === extracting.assetId)) {
+            window.clearInterval(timer);
+            setExtracting(null);
+            await queryClient.invalidateQueries({ queryKey: ["tenant", "venue", venueId] });
+            notifications.show({
+              message: t`Source text extracted.`,
+              color: "green",
+              icon: <IconCheck size={16} />,
+            });
+          }
+        } catch {
+          // Network blip — the next tick retries.
+        }
+      })();
+    }, EXTRACT_POLL_MS);
+    return () => {
+      cancelled = true;
+      window.clearInterval(timer);
+    };
+  }, [extracting, venueId, queryClient, t]);
+
   /** Initiate → PUT to MinIO → confirm, then refresh the venue's asset queries. */
   const handleUploadAsset = async (file: File) => {
     setUploadingAsset(true);
@@ -891,10 +981,11 @@ function VenueDetailPage() {
         sizeBytes: file.size,
       });
       await uploadFileToPresignedUrl(init.presignedUploadUrl, file, () => {});
+      const isDocument = !file.type.startsWith("image/");
       await venueAssetApi.confirmUpload(venueId, init.assetId, {
         objectKey: init.objectKey,
         fileName: file.name,
-        assetType: file.type.startsWith("image/") ? "PHOTO" : "DOCUMENT",
+        assetType: isDocument ? "DOCUMENT" : "PHOTO",
       });
       await queryClient.invalidateQueries({ queryKey: ["tenant", "venue", venueId] });
       notifications.show({
@@ -902,6 +993,8 @@ function VenueDetailPage() {
         color: "green",
         icon: <IconCheck size={16} />,
       });
+      // Photos produce no text; documents are mined in the background.
+      if (isDocument) setExtracting({ assetId: init.assetId, fileName: file.name });
     } catch (err) {
       notifications.show({
         message:
@@ -994,7 +1087,9 @@ function VenueDetailPage() {
                   variant="subtle"
                   color="gray"
                   size="sm"
-                  onClick={() => void refetch()}
+                  onClick={() =>
+                    void queryClient.invalidateQueries({ queryKey: ["tenant", "venue", venueId] })
+                  }
                   loading={isFetching}
                 >
                   <IconRefresh size={15} />
@@ -1457,14 +1552,23 @@ function VenueDetailPage() {
                 {/* ── Assets tab ───────────────────────────── */}
                 {venue && (
                   <Tabs.Panel value="assets" pt="sm">
-                    <AssetsTab venueId={venueId} assets={assets} isLoading={assetsLoading} />
+                    <AssetsTab
+                      venueId={venueId}
+                      assets={assets}
+                      isLoading={assetsLoading}
+                      extractingAssetId={extracting?.assetId ?? null}
+                    />
                   </Tabs.Panel>
                 )}
 
                 {/* ── Sources tab ──────────────────────────── */}
                 {venue && (
                   <Tabs.Panel value="sources" pt="sm">
-                    <SourcesTab sources={sources} isLoading={sourcesLoading} />
+                    <SourcesTab
+                      sources={sources}
+                      isLoading={sourcesLoading}
+                      extractingFileName={extracting?.fileName ?? null}
+                    />
                   </Tabs.Panel>
                 )}
               </Tabs>

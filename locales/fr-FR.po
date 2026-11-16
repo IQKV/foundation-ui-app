@@ -39,14 +39,27 @@ msgstr "{0} – {1}"
 msgid "{0} Days Left"
 msgstr "{0} jours restants"
 
-#. placeholder {0}: pendingPatches.length
+#. placeholder {0}: sectionsWithGaps.length
 #: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
-msgid "{0} suggestion(s) — accept individually or apply all"
+msgid "{0} sections with empty fields"
 msgstr ""
 
 #. placeholder {0}: pendingPatches.length
 #: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
-msgid "{acceptedCount} of {0} suggestions accepted"
+#~ msgid "{0} suggestion(s) — accept individually or apply all"
+#~ msgstr ""
+
+#. placeholder {0}: pendingPatches.length
+#: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
+#~ msgid "{acceptedCount} of {0} suggestions accepted"
+#~ msgstr ""
+
+#: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
+msgid "{acceptedCount} of {totalFound} accepted"
+msgstr ""
+
+#: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
+msgid "{doneCount} / {totalSections} sections"
 msgstr ""
 
 #: src/pages/_app/venues.$venueId.tsx
@@ -67,6 +80,10 @@ msgstr ""
 
 #: src/pages/_app/venues.index.tsx
 msgid "{selectedCount} selected"
+msgstr ""
+
+#: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
+msgid "{totalFound} suggestions — accept individually or apply all"
 msgstr ""
 
 #: src/features/manage-billing/ui/plan-card.tsx
@@ -163,8 +180,12 @@ msgid "Accepted"
 msgstr "Acceptée"
 
 #: src/pages/_app/venues.add.tsx
-msgid "Accepted formats: PDF, Word, Excel, CSV, JPEG, PNG, WebP · Max 5 MB"
+msgid "Accepted formats: PDF, Word, Excel, CSV, JPEG, PNG, WebP · Max 20 MB"
 msgstr ""
+
+#: src/pages/_app/venues.add.tsx
+#~ msgid "Accepted formats: PDF, Word, Excel, CSV, JPEG, PNG, WebP · Max 5 MB"
+#~ msgstr ""
 
 #: src/pages/unauthorized.tsx
 msgid "Access Denied"
@@ -277,6 +298,10 @@ msgstr ""
 msgid "All cities"
 msgstr ""
 
+#: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
+msgid "All fields are already filled."
+msgstr ""
+
 #: src/pages/_app/cms-pages.index.tsx
 msgid "All statuses"
 msgstr "Tous les statuts"
@@ -323,7 +348,11 @@ msgid "Apply accepted ({acceptedCount})"
 msgstr ""
 
 #: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
-msgid "Apply all"
+#~ msgid "Apply all"
+#~ msgstr ""
+
+#: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
+msgid "Apply all ({totalFound})"
 msgstr ""
 
 #: src/features/page-admin/model/types.ts
@@ -591,6 +620,7 @@ msgid "Client secret"
 msgstr "Secret client"
 
 #: src/features/invite-member/ui/invitation-details-modal.tsx
+#: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
 msgid "Close"
 msgstr "Fermer"
 
@@ -776,6 +806,10 @@ msgstr "Impossible d'ouvrir le portail de facturation. Veuillez réessayer."
 #: src/pages/_app/cms-pages.$pageId.tsx
 msgid "Could not save the page. Please check the form and try again."
 msgstr "Impossible de sauvegarder la page. Veuillez vérifier le formulaire et réessayer."
+
+#: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
+msgid "Could not save. Please try again."
+msgstr ""
 
 #: src/pages/_app/settings/security.tsx
 msgid "Could not start the linking flow."
@@ -990,16 +1024,16 @@ msgid "Demo Progress Bar"
 msgstr "Barre de progression de démonstration"
 
 #: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
-msgid "Describe your venue and I'll suggest which profile fields to fill in. Review and accept each suggestion before it's saved."
-msgstr ""
+#~ msgid "Describe your venue and I'll suggest which profile fields to fill in. Review and accept each suggestion before it's saved."
+#~ msgstr ""
 
 #: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
 #~ msgid "Describe your venue and I'll suggest which profile fields to fill in. You can review and accept each suggestion before it's saved."
 #~ msgstr ""
 
 #: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
-msgid "Describe your venue, e.g. \"500-person rooftop bar in London with in-house catering\""
-msgstr ""
+#~ msgid "Describe your venue, e.g. \"500-person rooftop bar in London with in-house catering\""
+#~ msgstr ""
 
 #: src/features/manage-venue/ui/venue-fields.tsx
 msgid "Description"
@@ -1028,6 +1062,10 @@ msgstr "Le nom affiché est requis"
 #: src/pages/sign-in.tsx
 msgid "Don't have an account? <0>Create one</0>"
 msgstr "Vous n'avez pas de compte ? <0>En créer un</0>"
+
+#: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
+msgid "Done — {totalFound} suggestions"
+msgstr ""
 
 #: src/features/page-admin/model/types.ts
 #: src/pages/_app/cms-pages.index.tsx
@@ -1150,8 +1188,8 @@ msgid "Enter the email address associated with your account and we'll send you a
 msgstr "Entrez l'adresse email associée à votre compte et nous vous enverrons un lien pour réinitialiser votre mot de passe."
 
 #: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
-msgid "Enter to send · Shift + Enter for a new line"
-msgstr ""
+#~ msgid "Enter to send · Shift + Enter for a new line"
+#~ msgstr ""
 
 #: src/features/change-password/ui/change-password-modal.tsx
 #: src/pages/_app/settings/security.tsx
@@ -1207,6 +1245,19 @@ msgstr "Expire"
 #: src/features/ban-user/ui/ban-member-modal.tsx
 msgid "Expires at (optional)"
 msgstr "Expire le (optionnel)"
+
+#: src/features/manage-venue/ui/venue-metadata-sections.tsx
+msgid "Extract"
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Extracting text…"
+msgstr ""
+
+#: src/features/manage-venue/ui/venue-metadata-sections.tsx
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Extracting…"
+msgstr ""
 
 #: src/features/manage-venue/ui/create-venue-modal.tsx
 #: src/pages/_app/venues.create.tsx
@@ -1286,12 +1337,23 @@ msgstr "Fonctionnalités"
 msgid "File"
 msgstr ""
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Fill empty fields"
+msgstr ""
+
+#: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
+msgid "Fill empty fields with AI"
+msgstr ""
+
 #: src/pages/_app/venues.create.tsx
 msgid "Fill in the details below. You can add photos and files after saving."
 msgstr ""
 
-#: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
-#: src/pages/_app/venues.$venueId.tsx
+#: src/features/manage-venue/ui/venue-metadata-sections.tsx
+msgid "Fill section with AI"
+msgstr ""
+
+#: src/features/manage-venue/ui/venue-metadata-sections.tsx
 msgid "Fill with AI"
 msgstr ""
 
@@ -1328,8 +1390,8 @@ msgid "Floor plans, capacity sheets, rate cards or brochures — PDF, image or s
 msgstr ""
 
 #: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
-msgid "Focus on"
-msgstr ""
+#~ msgid "Focus on"
+#~ msgstr ""
 
 #: src/pages/forgot-password.tsx
 msgid "Forgot Password"
@@ -1354,6 +1416,10 @@ msgstr "Gratuit"
 #: src/pages/loading-demo.tsx
 msgid "Full-screen centered loader shown on first app load (while locale initializes)."
 msgstr "Chargeur plein écran centré affiché au premier chargement de l'application (pendant l'initialisation de la langue)."
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Gallery"
+msgstr ""
 
 #: src/pages/_app/settings/general.tsx
 #: src/shared/ui/app-layout/nav-config.tsx
@@ -1745,8 +1811,8 @@ msgid "Message exceeds {MAX_INPUT_CHARS} character limit"
 msgstr ""
 
 #: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
-msgid "Message to AI enrichment assistant"
-msgstr ""
+#~ msgid "Message to AI enrichment assistant"
+#~ msgstr ""
 
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "Meta description for search engines"
@@ -1944,6 +2010,10 @@ msgstr "Aucun résultat"
 msgid "No roles assigned."
 msgstr "Aucun rôle attribué."
 
+#: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
+msgid "No source documents yet. Upload a PDF or paste text in the Sources tab first."
+msgstr ""
+
 #: src/pages/_app/venues.$venueId.tsx
 msgid "No sources for this venue."
 msgstr ""
@@ -1984,6 +2054,10 @@ msgstr "Non connecté"
 #: src/pages/_app/venues.$venueId.tsx
 #~ msgid "Not linked to a master catalog record."
 #~ msgstr ""
+
+#: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
+msgid "Nothing found"
+msgstr ""
 
 #: src/features/notification-bell/ui/notification-bell.tsx
 #: src/pages/_app/settings/notifications.tsx
@@ -2244,12 +2318,21 @@ msgid "Photo"
 msgstr ""
 
 #: src/pages/_app/venues.$venueId.tsx
-msgid "Photos"
-msgstr ""
+#~ msgid "Photos"
+#~ msgstr ""
 
 #: src/features/ban-user/ui/ban-member-modal.tsx
 msgid "Pick a date and time"
 msgstr "Choisissez une date et une heure"
+
+#: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
+msgid "Pick a source document. The AI reads it and suggests values for every empty profile field — you review and apply each one."
+msgstr ""
+
+#: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
+#: src/features/manage-venue/ui/venue-metadata-sections.tsx
+msgid "Pick a source…"
+msgstr ""
 
 #: src/features/manage-billing/ui/current-subscription.tsx
 #: src/features/manage-billing/ui/entitlements-card.tsx
@@ -2520,6 +2603,10 @@ msgstr "Révoquer cette invitation empêchera le destinataire de l'accepter."
 msgid "Role"
 msgstr "Rôle"
 
+#: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
+msgid "Run"
+msgstr ""
+
 #: src/features/member-role/ui/update-member-authorities-modal.tsx
 #: src/pages/_app/settings/security.tsx
 msgid "Save"
@@ -2623,8 +2710,8 @@ msgid "Semantic Search — Ask anything about your venues in natural language"
 msgstr ""
 
 #: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
-msgid "Send"
-msgstr ""
+#~ msgid "Send"
+#~ msgstr ""
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Send email verifications, password resets & invitations"
@@ -2809,11 +2896,19 @@ msgstr "Quelque chose s'est mal passé avec votre paiement. Veuillez réessayer 
 #: src/features/create-organization/model/use-create-organization.ts
 #: src/features/forgot-password/model/use-forgot-password.ts
 #: src/features/magic-link/model/use-magic-link-initiate.ts
-#: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
 #: src/features/reset-password/model/use-reset-password.ts
 #: src/features/signup/model/use-signup.ts
 msgid "Something went wrong. Please try again."
 msgstr "Quelque chose s'est mal passé. Veuillez réessayer."
+
+#: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
+#: src/features/manage-venue/ui/venue-metadata-sections.tsx
+msgid "Source document"
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Source text extracted."
+msgstr ""
 
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Sources"
@@ -2944,6 +3039,10 @@ msgstr "TENANT_OWNER ne peut pas être accordé par invitation"
 msgid "Text"
 msgstr ""
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Text extraction is taking longer than expected — refresh the Sources tab shortly."
+msgstr ""
+
 #: src/pages/_app/billing/success.tsx
 msgid "Thank you for your subscription. Your account has been upgraded."
 msgstr "Merci pour votre abonnement. Votre compte a été mis à jour."
@@ -2969,8 +3068,8 @@ msgid "Theme-aware (respects dark mode and color scheme)"
 msgstr "Thème adaptatif (respecte le mode sombre et le schéma de couleurs)"
 
 #: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
-msgid "Thinking…"
-msgstr ""
+#~ msgid "Thinking…"
+#~ msgstr ""
 
 #: src/features/manage-billing/ui/feature-gate.tsx
 msgid "This feature requires an active subscription. Please upgrade your plan to access this functionality."
