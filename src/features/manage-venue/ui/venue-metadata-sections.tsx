@@ -542,6 +542,7 @@ function ExtractPopover({
             value={sourceId}
             onChange={setSourceId}
             disabled={running}
+            comboboxProps={{ withinPortal: false }}
           />
           {running && progress && (
             <Group gap={6} wrap="nowrap">
