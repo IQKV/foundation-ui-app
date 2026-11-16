@@ -340,7 +340,7 @@ export function VenueAiEnrichModal({
     <Modal
       opened={opened}
       onClose={handleClose}
-      closeOnClickOutside={!running}
+      closeOnClickOutside={false}
       closeOnEscape={!running}
       title={
         <Group gap={8}>
