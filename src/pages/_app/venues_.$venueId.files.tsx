@@ -44,6 +44,7 @@ import {
   IconFolder,
   IconSearch,
   IconMaximize,
+  IconLink,
 } from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { PageTitle } from "@/shared/lib/page-title";
@@ -216,9 +217,9 @@ function VenueBrief({ venue, isLoading }: { venue: Venue | undefined; isLoading:
 
 const FILE_TYPE_OPTIONS: { value: FileTypeFilter; label: string; icon: React.ReactNode }[] = [
   { value: "all", label: "All files", icon: <IconFolder size={16} /> },
-  { value: "photos", label: "Photos", icon: <IconPhoto size={16} /> },
-  { value: "documents", label: "Documents", icon: <IconPaperclip size={16} /> },
   { value: "sources", label: "Sources", icon: <IconFileText size={16} /> },
+  { value: "photos", label: "Gallery", icon: <IconPhoto size={16} /> },
+  { value: "documents", label: "Documents", icon: <IconPaperclip size={16} /> },
 ];
 
 function FileTypeNav({
@@ -230,10 +231,13 @@ function FileTypeNav({
   counts: Record<FileTypeFilter, number>;
   onSelect: (value: FileTypeFilter) => void;
 }) {
+  const visibleOptions = FILE_TYPE_OPTIONS.filter(
+    (opt) => opt.value !== "sources" || counts.sources > 0,
+  );
   return (
     <Paper withBorder radius="md" p="xs" shadow="sm">
       <Stack gap={2}>
-        {FILE_TYPE_OPTIONS.map((opt) => {
+        {visibleOptions.map((opt) => {
           const isActive = active === opt.value;
           return (
             <Group
@@ -366,11 +370,14 @@ function PhotosSection({
       {masterPhotos.length > 0 && (
         <Stack gap="sm">
           <Group gap="xs">
-            <Divider size="md" color="gray.5" style={{ flex: 1 }} />
-            <Text size="xs" c="dimmed" fw={600} tt="uppercase" style={{ letterSpacing: "0.05em" }}>
-              <Trans>From master catalog</Trans>
-            </Text>
-            <Divider size="md" color="gray.5" style={{ flex: 1 }} />
+            <Divider style={{ flex: 1 }} />
+            <Group gap={4} wrap="nowrap">
+              <IconLink size={12} color="var(--mantine-color-gray-5)" />
+              <Text size="xs" c="dimmed" fw={600} tt="uppercase" style={{ letterSpacing: "0.05em" }}>
+                <Trans>Linked</Trans>
+              </Text>
+            </Group>
+            <Divider style={{ flex: 1 }} />
           </Group>
           <SimpleGrid cols={{ base: 2, sm: 3, md: 4 }} spacing="sm">
             {masterPhotos.map((photo, i) => (
@@ -748,6 +755,13 @@ function VenueFilesPage() {
     sources: sources.length,
   };
 
+  // Reset to "all" when the sources filter is active but sources have been removed.
+  useEffect(() => {
+    if (activeType === "sources" && sources.length === 0 && !sourcesLoading) {
+      setActiveType("all");
+    }
+  }, [activeType, sources.length, sourcesLoading]);
+
   const deleteMutation = useMutation({
     mutationFn: (assetId: string) => venueAssetApi.deleteAsset(venueId, assetId),
     onSuccess: () => {
@@ -1036,7 +1050,7 @@ function VenueFilesPage() {
         <Grid.Col span={{ base: 12, lg: 9 }}>
           <Stack gap="md">
             {/* Stats row */}
-            <SimpleGrid cols={{ base: 2, sm: 4 }} spacing="sm">
+            <SimpleGrid cols={{ base: 2, sm: counts.sources > 0 ? 4 : 3 }} spacing="sm">
               <StatCard
                 label={t`Total files`}
                 value={counts.all}
@@ -1044,29 +1058,31 @@ function VenueFilesPage() {
                 color="gray"
               />
               <StatCard
-                label={t`Photos`}
+                label={t`Gallery`}
                 value={counts.photos}
                 icon={<IconPhoto size={20} />}
                 color="blue"
               />
+              {counts.sources > 0 && (
+                <StatCard
+                  label={t`Sources`}
+                  value={counts.sources}
+                  icon={<IconFileText size={20} />}
+                  color="green"
+                />
+              )}
               <StatCard
                 label={t`Documents`}
                 value={counts.documents}
                 icon={<IconPaperclip size={20} />}
                 color="violet"
               />
-              <StatCard
-                label={t`Sources`}
-                value={counts.sources}
-                icon={<IconFileText size={20} />}
-                color="green"
-              />
             </SimpleGrid>
 
             {/* Content sections */}
             {(activeType === "all" || activeType === "photos") && (
               <FileSection
-                title={t`Photos`}
+                title={t`Gallery`}
                 icon={<IconPhoto size={16} />}
                 count={visiblePhotos.length + visibleMasterPhotos.length}
                 color="blue"
@@ -1076,6 +1092,21 @@ function VenueFilesPage() {
                   masterPhotos={visibleMasterPhotos}
                   isLoading={sectionLoading.photos}
                   onPreview={setPhotoPreview}
+                />
+              </FileSection>
+            )}
+
+            {counts.sources > 0 && (activeType === "all" || activeType === "sources") && (
+              <FileSection
+                title={t`Sources`}
+                icon={<IconFileText size={16} />}
+                count={visibleSources.length}
+                color="green"
+              >
+                <SourcesSection
+                  sources={visibleSources}
+                  isLoading={sectionLoading.sources}
+                  onPreview={setSourcePreview}
                 />
               </FileSection>
             )}
@@ -1094,21 +1125,6 @@ function VenueFilesPage() {
                   onDelete={(asset) => setDeleteConfirmId(asset.id)}
                   deletingId={deleteConfirmId}
                   isDeleting={deleteMutation.isPending}
-                />
-              </FileSection>
-            )}
-
-            {(activeType === "all" || activeType === "sources") && (
-              <FileSection
-                title={t`Sources`}
-                icon={<IconFileText size={16} />}
-                count={visibleSources.length}
-                color="green"
-              >
-                <SourcesSection
-                  sources={visibleSources}
-                  isLoading={sectionLoading.sources}
-                  onPreview={setSourcePreview}
                 />
               </FileSection>
             )}
