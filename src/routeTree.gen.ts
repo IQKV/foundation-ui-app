@@ -46,7 +46,7 @@ import { Route as AppVenuesIndexRouteImport } from "./pages/_app/venues.index"
 import { Route as AppVenuesVenueIdRouteImport } from "./pages/_app/venues.$venueId"
 import { Route as AppVenuesAddRouteImport } from "./pages/_app/venues.add"
 import { Route as AppVenuesCreateRouteImport } from "./pages/_app/venues.create"
-import { Route as AppVenuesVenueIdFilesRouteImport } from "./pages/_app/venues.$venueId.files"
+import { Route as AppVenuesVenueIdFilesRouteImport } from "./pages/_app/venues_.$venueId.files"
 
 const R404Route = R404RouteImport.update({
   id: "/404",
@@ -234,9 +234,9 @@ const AppVenuesCreateRoute = AppVenuesCreateRouteImport.update({
   getParentRoute: () => AppVenuesRoute,
 } as any)
 const AppVenuesVenueIdFilesRoute = AppVenuesVenueIdFilesRouteImport.update({
-  id: "/files",
-  path: "/files",
-  getParentRoute: () => AppVenuesVenueIdRoute,
+  id: "/venues_/$venueId/files",
+  path: "/venues/$venueId/files",
+  getParentRoute: () => AppRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -270,7 +270,7 @@ export interface FileRoutesByFullPath {
   "/settings/notifications": typeof AppSettingsNotificationsRoute
   "/settings/organization": typeof AppSettingsOrganizationRoute
   "/settings/security": typeof AppSettingsSecurityRoute
-  "/venues/$venueId": typeof AppVenuesVenueIdRouteWithChildren
+  "/venues/$venueId": typeof AppVenuesVenueIdRoute
   "/venues/add": typeof AppVenuesAddRoute
   "/venues/create": typeof AppVenuesCreateRoute
   "/billing/": typeof AppBillingIndexRoute
@@ -306,7 +306,7 @@ export interface FileRoutesByTo {
   "/settings/notifications": typeof AppSettingsNotificationsRoute
   "/settings/organization": typeof AppSettingsOrganizationRoute
   "/settings/security": typeof AppSettingsSecurityRoute
-  "/venues/$venueId": typeof AppVenuesVenueIdRouteWithChildren
+  "/venues/$venueId": typeof AppVenuesVenueIdRoute
   "/venues/add": typeof AppVenuesAddRoute
   "/venues/create": typeof AppVenuesCreateRoute
   "/billing": typeof AppBillingIndexRoute
@@ -347,13 +347,13 @@ export interface FileRoutesById {
   "/_app/settings/notifications": typeof AppSettingsNotificationsRoute
   "/_app/settings/organization": typeof AppSettingsOrganizationRoute
   "/_app/settings/security": typeof AppSettingsSecurityRoute
-  "/_app/venues/$venueId": typeof AppVenuesVenueIdRouteWithChildren
+  "/_app/venues/$venueId": typeof AppVenuesVenueIdRoute
   "/_app/venues/add": typeof AppVenuesAddRoute
   "/_app/venues/create": typeof AppVenuesCreateRoute
   "/_app/billing/": typeof AppBillingIndexRoute
   "/_app/cms-pages/": typeof AppCmsPagesIndexRoute
   "/_app/venues/": typeof AppVenuesIndexRoute
-  "/_app/venues/$venueId/files": typeof AppVenuesVenueIdFilesRoute
+  "/_app/venues_/$venueId/files": typeof AppVenuesVenueIdFilesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -470,7 +470,7 @@ export interface FileRouteTypes {
     | "/_app/billing/"
     | "/_app/cms-pages/"
     | "/_app/venues/"
-    | "/_app/venues/$venueId/files"
+    | "/_app/venues_/$venueId/files"
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -752,12 +752,12 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof AppVenuesCreateRouteImport
       parentRoute: typeof AppVenuesRoute
     }
-    "/_app/venues/$venueId/files": {
-      id: "/_app/venues/$venueId/files"
-      path: "/files"
+    "/_app/venues_/$venueId/files": {
+      id: "/_app/venues_/$venueId/files"
+      path: "/venues/$venueId/files"
       fullPath: "/venues/$venueId/files"
       preLoaderRoute: typeof AppVenuesVenueIdFilesRouteImport
-      parentRoute: typeof AppVenuesVenueIdRoute
+      parentRoute: typeof AppRoute
     }
   }
 }
@@ -790,26 +790,15 @@ const AppCmsPagesRouteWithChildren = AppCmsPagesRoute._addFileChildren(
   AppCmsPagesRouteChildren,
 )
 
-interface AppVenuesVenueIdRouteChildren {
-  AppVenuesVenueIdFilesRoute: typeof AppVenuesVenueIdFilesRoute
-}
-
-const AppVenuesVenueIdRouteChildren: AppVenuesVenueIdRouteChildren = {
-  AppVenuesVenueIdFilesRoute: AppVenuesVenueIdFilesRoute,
-}
-
-const AppVenuesVenueIdRouteWithChildren =
-  AppVenuesVenueIdRoute._addFileChildren(AppVenuesVenueIdRouteChildren)
-
 interface AppVenuesRouteChildren {
-  AppVenuesVenueIdRoute: typeof AppVenuesVenueIdRouteWithChildren
+  AppVenuesVenueIdRoute: typeof AppVenuesVenueIdRoute
   AppVenuesAddRoute: typeof AppVenuesAddRoute
   AppVenuesCreateRoute: typeof AppVenuesCreateRoute
   AppVenuesIndexRoute: typeof AppVenuesIndexRoute
 }
 
 const AppVenuesRouteChildren: AppVenuesRouteChildren = {
-  AppVenuesVenueIdRoute: AppVenuesVenueIdRouteWithChildren,
+  AppVenuesVenueIdRoute: AppVenuesVenueIdRoute,
   AppVenuesAddRoute: AppVenuesAddRoute,
   AppVenuesCreateRoute: AppVenuesCreateRoute,
   AppVenuesIndexRoute: AppVenuesIndexRoute,
@@ -832,6 +821,7 @@ interface AppRouteChildren {
   AppSettingsOrganizationRoute: typeof AppSettingsOrganizationRoute
   AppSettingsSecurityRoute: typeof AppSettingsSecurityRoute
   AppBillingIndexRoute: typeof AppBillingIndexRoute
+  AppVenuesVenueIdFilesRoute: typeof AppVenuesVenueIdFilesRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
@@ -847,6 +837,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppSettingsOrganizationRoute: AppSettingsOrganizationRoute,
   AppSettingsSecurityRoute: AppSettingsSecurityRoute,
   AppBillingIndexRoute: AppBillingIndexRoute,
+  AppVenuesVenueIdFilesRoute: AppVenuesVenueIdFilesRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)

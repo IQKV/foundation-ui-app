@@ -55,7 +55,7 @@ import { useVenue } from "@/features/manage-venue";
 import { dayjs } from "@/shared/lib/date-utils";
 import { TestSelectors } from "@/shared/lib/test-selectors";
 
-export const Route = createFileRoute("/_app/venues/$venueId/files")({
+export const Route = createFileRoute("/_app/venues_/$venueId/files")({
   component: VenueFilesPage,
 });
 
