@@ -118,8 +118,8 @@ export function CommandBar() {
                   onMouseEnter={(e) => hoverStyle(e, true)}
                   onMouseLeave={(e) => hoverStyle(e, false)}
                 >
-                  <IconSparkles size={14} style={{ color: "#6b9a1f", flexShrink: 0 }} />
-                  <Text size="sm" fw={500} style={{ color: "#6b9a1f", whiteSpace: "nowrap" }}>
+                  <IconSparkles size={14} style={{ color: "#e8541a", flexShrink: 0 }} />
+                  <Text size="sm" fw={500} style={{ color: "#e8541a", whiteSpace: "nowrap" }}>
                     <Trans>Ask AI</Trans>
                   </Text>
                 </UnstyledButton>

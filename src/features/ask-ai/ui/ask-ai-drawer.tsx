@@ -52,9 +52,9 @@ function SuggestionCard({ action, index, onSelect }: SuggestionCardProps) {
         }}
         onMouseEnter={(e) => {
           (e.currentTarget as HTMLButtonElement).style.borderColor =
-            "var(--mantine-color-green-5, #74b816)";
+            "var(--mantine-color-orange-5, #f76707)";
           (e.currentTarget as HTMLButtonElement).style.background =
-            "var(--mantine-color-green-0, #ebfbee)";
+            "var(--mantine-color-orange-0, #fff4e6)";
         }}
         onMouseLeave={(e) => {
           (e.currentTarget as HTMLButtonElement).style.borderColor = "var(--mantine-color-gray-2)";
@@ -193,7 +193,7 @@ export function AskAiDrawer() {
               size={32}
               radius="md"
               style={{
-                background: "linear-gradient(135deg, #5a7a1a 0%, #6b9a1f 100%)",
+                background: "linear-gradient(135deg, #c44b0a 0%, #e8541a 100%)",
                 border: "1px solid rgba(255,255,255,0.15)",
               }}
             >
@@ -246,7 +246,7 @@ export function AskAiDrawer() {
               <Text
                 size="xs"
                 fw={600}
-                c="green.7"
+                c="orange.7"
                 tt="uppercase"
                 style={{ letterSpacing: "0.06em" }}
                 mb="xs"
@@ -282,7 +282,7 @@ export function AskAiDrawer() {
                         width: 6,
                         height: 6,
                         borderRadius: "50%",
-                        background: "#6b9a1f",
+                        background: "#e8541a",
                       }}
                       animate={{ opacity: [0.3, 1, 0.3], y: [0, -4, 0] }}
                       transition={{
@@ -363,7 +363,7 @@ export function AskAiDrawer() {
             style={{
               background:
                 content.trim() && !isOverLimit && !sendMutation.isPending
-                  ? "linear-gradient(135deg, #5a7a1a 0%, #6b9a1f 100%)"
+                  ? "linear-gradient(135deg, #c44b0a 0%, #e8541a 100%)"
                   : undefined,
               border: "none",
               color: "white",
