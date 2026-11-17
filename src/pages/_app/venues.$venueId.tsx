@@ -834,9 +834,9 @@ function SourcesTab({
 
 const bigTabStyles = {
   tab: {
-    fontSize: "var(--mantine-font-size-lg)",
+    fontSize: "var(--mantine-font-size-sm)",
     fontWeight: 600,
-    padding: "var(--mantine-spacing-md) var(--mantine-spacing-xl)",
+    padding: "var(--mantine-spacing-xs) var(--mantine-spacing-md)",
   },
 };
 
@@ -1405,7 +1405,7 @@ function VenueDetailPage() {
                 >
                   <Tabs.Tab
                     value="details"
-                    leftSection={<IconAdjustments size={20} />}
+                    leftSection={<IconAdjustments size={15} />}
                     styles={bigTabStyles}
                   >
                     <Trans>Details</Trans>
@@ -1413,11 +1413,11 @@ function VenueDetailPage() {
                   {venue && (
                     <Tabs.Tab
                       value="photos"
-                      leftSection={<IconPhoto size={20} />}
+                      leftSection={<IconPhoto size={15} />}
                       styles={bigTabStyles}
                       rightSection={
                         !photosLoading && photoCount > 0 ? (
-                          <Badge size="xl" variant="filled" color="blue" circle>
+                          <Badge size="sm" variant="filled" color="blue" circle>
                             {photoCount}
                           </Badge>
                         ) : undefined
@@ -1429,11 +1429,11 @@ function VenueDetailPage() {
                   {venue && (
                     <Tabs.Tab
                       value="assets"
-                      leftSection={<IconPaperclip size={20} />}
+                      leftSection={<IconPaperclip size={15} />}
                       styles={bigTabStyles}
                       rightSection={
                         !assetsLoading && assets.length > 0 ? (
-                          <Badge size="xl" variant="filled" color="blue" circle>
+                          <Badge size="sm" variant="filled" color="blue" circle>
                             {assets.length}
                           </Badge>
                         ) : undefined
@@ -1445,11 +1445,11 @@ function VenueDetailPage() {
                   {venue && (
                     <Tabs.Tab
                       value="sources"
-                      leftSection={<IconFileText size={20} />}
+                      leftSection={<IconFileText size={15} />}
                       styles={bigTabStyles}
                       rightSection={
                         !sourcesLoading && sources.length > 0 ? (
-                          <Badge size="xl" variant="filled" color="blue" circle>
+                          <Badge size="sm" variant="filled" color="blue" circle>
                             {sources.length}
                           </Badge>
                         ) : undefined
