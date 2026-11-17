@@ -388,6 +388,7 @@ msgstr "Are you sure?"
 msgid "Asset deleted."
 msgstr "Asset deleted."
 
+#: src/pages/_app/venues.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Asset uploaded."
 msgstr "Asset uploaded."
@@ -444,6 +445,7 @@ msgstr "Back to <0>Sign in</0>"
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
+#: src/pages/_app/venues.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
 #: src/pages/_app/venues.add.tsx
 msgid "Back to list"
@@ -458,6 +460,10 @@ msgstr "Back to sign in"
 #: src/features/magic-link/ui/magic-link-initiate-form.tsx
 msgid "Back to sign-in"
 msgstr "Back to sign-in"
+
+#: src/pages/_app/venues.$venueId.files.tsx
+msgid "Back to venue profile"
+msgstr "Back to venue profile"
 
 #: src/features/ban-user/ui/ban-member-modal.tsx
 msgid "Ban member"
@@ -516,6 +522,7 @@ msgstr "Billing Portal Unavailable"
 #: src/features/member-role/ui/update-member-authorities-modal.tsx
 #: src/features/page-admin/ui/delete-page-modal.tsx
 #: src/pages/_app/cms-pages.create.tsx
+#: src/pages/_app/venues.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Cancel"
 msgstr "Cancel"
@@ -550,6 +557,7 @@ msgstr "Change Password"
 msgid "Change Role"
 msgstr "Change Role"
 
+#: src/pages/_app/venues.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "characters"
 msgstr "characters"
@@ -754,6 +762,10 @@ msgstr "Could not delete SSO configuration."
 msgid "Could not delete the asset."
 msgstr "Could not delete the asset."
 
+#: src/pages/_app/venues.$venueId.files.tsx
+msgid "Could not delete the document."
+msgstr "Could not delete the document."
+
 #: src/features/page-admin/ui/delete-page-modal.tsx
 msgid "Could not delete the page. It may be published."
 msgstr "Could not delete the page. It may be published."
@@ -795,6 +807,7 @@ msgstr "Could not load members."
 msgid "Could not load organizations."
 msgstr "Could not load organizations."
 
+#: src/pages/_app/venues.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Could not load the preview."
 msgstr "Could not load the preview."
@@ -831,6 +844,7 @@ msgstr "Could not unlink this provider."
 msgid "Could not update SSO configuration."
 msgstr "Could not update SSO configuration."
 
+#: src/pages/_app/venues.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Could not upload the asset. Please try again."
 msgstr "Could not upload the asset. Please try again."
@@ -969,6 +983,7 @@ msgstr "Default locale — required"
 #: src/features/page-admin/ui/delete-page-modal.tsx
 #: src/pages/_app/cms-pages.index.tsx
 #: src/pages/_app/settings/security.tsx
+#: src/pages/_app/venues.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
 #: src/pages/_app/venues.index.tsx
 msgid "Delete"
@@ -981,6 +996,10 @@ msgstr "Delete asset"
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Delete asset?"
 msgstr "Delete asset?"
+
+#: src/pages/_app/venues.$venueId.files.tsx
+msgid "Delete document"
+msgstr "Delete document"
 
 #: src/features/manage-venue/ui/bulk-delete-venues-modal.tsx
 #: src/features/manage-venue/ui/delete-venue-modal.tsx
@@ -996,6 +1015,10 @@ msgstr "Delete Page"
 #: src/pages/_app/venues.index.tsx
 msgid "Delete selected"
 msgstr "Delete selected"
+
+#: src/pages/_app/venues.$venueId.files.tsx
+msgid "Delete this document?"
+msgstr "Delete this document?"
 
 #: src/features/manage-venue/ui/delete-venue-modal.tsx
 msgid "Delete Venue"
@@ -1058,6 +1081,14 @@ msgstr "Display name"
 #: src/pages/_app/settings/security.tsx
 msgid "Display name is required"
 msgstr "Display name is required"
+
+#: src/pages/_app/venues.$venueId.files.tsx
+msgid "Document deleted."
+msgstr "Document deleted."
+
+#: src/pages/_app/venues.$venueId.files.tsx
+msgid "Documents"
+msgstr "Documents"
 
 #: src/pages/sign-in.tsx
 msgid "Don't have an account? <0>Create one</0>"
@@ -1293,6 +1324,7 @@ msgstr "Failed to load profile"
 msgid "Failed to load refund history."
 msgstr "Failed to load refund history."
 
+#: src/pages/_app/venues.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Failed to load the venue"
 msgstr "Failed to load the venue"
@@ -1333,9 +1365,15 @@ msgstr "Feature Usage Examples"
 msgid "Features"
 msgstr "Features"
 
+#: src/pages/_app/venues.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "File"
 msgstr "File"
+
+#: src/pages/_app/venues.$venueId.files.tsx
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Files"
+msgstr "Files"
 
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Fill empty fields"
@@ -1409,9 +1447,9 @@ msgstr "Forgot your"
 msgid "Free"
 msgstr "Free"
 
-#: src/pages/_app/venues.$venueId.tsx
-#~ msgid "From master catalog"
-#~ msgstr "From master catalog"
+#: src/pages/_app/venues.$venueId.files.tsx
+msgid "From master catalog"
+msgstr "From master catalog"
 
 #: src/pages/loading-demo.tsx
 msgid "Full-screen centered loader shown on first app load (while locale initializes)."
@@ -1488,6 +1526,7 @@ msgstr "Hierarchy"
 #: src/pages/_app/settings/organization.tsx
 #: src/pages/_app/settings/security.tsx
 #: src/pages/_app/team.tsx
+#: src/pages/_app/venues.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
 #: src/pages/_app/venues.index.tsx
 msgid "Home"
@@ -1945,6 +1984,14 @@ msgstr "No conversations yet. Start a new chat."
 msgid "No data yet — click Edit to add."
 msgstr "No data yet — click Edit to add."
 
+#: src/pages/_app/venues.$venueId.files.tsx
+msgid "No description available."
+msgstr "No description available."
+
+#: src/pages/_app/venues.$venueId.files.tsx
+msgid "No documents for this venue."
+msgstr "No documents for this venue."
+
 #: src/pages/_app/settings/security.tsx
 msgid "No external sign-in providers are enabled by your organization."
 msgstr "No external sign-in providers are enabled by your organization."
@@ -1994,6 +2041,7 @@ msgstr "No password? <0>Email me a sign-in link</0>"
 msgid "No pending invitations."
 msgstr "No pending invitations."
 
+#: src/pages/_app/venues.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "No photos for this venue."
 msgstr "No photos for this venue."
@@ -2017,6 +2065,10 @@ msgstr "No source documents yet. Upload a PDF or paste text in the Sources tab f
 #: src/pages/_app/venues.$venueId.tsx
 msgid "No sources for this venue."
 msgstr "No sources for this venue."
+
+#: src/pages/_app/venues.$venueId.files.tsx
+msgid "No text sources for this venue."
+msgstr "No text sources for this venue."
 
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "No translations added. At least the default locale is required."
@@ -2094,6 +2146,7 @@ msgstr "One click and you're all set."
 msgid "One last"
 msgstr "One last"
 
+#: src/pages/_app/venues.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Open"
 msgstr "Open"
@@ -2110,6 +2163,7 @@ msgstr "Open Graph description"
 msgid "Open Graph title"
 msgstr "Open Graph title"
 
+#: src/pages/_app/venues.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Open larger preview"
 msgstr "Open larger preview"
@@ -2313,13 +2367,14 @@ msgstr "Permissions assigned to your account"
 msgid "Personal Workspace"
 msgstr "Personal Workspace"
 
+#: src/pages/_app/venues.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Photo"
 msgstr "Photo"
 
-#: src/pages/_app/venues.$venueId.tsx
-#~ msgid "Photos"
-#~ msgstr "Photos"
+#: src/pages/_app/venues.$venueId.files.tsx
+msgid "Photos"
+msgstr "Photos"
 
 #: src/features/ban-user/ui/ban-member-modal.tsx
 msgid "Pick a date and time"
@@ -2374,6 +2429,7 @@ msgstr "Populated fields across the venue profile."
 msgid "Portal error"
 msgstr "Portal error"
 
+#: src/pages/_app/venues.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Preparing the preview…"
 msgstr "Preparing the preview…"
@@ -2382,6 +2438,7 @@ msgstr "Preparing the preview…"
 msgid "Press Enter to search"
 msgstr "Press Enter to search"
 
+#: src/pages/_app/venues.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Preview"
 msgstr "Preview"
@@ -2455,6 +2512,10 @@ msgstr "quick step."
 msgid "Raw JSON document"
 msgstr "Raw JSON document"
 
+#: src/pages/_app/venues.$venueId.files.tsx
+msgid "Read"
+msgstr "Read"
+
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 #: src/pages/_app/settings/general.tsx
 #: src/pages/invite.$token.tsx
@@ -2496,6 +2557,7 @@ msgstr "Redirecting to your workspace..."
 #: src/pages/_app/cms-pages.index.tsx
 #: src/pages/_app/settings/organization.tsx
 #: src/pages/_app/team.tsx
+#: src/pages/_app/venues.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
 #: src/pages/_app/venues.index.tsx
 msgid "Refresh"
@@ -2576,6 +2638,7 @@ msgstr "Restore access"
 #: src/pages/_app/settings/general.tsx
 #: src/pages/_app/settings/security.tsx
 #: src/pages/_app/team.tsx
+#: src/pages/_app/venues.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
 #: src/pages/_app/venues.index.tsx
 msgid "Retry"
@@ -2648,6 +2711,10 @@ msgstr "Search by name or email…"
 #: src/features/manage-billing/ui/webhook-log-list.tsx
 msgid "Search event type…"
 msgstr "Search event type…"
+
+#: src/pages/_app/venues.$venueId.files.tsx
+msgid "Search files…"
+msgstr "Search files…"
 
 #: src/pages/_app/settings/organization.tsx
 msgid "Search organizations…"
@@ -2910,6 +2977,7 @@ msgstr "Source document"
 msgid "Source text extracted."
 msgstr "Source text extracted."
 
+#: src/pages/_app/venues.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Sources"
 msgstr "Sources"
@@ -3035,6 +3103,7 @@ msgstr "Tenant SSO Configuration"
 msgid "TENANT_OWNER cannot be granted via invitation"
 msgstr "TENANT_OWNER cannot be granted via invitation"
 
+#: src/pages/_app/venues.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Text"
 msgstr "Text"
@@ -3055,6 +3124,7 @@ msgstr "The provider was disconnected."
 msgid "The unique identifier for your organization. This cannot be changed."
 msgstr "The unique identifier for your organization. This cannot be changed."
 
+#: src/pages/_app/venues.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "The venue could not be found or the API is unavailable."
 msgstr "The venue could not be found or the API is unavailable."
@@ -3070,6 +3140,10 @@ msgstr "Theme-aware (respects dark mode and color scheme)"
 #: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
 #~ msgid "Thinking…"
 #~ msgstr "Thinking…"
+
+#: src/pages/_app/venues.$venueId.files.tsx
+msgid "This action cannot be undone."
+msgstr "This action cannot be undone."
 
 #: src/features/manage-billing/ui/feature-gate.tsx
 msgid "This feature requires an active subscription. Please upgrade your plan to access this functionality."
@@ -3141,6 +3215,10 @@ msgstr "Too many requests. Please wait a moment before trying again."
 #: src/features/sign-in/model/use-sign-in.ts
 msgid "Too many sign-in attempts. Please try again later."
 msgstr "Too many sign-in attempts. Please try again later."
+
+#: src/pages/_app/venues.$venueId.files.tsx
+msgid "Total files"
+msgstr "Total files"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Track all activity with built-in audit trails"
@@ -3259,6 +3337,10 @@ msgstr "Upload asset"
 msgid "Upload avatar"
 msgstr "Upload avatar"
 
+#: src/pages/_app/venues.$venueId.files.tsx
+msgid "Upload file"
+msgstr "Upload file"
+
 #: src/pages/_app/venues.add.tsx
 msgid "Upload the venue's own document and we'll structure it — or enter the details by hand."
 msgstr "Upload the venue's own document and we'll structure it — or enter the details by hand."
@@ -3293,6 +3375,7 @@ msgstr "Uses <0>LoadingOverlay</0> component for full-screen loading"
 msgid "Using a corporate identity provider? <0>Sign in with Enterprise SSO</0>"
 msgstr "Using a corporate identity provider? <0>Sign in with Enterprise SSO</0>"
 
+#: src/pages/_app/venues.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Venue"
 msgstr "Venue"
@@ -3301,6 +3384,7 @@ msgstr "Venue"
 msgid "Venue ID"
 msgstr "Venue ID"
 
+#: src/pages/_app/venues.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
 #: src/pages/_app/venues.add.tsx
 #: src/pages/_app/venues.create.tsx

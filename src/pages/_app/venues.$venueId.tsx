@@ -50,6 +50,7 @@ import {
   IconSparkles,
   IconMaximize,
   IconLink,
+  IconFolder,
 } from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { PageTitle } from "@/shared/lib/page-title";
@@ -1139,6 +1140,16 @@ function VenueDetailPage() {
                       if (file) void handleUploadAsset(file);
                     }}
                   />
+                  <Button
+                    variant="subtle"
+                    size="sm"
+                    leftSection={<IconFolder size={15} />}
+                    disabled={!venue}
+                    data-testid={TestSelectors.VENUE_DETAIL_FILES_BUTTON}
+                    onClick={() => void navigate({ to: "/venues/$venueId/files", params: { venueId } })}
+                  >
+                    <Trans>Files</Trans>
+                  </Button>
                   <Button
                     variant="light"
                     color="red"

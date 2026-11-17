@@ -388,6 +388,7 @@ msgstr "Êtes-vous sûr ?"
 msgid "Asset deleted."
 msgstr ""
 
+#: src/pages/_app/venues.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Asset uploaded."
 msgstr ""
@@ -444,6 +445,7 @@ msgstr "Retour à <0>Se connecter</0>"
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
+#: src/pages/_app/venues.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
 #: src/pages/_app/venues.add.tsx
 msgid "Back to list"
@@ -458,6 +460,10 @@ msgstr "Retour à la connexion"
 #: src/features/magic-link/ui/magic-link-initiate-form.tsx
 msgid "Back to sign-in"
 msgstr "Retour à la connexion"
+
+#: src/pages/_app/venues.$venueId.files.tsx
+msgid "Back to venue profile"
+msgstr ""
 
 #: src/features/ban-user/ui/ban-member-modal.tsx
 msgid "Ban member"
@@ -516,6 +522,7 @@ msgstr "Portail de facturation indisponible"
 #: src/features/member-role/ui/update-member-authorities-modal.tsx
 #: src/features/page-admin/ui/delete-page-modal.tsx
 #: src/pages/_app/cms-pages.create.tsx
+#: src/pages/_app/venues.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Cancel"
 msgstr "Annuler"
@@ -550,6 +557,7 @@ msgstr "Changer le mot de passe"
 msgid "Change Role"
 msgstr "Changer le rôle"
 
+#: src/pages/_app/venues.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "characters"
 msgstr ""
@@ -754,6 +762,10 @@ msgstr "Impossible de supprimer la configuration SSO."
 msgid "Could not delete the asset."
 msgstr ""
 
+#: src/pages/_app/venues.$venueId.files.tsx
+msgid "Could not delete the document."
+msgstr ""
+
 #: src/features/page-admin/ui/delete-page-modal.tsx
 msgid "Could not delete the page. It may be published."
 msgstr "Impossible de supprimer la page. Elle est peut-être publiée."
@@ -795,6 +807,7 @@ msgstr "Impossible de charger les membres."
 msgid "Could not load organizations."
 msgstr "Impossible de charger les organisations."
 
+#: src/pages/_app/venues.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Could not load the preview."
 msgstr ""
@@ -831,6 +844,7 @@ msgstr "Impossible de délier ce fournisseur."
 msgid "Could not update SSO configuration."
 msgstr "Impossible de mettre à jour la configuration SSO."
 
+#: src/pages/_app/venues.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Could not upload the asset. Please try again."
 msgstr ""
@@ -969,6 +983,7 @@ msgstr "Langue par défaut — requise"
 #: src/features/page-admin/ui/delete-page-modal.tsx
 #: src/pages/_app/cms-pages.index.tsx
 #: src/pages/_app/settings/security.tsx
+#: src/pages/_app/venues.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
 #: src/pages/_app/venues.index.tsx
 msgid "Delete"
@@ -980,6 +995,10 @@ msgstr ""
 
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Delete asset?"
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.files.tsx
+msgid "Delete document"
 msgstr ""
 
 #: src/features/manage-venue/ui/bulk-delete-venues-modal.tsx
@@ -995,6 +1014,10 @@ msgstr "Supprimer la page"
 
 #: src/pages/_app/venues.index.tsx
 msgid "Delete selected"
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.files.tsx
+msgid "Delete this document?"
 msgstr ""
 
 #: src/features/manage-venue/ui/delete-venue-modal.tsx
@@ -1058,6 +1081,14 @@ msgstr "Nom affiché"
 #: src/pages/_app/settings/security.tsx
 msgid "Display name is required"
 msgstr "Le nom affiché est requis"
+
+#: src/pages/_app/venues.$venueId.files.tsx
+msgid "Document deleted."
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.files.tsx
+msgid "Documents"
+msgstr ""
 
 #: src/pages/sign-in.tsx
 msgid "Don't have an account? <0>Create one</0>"
@@ -1293,6 +1324,7 @@ msgstr "Échec du chargement du profil"
 msgid "Failed to load refund history."
 msgstr "Échec du chargement de l'historique des remboursements."
 
+#: src/pages/_app/venues.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Failed to load the venue"
 msgstr ""
@@ -1333,8 +1365,14 @@ msgstr "Exemples d'utilisation des fonctionnalités"
 msgid "Features"
 msgstr "Fonctionnalités"
 
+#: src/pages/_app/venues.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "File"
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.files.tsx
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Files"
 msgstr ""
 
 #: src/pages/_app/venues.$venueId.tsx
@@ -1409,9 +1447,9 @@ msgstr "Vous avez oublié votre"
 msgid "Free"
 msgstr "Gratuit"
 
-#: src/pages/_app/venues.$venueId.tsx
-#~ msgid "From master catalog"
-#~ msgstr ""
+#: src/pages/_app/venues.$venueId.files.tsx
+msgid "From master catalog"
+msgstr ""
 
 #: src/pages/loading-demo.tsx
 msgid "Full-screen centered loader shown on first app load (while locale initializes)."
@@ -1488,6 +1526,7 @@ msgstr "Hiérarchie"
 #: src/pages/_app/settings/organization.tsx
 #: src/pages/_app/settings/security.tsx
 #: src/pages/_app/team.tsx
+#: src/pages/_app/venues.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
 #: src/pages/_app/venues.index.tsx
 msgid "Home"
@@ -1945,6 +1984,14 @@ msgstr ""
 msgid "No data yet — click Edit to add."
 msgstr ""
 
+#: src/pages/_app/venues.$venueId.files.tsx
+msgid "No description available."
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.files.tsx
+msgid "No documents for this venue."
+msgstr ""
+
 #: src/pages/_app/settings/security.tsx
 msgid "No external sign-in providers are enabled by your organization."
 msgstr "Aucun fournisseur de connexion externe n'est activé par votre organisation."
@@ -1994,6 +2041,7 @@ msgstr "Pas de mot de passe ? <0>Envoyez-moi un lien de connexion</0>"
 msgid "No pending invitations."
 msgstr "Aucune invitation en attente."
 
+#: src/pages/_app/venues.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "No photos for this venue."
 msgstr ""
@@ -2016,6 +2064,10 @@ msgstr ""
 
 #: src/pages/_app/venues.$venueId.tsx
 msgid "No sources for this venue."
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.files.tsx
+msgid "No text sources for this venue."
 msgstr ""
 
 #: src/features/page-admin/ui/page-translation-fields.tsx
@@ -2094,6 +2146,7 @@ msgstr "Un clic et vous êtes prêt."
 msgid "One last"
 msgstr "Un dernier"
 
+#: src/pages/_app/venues.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Open"
 msgstr ""
@@ -2110,6 +2163,7 @@ msgstr "Description Open Graph"
 msgid "Open Graph title"
 msgstr "Titre Open Graph"
 
+#: src/pages/_app/venues.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Open larger preview"
 msgstr ""
@@ -2313,13 +2367,14 @@ msgstr "Autorisations attribuées à votre compte"
 msgid "Personal Workspace"
 msgstr "Espace de travail personnel"
 
+#: src/pages/_app/venues.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Photo"
 msgstr ""
 
-#: src/pages/_app/venues.$venueId.tsx
-#~ msgid "Photos"
-#~ msgstr ""
+#: src/pages/_app/venues.$venueId.files.tsx
+msgid "Photos"
+msgstr ""
 
 #: src/features/ban-user/ui/ban-member-modal.tsx
 msgid "Pick a date and time"
@@ -2374,6 +2429,7 @@ msgstr ""
 msgid "Portal error"
 msgstr "Erreur du portail"
 
+#: src/pages/_app/venues.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Preparing the preview…"
 msgstr ""
@@ -2382,6 +2438,7 @@ msgstr ""
 msgid "Press Enter to search"
 msgstr ""
 
+#: src/pages/_app/venues.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Preview"
 msgstr ""
@@ -2455,6 +2512,10 @@ msgstr "étape rapide."
 msgid "Raw JSON document"
 msgstr ""
 
+#: src/pages/_app/venues.$venueId.files.tsx
+msgid "Read"
+msgstr ""
+
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 #: src/pages/_app/settings/general.tsx
 #: src/pages/invite.$token.tsx
@@ -2496,6 +2557,7 @@ msgstr "Redirection vers votre espace de travail..."
 #: src/pages/_app/cms-pages.index.tsx
 #: src/pages/_app/settings/organization.tsx
 #: src/pages/_app/team.tsx
+#: src/pages/_app/venues.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
 #: src/pages/_app/venues.index.tsx
 msgid "Refresh"
@@ -2576,6 +2638,7 @@ msgstr "Restaurer l'accès"
 #: src/pages/_app/settings/general.tsx
 #: src/pages/_app/settings/security.tsx
 #: src/pages/_app/team.tsx
+#: src/pages/_app/venues.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
 #: src/pages/_app/venues.index.tsx
 msgid "Retry"
@@ -2648,6 +2711,10 @@ msgstr "Rechercher par nom ou email…"
 #: src/features/manage-billing/ui/webhook-log-list.tsx
 msgid "Search event type…"
 msgstr "Rechercher le type d'événement…"
+
+#: src/pages/_app/venues.$venueId.files.tsx
+msgid "Search files…"
+msgstr ""
 
 #: src/pages/_app/settings/organization.tsx
 msgid "Search organizations…"
@@ -2910,6 +2977,7 @@ msgstr ""
 msgid "Source text extracted."
 msgstr ""
 
+#: src/pages/_app/venues.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Sources"
 msgstr ""
@@ -3035,6 +3103,7 @@ msgstr "Configuration SSO du tenant"
 msgid "TENANT_OWNER cannot be granted via invitation"
 msgstr "TENANT_OWNER ne peut pas être accordé par invitation"
 
+#: src/pages/_app/venues.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Text"
 msgstr ""
@@ -3055,6 +3124,7 @@ msgstr "Le fournisseur a été déconnecté."
 msgid "The unique identifier for your organization. This cannot be changed."
 msgstr "L'identifiant unique de votre organisation. Ceci ne peut pas être modifié."
 
+#: src/pages/_app/venues.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "The venue could not be found or the API is unavailable."
 msgstr ""
@@ -3070,6 +3140,10 @@ msgstr "Thème adaptatif (respecte le mode sombre et le schéma de couleurs)"
 #: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
 #~ msgid "Thinking…"
 #~ msgstr ""
+
+#: src/pages/_app/venues.$venueId.files.tsx
+msgid "This action cannot be undone."
+msgstr ""
 
 #: src/features/manage-billing/ui/feature-gate.tsx
 msgid "This feature requires an active subscription. Please upgrade your plan to access this functionality."
@@ -3141,6 +3215,10 @@ msgstr "Trop de demandes. Veuillez attendre un moment avant de réessayer."
 #: src/features/sign-in/model/use-sign-in.ts
 msgid "Too many sign-in attempts. Please try again later."
 msgstr "Trop de tentatives de connexion. Veuillez réessayer plus tard."
+
+#: src/pages/_app/venues.$venueId.files.tsx
+msgid "Total files"
+msgstr ""
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Track all activity with built-in audit trails"
@@ -3259,6 +3337,10 @@ msgstr ""
 msgid "Upload avatar"
 msgstr "Télécharger l'avatar"
 
+#: src/pages/_app/venues.$venueId.files.tsx
+msgid "Upload file"
+msgstr ""
+
 #: src/pages/_app/venues.add.tsx
 msgid "Upload the venue's own document and we'll structure it — or enter the details by hand."
 msgstr ""
@@ -3293,6 +3375,7 @@ msgstr "Utilise le composant <0>LoadingOverlay</0> pour le chargement plein écr
 msgid "Using a corporate identity provider? <0>Sign in with Enterprise SSO</0>"
 msgstr "Vous utilisez un fournisseur d'identité d'entreprise ? <0>Se connecter avec SSO Entreprise</0>"
 
+#: src/pages/_app/venues.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Venue"
 msgstr ""
@@ -3301,6 +3384,7 @@ msgstr ""
 msgid "Venue ID"
 msgstr ""
 
+#: src/pages/_app/venues.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
 #: src/pages/_app/venues.add.tsx
 #: src/pages/_app/venues.create.tsx
