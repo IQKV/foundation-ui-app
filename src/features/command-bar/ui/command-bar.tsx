@@ -48,10 +48,12 @@ export function CommandBar() {
             style={{
               position: "fixed",
               bottom: 24,
-              left: "50%",
-              translateX: "-50%",
-              zIndex: 300,
+              left: 0,
+              right: 0,
+              marginInline: "auto",
+              width: "fit-content",
               maxWidth: "calc(100vw - 32px)",
+              zIndex: 300,
             }}
           >
             <Group
@@ -87,7 +89,7 @@ export function CommandBar() {
                 >
                   <IconSearch size={14} color="var(--mantine-color-gray-5)" />
                   <Text size="sm" c="dimmed" style={{ whiteSpace: "nowrap" }}>
-                    <Trans>Jump to a page…</Trans>
+                    <Trans>Go…</Trans>
                   </Text>
                   <Group gap={4} ml={8}>
                     <Kbd size="xs" style={{ lineHeight: 1.6 }}>
