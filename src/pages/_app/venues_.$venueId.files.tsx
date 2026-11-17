@@ -45,6 +45,7 @@ import {
   IconSearch,
   IconMaximize,
   IconLink,
+  IconArrowLeft,
 } from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { PageTitle } from "@/shared/lib/page-title";
@@ -218,8 +219,8 @@ function VenueBrief({ venue, isLoading }: { venue: Venue | undefined; isLoading:
 const FILE_TYPE_OPTIONS: { value: FileTypeFilter; label: string; icon: React.ReactNode }[] = [
   { value: "all", label: "All files", icon: <IconFolder size={16} /> },
   { value: "sources", label: "Sources", icon: <IconFileText size={16} /> },
-  { value: "photos", label: "Gallery", icon: <IconPhoto size={16} /> },
   { value: "documents", label: "Documents", icon: <IconPaperclip size={16} /> },
+  { value: "photos", label: "Gallery", icon: <IconPhoto size={16} /> },
 ];
 
 function FileTypeNav({
@@ -956,6 +957,18 @@ function VenueFilesPage() {
         toolbar={
           <Group gap="xs" justify="space-between" wrap="nowrap" style={{ width: "100%" }}>
             <Group gap="xs" wrap="nowrap" style={{ flex: 1, minWidth: 0 }}>
+              <Tooltip label={t`Back to list`} withArrow>
+                <ActionIcon
+                  data-testid={TestSelectors.VENUE_DETAIL_BACK_BUTTON}
+                  variant="subtle"
+                  color="gray"
+                  size="sm"
+                  aria-label={t`Back to list`}
+                  onClick={() => void navigate({ to: "/venues" })}
+                >
+                  <IconArrowLeft size={15} />
+                </ActionIcon>
+              </Tooltip>
               <Tooltip label={t`Refresh`} withArrow>
                 <ActionIcon
                   variant="subtle"
@@ -1063,12 +1076,6 @@ function VenueFilesPage() {
                 icon={<IconFolder size={20} />}
                 color="gray"
               />
-              <StatCard
-                label={t`Gallery`}
-                value={counts.photos}
-                icon={<IconPhoto size={20} />}
-                color="blue"
-              />
               {counts.sources > 0 && (
                 <StatCard
                   label={t`Sources`}
@@ -1083,25 +1090,15 @@ function VenueFilesPage() {
                 icon={<IconPaperclip size={20} />}
                 color="violet"
               />
+              <StatCard
+                label={t`Gallery`}
+                value={counts.photos}
+                icon={<IconPhoto size={20} />}
+                color="blue"
+              />
             </SimpleGrid>
 
             {/* Content sections */}
-            {(activeType === "all" || activeType === "photos") && (
-              <FileSection
-                title={t`Gallery`}
-                icon={<IconPhoto size={16} />}
-                count={visiblePhotos.length + visibleMasterPhotos.length}
-                color="blue"
-              >
-                <PhotosSection
-                  photos={visiblePhotos}
-                  masterPhotos={visibleMasterPhotos}
-                  isLoading={sectionLoading.photos}
-                  onPreview={setPhotoPreview}
-                />
-              </FileSection>
-            )}
-
             {counts.sources > 0 && (activeType === "all" || activeType === "sources") && (
               <FileSection
                 title={t`Sources`}
@@ -1131,6 +1128,22 @@ function VenueFilesPage() {
                   onDelete={(asset) => setDeleteConfirmId(asset.id)}
                   deletingId={deleteConfirmId}
                   isDeleting={deleteMutation.isPending}
+                />
+              </FileSection>
+            )}
+
+            {(activeType === "all" || activeType === "photos") && (
+              <FileSection
+                title={t`Gallery`}
+                icon={<IconPhoto size={16} />}
+                count={visiblePhotos.length + visibleMasterPhotos.length}
+                color="blue"
+              >
+                <PhotosSection
+                  photos={visiblePhotos}
+                  masterPhotos={visibleMasterPhotos}
+                  isLoading={sectionLoading.photos}
+                  onPreview={setPhotoPreview}
                 />
               </FileSection>
             )}
