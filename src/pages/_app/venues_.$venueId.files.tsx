@@ -936,36 +936,6 @@ function VenueFilesPage() {
         toolbar={
           <Group gap="xs" justify="space-between" wrap="nowrap" style={{ width: "100%" }}>
             <Group gap="xs" wrap="nowrap" style={{ flex: 1, minWidth: 0 }}>
-              <SegmentedControl
-                size="sm"
-                value="files"
-                data-testid={TestSelectors.VENUE_VIEW_MODE_SWITCHER}
-                onChange={(v) => {
-                  if (v === "profile") {
-                    void navigate({ to: "/venues/$venueId", params: { venueId } });
-                  }
-                }}
-                data={[
-                  {
-                    value: "profile",
-                    label: (
-                      <Group gap={6} wrap="nowrap">
-                        <IconBuildingStore size={14} />
-                        <Trans>Venue Profile</Trans>
-                      </Group>
-                    ),
-                  },
-                  {
-                    value: "files",
-                    label: (
-                      <Group gap={6} wrap="nowrap">
-                        <IconFolder size={14} />
-                        <Trans>File Manager</Trans>
-                      </Group>
-                    ),
-                  },
-                ]}
-              />
               <Tooltip label={t`Refresh`} withArrow>
                 <ActionIcon
                   variant="subtle"
@@ -997,27 +967,57 @@ function VenueFilesPage() {
                 allowDeselect={false}
                 comboboxProps={{ withinPortal: true }}
               />
+              {canManage && (
+                <Button
+                  variant="light"
+                  size="sm"
+                  leftSection={<IconUpload size={15} />}
+                  loading={uploading}
+                  onClick={() => assetFileInputRef.current?.click()}
+                  data-testid={TestSelectors.VENUE_FILES_UPLOAD_BUTTON}
+                >
+                  <Trans>Upload file</Trans>
+                </Button>
+              )}
+              <input
+                ref={assetFileInputRef}
+                type="file"
+                hidden
+                onChange={(e) => {
+                  const file = e.currentTarget.files?.[0];
+                  if (file) void handleUploadAsset(file);
+                }}
+              />
             </Group>
-            {canManage && (
-              <Button
-                variant="light"
-                size="sm"
-                leftSection={<IconUpload size={15} />}
-                loading={uploading}
-                onClick={() => assetFileInputRef.current?.click()}
-                data-testid={TestSelectors.VENUE_FILES_UPLOAD_BUTTON}
-              >
-                <Trans>Upload file</Trans>
-              </Button>
-            )}
-            <input
-              ref={assetFileInputRef}
-              type="file"
-              hidden
-              onChange={(e) => {
-                const file = e.currentTarget.files?.[0];
-                if (file) void handleUploadAsset(file);
+            <SegmentedControl
+              size="sm"
+              value="files"
+              data-testid={TestSelectors.VENUE_VIEW_MODE_SWITCHER}
+              onChange={(v) => {
+                if (v === "profile") {
+                  void navigate({ to: "/venues/$venueId", params: { venueId } });
+                }
               }}
+              data={[
+                {
+                  value: "profile",
+                  label: (
+                    <Group gap={6} wrap="nowrap">
+                      <IconBuildingStore size={14} />
+                      <Trans>Venue Profile</Trans>
+                    </Group>
+                  ),
+                },
+                {
+                  value: "files",
+                  label: (
+                    <Group gap={6} wrap="nowrap">
+                      <IconFolder size={14} />
+                      <Trans>File Manager</Trans>
+                    </Group>
+                  ),
+                },
+              ]}
             />
           </Group>
         }

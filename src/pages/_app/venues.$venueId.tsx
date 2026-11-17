@@ -1063,14 +1063,15 @@ function VenueDetailPage() {
           ]}
         />
         <PageHeader
-          title={<Trans>Venue</Trans>}
+          title={venue ? [venue.name, venue.city].filter(Boolean).join(", ") : <Trans>Venue</Trans>}
           breadcrumbs={[
             { label: <Trans>Home</Trans>, to: "/" },
             { label: <Trans>Venues</Trans>, to: "/venues" },
             { label: venue ? [venue.name, venue.city].filter(Boolean).join(", ") : t`Venue` },
           ]}
           toolbar={
-            <Group gap="xs">
+            <Group gap="xs" justify="space-between" wrap="nowrap" style={{ width: "100%" }}>
+              <Group gap="xs" wrap="nowrap">
               <Tooltip label={t`Back to list`} withArrow>
                 <ActionIcon
                   data-testid={TestSelectors.VENUE_DETAIL_BACK_BUTTON}
@@ -1097,36 +1098,6 @@ function VenueDetailPage() {
                   <IconRefresh size={15} />
                 </ActionIcon>
               </Tooltip>
-              <SegmentedControl
-                size="sm"
-                value="profile"
-                data-testid={TestSelectors.VENUE_VIEW_MODE_SWITCHER}
-                onChange={(v) => {
-                  if (v === "files") {
-                    void navigate({ to: "/venues/$venueId/files", params: { venueId } });
-                  }
-                }}
-                data={[
-                  {
-                    value: "profile",
-                    label: (
-                      <Group gap={6} wrap="nowrap">
-                        <IconBuildingStore size={14} />
-                        <Trans>Venue Profile</Trans>
-                      </Group>
-                    ),
-                  },
-                  {
-                    value: "files",
-                    label: (
-                      <Group gap={6} wrap="nowrap">
-                        <IconFolder size={14} />
-                        <Trans>File Manager</Trans>
-                      </Group>
-                    ),
-                  },
-                ]}
-              />
               {canManage && (
                 <>
                   <Button
@@ -1187,6 +1158,37 @@ function VenueDetailPage() {
                   </Button>
                 </>
               )}
+              </Group>
+              <SegmentedControl
+                size="sm"
+                value="profile"
+                data-testid={TestSelectors.VENUE_VIEW_MODE_SWITCHER}
+                onChange={(v) => {
+                  if (v === "files") {
+                    void navigate({ to: "/venues/$venueId/files", params: { venueId } });
+                  }
+                }}
+                data={[
+                  {
+                    value: "profile",
+                    label: (
+                      <Group gap={6} wrap="nowrap">
+                        <IconBuildingStore size={14} />
+                        <Trans>Venue Profile</Trans>
+                      </Group>
+                    ),
+                  },
+                  {
+                    value: "files",
+                    label: (
+                      <Group gap={6} wrap="nowrap">
+                        <IconFolder size={14} />
+                        <Trans>File Manager</Trans>
+                      </Group>
+                    ),
+                  },
+                ]}
+              />
             </Group>
           }
         />
