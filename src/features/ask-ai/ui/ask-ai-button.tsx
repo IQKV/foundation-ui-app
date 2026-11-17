@@ -5,7 +5,7 @@ import { useAskAiPanelStore } from "../model/ask-ai-panel.store";
 
 /**
  * Topbar button that opens the Ask AI drawer.
- * Green accent to visually separate it from the blue primary actions.
+ * Deep orange accent to visually separate it from the blue primary actions.
  */
 export function AskAiButton() {
   const open = useAskAiPanelStore((s) => s.open);
@@ -19,14 +19,14 @@ export function AskAiButton() {
       data-testid="ask-ai-button"
       styles={{
         root: {
-          background: "linear-gradient(135deg, #5a7a1a 0%, #6b9a1f 100%)",
+          background: "linear-gradient(135deg, #c44b0a 0%, #e8541a 100%)",
           border: "1px solid rgba(255,255,255,0.15)",
           color: "#ffffff",
           "&:hover": {
-            background: "linear-gradient(135deg, #6b9a1f 0%, #7cb523 100%)",
+            background: "linear-gradient(135deg, #d4530f 0%, #f06030 100%)",
           },
           "&:active": {
-            background: "linear-gradient(135deg, #4d6816 0%, #5a7a1a 100%)",
+            background: "linear-gradient(135deg, #a83d08 0%, #c44b0a 100%)",
           },
         },
       }}
