@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState, useCallback } from "react";
-import { Modal, Box, Group, Text, TextInput, UnstyledButton, Divider, Stack } from "@mantine/core";
-import { IconSearch, IconArrowRight, IconCornerDownLeft } from "@tabler/icons-react";
-import { useNavigate, useRouterState } from "@tanstack/react-router";
+import { Modal, Box, Group, Text, TextInput, UnstyledButton } from "@mantine/core";
+import { IconSearch, IconCornerDownLeft } from "@tabler/icons-react";
+import { useNavigate } from "@tanstack/react-router";
 import { Trans, useLingui } from "@lingui/react/macro";
+import { motion, AnimatePresence } from "framer-motion";
 import { navigationExtension } from "@/app/addons";
 import { useSession } from "@/processes/session";
 import { isMultiTenantMode } from "@/app/config";
@@ -24,50 +25,72 @@ interface SpotlightItem {
 interface SpotlightRowProps {
   item: SpotlightItem;
   isActive: boolean;
+  index: number;
   onSelect: () => void;
   onHover: () => void;
   itemRef: (el: HTMLButtonElement | null) => void;
 }
 
-function SpotlightRow({ item, isActive, onSelect, onHover, itemRef }: SpotlightRowProps) {
+function SpotlightRow({ item, isActive, index, onSelect, onHover, itemRef }: SpotlightRowProps) {
   return (
-    <UnstyledButton
-      ref={itemRef}
-      onClick={onSelect}
-      onMouseEnter={onHover}
-      data-testid="spotlight-row"
-      style={{
-        display: "flex",
-        alignItems: "center",
-        gap: 10,
-        width: "100%",
-        padding: "8px 16px",
-        borderRadius: "var(--mantine-radius-sm)",
-        background: isActive ? "var(--mantine-color-gray-1)" : "transparent",
-        transition: "background 80ms ease",
-        cursor: "pointer",
-      }}
+    <motion.div
+      initial={{ opacity: 0, x: -6 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ delay: index * 0.03, duration: 0.15 }}
+      style={{ position: "relative" }}
     >
-      {item.icon && (
-        <Box style={{ width: 20, flexShrink: 0, color: "var(--mantine-color-gray-6)" }}>
-          {item.icon}
-        </Box>
+      {/* Sliding active highlight — shared layoutId so it animates between rows */}
+      {isActive && (
+        <motion.div
+          layoutId="spotlight-active"
+          transition={{ type: "spring", stiffness: 400, damping: 32 }}
+          style={{
+            position: "absolute",
+            inset: 0,
+            borderRadius: "var(--mantine-radius-sm)",
+            background: "var(--mantine-color-gray-1)",
+            zIndex: 0,
+          }}
+        />
       )}
-      <Box style={{ flex: 1, minWidth: 0 }}>
-        <Text size="sm" fw={isActive ? 500 : 400} truncate>
-          {item.label}
-        </Text>
-        {item.subtitle && (
-          <Text size="xs" c="dimmed" truncate>
-            {item.subtitle}
-          </Text>
+      <UnstyledButton
+        ref={itemRef}
+        onClick={onSelect}
+        onMouseEnter={onHover}
+        data-testid="spotlight-row"
+        style={{
+          position: "relative",
+          zIndex: 1,
+          display: "flex",
+          alignItems: "center",
+          gap: 10,
+          width: "100%",
+          padding: "8px 16px",
+          borderRadius: "var(--mantine-radius-sm)",
+          cursor: "pointer",
+        }}
+      >
+        {item.icon && (
+          <Box style={{ width: 20, flexShrink: 0, color: "var(--mantine-color-gray-6)" }}>
+            {item.icon}
+          </Box>
         )}
-      </Box>
-    </UnstyledButton>
+        <Box style={{ flex: 1, minWidth: 0 }}>
+          <Text size="sm" fw={isActive ? 500 : 400} truncate>
+            {item.label}
+          </Text>
+          {item.subtitle && (
+            <Text size="xs" c="dimmed" truncate>
+              {item.subtitle}
+            </Text>
+          )}
+        </Box>
+      </UnstyledButton>
+    </motion.div>
   );
 }
 
-// ─── Section ──────────────────────────────────────────────────────────────────
+// ─── Section label ────────────────────────────────────────────────────────────
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
@@ -92,8 +115,6 @@ export function SpotlightModal() {
   const { t } = useLingui();
   const { isSpotlightOpen, closeSpotlight, actions: pageActions } = useCommandBarStore();
   const navigate = useNavigate();
-  const routerState = useRouterState();
-  const currentPath = routerState.location.pathname;
   const { isTenantOwner, isPersonalWorkspace, payload } = useSession();
   const canManagePages = (payload?.authorities ?? []).some(
     (a) => a === "TENANT_OWNER" || a === "ADMIN",
@@ -104,7 +125,6 @@ export function SpotlightModal() {
   const inputRef = useRef<HTMLInputElement>(null);
   const rowRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
-  // Build GO TO items from nav config
   const addonItems = navigationExtension.getNavItems("workspace");
   const sections = buildNavSections(
     { isMultiTenantMode, isTenantOwner, isPersonalWorkspace, canManagePages },
@@ -138,10 +158,10 @@ export function SpotlightModal() {
       },
     }));
 
-  // Flat list for keyboard navigation
   const allItems: SpotlightItem[] = [...actionItems, ...gotoItems];
+  const actionStart = 0;
+  const gotoStart = actionItems.length;
 
-  // Reset state on open
   useEffect(() => {
     if (isSpotlightOpen) {
       setQuery("");
@@ -151,10 +171,13 @@ export function SpotlightModal() {
     }
   }, [isSpotlightOpen]);
 
-  // Keep active row scrolled into view
   useEffect(() => {
     rowRefs.current[activeIndex]?.scrollIntoView({ block: "nearest" });
   }, [activeIndex]);
+
+  useEffect(() => {
+    setActiveIndex(0);
+  }, [query]);
 
   const handleSelect = useCallback(
     (index: number) => {
@@ -178,16 +201,6 @@ export function SpotlightModal() {
     }
   }
 
-  // Reset active index when query changes
-  useEffect(() => {
-    setActiveIndex(0);
-  }, [query]);
-
-  // Build flat index map for section rendering
-  let flatIndex = 0;
-  const actionStart = 0;
-  const gotoStart = actionItems.length;
-
   return (
     <Modal
       opened={isSpotlightOpen}
@@ -197,117 +210,130 @@ export function SpotlightModal() {
       radius="md"
       size={520}
       overlayProps={{ backgroundOpacity: 0.25, blur: 2 }}
+      transitionProps={{ transition: "fade", duration: 120 }}
       styles={{
         content: { overflow: "hidden" },
         body: { padding: 0 },
       }}
       data-testid="spotlight-modal"
     >
-      {/* Search input */}
-      <Box px="md" py="sm" style={{ borderBottom: "1px solid var(--mantine-color-gray-2)" }}>
-        <Group gap="xs">
-          <IconSearch size={16} color="var(--mantine-color-gray-5)" style={{ flexShrink: 0 }} />
-          <TextInput
-            ref={inputRef}
-            variant="unstyled"
-            flex={1}
-            placeholder={t`Search pages, actions…`}
-            value={query}
-            onChange={(e) => setQuery(e.currentTarget.value)}
-            onKeyDown={handleKeyDown}
-            styles={{ input: { fontSize: "var(--mantine-font-size-sm)", padding: 0 } }}
-            data-testid="spotlight-input"
-          />
-          <Text size="xs" c="dimmed">
-            Esc
-          </Text>
-        </Group>
-      </Box>
-
-      {/* Results */}
-      <Box style={{ maxHeight: 400, overflowY: "auto" }} py="xs">
-        {allItems.length === 0 && (
-          <Text size="sm" c="dimmed" ta="center" py="xl">
-            <Trans>No results</Trans>
-          </Text>
-        )}
-
-        {actionItems.length > 0 && (
-          <>
-            <SectionLabel>
-              <Trans>Actions</Trans>
-            </SectionLabel>
-            {actionItems.map((item, i) => {
-              const idx = actionStart + i;
-              const ref = (el: HTMLButtonElement | null) => {
-                rowRefs.current[idx] = el;
-              };
-              return (
-                <SpotlightRow
-                  key={item.id}
-                  item={item}
-                  isActive={activeIndex === idx}
-                  onSelect={() => handleSelect(idx)}
-                  onHover={() => setActiveIndex(idx)}
-                  itemRef={ref}
-                />
-              );
-            })}
-          </>
-        )}
-
-        {gotoItems.length > 0 && (
-          <>
-            <SectionLabel>
-              <Trans>Go to</Trans>
-            </SectionLabel>
-            {gotoItems.map((item, i) => {
-              const idx = gotoStart + i;
-              const ref = (el: HTMLButtonElement | null) => {
-                rowRefs.current[idx] = el;
-              };
-              return (
-                <SpotlightRow
-                  key={item.id}
-                  item={item}
-                  isActive={activeIndex === idx}
-                  onSelect={() => handleSelect(idx)}
-                  onHover={() => setActiveIndex(idx)}
-                  itemRef={ref}
-                />
-              );
-            })}
-          </>
-        )}
-      </Box>
-
-      {/* Footer */}
-      <Box px="md" py="xs" style={{ borderTop: "1px solid var(--mantine-color-gray-2)" }}>
-        <Group gap="lg">
-          <Group gap={4}>
-            <IconCornerDownLeft size={12} color="var(--mantine-color-gray-5)" />
-            <Text size="xs" c="dimmed">
-              <Trans>open</Trans>
-            </Text>
-          </Group>
-          <Group gap={4}>
-            <Text size="xs" c="dimmed">
-              ↑↓
-            </Text>
-            <Text size="xs" c="dimmed">
-              <Trans>navigate</Trans>
-            </Text>
-          </Group>
-          <Group gap={4}>
+      <motion.div
+        initial={{ opacity: 0, scale: 0.97, y: -8 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{ type: "spring", stiffness: 420, damping: 30 }}
+      >
+        {/* Search input */}
+        <Box px="md" py="sm" style={{ borderBottom: "1px solid var(--mantine-color-gray-2)" }}>
+          <Group gap="xs">
+            <IconSearch size={16} color="var(--mantine-color-gray-5)" style={{ flexShrink: 0 }} />
+            <TextInput
+              ref={inputRef}
+              variant="unstyled"
+              flex={1}
+              placeholder={t`Search pages, actions…`}
+              value={query}
+              onChange={(e) => setQuery(e.currentTarget.value)}
+              onKeyDown={handleKeyDown}
+              styles={{ input: { fontSize: "var(--mantine-font-size-sm)", padding: 0 } }}
+              data-testid="spotlight-input"
+            />
             <Text size="xs" c="dimmed">
               Esc
             </Text>
-            <Text size="xs" c="dimmed">
-              <Trans>close</Trans>
-            </Text>
           </Group>
-        </Group>
-      </Box>
+        </Box>
+
+        {/* Results */}
+        <Box style={{ maxHeight: 400, overflowY: "auto" }} py="xs">
+          {allItems.length === 0 && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.15 }}
+            >
+              <Text size="sm" c="dimmed" ta="center" py="xl">
+                <Trans>No results</Trans>
+              </Text>
+            </motion.div>
+          )}
+
+          {actionItems.length > 0 && (
+            <>
+              <SectionLabel>
+                <Trans>Actions</Trans>
+              </SectionLabel>
+              {actionItems.map((item, i) => {
+                const idx = actionStart + i;
+                return (
+                  <SpotlightRow
+                    key={item.id}
+                    item={item}
+                    index={i}
+                    isActive={activeIndex === idx}
+                    onSelect={() => handleSelect(idx)}
+                    onHover={() => setActiveIndex(idx)}
+                    itemRef={(el) => {
+                      rowRefs.current[idx] = el;
+                    }}
+                  />
+                );
+              })}
+            </>
+          )}
+
+          {gotoItems.length > 0 && (
+            <>
+              <SectionLabel>
+                <Trans>Go to</Trans>
+              </SectionLabel>
+              {gotoItems.map((item, i) => {
+                const idx = gotoStart + i;
+                return (
+                  <SpotlightRow
+                    key={item.id}
+                    item={item}
+                    index={i}
+                    isActive={activeIndex === idx}
+                    onSelect={() => handleSelect(idx)}
+                    onHover={() => setActiveIndex(idx)}
+                    itemRef={(el) => {
+                      rowRefs.current[idx] = el;
+                    }}
+                  />
+                );
+              })}
+            </>
+          )}
+        </Box>
+
+        {/* Footer */}
+        <Box px="md" py="xs" style={{ borderTop: "1px solid var(--mantine-color-gray-2)" }}>
+          <Group gap="lg">
+            <Group gap={4}>
+              <IconCornerDownLeft size={12} color="var(--mantine-color-gray-5)" />
+              <Text size="xs" c="dimmed">
+                <Trans>open</Trans>
+              </Text>
+            </Group>
+            <Group gap={4}>
+              <Text size="xs" c="dimmed">
+                ↑↓
+              </Text>
+              <Text size="xs" c="dimmed">
+                <Trans>navigate</Trans>
+              </Text>
+            </Group>
+            <Group gap={4}>
+              <Text size="xs" c="dimmed">
+                Esc
+              </Text>
+              <Text size="xs" c="dimmed">
+                <Trans>close</Trans>
+              </Text>
+            </Group>
+          </Group>
+        </Box>
+      </motion.div>
     </Modal>
   );
 }

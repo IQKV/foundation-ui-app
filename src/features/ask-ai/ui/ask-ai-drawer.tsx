@@ -9,12 +9,12 @@ import {
   ActionIcon,
   UnstyledButton,
   ScrollArea,
-  Loader,
   Alert,
   ThemeIcon,
 } from "@mantine/core";
 import { IconSparkles, IconArrowUp, IconAlertCircle, IconRefresh } from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
+import { motion, AnimatePresence } from "framer-motion";
 import { useMessages, useSendMessage, useChatInputHistory } from "@/addons/platform-ai-chat/model";
 import { MessageBubble } from "@/addons/platform-ai-chat/ui/message-bubble";
 import { useAskAiPanelStore } from "../model/ask-ai-panel.store";
@@ -26,44 +26,51 @@ const MAX_INPUT_CHARS = 4000;
 
 interface SuggestionCardProps {
   action: AiContextAction;
+  index: number;
   onSelect: (message: string) => void;
 }
 
-function SuggestionCard({ action, onSelect }: SuggestionCardProps) {
+function SuggestionCard({ action, index, onSelect }: SuggestionCardProps) {
   return (
-    <UnstyledButton
-      onClick={() => onSelect(action.message)}
-      data-testid="ai-suggestion-card"
-      style={{
-        display: "block",
-        width: "100%",
-        padding: "10px 14px",
-        borderRadius: "var(--mantine-radius-md)",
-        border: "1px solid var(--mantine-color-gray-2)",
-        background: "var(--app-surface-bg)",
-        cursor: "pointer",
-        transition: "border-color 120ms ease, background 120ms ease",
-      }}
-      onMouseEnter={(e) => {
-        (e.currentTarget as HTMLButtonElement).style.borderColor =
-          "var(--mantine-color-green-5, #74b816)";
-        (e.currentTarget as HTMLButtonElement).style.background =
-          "var(--mantine-color-green-0, #ebfbee)";
-      }}
-      onMouseLeave={(e) => {
-        (e.currentTarget as HTMLButtonElement).style.borderColor = "var(--mantine-color-gray-2)";
-        (e.currentTarget as HTMLButtonElement).style.background = "var(--app-surface-bg)";
-      }}
+    <motion.div
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: index * 0.05, type: "spring", stiffness: 340, damping: 28 }}
     >
-      <Text size="sm" fw={500} style={{ lineHeight: 1.4 }}>
-        {action.label}
-      </Text>
-      {action.subtitle && (
-        <Text size="xs" c="dimmed" mt={2}>
-          {action.subtitle}
+      <UnstyledButton
+        onClick={() => onSelect(action.message)}
+        data-testid="ai-suggestion-card"
+        style={{
+          display: "block",
+          width: "100%",
+          padding: "10px 14px",
+          borderRadius: "var(--mantine-radius-md)",
+          border: "1px solid var(--mantine-color-gray-2)",
+          background: "var(--app-surface-bg)",
+          cursor: "pointer",
+          transition: "border-color 120ms ease, background 120ms ease",
+        }}
+        onMouseEnter={(e) => {
+          (e.currentTarget as HTMLButtonElement).style.borderColor =
+            "var(--mantine-color-green-5, #74b816)";
+          (e.currentTarget as HTMLButtonElement).style.background =
+            "var(--mantine-color-green-0, #ebfbee)";
+        }}
+        onMouseLeave={(e) => {
+          (e.currentTarget as HTMLButtonElement).style.borderColor = "var(--mantine-color-gray-2)";
+          (e.currentTarget as HTMLButtonElement).style.background = "var(--app-surface-bg)";
+        }}
+      >
+        <Text size="sm" fw={500} style={{ lineHeight: 1.4 }}>
+          {action.label}
         </Text>
-      )}
-    </UnstyledButton>
+        {action.subtitle && (
+          <Text size="xs" c="dimmed" mt={2}>
+            {action.subtitle}
+          </Text>
+        )}
+      </UnstyledButton>
+    </motion.div>
   );
 }
 
@@ -90,8 +97,8 @@ function SuggestionsSection({ actions, onSelect }: SuggestionsSectionProps) {
         <Trans>Suggested</Trans>
       </Text>
       <Stack gap="xs">
-        {actions.map((action) => (
-          <SuggestionCard key={action.label} action={action} onSelect={onSelect} />
+        {actions.map((action, i) => (
+          <SuggestionCard key={action.label} action={action} index={i} onSelect={onSelect} />
         ))}
       </Stack>
     </Box>
@@ -268,10 +275,24 @@ export function AskAiDrawer() {
               ))}
               {sendMutation.isPending && (
                 <Group gap="xs" pl={44}>
-                  <Loader size="xs" color="green" />
-                  <Text size="xs" c="dimmed">
-                    <Trans>Thinking…</Trans>
-                  </Text>
+                  {[0, 1, 2].map((i) => (
+                    <motion.div
+                      key={i}
+                      style={{
+                        width: 6,
+                        height: 6,
+                        borderRadius: "50%",
+                        background: "#6b9a1f",
+                      }}
+                      animate={{ opacity: [0.3, 1, 0.3], y: [0, -4, 0] }}
+                      transition={{
+                        duration: 0.9,
+                        repeat: Infinity,
+                        delay: i * 0.18,
+                        ease: "easeInOut",
+                      }}
+                    />
+                  ))}
                 </Group>
               )}
             </Stack>
@@ -349,18 +370,59 @@ export function AskAiDrawer() {
               flexShrink: 0,
             }}
           >
-            {sendMutation.isPending ? (
-              <Loader size={14} color="white" />
-            ) : (
-              <IconArrowUp size={16} />
-            )}
+            <AnimatePresence mode="wait" initial={false}>
+              {sendMutation.isPending ? (
+                <motion.div
+                  key="pending"
+                  initial={{ opacity: 0, scale: 0.7 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.7 }}
+                  transition={{ duration: 0.12 }}
+                >
+                  {[0, 1, 2].map((i) => (
+                    <motion.div
+                      key={i}
+                      style={{
+                        width: 4,
+                        height: 4,
+                        borderRadius: "50%",
+                        background: "white",
+                        display: "inline-block",
+                        margin: "0 1px",
+                      }}
+                      animate={{ opacity: [0.3, 1, 0.3] }}
+                      transition={{ duration: 0.8, repeat: Infinity, delay: i * 0.15 }}
+                    />
+                  ))}
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="arrow"
+                  initial={{ opacity: 0, scale: 0.7 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.7 }}
+                  transition={{ duration: 0.12 }}
+                >
+                  <IconArrowUp size={16} />
+                </motion.div>
+              )}
+            </AnimatePresence>
           </ActionIcon>
         </Group>
-        {charsLeft < 200 && (
-          <Text size="xs" ta="right" c={isOverLimit ? "red" : "dimmed"} mt={4}>
-            {charsLeft.toLocaleString()} / {MAX_INPUT_CHARS.toLocaleString()}
-          </Text>
-        )}
+        <AnimatePresence>
+          {charsLeft < 200 && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.15 }}
+            >
+              <Text size="xs" ta="right" c={isOverLimit ? "red" : "dimmed"} mt={4}>
+                {charsLeft.toLocaleString()} / {MAX_INPUT_CHARS.toLocaleString()}
+              </Text>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </Box>
     </Drawer>
   );
