@@ -26,8 +26,8 @@ export function useCommandBarActions(
   actions: CommandBarAction[],
   options?: CommandBarOptions,
 ): void {
-  const setActions = useCommandBarStore((s) => s.setActions);
-  const clearActions = useCommandBarStore((s) => s.clearActions);
+  const setSpotlightActions = useCommandBarStore((s) => s.setSpotlightActions);
+  const clearSpotlightActions = useCommandBarStore((s) => s.clearSpotlightActions);
   const hide = useCommandBarStore((s) => s.hide);
   const show = useCommandBarStore((s) => s.show);
 
@@ -36,13 +36,13 @@ export function useCommandBarActions(
       hide();
     }
     if (actions.length > 0) {
-      setActions(actions);
+      setSpotlightActions(actions);
     }
     return () => {
       show();
-      clearActions();
+      clearSpotlightActions();
     };
     // actions identity intentionally excluded — callers must pass a stable ref
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [hide, show, setActions, clearActions, options?.hidden]);
+  }, [hide, show, setSpotlightActions, clearSpotlightActions, options?.hidden]);
 }

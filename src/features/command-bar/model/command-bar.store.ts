@@ -13,26 +13,26 @@ interface CommandBarState {
   isVisible: boolean;
   /** Whether the Ctrl+K spotlight modal is open. */
   isSpotlightOpen: boolean;
-  /** Page-level actions registered by the active route. */
-  actions: CommandBarAction[];
+  /** Page-level actions shown inside the spotlight modal under "Create". */
+  spotlightActions: CommandBarAction[];
 
   show: () => void;
   hide: () => void;
   openSpotlight: () => void;
   closeSpotlight: () => void;
-  setActions: (actions: CommandBarAction[]) => void;
-  clearActions: () => void;
+  setSpotlightActions: (actions: CommandBarAction[]) => void;
+  clearSpotlightActions: () => void;
 }
 
 export const useCommandBarStore = create<CommandBarState>((set) => ({
   isVisible: true,
   isSpotlightOpen: false,
-  actions: [],
+  spotlightActions: [],
 
   show: () => set({ isVisible: true }),
   hide: () => set({ isVisible: false }),
   openSpotlight: () => set({ isSpotlightOpen: true }),
   closeSpotlight: () => set({ isSpotlightOpen: false }),
-  setActions: (actions) => set({ actions }),
-  clearActions: () => set({ actions: [] }),
+  setSpotlightActions: (actions) => set({ spotlightActions: actions }),
+  clearSpotlightActions: () => set({ spotlightActions: [] }),
 }));

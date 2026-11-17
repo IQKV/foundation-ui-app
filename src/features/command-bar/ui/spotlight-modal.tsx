@@ -113,7 +113,7 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 
 export function SpotlightModal() {
   const { t } = useLingui();
-  const { isSpotlightOpen, closeSpotlight, actions: pageActions } = useCommandBarStore();
+  const { isSpotlightOpen, closeSpotlight, spotlightActions: pageActions } = useCommandBarStore();
   const navigate = useNavigate();
   const { isTenantOwner, isPersonalWorkspace, payload } = useSession();
   const canManagePages = (payload?.authorities ?? []).some(
@@ -260,7 +260,7 @@ export function SpotlightModal() {
           {actionItems.length > 0 && (
             <>
               <SectionLabel>
-                <Trans>Actions</Trans>
+                <Trans>Create</Trans>
               </SectionLabel>
               {actionItems.map((item, i) => {
                 const idx = actionStart + i;
