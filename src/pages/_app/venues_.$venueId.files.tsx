@@ -263,7 +263,12 @@ function FileTypeNav({
                   {opt.label}
                 </Text>
               </Group>
-              <Badge size="xs" variant={isActive ? "filled" : "light"} color={isActive ? "blue" : "gray"} circle>
+              <Badge
+                size="xs"
+                variant={isActive ? "filled" : "light"}
+                color={isActive ? "blue" : "gray"}
+                circle
+              >
                 {counts[opt.value]}
               </Badge>
             </Group>
@@ -333,7 +338,12 @@ function PhotosSection({
 
   if (photos.length === 0 && masterPhotos.length === 0) {
     return (
-      <Paper withBorder p="xl" radius="md" style={{ textAlign: "center", background: "var(--mantine-color-gray-0)" }}>
+      <Paper
+        withBorder
+        p="xl"
+        radius="md"
+        style={{ textAlign: "center", background: "var(--mantine-color-gray-0)" }}
+      >
         <Stack align="center" gap="sm">
           <IconPhoto size={40} color="var(--mantine-color-gray-4)" />
           <Text size="sm" c="dimmed">
@@ -390,13 +400,23 @@ function PhotoCard({
           <img
             src={photo.sourceUrl}
             alt={photo.label ?? photo.fileName ?? ""}
-            style={{ width: "100%", height: 140, objectFit: "cover", display: "block", borderRadius: "var(--mantine-radius-sm)" }}
+            style={{
+              width: "100%",
+              height: 140,
+              objectFit: "cover",
+              display: "block",
+              borderRadius: "var(--mantine-radius-sm)",
+            }}
           />
         ) : (
           <Group
             justify="center"
             align="center"
-            style={{ height: 140, background: "var(--mantine-color-gray-1)", borderRadius: "var(--mantine-radius-sm)" }}
+            style={{
+              height: 140,
+              background: "var(--mantine-color-gray-1)",
+              borderRadius: "var(--mantine-radius-sm)",
+            }}
           >
             <IconPhoto size={24} color="var(--mantine-color-gray-4)" />
           </Group>
@@ -414,7 +434,13 @@ function PhotoCard({
             <IconMaximize size={14} />
           </ActionIcon>
         )}
-        <Badge variant="filled" color="dark" size="xs" radius="sm" style={{ position: "absolute", top: 6, left: 6, opacity: 0.75 }}>
+        <Badge
+          variant="filled"
+          color="dark"
+          size="xs"
+          radius="sm"
+          style={{ position: "absolute", top: 6, left: 6, opacity: 0.75 }}
+        >
           #{index + 1}
         </Badge>
       </Box>
@@ -458,7 +484,12 @@ function DocumentsSection({
 
   if (documents.length === 0) {
     return (
-      <Paper withBorder p="xl" radius="md" style={{ textAlign: "center", background: "var(--mantine-color-gray-0)" }}>
+      <Paper
+        withBorder
+        p="xl"
+        radius="md"
+        style={{ textAlign: "center", background: "var(--mantine-color-gray-0)" }}
+      >
         <Stack align="center" gap="sm">
           <IconPaperclip size={40} color="var(--mantine-color-gray-4)" />
           <Text size="sm" c="dimmed">{t`No documents for this venue.`}</Text>
@@ -472,10 +503,23 @@ function DocumentsSection({
       {documents.map((asset) => {
         const name = asset.label ?? asset.fileName ?? asset.id;
         return (
-          <Paper key={asset.id} withBorder radius="md" p="sm" shadow="sm" style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+          <Paper
+            key={asset.id}
+            withBorder
+            radius="md"
+            p="sm"
+            shadow="sm"
+            style={{ display: "flex", flexDirection: "column", gap: 8 }}
+          >
             <Group wrap="nowrap" justify="space-between" align="flex-start">
               <Group gap="sm" wrap="nowrap" style={{ minWidth: 0 }}>
-                <ThemeIcon size={36} radius="md" variant="light" color="blue" style={{ flexShrink: 0 }}>
+                <ThemeIcon
+                  size={36}
+                  radius="md"
+                  variant="light"
+                  color="blue"
+                  style={{ flexShrink: 0 }}
+                >
                   <IconPaperclip size={18} />
                 </ThemeIcon>
                 <Stack gap={2} style={{ minWidth: 0 }}>
@@ -554,7 +598,12 @@ function SourcesSection({
 
   if (sources.length === 0) {
     return (
-      <Paper withBorder p="xl" radius="md" style={{ textAlign: "center", background: "var(--mantine-color-gray-0)" }}>
+      <Paper
+        withBorder
+        p="xl"
+        radius="md"
+        style={{ textAlign: "center", background: "var(--mantine-color-gray-0)" }}
+      >
         <Stack align="center" gap="sm">
           <IconFileText size={40} color="var(--mantine-color-gray-4)" />
           <Text size="sm" c="dimmed">{t`No text sources for this venue.`}</Text>
@@ -573,7 +622,13 @@ function SourcesSection({
           <Paper key={source.id} withBorder radius="md" p="sm" shadow="sm">
             <Group justify="space-between" wrap="nowrap" align="flex-start" mb={6}>
               <Group gap="sm" wrap="nowrap" style={{ minWidth: 0 }}>
-                <ThemeIcon size={32} radius="sm" variant="light" color="violet" style={{ flexShrink: 0 }}>
+                <ThemeIcon
+                  size={32}
+                  radius="sm"
+                  variant="light"
+                  color="violet"
+                  style={{ flexShrink: 0 }}
+                >
                   <IconFileText size={16} />
                 </ThemeIcon>
                 <Stack gap={0} style={{ minWidth: 0 }}>
@@ -699,7 +754,11 @@ function VenueFilesPage() {
       setDeleteConfirmId(null);
       setDeletingId(null);
       void queryClient.invalidateQueries({ queryKey: ["tenant", "venue", venueId] });
-      notifications.show({ message: t`Document deleted.`, color: "green", icon: <IconCheck size={16} /> });
+      notifications.show({
+        message: t`Document deleted.`,
+        color: "green",
+        icon: <IconCheck size={16} />,
+      });
     },
     onError: (err) => {
       notifications.show({
@@ -712,7 +771,12 @@ function VenueFilesPage() {
 
   const openAssetPreview = async (asset: VenueAsset) => {
     const name = asset.label ?? asset.fileName ?? asset.id;
-    setAssetPreview({ name, url: null, contentType: asset.contentType, sizeBytes: asset.sizeBytes });
+    setAssetPreview({
+      name,
+      url: null,
+      contentType: asset.contentType,
+      sizeBytes: asset.sizeBytes,
+    });
     try {
       const result = await venueAssetApi.previewUrl(venueId, asset.id);
       setAssetPreview((current) =>
@@ -720,7 +784,11 @@ function VenueFilesPage() {
       );
     } catch {
       setAssetPreview(null);
-      notifications.show({ message: t`Could not load the preview.`, color: "red", icon: <IconAlertTriangle size={16} /> });
+      notifications.show({
+        message: t`Could not load the preview.`,
+        color: "red",
+        icon: <IconAlertTriangle size={16} />,
+      });
     }
   };
 
@@ -740,10 +808,15 @@ function VenueFilesPage() {
         assetType: isDocument ? "DOCUMENT" : "PHOTO",
       });
       await queryClient.invalidateQueries({ queryKey: ["tenant", "venue", venueId] });
-      notifications.show({ message: t`Asset uploaded.`, color: "green", icon: <IconCheck size={16} /> });
+      notifications.show({
+        message: t`Asset uploaded.`,
+        color: "green",
+        icon: <IconCheck size={16} />,
+      });
     } catch (err) {
       notifications.show({
-        message: err instanceof Error ? err.message : t`Could not upload the asset. Please try again.`,
+        message:
+          err instanceof Error ? err.message : t`Could not upload the asset. Please try again.`,
         color: "red",
         icon: <IconAlertTriangle size={16} />,
       });
@@ -756,7 +829,9 @@ function VenueFilesPage() {
   // Search + sort filtering helpers
   const searchLower = search.trim().toLowerCase();
 
-  const filterByName = <T extends { label?: string | null; fileName?: string | null; name?: string }>(
+  const filterByName = <
+    T extends { label?: string | null; fileName?: string | null; name?: string },
+  >(
     items: T[],
     getName: (item: T) => string,
   ) => {
@@ -764,13 +839,16 @@ function VenueFilesPage() {
     return items.filter((item) => getName(item).toLowerCase().includes(searchLower));
   };
 
-  const sortAssets = <T extends { createdAt: string; label?: string | null; fileName?: string | null }>(
+  const sortAssets = <
+    T extends { createdAt: string; label?: string | null; fileName?: string | null },
+  >(
     items: T[],
     getName: (item: T) => string,
   ) => {
     const copy = [...items];
     if (sort === "newest") copy.sort((a, b) => +new Date(b.createdAt) - +new Date(a.createdAt));
-    else if (sort === "oldest") copy.sort((a, b) => +new Date(a.createdAt) - +new Date(b.createdAt));
+    else if (sort === "oldest")
+      copy.sort((a, b) => +new Date(a.createdAt) - +new Date(b.createdAt));
     else copy.sort((a, b) => getName(a).localeCompare(getName(b)));
     return copy;
   };
@@ -778,8 +856,12 @@ function VenueFilesPage() {
   const sortSources = (items: VenueTextContent[]) => {
     const copy = [...items];
     if (sort === "newest") copy.sort((a, b) => +new Date(b.createdAt) - +new Date(a.createdAt));
-    else if (sort === "oldest") copy.sort((a, b) => +new Date(a.createdAt) - +new Date(b.createdAt));
-    else copy.sort((a, b) => (a.label ?? sourceLabel(a.content)).localeCompare(b.label ?? sourceLabel(b.content)));
+    else if (sort === "oldest")
+      copy.sort((a, b) => +new Date(a.createdAt) - +new Date(b.createdAt));
+    else
+      copy.sort((a, b) =>
+        (a.label ?? sourceLabel(a.content)).localeCompare(b.label ?? sourceLabel(b.content)),
+      );
     return copy;
   };
 
@@ -795,19 +877,32 @@ function VenueFilesPage() {
     filterByName(documents, (a) => a.label ?? a.fileName ?? a.id),
     (a) => a.label ?? a.fileName ?? a.id,
   );
-  const visibleSources = sortSources(filterByName(sources, (s) => s.label ?? sourceLabel(s.content)));
+  const visibleSources = sortSources(
+    filterByName(sources, (s) => s.label ?? sourceLabel(s.content)),
+  );
 
   if (isError) {
     return (
       <Container size="xl" py={0}>
         <PageTitle segments={[t`Venues`, t`Files`]} />
-        <Alert icon={<IconAlertCircle size={16} />} title={<Trans>Failed to load the venue</Trans>} color="red" variant="light" mt="md">
+        <Alert
+          icon={<IconAlertCircle size={16} />}
+          title={<Trans>Failed to load the venue</Trans>}
+          color="red"
+          variant="light"
+          mt="md"
+        >
           <Trans>The venue could not be found or the API is unavailable.</Trans>
           <Group mt="sm">
             <Button variant="light" color="red" size="xs" onClick={() => void refetch()}>
               <Trans>Retry</Trans>
             </Button>
-            <Button variant="subtle" color="gray" size="xs" onClick={() => void navigate({ to: "/venues" })}>
+            <Button
+              variant="subtle"
+              color="gray"
+              size="xs"
+              onClick={() => void navigate({ to: "/venues" })}
+            >
               <Trans>Back to list</Trans>
             </Button>
           </Group>
@@ -876,7 +971,9 @@ function VenueFilesPage() {
                   variant="subtle"
                   color="gray"
                   size="sm"
-                  onClick={() => void queryClient.invalidateQueries({ queryKey: ["tenant", "venue", venueId] })}
+                  onClick={() =>
+                    void queryClient.invalidateQueries({ queryKey: ["tenant", "venue", venueId] })
+                  }
                   loading={isFetching}
                 >
                   <IconRefresh size={15} />
@@ -940,10 +1037,30 @@ function VenueFilesPage() {
           <Stack gap="md">
             {/* Stats row */}
             <SimpleGrid cols={{ base: 2, sm: 4 }} spacing="sm">
-              <StatCard label={t`Total files`} value={counts.all} icon={<IconFolder size={20} />} color="gray" />
-              <StatCard label={t`Photos`} value={counts.photos} icon={<IconPhoto size={20} />} color="blue" />
-              <StatCard label={t`Documents`} value={counts.documents} icon={<IconPaperclip size={20} />} color="violet" />
-              <StatCard label={t`Sources`} value={counts.sources} icon={<IconFileText size={20} />} color="green" />
+              <StatCard
+                label={t`Total files`}
+                value={counts.all}
+                icon={<IconFolder size={20} />}
+                color="gray"
+              />
+              <StatCard
+                label={t`Photos`}
+                value={counts.photos}
+                icon={<IconPhoto size={20} />}
+                color="blue"
+              />
+              <StatCard
+                label={t`Documents`}
+                value={counts.documents}
+                icon={<IconPaperclip size={20} />}
+                color="violet"
+              />
+              <StatCard
+                label={t`Sources`}
+                value={counts.sources}
+                icon={<IconFileText size={20} />}
+                color="green"
+              />
             </SimpleGrid>
 
             {/* Content sections */}
@@ -1073,7 +1190,13 @@ function VenueFilesPage() {
                   target="_blank"
                   rel="noreferrer"
                   size="xs"
-                  style={{ display: "inline-flex", alignItems: "center", gap: 4, fontWeight: 600, flexShrink: 0 }}
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 4,
+                    fontWeight: 600,
+                    flexShrink: 0,
+                  }}
                 >
                   <IconExternalLink size={13} />
                   <Trans>Open</Trans>
@@ -1104,9 +1227,22 @@ function VenueFilesPage() {
                     </Text>
                   </Stack>
                 ) : assetPreview.contentType === "application/pdf" ? (
-                  <iframe src={assetPreview.url} title={assetPreview.name} style={{ width: "100%", height: "72vh", border: 0, display: "block" }} />
+                  <iframe
+                    src={assetPreview.url}
+                    title={assetPreview.name}
+                    style={{ width: "100%", height: "72vh", border: 0, display: "block" }}
+                  />
                 ) : (
-                  <img src={assetPreview.url} alt={assetPreview.name} style={{ maxWidth: "100%", maxHeight: "72vh", objectFit: "contain", display: "block" }} />
+                  <img
+                    src={assetPreview.url}
+                    alt={assetPreview.name}
+                    style={{
+                      maxWidth: "100%",
+                      maxHeight: "72vh",
+                      objectFit: "contain",
+                      display: "block",
+                    }}
+                  />
                 )}
               </Box>
             </Box>
@@ -1156,7 +1292,10 @@ function VenueFilesPage() {
             <Box p="md" style={{ background: PREVIEW_TOKENS.canvas }}>
               <Box style={PREVIEW_TEXT_SURFACE_STYLES}>
                 <ScrollArea.Autosize mah="72vh" style={{ width: "100%" }}>
-                  <Text size="sm" style={{ whiteSpace: "pre-wrap", wordBreak: "break-word", lineHeight: 1.6 }}>
+                  <Text
+                    size="sm"
+                    style={{ whiteSpace: "pre-wrap", wordBreak: "break-word", lineHeight: 1.6 }}
+                  >
                     {sourcePreview.content}
                   </Text>
                 </ScrollArea.Autosize>

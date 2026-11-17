@@ -193,8 +193,14 @@ export function useVenueEnrichment(venueId: string): UseVenueEnrichmentResult {
     if (!section) return;
 
     // Determine which fields are currently empty.
-    interface MetaRow { group: string; field: string; value: unknown }
-    interface ParsedMeta { items: MetaRow[] }
+    interface MetaRow {
+      group: string;
+      field: string;
+      value: unknown;
+    }
+    interface ParsedMeta {
+      items: MetaRow[];
+    }
     let parsed: ParsedMeta | null = null;
     if (currentMetadataRaw) {
       try {
