@@ -23,12 +23,12 @@ import {
   Grid,
   TextInput,
   Select,
+  SegmentedControl,
 } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   IconAlertCircle,
-  IconArrowLeft,
   IconRefresh,
   IconBuildingStore,
   IconMapPin,
@@ -207,20 +207,6 @@ function VenueBrief({ venue, isLoading }: { venue: Venue | undefined; isLoading:
             <Trans>No description available.</Trans>
           </Text>
         )}
-
-        <Button
-          fullWidth
-          size="sm"
-          variant="light"
-          mt="sm"
-          leftSection={<IconArrowLeft size={14} />}
-          data-testid={TestSelectors.VENUE_FILES_BACK_TO_VENUE_BUTTON}
-          onClick={() =>
-            void navigate({ to: "/venues/$venueId", params: { venueId: venue?.id ?? "" } })
-          }
-        >
-          <Trans>Back to venue profile</Trans>
-        </Button>
       </Box>
     </Paper>
   );
@@ -838,29 +824,53 @@ function VenueFilesPage() {
 
   return (
     <Container size="100%" px="md" py={0} style={{ maxWidth: 1600 }}>
-      <PageTitle segments={[t`Venues`, venue ? venue.name : t`Venue`, t`Files`]} />
+      <PageTitle
+        segments={[
+          t`Venues`,
+          venue ? [venue.name, venue.city].filter(Boolean).join(", ") : t`Venue`,
+          t`Files`,
+        ]}
+      />
       <PageHeader
-        title={<Trans>Files</Trans>}
+        title={venue ? [venue.name, venue.city].filter(Boolean).join(", ") : <Trans>Venue</Trans>}
         breadcrumbs={[
           { label: <Trans>Home</Trans>, to: "/" },
           { label: <Trans>Venues</Trans>, to: "/venues" },
-          { label: venue ? venue.name : t`Venue`, to: `/venues/${venueId}` },
-          { label: <Trans>Files</Trans> },
+          { label: venue ? [venue.name, venue.city].filter(Boolean).join(", ") : t`Venue` },
         ]}
         toolbar={
           <Group gap="xs" justify="space-between" wrap="nowrap" style={{ width: "100%" }}>
             <Group gap="xs" wrap="nowrap" style={{ flex: 1, minWidth: 0 }}>
-              <Tooltip label={t`Back to venue profile`} withArrow>
-                <ActionIcon
-                  variant="subtle"
-                  color="gray"
-                  size="sm"
-                  aria-label={t`Back to venue profile`}
-                  onClick={() => void navigate({ to: "/venues/$venueId", params: { venueId } })}
-                >
-                  <IconArrowLeft size={15} />
-                </ActionIcon>
-              </Tooltip>
+              <SegmentedControl
+                size="sm"
+                value="files"
+                data-testid={TestSelectors.VENUE_VIEW_MODE_SWITCHER}
+                onChange={(v) => {
+                  if (v === "profile") {
+                    void navigate({ to: "/venues/$venueId", params: { venueId } });
+                  }
+                }}
+                data={[
+                  {
+                    value: "profile",
+                    label: (
+                      <Group gap={6} wrap="nowrap">
+                        <IconBuildingStore size={14} />
+                        <Trans>Venue Profile</Trans>
+                      </Group>
+                    ),
+                  },
+                  {
+                    value: "files",
+                    label: (
+                      <Group gap={6} wrap="nowrap">
+                        <IconFolder size={14} />
+                        <Trans>File Manager</Trans>
+                      </Group>
+                    ),
+                  },
+                ]}
+              />
               <Tooltip label={t`Refresh`} withArrow>
                 <ActionIcon
                   variant="subtle"

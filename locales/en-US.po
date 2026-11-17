@@ -462,8 +462,8 @@ msgid "Back to sign-in"
 msgstr "Back to sign-in"
 
 #: src/pages/_app/venues_.$venueId.files.tsx
-msgid "Back to venue profile"
-msgstr "Back to venue profile"
+#~ msgid "Back to venue profile"
+#~ msgstr "Back to venue profile"
 
 #: src/features/ban-user/ui/ban-member-modal.tsx
 msgid "Ban member"
@@ -1372,6 +1372,10 @@ msgstr "File"
 
 #: src/pages/_app/venues_.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
+msgid "File Manager"
+msgstr "File Manager"
+
+#: src/pages/_app/venues_.$venueId.files.tsx
 msgid "Files"
 msgstr "Files"
 
@@ -3383,6 +3387,11 @@ msgstr "Venue"
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Venue ID"
 msgstr "Venue ID"
+
+#: src/pages/_app/venues_.$venueId.files.tsx
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Venue Profile"
+msgstr "Venue Profile"
 
 #: src/pages/_app/venues_.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx

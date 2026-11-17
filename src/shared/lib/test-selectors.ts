@@ -413,9 +413,8 @@ export const TestSelectors = {
   VENUE_DETAIL_REFRESH_BUTTON: "venue-detail-refresh-button",
   VENUE_DETAIL_ERROR_RETRY_BUTTON: "venue-detail-error-retry-button",
   VENUE_DETAIL_ASSET_UPLOAD_BUTTON: "venue-detail-asset-upload-button",
-  VENUE_DETAIL_FILES_BUTTON: "venue-detail-files-button",
+  VENUE_VIEW_MODE_SWITCHER: "venue-view-mode-switcher",
   VENUE_FILES_PAGE: "venue-files-page",
-  VENUE_FILES_BACK_TO_VENUE_BUTTON: "venue-files-back-to-venue-button",
   VENUE_FILES_SEARCH_INPUT: "venue-files-search-input",
   VENUE_FILES_UPLOAD_BUTTON: "venue-files-upload-button",
 } as const;
