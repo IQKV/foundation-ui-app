@@ -61,9 +61,9 @@ export const aiChatApi = {
     _client = httpClient;
   },
 
-  sendMessage(body: SendMessageRequest): Promise<ChatResponse> {
+  sendMessage(body: SendMessageRequest, endpoint?: string): Promise<ChatResponse> {
     return client()
-      .post<ChatResponse>(BASE, body)
+      .post<ChatResponse>(endpoint ?? BASE, body)
       .then((r) => r.data);
   },
 
