@@ -161,7 +161,7 @@ export function AskAiDrawer() {
     <Drawer
       opened={isOpen}
       onClose={close}
-      position="left"
+      position="right"
       size={440}
       withCloseButton={false}
       padding={0}
