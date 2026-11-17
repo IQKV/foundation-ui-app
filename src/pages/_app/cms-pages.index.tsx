@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState, useMemo } from "react";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import {
   Container,
   Text,
@@ -39,6 +39,7 @@ import type { CmsPageSummary, CmsPageStatus } from "@/shared/api";
 import { PageHeader } from "@/shared/ui";
 import { useSession } from "@/processes/session";
 import { DeletePageModal } from "@/features/page-admin";
+import { useCommandBarActions } from "@/features/command-bar";
 import { TestSelectors } from "@/shared/lib/test-selectors";
 
 export const Route = createFileRoute("/_app/cms-pages/")({
@@ -49,9 +50,24 @@ const PAGE_SIZE = 20;
 
 function CmsPagesPage() {
   const { t } = useLingui();
+  const navigate = useNavigate();
   const { payload, tenantKey } = useSession();
   const authorities = payload?.authorities ?? [];
   const canManage = authorities.includes("TENANT_OWNER") || authorities.includes("ADMIN");
+
+  const commandBarActions = useMemo(
+    () => [
+      {
+        id: "new-cms-page",
+        label: t`New page`,
+        icon: IconPlus,
+        onClick: () => void navigate({ to: "/cms-pages/create" }),
+      },
+    ],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [],
+  );
+  useCommandBarActions(commandBarActions);
 
   const [page, setPage] = useState(1);
   const [statusFilter, setStatusFilter] = useState<CmsPageStatus | null>(null);
