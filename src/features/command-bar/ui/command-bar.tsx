@@ -17,7 +17,10 @@ function hoverStyle(e: React.MouseEvent<HTMLButtonElement>, entering: boolean) {
 export function CommandBar() {
   const { t } = useLingui();
   const { isVisible, openSpotlight, actions } = useCommandBarStore();
-  const openAi = useAskAiPanelStore((s) => s.open);
+  const { isOpen: aiIsOpen, open: openAi, close: closeAi } = useAskAiPanelStore();
+  function toggleAi() {
+    aiIsOpen ? closeAi() : openAi();
+  }
 
   // Global Ctrl+K / Cmd+K shortcut
   useEffect(() => {
@@ -102,8 +105,9 @@ export function CommandBar() {
               {/* ── Ask AI zone ──────────────────────────────────────────── */}
               <motion.div whileTap={{ scale: 0.97 }}>
                 <UnstyledButton
-                  onClick={openAi}
+                  onClick={toggleAi}
                   aria-label={t`Open AI assistant`}
+                  aria-pressed={aiIsOpen}
                   data-testid="command-bar-ask-ai"
                   style={{
                     display: "flex",
@@ -113,6 +117,7 @@ export function CommandBar() {
                     paddingInline: 14,
                     cursor: "pointer",
                     transition: "background 100ms ease",
+                    background: aiIsOpen ? "var(--mantine-color-orange-0, #fff4e6)" : "transparent",
                     borderRight: hasActions ? "1px solid var(--mantine-color-gray-2)" : undefined,
                   }}
                   onMouseEnter={(e) => hoverStyle(e, true)}
