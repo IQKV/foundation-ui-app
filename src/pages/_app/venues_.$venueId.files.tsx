@@ -373,7 +373,13 @@ function PhotosSection({
             <Divider style={{ flex: 1 }} />
             <Group gap={4} wrap="nowrap">
               <IconLink size={12} color="var(--mantine-color-gray-5)" />
-              <Text size="xs" c="dimmed" fw={600} tt="uppercase" style={{ letterSpacing: "0.05em" }}>
+              <Text
+                size="xs"
+                c="dimmed"
+                fw={600}
+                tt="uppercase"
+                style={{ letterSpacing: "0.05em" }}
+              >
                 <Trans>Linked</Trans>
               </Text>
             </Group>

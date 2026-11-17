@@ -1072,92 +1072,92 @@ function VenueDetailPage() {
           toolbar={
             <Group gap="xs" justify="space-between" wrap="nowrap" style={{ width: "100%" }}>
               <Group gap="xs" wrap="nowrap">
-              <Tooltip label={t`Back to list`} withArrow>
-                <ActionIcon
-                  data-testid={TestSelectors.VENUE_DETAIL_BACK_BUTTON}
-                  variant="subtle"
-                  color="gray"
-                  size="sm"
-                  aria-label={t`Back to list`}
-                  onClick={() => void navigate({ to: "/venues" })}
-                >
-                  <IconArrowLeft size={15} />
-                </ActionIcon>
-              </Tooltip>
-              <Tooltip label={t`Refresh`} withArrow>
-                <ActionIcon
-                  data-testid={TestSelectors.VENUE_DETAIL_REFRESH_BUTTON}
-                  variant="subtle"
-                  color="gray"
-                  size="sm"
-                  onClick={() =>
-                    void queryClient.invalidateQueries({ queryKey: ["tenant", "venue", venueId] })
-                  }
-                  loading={isFetching}
-                >
-                  <IconRefresh size={15} />
-                </ActionIcon>
-              </Tooltip>
-              {canManage && (
-                <>
-                  <Button
-                    variant="light"
+                <Tooltip label={t`Back to list`} withArrow>
+                  <ActionIcon
+                    data-testid={TestSelectors.VENUE_DETAIL_BACK_BUTTON}
+                    variant="subtle"
+                    color="gray"
                     size="sm"
-                    leftSection={<IconEdit size={15} />}
-                    disabled={!venue}
-                    data-testid={TestSelectors.VENUE_DETAIL_EDIT_BUTTON}
-                    onClick={openEdit}
+                    aria-label={t`Back to list`}
+                    onClick={() => void navigate({ to: "/venues" })}
                   >
-                    <Trans>Edit Manually</Trans>
-                  </Button>
-                  {sources.length > 0 && completeness.percent < 100 && (
+                    <IconArrowLeft size={15} />
+                  </ActionIcon>
+                </Tooltip>
+                <Tooltip label={t`Refresh`} withArrow>
+                  <ActionIcon
+                    data-testid={TestSelectors.VENUE_DETAIL_REFRESH_BUTTON}
+                    variant="subtle"
+                    color="gray"
+                    size="sm"
+                    onClick={() =>
+                      void queryClient.invalidateQueries({ queryKey: ["tenant", "venue", venueId] })
+                    }
+                    loading={isFetching}
+                  >
+                    <IconRefresh size={15} />
+                  </ActionIcon>
+                </Tooltip>
+                {canManage && (
+                  <>
                     <Button
                       variant="light"
-                      color="violet"
                       size="sm"
-                      leftSection={<IconSparkles size={15} />}
+                      leftSection={<IconEdit size={15} />}
                       disabled={!venue}
-                      onClick={openAiEnrich}
+                      data-testid={TestSelectors.VENUE_DETAIL_EDIT_BUTTON}
+                      onClick={openEdit}
                     >
-                      <Trans>Fill empty fields</Trans>
+                      <Trans>Edit Manually</Trans>
                     </Button>
-                  )}
-                  <Button
-                    variant="light"
-                    size="sm"
-                    leftSection={<IconUpload size={15} />}
-                    disabled={!venue}
-                    loading={uploadingAsset}
-                    data-testid={TestSelectors.VENUE_DETAIL_ASSET_UPLOAD_BUTTON}
-                    onClick={() => assetFileInputRef.current?.click()}
-                  >
-                    <Trans>Upload asset</Trans>
-                  </Button>
-                  <input
-                    ref={assetFileInputRef}
-                    type="file"
-                    hidden
-                    onChange={(e) => {
-                      const file = e.currentTarget.files?.[0];
-                      if (file) void handleUploadAsset(file);
-                    }}
-                  />
-                  <Button
-                    variant="light"
-                    color="red"
-                    size="sm"
-                    leftSection={<IconTrash size={15} />}
-                    disabled={!venue}
-                    data-testid={TestSelectors.VENUE_DETAIL_DELETE_BUTTON}
-                    onClick={() => {
-                      setDeletedVenue(venue ?? null);
-                      openDelete();
-                    }}
-                  >
-                    <Trans>Delete</Trans>
-                  </Button>
-                </>
-              )}
+                    {sources.length > 0 && completeness.percent < 100 && (
+                      <Button
+                        variant="light"
+                        color="violet"
+                        size="sm"
+                        leftSection={<IconSparkles size={15} />}
+                        disabled={!venue}
+                        onClick={openAiEnrich}
+                      >
+                        <Trans>Fill empty fields</Trans>
+                      </Button>
+                    )}
+                    <Button
+                      variant="light"
+                      size="sm"
+                      leftSection={<IconUpload size={15} />}
+                      disabled={!venue}
+                      loading={uploadingAsset}
+                      data-testid={TestSelectors.VENUE_DETAIL_ASSET_UPLOAD_BUTTON}
+                      onClick={() => assetFileInputRef.current?.click()}
+                    >
+                      <Trans>Upload asset</Trans>
+                    </Button>
+                    <input
+                      ref={assetFileInputRef}
+                      type="file"
+                      hidden
+                      onChange={(e) => {
+                        const file = e.currentTarget.files?.[0];
+                        if (file) void handleUploadAsset(file);
+                      }}
+                    />
+                    <Button
+                      variant="light"
+                      color="red"
+                      size="sm"
+                      leftSection={<IconTrash size={15} />}
+                      disabled={!venue}
+                      data-testid={TestSelectors.VENUE_DETAIL_DELETE_BUTTON}
+                      onClick={() => {
+                        setDeletedVenue(venue ?? null);
+                        openDelete();
+                      }}
+                    >
+                      <Trans>Delete</Trans>
+                    </Button>
+                  </>
+                )}
               </Group>
               <SegmentedControl
                 size="sm"
