@@ -6,6 +6,7 @@ import { AppNav } from "./app-nav";
 import { AppNavLogo } from "./app-nav-logo";
 import { OnboardingModal } from "@/features/onboarding";
 import { AskAiDrawer } from "@/features/ask-ai";
+import { CommandBar } from "@/features/command-bar";
 import { useSession } from "@/processes/session/use-session";
 import classes from "./app-layout.module.css";
 
@@ -110,6 +111,7 @@ export function AppLayout({ children }: AppLayoutProps) {
       </Group>
       <OnboardingModal opened={onboardingOpened} onClose={closeOnboarding} />
       <AskAiDrawer />
+      <CommandBar />
     </>
   );
 }

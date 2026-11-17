@@ -14,6 +14,7 @@ import { AppShell } from "@mantine/core";
 import { AppTopNavBar } from "./app-top-nav-bar";
 import { AppSubNavBar } from "./app-sub-nav-bar";
 import { AskAiDrawer } from "@/features/ask-ai";
+import { CommandBar } from "@/features/command-bar";
 
 interface AppLayoutTopNavProps {
   children: React.ReactNode;
@@ -41,6 +42,7 @@ export function AppLayoutTopNav({ children }: AppLayoutTopNavProps) {
         {children}
       </AppShell.Main>
       <AskAiDrawer />
+      <CommandBar />
     </AppShell>
   );
 }
