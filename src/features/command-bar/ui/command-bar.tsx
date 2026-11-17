@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Group, Text, UnstyledButton, Box, Kbd, Tooltip } from "@mantine/core";
+import { Group, Text, UnstyledButton, Box, Kbd } from "@mantine/core";
 import { IconSearch, IconSparkles } from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { motion, AnimatePresence } from "framer-motion";
@@ -7,7 +7,6 @@ import { useAskAiPanelStore } from "@/features/ask-ai/model/ask-ai-panel.store";
 import { useCommandBarStore } from "../model/command-bar.store";
 import { SpotlightModal } from "./spotlight-modal";
 
-// Shared hover style helper — avoids repeated inline handler pairs
 function hoverStyle(e: React.MouseEvent<HTMLButtonElement>, entering: boolean) {
   (e.currentTarget as HTMLButtonElement).style.background = entering
     ? "var(--mantine-color-gray-0)"
@@ -16,8 +15,9 @@ function hoverStyle(e: React.MouseEvent<HTMLButtonElement>, entering: boolean) {
 
 export function CommandBar() {
   const { t } = useLingui();
-  const { isVisible, openSpotlight, actions } = useCommandBarStore();
+  const { isVisible, openSpotlight } = useCommandBarStore();
   const { isOpen: aiIsOpen, open: openAi, close: closeAi } = useAskAiPanelStore();
+
   function toggleAi() {
     aiIsOpen ? closeAi() : openAi();
   }
@@ -33,8 +33,6 @@ export function CommandBar() {
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [openSpotlight]);
-
-  const hasActions = actions.length > 0;
 
   return (
     <>
@@ -118,7 +116,6 @@ export function CommandBar() {
                     cursor: "pointer",
                     transition: "background 100ms ease",
                     background: aiIsOpen ? "var(--mantine-color-orange-0, #fff4e6)" : "transparent",
-                    borderRight: hasActions ? "1px solid var(--mantine-color-gray-2)" : undefined,
                   }}
                   onMouseEnter={(e) => hoverStyle(e, true)}
                   onMouseLeave={(e) => hoverStyle(e, false)}
@@ -129,51 +126,6 @@ export function CommandBar() {
                   </Text>
                 </UnstyledButton>
               </motion.div>
-
-              {/* ── Page-level actions (animate in/out individually) ──────── */}
-              <AnimatePresence initial={false}>
-                {actions.map((action) => {
-                  const Icon = action.icon;
-                  return (
-                    <motion.div
-                      key={action.id}
-                      initial={{ opacity: 0, width: 0 }}
-                      animate={{ opacity: 1, width: "auto" }}
-                      exit={{ opacity: 0, width: 0 }}
-                      transition={{ type: "spring", stiffness: 340, damping: 28 }}
-                      style={{ overflow: "hidden" }}
-                    >
-                      <Tooltip label={action.label} position="top" withArrow>
-                        <motion.div whileTap={{ scale: 0.97 }}>
-                          <UnstyledButton
-                            onClick={action.onClick}
-                            aria-label={action.label}
-                            data-testid={`command-bar-action-${action.id}`}
-                            style={{
-                              display: "flex",
-                              alignItems: "center",
-                              gap: 6,
-                              height: 44,
-                              paddingInline: 14,
-                              cursor: "pointer",
-                              borderLeft: "1px solid var(--mantine-color-gray-2)",
-                              transition: "background 100ms ease",
-                              whiteSpace: "nowrap",
-                            }}
-                            onMouseEnter={(e) => hoverStyle(e, true)}
-                            onMouseLeave={(e) => hoverStyle(e, false)}
-                          >
-                            {Icon && <Icon size={14} />}
-                            <Text size="sm" fw={500}>
-                              {action.label}
-                            </Text>
-                          </UnstyledButton>
-                        </motion.div>
-                      </Tooltip>
-                    </motion.div>
-                  );
-                })}
-              </AnimatePresence>
             </Group>
           </motion.div>
         )}
