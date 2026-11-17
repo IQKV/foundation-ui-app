@@ -4,6 +4,7 @@ import { Link, useNavigate } from "@tanstack/react-router";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { useSignOut } from "@/features/sign-out";
 import { NotificationBell } from "@/features/notification-bell";
+import { AskAiButton } from "@/features/ask-ai";
 import { useSessionStore } from "@/processes/session";
 import { decodeJwt } from "@/shared/lib/jwt";
 import { isMultiTenantMode } from "@/app/config";
@@ -114,6 +115,7 @@ export function AppHeader({ opened, onToggle }: AppHeaderProps) {
 
       {/* Right-side utility strip */}
       <Group gap="xs" ml="auto">
+        <AskAiButton />
         {isMultiTenantMode && (
           <Button
             variant="filled"

@@ -5,6 +5,7 @@ import { AppHeader } from "./app-header";
 import { AppNav } from "./app-nav";
 import { AppNavLogo } from "./app-nav-logo";
 import { OnboardingModal } from "@/features/onboarding";
+import { AskAiDrawer } from "@/features/ask-ai";
 import { useSession } from "@/processes/session/use-session";
 import classes from "./app-layout.module.css";
 
@@ -108,6 +109,7 @@ export function AppLayout({ children }: AppLayoutProps) {
         {opened && <Box onClick={toggle} aria-hidden className={classes.backdrop} />}
       </Group>
       <OnboardingModal opened={onboardingOpened} onClose={closeOnboarding} />
+      <AskAiDrawer />
     </>
   );
 }

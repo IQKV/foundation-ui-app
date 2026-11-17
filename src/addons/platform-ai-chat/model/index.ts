@@ -28,11 +28,15 @@ export function useMessages(sessionId: string) {
   });
 }
 
-export function useSendMessage(opts?: { onSuccess?: (r: ChatResponse) => void }) {
+export function useSendMessage(opts?: {
+  onSuccess?: (r: ChatResponse) => void;
+  endpoint?: string;
+}) {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: aiChatApi.sendMessage,
+    mutationFn: (body: Parameters<typeof aiChatApi.sendMessage>[0]) =>
+      aiChatApi.sendMessage(body, opts?.endpoint),
     onSuccess: (result) => {
       // Invalidate sessions (title/updatedAt may have changed)
       void queryClient.invalidateQueries({ queryKey: chatKeys.sessions() });

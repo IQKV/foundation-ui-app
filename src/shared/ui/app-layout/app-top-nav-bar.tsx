@@ -18,6 +18,7 @@ import { ColorSchemeToggle } from "@/shared/ui/color-scheme-toggle/color-scheme-
 import { LocaleSwitcher } from "@/shared/ui/locale-switcher/locale-switcher";
 import { NotificationBell } from "@/features/notification-bell";
 import { TenantSwitcher } from "@/features/tenant-switcher";
+import { AskAiButton } from "@/features/ask-ai";
 import { useSession } from "@/processes/session";
 import { isMultiTenantMode } from "@/app/config";
 import { navigationExtension } from "@/app/addons";
@@ -153,6 +154,7 @@ export function AppTopNavBar() {
           }
         >
           {isMultiTenantMode && <TenantSwitcher />}
+          <AskAiButton />
           {isMultiTenantMode && (
             <Button
               variant="filled"
