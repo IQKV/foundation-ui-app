@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import type { ChatEndpoints } from "@/addons/platform-ai-chat/api/ai-chat-api";
 
 export interface AiContextAction {
   /** Short label shown on the chip / card */
@@ -15,8 +16,8 @@ interface AskAiPanelState {
   sessionId: string | null;
   /** Context actions registered by the active page */
   contextActions: AiContextAction[];
-  /** Optional per-page backend endpoint override for sendMessage */
-  endpoint: string | null;
+  /** Optional per-page endpoint override, applied to every AI call while the page is mounted */
+  endpoints: ChatEndpoints | null;
 
   open: () => void;
   close: () => void;
@@ -24,15 +25,15 @@ interface AskAiPanelState {
   clearSession: () => void;
   setContextActions: (actions: AiContextAction[]) => void;
   clearContextActions: () => void;
-  setEndpoint: (endpoint: string) => void;
-  clearEndpoint: () => void;
+  setEndpoints: (endpoints: ChatEndpoints) => void;
+  clearEndpoints: () => void;
 }
 
 export const useAskAiPanelStore = create<AskAiPanelState>((set) => ({
   isOpen: false,
   sessionId: null,
   contextActions: [],
-  endpoint: null,
+  endpoints: null,
 
   open: () => set({ isOpen: true }),
   close: () => set({ isOpen: false }),
@@ -40,6 +41,6 @@ export const useAskAiPanelStore = create<AskAiPanelState>((set) => ({
   clearSession: () => set({ sessionId: null }),
   setContextActions: (actions) => set({ contextActions: actions }),
   clearContextActions: () => set({ contextActions: [] }),
-  setEndpoint: (endpoint) => set({ endpoint }),
-  clearEndpoint: () => set({ endpoint: null }),
+  setEndpoints: (endpoints) => set({ endpoints }),
+  clearEndpoints: () => set({ endpoints: null }),
 }));

@@ -216,14 +216,21 @@ A right-side drawer panel backed by the `platform-ai-chat` addon API (`/v1/aicha
 
 - **Topbar button** — orange `Ask AI` button next to New Organization; also toggleable from the command bar.
 - **Context actions** — pages register suggestion cards via `useAiContextActions`. Clicking a card sends the message immediately.
-- **Per-page endpoint** — pages can route AI requests to a specialised endpoint:
+- **Per-page endpoints** — pages can route every AI call (send, sessions, messages, delete) to a specialised service. Omitted fields fall back to the app-wide default (`aiChatApi.init(httpClient, endpoints)`, set by the addon at bootstrap), then to `/v1/aichat/chat`:
 
 ```tsx
 import { useAiContextActions } from "@/features/ask-ai";
 
 useAiContextActions(
   [{ label: "Summarise team", subtitle: "Team page", message: "Summarise the current team." }],
-  { endpoint: "/v1/aichat/team" },
+  {
+    endpoints: {
+      send: "/v1/catalog/venues/ask",
+      sessions: "/v1/catalog/chat/sessions",
+      messages: "/v1/catalog/chat/sessions/:sessionId/messages",
+      delete: "/v1/catalog/chat/sessions/:sessionId",
+    },
+  },
 );
 ```
 
