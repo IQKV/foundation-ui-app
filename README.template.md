@@ -35,10 +35,28 @@ Describe the purpose of the app, the platform surface it covers, and the primary
 - React 19 · TypeScript · Vite 8 (SWC)
 - Mantine UI 9 · mantine-datatable · Tabler Icons
 - TanStack Router · TanStack Query · Zustand
-- Lingui 6 · Axios · Zod · MSW
+- Lingui 6 · Axios · Zod · MSW · Framer Motion
 - Vitest · Playwright · OxLint · OxFmt
 
 Architecture follows [Feature-Sliced Design](AGENTS.md).
+
+## Global UI
+
+Two persistent UI elements available on every authenticated route.
+
+### Ask AI (`features/ask-ai`)
+
+Right-side drawer panel backed by the `platform-ai-chat` addon. Sessions managed silently.
+
+- Topbar orange `Ask AI` button (also toggleable from command bar)
+- Pages register suggestion cards and optional endpoint override via `useAiContextActions`
+
+### Command Bar (`features/command-bar`)
+
+Floating bottom-center pill with Ctrl+K spotlight (Go To + Create actions) and Ask AI toggle.
+
+- Pages register spotlight Create actions via `useCommandBarActions`
+- Bar can be hidden per route with `{ hidden: true }`
 
 ## Prerequisites
 
@@ -94,8 +112,9 @@ src/
 ├── processes/     # Session store, inactivity timer, theme
 ├── pages/         # File-based routes (TanStack Router)
 ├── widgets/       # Composed UI blocks
-├── features/      # User scenarios and business logic
+├── features/      # User scenarios and business logic (ask-ai, command-bar, …)
 ├── entities/      # Business entities and data models
+├── addons/        # Optional capability addons (platform-ai-chat, …)
 ├── shared/        # API clients, UI kit, locales, utilities
 └── architecture.test.ts
 ```

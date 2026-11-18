@@ -23,6 +23,8 @@ This is the tenant surface of the platform — separate from `foundation-ui-plat
 | **Notifications**      | In-app notifications with WebSocket support; notification bell UI                                                                                                                                                                                                             |
 | **Session security**   | Access token in memory; refresh token + tenant key in `sessionStorage`; silent refresh on 401; 30-minute inactivity sign-out                                                                                                                                                  |
 | **UX**                 | Light/dark theme, Lingui i18n (English catalog), locale cookie, navigation progress, error boundaries                                                                                                                                                                         |
+| **Ask AI**             | Global AI Assistant drawer (right-side panel) — context-aware suggestions per page, chat history, Ctrl+K-accessible; powered by `platform-ai-chat` addon via `/v1/aichat/chat`                                                                                               |
+| **Command Bar**        | Floating bottom pill — Ctrl+K spotlight (Go To nav + page Create actions), Ask AI toggle; pages register actions via `useCommandBarActions`; bar can be hidden per route                                                                                                      |
 
 ## Routes
 
@@ -76,6 +78,8 @@ Authenticated routes live under the `/_app` layout, which enforces a valid tenan
 | Member ban/unban                        | Done (TENANT_OWNER) |
 | Member transfer ownership               | Done (TENANT_OWNER) |
 | Magic link authentication               | Done (feature flag) |
+| Ask AI drawer                           | Done                |
+| Command bar with spotlight              | Done                |
 
 ## Billing & Entitlements
 
@@ -202,6 +206,49 @@ All calls go through `src/shared/api/billing.ts` → `billingApi`. The paths bel
 
 ---
 
+## Global UI
+
+Two persistent UI elements are mounted in both layout variants (`AppLayout` and `AppLayoutTopNav`) and are available on every authenticated route.
+
+### Ask AI (`features/ask-ai`)
+
+A right-side drawer panel backed by the `platform-ai-chat` addon API (`/v1/aichat/chat`). Sessions are managed silently — users never see session management.
+
+- **Topbar button** — orange `Ask AI` button next to New Organization; also toggleable from the command bar.
+- **Context actions** — pages register suggestion cards via `useAiContextActions`. Clicking a card sends the message immediately.
+- **Per-page endpoint** — pages can route AI requests to a specialised endpoint:
+
+```tsx
+import { useAiContextActions } from "@/features/ask-ai";
+
+useAiContextActions(
+  [{ label: "Summarise team", subtitle: "Team page", message: "Summarise the current team." }],
+  { endpoint: "/v1/aichat/team" },
+);
+```
+
+### Command Bar (`features/command-bar`)
+
+A floating pill fixed at the bottom-center of the viewport.
+
+- **Search zone** — opens the Ctrl+K spotlight modal (Go To nav + page Create actions, keyboard navigable).
+- **Ask AI zone** — toggles the AI drawer.
+- Pages register spotlight Create actions via `useCommandBarActions`:
+
+```tsx
+import { useCommandBarActions } from "@/features/command-bar";
+import { IconPlus } from "@tabler/icons-react";
+
+useCommandBarActions([
+  { id: "new-page", label: "New page", icon: IconPlus, onClick: () => navigate({ to: "/cms-pages/create" }) },
+]);
+
+// Or hide the bar entirely on a specific route:
+useCommandBarActions([], { hidden: true });
+```
+
+---
+
 ## Tech stack
 
 - React 19, TypeScript 6, Vite 8 (SWC)
@@ -304,9 +351,10 @@ src/
 ├── app/           # Providers, theme, runtime config
 ├── processes/     # Session store, inactivity timer, theme
 ├── pages/         # File-based routes (TanStack Router)
-├── features/      # sign-in, signup, invite-member, edit-profile, …
+├── features/      # sign-in, signup, invite-member, ask-ai, command-bar, …
 ├── widgets/       # (reserved for composed blocks)
 ├── shared/        # UI kit, API clients, locales, utilities
+├── addons/        # platform-ai-chat (AI chat addon)
 └── architecture.test.ts
 ```
 
