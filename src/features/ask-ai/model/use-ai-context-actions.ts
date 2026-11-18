@@ -1,13 +1,20 @@
 import { useEffect } from "react";
 import { useAskAiPanelStore, type AiContextAction } from "./ask-ai-panel.store";
+import type { ChatEndpoints } from "@/addons/platform-ai-chat/api/ai-chat-api";
 
 interface AiContextOptions {
   /**
-   * Override the backend endpoint used by sendMessage for this page.
-   * Falls back to the default `/v1/aichat/chat` when not set.
-   * @example "/v1/aichat/billing"
+   * Redirect the AI calls for this page/route to a different service. Any field left
+   * out falls back to the app-wide default, then to `/v1/aichat/chat`.
+   * @example
+   * {
+   *   send: `/v1/catalog/venues/${venueId}/ask`,
+   *   sessions: "/v1/catalog/chat/sessions",
+   *   messages: "/v1/catalog/chat/sessions/:sessionId/messages",
+   *   delete: "/v1/catalog/chat/sessions/:sessionId",
+   * }
    */
-  endpoint?: string;
+  endpoints?: ChatEndpoints;
 }
 
 /**
@@ -21,27 +28,27 @@ interface AiContextOptions {
  * @example
  * useAiContextActions(
  *   [{ label: "Summarise members", subtitle: "Team page", message: "Summarise the current team members." }],
- *   { endpoint: "/v1/aichat/team" },
+ *   { endpoints: { send: "/v1/catalog/venues/ask" } },
  * );
  */
 export function useAiContextActions(actions: AiContextAction[], options?: AiContextOptions): void {
   const setContextActions = useAskAiPanelStore((s) => s.setContextActions);
   const clearContextActions = useAskAiPanelStore((s) => s.clearContextActions);
-  const setEndpoint = useAskAiPanelStore((s) => s.setEndpoint);
-  const clearEndpoint = useAskAiPanelStore((s) => s.clearEndpoint);
+  const setEndpoints = useAskAiPanelStore((s) => s.setEndpoints);
+  const clearEndpoints = useAskAiPanelStore((s) => s.clearEndpoints);
 
   useEffect(() => {
     if (actions.length > 0) {
       setContextActions(actions);
     }
-    if (options?.endpoint) {
-      setEndpoint(options.endpoint);
+    if (options?.endpoints) {
+      setEndpoints(options.endpoints);
     }
     return () => {
       clearContextActions();
-      clearEndpoint();
+      clearEndpoints();
     };
     // actions identity is intentionally not in deps — callers must pass a stable ref
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [setContextActions, clearContextActions, setEndpoint, clearEndpoint]);
+  }, [setContextActions, clearContextActions, setEndpoints, clearEndpoints]);
 }

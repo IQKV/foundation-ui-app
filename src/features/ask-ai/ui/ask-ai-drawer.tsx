@@ -109,13 +109,13 @@ function SuggestionsSection({ actions, onSelect }: SuggestionsSectionProps) {
 
 export function AskAiDrawer() {
   const { t } = useLingui();
-  const { isOpen, close, sessionId, setSessionId, clearSession, contextActions, endpoint } =
+  const { isOpen, close, sessionId, setSessionId, clearSession, contextActions, endpoints } =
     useAskAiPanelStore();
 
   const [content, setContent] = useState("");
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  const { data: messagesData } = useMessages(sessionId ?? "");
+  const { data: messagesData } = useMessages(sessionId ?? "", endpoints ?? undefined);
   const hasMessages = (messagesData?.items.length ?? 0) > 0;
 
   const {
@@ -128,7 +128,7 @@ export function AskAiDrawer() {
   const isOverLimit = charsLeft < 0;
 
   const sendMutation = useSendMessage({
-    endpoint: endpoint ?? undefined,
+    endpoints: endpoints ?? undefined,
     onSuccess: (r) => {
       if (!sessionId) {
         setSessionId(r.sessionId);
