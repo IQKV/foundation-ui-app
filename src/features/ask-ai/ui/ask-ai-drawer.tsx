@@ -231,6 +231,7 @@ export function AskAiDrawer() {
 
   function handleSuggestionSelect(message: string) {
     addToHistory(message);
+    setContent("");
     if (isCatalogMode) {
       catalogSend.mutate({
         sessionId: sessionId ?? undefined,
@@ -247,8 +248,8 @@ export function AskAiDrawer() {
     setContent("");
   }
 
-  // Show suggestions only when no messages yet
-  const showSuggestions = !hasMessages && contextActions.length > 0;
+  // Show suggestions only when no messages yet and not waiting for the first reply.
+  const showSuggestions = !hasMessages && !isPending && contextActions.length > 0;
 
   return (
     <Drawer
@@ -331,7 +332,7 @@ export function AskAiDrawer() {
       <ScrollArea flex={1} viewportRef={scrollRef} data-testid="ask-ai-scroll-area">
         <Stack gap={0} py="sm">
           {/* Welcome / empty state */}
-          {!hasMessages && contextActions.length === 0 && (
+          {!hasMessages && !isPending && contextActions.length === 0 && (
             <Box px="md" pb="md">
               <Text
                 size="xs"
@@ -355,6 +356,41 @@ export function AskAiDrawer() {
           {/* Page-level context actions */}
           {showSuggestions && (
             <SuggestionsSection actions={contextActions} onSelect={handleSuggestionSelect} />
+          )}
+
+          {/* Centred spinner shown while waiting for the very first reply */}
+          {isPending && !hasMessages && (
+            <AnimatePresence>
+              <motion.div
+                key="first-turn-pending"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.15 }}
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  minHeight: 160,
+                  gap: 10,
+                }}
+              >
+                <Group gap={6}>
+                  {[0, 1, 2].map((i) => (
+                    <motion.div
+                      key={i}
+                      style={{ width: 7, height: 7, borderRadius: "50%", background: "#e8541a" }}
+                      animate={{ opacity: [0.25, 1, 0.25], y: [0, -5, 0] }}
+                      transition={{ duration: 1, repeat: Infinity, delay: i * 0.2, ease: "easeInOut" }}
+                    />
+                  ))}
+                </Group>
+                <Text size="xs" c="dimmed">
+                  <Trans>Thinking…</Trans>
+                </Text>
+              </motion.div>
+            </AnimatePresence>
           )}
 
           {/* Chat messages */}
@@ -433,7 +469,7 @@ export function AskAiDrawer() {
               }
               handleHistoryKeyDown(e);
             }}
-            disabled={isPending}
+            disabled={isPending && hasMessages}
             error={isOverLimit ? t`Message too long` : undefined}
             styles={{
               input: {
