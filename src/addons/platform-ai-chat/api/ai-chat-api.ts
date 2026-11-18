@@ -116,9 +116,12 @@ export const aiChatApi = {
     endpoints?: ChatEndpoints,
   ): Promise<MessageListResponse> {
     return client()
-      .get<MessageListResponse>(withSessionId(resolveChatEndpoints(endpoints).messages, sessionId), {
-        params,
-      })
+      .get<MessageListResponse>(
+        withSessionId(resolveChatEndpoints(endpoints).messages, sessionId),
+        {
+          params,
+        },
+      )
       .then((r) => r.data);
   },
 

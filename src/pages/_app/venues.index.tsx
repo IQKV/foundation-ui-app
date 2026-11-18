@@ -60,6 +60,8 @@ import {
   SemanticSearchFiltersSummary,
 } from "@/features/venue-semantic-search";
 import { TestSelectors } from "@/shared/lib/test-selectors";
+import { useAiContextActions } from "@/features/ask-ai";
+import type { ChatEndpoints } from "@/features/ask-ai";
 
 export const Route = createFileRoute("/_app/venues/")({
   component: VenuesPage,
@@ -633,6 +635,34 @@ function VenuesPage() {
   const navigate = useNavigate();
   const { payload, isTenantOwner, tenantKey } = useSession();
   const canManage = isTenantOwner;
+
+  const VENUE_CHAT_ENDPOINTS: ChatEndpoints = useMemo(
+    () => ({
+      send: "/v1/catalog/chat",
+      sessions: "/v1/catalog/chat/sessions",
+      messages: "/v1/catalog/chat/sessions/:sessionId/messages",
+      delete: "/v1/catalog/chat/sessions/:sessionId",
+    }),
+    [],
+  );
+
+  useAiContextActions(
+    useMemo(
+      () => [
+        { label: t`Summarise my venues`, message: t`Give me an overview of all my venues.` },
+        {
+          label: t`Which venues have photos?`,
+          message: t`Which venues have photos in the gallery?`,
+        },
+        {
+          label: t`Which venues are incomplete?`,
+          message: t`Which venues are missing key profile data?`,
+        },
+      ],
+      [t],
+    ),
+    { endpoints: VENUE_CHAT_ENDPOINTS },
+  );
 
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");

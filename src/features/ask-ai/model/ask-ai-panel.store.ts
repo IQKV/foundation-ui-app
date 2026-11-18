@@ -18,6 +18,8 @@ interface AskAiPanelState {
   contextActions: AiContextAction[];
   /** Optional per-page endpoint override, applied to every AI call while the page is mounted */
   endpoints: ChatEndpoints | null;
+  /** Optional venue the active page scopes its conversation to, sent with every turn */
+  venueId: string | null;
 
   open: () => void;
   close: () => void;
@@ -27,6 +29,8 @@ interface AskAiPanelState {
   clearContextActions: () => void;
   setEndpoints: (endpoints: ChatEndpoints) => void;
   clearEndpoints: () => void;
+  setVenueId: (venueId: string) => void;
+  clearVenueId: () => void;
 }
 
 export const useAskAiPanelStore = create<AskAiPanelState>((set) => ({
@@ -34,6 +38,7 @@ export const useAskAiPanelStore = create<AskAiPanelState>((set) => ({
   sessionId: null,
   contextActions: [],
   endpoints: null,
+  venueId: null,
 
   open: () => set({ isOpen: true }),
   close: () => set({ isOpen: false }),
@@ -43,4 +48,6 @@ export const useAskAiPanelStore = create<AskAiPanelState>((set) => ({
   clearContextActions: () => set({ contextActions: [] }),
   setEndpoints: (endpoints) => set({ endpoints }),
   clearEndpoints: () => set({ endpoints: null }),
+  setVenueId: (venueId) => set({ venueId }),
+  clearVenueId: () => set({ venueId: null }),
 }));

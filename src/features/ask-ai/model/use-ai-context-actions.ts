@@ -15,6 +15,11 @@ interface AiContextOptions {
    * }
    */
   endpoints?: ChatEndpoints;
+  /**
+   * Ground every turn of this page's conversation on one venue, e.g. the venue a detail page
+   * shows. Ignored when `endpoints.ask` is set, since a one-shot ask carries no venue.
+   */
+  venueId?: string;
 }
 
 /**
@@ -28,7 +33,7 @@ interface AiContextOptions {
  * @example
  * useAiContextActions(
  *   [{ label: "Summarise members", subtitle: "Team page", message: "Summarise the current team members." }],
- *   { endpoints: { send: "/v1/catalog/venues/ask" } },
+ *   { endpoints: { send: "/v1/catalog/chat", venueId } },
  * );
  */
 export function useAiContextActions(actions: AiContextAction[], options?: AiContextOptions): void {
@@ -36,19 +41,34 @@ export function useAiContextActions(actions: AiContextAction[], options?: AiCont
   const clearContextActions = useAskAiPanelStore((s) => s.clearContextActions);
   const setEndpoints = useAskAiPanelStore((s) => s.setEndpoints);
   const clearEndpoints = useAskAiPanelStore((s) => s.clearEndpoints);
+  const setVenueId = useAskAiPanelStore((s) => s.setVenueId);
+  const clearVenueId = useAskAiPanelStore((s) => s.clearVenueId);
+
+  const { endpoints, venueId } = options ?? {};
 
   useEffect(() => {
     if (actions.length > 0) {
       setContextActions(actions);
     }
-    if (options?.endpoints) {
-      setEndpoints(options.endpoints);
+    if (endpoints) {
+      setEndpoints(endpoints);
+    }
+    if (venueId) {
+      setVenueId(venueId);
     }
     return () => {
       clearContextActions();
       clearEndpoints();
+      clearVenueId();
     };
     // actions identity is intentionally not in deps — callers must pass a stable ref
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [setContextActions, clearContextActions, setEndpoints, clearEndpoints]);
+  }, [
+    setContextActions,
+    clearContextActions,
+    setEndpoints,
+    clearEndpoints,
+    setVenueId,
+    clearVenueId,
+  ]);
 }

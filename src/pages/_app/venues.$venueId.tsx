@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { z } from "zod";
 import { motion } from "framer-motion";
@@ -74,6 +74,8 @@ import {
 } from "@/features/manage-venue";
 import { dayjs } from "@/shared/lib/date-utils";
 import { TestSelectors } from "@/shared/lib/test-selectors";
+import { useAiContextActions } from "@/features/ask-ai";
+import type { ChatEndpoints } from "@/features/ask-ai";
 
 export const Route = createFileRoute("/_app/venues/$venueId")({
   validateSearch: z.object({ fromUpload: z.boolean().optional() }),
@@ -870,6 +872,31 @@ function VenueDetailPage() {
   // Set after a document upload; cleared once its extracted source row lands.
   const [extracting, setExtracting] = useState<{ assetId: string; fileName: string } | null>(null);
   const assetFileInputRef = useRef<HTMLInputElement>(null);
+
+  const VENUE_CHAT_ENDPOINTS: ChatEndpoints = useMemo(
+    () => ({
+      send: "/v1/catalog/chat",
+      sessions: "/v1/catalog/chat/sessions",
+      messages: "/v1/catalog/chat/sessions/:sessionId/messages",
+      delete: "/v1/catalog/chat/sessions/:sessionId",
+    }),
+    [],
+  );
+
+  useAiContextActions(
+    useMemo(
+      () => [
+        { label: t`Summarise this venue`, message: t`Give me a short summary of this venue.` },
+        { label: t`What's missing?`, message: t`Which profile fields are empty or incomplete?` },
+        {
+          label: t`What documents exist?`,
+          message: t`What documents and sources are attached to this venue?`,
+        },
+      ],
+      [t],
+    ),
+    { endpoints: VENUE_CHAT_ENDPOINTS, venueId },
+  );
 
   const { data: venue, isLoading, isError, refetch, isFetching } = useVenue(venueId);
 

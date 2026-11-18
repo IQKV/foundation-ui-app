@@ -197,6 +197,85 @@ export const catalogApi = {
       .then((r) => r.data),
 };
 
+// ─── Venue catalog chat ───────────────────────────────────────────────────────
+
+export interface VenueChatSource {
+  sourceTextId: string;
+  assetId: string | null;
+  label: string | null;
+  snippet: string;
+  similarity: number;
+}
+
+export interface VenueChatSendRequest {
+  sessionId?: string;
+  /** Grounds this turn in one specific venue instead of the whole catalogue. */
+  venueId?: string;
+  content: string;
+  model?: string;
+}
+
+export interface VenueChatResponse {
+  sessionId: string;
+  sessionTitle: string | null;
+  reply: string;
+  model: string;
+  timestamp: string;
+  sources: VenueChatSource[];
+}
+
+export interface VenueChatSession {
+  id: string;
+  userId: string;
+  title: string | null;
+  model: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface VenueChatSessionListResponse {
+  items: VenueChatSession[];
+  totalElements: number;
+}
+
+export interface VenueChatMessage {
+  id: string;
+  sessionId: string;
+  role: "USER" | "ASSISTANT";
+  content: string;
+  createdAt: string;
+}
+
+export interface VenueChatMessageListResponse {
+  items: VenueChatMessage[];
+  totalElements: number;
+}
+
+export const venueChatApi = {
+  send: (body: VenueChatSendRequest) =>
+    httpClient
+      .post<VenueChatResponse>("/v1/catalog/chat", body, { timeout: 120_000 })
+      .then((r) => r.data),
+
+  getSessions: (params?: { limit?: number; offset?: number }) =>
+    httpClient
+      .get<VenueChatSessionListResponse>("/v1/catalog/chat/sessions", { params })
+      .then((r) => r.data),
+
+  getMessages: (sessionId: string, params?: { limit?: number; offset?: number }) =>
+    httpClient
+      .get<VenueChatMessageListResponse>(
+        `/v1/catalog/chat/sessions/${encodeURIComponent(sessionId)}/messages`,
+        { params },
+      )
+      .then((r) => r.data),
+
+  deleteSession: (sessionId: string) =>
+    httpClient
+      .delete(`/v1/catalog/chat/sessions/${encodeURIComponent(sessionId)}`)
+      .then(() => undefined),
+};
+
 // ─── Venue asset upload ───────────────────────────────────────────────────────
 // Two-phase presigned flow: initiate → PUT to presigned URL → confirm.
 // The presigned PUT goes directly to MinIO (bypasses our API), so XHR is used

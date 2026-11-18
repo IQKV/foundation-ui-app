@@ -56,6 +56,8 @@ import { catalogApi, venueAssetApi, uploadFileToPresignedUrl } from "@/shared/ap
 import { useVenue } from "@/features/manage-venue";
 import { dayjs } from "@/shared/lib/date-utils";
 import { TestSelectors } from "@/shared/lib/test-selectors";
+import { useAiContextActions } from "@/features/ask-ai";
+import type { ChatEndpoints } from "@/features/ask-ai";
 
 export const Route = createFileRoute("/_app/venues_/$venueId/files")({
   component: VenueFilesPage,
@@ -707,6 +709,37 @@ function VenueFilesPage() {
   const { venueId } = Route.useParams();
   const { isTenantOwner } = useSession();
   const canManage = isTenantOwner;
+
+  const VENUE_CHAT_ENDPOINTS: ChatEndpoints = useMemo(
+    () => ({
+      send: "/v1/catalog/chat",
+      sessions: "/v1/catalog/chat/sessions",
+      messages: "/v1/catalog/chat/sessions/:sessionId/messages",
+      delete: "/v1/catalog/chat/sessions/:sessionId",
+    }),
+    [],
+  );
+
+  useAiContextActions(
+    useMemo(
+      () => [
+        {
+          label: t`What's in the documents?`,
+          message: t`Summarise the documents attached to this venue.`,
+        },
+        {
+          label: t`List extracted text`,
+          message: t`List the text extracted from this venue's sources.`,
+        },
+        {
+          label: t`How many files?`,
+          message: t`How many photos, documents and sources does this venue have?`,
+        },
+      ],
+      [t],
+    ),
+    { endpoints: VENUE_CHAT_ENDPOINTS, venueId },
+  );
 
   const [activeType, setActiveType] = useState<FileTypeFilter>("all");
   const [search, setSearch] = useState("");

@@ -15,12 +15,105 @@ import {
 import { IconSparkles, IconArrowUp, IconAlertCircle, IconRefresh } from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { motion, AnimatePresence } from "framer-motion";
-import { useMessages, useSendMessage, useChatInputHistory } from "@/addons/platform-ai-chat/model";
+import {
+  useMessages,
+  useSendMessage,
+  useAsk,
+  useChatInputHistory,
+} from "@/addons/platform-ai-chat/model";
+import type { AskSource, ChatMessage } from "@/addons/platform-ai-chat/api/ai-chat-api";
 import { MessageBubble } from "@/addons/platform-ai-chat/ui/message-bubble";
 import { useAskAiPanelStore } from "../model/ask-ai-panel.store";
 import type { AiContextAction } from "../model/ask-ai-panel.store";
+import { useSendCatalogMessage, useCatalogChatMessages } from "../model/use-catalog-chat";
+import type { VenueChatMessage } from "@/shared/api";
 
 const MAX_INPUT_CHARS = 4000;
+
+// ─── Local turn (session-less) ────────────────────────────────────────────────
+
+/**
+ * One question/answer pair of a page whose endpoints configure a one-shot `ask` endpoint.
+ * Nothing is persisted, so the drawer keeps these turns itself.
+ */
+interface LocalTurn {
+  id: string;
+  question: string;
+  answer: string;
+  sources: AskSource[];
+  createdAt: string;
+}
+
+function asBubbleMessage(turn: LocalTurn, role: "USER" | "ASSISTANT"): ChatMessage {
+  return {
+    id: `${turn.id}-${role}`,
+    sessionId: "",
+    role,
+    content: role === "USER" ? turn.question : turn.answer,
+    createdAt: turn.createdAt,
+  };
+}
+
+// ─── Sources cited by an answer ───────────────────────────────────────────────
+
+function SourcesList({ sources }: { sources: AskSource[] }) {
+  return (
+    <Box pl={48}>
+      <Text size="xs" fw={600} c="dimmed" tt="uppercase" style={{ letterSpacing: "0.06em" }} mb={4}>
+        <Trans>Sources</Trans>
+      </Text>
+      <Stack gap={4}>
+        {sources.map((source) => (
+          <Box
+            key={source.sourceTextId}
+            p="xs"
+            style={{
+              border: "1px solid var(--mantine-color-gray-2)",
+              borderRadius: "var(--mantine-radius-sm)",
+            }}
+            data-testid="ask-ai-source"
+          >
+            {source.label && (
+              <Text size="xs" fw={500} lineClamp={1}>
+                {source.label}
+              </Text>
+            )}
+            <Text size="xs" c="dimmed" lineClamp={3}>
+              {source.snippet}
+            </Text>
+          </Box>
+        ))}
+      </Stack>
+    </Box>
+  );
+}
+
+// ─── Thinking indicator ───────────────────────────────────────────────────────
+
+function PendingDots() {
+  return (
+    <Group gap="xs" pl={44}>
+      {[0, 1, 2].map((i) => (
+        <motion.div
+          key={i}
+          style={{
+            width: 6,
+            height: 6,
+            borderRadius: "50%",
+            background: "#e8541a",
+          }}
+          animate={{ opacity: [0.3, 1, 0.3], y: [0, -4, 0] }}
+          transition={{
+            duration: 0.9,
+            repeat: Infinity,
+            delay: i * 0.18,
+            ease: "easeInOut",
+          }}
+        />
+      ))}
+    </Group>
+  );
+}
 
 // ─── Suggestion card ──────────────────────────────────────────────────────────
 
@@ -109,51 +202,103 @@ function SuggestionsSection({ actions, onSelect }: SuggestionsSectionProps) {
 
 export function AskAiDrawer() {
   const { t } = useLingui();
-  const { isOpen, close, sessionId, setSessionId, clearSession, contextActions, endpoints } =
-    useAskAiPanelStore();
+  const {
+    isOpen,
+    close,
+    sessionId,
+    setSessionId,
+    clearSession,
+    contextActions,
+    endpoints,
+    venueId,
+  } = useAskAiPanelStore();
+
+  // Catalog mode: endpoints are registered by a venue page pointing at /v1/catalog/chat.
+  // Generic mode: no endpoints set, falls through to the platform-ai-chat addon hooks.
+  const isCatalogMode = endpoints !== null;
 
   const [content, setContent] = useState("");
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  const { data: messagesData } = useMessages(sessionId ?? "", endpoints ?? undefined);
-  const hasMessages = (messagesData?.items.length ?? 0) > 0;
+  // ── Catalog mode data ──────────────────────────────────────────────────────
+  const catalogMessages = useCatalogChatMessages(isCatalogMode ? sessionId : null);
+  const catalogSend = useSendCatalogMessage({
+    onSuccess: (r) => {
+      if (!sessionId) setSessionId(r.sessionId);
+      setContent("");
+    },
+  });
+
+  // ── Addon (generic) mode data ──────────────────────────────────────────────
+  const { data: addonMessagesData } = useMessages(
+    isCatalogMode ? "" : (sessionId ?? ""),
+    isCatalogMode ? undefined : (endpoints ?? undefined),
+  );
 
   const {
     addToHistory,
     handleKeyDown: handleHistoryKeyDown,
     resetNavigation,
-  } = useChatInputHistory(content, setContent, messagesData?.items);
+  } = useChatInputHistory(
+    content,
+    setContent,
+    isCatalogMode
+      ? (catalogMessages.data?.items as ChatMessage[] | undefined)
+      : addonMessagesData?.items,
+  );
 
-  const charsLeft = MAX_INPUT_CHARS - content.length;
-  const isOverLimit = charsLeft < 0;
-
-  const sendMutation = useSendMessage({
-    endpoints: endpoints ?? undefined,
+  const addonSend = useSendMessage({
+    endpoints: isCatalogMode ? undefined : (endpoints ?? undefined),
     onSuccess: (r) => {
-      if (!sessionId) {
-        setSessionId(r.sessionId);
-      }
+      if (!sessionId) setSessionId(r.sessionId);
       setContent("");
     },
   });
+
+  // Unified view of messages and pending state across both modes
+  const messages = isCatalogMode
+    ? (catalogMessages.data?.items as ChatMessage[] | undefined)
+    : addonMessagesData?.items;
+  const hasMessages = (messages?.length ?? 0) > 0;
+  const isPending = isCatalogMode ? catalogSend.isPending : addonSend.isPending;
+  const sendError = isCatalogMode ? catalogSend.error : addonSend.error;
+
+  const charsLeft = MAX_INPUT_CHARS - content.length;
+  const isOverLimit = charsLeft < 0;
 
   // Auto-scroll to bottom when new messages arrive
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
     }
-  }, [messagesData?.items.length]);
+  }, [messages?.length]);
 
   function handleSubmit() {
     const trimmed = content.trim();
-    if (!trimmed || isOverLimit || sendMutation.isPending) return;
+    if (!trimmed || isOverLimit || isPending) return;
     addToHistory(trimmed);
-    sendMutation.mutate({ sessionId: sessionId ?? undefined, content: trimmed });
+    if (isCatalogMode) {
+      catalogSend.mutate({
+        sessionId: sessionId ?? undefined,
+        venueId: venueId ?? undefined,
+        content: trimmed,
+      });
+    } else {
+      addonSend.mutate({ sessionId: sessionId ?? undefined, content: trimmed });
+    }
   }
 
   function handleSuggestionSelect(message: string) {
     addToHistory(message);
-    sendMutation.mutate({ sessionId: sessionId ?? undefined, content: message });
+    if (isCatalogMode) {
+      catalogSend.mutate({
+        sessionId: sessionId ?? undefined,
+        venueId: venueId ?? undefined,
+        content: message,
+      });
+    } else {
+      addonSend.mutate({ sessionId: sessionId ?? undefined, content: message });
+    }
   }
 
   function handleNewConversation() {
@@ -204,7 +349,11 @@ export function AskAiDrawer() {
                 <Trans>AI Assistant</Trans>
               </Text>
               <Text size="xs" c="dimmed">
-                <Trans>Ask about your workspace, team or settings</Trans>
+                {venueId ? (
+                  <Trans>Ask about this venue</Trans>
+                ) : (
+                  <Trans>Ask about your venues</Trans>
+                )}
               </Text>
             </Box>
           </Group>
@@ -270,10 +419,10 @@ export function AskAiDrawer() {
           {/* Chat messages */}
           {hasMessages && (
             <Stack gap="xs" px="md">
-              {messagesData!.items.map((m) => (
+              {messages!.map((m) => (
                 <MessageBubble key={m.id} message={m} />
               ))}
-              {sendMutation.isPending && (
+              {isPending && (
                 <Group gap="xs" pl={44}>
                   {[0, 1, 2].map((i) => (
                     <motion.div
@@ -311,7 +460,7 @@ export function AskAiDrawer() {
           background: "var(--app-surface-bg)",
         }}
       >
-        {sendMutation.error && (
+        {sendError && (
           <Alert
             icon={<IconAlertCircle size={14} />}
             color="red"
@@ -343,7 +492,7 @@ export function AskAiDrawer() {
               }
               handleHistoryKeyDown(e);
             }}
-            disabled={sendMutation.isPending}
+            disabled={isPending}
             error={isOverLimit ? t`Message too long` : undefined}
             styles={{
               input: {
@@ -356,13 +505,13 @@ export function AskAiDrawer() {
           <ActionIcon
             size={36}
             radius="md"
-            disabled={!content.trim() || isOverLimit || sendMutation.isPending}
+            disabled={!content.trim() || isOverLimit || isPending}
             onClick={handleSubmit}
             aria-label={t`Send message`}
             data-testid="ask-ai-send"
             style={{
               background:
-                content.trim() && !isOverLimit && !sendMutation.isPending
+                content.trim() && !isOverLimit && !isPending
                   ? "linear-gradient(135deg, #c44b0a 0%, #e8541a 100%)"
                   : undefined,
               border: "none",
@@ -371,7 +520,7 @@ export function AskAiDrawer() {
             }}
           >
             <AnimatePresence mode="wait" initial={false}>
-              {sendMutation.isPending ? (
+              {isPending ? (
                 <motion.div
                   key="pending"
                   initial={{ opacity: 0, scale: 0.7 }}

@@ -83,6 +83,7 @@ export {
   venueAssetApi,
   venueAssetImportApi,
   uploadFileToPresignedUrl,
+  venueChatApi,
 } from "./catalog";
 export type {
   Venue,
@@ -107,6 +108,13 @@ export type {
   ConfirmAssetUploadRequest,
   VenueAssetResponse,
   VenueAssetImportResponse,
+  VenueChatSource,
+  VenueChatSendRequest,
+  VenueChatResponse,
+  VenueChatSession,
+  VenueChatSessionListResponse,
+  VenueChatMessage,
+  VenueChatMessageListResponse,
 } from "./catalog";
 
 // ─── Auth ─────────────────────────────────────────────────────────────────────
