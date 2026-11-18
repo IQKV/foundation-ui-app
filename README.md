@@ -23,7 +23,7 @@ This is the tenant surface of the platform — separate from `foundation-ui-plat
 | **Notifications**      | In-app notifications with WebSocket support; notification bell UI                                                                                                                                                                                                             |
 | **Session security**   | Access token in memory; refresh token + tenant key in `sessionStorage`; silent refresh on 401; 30-minute inactivity sign-out                                                                                                                                                  |
 | **UX**                 | Light/dark theme, Lingui i18n (English catalog), locale cookie, navigation progress, error boundaries                                                                                                                                                                         |
-| **Ask AI**             | Global AI Assistant drawer (right-side panel) — context-aware suggestions per page, chat history, Ctrl+K-accessible; powered by `platform-ai-chat` addon via `/v1/aichat/chat`                                                                                               |
+| **Ask AI**             | Global AI Assistant drawer (right-side panel) — context-aware suggestions per page, chat history, Ctrl+K-accessible; powered by `platform-ai-chat` addon via `/v1/aichat/chat`                                                                                                |
 | **Command Bar**        | Floating bottom pill — Ctrl+K spotlight (Go To nav + page Create actions), Ask AI toggle; pages register actions via `useCommandBarActions`; bar can be hidden per route                                                                                                      |
 
 ## Routes
@@ -240,7 +240,12 @@ import { useCommandBarActions } from "@/features/command-bar";
 import { IconPlus } from "@tabler/icons-react";
 
 useCommandBarActions([
-  { id: "new-page", label: "New page", icon: IconPlus, onClick: () => navigate({ to: "/cms-pages/create" }) },
+  {
+    id: "new-page",
+    label: "New page",
+    icon: IconPlus,
+    onClick: () => navigate({ to: "/cms-pages/create" }),
+  },
 ]);
 
 // Or hide the bar entirely on a specific route:
