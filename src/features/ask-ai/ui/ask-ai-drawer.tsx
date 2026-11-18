@@ -12,7 +12,7 @@ import {
   Alert,
   ThemeIcon,
 } from "@mantine/core";
-import { IconSparkles, IconArrowUp, IconAlertCircle, IconRefresh } from "@tabler/icons-react";
+import { IconSparkles, IconArrowUp, IconAlertCircle, IconArrowLeft } from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { motion, AnimatePresence } from "framer-motion";
 import { useMessages, useSendMessage, useChatInputHistory } from "@/addons/platform-ai-chat/model";
@@ -204,24 +204,25 @@ export function AskAiDrawer() {
               <Text size="sm" fw={600} style={{ lineHeight: 1.3 }}>
                 <Trans>AI Assistant</Trans>
               </Text>
-              <Text size="xs" c="dimmed">
-                <Trans>Ask about your workspace, team or settings</Trans>
+              <Text size="xs" c="dimmed" lineClamp={1}>
+                {hasMessages || sendMutation.isPending
+                  ? (messagesData?.items.find((m) => m.role === "USER")?.content ?? t`Thinking…`)
+                  : t`Ask about your workspace, team or settings`}
               </Text>
             </Box>
           </Group>
 
           <Group gap={4}>
-            {/* New conversation — only shown when a session is active */}
-            {sessionId && (
+            {(hasMessages || sendMutation.isPending) && (
               <ActionIcon
                 variant="subtle"
                 color="gray"
                 size="sm"
                 onClick={handleNewConversation}
-                title={t`New conversation`}
-                data-testid="ask-ai-new-conversation"
+                aria-label={t`Back to suggestions`}
+                data-testid="ask-ai-back"
               >
-                <IconRefresh size={14} />
+                <IconArrowLeft size={14} />
               </ActionIcon>
             )}
             <ActionIcon
