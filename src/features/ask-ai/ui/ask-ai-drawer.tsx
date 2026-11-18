@@ -18,10 +18,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   useMessages,
   useSendMessage,
-  useAsk,
   useChatInputHistory,
 } from "@/addons/platform-ai-chat/model";
-import type { AskSource, ChatMessage } from "@/addons/platform-ai-chat/api/ai-chat-api";
+import type { ChatMessage } from "@/addons/platform-ai-chat/api/ai-chat-api";
 import { MessageBubble } from "@/addons/platform-ai-chat/ui/message-bubble";
 import { useAskAiPanelStore } from "../model/ask-ai-panel.store";
 import type { AiContextAction } from "../model/ask-ai-panel.store";
@@ -29,64 +28,6 @@ import { useSendCatalogMessage, useCatalogChatMessages } from "../model/use-cata
 import type { VenueChatMessage } from "@/shared/api";
 
 const MAX_INPUT_CHARS = 4000;
-
-// ─── Local turn (session-less) ────────────────────────────────────────────────
-
-/**
- * One question/answer pair of a page whose endpoints configure a one-shot `ask` endpoint.
- * Nothing is persisted, so the drawer keeps these turns itself.
- */
-interface LocalTurn {
-  id: string;
-  question: string;
-  answer: string;
-  sources: AskSource[];
-  createdAt: string;
-}
-
-function asBubbleMessage(turn: LocalTurn, role: "USER" | "ASSISTANT"): ChatMessage {
-  return {
-    id: `${turn.id}-${role}`,
-    sessionId: "",
-    role,
-    content: role === "USER" ? turn.question : turn.answer,
-    createdAt: turn.createdAt,
-  };
-}
-
-// ─── Sources cited by an answer ───────────────────────────────────────────────
-
-function SourcesList({ sources }: { sources: AskSource[] }) {
-  return (
-    <Box pl={48}>
-      <Text size="xs" fw={600} c="dimmed" tt="uppercase" style={{ letterSpacing: "0.06em" }} mb={4}>
-        <Trans>Sources</Trans>
-      </Text>
-      <Stack gap={4}>
-        {sources.map((source) => (
-          <Box
-            key={source.sourceTextId}
-            p="xs"
-            style={{
-              border: "1px solid var(--mantine-color-gray-2)",
-              borderRadius: "var(--mantine-radius-sm)",
-            }}
-            data-testid="ask-ai-source"
-          >
-            {source.label && (
-              <Text size="xs" fw={500} lineClamp={1}>
-                {source.label}
-              </Text>
-            )}
-            <Text size="xs" c="dimmed" lineClamp={3}>
-              {source.snippet}
-            </Text>
-          </Box>
-        ))}
-      </Stack>
-    </Box>
-  );
-}
 
 // ─── Thinking indicator ───────────────────────────────────────────────────────
 
