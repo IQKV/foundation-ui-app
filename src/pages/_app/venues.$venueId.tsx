@@ -1489,6 +1489,7 @@ function VenueDetailPage() {
                             }
                             onDismissSuggestion={(s) => enrichment.dismissPatch(s)}
                             enrichment={enrichment}
+                            onEdit={openEdit}
                           />
 
                           {/* Raw JSON fallback — read-only, collapsible */}

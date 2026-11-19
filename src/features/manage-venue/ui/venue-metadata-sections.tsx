@@ -1161,6 +1161,8 @@ interface VenueMetadataSectionsProps {
   onAcceptSuggestion?: (s: VenueEnrichmentSuggestion) => void;
   onDismissSuggestion?: (s: VenueEnrichmentSuggestion) => void;
   enrichment?: UseVenueEnrichmentResult;
+  /** Opens the manual venue edit modal from the core "The venue" card group. */
+  onEdit?: () => void;
 }
 
 /**
@@ -1185,6 +1187,7 @@ export function VenueMetadataSections({
   onAcceptSuggestion,
   onDismissSuggestion,
   enrichment,
+  onEdit,
 }: VenueMetadataSectionsProps) {
   const parsed = useMemo(() => parseMetadata(metadata), [metadata]);
 
@@ -1219,14 +1222,29 @@ export function VenueMetadataSections({
         return (
           <Paper key={cardGroup.key} withBorder radius="md" p="lg">
             <Stack gap="md">
-              <Stack gap={4}>
-                <Text size="sm" c="dimmed" fw={500}>
-                  {cardGroup.label}
-                </Text>
-                <Text size="xs" c="dimmed">
-                  {cardGroup.description}
-                </Text>
-              </Stack>
+              <Group justify="space-between" align="flex-start" wrap="nowrap" gap="md">
+                <Stack gap={4}>
+                  <Text size="sm" c="dimmed" fw={500}>
+                    {cardGroup.label}
+                  </Text>
+                  <Text size="xs" c="dimmed">
+                    {cardGroup.description}
+                  </Text>
+                </Stack>
+                {cardGroup.key === "venue" && onEdit && (
+                  <Tooltip label={<Trans>Edit Manually</Trans>} withArrow position="left">
+                    <ActionIcon
+                      variant="subtle"
+                      color="gray"
+                      size="sm"
+                      style={{ flexShrink: 0 }}
+                      onClick={onEdit}
+                    >
+                      <IconPencil size={14} />
+                    </ActionIcon>
+                  </Tooltip>
+                )}
+              </Group>
               {cardGroup.key === "venue" && venue && (
                 <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md">
                   <CoreVenueValue
