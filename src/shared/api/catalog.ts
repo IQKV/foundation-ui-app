@@ -215,8 +215,6 @@ export interface VenueChatSendRequest {
   venueId?: string;
   content: string;
   model?: string;
-  /** Key of a configured persona overlay; unknown keys fall back to the base assistant. */
-  persona?: string;
 }
 
 export interface VenueChatResponse {
