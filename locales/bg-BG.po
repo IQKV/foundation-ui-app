@@ -257,6 +257,10 @@ msgstr "Активни членове"
 msgid "Add a venue"
 msgstr ""
 
+#: src/features/manage-venue/ui/venue-metadata-sections.tsx
+msgid "Add contact"
+msgstr ""
+
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "Add locale"
 msgstr "Добави локал"
@@ -2003,6 +2007,7 @@ msgid "My Account"
 msgstr "Моят акаунт"
 
 #: src/features/manage-venue/ui/venue-fields.tsx
+#: src/features/manage-venue/ui/venue-metadata-sections.tsx
 msgid "Name"
 msgstr ""
 
@@ -2712,6 +2717,10 @@ msgstr "Помните ли паролата си? <0>Влезте</0>"
 msgid "Remove"
 msgstr "Премахни"
 
+#: src/features/manage-venue/ui/venue-metadata-sections.tsx
+msgid "Remove contact"
+msgstr ""
+
 #: src/features/manage-organization/ui/member-actions.tsx
 msgid "Remove Member"
 msgstr "Премахни член"
@@ -2794,6 +2803,7 @@ msgstr "Отмяната на тази покана ще попречи на п�
 
 #: src/features/invite-member/ui/invitation-details-modal.tsx
 #: src/features/invite-member/ui/send-invitation-modal.tsx
+#: src/features/manage-venue/ui/venue-metadata-sections.tsx
 #: src/pages/_app/settings/organization.tsx
 msgid "Role"
 msgstr "Роля"

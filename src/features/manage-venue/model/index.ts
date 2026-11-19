@@ -15,6 +15,7 @@ export type {
   MetadataSectionDefinition,
 } from "./metadata-spec";
 export {
+  isAutoFillEligible,
   isFieldEmpty,
   overallCompleteness,
   parseMetadata,

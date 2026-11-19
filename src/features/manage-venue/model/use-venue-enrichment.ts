@@ -7,6 +7,7 @@ import type {
   VenueFieldExtractionResponse,
 } from "@/entities/venue";
 import { METADATA_SECTIONS } from "./metadata-spec";
+import { isAutoFillEligible } from "./metadata-utils";
 
 export interface EnrichmentTurn {
   message: string;
@@ -225,7 +226,7 @@ export function useVenueEnrichment(venueId: string): UseVenueEnrichmentResult {
       return val === null || val === undefined || val === "";
     };
 
-    const editableFields = section.fields.filter((f) => !f.readOnly);
+    const editableFields = section.fields.filter(isAutoFillEligible);
     const emptyFields = editableFields.filter((f) => {
       const dotKey = f.key;
       const parts = dotKey.split(".").filter(Boolean);

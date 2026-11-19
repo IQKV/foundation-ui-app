@@ -257,6 +257,10 @@ msgstr "Active members"
 msgid "Add a venue"
 msgstr "Add a venue"
 
+#: src/features/manage-venue/ui/venue-metadata-sections.tsx
+msgid "Add contact"
+msgstr "Add contact"
+
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "Add locale"
 msgstr "Add locale"
@@ -2003,6 +2007,7 @@ msgid "My Account"
 msgstr "My Account"
 
 #: src/features/manage-venue/ui/venue-fields.tsx
+#: src/features/manage-venue/ui/venue-metadata-sections.tsx
 msgid "Name"
 msgstr "Name"
 
@@ -2712,6 +2717,10 @@ msgstr "Remember your password? <0>Sign in</0>"
 msgid "Remove"
 msgstr "Remove"
 
+#: src/features/manage-venue/ui/venue-metadata-sections.tsx
+msgid "Remove contact"
+msgstr "Remove contact"
+
 #: src/features/manage-organization/ui/member-actions.tsx
 msgid "Remove Member"
 msgstr "Remove Member"
@@ -2794,6 +2803,7 @@ msgstr "Revoking this invitation will prevent the recipient from accepting it."
 
 #: src/features/invite-member/ui/invitation-details-modal.tsx
 #: src/features/invite-member/ui/send-invitation-modal.tsx
+#: src/features/manage-venue/ui/venue-metadata-sections.tsx
 #: src/pages/_app/settings/organization.tsx
 msgid "Role"
 msgstr "Role"

@@ -8,6 +8,7 @@ const EMPTY: MetadataDocument = { _schema_version: 1, items: [] };
 
 /** A value `setFieldValue` will actually store for the given field type. */
 function sampleValue(field: MetadataFieldDefinition): unknown {
+  if (field.type === "contacts") return [{ name: "value", role: "Venue Manager" }];
   if (field.type === "string_array" || field.type === "enum_multi") return ["value"];
   if (field.type === "boolean") return true;
   return "value";

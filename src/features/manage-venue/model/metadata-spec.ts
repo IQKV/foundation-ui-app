@@ -13,7 +13,9 @@ export type MetadataFieldType =
   | "boolean"
   | "enum"
   | "enum_multi"
-  | "time";
+  | "time"
+  /** Repeated `{name, role}` coordinator rows — structured, so it has its own editor. */
+  | "contacts";
 
 export interface MetadataFieldOption {
   value: string;
@@ -346,8 +348,7 @@ export const METADATA_SECTIONS: MetadataSectionDefinition[] = [
       {
         key: "contacts",
         label: "Contacts",
-        type: "string_array",
-        readOnly: true,
+        type: "contacts",
         hint: "Venue coordinators and sales managers.",
       },
     ],

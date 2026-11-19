@@ -61,7 +61,16 @@ function splitKey(key: string): { group: string; field: string } {
 
 /** List-typed fields expand to one row per element; scalars to a single row. */
 function isListField(type: MetadataFieldType): boolean {
-  return type === "string_array" || type === "enum_multi";
+  return type === "string_array" || type === "enum_multi" || type === "contacts";
+}
+
+/**
+ * Whether the scalar AI extractor may fill this field. Structured fields
+ * (e.g. `contacts`) hold object rows and are excluded, so auto-fill cannot
+ * overwrite them with a plain string.
+ */
+export function isAutoFillEligible(definition: MetadataFieldDefinition): boolean {
+  return !definition.readOnly && definition.type !== "contacts";
 }
 
 /** Read a field's value from the flat rows (an array for list-typed fields). */
@@ -138,8 +147,8 @@ export interface MetadataCompleteness {
 }
 
 /**
- * Roll `sectionCompleteness` up across every section. Read-only fields (e.g. `contacts`)
- * count towards neither numerator nor denominator.
+ * Roll `sectionCompleteness` up across every section. Read-only fields count
+ * towards neither numerator nor denominator.
  */
 export function overallCompleteness(
   metadata: MetadataDocument | null,

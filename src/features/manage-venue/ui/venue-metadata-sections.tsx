@@ -29,11 +29,14 @@ import {
   IconAlertTriangle,
   IconCheck,
   IconPencil,
+  IconPlus,
   IconSparkles,
+  IconTrash,
   IconX,
 } from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
 import {
+  isAutoFillEligible,
   isFieldEmpty,
   parseMetadata,
   resolveFieldValue,
@@ -171,6 +174,22 @@ function ExtractResultChip({
 
 function formatFieldValue(definition: MetadataFieldDefinition, value: unknown): string | null {
   if (isFieldEmpty(value)) return null;
+  if (definition.type === "contacts") {
+    const rows = Array.isArray(value) ? value : [];
+    const labels = rows
+      .map((row) => {
+        if (row !== null && typeof row === "object") {
+          const record = row as Record<string, unknown>;
+          const name = typeof record.name === "string" ? record.name : "";
+          const role = typeof record.role === "string" ? record.role : "";
+          if (name && role) return `${name} (${role})`;
+          return name || role;
+        }
+        return String(row);
+      })
+      .filter((label) => label !== "");
+    return labels.length > 0 ? labels.join(", ") : null;
+  }
   if (definition.type === "enum") {
     const match = definition.options?.find((option) => option.value === value);
     return match?.label ?? String(value);
@@ -241,6 +260,106 @@ function toInputText(value: unknown): string {
   return "";
 }
 
+interface ContactEntry {
+  name: string;
+  role: string;
+}
+
+/** Normalise the stored `{name, role}` rows into editable pairs. */
+function toContactEntries(value: unknown): ContactEntry[] {
+  if (!Array.isArray(value)) return [];
+  return value.map((row) => {
+    if (row !== null && typeof row === "object") {
+      const record = row as Record<string, unknown>;
+      return {
+        name: typeof record.name === "string" ? record.name : "",
+        role: typeof record.role === "string" ? record.role : "",
+      };
+    }
+    return { name: typeof row === "string" ? row : "", role: "" };
+  });
+}
+
+/** Repeatable name + role editor for the structured `contacts` field. */
+function ContactsEditor({
+  label,
+  hint,
+  value,
+  onChange,
+}: {
+  label: string;
+  hint?: string;
+  value: unknown;
+  onChange: (value: unknown) => void;
+}) {
+  const { t } = useLingui();
+  const [rows, setRows] = useState<ContactEntry[]>(() => {
+    const initial = toContactEntries(value);
+    return initial.length > 0 ? initial : [{ name: "", role: "" }];
+  });
+
+  // Persist only complete rows; an empty draft row stays local until it is filled.
+  function emit(next: ContactEntry[]) {
+    setRows(next);
+    const cleaned = next
+      .map((row) => ({ name: row.name.trim(), role: row.role.trim() }))
+      .filter((row) => row.name !== "" || row.role !== "");
+    onChange(cleaned.length > 0 ? cleaned : null);
+  }
+
+  function updateRow(index: number, patch: Partial<ContactEntry>) {
+    emit(rows.map((row, i) => (i === index ? { ...row, ...patch } : row)));
+  }
+
+  return (
+    <Stack gap="xs">
+      <Stack gap={0}>
+        <Text size="sm" fw={500}>
+          {label}
+        </Text>
+        {hint && (
+          <Text size="xs" c="dimmed">
+            {hint}
+          </Text>
+        )}
+      </Stack>
+      {rows.map((row, index) => (
+        <Group key={index} gap="xs" wrap="nowrap" align="flex-end">
+          <TextInput
+            style={{ flex: 1 }}
+            placeholder={t`Name`}
+            value={row.name}
+            onChange={(event) => updateRow(index, { name: event.currentTarget.value })}
+          />
+          <TextInput
+            style={{ flex: 1 }}
+            placeholder={t`Role`}
+            value={row.role}
+            onChange={(event) => updateRow(index, { role: event.currentTarget.value })}
+          />
+          <ActionIcon
+            variant="subtle"
+            color="red"
+            aria-label={t`Remove contact`}
+            onClick={() => emit(rows.filter((_, i) => i !== index))}
+          >
+            <IconTrash size={16} />
+          </ActionIcon>
+        </Group>
+      ))}
+      <Button
+        variant="light"
+        size="xs"
+        style={{ alignSelf: "flex-start" }}
+        leftSection={<IconPlus size={14} />}
+        onClick={() => setRows((prev) => [...prev, { name: "", role: "" }])}
+      >
+        <Trans>Add contact</Trans>
+      </Button>
+    </Stack>
+  );
+}
+
 function FieldInput({
   definition,
   value,
@@ -252,6 +371,10 @@ function FieldInput({
 }) {
   const { type, label, placeholder, unit, min, max, options, hint } = definition;
   const inputLabel = unit ? `${label} (${unit})` : label;
+
+  if (type === "contacts") {
+    return <ContactsEditor label={label} hint={hint} value={value} onChange={onChange} />;
+  }
 
   if (type === "boolean") {
     return (
@@ -601,13 +724,16 @@ function MetadataSectionCard({
   const readOnly = section.fields.filter((field) => field.readOnly);
   const valueFields = editable.filter((field) => field.type !== "boolean");
   const boolFields = editable.filter((field) => field.type === "boolean");
+  // Structured fields (e.g. contacts) are edited manually, never by the scalar AI extractor.
+  const autoFillFields = editable.filter(isAutoFillEligible);
 
   const { filled, total } = sectionCompleteness(section.fields, metadata);
   const allFilled = total > 0 && filled === total;
-  const hasEmptyFields = filled < total;
+  const hasAutoFillGap = autoFillFields.some((field) =>
+    isFieldEmpty(resolveFieldValue(metadata, field)),
+  );
 
-  const hasAny =
-    filled > 0 || readOnly.some((field) => !isFieldEmpty(resolveFieldValue(metadata, field)));
+  const hasAny = section.fields.some((field) => !isFieldEmpty(resolveFieldValue(metadata, field)));
 
   function handleExtractResults(results: FieldExtractResult[]) {
     // Merge: replace any existing result for the same field.
@@ -731,8 +857,8 @@ function MetadataSectionCard({
           </Stack>
 
           <Group gap={4} style={{ flexShrink: 0 }}>
-            {/* AI extract button — only shown when sources exist and section has empty fields */}
-            {sources.length > 0 && hasEmptyFields && editable.length > 0 && (
+            {/* AI extract button — only shown when sources exist and the section has empty, auto-fillable fields */}
+            {sources.length > 0 && hasAutoFillGap && (
               <ExtractPopover
                 section={section}
                 sources={sources}

@@ -19,7 +19,7 @@ import {
 import { IconAlertCircle, IconCheck, IconSparkles, IconX } from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
 import type { VenueTextContent } from "@/entities/venue";
-import { METADATA_SECTIONS } from "../model";
+import { METADATA_SECTIONS, isAutoFillEligible } from "../model";
 import type { FieldExtractResult, UseVenueEnrichmentResult } from "../model";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -200,9 +200,9 @@ export function VenueAiEnrichModal({
     return { value: s.id, label: label.slice(0, 72) + (label.length > 72 ? "…" : "") };
   });
 
-  // Sections that have at least one empty editable field.
+  // Sections that have at least one empty, auto-fillable field.
   const sectionsWithGaps = METADATA_SECTIONS.filter((section) => {
-    const editable = section.fields.filter((f) => !f.readOnly);
+    const editable = section.fields.filter(isAutoFillEligible);
     if (editable.length === 0) return false;
     // Parse current metadata to check emptiness.
     if (!currentMetadata) return true;
