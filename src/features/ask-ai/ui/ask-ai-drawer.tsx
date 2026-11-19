@@ -16,47 +16,15 @@ import {
 import { IconSparkles, IconArrowUp, IconAlertCircle, IconArrowLeft } from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  useMessages,
-  useSendMessage,
-  useChatInputHistory,
-} from "@/addons/platform-ai-chat/model";
+import { useMessages, useSendMessage, useChatInputHistory } from "@/addons/platform-ai-chat/model";
 import type { ChatMessage } from "@/addons/platform-ai-chat/api/ai-chat-api";
 import { MessageBubble } from "@/addons/platform-ai-chat/ui/message-bubble";
 import { useAskAiPanelStore } from "../model/ask-ai-panel.store";
 import type { AiContextAction } from "../model/ask-ai-panel.store";
 import { useSendCatalogMessage, useCatalogChatMessages } from "../model/use-catalog-chat";
 import { CitationChips } from "./citation-chips";
-import type { VenueChatMessage } from "@/shared/api";
 
 const MAX_INPUT_CHARS = 4000;
-
-// ─── Thinking indicator ───────────────────────────────────────────────────────
-
-function PendingDots() {
-  return (
-    <Group gap="xs" pl={44}>
-      {[0, 1, 2].map((i) => (
-        <motion.div
-          key={i}
-          style={{
-            width: 6,
-            height: 6,
-            borderRadius: "50%",
-            background: "#e8541a",
-          }}
-          animate={{ opacity: [0.3, 1, 0.3], y: [0, -4, 0] }}
-          transition={{
-            duration: 0.9,
-            repeat: Infinity,
-            delay: i * 0.18,
-            ease: "easeInOut",
-          }}
-        />
-      ))}
-    </Group>
-  );
-}
 
 // ─── Suggestion card ──────────────────────────────────────────────────────────
 
@@ -251,14 +219,14 @@ export function AskAiDrawer() {
     setContent("");
   }
 
-  // A citation opens that source's preview on the venue's Files page.
-  function openCitation(sourceTextId: string) {
+  // A citation opens that source's preview on the venue's Files page, at the cited page.
+  function openCitation(sourceTextId: string, page: number | null) {
     if (!venueId) return;
     close();
     void navigate({
       to: "/venues/$venueId/files",
       params: { venueId },
-      search: { source: sourceTextId },
+      search: { source: sourceTextId, page: page ?? undefined },
     });
   }
 
@@ -395,7 +363,12 @@ export function AskAiDrawer() {
                       key={i}
                       style={{ width: 7, height: 7, borderRadius: "50%", background: "#e8541a" }}
                       animate={{ opacity: [0.25, 1, 0.25], y: [0, -5, 0] }}
-                      transition={{ duration: 1, repeat: Infinity, delay: i * 0.2, ease: "easeInOut" }}
+                      transition={{
+                        duration: 1,
+                        repeat: Infinity,
+                        delay: i * 0.2,
+                        ease: "easeInOut",
+                      }}
                     />
                   ))}
                 </Group>

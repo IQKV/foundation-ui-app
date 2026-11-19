@@ -21,13 +21,13 @@ describe("CitationChips", () => {
     expect(screen.queryByTestId("ai-citations")).not.toBeInTheDocument();
   });
 
-  it("opens the clicked source", async () => {
+  it("opens the clicked source at its page", async () => {
     const onOpen = vi.fn();
     await renderWithProviders(<CitationChips sources={[SOURCE]} onOpen={onOpen} />);
 
     await userEvent.click(screen.getByTestId("ai-citation"));
 
-    expect(onOpen).toHaveBeenCalledWith(SOURCE.sourceTextId);
+    expect(onOpen).toHaveBeenCalledWith(SOURCE.sourceTextId, 3);
   });
 
   it("labels the chip with the page the snippet came from", async () => {

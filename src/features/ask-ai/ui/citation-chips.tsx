@@ -4,7 +4,7 @@ import type { VenueChatSource } from "@/shared/api";
 
 interface CitationChipsProps {
   sources: VenueChatSource[];
-  onOpen: (sourceTextId: string) => void;
+  onOpen: (sourceTextId: string, page: number | null) => void;
 }
 
 /**
@@ -34,7 +34,7 @@ export function CitationChips({ sources, onOpen }: CitationChipsProps) {
               color="gray"
               radius="sm"
               size="sm"
-              onClick={() => onOpen(source.sourceTextId)}
+              onClick={() => onOpen(source.sourceTextId, source.page)}
               data-testid="ai-citation"
             >
               {source.page ? t`${label} · p.${source.page}` : label}

@@ -61,8 +61,8 @@ import { useAiContextActions } from "@/features/ask-ai";
 import type { ChatEndpoints } from "@/features/ask-ai";
 
 export const Route = createFileRoute("/_app/venues_/$venueId/files")({
-  // `source` is set when an AI citation links here from the ask-ai drawer.
-  validateSearch: z.object({ source: z.string().optional() }),
+  // `source`/`page` are set when an AI citation links here from the ask-ai drawer.
+  validateSearch: z.object({ source: z.string().optional(), page: z.coerce.number().optional() }),
   component: VenueFilesPage,
 });
 
@@ -146,6 +146,23 @@ function contentTypeLabel(contentType: string | null): string {
 /** Collapse whitespace so a text chunk renders as a single readable line. */
 function sourceLabel(content: string): string {
   return content.trim().replace(/\s+/g, " ");
+}
+
+/**
+ * Paged sources carry `[page N]` notes. Wrap each marker in an anchor so a citation can
+ * scroll the preview to the page it quoted; unpaged text renders unchanged.
+ */
+function renderSourceContent(content: string) {
+  return content.split(/(\[page \d+\])/g).map((part, index) => {
+    const marker = /^\[page (\d+)\]$/.exec(part);
+    return marker ? (
+      <span key={index} data-source-page={Number(marker[1])}>
+        {part}
+      </span>
+    ) : (
+      <span key={index}>{part}</span>
+    );
+  });
 }
 
 // ─── Venue brief sidebar ─────────────────────────────────────────────────────
@@ -710,7 +727,7 @@ function VenueFilesPage() {
   const { t } = useLingui();
   const navigate = useNavigate();
   const { venueId } = Route.useParams();
-  const { source: sourceParam } = Route.useSearch();
+  const { source: sourceParam, page: sourcePageParam } = Route.useSearch();
   const { isTenantOwner } = useSession();
   const canManage = isTenantOwner;
 
@@ -752,6 +769,9 @@ function VenueFilesPage() {
   const [assetPreview, setAssetPreview] = useState<AssetPreview | null>(null);
   const [photoPreview, setPhotoPreview] = useState<VenueAssetPublic | null>(null);
   const [sourcePreview, setSourcePreview] = useState<VenueTextContent | null>(null);
+  // The cited page to scroll the source preview to; null when the citation had no page.
+  const [sourcePage, setSourcePage] = useState<number | null>(null);
+  const sourceScrollRef = useRef<HTMLDivElement>(null);
 
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
@@ -799,6 +819,7 @@ function VenueFilesPage() {
     const cited = sources.find((s) => s.id === sourceParam);
     if (cited) {
       setSourcePreview(cited);
+      setSourcePage(sourcePageParam ?? null);
       setActiveType("sources");
     }
     void navigate({
@@ -807,7 +828,14 @@ function VenueFilesPage() {
       search: {},
       replace: true,
     });
-  }, [sourceParam, sourcesLoading, sources, navigate, venueId]);
+  }, [sourceParam, sourcePageParam, sourcesLoading, sources, navigate, venueId]);
+
+  // Jump to the cited page once the preview is mounted.
+  useEffect(() => {
+    if (sourcePreview === null || sourcePage === null) return;
+    const target = sourceScrollRef.current?.querySelector(`[data-source-page="${sourcePage}"]`);
+    target?.scrollIntoView({ block: "start" });
+  }, [sourcePreview, sourcePage]);
 
   const counts: Record<FileTypeFilter, number> = {
     all: photos.length + masterPhotos.length + documents.length + sources.length,
@@ -1342,7 +1370,10 @@ function VenueFilesPage() {
       {/* Source text preview modal */}
       <Modal
         opened={sourcePreview !== null}
-        onClose={() => setSourcePreview(null)}
+        onClose={() => {
+          setSourcePreview(null);
+          setSourcePage(null);
+        }}
         size="xl"
         centered
         styles={PREVIEW_MODAL_STYLES}
@@ -1380,12 +1411,16 @@ function VenueFilesPage() {
             </Group>
             <Box p="md" style={{ background: PREVIEW_TOKENS.canvas }}>
               <Box style={PREVIEW_TEXT_SURFACE_STYLES}>
-                <ScrollArea.Autosize mah="72vh" style={{ width: "100%" }}>
+                <ScrollArea.Autosize
+                  mah="72vh"
+                  viewportRef={sourceScrollRef}
+                  style={{ width: "100%" }}
+                >
                   <Text
                     size="sm"
                     style={{ whiteSpace: "pre-wrap", wordBreak: "break-word", lineHeight: 1.6 }}
                   >
-                    {sourcePreview.content}
+                    {renderSourceContent(sourcePreview.content)}
                   </Text>
                 </ScrollArea.Autosize>
               </Box>

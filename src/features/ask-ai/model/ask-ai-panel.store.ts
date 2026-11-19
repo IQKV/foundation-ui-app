@@ -12,7 +12,7 @@ export interface AiContextAction {
 
 interface AskAiPanelState {
   isOpen: boolean;
-  /** Current session id — managed internally, hidden from UX */
+  /** Current session id — one conversation per scope, resumed when its page comes back */
   sessionId: string | null;
   /** Context actions registered by the active page */
   contextActions: AiContextAction[];
@@ -33,21 +33,60 @@ interface AskAiPanelState {
   clearVenueId: () => void;
 }
 
-export const useAskAiPanelStore = create<AskAiPanelState>((set) => ({
+// ─── Session scope ────────────────────────────────────────────────────────────
+
+const SESSION_KEY_PREFIX = "ask_ai_session:";
+/** Scope of a conversation grounded on no single venue. */
+const WORKSPACE_SCOPE = "workspace";
+
+function sessionKey(venueId: string | null): string {
+  return `${SESSION_KEY_PREFIX}${venueId ?? WORKSPACE_SCOPE}`;
+}
+
+/** The session last used in this scope, so a venue page picks its conversation back up. */
+function readSession(venueId: string | null): string | null {
+  try {
+    return sessionStorage.getItem(sessionKey(venueId));
+  } catch {
+    // Storage unavailable (private window) — the panel still works, just not across reloads.
+    return null;
+  }
+}
+
+function writeSession(venueId: string | null, sessionId: string | null): void {
+  try {
+    if (sessionId) {
+      sessionStorage.setItem(sessionKey(venueId), sessionId);
+    } else {
+      sessionStorage.removeItem(sessionKey(venueId));
+    }
+  } catch {
+    // Ignore storage errors — persistence is best-effort.
+  }
+}
+
+export const useAskAiPanelStore = create<AskAiPanelState>((set, get) => ({
   isOpen: false,
-  sessionId: null,
+  sessionId: readSession(null),
   contextActions: [],
   endpoints: null,
   venueId: null,
 
   open: () => set({ isOpen: true }),
   close: () => set({ isOpen: false }),
-  setSessionId: (id) => set({ sessionId: id }),
-  clearSession: () => set({ sessionId: null }),
+  setSessionId: (id) => {
+    writeSession(get().venueId, id);
+    set({ sessionId: id });
+  },
+  clearSession: () => {
+    writeSession(get().venueId, null);
+    set({ sessionId: null });
+  },
   setContextActions: (actions) => set({ contextActions: actions }),
   clearContextActions: () => set({ contextActions: [] }),
   setEndpoints: (endpoints) => set({ endpoints }),
   clearEndpoints: () => set({ endpoints: null }),
-  setVenueId: (venueId) => set({ venueId }),
-  clearVenueId: () => set({ venueId: null }),
+  // The scope owns the conversation: each venue carries on with its own thread.
+  setVenueId: (venueId) => set({ venueId, sessionId: readSession(venueId) }),
+  clearVenueId: () => set({ venueId: null, sessionId: readSession(null) }),
 }));
