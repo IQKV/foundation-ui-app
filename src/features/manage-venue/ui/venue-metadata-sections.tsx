@@ -289,6 +289,7 @@ function CoreVenueValue({
   label,
   value,
   fullWidth = false,
+  testId,
 }: {
   label: ReactNode;
   value: string | null;
