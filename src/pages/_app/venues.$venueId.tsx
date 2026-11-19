@@ -78,7 +78,8 @@ import { useAiContextActions } from "@/features/ask-ai";
 import type { ChatEndpoints } from "@/features/ask-ai";
 
 export const Route = createFileRoute("/_app/venues/$venueId")({
-  validateSearch: z.object({ fromUpload: z.boolean().optional() }),
+  // `source` is set when an AI citation links here from the ask-ai drawer.
+  validateSearch: z.object({ fromUpload: z.boolean().optional(), source: z.string().optional() }),
   component: VenueDetailPage,
 });
 
@@ -694,14 +695,18 @@ function SourcesTab({
   sources,
   isLoading,
   extractingFileName,
+  preview,
+  onPreview,
 }: {
   sources: VenueTextContent[];
   isLoading: boolean;
   /** File name whose text is still being extracted by the worker, if any. */
   extractingFileName?: string | null;
+  /** Source whose preview modal is open — owned by the page so a citation can open it. */
+  preview: VenueTextContent | null;
+  onPreview: (source: VenueTextContent | null) => void;
 }) {
   const { t } = useLingui();
-  const [preview, setPreview] = useState<VenueTextContent | null>(null);
 
   return (
     <>
@@ -764,7 +769,7 @@ function SourcesTab({
                     size="compact-sm"
                     variant="subtle"
                     leftSection={<IconEye size={14} />}
-                    onClick={() => setPreview(source)}
+                    onClick={() => onPreview(source)}
                   >
                     <Trans>Preview</Trans>
                   </Button>
@@ -777,7 +782,7 @@ function SourcesTab({
 
       <Modal
         opened={preview !== null}
-        onClose={() => setPreview(null)}
+        onClose={() => onPreview(null)}
         size="xl"
         centered
         styles={PREVIEW_MODAL_STYLES}
@@ -855,7 +860,7 @@ function VenueDetailPage() {
   const { t } = useLingui();
   const navigate = useNavigate();
   const { venueId } = Route.useParams();
-  const { fromUpload } = Route.useSearch();
+  const { fromUpload, source: sourceParam } = Route.useSearch();
   const { payload, isTenantOwner } = useSession();
   const canManage = isTenantOwner;
 
@@ -864,6 +869,10 @@ function VenueDetailPage() {
   const [deletedVenue, setDeletedVenue] = useState<Venue | null>(null);
   const [rawJsonOpened, { toggle: toggleRawJson }] = useDisclosure(false);
   const [aiEnrichOpened, { open: openAiEnrich, close: closeAiEnrich }] = useDisclosure(false);
+  // Controlled tab value so a citation deep link can jump to the Sources tab.
+  const [activeTab, setActiveTab] = useState<string | null>("details");
+  // Preview modal state lives here so both the Sources tab and a citation can open it.
+  const [previewSource, setPreviewSource] = useState<VenueTextContent | null>(null);
 
   const enrichment = useVenueEnrichment(venueId);
 
@@ -942,6 +951,23 @@ function VenueDetailPage() {
   });
 
   const sources = sourcesData?.items ?? [];
+
+  // Deep link from an AI citation: open the cited source once the list has loaded,
+  // then drop the param so closing the preview keeps it closed.
+  useEffect(() => {
+    if (!sourceParam || sourcesLoading) return;
+    const cited = sources.find((s) => s.id === sourceParam);
+    if (cited) {
+      setPreviewSource(cited);
+      setActiveTab("sources");
+    }
+    void navigate({
+      to: "/venues/$venueId",
+      params: { venueId },
+      search: {},
+      replace: true,
+    });
+  }, [sourceParam, sourcesLoading, sources, navigate, venueId]);
 
   const hasPhoto = Boolean(venue?.primaryPhotoUrl);
 
@@ -1421,7 +1447,7 @@ function VenueDetailPage() {
                 </Box>
               )}
               {/* ── Tabs — mirrors admin VenueProfileWidget tab structure ─────── */}
-              <Tabs defaultValue="details" keepMounted={false}>
+              <Tabs value={activeTab} onChange={setActiveTab} keepMounted={false}>
                 <Tabs.List
                   styles={{
                     list: {
@@ -1629,6 +1655,8 @@ function VenueDetailPage() {
                       sources={sources}
                       isLoading={sourcesLoading}
                       extractingFileName={extracting?.fileName ?? null}
+                      preview={previewSource}
+                      onPreview={setPreviewSource}
                     />
                   </Tabs.Panel>
                 )}

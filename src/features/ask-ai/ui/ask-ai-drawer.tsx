@@ -1,4 +1,5 @@
 import { useRef, useEffect, useState } from "react";
+import { useNavigate } from "@tanstack/react-router";
 import {
   Drawer,
   Stack,
@@ -25,6 +26,7 @@ import { MessageBubble } from "@/addons/platform-ai-chat/ui/message-bubble";
 import { useAskAiPanelStore } from "../model/ask-ai-panel.store";
 import type { AiContextAction } from "../model/ask-ai-panel.store";
 import { useSendCatalogMessage, useCatalogChatMessages } from "../model/use-catalog-chat";
+import { CitationChips } from "./citation-chips";
 import type { VenueChatMessage } from "@/shared/api";
 
 const MAX_INPUT_CHARS = 4000;
@@ -153,6 +155,7 @@ export function AskAiDrawer() {
     endpoints,
     venueId,
   } = useAskAiPanelStore();
+  const navigate = useNavigate();
 
   // Catalog mode: endpoints are registered by a venue page pointing at /v1/catalog/chat.
   // Generic mode: no endpoints set, falls through to the platform-ai-chat addon hooks.
@@ -246,6 +249,17 @@ export function AskAiDrawer() {
   function handleNewConversation() {
     clearSession();
     setContent("");
+  }
+
+  // A citation opens that source's preview on the venue's Files page.
+  function openCitation(sourceTextId: string) {
+    if (!venueId) return;
+    close();
+    void navigate({
+      to: "/venues/$venueId/files",
+      params: { venueId },
+      search: { source: sourceTextId },
+    });
   }
 
   // Show suggestions only when no messages yet and not waiting for the first reply.
@@ -395,9 +409,16 @@ export function AskAiDrawer() {
           {/* Chat messages */}
           {hasMessages && (
             <Stack gap="xs" px="md">
-              {messages!.map((m) => (
-                <MessageBubble key={m.id} message={m} />
-              ))}
+              {isCatalogMode
+                ? catalogMessages.data?.items.map((m) => (
+                    <Box key={m.id}>
+                      <MessageBubble message={m} />
+                      {m.role === "ASSISTANT" && (
+                        <CitationChips sources={m.sources} onOpen={openCitation} />
+                      )}
+                    </Box>
+                  ))
+                : messages!.map((m) => <MessageBubble key={m.id} message={m} />)}
               {isPending && (
                 <Group gap="xs" pl={44}>
                   {[0, 1, 2].map((i) => (

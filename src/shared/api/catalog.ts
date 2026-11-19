@@ -244,6 +244,8 @@ export interface VenueChatMessage {
   role: "USER" | "ASSISTANT";
   content: string;
   createdAt: string;
+  /** Source chunks the reply was grounded in; empty for user turns. */
+  sources: VenueChatSource[];
 }
 
 export interface VenueChatMessageListResponse {

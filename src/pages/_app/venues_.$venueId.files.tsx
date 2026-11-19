@@ -48,6 +48,7 @@ import {
   IconArrowLeft,
 } from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
+import { z } from "zod";
 import { PageTitle } from "@/shared/lib/page-title";
 import type { Venue, VenueAsset, VenueAssetPublic, VenueTextContent } from "@/entities/venue";
 import { PageHeader } from "@/shared/ui";
@@ -60,6 +61,8 @@ import { useAiContextActions } from "@/features/ask-ai";
 import type { ChatEndpoints } from "@/features/ask-ai";
 
 export const Route = createFileRoute("/_app/venues_/$venueId/files")({
+  // `source` is set when an AI citation links here from the ask-ai drawer.
+  validateSearch: z.object({ source: z.string().optional() }),
   component: VenueFilesPage,
 });
 
@@ -707,6 +710,7 @@ function VenueFilesPage() {
   const { t } = useLingui();
   const navigate = useNavigate();
   const { venueId } = Route.useParams();
+  const { source: sourceParam } = Route.useSearch();
   const { isTenantOwner } = useSession();
   const canManage = isTenantOwner;
 
@@ -787,6 +791,23 @@ function VenueFilesPage() {
     enabled: Boolean(venue),
   });
   const sources = sourcesData?.items ?? [];
+
+  // Deep link from an AI citation: open the cited source once the list has loaded,
+  // then drop the param so closing the preview keeps it closed.
+  useEffect(() => {
+    if (!sourceParam || sourcesLoading) return;
+    const cited = sources.find((s) => s.id === sourceParam);
+    if (cited) {
+      setSourcePreview(cited);
+      setActiveType("sources");
+    }
+    void navigate({
+      to: "/venues/$venueId/files",
+      params: { venueId },
+      search: {},
+      replace: true,
+    });
+  }, [sourceParam, sourcesLoading, sources, navigate, venueId]);
 
   const counts: Record<FileTypeFilter, number> = {
     all: photos.length + masterPhotos.length + documents.length + sources.length,

@@ -129,6 +129,10 @@ msgstr "• No technical background needed — our intuitive UI is designed for 
 msgid "••••••••"
 msgstr "••••••••"
 
+#: src/features/ask-ai/ui/ask-ai-drawer.tsx
+msgid "+ Ask AI"
+msgstr "+ Ask AI"
+
 #: src/widgets/dashboard-personal-welcome/ui/dashboard-personal-welcome.tsx
 msgid "<0>Configure notifications</0> to stay informed."
 msgstr "<0>Configure notifications</0> to stay informed."
@@ -282,6 +286,10 @@ msgstr "Admin"
 msgid "Advanced Analytics"
 msgstr "Advanced Analytics"
 
+#: src/features/ask-ai/ui/ask-ai-drawer.tsx
+msgid "AI Assistant"
+msgstr "AI Assistant"
+
 #: src/addons/platform-ai-chat/ui/ai-chat-page.tsx
 msgid "AI Chat"
 msgstr "AI Chat"
@@ -384,6 +392,27 @@ msgstr "Are you sure you want to remove <0>{0} {1}</0> from this organization? T
 msgid "Are you sure?"
 msgstr "Are you sure?"
 
+#: src/features/ask-ai/ui/ask-ai-drawer.tsx
+msgid "Ask a question or pick a suggestion. The AI works from records in this workspace and links every answer to its source."
+msgstr "Ask a question or pick a suggestion. The AI works from records in this workspace and links every answer to its source."
+
+#: src/features/ask-ai/ui/ask-ai-drawer.tsx
+msgid "Ask about this venue"
+msgstr "Ask about this venue"
+
+#: src/features/ask-ai/ui/ask-ai-drawer.tsx
+msgid "Ask about your venues"
+msgstr "Ask about your venues"
+
+#: src/features/ask-ai/ui/ask-ai-drawer.tsx
+msgid "Ask about your workspace…"
+msgstr "Ask about your workspace…"
+
+#: src/features/ask-ai/ui/ask-ai-button.tsx
+#: src/features/command-bar/ui/command-bar.tsx
+msgid "Ask AI"
+msgstr "Ask AI"
+
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Asset deleted."
 msgstr "Asset deleted."
@@ -460,6 +489,10 @@ msgstr "Back to sign in"
 #: src/features/magic-link/ui/magic-link-initiate-form.tsx
 msgid "Back to sign-in"
 msgstr "Back to sign-in"
+
+#: src/features/ask-ai/ui/ask-ai-drawer.tsx
+msgid "Back to suggestions"
+msgstr "Back to suggestions"
 
 #: src/pages/_app/venues_.$venueId.files.tsx
 #~ msgid "Back to venue profile"
@@ -627,10 +660,18 @@ msgstr "Client ID is required"
 msgid "Client secret"
 msgstr "Client secret"
 
+#: src/features/command-bar/ui/spotlight-modal.tsx
+msgid "close"
+msgstr "close"
+
 #: src/features/invite-member/ui/invitation-details-modal.tsx
 #: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
 msgid "Close"
 msgstr "Close"
+
+#: src/features/ask-ai/ui/ask-ai-drawer.tsx
+msgid "Close AI panel"
+msgstr "Close AI panel"
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
@@ -848,6 +889,10 @@ msgstr "Could not update SSO configuration."
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Could not upload the asset. Please try again."
 msgstr "Could not upload the asset. Please try again."
+
+#: src/features/command-bar/ui/spotlight-modal.tsx
+msgid "Create"
+msgstr "Create"
 
 #: src/features/signup/ui/signup-form.tsx
 #: src/pages/signup.tsx
@@ -1341,6 +1386,10 @@ msgstr "Failed to load webhook log history."
 msgid "Failed to send message. Please try again."
 msgstr "Failed to send message. Please try again."
 
+#: src/features/ask-ai/ui/ask-ai-drawer.tsx
+msgid "Failed to send. Please try again."
+msgstr "Failed to send. Please try again."
+
 #: src/features/manage-venue/ui/edit-venue-modal.tsx
 msgid "Failed to update venue"
 msgstr "Failed to update venue"
@@ -1452,13 +1501,14 @@ msgid "Free"
 msgstr "Free"
 
 #: src/pages/_app/venues_.$venueId.files.tsx
-msgid "From master catalog"
-msgstr "From master catalog"
+#~ msgid "From master catalog"
+#~ msgstr "From master catalog"
 
 #: src/pages/loading-demo.tsx
 msgid "Full-screen centered loader shown on first app load (while locale initializes)."
 msgstr "Full-screen centered loader shown on first app load (while locale initializes)."
 
+#: src/pages/_app/venues_.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Gallery"
 msgstr "Gallery"
@@ -1480,10 +1530,22 @@ msgstr "Get Started"
 msgid "GitHub"
 msgstr "GitHub"
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Give me a short summary of this venue."
+msgstr "Give me a short summary of this venue."
+
+#: src/pages/_app/venues.index.tsx
+msgid "Give me an overview of all my venues."
+msgstr "Give me an overview of all my venues."
+
 #: src/pages/404.tsx
 #: src/pages/500.tsx
 msgid "Go home"
 msgstr "Go home"
+
+#: src/features/command-bar/ui/spotlight-modal.tsx
+msgid "Go to"
+msgstr "Go to"
 
 #: src/pages/_app/billing/success.tsx
 msgid "Go to Billing"
@@ -1494,6 +1556,10 @@ msgstr "Go to Billing"
 #: src/pages/unauthorized.tsx
 msgid "Go to Home"
 msgstr "Go to Home"
+
+#: src/features/command-bar/ui/command-bar.tsx
+msgid "Go…"
+msgstr "Go…"
 
 #: src/features/signup/ui/password-strength.tsx
 msgid "Good"
@@ -1535,6 +1601,14 @@ msgstr "Hierarchy"
 #: src/pages/_app/venues.index.tsx
 msgid "Home"
 msgstr "Home"
+
+#: src/pages/_app/venues_.$venueId.files.tsx
+msgid "How many files?"
+msgstr "How many files?"
+
+#: src/pages/_app/venues_.$venueId.files.tsx
+msgid "How many photos, documents and sources does this venue have?"
+msgstr "How many photos, documents and sources does this venue have?"
 
 #: src/features/page-admin/ui/rich-content-editor.tsx
 msgid "HTML content. At least one paragraph required for the default locale."
@@ -1715,6 +1789,18 @@ msgstr "Link external accounts for quick sign-in"
 msgid "Link failed"
 msgstr "Link failed"
 
+#: src/pages/_app/venues_.$venueId.files.tsx
+msgid "Linked"
+msgstr "Linked"
+
+#: src/pages/_app/venues_.$venueId.files.tsx
+msgid "List extracted text"
+msgstr "List extracted text"
+
+#: src/pages/_app/venues_.$venueId.files.tsx
+msgid "List the text extracted from this venue's sources."
+msgstr "List the text extracted from this venue's sources."
+
 #: src/pages/_app/venues.index.tsx
 msgid "List view"
 msgstr "List view"
@@ -1857,6 +1943,10 @@ msgstr "Message exceeds {MAX_INPUT_CHARS} character limit"
 #~ msgid "Message to AI enrichment assistant"
 #~ msgstr "Message to AI enrichment assistant"
 
+#: src/features/ask-ai/ui/ask-ai-drawer.tsx
+msgid "Message too long"
+msgstr "Message too long"
+
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "Meta description for search engines"
 msgstr "Meta description for search engines"
@@ -1914,6 +2004,10 @@ msgstr "Name or city…"
 #: src/pages/_app/venues.index.tsx
 msgid "Name Z → A"
 msgstr "Name Z → A"
+
+#: src/features/command-bar/ui/spotlight-modal.tsx
+msgid "navigate"
+msgstr "navigate"
 
 #: src/pages/_app/cms-pages.create.tsx
 msgid "New"
@@ -2054,6 +2148,7 @@ msgstr "No photos for this venue."
 msgid "No plans available at the moment."
 msgstr "No plans available at the moment."
 
+#: src/features/command-bar/ui/spotlight-modal.tsx
 #: src/shared/ui/app-layout/app-nav.tsx
 msgid "No results"
 msgstr "No results"
@@ -2150,10 +2245,18 @@ msgstr "One click and you're all set."
 msgid "One last"
 msgstr "One last"
 
+#: src/features/command-bar/ui/spotlight-modal.tsx
+msgid "open"
+msgstr "open"
+
 #: src/pages/_app/venues_.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Open"
 msgstr "Open"
+
+#: src/features/command-bar/ui/command-bar.tsx
+msgid "Open AI assistant"
+msgstr "Open AI assistant"
 
 #: src/features/manage-billing/ui/billing-portal-button.tsx
 msgid "Open Billing Portal"
@@ -2171,6 +2274,10 @@ msgstr "Open Graph title"
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Open larger preview"
 msgstr "Open larger preview"
+
+#: src/features/command-bar/ui/command-bar.tsx
+msgid "Open spotlight search"
+msgstr "Open spotlight search"
 
 #: src/pages/_app/settings/security.tsx
 msgid "openid profile email"
@@ -2377,8 +2484,8 @@ msgid "Photo"
 msgstr "Photo"
 
 #: src/pages/_app/venues_.$venueId.files.tsx
-msgid "Photos"
-msgstr "Photos"
+#~ msgid "Photos"
+#~ msgstr "Photos"
 
 #: src/features/ban-user/ui/ban-member-modal.tsx
 msgid "Pick a date and time"
@@ -2724,6 +2831,10 @@ msgstr "Search files…"
 msgid "Search organizations…"
 msgstr "Search organizations…"
 
+#: src/features/command-bar/ui/spotlight-modal.tsx
+msgid "Search pages, actions…"
+msgstr "Search pages, actions…"
+
 #: src/shared/ui/app-layout/app-nav.tsx
 msgid "Search…"
 msgstr "Search…"
@@ -2795,6 +2906,10 @@ msgstr "Send invitation"
 #: src/features/magic-link/ui/magic-link-initiate-form.tsx
 msgid "Send magic link"
 msgstr "Send magic link"
+
+#: src/features/ask-ai/ui/ask-ai-drawer.tsx
+msgid "Send message"
+msgstr "Send message"
 
 #: src/features/forgot-password/ui/forgot-password-form.tsx
 msgid "Send reset link"
@@ -2972,6 +3087,11 @@ msgstr "Something went wrong with your payment. Please try again or contact supp
 msgid "Something went wrong. Please try again."
 msgstr "Something went wrong. Please try again."
 
+#. placeholder {0}: index + 1
+#: src/features/ask-ai/ui/citation-chips.tsx
+msgid "Source {0}"
+msgstr "Source {0}"
+
 #: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
 #: src/features/manage-venue/ui/venue-metadata-sections.tsx
 msgid "Source document"
@@ -2981,6 +3101,7 @@ msgstr "Source document"
 msgid "Source text extracted."
 msgstr "Source text extracted."
 
+#: src/features/ask-ai/ui/citation-chips.tsx
 #: src/pages/_app/venues_.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Sources"
@@ -3027,6 +3148,22 @@ msgstr "Still setting up…"
 #: src/features/signup/ui/password-strength.tsx
 msgid "Strong"
 msgstr "Strong"
+
+#: src/features/ask-ai/ui/ask-ai-drawer.tsx
+msgid "Suggested"
+msgstr "Suggested"
+
+#: src/pages/_app/venues.index.tsx
+msgid "Summarise my venues"
+msgstr "Summarise my venues"
+
+#: src/pages/_app/venues_.$venueId.files.tsx
+msgid "Summarise the documents attached to this venue."
+msgstr "Summarise the documents attached to this venue."
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Summarise this venue"
+msgstr "Summarise this venue"
 
 #: src/shared/ui/tenant-status-badge/tenant-status-badge.tsx
 #: src/shared/ui/user-status-badge/user-status-badge.tsx
@@ -3141,9 +3278,9 @@ msgstr "The venue's name and address as it appears in your workspace."
 msgid "Theme-aware (respects dark mode and color scheme)"
 msgstr "Theme-aware (respects dark mode and color scheme)"
 
-#: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
-#~ msgid "Thinking…"
-#~ msgstr "Thinking…"
+#: src/features/ask-ai/ui/ask-ai-drawer.tsx
+msgid "Thinking…"
+msgstr "Thinking…"
 
 #: src/pages/_app/venues_.$venueId.files.tsx
 msgid "This action cannot be undone."
@@ -3486,13 +3623,49 @@ msgstr "Welcome!"
 msgid "Welcome! Your account is ready — start using the app right away."
 msgstr "Welcome! Your account is ready — start using the app right away."
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "What documents and sources are attached to this venue?"
+msgstr "What documents and sources are attached to this venue?"
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "What documents exist?"
+msgstr "What documents exist?"
+
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "What you can do"
 msgstr "What you can do"
 
+#: src/pages/_app/venues_.$venueId.files.tsx
+msgid "What's in the documents?"
+msgstr "What's in the documents?"
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "What's missing?"
+msgstr "What's missing?"
+
 #: src/features/venue-semantic-search/ui/SemanticSearchFiltersSummary.tsx
 msgid "Wheelchair accessible"
 msgstr "Wheelchair accessible"
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Which profile fields are empty or incomplete?"
+msgstr "Which profile fields are empty or incomplete?"
+
+#: src/pages/_app/venues.index.tsx
+msgid "Which venues are incomplete?"
+msgstr "Which venues are incomplete?"
+
+#: src/pages/_app/venues.index.tsx
+msgid "Which venues are missing key profile data?"
+msgstr "Which venues are missing key profile data?"
+
+#: src/pages/_app/venues.index.tsx
+msgid "Which venues have photos in the gallery?"
+msgstr "Which venues have photos in the gallery?"
+
+#: src/pages/_app/venues.index.tsx
+msgid "Which venues have photos?"
+msgstr "Which venues have photos?"
 
 #: src/features/signup/ui/signup-form.tsx
 msgid "Work email"
