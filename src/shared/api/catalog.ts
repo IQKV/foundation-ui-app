@@ -204,6 +204,8 @@ export interface VenueChatSource {
   assetId: string | null;
   label: string | null;
   snippet: string;
+  /** 1-based page the snippet was taken from; `null` when the source document has no pages. */
+  page: number | null;
   similarity: number;
 }
 

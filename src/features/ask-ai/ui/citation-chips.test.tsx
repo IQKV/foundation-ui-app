@@ -10,6 +10,7 @@ const SOURCE: VenueChatSource = {
   assetId: null,
   label: "Parking note",
   snippet: "Two levels of parking.",
+  page: 3,
   similarity: 0.9,
 };
 
@@ -27,5 +28,20 @@ describe("CitationChips", () => {
     await userEvent.click(screen.getByTestId("ai-citation"));
 
     expect(onOpen).toHaveBeenCalledWith(SOURCE.sourceTextId);
+  });
+
+  it("labels the chip with the page the snippet came from", async () => {
+    await renderWithProviders(<CitationChips sources={[SOURCE]} onOpen={vi.fn()} />);
+
+    expect(screen.getByTestId("ai-citation")).toHaveTextContent("Parking note · p.3");
+  });
+
+  it("omits the page when the source has none", async () => {
+    await renderWithProviders(
+      <CitationChips sources={[{ ...SOURCE, page: null }]} onOpen={vi.fn()} />,
+    );
+
+    expect(screen.getByTestId("ai-citation")).toHaveTextContent("Parking note");
+    expect(screen.getByTestId("ai-citation")).not.toHaveTextContent("p.");
   });
 });

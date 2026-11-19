@@ -70,6 +70,11 @@ msgstr "{doneCount} / {totalSections} sections"
 msgid "{filled} of {total} fields filled"
 msgstr "{filled} of {total} fields filled"
 
+#. placeholder {0}: source.page
+#: src/features/ask-ai/ui/citation-chips.tsx
+msgid "{label} · p.{0}"
+msgstr "{label} · p.{0}"
+
 #: src/features/venue-semantic-search/ui/SemanticSearchFiltersSummary.tsx
 msgid "{min}–{max} guests"
 msgstr "{min}–{max} guests"

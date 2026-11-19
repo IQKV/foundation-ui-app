@@ -23,22 +23,25 @@ export function CitationChips({ sources, onOpen }: CitationChipsProps) {
       <Text size="xs" c="dimmed">
         <Trans>Sources</Trans>
       </Text>
-      {sources.map((source, index) => (
-        <Tooltip key={source.sourceTextId} label={source.snippet} withArrow maw={320} multiline>
-          <Badge
-            component="button"
-            type="button"
-            variant="light"
-            color="gray"
-            radius="sm"
-            size="sm"
-            onClick={() => onOpen(source.sourceTextId)}
-            data-testid="ai-citation"
-          >
-            {source.label ?? t`Source ${index + 1}`}
-          </Badge>
-        </Tooltip>
-      ))}
+      {sources.map((source, index) => {
+        const label = source.label ?? t`Source ${index + 1}`;
+        return (
+          <Tooltip key={source.sourceTextId} label={source.snippet} withArrow maw={320} multiline>
+            <Badge
+              component="button"
+              type="button"
+              variant="light"
+              color="gray"
+              radius="sm"
+              size="sm"
+              onClick={() => onOpen(source.sourceTextId)}
+              data-testid="ai-citation"
+            >
+              {source.page ? t`${label} · p.${source.page}` : label}
+            </Badge>
+          </Tooltip>
+        );
+      })}
     </Group>
   );
 }
