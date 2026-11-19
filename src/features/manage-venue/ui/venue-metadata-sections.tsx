@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import type { ReactNode } from "react";
 import {
   ActionIcon,
   Alert,
@@ -15,6 +16,7 @@ import {
   Popover,
   Select,
   Skeleton,
+  SimpleGrid,
   Stack,
   Switch,
   TagsInput,
@@ -41,18 +43,19 @@ import {
   parseMetadata,
   resolveFieldValue,
   sectionCompleteness,
+  METADATA_CARD_GROUPS,
   METADATA_SECTIONS,
-  METADATA_TABS,
   useUpdateVenueMetadata,
 } from "../model";
 import type {
   MetadataDocument,
   MetadataFieldDefinition,
+  MetadataRecordFieldDefinition,
   MetadataSectionDefinition,
 } from "../model";
-import type { VenueEnrichmentSuggestion, VenueTextContent } from "@/entities/venue";
+import type { Venue, VenueEnrichmentSuggestion, VenueTextContent } from "@/entities/venue";
 import type { FieldExtractResult, UseVenueEnrichmentResult } from "../model";
-import { SECTION_CARD_STYLES } from "./section-accent";
+import { TestSelectors } from "@/shared/lib/test-selectors";
 
 // ── AI suggestion chip (inline, per-field, from chat flow) ───────────────────
 
@@ -215,20 +218,96 @@ function formatFieldValue(definition: MetadataFieldDefinition, value: unknown): 
 function ValueChip({ definition, value }: { definition: MetadataFieldDefinition; value: unknown }) {
   const text = formatFieldValue(definition, value);
   return (
-    <Group gap={4} wrap="nowrap" style={{ minWidth: 0 }}>
-      <Text size="sm" c="dimmed" style={{ flexShrink: 0 }}>
-        {definition.label}:
+    <Stack gap={3} style={{ minWidth: 0 }}>
+      <Text size="xs" c="dimmed" tt="uppercase" style={{ letterSpacing: "0.07em" }}>
+        {definition.label}
       </Text>
       {text === null ? (
-        <Text size="sm" c="dimmed" fs="italic">
+        <Text size="sm" c="dimmed">
           —
         </Text>
       ) : (
-        <Text size="sm" style={{ wordBreak: "break-word" }}>
+        <Text size="sm" style={{ wordBreak: "break-word", whiteSpace: "pre-line" }}>
           {text}
         </Text>
       )}
-    </Group>
+    </Stack>
+  );
+}
+
+function RecordArrayValue({
+  definition,
+  value,
+}: {
+  definition: MetadataFieldDefinition;
+  value: unknown;
+}) {
+  const rows = Array.isArray(value)
+    ? value.filter((row): row is Record<string, unknown> => row !== null && typeof row === "object")
+    : [];
+  const fields = definition.recordFields ?? [];
+
+  return (
+    <Stack gap="xs">
+      <Text size="xs" c="dimmed" tt="uppercase" style={{ letterSpacing: "0.07em" }}>
+        {definition.label}
+      </Text>
+      {rows.length === 0 ? (
+        <Text size="sm" c="dimmed">
+          —
+        </Text>
+      ) : (
+        <Stack gap={6}>
+          {rows.map((row, index) => (
+            <Paper key={index} withBorder radius="sm" p="xs">
+              <SimpleGrid cols={{ base: 1, sm: Math.min(fields.length, 4) }} spacing="xs">
+                {fields.map((field) => (
+                  <Stack key={field.key} gap={2} style={{ minWidth: 0 }}>
+                    <Text size="xs" c="dimmed">
+                      {field.label}
+                    </Text>
+                    <Text size="sm" style={{ wordBreak: "break-word" }}>
+                      {row[field.key] == null || row[field.key] === ""
+                        ? "—"
+                        : String(row[field.key])}
+                      {row[field.key] != null && row[field.key] !== "" && field.unit
+                        ? ` ${field.unit}`
+                        : ""}
+                    </Text>
+                  </Stack>
+                ))}
+              </SimpleGrid>
+            </Paper>
+          ))}
+        </Stack>
+      )}
+    </Stack>
+  );
+}
+
+function CoreVenueValue({
+  label,
+  value,
+  fullWidth = false,
+}: {
+  label: ReactNode;
+  value: string | null;
+  fullWidth?: boolean;
+  testId?: string;
+}) {
+  return (
+    <Stack gap={3} style={{ minWidth: 0, gridColumn: fullWidth ? "1 / -1" : undefined }}>
+      <Text size="xs" c="dimmed" tt="uppercase" style={{ letterSpacing: "0.07em" }}>
+        {label}
+      </Text>
+      <Text
+        size="sm"
+        data-testid={testId}
+        style={{ wordBreak: "break-word", whiteSpace: "pre-line" }}
+      >
+        {value?.trim() || "—"}
+      </Text>
+    </Stack>
   );
 }
 
@@ -360,6 +439,124 @@ function ContactsEditor({
   );
 }
 
+type RecordDraft = Record<string, string | number>;
+
+function toRecordDrafts(value: unknown, fields: MetadataRecordFieldDefinition[]): RecordDraft[] {
+  if (!Array.isArray(value)) return [];
+  return value.map((row) => {
+    const record = row !== null && typeof row === "object" ? (row as Record<string, unknown>) : {};
+    return Object.fromEntries(
+      fields.map((field) => [field.key, (record[field.key] as string | number | undefined) ?? ""]),
+    );
+  });
+}
+
+function RecordArrayEditor({
+  definition,
+  value,
+  onChange,
+}: {
+  definition: MetadataFieldDefinition;
+  value: unknown;
+  onChange: (value: unknown) => void;
+}) {
+  const { t } = useLingui();
+  const fields = definition.recordFields ?? [];
+  const [rows, setRows] = useState<RecordDraft[]>(() => {
+    const initial = toRecordDrafts(value, fields);
+    return initial.length > 0
+      ? initial
+      : [Object.fromEntries(fields.map((field) => [field.key, ""]))];
+  });
+
+  function emit(next: RecordDraft[]) {
+    setRows(next);
+    const cleaned = next
+      .map((row) => {
+        const record: Record<string, unknown> = {};
+        for (const field of fields) {
+          const raw = row[field.key];
+          if (raw == null || String(raw).trim() === "") continue;
+          record[field.key] =
+            field.type === "integer" || field.type === "decimal" ? Number(raw) : String(raw).trim();
+        }
+        return record;
+      })
+      .filter((row) => Object.keys(row).length > 0);
+    onChange(cleaned.length > 0 ? cleaned : null);
+  }
+
+  function updateRow(index: number, key: string, value: string | number) {
+    emit(rows.map((row, rowIndex) => (rowIndex === index ? { ...row, [key]: value } : row)));
+  }
+
+  return (
+    <Stack gap="xs">
+      <Stack gap={0}>
+        <Text size="sm" fw={500}>
+          {definition.label}
+        </Text>
+        {definition.hint && (
+          <Text size="xs" c="dimmed">
+            {definition.hint}
+          </Text>
+        )}
+      </Stack>
+      {rows.map((row, index) => (
+        <Group key={index} gap="xs" wrap="nowrap" align="flex-end">
+          <SimpleGrid cols={{ base: 1, sm: fields.length }} spacing="xs" style={{ flex: 1 }}>
+            {fields.map((field) =>
+              field.type === "integer" || field.type === "decimal" ? (
+                <NumberInput
+                  key={field.key}
+                  label={field.label}
+                  placeholder={field.placeholder}
+                  value={row[field.key] ?? ""}
+                  allowDecimal={field.type === "decimal"}
+                  decimalScale={field.type === "decimal" ? 2 : undefined}
+                  onChange={(value) =>
+                    updateRow(index, field.key, value === "" ? "" : Number(value))
+                  }
+                />
+              ) : (
+                <TextInput
+                  key={field.key}
+                  label={field.label}
+                  placeholder={field.placeholder}
+                  value={row[field.key] ?? ""}
+                  onChange={(event) => updateRow(index, field.key, event.currentTarget.value)}
+                />
+              ),
+            )}
+          </SimpleGrid>
+          <ActionIcon
+            variant="subtle"
+            color="red"
+            aria-label={t`Remove row`}
+            onClick={() => emit(rows.filter((_, rowIndex) => rowIndex !== index))}
+          >
+            <IconTrash size={16} />
+          </ActionIcon>
+        </Group>
+      ))}
+      <Button
+        variant="light"
+        size="xs"
+        style={{ alignSelf: "flex-start" }}
+        leftSection={<IconPlus size={14} />}
+        onClick={() =>
+          setRows((previous) => [
+            ...previous,
+            Object.fromEntries(fields.map((field) => [field.key, ""])),
+          ])
+        }
+      >
+        {definition.addLabel ?? t`Add row`}
+      </Button>
+    </Stack>
+  );
+}
+
 function FieldInput({
   definition,
   value,
@@ -376,6 +573,9 @@ function FieldInput({
     return <ContactsEditor label={label} hint={hint} value={value} onChange={onChange} />;
   }
 
+  if (type === "record_array") {
+    return <RecordArrayEditor definition={definition} value={value} onChange={onChange} />;
+  }
   if (type === "boolean") {
     return (
       <Group justify="space-between" py={4} wrap="nowrap">
@@ -698,6 +898,7 @@ function MetadataSectionCard({
   venueId,
   metadata,
   section,
+  isFirst,
   sources,
   suggestions,
   onAcceptSuggestion,
@@ -708,6 +909,7 @@ function MetadataSectionCard({
   venueId: string;
   metadata: MetadataDocument;
   section: MetadataSectionDefinition;
+  isFirst: boolean;
   sources: VenueTextContent[];
   suggestions: VenueEnrichmentSuggestion[];
   onAcceptSuggestion: (s: VenueEnrichmentSuggestion) => void;
@@ -732,8 +934,6 @@ function MetadataSectionCard({
   const hasAutoFillGap = autoFillFields.some((field) =>
     isFieldEmpty(resolveFieldValue(metadata, field)),
   );
-
-  const hasAny = section.fields.some((field) => !isFieldEmpty(resolveFieldValue(metadata, field)));
 
   function handleExtractResults(results: FieldExtractResult[]) {
     // Merge: replace any existing result for the same field.
@@ -762,12 +962,13 @@ function MetadataSectionCard({
 
   return (
     <>
-      <Paper withBorder radius="md" p="lg" shadow="sm" styles={SECTION_CARD_STYLES}>
+      <Box>
+        {(!isFirst || section.cardGroup === "venue") && <Divider my="sm" />}
         <Group justify="space-between" align="flex-start" wrap="nowrap" gap="md">
           <Stack gap={6} style={{ flex: 1, minWidth: 0 }}>
             <Group gap={8} align="center">
-              <Text size="md" fw={700}>
-                {section.label}
+              <Text size="sm" fw={600}>
+                {section.subgroup ?? section.label}
               </Text>
               {total > 0 && (
                 <Badge
@@ -787,73 +988,74 @@ function MetadataSectionCard({
               )}
             </Group>
 
-            {!hasAny && suggestions.length === 0 && extractResults.length === 0 ? (
-              <Text size="xs" c="dimmed" fs="italic">
-                <Trans>No data yet — click Edit to add.</Trans>
-              </Text>
-            ) : (
-              <Stack gap={6}>
-                {valueFields.length > 0 && (
-                  <Group gap="lg" wrap="wrap">
-                    {valueFields.map((field) => (
+            <Stack gap={6}>
+              {valueFields.length > 0 && (
+                <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md">
+                  {valueFields.map((field) =>
+                    field.type === "record_array" ? (
+                      <Box key={field.key} style={{ gridColumn: "1 / -1" }}>
+                        <RecordArrayValue
+                          definition={field}
+                          value={resolveFieldValue(metadata, field)}
+                        />
+                      </Box>
+                    ) : (
                       <ValueChip
                         key={field.key}
                         definition={field}
                         value={resolveFieldValue(metadata, field)}
                       />
-                    ))}
-                  </Group>
-                )}
-                {boolFields.length > 0 && (
-                  <Group gap="sm" wrap="wrap">
-                    {boolFields.map((field) => (
-                      <BooleanChip
-                        key={field.key}
-                        definition={field}
-                        value={resolveFieldValue(metadata, field)}
-                      />
-                    ))}
-                  </Group>
-                )}
-                {readOnly.length > 0 && (
-                  <Box>
-                    {readOnly.map((field) => (
-                      <ValueChip
-                        key={field.key}
-                        definition={field}
-                        value={resolveFieldValue(metadata, field)}
-                      />
-                    ))}
-                  </Box>
-                )}
-                {/* Chat-flow suggestion chips */}
-                {suggestions.length > 0 && (
-                  <Stack gap={4} mt={4}>
-                    {suggestions.map((s) => (
-                      <SuggestionChip
-                        key={`${s.group}.${s.field}`}
-                        suggestion={s}
-                        onAccept={() => onAcceptSuggestion(s)}
-                        onDismiss={() => onDismissSuggestion(s)}
-                      />
-                    ))}
-                  </Stack>
-                )}
-                {/* Per-section extract result chips */}
-                {extractResults.length > 0 && (
-                  <Stack gap={4} mt={4}>
-                    {extractResults.map((r) => (
-                      <ExtractResultChip
-                        key={`${r.group}.${r.field}`}
-                        result={r}
-                        onAccept={() => acceptExtractResult(r)}
-                        onSkip={() => dismissExtractResult(r)}
-                      />
-                    ))}
-                  </Stack>
-                )}
-              </Stack>
-            )}
+                    ),
+                  )}
+                </SimpleGrid>
+              )}
+              {boolFields.length > 0 && (
+                <Group gap="sm" wrap="wrap">
+                  {boolFields.map((field) => (
+                    <BooleanChip
+                      key={field.key}
+                      definition={field}
+                      value={resolveFieldValue(metadata, field)}
+                    />
+                  ))}
+                </Group>
+              )}
+              {readOnly.length > 0 && (
+                <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md">
+                  {readOnly.map((field) => (
+                    <ValueChip
+                      key={field.key}
+                      definition={field}
+                      value={resolveFieldValue(metadata, field)}
+                    />
+                  ))}
+                </SimpleGrid>
+              )}
+              {suggestions.length > 0 && (
+                <Stack gap={4} mt={4}>
+                  {suggestions.map((s) => (
+                    <SuggestionChip
+                      key={`${s.group}.${s.field}`}
+                      suggestion={s}
+                      onAccept={() => onAcceptSuggestion(s)}
+                      onDismiss={() => onDismissSuggestion(s)}
+                    />
+                  ))}
+                </Stack>
+              )}
+              {extractResults.length > 0 && (
+                <Stack gap={4} mt={4}>
+                  {extractResults.map((r) => (
+                    <ExtractResultChip
+                      key={`${r.group}.${r.field}`}
+                      result={r}
+                      onAccept={() => acceptExtractResult(r)}
+                      onSkip={() => dismissExtractResult(r)}
+                    />
+                  ))}
+                </Stack>
+              )}
+            </Stack>
           </Stack>
 
           <Group gap={4} style={{ flexShrink: 0 }}>
@@ -882,7 +1084,7 @@ function MetadataSectionCard({
             )}
           </Group>
         </Group>
-      </Paper>
+      </Box>
 
       <Drawer
         opened={drawerOpened}
@@ -921,6 +1123,7 @@ function MetadataSectionCard({
 interface VenueMetadataSectionsProps {
   venueId: string;
   metadata: string | null;
+  venue?: Pick<Venue, "name" | "description" | "address" | "city">;
   isLoading?: boolean;
   sources?: VenueTextContent[];
   suggestions?: VenueEnrichmentSuggestion[];
@@ -944,6 +1147,7 @@ interface VenueMetadataSectionsProps {
 export function VenueMetadataSections({
   venueId,
   metadata,
+  venue,
   isLoading,
   sources = [],
   suggestions = [],
@@ -975,52 +1179,70 @@ export function VenueMetadataSections({
   }
 
   return (
-    <Stack gap="xs">
-      {METADATA_TABS.map((tab) => {
-        const sections = METADATA_SECTIONS.filter((section) => section.tab === tab.key).sort(
-          (a, b) => a.order - b.order,
-        );
+    <Stack gap="md">
+      {METADATA_CARD_GROUPS.map((cardGroup) => {
+        const sections = METADATA_SECTIONS.filter(
+          (section) => section.cardGroup === cardGroup.key,
+        ).sort((a, b) => a.order - b.order);
         if (sections.length === 0) return null;
         return (
-          <Stack key={tab.key} gap="sm">
-            <Divider
-              label={
-                <Text
-                  size="xs"
-                  fw={700}
-                  tt="uppercase"
-                  c="dimmed"
-                  style={{ letterSpacing: "0.07em" }}
-                >
-                  {tab.label}
+          <Paper key={cardGroup.key} withBorder radius="md" p="lg">
+            <Stack gap="md">
+              <Stack gap={4}>
+                <Text size="md" fw={600}>
+                  {cardGroup.label}
                 </Text>
-              }
-              labelPosition="left"
-              my="xs"
-            />
-            {sections.map((section) => (
-              <MetadataSectionCard
-                key={section.key}
-                venueId={venueId}
-                metadata={parsed}
-                section={section}
-                sources={sources}
-                suggestions={suggestions.filter((s) =>
-                  section.fields.some(
-                    (f) => f.key === `${s.group}.${s.field}` || f.key === s.field,
-                  ),
-                )}
-                onAcceptSuggestion={onAcceptSuggestion ?? (() => {})}
-                onDismissSuggestion={onDismissSuggestion ?? (() => {})}
-                enrichment={enrichment ?? ({} as UseVenueEnrichmentResult)}
-                onAcceptExtracted={(patches) => {
-                  if (enrichment && patches.length > 0) {
-                    enrichment.applyPatches(patches, metadata);
-                  }
-                }}
-              />
-            ))}
-          </Stack>
+                <Text size="xs" c="dimmed">
+                  {cardGroup.description}
+                </Text>
+              </Stack>
+              {cardGroup.key === "venue" && venue && (
+                <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md">
+                  <CoreVenueValue
+                    label={<Trans>Venue name</Trans>}
+                    value={venue.name}
+                    testId={TestSelectors.VENUE_DETAIL_NAME}
+                  />
+                  <CoreVenueValue
+                    label={<Trans>City</Trans>}
+                    value={venue.city}
+                    testId={TestSelectors.VENUE_DETAIL_CITY}
+                  />
+                  <CoreVenueValue label={<Trans>Address</Trans>} value={venue.address} fullWidth />
+                  <CoreVenueValue
+                    label={<Trans>Overview</Trans>}
+                    value={venue.description}
+                    fullWidth
+                  />
+                </SimpleGrid>
+              )}
+              <Stack gap={0}>
+                {sections.map((section, index) => (
+                  <MetadataSectionCard
+                    key={section.key}
+                    venueId={venueId}
+                    metadata={parsed}
+                    section={section}
+                    isFirst={index === 0}
+                    sources={sources}
+                    suggestions={suggestions.filter((s) =>
+                      section.fields.some(
+                        (f) => f.key === `${s.group}.${s.field}` || f.key === s.field,
+                      ),
+                    )}
+                    onAcceptSuggestion={onAcceptSuggestion ?? (() => {})}
+                    onDismissSuggestion={onDismissSuggestion ?? (() => {})}
+                    enrichment={enrichment ?? ({} as UseVenueEnrichmentResult)}
+                    onAcceptExtracted={(patches) => {
+                      if (enrichment && patches.length > 0) {
+                        enrichment.applyPatches(patches, metadata);
+                      }
+                    }}
+                  />
+                ))}
+              </Stack>
+            </Stack>
+          </Paper>
         );
       })}
     </Stack>

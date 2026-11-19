@@ -1,7 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { METADATA_SECTIONS } from "./metadata-spec";
+import { METADATA_CARD_GROUPS, METADATA_SECTIONS } from "./metadata-spec";
 import type { MetadataFieldDefinition } from "./metadata-spec";
-import { overallCompleteness, parseMetadata, setFieldValue } from "./metadata-utils";
+import {
+  overallCompleteness,
+  parseMetadata,
+  resolveFieldValue,
+  setFieldValue,
+} from "./metadata-utils";
 import type { MetadataDocument } from "./metadata-utils";
 
 const EMPTY: MetadataDocument = { _schema_version: 1, items: [] };
@@ -9,12 +14,32 @@ const EMPTY: MetadataDocument = { _schema_version: 1, items: [] };
 /** A value `setFieldValue` will actually store for the given field type. */
 function sampleValue(field: MetadataFieldDefinition): unknown {
   if (field.type === "contacts") return [{ name: "value", role: "Venue Manager" }];
+  if (field.type === "record_array") {
+    return [
+      Object.fromEntries(
+        (field.recordFields ?? []).map((recordField) => [recordField.key, "value"]),
+      ),
+    ];
+  }
   if (field.type === "string_array" || field.type === "enum_multi") return ["value"];
   if (field.type === "boolean") return true;
   return "value";
 }
 
 describe("overallCompleteness", () => {
+  it("assigns each metadata section to a presentation card group", () => {
+    expect(
+      METADATA_SECTIONS.every((section) =>
+        METADATA_CARD_GROUPS.some((group) => group.key === section.cardGroup),
+      ),
+    ).toBe(true);
+    expect(
+      METADATA_CARD_GROUPS.every((group) =>
+        METADATA_SECTIONS.some((section) => section.cardGroup === group.key),
+      ),
+    ).toBe(true);
+  });
+
   it("reports 0% and one row per section for an empty document", () => {
     const result = overallCompleteness(parseMetadata(null));
 
@@ -67,5 +92,18 @@ describe("overallCompleteness", () => {
     expect(result.filled).toBe(1);
     expect(result.percent).toBe(Math.round((1 / result.total) * 100));
     expect(result.sections.find((row) => row.key === section.key)?.filled).toBe(1);
+  });
+
+  it("round-trips repeatable structured rows using the existing flat metadata format", () => {
+    const field = METADATA_SECTIONS.flatMap((section) => section.fields).find(
+      (candidate) => candidate.type === "record_array",
+    );
+    if (!field) throw new Error("metadata spec has no repeatable record field");
+    const rows = [{ name: "Main floor", seated: 300, standing: 800, notes: "Open plan" }];
+
+    const saved = setFieldValue(EMPTY, field, rows);
+    const parsed = parseMetadata(JSON.stringify(saved));
+
+    expect(resolveFieldValue(parsed, field)).toEqual(rows);
   });
 });

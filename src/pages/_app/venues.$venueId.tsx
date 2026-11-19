@@ -1064,7 +1064,9 @@ function VenueDetailPage() {
   };
 
   // Completeness counts for section cards
-  const locationFilled = [venue?.address, venue?.city, venue?.locationLat].filter(Boolean).length;
+  const locationFilled = [venue?.locationLat, venue?.locationLng].filter(
+    (coordinate) => coordinate != null,
+  ).length;
 
   if (isError) {
     return (
@@ -1285,75 +1287,24 @@ function VenueDetailPage() {
                     <Box
                       style={{
                         position: "absolute",
-                        inset: 0,
-                        background: hasPhoto
-                          ? "linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.28) 50%, transparent 100%)"
-                          : "linear-gradient(to top, rgba(0,0,0,0.08) 0%, transparent 60%)",
-                      }}
-                    />
-                  )}
-                  {!isLoading && (
-                    <Box
-                      style={{
-                        position: "absolute",
-                        bottom: 0,
-                        left: 0,
-                        right: 0,
-                        padding: "var(--mantine-spacing-md)",
+                        top: "var(--mantine-spacing-sm)",
+                        right: "var(--mantine-spacing-sm)",
                       }}
                     >
-                      <Stack gap={4}>
-                        <Group gap="sm" align="center" wrap="nowrap">
-                          <Text
-                            fw={800}
-                            style={{
-                              color: hasPhoto ? "#ffffff" : "var(--mantine-color-dark-9)",
-                              lineHeight: 1.15,
-                              letterSpacing: "-0.02em",
-                              textShadow: hasPhoto ? "0 1px 4px rgba(0,0,0,0.4)" : "none",
-                              fontSize: "clamp(1.2rem, 2vw, 1.6rem)",
-                            }}
-                            data-testid={TestSelectors.VENUE_DETAIL_NAME}
-                          >
-                            {venue?.name}
-                          </Text>
-                          <ThemeIcon
-                            role="img"
-                            aria-label={
-                              isMasterLinked
-                                ? t`Matched to a master catalog record`
-                                : t`No master catalog record matched`
-                            }
-                            size={22}
-                            radius="xl"
-                            variant={isMasterLinked ? "filled" : "light"}
-                            color={isMasterLinked ? "blue" : "gray"}
-                          >
-                            <IconLink size={12} />
-                          </ThemeIcon>
-                        </Group>
-                        {(venue?.address || venue?.city) && (
-                          <Group gap={5} wrap="nowrap">
-                            <IconMapPin
-                              size={13}
-                              color={
-                                hasPhoto ? "rgba(255,255,255,0.75)" : "var(--mantine-color-gray-6)"
-                              }
-                            />
-                            <Text
-                              size="sm"
-                              style={{
-                                color: hasPhoto
-                                  ? "rgba(255,255,255,0.85)"
-                                  : "var(--mantine-color-gray-7)",
-                              }}
-                              data-testid={TestSelectors.VENUE_DETAIL_CITY}
-                            >
-                              {[venue?.address, venue?.city].filter(Boolean).join(", ")}
-                            </Text>
-                          </Group>
-                        )}
-                      </Stack>
+                      <ThemeIcon
+                        role="img"
+                        aria-label={
+                          isMasterLinked
+                            ? t`Matched to a master catalog record`
+                            : t`No master catalog record matched`
+                        }
+                        size={22}
+                        radius="xl"
+                        variant={isMasterLinked ? "filled" : "light"}
+                        color={isMasterLinked ? "blue" : "gray"}
+                      >
+                        <IconLink size={12} />
+                      </ThemeIcon>
                     </Box>
                   )}
                 </Box>
@@ -1362,21 +1313,19 @@ function VenueDetailPage() {
               {/* Quality control — detailed completeness breakdown */}
               <VenueCompletenessCard completeness={completeness} isLoading={isLoading} />
 
-              {/* Location */}
+              {/* Map coordinates */}
               <InfoSectionCard
-                title={<Trans>Address & coordinates</Trans>}
+                title={<Trans>Coordinates</Trans>}
                 icon={<IconMapPin size={14} />}
                 filled={locationFilled}
-                total={3}
+                total={2}
                 isLoading={isLoading}
               >
                 <Stack gap={6}>
-                  <FieldChip label={<Trans>Address</Trans>} value={venue?.address} />
-                  <FieldChip label={<Trans>City</Trans>} value={venue?.city} />
                   <FieldChip
                     label={<Trans>Coordinates</Trans>}
                     value={
-                      venue?.locationLat && venue?.locationLng ? (
+                      venue?.locationLat != null && venue?.locationLng != null ? (
                         <Group gap={6} wrap="nowrap">
                           <Text size="sm">
                             {String(venue.locationLat)}, {String(venue.locationLng)}
@@ -1438,14 +1387,6 @@ function VenueDetailPage() {
           {/* ── Right column: tabs ─────────────────────────────────────── */}
           <Grid.Col span={{ base: 12, lg: 8 }}>
             <Stack gap="md">
-              {/* Brief venue description — only rendered when the venue has one. */}
-              {venue?.description && (
-                <Box pl="md" style={{ borderLeft: "3px solid var(--mantine-color-blue-4)" }}>
-                  <Text size="lg" lh={1.55} style={{ whiteSpace: "pre-line" }}>
-                    {venue.description}
-                  </Text>
-                </Box>
-              )}
               {/* ── Tabs — mirrors admin VenueProfileWidget tab structure ─────── */}
               <Tabs value={activeTab} onChange={setActiveTab} keepMounted={false}>
                 <Tabs.List
@@ -1539,6 +1480,7 @@ function VenueDetailPage() {
                           <VenueMetadataSections
                             venueId={venueId}
                             metadata={venue.metadata ?? null}
+                            venue={venue}
                             isLoading={isLoading}
                             sources={sources}
                             suggestions={enrichment.pendingPatches}

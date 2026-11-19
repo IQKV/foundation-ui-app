@@ -7,11 +7,13 @@ export { useDeleteVenue } from "./use-delete-venue";
 export { useBulkDeleteVenues } from "./use-bulk-delete-venues";
 export { useUploadVenueDocument } from "./use-upload-venue-document";
 export type { UploadStage, UseUploadVenueDocumentResult } from "./use-upload-venue-document";
-export { METADATA_SECTIONS, METADATA_TABS } from "./metadata-spec";
+export { METADATA_CARD_GROUPS, METADATA_SECTIONS, METADATA_TABS } from "./metadata-spec";
 export type {
+  MetadataCardGroupDefinition,
   MetadataFieldDefinition,
   MetadataFieldOption,
   MetadataFieldType,
+  MetadataRecordFieldDefinition,
   MetadataSectionDefinition,
 } from "./metadata-spec";
 export {

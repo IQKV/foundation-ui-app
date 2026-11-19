@@ -61,7 +61,12 @@ function splitKey(key: string): { group: string; field: string } {
 
 /** List-typed fields expand to one row per element; scalars to a single row. */
 function isListField(type: MetadataFieldType): boolean {
-  return type === "string_array" || type === "enum_multi" || type === "contacts";
+  return (
+    type === "string_array" ||
+    type === "enum_multi" ||
+    type === "contacts" ||
+    type === "record_array"
+  );
 }
 
 /**
@@ -70,7 +75,9 @@ function isListField(type: MetadataFieldType): boolean {
  * overwrite them with a plain string.
  */
 export function isAutoFillEligible(definition: MetadataFieldDefinition): boolean {
-  return !definition.readOnly && definition.type !== "contacts";
+  return (
+    !definition.readOnly && definition.type !== "contacts" && definition.type !== "record_array"
+  );
 }
 
 /** Read a field's value from the flat rows (an array for list-typed fields). */

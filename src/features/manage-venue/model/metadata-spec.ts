@@ -1,8 +1,8 @@
 /**
- * Local field specification for the venue `metadata` JSON document.
+ * Local field specification for the tenant venue `metadata` document.
  *
- * Mirrors the admin app's metadata-spec verbatim — `key` is a dot-path into the
- * metadata JSON, matching the ingestion worker's output.
+ * Field keys preserve the existing metadata row addresses. Card and subgroup
+ * values are presentation-only and do not affect persisted metadata.
  */
 
 export type MetadataFieldType =
@@ -15,7 +15,17 @@ export type MetadataFieldType =
   | "enum_multi"
   | "time"
   /** Repeated `{name, role}` coordinator rows — structured, so it has its own editor. */
-  | "contacts";
+  | "contacts"
+  /** Repeated structured rows such as rooms, price lines, and technical specs. */
+  | "record_array";
+
+export interface MetadataRecordFieldDefinition {
+  key: string;
+  label: string;
+  placeholder?: string;
+  type?: "string" | "integer" | "decimal";
+  unit?: string;
+}
 
 export interface MetadataFieldOption {
   value: string;
@@ -33,6 +43,8 @@ export interface MetadataFieldDefinition {
   min?: number;
   max?: number;
   options?: MetadataFieldOption[];
+  recordFields?: MetadataRecordFieldDefinition[];
+  addLabel?: string;
   /** Rendered as a read-only chip; excluded from the edit drawer. */
   readOnly?: boolean;
 }
@@ -40,8 +52,12 @@ export interface MetadataFieldDefinition {
 export interface MetadataSectionDefinition {
   key: string;
   label: string;
-  /** Tab key this section belongs to. */
+  /** Logical tab key retained for compatibility with metadata consumers. */
   tab: string;
+  /** Presentation card that contains this section without changing its storage address. */
+  cardGroup: string;
+  /** Optional smaller heading inside the presentation card. */
+  subgroup?: string;
   order: number;
   fields: MetadataFieldDefinition[];
 }
@@ -50,6 +66,51 @@ export interface MetadataTabDefinition {
   key: string;
   label: string;
 }
+
+export interface MetadataCardGroupDefinition {
+  key: string;
+  label: string;
+  description: string;
+}
+
+/** Presentation groups may combine sections while their storage keys stay unchanged. */
+export const METADATA_CARD_GROUPS: MetadataCardGroupDefinition[] = [
+  {
+    key: "venue",
+    label: "The venue",
+    description: "How you describe this space to a client.",
+  },
+  {
+    key: "capacity",
+    label: "Capacity & layout",
+    description: "Numbers and physical detail extracted from the venue file.",
+  },
+  {
+    key: "pricing",
+    label: "Pricing & packages",
+    description: "Rates, minimums, and what the hire fee covers.",
+  },
+  {
+    key: "catering_technical",
+    label: "Catering & technical",
+    description: "Kitchen, production, and technical detail for the pitch.",
+  },
+  {
+    key: "logistics",
+    label: "Logistics & access",
+    description: "Arrival, loading, parking, and event-day constraints.",
+  },
+  {
+    key: "team_notes",
+    label: "Notes for your team",
+    description: "Internal context that should not appear in a client-facing brief.",
+  },
+  {
+    key: "contacts_online",
+    label: "Contacts & online",
+    description: "People and public information associated with this venue.",
+  },
+];
 
 export const METADATA_TABS: MetadataTabDefinition[] = [
   { key: "overview", label: "Overview" },
@@ -100,9 +161,35 @@ const CATERING_POLICY_OPTIONS: MetadataFieldOption[] = [
 
 export const METADATA_SECTIONS: MetadataSectionDefinition[] = [
   {
+    key: "venue_profile",
+    label: "Profile details",
+    tab: "overview",
+    cardGroup: "venue",
+    subgroup: "Profile",
+    order: 0,
+    fields: [
+      {
+        key: "profile.category",
+        label: "Category",
+        type: "enum",
+        options: VENUE_TYPE_OPTIONS,
+      },
+      { key: "profile.country", label: "Country", type: "string" },
+      { key: "profile.positioning_line", label: "Positioning line", type: "string" },
+      {
+        key: "profile.search_tags",
+        label: "Search tags",
+        type: "string_array",
+        hint: "Comma separated — used to find this venue later.",
+      },
+    ],
+  },
+  {
     key: "basic",
     label: "Basic info",
     tab: "overview",
+    cardGroup: "venue",
+    subgroup: "Description & discovery",
     order: 1,
     fields: [
       {
@@ -123,13 +210,15 @@ export const METADATA_SECTIONS: MetadataSectionDefinition[] = [
   },
   {
     key: "venue_type",
-    label: "Venue type",
+    label: "Additional venue types",
     tab: "overview",
+    cardGroup: "venue",
+    subgroup: "Additional categories",
     order: 2,
     fields: [
       {
         key: "venue_type",
-        label: "Venue type(s)",
+        label: "Additional venue types",
         type: "enum_multi",
         options: VENUE_TYPE_OPTIONS,
       },
@@ -139,6 +228,8 @@ export const METADATA_SECTIONS: MetadataSectionDefinition[] = [
     key: "restrictions",
     label: "Restrictions",
     tab: "overview",
+    cardGroup: "venue",
+    subgroup: "Restrictions",
     order: 3,
     fields: [
       {
@@ -154,6 +245,8 @@ export const METADATA_SECTIONS: MetadataSectionDefinition[] = [
     key: "cap_total",
     label: "Total capacity",
     tab: "capacity",
+    cardGroup: "capacity",
+    subgroup: "Overall capacity",
     order: 1,
     fields: [
       {
@@ -170,6 +263,8 @@ export const METADATA_SECTIONS: MetadataSectionDefinition[] = [
     key: "cap_configs",
     label: "Configuration breakdown",
     tab: "capacity",
+    cardGroup: "capacity",
+    subgroup: "Configurations",
     order: 2,
     fields: [
       {
@@ -207,12 +302,66 @@ export const METADATA_SECTIONS: MetadataSectionDefinition[] = [
         unit: "guests",
         min: 1,
       },
+      {
+        key: "capacity.configurations.seated",
+        label: "Seated",
+        type: "integer",
+        unit: "guests",
+        min: 1,
+      },
+      {
+        key: "capacity.configurations.standing",
+        label: "Standing",
+        type: "integer",
+        unit: "guests",
+        min: 1,
+      },
+    ],
+  },
+  {
+    key: "room_areas",
+    label: "Rooms & areas",
+    tab: "capacity",
+    cardGroup: "capacity",
+    subgroup: "Rooms & areas",
+    order: 3,
+    fields: [
+      {
+        key: "capacity.rooms",
+        label: "Rooms & areas",
+        type: "record_array",
+        addLabel: "Add a room",
+        recordFields: [
+          { key: "name", label: "Room name", placeholder: "Main floor" },
+          { key: "seated", label: "Seated", type: "integer", placeholder: "300" },
+          { key: "standing", label: "Standing", type: "integer", placeholder: "800" },
+          { key: "notes", label: "Notes", placeholder: "Uncolumned, 9 m clearance" },
+        ],
+      },
+    ],
+  },
+  {
+    key: "floor_access",
+    label: "Floor plan & access",
+    tab: "capacity",
+    cardGroup: "capacity",
+    subgroup: "Floor plan & access",
+    order: 4,
+    fields: [
+      {
+        key: "capacity.floor_plan_access",
+        label: "Floor plan & access",
+        type: "string",
+        hint: "Vehicle access, loading, and floor-plan constraints.",
+      },
     ],
   },
   {
     key: "catering",
     label: "Catering",
     tab: "facilities",
+    cardGroup: "catering_technical",
+    subgroup: "Catering & bar",
     order: 1,
     fields: [
       {
@@ -221,16 +370,40 @@ export const METADATA_SECTIONS: MetadataSectionDefinition[] = [
         type: "enum",
         options: CATERING_POLICY_OPTIONS,
       },
+      {
+        key: "catering.notes",
+        label: "Catering & bar",
+        type: "string",
+        hint: "Kitchen facilities, alcohol permissions, and service arrangements.",
+      },
       { key: "catering.kosher_available", label: "Kosher available", type: "boolean" },
       { key: "catering.halal_available", label: "Halal available", type: "boolean" },
       { key: "catering.vegan_available", label: "Vegan menu available", type: "boolean" },
     ],
   },
   {
+    key: "catering_formats",
+    label: "Catering formats",
+    tab: "facilities",
+    cardGroup: "catering_technical",
+    subgroup: "Catering formats",
+    order: 2,
+    fields: [
+      {
+        key: "catering.formats",
+        label: "Catering formats",
+        type: "string_array",
+        placeholder: "Food trucks, Seated dinner, Open bar",
+      },
+    ],
+  },
+  {
     key: "av",
     label: "AV & technology",
     tab: "facilities",
-    order: 2,
+    cardGroup: "catering_technical",
+    subgroup: "AV & technology",
+    order: 3,
     fields: [
       { key: "av_tech.built_in_av", label: "Built-in AV system", type: "boolean" },
       {
@@ -257,10 +430,38 @@ export const METADATA_SECTIONS: MetadataSectionDefinition[] = [
     ],
   },
   {
+    key: "technical",
+    label: "Technical notes & specifications",
+    tab: "facilities",
+    cardGroup: "catering_technical",
+    subgroup: "Technical notes & specifications",
+    order: 4,
+    fields: [
+      {
+        key: "technical.notes",
+        label: "Technical notes",
+        type: "string",
+        hint: "Production capabilities, restrictions, and supplier arrangements.",
+      },
+      {
+        key: "technical.specifications",
+        label: "Technical specifications",
+        type: "record_array",
+        addLabel: "Add a specification",
+        recordFields: [
+          { key: "name", label: "Specification", placeholder: "Clearance" },
+          { key: "value", label: "Details", placeholder: "9 m under trusses" },
+        ],
+      },
+    ],
+  },
+  {
     key: "accessibility",
     label: "Accessibility",
     tab: "facilities",
-    order: 3,
+    cardGroup: "catering_technical",
+    subgroup: "Accessibility",
+    order: 5,
     fields: [
       { key: "accessibility.ada_compliant", label: "ADA / wheelchair compliant", type: "boolean" },
       { key: "accessibility.elevator_access", label: "Elevator access", type: "boolean" },
@@ -276,7 +477,9 @@ export const METADATA_SECTIONS: MetadataSectionDefinition[] = [
     key: "outdoor",
     label: "Outdoor space",
     tab: "facilities",
-    order: 4,
+    cardGroup: "catering_technical",
+    subgroup: "Outdoor space",
+    order: 6,
     fields: [
       { key: "outdoor_space.available", label: "Outdoor space available", type: "boolean" },
       { key: "outdoor_space.covered", label: "Covered / sheltered", type: "boolean" },
@@ -287,7 +490,9 @@ export const METADATA_SECTIONS: MetadataSectionDefinition[] = [
     key: "exclusivity",
     label: "Exclusivity",
     tab: "facilities",
-    order: 5,
+    cardGroup: "catering_technical",
+    subgroup: "Exclusivity",
+    order: 7,
     fields: [
       { key: "exclusivity.exclusive_use", label: "Exclusive use available", type: "boolean" },
       {
@@ -301,6 +506,8 @@ export const METADATA_SECTIONS: MetadataSectionDefinition[] = [
     key: "logistics",
     label: "Logistics",
     tab: "logistics",
+    cardGroup: "logistics",
+    subgroup: "Logistics",
     order: 1,
     fields: [
       {
@@ -340,9 +547,27 @@ export const METADATA_SECTIONS: MetadataSectionDefinition[] = [
     ],
   },
   {
+    key: "team_notes",
+    label: "Team notes",
+    tab: "overview",
+    cardGroup: "team_notes",
+    subgroup: "Team notes",
+    order: 4,
+    fields: [
+      {
+        key: "team.notes",
+        label: "Notes for your team",
+        type: "string",
+        hint: "Internal context for colleagues, not the client-facing pitch.",
+      },
+    ],
+  },
+  {
     key: "contacts",
     label: "Contacts",
     tab: "contacts",
+    cardGroup: "contacts_online",
+    subgroup: "Contacts",
     order: 1,
     fields: [
       {
@@ -357,6 +582,8 @@ export const METADATA_SECTIONS: MetadataSectionDefinition[] = [
     key: "pricing",
     label: "Pricing",
     tab: "pricing",
+    cardGroup: "pricing",
+    subgroup: "Pricing",
     order: 1,
     fields: [
       {
@@ -374,9 +601,27 @@ export const METADATA_SECTIONS: MetadataSectionDefinition[] = [
       },
       {
         key: "pricing.rental_fee_indicative",
-        label: "Rental fee (indicative)",
+        label: "Hire from",
         type: "decimal",
-        hint: "Indicative hire fee — not a confirmed quote.",
+        min: 0,
+        hint: "Indicative starting hire fee — not a confirmed quote.",
+      },
+      {
+        key: "pricing.price_lines",
+        label: "Price lines",
+        type: "record_array",
+        addLabel: "Add a price line",
+        recordFields: [
+          { key: "name", label: "Price line", placeholder: "Main floor, exclusive" },
+          { key: "amount", label: "Amount", type: "decimal", placeholder: "4200" },
+          { key: "unit", label: "Unit", placeholder: "per day" },
+        ],
+      },
+      {
+        key: "pricing.commercial_terms",
+        label: "Commercial terms",
+        type: "string",
+        hint: "Deposits, inclusions, setup, breakdown, and cancellation terms.",
       },
     ],
   },
@@ -384,6 +629,8 @@ export const METADATA_SECTIONS: MetadataSectionDefinition[] = [
     key: "social",
     label: "Social & maps",
     tab: "online",
+    cardGroup: "contacts_online",
+    subgroup: "Social & maps",
     order: 1,
     fields: [
       { key: "social.instagram_handle", label: "Instagram", type: "string", placeholder: "@venue" },
@@ -400,6 +647,8 @@ export const METADATA_SECTIONS: MetadataSectionDefinition[] = [
     key: "ratings",
     label: "Ratings",
     tab: "online",
+    cardGroup: "contacts_online",
+    subgroup: "Ratings",
     order: 2,
     fields: [
       {
