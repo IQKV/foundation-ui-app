@@ -1220,9 +1220,9 @@ export function VenueMetadataSections({
         ).sort((a, b) => a.order - b.order);
         if (sections.length === 0) return null;
         return (
-          <Paper key={cardGroup.key} withBorder radius="md" p="lg">
-            <Stack gap="md">
-              <Group justify="space-between" align="flex-start" wrap="nowrap" gap="md">
+          <Paper key={cardGroup.key} withBorder radius="md" p={0}>
+            <Box px="lg" py="sm" style={{ borderBottom: "1px solid var(--mantine-color-gray-2)" }}>
+              <Group justify="space-between" align="center" wrap="nowrap" gap="md">
                 <Stack gap={4}>
                   <Text size="sm" c="dimmed" fw={500}>
                     {cardGroup.label}
@@ -1245,6 +1245,8 @@ export function VenueMetadataSections({
                   </Tooltip>
                 )}
               </Group>
+            </Box>
+            <Stack gap="md" p="lg">
               {cardGroup.key === "venue" && venue && (
                 <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md">
                   <CoreVenueValue
