@@ -219,7 +219,13 @@ function ValueChip({ definition, value }: { definition: MetadataFieldDefinition;
   const text = formatFieldValue(definition, value);
   return (
     <Stack gap={3} style={{ minWidth: 0 }}>
-      <Text size="xs" c="dimmed" tt="uppercase" style={{ letterSpacing: "0.07em" }}>
+      <Text
+        size="xs"
+        c="var(--mantine-color-text)"
+        fw={500}
+        tt="uppercase"
+        style={{ letterSpacing: "0.07em" }}
+      >
         {definition.label}
       </Text>
       {text === null ? (
@@ -227,7 +233,12 @@ function ValueChip({ definition, value }: { definition: MetadataFieldDefinition;
           —
         </Text>
       ) : (
-        <Text size="sm" style={{ wordBreak: "break-word", whiteSpace: "pre-line" }}>
+        <Text
+          size="sm"
+          c="var(--mantine-color-text)"
+          fw={600}
+          style={{ wordBreak: "break-word", whiteSpace: "pre-line" }}
+        >
           {text}
         </Text>
       )}
@@ -249,7 +260,13 @@ function RecordArrayValue({
 
   return (
     <Stack gap="xs">
-      <Text size="xs" c="dimmed" tt="uppercase" style={{ letterSpacing: "0.07em" }}>
+      <Text
+        size="xs"
+        c="var(--mantine-color-text)"
+        fw={500}
+        tt="uppercase"
+        style={{ letterSpacing: "0.07em" }}
+      >
         {definition.label}
       </Text>
       {rows.length === 0 ? (
@@ -263,10 +280,15 @@ function RecordArrayValue({
               <SimpleGrid cols={{ base: 1, sm: Math.min(fields.length, 4) }} spacing="xs">
                 {fields.map((field) => (
                   <Stack key={field.key} gap={2} style={{ minWidth: 0 }}>
-                    <Text size="xs" c="dimmed">
+                    <Text size="xs" c="var(--mantine-color-text)" fw={500}>
                       {field.label}
                     </Text>
-                    <Text size="sm" style={{ wordBreak: "break-word" }}>
+                    <Text
+                      size="sm"
+                      c="var(--mantine-color-text)"
+                      fw={600}
+                      style={{ wordBreak: "break-word" }}
+                    >
                       {row[field.key] == null || row[field.key] === ""
                         ? "—"
                         : String(row[field.key])}
@@ -298,11 +320,19 @@ function CoreVenueValue({
 }) {
   return (
     <Stack gap={3} style={{ minWidth: 0, gridColumn: fullWidth ? "1 / -1" : undefined }}>
-      <Text size="xs" c="dimmed" tt="uppercase" style={{ letterSpacing: "0.07em" }}>
+      <Text
+        size="xs"
+        c="var(--mantine-color-text)"
+        fw={500}
+        tt="uppercase"
+        style={{ letterSpacing: "0.07em" }}
+      >
         {label}
       </Text>
       <Text
         size="sm"
+        c="var(--mantine-color-text)"
+        fw={600}
         data-testid={testId}
         style={{ wordBreak: "break-word", whiteSpace: "pre-line" }}
       >
@@ -968,7 +998,7 @@ function MetadataSectionCard({
         <Group justify="space-between" align="flex-start" wrap="nowrap" gap="md">
           <Stack gap={6} style={{ flex: 1, minWidth: 0 }}>
             <Group gap={8} align="center">
-              <Text size="sm" fw={600}>
+              <Text size="sm" c="dimmed" fw={500}>
                 {section.subgroup ?? section.label}
               </Text>
               {total > 0 && (
@@ -1190,7 +1220,7 @@ export function VenueMetadataSections({
           <Paper key={cardGroup.key} withBorder radius="md" p="lg">
             <Stack gap="md">
               <Stack gap={4}>
-                <Text size="md" fw={600}>
+                <Text size="sm" c="dimmed" fw={500}>
                   {cardGroup.label}
                 </Text>
                 <Text size="xs" c="dimmed">
