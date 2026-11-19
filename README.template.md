@@ -38,6 +38,7 @@ Describe the purpose of the app, the platform surface it covers, and the primary
 | Venue list             | ✅ Live | Keyword search, semantic (AI) search, bulk delete        |
 | Venue detail & edit    | ✅ Live | See [Venue Detail Page](#venue-detail-page)              |
 | Venue AI enrichment    | ✅ Live | Fill-with-AI chat, inline diff suggestions, atomic apply |
+| Ask AI catalogue chat  | ✅ Live | Header drawer, grounded answers, citations → source page |
 | Settings               | ✅ Live | Profile, security, notifications, organisation           |
 | Platform AI Chat addon | ✅ Live | Pluggable addon, extension-point nav entry               |
 
@@ -126,11 +127,20 @@ src/
 
 ---
 
+## Ask AI Catalog Chat
+
+A right-hand chat drawer over the workspace's venue catalogue, opened from the header button on any authenticated page.
+
+- Catalogue pages register the catalog chat endpoints (`/v1/catalog/chat*`) via `useAiContextActions`; venue pages scope the conversation to that venue.
+- Every venue-grounded reply carries `sources`; selecting a citation navigates to `/venues/:venueId/files?source=<sourceTextId>&page=<page>` and opens the cited document at that page.
+- The active session id is kept per scope in `sessionStorage` (`ask_ai_session:<venueId|workspace>`), so a page picks its conversation back up.
+- The client sends no persona: for MVP the backend pins every turn to the `compliance` overlay (`iqkv.catalog.venue-ask.default-persona`).
+
 ## Venue Detail Page
 
 Route: `/_app/venues/$venueId`  
 Feature slice: `features/manage-venue`  
-Roles: `TENANT_OWNER`, `MEMBER` (read); `TENANT_OWNER`, `MEMBER` (write via AI apply); `TENANT_OWNER` (manual edit, delete)
+Roles: `TENANT_OWNER`, `MEMBER` (read); `TENANT_OWNER` (manual edit, asset upload, delete, AI apply)
 
 ### Layout
 
@@ -145,8 +155,8 @@ The page uses a two-column grid (`lg: 4 / 8`).
 
 **Right column**
 
-- Sticky "Fill with AI" button at the top (hidden when profile is 100% complete)
-- Tabs: Details · Photos · Assets · Sources
+- **Fill empty fields** button in the header toolbar (shown when sources exist and the profile is under 100% complete)
+- Tabs: Details · Gallery · Assets · Sources
 
 ### Details tab
 
@@ -160,7 +170,7 @@ A collapsible raw JSON viewer is available below the sections.
 
 ### Fill with AI flow
 
-1. Click **Fill with AI** (sticky button, top of right column) → opens `VenueAiEnrichModal`
+1. Click **Fill empty fields** (header toolbar) → opens `VenueAiEnrichModal`
 2. Optionally select a field group focus (capacity, amenities, catering, etc.)
 3. Type a free-text description of the venue and press Enter or Send
 4. The modal calls `POST /v1/catalog/venues/{id}/enrichment/suggestions`; the AI returns a conversational reply and a list of structured field patches
@@ -171,11 +181,12 @@ A collapsible raw JSON viewer is available below the sections.
 
 ### Header toolbar
 
-| Button        | Role required  | Action                                                    |
-| ------------- | -------------- | --------------------------------------------------------- |
-| Edit Manually | `TENANT_OWNER` | Opens `EditVenueModal` (name, address, city, coordinates) |
-| Upload asset  | `TENANT_OWNER` | Presigned two-phase upload to MinIO                       |
-| Delete        | `TENANT_OWNER` | Opens `DeleteVenueModal` with confirmation                |
+| Button            | Role required  | Action                                                                                   |
+| ----------------- | -------------- | ---------------------------------------------------------------------------------------- |
+| Edit Manually     | `TENANT_OWNER` | Opens `EditVenueModal` (name, address, city, coordinates)                                |
+| Fill empty fields | `TENANT_OWNER` | Opens `VenueAiEnrichModal`; shown when sources exist and the profile is under 100% complete |
+| Upload asset      | `TENANT_OWNER` | Presigned two-phase upload to MinIO; uploaded documents are text-mined by the processing worker |
+| Delete            | `TENANT_OWNER` | Opens `DeleteVenueModal` with confirmation                                               |
 
 ### Key hooks & components
 

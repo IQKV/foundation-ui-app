@@ -22,6 +22,7 @@ This is the tenant surface of the platform — separate from `foundation-ui-plat
 | **Tenant Settings**    | Organization metadata editing                                                                                                                                                                                                                                                 |
 | **Notifications**      | In-app notifications with WebSocket support; notification bell UI                                                                                                                                                                                                             |
 | **Venues**             | Venue list with semantic search; create/edit/delete and bulk delete; tabbed metadata sections with completeness scoring; document upload via presigned URLs; AI enrichment assistant                                                                                          |
+| **Ask AI**             | Catalogue-wide AI chat drawer with grounded answers and clickable citations that deep-link to the cited source page; venue-scoped conversations started from a venue page                                            |
 | **CMS pages**          | Publish and edit CMS pages with per-locale translations and a rich-text (Tiptap) editor                                                                                                                                                                                       |
 | **Session security**   | Access token in memory; refresh token + tenant key in `sessionStorage`; silent refresh on 401; 30-minute inactivity sign-out                                                                                                                                                  |
 | **UX**                 | Light/dark theme, Lingui i18n (`en-US`, `bg-BG`, `de-DE`, `fr-FR`) with locale cookie, navigation progress, error boundaries                                                                                                                                                  |
@@ -46,6 +47,7 @@ This is the tenant surface of the platform — separate from `foundation-ui-plat
 | `/venues`                              | Authenticated | Venue list with semantic search              |
 | `/venues/create`, `/venues/add`        | Authenticated | Create a venue (form / import flow)          |
 | `/venues/:venueId`                     | Authenticated | Venue detail and metadata                    |
+| `/venues/:venueId/files`               | Authenticated | Venue files; `?source=…&page=…` opens a cited document |
 | `/cms-pages`                           | Authenticated | CMS page list                                |
 | `/cms-pages/create`                    | Authenticated | Create a CMS page                            |
 | `/cms-pages/:pageId`                   | Authenticated | Edit a CMS page                              |
@@ -90,11 +92,92 @@ Authenticated routes live under the `/_app` layout, which enforces a valid tenan
 | Venues — document upload (presigned URL) | Done                |
 | Venues — semantic search                 | Done                |
 | Venues — AI enrichment assistant         | Done                |
+| Ask AI — catalogue chat & citations      | Done                |
 | CMS pages (per-locale, rich text)        | Done                |
 | Member role editing                      | Done (TENANT_OWNER) |
 | Member ban/unban                         | Done (TENANT_OWNER) |
 | Member transfer ownership                | Done (TENANT_OWNER) |
 | Magic link authentication                | Done (feature flag) |
+
+## Ask AI catalog chat
+
+A right-hand chat drawer over the tenant's own venue catalogue, opened from the header button (`AskAiButton` → `AskAiDrawer`) on any authenticated page. Answers are grounded in the workspace's venues, and every venue-grounded reply cites the source chunks it used.
+
+**Modes.** Catalogue pages register the catalog chat endpoints (`/v1/catalog/chat*`) through `useAiContextActions(...)`; venue pages (venue detail, venue files) also scope the conversation to that venue. With no endpoints registered, the drawer falls back to the platform AI chat addon (`/v1/aichat/chat`).
+
+**Citations.** An assistant turn carries `sources` (`sourceTextId`, `label`, `snippet`, `page`, `similarity`). Selecting a citation chip navigates to `/venues/:venueId/files?source=<sourceTextId>&page=<page>`, opening that document at the cited page. Citations are persisted on the message, so they survive a reload.
+
+**Sessions.** One conversation per scope, resumed when its page comes back. The active session id is kept in `sessionStorage` under `ask_ai_session:<venueId|workspace>`. The newest 50 turns are shown — earlier turns are outside the model's memory window.
+
+**Persona.** The client sends no persona: for MVP the backend pins every turn to the `compliance` overlay (`iqkv.catalog.venue-ask.default-persona`). See the catalog API reference for the `POST /chat` payload.
+
+| Symbol                        | Location                | Purpose                                                       |
+| ----------------------------- | ----------------------- | ------------------------------------------------------------- |
+| `useAiContextActions`         | `features/ask-ai/model` | Registers page suggestion chips plus a per-page chat endpoint override |
+| `AskAiButton` / `AskAiDrawer` | `features/ask-ai/ui`    | Header trigger and the drawer itself                          |
+| `useSendCatalogMessage`       | `features/ask-ai/model` | `venueChatApi.send` with optimistic user turn + reply append  |
+| `useCatalogChatMessages`      | `features/ask-ai/model` | Loads the newest message window for a session                 |
+| `venueChatApi`                | `shared/api`            | `/v1/catalog/chat`, `/sessions`, `/sessions/{id}/messages`, delete |
+
+---
+
+## Venue Detail Page
+
+Route: `/_app/venues/$venueId` (UI path `/venues/:venueId`) — feature slice `features/manage-venue`.
+
+Read is available to `TENANT_OWNER` and `MEMBER`; editing (manual edit, asset upload, delete, AI apply) is `TENANT_OWNER` only. The route accepts an optional `source` search param — an AI citation deep-links here as `/venues/:venueId?source=<sourceTextId>` and the page opens the matching source chunk.
+
+### Layout
+
+Two-column grid (left `lg/4`, right `lg/8`).
+
+**Left column**
+
+- Hero card — primary photo banner, venue name and city, master-catalog match indicator
+- `VenueCompletenessCard` — per-section completeness breakdown with a ring chart
+- Address & coordinates card with a Google Maps link
+- Identifiers & timestamps card
+
+**Right column**
+
+- Optional venue description block
+- `SegmentedControl` switching **Venue Profile** ↔ **File Manager** (`/venues/:venueId/files`)
+- Tabs: Details · Gallery · Assets · Sources, each with a count badge
+
+### Header toolbar
+
+| Button            | Role required  | Action                                                                                                                       |
+| ----------------- | -------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| Edit Manually     | `TENANT_OWNER` | Opens `EditVenueModal` (name, address, city, coordinates)                                                                     |
+| Fill empty fields | `TENANT_OWNER` | Opens `VenueAiEnrichModal`; shown when sources exist and the profile is under 100% complete                                   |
+| Upload asset      | `TENANT_OWNER` | Presigned two-phase upload (`initiateUpload` → PUT to MinIO → `confirmUpload`); uploaded documents are text-mined by the processing worker |
+| Delete            | `TENANT_OWNER` | Opens `DeleteVenueModal` with confirmation                                                                                    |
+
+### Details tab
+
+`VenueMetadataSections` renders the structured metadata document as section cards: read chips for current values, a pencil action opening `SectionFieldsForm` for manual edits, and inline violet AI suggestion chips with per-chip Accept / Dismiss when enrichment patches are pending. A collapsible raw JSON viewer sits below.
+
+### Fill with AI flow
+
+1. Click **Fill empty fields** → `VenueAiEnrichModal` (backed by `useVenueEnrichment`)
+2. Type a free-text description of the venue; optionally focus a field group
+3. The modal calls `POST /v1/catalog/venues/{id}/enrichment/suggestions`; the reply carries structured field patches
+4. Patches appear as inline diff chips on the matching section cards and in the modal, with **Accept** / **Dismiss** per chip, **Apply accepted**, and **Apply all**
+5. Applying calls `POST /v1/catalog/venues/{id}/enrichment/apply` — the backend merges the accepted patches atomically into the metadata document and re-embeds the venue
+6. The venue query is invalidated and the section cards refresh immediately
+
+### Key symbols
+
+| Symbol                                  | Location                      | Purpose                                                     |
+| --------------------------------------- | ----------------------------- | ----------------------------------------------------------- |
+| `useVenueEnrichment`                    | `features/manage-venue/model` | Chat history, pending patches, suggest + apply mutations    |
+| `VenueAiEnrichModal`                    | `features/manage-venue/ui`    | Chat modal with reply bubbles and per-patch diff chips      |
+| `VenueMetadataSections`                 | `features/manage-venue/ui`    | Structured metadata view with inline suggestion chips       |
+| `VenueCompletenessCard`                 | `features/manage-venue/ui`    | Per-section completeness ring                               |
+| `catalogApi.venueEnrichmentSuggestions` | `shared/api`                  | `POST /v1/catalog/venues/{id}/enrichment/suggestions`       |
+| `catalogApi.venueEnrichmentApply`       | `shared/api`                  | `POST /v1/catalog/venues/{id}/enrichment/apply`             |
+
+---
 
 ## Billing & Entitlements
 
@@ -343,7 +426,7 @@ src/
 ├── processes/     # Session store, inactivity timer, theme
 ├── pages/         # File-based routes (TanStack Router)
 ├── widgets/       # Dashboard welcome, signup chart, stat card
-├── features/      # sign-in, signup, invite-member, manage-venue, manage-billing, …
+├── features/      # sign-in, signup, invite-member, manage-venue, ask-ai, manage-billing, …
 ├── entities/      # Tenant, user, venue, subscription, notification, cms-page, …
 ├── shared/        # UI kit, API clients, locales, utilities
 ├── addons/        # Optional pluggable modules (platform-ai-chat)
