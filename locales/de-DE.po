@@ -431,6 +431,10 @@ msgstr ""
 msgid "Assets"
 msgstr ""
 
+#: src/features/ask-ai/ui/ask-ai-drawer.tsx
+msgid "Assistant persona"
+msgstr ""
+
 #: src/features/reset-password/ui/reset-password-form.tsx
 #: src/features/signup/ui/password-strength.tsx
 #: src/features/signup/ui/signup-form.tsx
@@ -704,6 +708,14 @@ msgstr "Profil vervollständigen"
 #: src/pages/auth.callback.tsx
 msgid "Completing sign-in"
 msgstr "Anmeldung wird abgeschlossen"
+
+#: src/features/ask-ai/model/personas.ts
+msgid "Compliance"
+msgstr ""
+
+#: src/features/ask-ai/model/personas.ts
+msgid "Concierge"
+msgstr ""
 
 #: src/pages/_app/settings/security.tsx
 msgid "Configure a custom OIDC provider for your tenant. The client secret is write-only and will not be shown after saving."
@@ -1022,6 +1034,10 @@ msgstr "Datum"
 
 #: src/features/manage-venue/ui/venue-fields.tsx
 msgid "Decimal lat / lng used for map pins and geo search. Leave blank if unknown."
+msgstr ""
+
+#: src/features/ask-ai/model/personas.ts
+msgid "Default"
 msgstr ""
 
 #: src/features/page-admin/ui/page-translation-fields.tsx

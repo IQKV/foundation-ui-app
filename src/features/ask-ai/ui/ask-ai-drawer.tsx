@@ -12,6 +12,7 @@ import {
   ScrollArea,
   Alert,
   ThemeIcon,
+  Select,
 } from "@mantine/core";
 import { IconSparkles, IconArrowUp, IconAlertCircle, IconArrowLeft } from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
@@ -21,6 +22,7 @@ import type { ChatMessage } from "@/addons/platform-ai-chat/api/ai-chat-api";
 import { MessageBubble } from "@/addons/platform-ai-chat/ui/message-bubble";
 import { useAskAiPanelStore } from "../model/ask-ai-panel.store";
 import type { AiContextAction } from "../model/ask-ai-panel.store";
+import { getPersonas } from "../model/personas";
 import { useSendCatalogMessage, useCatalogChatMessages } from "../model/use-catalog-chat";
 import { CitationChips } from "./citation-chips";
 
@@ -122,6 +124,8 @@ export function AskAiDrawer() {
     contextActions,
     endpoints,
     venueId,
+    personaId,
+    setPersonaId,
   } = useAskAiPanelStore();
   const navigate = useNavigate();
 
@@ -178,6 +182,8 @@ export function AskAiDrawer() {
   const charsLeft = MAX_INPUT_CHARS - content.length;
   const isOverLimit = charsLeft < 0;
 
+  const personas = getPersonas();
+
   // Auto-scroll to bottom when new messages arrive
   useEffect(() => {
     if (scrollRef.current) {
@@ -194,6 +200,7 @@ export function AskAiDrawer() {
         sessionId: sessionId ?? undefined,
         venueId: venueId ?? undefined,
         content: trimmed,
+        persona: personaId ?? undefined,
       });
     } else {
       addonSend.mutate({ sessionId: sessionId ?? undefined, content: trimmed });
@@ -208,6 +215,7 @@ export function AskAiDrawer() {
         sessionId: sessionId ?? undefined,
         venueId: venueId ?? undefined,
         content: message,
+        persona: personaId ?? undefined,
       });
     } else {
       addonSend.mutate({ sessionId: sessionId ?? undefined, content: message });
@@ -216,6 +224,7 @@ export function AskAiDrawer() {
 
   function handleNewConversation() {
     clearSession();
+    setPersonaId(null);
     setContent("");
   }
 
@@ -307,6 +316,21 @@ export function AskAiDrawer() {
             </ActionIcon>
           </Group>
         </Group>
+
+        {/* Persona is a catalog-only turn setting; the addon chat surface ignores it. */}
+        {isCatalogMode && (
+          <Select
+            size="xs"
+            mt="xs"
+            allowDeselect={false}
+            checkIconPosition="right"
+            aria-label={t`Assistant persona`}
+            data={personas.map((p) => ({ value: p.id ?? "", label: p.label }))}
+            value={personaId ?? ""}
+            onChange={(value) => setPersonaId(value || null)}
+            data-testid="ask-ai-persona"
+          />
+        )}
       </Box>
 
       {/* ── Scrollable body ────────────────────────────────────────────────── */}

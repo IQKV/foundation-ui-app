@@ -20,6 +20,8 @@ interface AskAiPanelState {
   endpoints: ChatEndpoints | null;
   /** Optional venue the active page scopes its conversation to, sent with every turn */
   venueId: string | null;
+  /** Key of the persona overlay the user picked, sent with every turn; null for the base assistant */
+  personaId: string | null;
 
   open: () => void;
   close: () => void;
@@ -31,6 +33,7 @@ interface AskAiPanelState {
   clearEndpoints: () => void;
   setVenueId: (venueId: string) => void;
   clearVenueId: () => void;
+  setPersonaId: (personaId: string | null) => void;
 }
 
 // ─── Session scope ────────────────────────────────────────────────────────────
@@ -71,6 +74,7 @@ export const useAskAiPanelStore = create<AskAiPanelState>((set, get) => ({
   contextActions: [],
   endpoints: null,
   venueId: null,
+  personaId: null,
 
   open: () => set({ isOpen: true }),
   close: () => set({ isOpen: false }),
@@ -89,4 +93,5 @@ export const useAskAiPanelStore = create<AskAiPanelState>((set, get) => ({
   // The scope owns the conversation: each venue carries on with its own thread.
   setVenueId: (venueId) => set({ venueId, sessionId: readSession(venueId) }),
   clearVenueId: () => set({ venueId: null, sessionId: readSession(null) }),
+  setPersonaId: (personaId) => set({ personaId }),
 }));
