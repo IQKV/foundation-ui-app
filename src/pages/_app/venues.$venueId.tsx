@@ -18,7 +18,10 @@ import {
   ThemeIcon,
   Divider,
   SegmentedControl,
+  Collapse,
+  UnstyledButton,
 } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
@@ -42,6 +45,7 @@ import {
   IconUpload,
   IconCheck,
   IconAlertTriangle,
+  IconChevronDown,
 } from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { PageTitle } from "@/shared/lib/page-title";
@@ -51,6 +55,7 @@ import {
   CompletenessRing,
   overallCompleteness,
   parseMetadata,
+  VenueMetadataSections,
 } from "@/features/manage-venue";
 import { catalogApi, venueAssetApi, uploadFileToPresignedUrl } from "@/shared/api";
 import { dayjs } from "@/shared/lib/date-utils";
@@ -105,6 +110,7 @@ function VenueOverviewPage() {
 
   const [uploadingAsset, setUploadingAsset] = useState(false);
   const assetFileInputRef = useRef<HTMLInputElement>(null);
+  const [metaExpanded, { toggle: toggleMeta }] = useDisclosure(false);
 
   const handleUploadAsset = async (file: File) => {
     setUploadingAsset(true);
@@ -517,6 +523,38 @@ function VenueOverviewPage() {
               </Stack>
             </Box>
           </Box>
+
+          {/* ── Expandable metadata section ──────────────────────────────── */}
+          <Divider />
+          <UnstyledButton
+            onClick={toggleMeta}
+            disabled={!venue}
+            style={{ width: "100%", padding: "var(--mantine-spacing-xs) var(--mantine-spacing-md)" }}
+          >
+            <Group justify="space-between" align="center">
+              <Text size="sm" fw={600} c="dimmed">
+                <Trans>All metadata</Trans>
+              </Text>
+              <IconChevronDown
+                size={16}
+                color="var(--mantine-color-dimmed)"
+                style={{
+                  transform: metaExpanded ? "rotate(180deg)" : "rotate(0deg)",
+                  transition: "transform 200ms ease",
+                }}
+              />
+            </Group>
+          </UnstyledButton>
+          <Collapse in={metaExpanded}>
+            <Box p="md" pt={0}>
+              <VenueMetadataSections
+                venueId={venueId}
+                metadata={venue?.metadata ?? null}
+                venue={venue ?? undefined}
+                isLoading={isLoading}
+              />
+            </Box>
+          </Collapse>
         </Paper>
 
         {/* ── Dashboard: main stream + right rail ──────────────────────────── */}
