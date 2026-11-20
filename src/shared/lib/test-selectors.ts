@@ -399,7 +399,6 @@ export const TestSelectors = {
   VENUE_CITY_INPUT: "venue-city-input",
   VENUE_LATITUDE_INPUT: "venue-latitude-input",
   VENUE_LONGITUDE_INPUT: "venue-longitude-input",
-  VENUE_MASTER_VENUE_ID_INPUT: "venue-master-venue-id-input",
   CREATE_VENUE_MODAL: "create-venue-modal",
   EDIT_VENUE_MODAL: "edit-venue-modal",
   DELETE_VENUE_MODAL: "delete-venue-modal",

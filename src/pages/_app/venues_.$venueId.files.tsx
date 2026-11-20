@@ -44,8 +44,9 @@ import {
   IconFolder,
   IconSearch,
   IconMaximize,
-  IconLink,
   IconArrowLeft,
+  IconLayoutDashboard,
+  IconPencil,
 } from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { z } from "zod";
@@ -392,22 +393,8 @@ function PhotosSection({
       )}
       {masterPhotos.length > 0 && (
         <Stack gap="sm">
-          <Group gap="xs">
-            <Divider style={{ flex: 1 }} />
-            <Group gap={4} wrap="nowrap">
-              <IconLink size={12} color="var(--mantine-color-gray-5)" />
-              <Text
-                size="xs"
-                c="dimmed"
-                fw={600}
-                tt="uppercase"
-                style={{ letterSpacing: "0.05em" }}
-              >
-                <Trans>Linked</Trans>
-              </Text>
-            </Group>
-            <Divider style={{ flex: 1 }} />
-          </Group>
+          {/* Reference photos from the linked master-catalog venue — no user-facing label. */}
+          <Divider />
           <SimpleGrid cols={{ base: 2, sm: 3, md: 4 }} spacing="sm">
             {masterPhotos.map((photo, i) => (
               <PhotoCard key={photo.id} photo={photo} index={i} onPreview={onPreview} />
@@ -1109,17 +1096,28 @@ function VenueFilesPage() {
               value="files"
               data-testid={TestSelectors.VENUE_VIEW_MODE_SWITCHER}
               onChange={(v) => {
-                if (v === "profile") {
+                if (v === "overview") {
                   void navigate({ to: "/venues/$venueId", params: { venueId } });
+                } else if (v === "research") {
+                  void navigate({ to: "/venues/$venueId/research", params: { venueId } });
                 }
               }}
               data={[
                 {
-                  value: "profile",
+                  value: "overview",
                   label: (
                     <Group gap={6} wrap="nowrap">
-                      <IconBuildingStore size={14} />
-                      <Trans>Venue Profile</Trans>
+                      <IconLayoutDashboard size={14} />
+                      <Trans>Overview</Trans>
+                    </Group>
+                  ),
+                },
+                {
+                  value: "research",
+                  label: (
+                    <Group gap={6} wrap="nowrap">
+                      <IconPencil size={14} />
+                      <Trans>Research</Trans>
                     </Group>
                   ),
                 },
@@ -1128,7 +1126,7 @@ function VenueFilesPage() {
                   label: (
                     <Group gap={6} wrap="nowrap">
                       <IconFolder size={14} />
-                      <Trans>File Manager</Trans>
+                      <Trans>Files</Trans>
                     </Group>
                   ),
                 },

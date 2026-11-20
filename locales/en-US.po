@@ -13,7 +13,7 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
 msgid "— no metadata —"
 msgstr "— no metadata —"
 
@@ -67,8 +67,8 @@ msgstr "{doneCount} / {totalSections} sections"
 #~ msgstr "{filled} of {total} fields"
 
 #: src/features/manage-venue/ui/venue-completeness.tsx
-msgid "{filled} of {total} fields filled"
-msgstr "{filled} of {total} fields filled"
+#~ msgid "{filled} of {total} fields filled"
+#~ msgstr "{filled} of {total} fields filled"
 
 #. placeholder {0}: source.page
 #: src/features/ask-ai/ui/citation-chips.tsx
@@ -265,6 +265,10 @@ msgstr "Add contact"
 msgid "Add locale"
 msgstr "Add locale"
 
+#: src/features/manage-venue/ui/venue-metadata-sections.tsx
+msgid "Add row"
+msgstr "Add row"
+
 #: src/pages/_app/venues.add.tsx
 #: src/pages/_app/venues.create.tsx
 msgid "Add to catalog"
@@ -279,13 +283,13 @@ msgid "Addons"
 msgstr "Addons"
 
 #: src/features/manage-venue/ui/venue-fields.tsx
-#: src/pages/_app/venues.$venueId.tsx
+#: src/features/manage-venue/ui/venue-metadata-sections.tsx
 msgid "Address"
 msgstr "Address"
 
 #: src/pages/_app/venues.$venueId.tsx
-msgid "Address & coordinates"
-msgstr "Address & coordinates"
+#~ msgid "Address & coordinates"
+#~ msgstr "Address & coordinates"
 
 #: src/features/invite-member/model/types.ts
 msgid "Admin"
@@ -422,16 +426,16 @@ msgstr "Ask about your workspace…"
 msgid "Ask AI"
 msgstr "Ask AI"
 
-#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
 msgid "Asset deleted."
 msgstr "Asset deleted."
 
 #: src/pages/_app/venues_.$venueId.files.tsx
-#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
 msgid "Asset uploaded."
 msgstr "Asset uploaded."
 
-#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
 msgid "Assets"
 msgstr "Assets"
 
@@ -488,6 +492,7 @@ msgstr "Back to <0>Sign in</0>"
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
 #: src/pages/_app/venues_.$venueId.files.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
 #: src/pages/_app/venues.$venueId.tsx
 #: src/pages/_app/venues.add.tsx
 msgid "Back to list"
@@ -569,7 +574,7 @@ msgstr "Billing Portal Unavailable"
 #: src/features/page-admin/ui/delete-page-modal.tsx
 #: src/pages/_app/cms-pages.create.tsx
 #: src/pages/_app/venues_.$venueId.files.tsx
-#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
 msgid "Cancel"
 msgstr "Cancel"
 
@@ -604,7 +609,7 @@ msgid "Change Role"
 msgstr "Change Role"
 
 #: src/pages/_app/venues_.$venueId.files.tsx
-#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
 msgid "characters"
 msgstr "characters"
 
@@ -634,7 +639,7 @@ msgid "Choose a strong password with at least 8 characters, including uppercase,
 msgstr "Choose a strong password with at least 8 characters, including uppercase, lowercase, a number, and a special character."
 
 #: src/features/manage-venue/ui/venue-fields.tsx
-#: src/pages/_app/venues.$venueId.tsx
+#: src/features/manage-venue/ui/venue-metadata-sections.tsx
 #: src/pages/_app/venues.index.tsx
 msgid "City"
 msgstr "City"
@@ -795,7 +800,7 @@ msgid "Continue with SSO"
 msgstr "Continue with SSO"
 
 #: src/features/manage-venue/ui/venue-fields.tsx
-#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
 #: src/pages/_app/venues.index.tsx
 msgid "Coordinates"
 msgstr "Coordinates"
@@ -820,7 +825,7 @@ msgstr "Could not create the page. Please check the form and try again."
 msgid "Could not delete SSO configuration."
 msgstr "Could not delete SSO configuration."
 
-#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
 msgid "Could not delete the asset."
 msgstr "Could not delete the asset."
 
@@ -870,7 +875,7 @@ msgid "Could not load organizations."
 msgstr "Could not load organizations."
 
 #: src/pages/_app/venues_.$venueId.files.tsx
-#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
 msgid "Could not load the preview."
 msgstr "Could not load the preview."
 
@@ -907,7 +912,7 @@ msgid "Could not update SSO configuration."
 msgstr "Could not update SSO configuration."
 
 #: src/pages/_app/venues_.$venueId.files.tsx
-#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
 msgid "Could not upload the asset. Please try again."
 msgstr "Could not upload the asset. Please try again."
 
@@ -978,7 +983,7 @@ msgstr "Create your organization"
 msgid "Create, manage & invite teams to your workspace"
 msgstr "Create, manage & invite teams to your workspace"
 
-#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
 #: src/pages/_app/venues.index.tsx
 msgid "Created"
 msgstr "Created"
@@ -1054,16 +1059,16 @@ msgstr "Default locale — required"
 #: src/pages/_app/cms-pages.index.tsx
 #: src/pages/_app/settings/security.tsx
 #: src/pages/_app/venues_.$venueId.files.tsx
-#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
 #: src/pages/_app/venues.index.tsx
 msgid "Delete"
 msgstr "Delete"
 
-#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
 msgid "Delete asset"
 msgstr "Delete asset"
 
-#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
 msgid "Delete asset?"
 msgstr "Delete asset?"
 
@@ -1132,7 +1137,7 @@ msgstr "Demo Progress Bar"
 msgid "Description"
 msgstr "Description"
 
-#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
 msgid "Details"
 msgstr "Details"
 
@@ -1206,7 +1211,8 @@ msgstr "Edit — {defaultTitle}"
 msgid "Edit {0}"
 msgstr "Edit {0}"
 
-#: src/pages/_app/venues.$venueId.tsx
+#: src/features/manage-venue/ui/venue-metadata-sections.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
 msgid "Edit Manually"
 msgstr "Edit Manually"
 
@@ -1351,12 +1357,12 @@ msgstr "Expires at (optional)"
 msgid "Extract"
 msgstr "Extract"
 
-#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
 msgid "Extracting text…"
 msgstr "Extracting text…"
 
 #: src/features/manage-venue/ui/venue-metadata-sections.tsx
-#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
 msgid "Extracting…"
 msgstr "Extracting…"
 
@@ -1395,6 +1401,7 @@ msgid "Failed to load refund history."
 msgstr "Failed to load refund history."
 
 #: src/pages/_app/venues_.$venueId.files.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Failed to load the venue"
 msgstr "Failed to load the venue"
@@ -1439,21 +1446,27 @@ msgstr "Feature Usage Examples"
 msgid "Features"
 msgstr "Features"
 
-#: src/pages/_app/venues_.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
+msgid "fields filled"
+msgstr "fields filled"
+
+#: src/pages/_app/venues_.$venueId.files.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
 msgid "File"
 msgstr "File"
 
 #: src/pages/_app/venues_.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
-msgid "File Manager"
-msgstr "File Manager"
+#~ msgid "File Manager"
+#~ msgstr "File Manager"
 
 #: src/pages/_app/venues_.$venueId.files.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
+#: src/pages/_app/venues.$venueId.tsx
 msgid "Files"
 msgstr "Files"
 
-#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
 msgid "Fill empty fields"
 msgstr "Fill empty fields"
 
@@ -1534,7 +1547,7 @@ msgid "Full-screen centered loader shown on first app load (while locale initial
 msgstr "Full-screen centered loader shown on first app load (while locale initializes)."
 
 #: src/pages/_app/venues_.$venueId.files.tsx
-#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
 msgid "Gallery"
 msgstr "Gallery"
 
@@ -1555,6 +1568,7 @@ msgstr "Get Started"
 msgid "GitHub"
 msgstr "GitHub"
 
+#: src/pages/_app/venues_.$venueId.research.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Give me a short summary of this venue."
 msgstr "Give me a short summary of this venue."
@@ -1602,7 +1616,7 @@ msgstr "Grid view"
 msgid "Here's what you can do from your personal workspace:"
 msgstr "Here's what you can do from your personal workspace:"
 
-#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
 msgid "Hide raw JSON"
 msgstr "Hide raw JSON"
 
@@ -1622,6 +1636,7 @@ msgstr "Hierarchy"
 #: src/pages/_app/settings/security.tsx
 #: src/pages/_app/team.tsx
 #: src/pages/_app/venues_.$venueId.files.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
 #: src/pages/_app/venues.$venueId.tsx
 #: src/pages/_app/venues.index.tsx
 msgid "Home"
@@ -1652,7 +1667,7 @@ msgstr "ID"
 msgid "ID: {0}"
 msgstr "ID: {0}"
 
-#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
 msgid "Identifiers & timestamps"
 msgstr "Identifiers & timestamps"
 
@@ -1786,6 +1801,10 @@ msgstr "Last name is required"
 msgid "Last name is too long"
 msgstr "Last name is too long"
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Last updated"
+msgstr "Last updated"
+
 #: src/features/manage-venue/ui/venue-fields.tsx
 msgid "Latitude"
 msgstr "Latitude"
@@ -1815,8 +1834,8 @@ msgid "Link failed"
 msgstr "Link failed"
 
 #: src/pages/_app/venues_.$venueId.files.tsx
-msgid "Linked"
-msgstr "Linked"
+#~ msgid "Linked"
+#~ msgstr "Linked"
 
 #: src/pages/_app/venues_.$venueId.files.tsx
 msgid "List extracted text"
@@ -1909,6 +1928,7 @@ msgstr "Manage your subscription and billing when you are ready"
 #~ msgid "Manage your team, subscriptions, and settings — all from one place, secured by enterprise-grade authentication."
 #~ msgstr "Manage your team, subscriptions, and settings — all from one place, secured by enterprise-grade authentication."
 
+#: src/pages/_app/venues_.$venueId.research.tsx
 #: src/pages/_app/venues.$venueId.tsx
 #: src/pages/_app/venues.index.tsx
 msgid "Maps"
@@ -1936,8 +1956,8 @@ msgstr "Mark all as read"
 #~ msgstr "Master venue id"
 
 #: src/pages/_app/venues.$venueId.tsx
-msgid "Matched to a master catalog record"
-msgstr "Matched to a master catalog record"
+#~ msgid "Matched to a master catalog record"
+#~ msgstr "Matched to a master catalog record"
 
 #: src/pages/-billing-example.tsx
 msgid "Max Projects:"
@@ -1976,7 +1996,7 @@ msgstr "Message too long"
 msgid "Meta description for search engines"
 msgstr "Meta description for search engines"
 
-#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
 msgid "Metadata"
 msgstr "Metadata"
 
@@ -2088,11 +2108,12 @@ msgstr "No active subscription found. Subscribe to a plan to access platform fea
 msgid "No active tenant memberships found for this account"
 msgstr "No active tenant memberships found for this account"
 
+#: src/pages/_app/venues.$venueId.tsx
 #: src/pages/_app/venues.index.tsx
 msgid "No address on record"
 msgstr "No address on record"
 
-#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
 msgid "No assets for this venue."
 msgstr "No assets for this venue."
 
@@ -2105,10 +2126,11 @@ msgid "No conversations yet. Start a new chat."
 msgstr "No conversations yet. Start a new chat."
 
 #: src/features/manage-venue/ui/venue-metadata-sections.tsx
-msgid "No data yet — click Edit to add."
-msgstr "No data yet — click Edit to add."
+#~ msgid "No data yet — click Edit to add."
+#~ msgstr "No data yet — click Edit to add."
 
 #: src/pages/_app/venues_.$venueId.files.tsx
+#: src/pages/_app/venues.$venueId.tsx
 msgid "No description available."
 msgstr "No description available."
 
@@ -2121,8 +2143,8 @@ msgid "No external sign-in providers are enabled by your organization."
 msgstr "No external sign-in providers are enabled by your organization."
 
 #: src/pages/_app/venues.$venueId.tsx
-msgid "No master catalog record matched"
-msgstr "No master catalog record matched"
+#~ msgid "No master catalog record matched"
+#~ msgstr "No master catalog record matched"
 
 #: src/pages/_app/settings/organization.tsx
 msgid "No matches."
@@ -2166,7 +2188,7 @@ msgid "No pending invitations."
 msgstr "No pending invitations."
 
 #: src/pages/_app/venues_.$venueId.files.tsx
-#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
 msgid "No photos for this venue."
 msgstr "No photos for this venue."
 
@@ -2187,7 +2209,7 @@ msgstr "No roles assigned."
 msgid "No source documents yet. Upload a PDF or paste text in the Sources tab first."
 msgstr "No source documents yet. Upload a PDF or paste text in the Sources tab first."
 
-#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
 msgid "No sources for this venue."
 msgstr "No sources for this venue."
 
@@ -2276,7 +2298,7 @@ msgid "open"
 msgstr "open"
 
 #: src/pages/_app/venues_.$venueId.files.tsx
-#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
 msgid "Open"
 msgstr "Open"
 
@@ -2297,7 +2319,7 @@ msgid "Open Graph title"
 msgstr "Open Graph title"
 
 #: src/pages/_app/venues_.$venueId.files.tsx
-#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
 msgid "Open larger preview"
 msgstr "Open larger preview"
 
@@ -2377,6 +2399,13 @@ msgstr "Organizations"
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "Override page title for search engines"
 msgstr "Override page title for search engines"
+
+#: src/features/manage-venue/ui/venue-metadata-sections.tsx
+#: src/pages/_app/venues_.$venueId.files.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Overview"
+msgstr "Overview"
 
 #: src/pages/_app/cms-pages.index.tsx
 msgid "Page"
@@ -2505,7 +2534,7 @@ msgid "Personal Workspace"
 msgstr "Personal Workspace"
 
 #: src/pages/_app/venues_.$venueId.files.tsx
-#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
 msgid "Photo"
 msgstr "Photo"
 
@@ -2559,15 +2588,15 @@ msgid "Please wait while we verify your magic link."
 msgstr "Please wait while we verify your magic link."
 
 #: src/features/manage-venue/ui/venue-completeness.tsx
-msgid "Populated fields across the venue profile."
-msgstr "Populated fields across the venue profile."
+#~ msgid "Populated fields across the venue profile."
+#~ msgstr "Populated fields across the venue profile."
 
 #: src/features/manage-billing/model/use-billing-portal.ts
 msgid "Portal error"
 msgstr "Portal error"
 
 #: src/pages/_app/venues_.$venueId.files.tsx
-#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
 msgid "Preparing the preview…"
 msgstr "Preparing the preview…"
 
@@ -2576,7 +2605,7 @@ msgid "Press Enter to search"
 msgstr "Press Enter to search"
 
 #: src/pages/_app/venues_.$venueId.files.tsx
-#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
 msgid "Preview"
 msgstr "Preview"
 
@@ -2605,6 +2634,7 @@ msgstr "Pro tip: You can search by vibe, amenities, capacity, or specific locati
 #~ msgstr "Profile {percent}% completed"
 
 #: src/features/manage-venue/ui/venue-completeness.tsx
+#: src/pages/_app/venues.$venueId.tsx
 msgid "Profile completeness"
 msgstr "Profile completeness"
 
@@ -2645,7 +2675,7 @@ msgstr "Published"
 msgid "quick step."
 msgstr "quick step."
 
-#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
 msgid "Raw JSON document"
 msgstr "Raw JSON document"
 
@@ -2664,10 +2694,10 @@ msgid "Read-only"
 msgstr "Read-only"
 
 #: src/features/manage-venue/ui/venue-completeness.tsx
-msgid "Read-only fields are not counted."
-msgstr "Read-only fields are not counted."
+#~ msgid "Read-only fields are not counted."
+#~ msgstr "Read-only fields are not counted."
 
-#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
 msgid "Read-only view of the full metadata string."
 msgstr "Read-only view of the full metadata string."
 
@@ -2695,6 +2725,7 @@ msgstr "Redirecting to your workspace..."
 #: src/pages/_app/settings/organization.tsx
 #: src/pages/_app/team.tsx
 #: src/pages/_app/venues_.$venueId.files.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
 #: src/pages/_app/venues.$venueId.tsx
 #: src/pages/_app/venues.index.tsx
 msgid "Refresh"
@@ -2725,6 +2756,10 @@ msgstr "Remove contact"
 msgid "Remove Member"
 msgstr "Remove Member"
 
+#: src/features/manage-venue/ui/venue-metadata-sections.tsx
+msgid "Remove row"
+msgstr "Remove row"
+
 #: src/features/manage-billing/ui/entitlements-card.tsx
 msgid "Renews On"
 msgstr "Renews On"
@@ -2749,6 +2784,16 @@ msgstr "Request a new reset link"
 #: src/pages/_app/settings/security.tsx
 msgid "Required for new configuration"
 msgstr "Required for new configuration"
+
+#: src/pages/_app/venues_.$venueId.files.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Research"
+msgstr "Research"
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Research & edit"
+msgstr "Research & edit"
 
 #: src/features/signup/ui/verify-email-prompt.tsx
 msgid "Resend in {resendCooldown}s"
@@ -2780,6 +2825,7 @@ msgstr "Restore access"
 #: src/pages/_app/settings/security.tsx
 #: src/pages/_app/team.tsx
 #: src/pages/_app/venues_.$venueId.files.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
 #: src/pages/_app/venues.$venueId.tsx
 #: src/pages/_app/venues.index.tsx
 msgid "Retry"
@@ -3004,7 +3050,7 @@ msgstr "Setting up your workspace"
 msgid "Short \"About\" line shown under the venue's name."
 msgstr "Short \"About\" line shown under the venue's name."
 
-#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
 msgid "Show raw JSON"
 msgstr "Show raw JSON"
 
@@ -3128,13 +3174,13 @@ msgstr "Source {0}"
 msgid "Source document"
 msgstr "Source document"
 
-#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
 msgid "Source text extracted."
 msgstr "Source text extracted."
 
 #: src/features/ask-ai/ui/citation-chips.tsx
 #: src/pages/_app/venues_.$venueId.files.tsx
-#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
 msgid "Sources"
 msgstr "Sources"
 
@@ -3192,6 +3238,7 @@ msgstr "Summarise my venues"
 msgid "Summarise the documents attached to this venue."
 msgstr "Summarise the documents attached to this venue."
 
+#: src/pages/_app/venues_.$venueId.research.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Summarise this venue"
 msgstr "Summarise this venue"
@@ -3276,11 +3323,11 @@ msgid "TENANT_OWNER cannot be granted via invitation"
 msgstr "TENANT_OWNER cannot be granted via invitation"
 
 #: src/pages/_app/venues_.$venueId.files.tsx
-#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
 msgid "Text"
 msgstr "Text"
 
-#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
 msgid "Text extraction is taking longer than expected — refresh the Sources tab shortly."
 msgstr "Text extraction is taking longer than expected — refresh the Sources tab shortly."
 
@@ -3297,6 +3344,7 @@ msgid "The unique identifier for your organization. This cannot be changed."
 msgstr "The unique identifier for your organization. This cannot be changed."
 
 #: src/pages/_app/venues_.$venueId.files.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "The venue could not be found or the API is unavailable."
 msgstr "The venue could not be found or the API is unavailable."
@@ -3492,7 +3540,7 @@ msgid "Update your profile and preferences in account settings"
 msgstr "Update your profile and preferences in account settings"
 
 #: src/pages/_app/cms-pages.index.tsx
-#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
 #: src/pages/_app/venues.index.tsx
 msgid "Updated"
 msgstr "Updated"
@@ -3501,7 +3549,7 @@ msgstr "Updated"
 msgid "Upload another file"
 msgstr "Upload another file"
 
-#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
 msgid "Upload asset"
 msgstr "Upload asset"
 
@@ -3548,20 +3596,26 @@ msgid "Using a corporate identity provider? <0>Sign in with Enterprise SSO</0>"
 msgstr "Using a corporate identity provider? <0>Sign in with Enterprise SSO</0>"
 
 #: src/pages/_app/venues_.$venueId.files.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Venue"
 msgstr "Venue"
 
-#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
 msgid "Venue ID"
 msgstr "Venue ID"
 
-#: src/pages/_app/venues_.$venueId.files.tsx
-#: src/pages/_app/venues.$venueId.tsx
-msgid "Venue Profile"
-msgstr "Venue Profile"
+#: src/features/manage-venue/ui/venue-metadata-sections.tsx
+msgid "Venue name"
+msgstr "Venue name"
 
 #: src/pages/_app/venues_.$venueId.files.tsx
+#: src/pages/_app/venues.$venueId.tsx
+#~ msgid "Venue Profile"
+#~ msgstr "Venue Profile"
+
+#: src/pages/_app/venues_.$venueId.files.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
 #: src/pages/_app/venues.$venueId.tsx
 #: src/pages/_app/venues.add.tsx
 #: src/pages/_app/venues.create.tsx
@@ -3654,10 +3708,12 @@ msgstr "Welcome!"
 msgid "Welcome! Your account is ready — start using the app right away."
 msgstr "Welcome! Your account is ready — start using the app right away."
 
+#: src/pages/_app/venues_.$venueId.research.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "What documents and sources are attached to this venue?"
 msgstr "What documents and sources are attached to this venue?"
 
+#: src/pages/_app/venues_.$venueId.research.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "What documents exist?"
 msgstr "What documents exist?"
@@ -3670,6 +3726,7 @@ msgstr "What you can do"
 msgid "What's in the documents?"
 msgstr "What's in the documents?"
 
+#: src/pages/_app/venues_.$venueId.research.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "What's missing?"
 msgstr "What's missing?"
@@ -3678,6 +3735,7 @@ msgstr "What's missing?"
 msgid "Wheelchair accessible"
 msgstr "Wheelchair accessible"
 
+#: src/pages/_app/venues_.$venueId.research.tsx
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Which profile fields are empty or incomplete?"
 msgstr "Which profile fields are empty or incomplete?"
