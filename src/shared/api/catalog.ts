@@ -107,6 +107,20 @@ export interface SemanticSearchParams {
   limit?: number;
 }
 
+/** Asset count breakdown returned by GET /v1/catalog/venues/{venueId}/assets/count. */
+export interface VenueAssetCountResponse {
+  venueId: string;
+  total: number;
+  photos: number;
+  documents: number;
+}
+
+/** Source-text count returned by GET /v1/catalog/venue-text-contents/venue/{venueId}/count. */
+export interface VenueTextContentCountResponse {
+  venueId: string;
+  total: number;
+}
+
 export const catalogApi = {
   listVenues: (params: ListVenueParams = {}) =>
     httpClient.get<VenueListResponse>("/v1/catalog/venues", { params }).then((r) => r.data),
@@ -165,6 +179,17 @@ export const catalogApi = {
   listVenueTextContents: (venueId: string) =>
     httpClient
       .get<VenueTextContentListResponse>(`/v1/catalog/venue-text-contents/venue/${venueId}`)
+      .then((r) => r.data),
+
+  // Count-only endpoints — avoids loading full collections just for badge/stat numbers.
+  countVenueAssets: (venueId: string) =>
+    httpClient
+      .get<VenueAssetCountResponse>(`/v1/catalog/venues/${venueId}/assets/count`)
+      .then((r) => r.data),
+
+  countVenueTextContents: (venueId: string) =>
+    httpClient
+      .get<VenueTextContentCountResponse>(`/v1/catalog/venue-text-contents/venue/${venueId}/count`)
       .then((r) => r.data),
 
   // AI enrichment — suggestions and atomic apply.

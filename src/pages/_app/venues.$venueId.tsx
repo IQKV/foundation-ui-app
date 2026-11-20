@@ -101,28 +101,19 @@ function VenueOverviewPage() {
   const completeness = overallCompleteness(parseMetadata(venue?.metadata ?? null));
 
   // ── Overview counts (real numbers shown in the stats strip) ────────────────────────
-  const { data: photosData } = useQuery({
-    queryKey: ["tenant", "venue", venueId, "photos"],
-    queryFn: () => catalogApi.listVenueAssetPhotos(venueId),
+  const { data: assetCountData } = useQuery({
+    queryKey: ["tenant", "venue", venueId, "assets", "count"],
+    queryFn: () => catalogApi.countVenueAssets(venueId),
   });
-  const { data: masterPhotosData } = useQuery({
-    queryKey: ["tenant", "venue", venueId, "master-photos"],
-    queryFn: () => catalogApi.listVenueMasterPhotos(venueId),
-  });
-  const { data: sourcesData } = useQuery({
-    queryKey: ["tenant", "venue", venueId, "sources"],
-    queryFn: () => catalogApi.listVenueTextContents(venueId),
-  });
-  const { data: assetsData } = useQuery({
-    queryKey: ["tenant", "venue", venueId, "assets"],
-    queryFn: () => catalogApi.listVenueAssets(venueId),
+  const { data: sourceCountData } = useQuery({
+    queryKey: ["tenant", "venue", venueId, "sources", "count"],
+    queryFn: () => catalogApi.countVenueTextContents(venueId),
   });
 
-  const photoCount = (photosData?.items?.length ?? 0) + (masterPhotosData?.items?.length ?? 0);
-  const sourceCount = sourcesData?.items?.length ?? 0;
-  const assetCount = assetsData?.items?.length ?? 0;
-  const countsLoading =
-    !photosData || !masterPhotosData || !sourcesData || !assetsData;
+  const photoCount = assetCountData?.photos ?? 0;
+  const sourceCount = sourceCountData?.total ?? 0;
+  const assetCount = assetCountData?.total ?? 0;
+  const countsLoading = !assetCountData || !sourceCountData;
 
   const hasPhoto = Boolean(venue?.primaryPhotoUrl);
   const isMasterLinked = Boolean(venue?.masterVenueId);

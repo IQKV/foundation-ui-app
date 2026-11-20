@@ -103,6 +103,8 @@ export type {
   SemanticSearchFilters,
   SemanticSearchResponse,
   SemanticSearchParams,
+  VenueAssetCountResponse,
+  VenueTextContentCountResponse,
   InitiateAssetUploadRequest,
   InitiateAssetUploadResponse,
   ConfirmAssetUploadRequest,
