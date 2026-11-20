@@ -222,7 +222,74 @@ export const catalogApi = {
       .then((r) => r.data),
 };
 
-// ─── Venue catalog chat ───────────────────────────────────────────────────────
+/** Smart note attached to a tenant venue. */
+export interface VenueSmartNote {
+  id: string;
+  venueId: string;
+  title: string | null;
+  /** HTML content produced by the Mantine rich-text editor. */
+  content: string | null;
+  /** Hex code or design-token name for the card background colour. */
+  color: string | null;
+  tags: string[] | null;
+  authorId: string;
+  linkedAssetId: string | null;
+  sortOrder: number;
+  pinned: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface VenueSmartNoteListResponse {
+  items: VenueSmartNote[];
+  totalElements: number;
+}
+
+export interface VenueSmartNoteCreateRequest {
+  venueId: string;
+  title?: string | null;
+  content?: string | null;
+  color?: string | null;
+  tags?: string[] | null;
+  linkedAssetId?: string | null;
+  sortOrder?: number | null;
+  pinned?: boolean | null;
+}
+
+export interface VenueSmartNotePatchRequest {
+  title?: string | null;
+  content?: string | null;
+  color?: string | null;
+  tags?: string[] | null;
+  linkedAssetId?: string | null;
+  sortOrder?: number | null;
+  pinned?: boolean | null;
+}
+
+export const venueSmartNoteApi = {
+  list: (venueId: string, params?: { direction?: string; pinned?: boolean }) =>
+    httpClient
+      .get<VenueSmartNoteListResponse>(`/v1/catalog/venue-smart-notes/venue/${venueId}`, {
+        params,
+      })
+      .then((r) => r.data),
+
+  create: (data: VenueSmartNoteCreateRequest) =>
+    httpClient.post<VenueSmartNote>("/v1/catalog/venue-smart-notes", data).then((r) => r.data),
+
+  patch: (id: string, data: VenueSmartNotePatchRequest) =>
+    httpClient
+      .patch<VenueSmartNote>(`/v1/catalog/venue-smart-notes/${id}`, data)
+      .then((r) => r.data),
+
+  setPinned: (id: string, pinned: boolean) =>
+    httpClient
+      .put<VenueSmartNote>(`/v1/catalog/venue-smart-notes/${id}/pinned`, { pinned })
+      .then((r) => r.data),
+
+  delete: (id: string) =>
+    httpClient.delete(`/v1/catalog/venue-smart-notes/${id}`).then(() => undefined),
+};
 
 export interface VenueChatSource {
   sourceTextId: string;

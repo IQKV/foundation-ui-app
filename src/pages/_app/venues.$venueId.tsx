@@ -1,4 +1,5 @@
 import { useMemo, useRef, useState, type ReactNode } from "react";
+import { useMemo, useRef, useState, useEffect, type ReactNode } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { z } from "zod";
 import { motion } from "framer-motion";
@@ -20,10 +21,16 @@ import {
   SegmentedControl,
   Collapse,
   UnstyledButton,
+  Badge,
+  TextInput as MantineTextInput,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { RichTextEditor, Link } from "@mantine/tiptap";
+import { useEditor } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
+import Underline from "@tiptap/extension-underline";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   IconAlertCircle,
   IconArrowLeft,
@@ -46,6 +53,11 @@ import {
   IconCheck,
   IconAlertTriangle,
   IconChevronDown,
+  IconPin,
+  IconPinFilled,
+  IconTrash,
+  IconPlus,
+  IconX,
 } from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { PageTitle } from "@/shared/lib/page-title";
@@ -60,7 +72,13 @@ import {
   isFieldEmpty,
 } from "@/features/manage-venue";
 import type { MetadataDocument, MetadataFieldDefinition } from "@/features/manage-venue";
-import { catalogApi, venueAssetApi, uploadFileToPresignedUrl } from "@/shared/api";
+import {
+  catalogApi,
+  venueAssetApi,
+  venueSmartNoteApi,
+  uploadFileToPresignedUrl,
+} from "@/shared/api";
+import type { VenueSmartNote } from "@/shared/api";
 import { dayjs } from "@/shared/lib/date-utils";
 import { TestSelectors } from "@/shared/lib/test-selectors";
 import { useAiContextActions } from "@/features/ask-ai";
@@ -593,7 +611,7 @@ function VenueOverviewPage() {
               title={<Trans>Recent activity</Trans>}
               subtitle={<Trans>Latest changes on this venue</Trans>}
             >
-              <ActivityStreamPlaceholder />
+              <VenueSmartNotesCard venueId={venueId} />
             </DashboardCard>
           </Stack>
 
@@ -759,20 +777,401 @@ function FocusListPlaceholder() {
   );
 }
 
-function ActivityStreamPlaceholder() {
+// ─── NOTE_COLORS: 3 swatches — white, soft teal, soft yellow ──────────────────
+const NOTE_COLORS = [
+  { value: "#ffffff", label: "White" },
+  { value: "#e6f7f5", label: "Teal" },
+  { value: "#fff9c4", label: "Yellow" },
+] as const;
+
+type NoteColor = (typeof NOTE_COLORS)[number]["value"];
+
+/** Strip HTML tags to plain text for the list preview. */
+function stripHtml(html: string | null | undefined): string {
+  if (!html) return "";
+  return html.replace(/<[^>]+>/g, " ").replace(/\s{2,}/g, " ").trim();
+}
+
+// ─── Colour swatch picker ─────────────────────────────────────────────────────
+
+function ColorSwatchPicker({
+  value,
+  onChange,
+}: {
+  value: NoteColor;
+  onChange: (c: NoteColor) => void;
+}) {
+  return (
+    <Group gap={6}>
+      {NOTE_COLORS.map((c) => (
+        <UnstyledButton
+          key={c.value}
+          aria-label={c.label}
+          onClick={() => onChange(c.value)}
+          style={{
+            width: 22,
+            height: 22,
+            borderRadius: "50%",
+            background: c.value,
+            border:
+              value === c.value
+                ? "2px solid var(--mantine-color-teal-6)"
+                : "2px solid var(--mantine-color-default-border)",
+            flexShrink: 0,
+          }}
+        />
+      ))}
+    </Group>
+  );
+}
+
+// ─── Note editor panel ────────────────────────────────────────────────────────
+
+interface NoteEditorProps {
+  initialTitle: string;
+  initialContent: string;
+  initialColor: NoteColor;
+  isNew: boolean;
+  isSaving: boolean;
+  onSave: (title: string, content: string, color: NoteColor) => void;
+  onCancel: () => void;
+  onDelete?: () => void;
+}
+
+function NoteEditor({
+  initialTitle,
+  initialContent,
+  initialColor,
+  isNew,
+  isSaving,
+  onSave,
+  onCancel,
+  onDelete,
+}: NoteEditorProps) {
+  const { t } = useLingui();
+  const [title, setTitle] = useState(initialTitle);
+  const [color, setColor] = useState<NoteColor>(initialColor);
+
+  const editor = useEditor({
+    extensions: [StarterKit, Underline, Link],
+    content: initialContent || "",
+  });
+
+  // sync content when switching notes
+  useEffect(() => {
+    if (editor && editor.getHTML() !== initialContent) {
+      editor.commands.setContent(initialContent || "");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialContent]);
+
+  return (
+    <Paper
+      withBorder
+      radius="md"
+      shadow="sm"
+      style={{ background: color, overflow: "hidden" }}
+    >
+      {/* Header */}
+      <Group
+        justify="space-between"
+        px="md"
+        py="xs"
+        style={{ borderBottom: "1px solid var(--mantine-color-default-border)" }}
+      >
+        <Text size="xs" fw={700} tt="uppercase" c="teal.7" style={{ letterSpacing: "0.08em" }}>
+          {isNew ? <Trans>New note</Trans> : <Trans>Editing note</Trans>}
+        </Text>
+        <Group gap={4}>
+          {!isNew && onDelete && (
+            <Tooltip label={t`Delete note`} withArrow>
+              <ActionIcon
+                variant="subtle"
+                color="red"
+                size="sm"
+                aria-label={t`Delete note`}
+                onClick={onDelete}
+              >
+                <IconTrash size={15} />
+              </ActionIcon>
+            </Tooltip>
+          )}
+          <ActionIcon variant="subtle" color="gray" size="sm" aria-label={t`Close`} onClick={onCancel}>
+            <IconX size={15} />
+          </ActionIcon>
+        </Group>
+      </Group>
+
+      <Stack gap={0} p="md" pb="xs">
+        {/* Title */}
+        <MantineTextInput
+          variant="unstyled"
+          fw={700}
+          size="md"
+          placeholder={t`Title`}
+          value={title}
+          onChange={(e) => setTitle(e.currentTarget.value)}
+          style={{ marginBottom: 4 }}
+        />
+
+        {/* Tiptap editor */}
+        <RichTextEditor
+          editor={editor}
+          styles={{
+            root: { border: "none", background: "transparent" },
+            toolbar: { background: "transparent", borderBottom: "1px solid var(--mantine-color-default-border)", paddingBottom: 4, marginBottom: 4 },
+            content: { background: "transparent", minHeight: 100, fontSize: "var(--mantine-font-size-sm)" },
+          }}
+        >
+          <RichTextEditor.Toolbar>
+            <RichTextEditor.ControlsGroup>
+              <RichTextEditor.Undo />
+              <RichTextEditor.Redo />
+            </RichTextEditor.ControlsGroup>
+            <RichTextEditor.ControlsGroup>
+              <RichTextEditor.Bold />
+              <RichTextEditor.Italic />
+              <RichTextEditor.Underline />
+            </RichTextEditor.ControlsGroup>
+          </RichTextEditor.Toolbar>
+          <RichTextEditor.Content />
+        </RichTextEditor>
+
+        {/* Colour picker */}
+        <Group justify="space-between" align="center" mt="xs">
+          <ColorSwatchPicker value={color} onChange={setColor} />
+        </Group>
+      </Stack>
+
+      {/* Footer */}
+      <Divider />
+      <Group justify="space-between" px="md" py="sm">
+        <Button variant="subtle" color="gray" size="xs" onClick={onCancel}>
+          <Trans>Cancel</Trans>
+        </Button>
+        <Button
+          size="xs"
+          color="teal"
+          loading={isSaving}
+          onClick={() => onSave(title, editor?.getHTML() ?? "", color)}
+        >
+          <Trans>Save note</Trans>
+        </Button>
+      </Group>
+    </Paper>
+  );
+}
+
+// ─── Smart notes list card ────────────────────────────────────────────────────
+
+function VenueSmartNotesCard({ venueId }: { venueId: string }) {
+  const { t } = useLingui();
+  const queryClient = useQueryClient();
+
+  // null = nothing open; "new" = new note form; uuid = editing that note
+  const [openId, setOpenId] = useState<string | null>(null);
+
+  const { data, isLoading } = useQuery({
+    queryKey: ["tenant", "venue", venueId, "smart-notes"],
+    queryFn: () => venueSmartNoteApi.list(venueId, { direction: "DESC" }),
+  });
+
+  const notes = data?.items ?? [];
+
+  const saveMutation = useMutation({
+    mutationFn: ({
+      id,
+      title,
+      content,
+      color,
+    }: {
+      id: string | null;
+      title: string;
+      content: string;
+      color: string;
+    }) =>
+      id
+        ? venueSmartNoteApi.patch(id, { title, content, color })
+        : venueSmartNoteApi.create({ venueId, title, content, color }),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: ["tenant", "venue", venueId, "smart-notes"] });
+      setOpenId(null);
+    },
+    onError: (err) =>
+      notifications.show({
+        message: err instanceof Error ? err.message : t`Could not save note.`,
+        color: "red",
+      }),
+  });
+
+  const pinMutation = useMutation({
+    mutationFn: ({ id, pinned }: { id: string; pinned: boolean }) =>
+      venueSmartNoteApi.setPinned(id, pinned),
+    onSuccess: () =>
+      void queryClient.invalidateQueries({ queryKey: ["tenant", "venue", venueId, "smart-notes"] }),
+  });
+
+  const deleteMutation = useMutation({
+    mutationFn: (id: string) => venueSmartNoteApi.delete(id),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: ["tenant", "venue", venueId, "smart-notes"] });
+      setOpenId(null);
+    },
+    onError: (err) =>
+      notifications.show({
+        message: err instanceof Error ? err.message : t`Could not delete note.`,
+        color: "red",
+      }),
+  });
+
+  if (isLoading) {
+    return (
+      <Stack gap={0}>
+        {[0, 1, 2].map((i) => (
+          <Group key={i} gap="sm" py="sm" style={{ borderBottom: i < 2 ? "1px solid var(--mantine-color-default-border)" : undefined }}>
+            <Skeleton height={14} width="60%" radius="sm" />
+          </Group>
+        ))}
+      </Stack>
+    );
+  }
+
+  const editingNote = openId && openId !== "new" ? notes.find((n) => n.id === openId) : null;
+
   return (
     <Stack gap={0}>
-      {[0, 1, 2, 3].map((i) => (
-        <Group key={i} gap="sm" py="sm" style={{ borderBottom: i < 3 ? "1px solid var(--mantine-color-default-border)" : undefined }}>
-          <ThemeIcon variant="light" color="gray" size={28} radius="xl">
-            <IconActivity size={14} />
-          </ThemeIcon>
-          <Stack gap={2} style={{ flex: 1 }}>
-            <Skeleton height={14} width="70%" radius="sm" />
-            <Skeleton height={12} width="30%" radius="sm" />
-          </Stack>
-        </Group>
-      ))}
+      {/* Editor — shown at the top when creating/editing */}
+      {openId && (
+        <Box mb="sm">
+          <NoteEditor
+            key={openId} // remount when switching notes
+            initialTitle={editingNote?.title ?? ""}
+            initialContent={editingNote?.content ?? ""}
+            initialColor={
+              (editingNote?.color as NoteColor | null | undefined) ?? NOTE_COLORS[0].value
+            }
+            isNew={openId === "new"}
+            isSaving={saveMutation.isPending}
+            onSave={(title, content, color) =>
+              saveMutation.mutate({ id: openId === "new" ? null : openId, title, content, color })
+            }
+            onCancel={() => setOpenId(null)}
+            onDelete={
+              editingNote
+                ? () => deleteMutation.mutate(editingNote.id)
+                : undefined
+            }
+          />
+        </Box>
+      )}
+
+      {/* Note list */}
+      {notes.length === 0 && !openId && (
+        <Text size="sm" c="dimmed" fs="italic" py="sm">
+          <Trans>No notes yet. Add the first one below.</Trans>
+        </Text>
+      )}
+
+      {notes.map((note, idx) => {
+        const bg = (note.color as NoteColor | null) ?? "#ffffff";
+        const preview = stripHtml(note.content);
+        const tags = note.tags ?? [];
+        const isEditing = openId === note.id;
+
+        return (
+          <Box
+            key={note.id}
+            style={{
+              borderBottom:
+                idx < notes.length - 1
+                  ? "1px solid var(--mantine-color-default-border)"
+                  : undefined,
+              borderLeft: `3px solid ${bg === "#ffffff" ? "var(--mantine-color-default-border)" : bg}`,
+              paddingLeft: "var(--mantine-spacing-sm)",
+              opacity: isEditing ? 0.5 : 1,
+              transition: "opacity 150ms",
+            }}
+            py="sm"
+          >
+            <Group justify="space-between" wrap="nowrap" align="flex-start">
+              <Stack gap={2} style={{ flex: 1, minWidth: 0 }}>
+                <Text size="xs" c="dimmed" ff="monospace">
+                  {dayjs(note.updatedAt).format("MMM D, YYYY")}
+                </Text>
+                {note.title && (
+                  <Text fw={700} size="sm" lineClamp={1}>
+                    {note.title}
+                  </Text>
+                )}
+                {preview && (
+                  <Text size="xs" c="dimmed" lineClamp={2}>
+                    {preview}
+                  </Text>
+                )}
+                {tags.length > 0 && (
+                  <Group gap={4} mt={2} wrap="wrap">
+                    {tags.map((tag) => (
+                      <Badge key={tag} size="xs" variant="light" color="gray" radius="sm">
+                        #{tag}
+                      </Badge>
+                    ))}
+                  </Group>
+                )}
+                <Text size="xs" c="dimmed">
+                  {dayjs(note.updatedAt).format("h:mm A")}
+                </Text>
+              </Stack>
+
+              <Group gap={4} style={{ flexShrink: 0 }}>
+                <Tooltip label={note.pinned ? t`Unpin` : t`Pin`} withArrow>
+                  <ActionIcon
+                    variant="subtle"
+                    color={note.pinned ? "teal" : "gray"}
+                    size="xs"
+                    aria-label={note.pinned ? t`Unpin note` : t`Pin note`}
+                    loading={pinMutation.isPending}
+                    onClick={() => pinMutation.mutate({ id: note.id, pinned: !note.pinned })}
+                  >
+                    {note.pinned ? <IconPinFilled size={12} /> : <IconPin size={12} />}
+                  </ActionIcon>
+                </Tooltip>
+                <Tooltip label={t`Edit`} withArrow>
+                  <ActionIcon
+                    variant="subtle"
+                    color="gray"
+                    size="xs"
+                    aria-label={t`Edit note`}
+                    onClick={() => setOpenId(isEditing ? null : note.id)}
+                  >
+                    <IconPencil size={12} />
+                  </ActionIcon>
+                </Tooltip>
+              </Group>
+            </Group>
+          </Box>
+        );
+      })}
+
+      {/* New note row */}
+      {!openId && (
+        <UnstyledButton
+          mt="xs"
+          onClick={() => setOpenId("new")}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 6,
+            padding: "var(--mantine-spacing-xs) 0",
+            color: "var(--mantine-color-dimmed)",
+          }}
+          aria-label={t`Add a new note`}
+        >
+          <IconPlus size={14} />
+          <Text size="xs" c="dimmed">
+            <Trans>New note</Trans>
+          </Text>
+        </UnstyledButton>
+      )}
     </Stack>
   );
 }
