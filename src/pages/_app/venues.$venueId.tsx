@@ -430,38 +430,52 @@ function VenueOverviewPage() {
                         </Text>
                       </Stack>
                     </Group>
-                    <Button
-                      variant="subtle"
-                      color="gray"
-                      size="sm"
-                      leftSection={<IconSparkles size={15} />}
-                      disabled={!venue}
-                      onClick={() =>
-                        void navigate({ to: "/venues/$venueId/research", params: { venueId } })
-                      }
-                    >
-                      <Trans>Fill with AI</Trans>
-                    </Button>
-                    <Button
-                      variant="light"
-                      size="sm"
-                      leftSection={<IconUpload size={15} />}
-                      disabled={!venue}
-                      loading={uploadingAsset}
-                      data-testid={TestSelectors.VENUE_DETAIL_ASSET_UPLOAD_BUTTON}
-                      onClick={() => assetFileInputRef.current?.click()}
-                    >
-                      <Trans>Upload asset</Trans>
-                    </Button>
-                    <input
-                      ref={assetFileInputRef}
-                      type="file"
-                      hidden
-                      onChange={(e) => {
-                        const file = e.currentTarget.files?.[0];
-                        if (file) void handleUploadAsset(file);
+                    <Group
+                      gap={0}
+                      wrap="nowrap"
+                      style={{
+                        border: "1px solid var(--mantine-color-default-border)",
+                        borderRadius: "var(--mantine-radius-sm)",
+                        overflow: "hidden",
                       }}
-                    />
+                    >
+                      <Button
+                        variant="subtle"
+                        color="gray"
+                        size="sm"
+                        radius={0}
+                        leftSection={<IconSparkles size={15} />}
+                        disabled={!venue}
+                        onClick={() =>
+                          void navigate({ to: "/venues/$venueId/research", params: { venueId } })
+                        }
+                      >
+                        <Trans>Fill with AI</Trans>
+                      </Button>
+                      <Divider orientation="vertical" />
+                      <Button
+                        variant="subtle"
+                        color="gray"
+                        size="sm"
+                        radius={0}
+                        leftSection={<IconUpload size={15} />}
+                        disabled={!venue}
+                        loading={uploadingAsset}
+                        data-testid={TestSelectors.VENUE_DETAIL_ASSET_UPLOAD_BUTTON}
+                        onClick={() => assetFileInputRef.current?.click()}
+                      >
+                        <Trans>Upload asset</Trans>
+                      </Button>
+                      <input
+                        ref={assetFileInputRef}
+                        type="file"
+                        hidden
+                        onChange={(e) => {
+                          const file = e.currentTarget.files?.[0];
+                          if (file) void handleUploadAsset(file);
+                        }}
+                      />
+                    </Group>
                   </Group>
                   <Group gap="lg" wrap="wrap">
                     <Group gap={6} wrap="nowrap">
