@@ -265,6 +265,10 @@ msgstr ""
 msgid "Add locale"
 msgstr "Ajouter une langue"
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Add note"
+msgstr ""
+
 #: src/features/manage-venue/ui/venue-metadata-sections.tsx
 msgid "Add row"
 msgstr ""
@@ -436,6 +440,7 @@ msgid "Asset uploaded."
 msgstr ""
 
 #: src/pages/_app/venues_.$venueId.research.tsx
+#: src/pages/_app/venues.$venueId.tsx
 msgid "Assets"
 msgstr ""
 
@@ -1548,6 +1553,7 @@ msgstr "Chargeur plein écran centré affiché au premier chargement de l'applic
 
 #: src/pages/_app/venues_.$venueId.files.tsx
 #: src/pages/_app/venues_.$venueId.research.tsx
+#: src/pages/_app/venues.$venueId.tsx
 msgid "Gallery"
 msgstr ""
 
@@ -1689,6 +1695,10 @@ msgstr "Détails de mise en œuvre"
 msgid "Incorrect password. Please try again."
 msgstr "Mot de passe incorrect. Veuillez réessayer."
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Internal notes and reminders"
+msgstr ""
+
 #: src/pages/500.tsx
 msgid "Internal server error."
 msgstr "Erreur interne du serveur."
@@ -1741,6 +1751,10 @@ msgstr "URI de l'émetteur"
 #: src/pages/_app/settings/security.tsx
 msgid "Issuer URI is required"
 msgstr "L'URI de l'émetteur est requise"
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Items that need attention for this venue"
+msgstr ""
 
 #: src/features/complete-profile/ui/complete-profile-form.tsx
 #: src/features/signup/ui/signup-form.tsx
@@ -1803,6 +1817,10 @@ msgstr "Le nom de famille est trop long"
 
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Last updated"
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Latest changes on this venue"
 msgstr ""
 
 #: src/features/manage-venue/ui/venue-fields.tsx
@@ -1907,6 +1925,10 @@ msgstr "Lettre minuscule"
 #: src/features/magic-link/model/use-magic-link-exchange.ts
 msgid "Magic link is invalid or has expired. Please request a new one."
 msgstr "Le lien magique est invalide ou a expiré. Veuillez en demander un nouveau."
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Manage files"
+msgstr ""
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Manage user roles, permissions & access"
@@ -2253,6 +2275,10 @@ msgstr "Non connecté"
 #: src/pages/_app/venues.$venueId.tsx
 #~ msgid "Not linked to a master catalog record."
 #~ msgstr ""
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Notes will appear here."
+msgstr ""
 
 #: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
 msgid "Nothing found"
@@ -2671,6 +2697,10 @@ msgstr "Approvisionnement de l'espace de travail"
 msgid "Published"
 msgstr "Publié"
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Quick actions"
+msgstr ""
+
 #: src/pages/complete-profile.tsx
 msgid "quick step."
 msgstr "étape rapide."
@@ -2708,6 +2738,10 @@ msgstr "Raison (facultative)"
 #: src/features/manage-billing/ui/webhook-log-list.tsx
 msgid "Received At"
 msgstr "Reçu le"
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Recent activity"
+msgstr ""
 
 #: src/pages/_app/venues.index.tsx
 msgid "Recently Added"
@@ -3174,6 +3208,10 @@ msgstr ""
 msgid "Source document"
 msgstr ""
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Source documents"
+msgstr ""
+
 #: src/pages/_app/venues_.$venueId.research.tsx
 msgid "Source text extracted."
 msgstr ""
@@ -3421,6 +3459,10 @@ msgstr "Le titre est requis pour la langue par défaut"
 msgid "To access the billing portal, please complete your billing settings setup."
 msgstr "Pour accéder au portail de facturation, veuillez terminer la configuration de vos paramètres de facturation."
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Today's focus"
+msgstr ""
+
 #: src/features/magic-link/model/use-magic-link-initiate.ts
 msgid "Too many attempts. Please try again later."
 msgstr "Trop de tentatives. Veuillez réessayer plus tard."
@@ -3609,6 +3651,10 @@ msgstr ""
 msgid "Venue name"
 msgstr ""
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Venue notes"
+msgstr ""
+
 #: src/pages/_app/venues_.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
 #~ msgid "Venue Profile"
@@ -3754,6 +3800,14 @@ msgstr ""
 
 #: src/pages/_app/venues.index.tsx
 msgid "Which venues have photos?"
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Widgets"
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Widgets will appear here."
 msgstr ""
 
 #: src/features/signup/ui/signup-form.tsx

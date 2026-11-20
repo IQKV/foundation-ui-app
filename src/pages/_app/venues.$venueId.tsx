@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, type ReactNode } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { z } from "zod";
 import { motion } from "framer-motion";
@@ -18,8 +18,9 @@ import {
   ThemeIcon,
   Divider,
   SegmentedControl,
+  SimpleGrid,
 } from "@mantine/core";
-import { useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   IconAlertCircle,
   IconArrowLeft,
@@ -31,6 +32,13 @@ import {
   IconFolder,
   IconLayoutDashboard,
   IconPencil,
+  IconFileText,
+  IconPhoto,
+  IconPaperclip,
+  IconFocus,
+  IconActivity,
+  IconBolt,
+  IconSticker,
 } from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { PageTitle } from "@/shared/lib/page-title";
@@ -41,6 +49,7 @@ import {
   overallCompleteness,
   parseMetadata,
 } from "@/features/manage-venue";
+import { catalogApi } from "@/shared/api";
 import { dayjs } from "@/shared/lib/date-utils";
 import { TestSelectors } from "@/shared/lib/test-selectors";
 import { useAiContextActions } from "@/features/ask-ai";
@@ -90,6 +99,30 @@ function VenueOverviewPage() {
 
   // Client-side profile completeness, derived from the raw metadata document.
   const completeness = overallCompleteness(parseMetadata(venue?.metadata ?? null));
+
+  // ── Overview counts (real numbers shown in the stats strip) ────────────────────────
+  const { data: photosData } = useQuery({
+    queryKey: ["tenant", "venue", venueId, "photos"],
+    queryFn: () => catalogApi.listVenueAssetPhotos(venueId),
+  });
+  const { data: masterPhotosData } = useQuery({
+    queryKey: ["tenant", "venue", venueId, "master-photos"],
+    queryFn: () => catalogApi.listVenueMasterPhotos(venueId),
+  });
+  const { data: sourcesData } = useQuery({
+    queryKey: ["tenant", "venue", venueId, "sources"],
+    queryFn: () => catalogApi.listVenueTextContents(venueId),
+  });
+  const { data: assetsData } = useQuery({
+    queryKey: ["tenant", "venue", venueId, "assets"],
+    queryFn: () => catalogApi.listVenueAssets(venueId),
+  });
+
+  const photoCount = (photosData?.items?.length ?? 0) + (masterPhotosData?.items?.length ?? 0);
+  const sourceCount = sourcesData?.items?.length ?? 0;
+  const assetCount = assetsData?.items?.length ?? 0;
+  const countsLoading =
+    !photosData || !masterPhotosData || !sourcesData || !assetsData;
 
   const hasPhoto = Boolean(venue?.primaryPhotoUrl);
   const isMasterLinked = Boolean(venue?.masterVenueId);
@@ -386,8 +419,243 @@ function VenueOverviewPage() {
           </Box>
         </Paper>
 
-        {/* ── Content below the hero is pending discussion. ────────────── */}
+        {/* ── Stats strip — real numbers near the hero (left/main column) ────── */}
+        <SimpleGrid
+          mt="md"
+          cols={{ base: 1, sm: 2, lg: 4 }}
+          spacing="md"
+        >
+          <StatCard
+            label={t`Source documents`}
+            value={sourceCount}
+            loading={countsLoading}
+            icon={<IconFileText size={20} />}
+            color="blue"
+            onClick={() =>
+              void navigate({ to: "/venues/$venueId/files", params: { venueId } })
+            }
+          />
+          <StatCard
+            label={t`Gallery`}
+            value={photoCount}
+            loading={countsLoading}
+            icon={<IconPhoto size={20} />}
+            color="violet"
+            onClick={() =>
+              void navigate({ to: "/venues/$venueId/files", params: { venueId } })
+            }
+          />
+          <StatCard
+            label={t`Assets`}
+            value={assetCount}
+            loading={countsLoading}
+            icon={<IconPaperclip size={20} />}
+            color="teal"
+            onClick={() =>
+              void navigate({ to: "/venues/$venueId/files", params: { venueId } })
+            }
+          />
+          <StatCard
+            label={t`Profile completeness`}
+            value={`${completeness.percent}%`}
+            loading={isLoading}
+            icon={<IconFocus size={20} />}
+            color="green"
+            onClick={() =>
+              void navigate({ to: "/venues/$venueId/research", params: { venueId } })
+            }
+          />
+        </SimpleGrid>
+
+        {/* ── Dashboard: main stream + right rail ──────────────────────────── */}
+        <Box
+          mt="md"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "minmax(0, 1fr) 340px",
+            gap: "var(--mantine-spacing-md)",
+          }}
+        >
+          {/* Main column */}
+          <Stack gap="md">
+            <DashboardCard
+              icon={<IconFocus size={18} />}
+              title={<Trans>Today's focus</Trans>}
+              subtitle={<Trans>Items that need attention for this venue</Trans>}
+            >
+              <FocusListPlaceholder />
+            </DashboardCard>
+
+            <DashboardCard
+              icon={<IconActivity size={18} />}
+              title={<Trans>Recent activity</Trans>}
+              subtitle={<Trans>Latest changes on this venue</Trans>}
+            >
+              <ActivityStreamPlaceholder />
+            </DashboardCard>
+          </Stack>
+
+          {/* Right rail */}
+          <Stack gap="md">
+            <DashboardCard
+              icon={<IconBolt size={18} />}
+              title={<Trans>Quick actions</Trans>}
+            >
+              <Stack gap={8}>
+                <Button
+                  variant="light"
+                  leftSection={<IconPencil size={16} />}
+                  onClick={() =>
+                    void navigate({ to: "/venues/$venueId/research", params: { venueId } })
+                  }
+                >
+                  <Trans>Research & edit</Trans>
+                </Button>
+                <Button
+                  variant="light"
+                  color="gray"
+                  leftSection={<IconFolder size={16} />}
+                  onClick={() =>
+                    void navigate({ to: "/venues/$venueId/files", params: { venueId } })
+                  }
+                >
+                  <Trans>Manage files</Trans>
+                </Button>
+                <Button variant="light" color="gray" leftSection={<IconFileText size={16} />} disabled>
+                  <Trans>Add note</Trans>
+                </Button>
+              </Stack>
+            </DashboardCard>
+
+            {/* VenueNotes — placeholder for the upcoming interactive component. */}
+            <DashboardCard
+              icon={<IconSticker size={18} />}
+              title={<Trans>Venue notes</Trans>}
+              subtitle={<Trans>Internal notes and reminders</Trans>}
+            >
+              <Text size="sm" c="dimmed" py="xl" ta="center">
+                <Trans>Notes will appear here.</Trans>
+              </Text>
+            </DashboardCard>
+
+            {/* Widget area — reserved for dashboard widgets. */}
+            <DashboardCard title={<Trans>Widgets</Trans>}>
+              <Text size="sm" c="dimmed" py="xl" ta="center">
+                <Trans>Widgets will appear here.</Trans>
+              </Text>
+            </DashboardCard>
+          </Stack>
+        </Box>
       </Container>
     </motion.div>
+  );
+}
+
+// ─── Dashboard building blocks (layout only — no real data yet ────────────────────────────
+
+interface StatCardProps {
+  label: string;
+  value: number | string;
+  loading: boolean;
+  icon: ReactNode;
+  color: string;
+  onClick?: () => void;
+}
+
+function StatCard({ label, value, loading, icon, color, onClick }: StatCardProps) {
+  return (
+    <Paper
+      withBorder
+      radius="md"
+      p="md"
+      shadow="xs"
+      onClick={onClick}
+      style={onClick ? { cursor: "pointer" } : undefined}
+    >
+      <Group justify="space-between" align="flex-start" gap="xs">
+        <Stack gap={4}>
+        <Text size="sm" c="dimmed" fw={500}>
+          {label}
+        </Text>
+        {loading ? (
+          <Skeleton height={26} width={60} radius="sm" />
+        ) : (
+          <Text fw={700} size="1.6rem" lh={1}>
+            {value}
+          </Text>
+        )}
+        </Stack>
+        <ThemeIcon variant="light" color={color} radius="md" size={36}>
+          {icon}
+        </ThemeIcon>
+      </Group>
+    </Paper>
+  );
+}
+
+interface DashboardCardProps {
+  icon?: ReactNode;
+  title: ReactNode;
+  subtitle?: ReactNode;
+  children: ReactNode;
+}
+
+function DashboardCard({ icon, title, subtitle, children }: DashboardCardProps) {
+  return (
+    <Paper withBorder radius="md" shadow="sm" p="lg">
+      <Group gap="xs" mb="md" align="flex-start">
+        {icon && (
+          <ThemeIcon variant="light" color="gray" size={32} radius="md">
+            {icon}
+          </ThemeIcon>
+        )}
+        <Stack gap={0}>
+          <Text fw={700} size="md">
+            {title}
+          </Text>
+          {subtitle && (
+            <Text size="xs" c="dimmed">
+              {subtitle}
+            </Text>
+          )}
+        </Stack>
+      </Group>
+      {children}
+    </Paper>
+  );
+}
+
+function FocusListPlaceholder() {
+  return (
+    <Stack gap="sm">
+      {[0, 1, 2].map((i) => (
+        <Group key={i} gap="sm" align="flex-start" p="sm" style={{ border: "1px solid var(--mantine-color-default-border)", borderRadius: "var(--mantine-radius-sm)" }}>
+          <Skeleton height={20} width={20} radius="sm" />
+          <Stack gap={4} style={{ flex: 1 }}>
+            <Skeleton height={14} width="60%" radius="sm" />
+            <Skeleton height={12} width="40%" radius="sm" />
+          </Stack>
+          <Skeleton height={20} width={56} radius="sm" />
+        </Group>
+      ))}
+    </Stack>
+  );
+}
+
+function ActivityStreamPlaceholder() {
+  return (
+    <Stack gap={0}>
+      {[0, 1, 2, 3].map((i) => (
+        <Group key={i} gap="sm" py="sm" style={{ borderBottom: i < 3 ? "1px solid var(--mantine-color-default-border)" : undefined }}>
+          <ThemeIcon variant="light" color="gray" size={28} radius="xl">
+            <IconActivity size={14} />
+          </ThemeIcon>
+          <Stack gap={2} style={{ flex: 1 }}>
+            <Skeleton height={14} width="70%" radius="sm" />
+            <Skeleton height={12} width="30%" radius="sm" />
+          </Stack>
+        </Group>
+      ))}
+    </Stack>
   );
 }

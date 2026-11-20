@@ -265,6 +265,10 @@ msgstr "Add contact"
 msgid "Add locale"
 msgstr "Add locale"
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Add note"
+msgstr "Add note"
+
 #: src/features/manage-venue/ui/venue-metadata-sections.tsx
 msgid "Add row"
 msgstr "Add row"
@@ -436,6 +440,7 @@ msgid "Asset uploaded."
 msgstr "Asset uploaded."
 
 #: src/pages/_app/venues_.$venueId.research.tsx
+#: src/pages/_app/venues.$venueId.tsx
 msgid "Assets"
 msgstr "Assets"
 
@@ -1548,6 +1553,7 @@ msgstr "Full-screen centered loader shown on first app load (while locale initia
 
 #: src/pages/_app/venues_.$venueId.files.tsx
 #: src/pages/_app/venues_.$venueId.research.tsx
+#: src/pages/_app/venues.$venueId.tsx
 msgid "Gallery"
 msgstr "Gallery"
 
@@ -1689,6 +1695,10 @@ msgstr "Implementation Details"
 msgid "Incorrect password. Please try again."
 msgstr "Incorrect password. Please try again."
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Internal notes and reminders"
+msgstr "Internal notes and reminders"
+
 #: src/pages/500.tsx
 msgid "Internal server error."
 msgstr "Internal server error."
@@ -1741,6 +1751,10 @@ msgstr "Issuer URI"
 #: src/pages/_app/settings/security.tsx
 msgid "Issuer URI is required"
 msgstr "Issuer URI is required"
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Items that need attention for this venue"
+msgstr "Items that need attention for this venue"
 
 #: src/features/complete-profile/ui/complete-profile-form.tsx
 #: src/features/signup/ui/signup-form.tsx
@@ -1804,6 +1818,10 @@ msgstr "Last name is too long"
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Last updated"
 msgstr "Last updated"
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Latest changes on this venue"
+msgstr "Latest changes on this venue"
 
 #: src/features/manage-venue/ui/venue-fields.tsx
 msgid "Latitude"
@@ -1907,6 +1925,10 @@ msgstr "Lowercase letter"
 #: src/features/magic-link/model/use-magic-link-exchange.ts
 msgid "Magic link is invalid or has expired. Please request a new one."
 msgstr "Magic link is invalid or has expired. Please request a new one."
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Manage files"
+msgstr "Manage files"
 
 #: src/features/onboarding/ui/onboarding-modal.tsx
 msgid "Manage user roles, permissions & access"
@@ -2253,6 +2275,10 @@ msgstr "Not connected"
 #: src/pages/_app/venues.$venueId.tsx
 #~ msgid "Not linked to a master catalog record."
 #~ msgstr "Not linked to a master catalog record."
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Notes will appear here."
+msgstr "Notes will appear here."
 
 #: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
 msgid "Nothing found"
@@ -2671,6 +2697,10 @@ msgstr "Provisioning workspace"
 msgid "Published"
 msgstr "Published"
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Quick actions"
+msgstr "Quick actions"
+
 #: src/pages/complete-profile.tsx
 msgid "quick step."
 msgstr "quick step."
@@ -2708,6 +2738,10 @@ msgstr "Reason (optional)"
 #: src/features/manage-billing/ui/webhook-log-list.tsx
 msgid "Received At"
 msgstr "Received At"
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Recent activity"
+msgstr "Recent activity"
 
 #: src/pages/_app/venues.index.tsx
 msgid "Recently Added"
@@ -3174,6 +3208,10 @@ msgstr "Source {0}"
 msgid "Source document"
 msgstr "Source document"
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Source documents"
+msgstr "Source documents"
+
 #: src/pages/_app/venues_.$venueId.research.tsx
 msgid "Source text extracted."
 msgstr "Source text extracted."
@@ -3421,6 +3459,10 @@ msgstr "Title is required for the default locale"
 msgid "To access the billing portal, please complete your billing settings setup."
 msgstr "To access the billing portal, please complete your billing settings setup."
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Today's focus"
+msgstr "Today's focus"
+
 #: src/features/magic-link/model/use-magic-link-initiate.ts
 msgid "Too many attempts. Please try again later."
 msgstr "Too many attempts. Please try again later."
@@ -3609,6 +3651,10 @@ msgstr "Venue ID"
 msgid "Venue name"
 msgstr "Venue name"
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Venue notes"
+msgstr "Venue notes"
+
 #: src/pages/_app/venues_.$venueId.files.tsx
 #: src/pages/_app/venues.$venueId.tsx
 #~ msgid "Venue Profile"
@@ -3755,6 +3801,14 @@ msgstr "Which venues have photos in the gallery?"
 #: src/pages/_app/venues.index.tsx
 msgid "Which venues have photos?"
 msgstr "Which venues have photos?"
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Widgets"
+msgstr "Widgets"
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Widgets will appear here."
+msgstr "Widgets will appear here."
 
 #: src/features/signup/ui/signup-form.tsx
 msgid "Work email"
