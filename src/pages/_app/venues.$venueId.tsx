@@ -55,8 +55,11 @@ import {
   CompletenessRing,
   overallCompleteness,
   parseMetadata,
-  VenueMetadataSections,
+  METADATA_SECTIONS,
+  resolveFieldValue,
+  isFieldEmpty,
 } from "@/features/manage-venue";
+import type { MetadataDocument, MetadataFieldDefinition } from "@/features/manage-venue";
 import { catalogApi, venueAssetApi, uploadFileToPresignedUrl } from "@/shared/api";
 import { dayjs } from "@/shared/lib/date-utils";
 import { TestSelectors } from "@/shared/lib/test-selectors";
@@ -561,12 +564,7 @@ function VenueOverviewPage() {
           </UnstyledButton>
           <Collapse expanded={metaExpanded}>
             <Box p="md" pt={0}>
-              <VenueMetadataSections
-                venueId={venueId}
-                metadata={venue?.metadata ?? null}
-                venue={venue ?? undefined}
-                isLoading={isLoading}
-              />
+              <VenueMetadataReadOnly metadata={parseMetadata(venue?.metadata ?? null)} />
             </Box>
           </Collapse>
         </Paper>
@@ -621,6 +619,92 @@ function VenueOverviewPage() {
         </Box>
       </Container>
     </motion.div>
+  );
+}
+
+// ─── Read-only metadata panel ─────────────────────────────────────────────────
+
+function formatValue(def: MetadataFieldDefinition, value: unknown): string | null {
+  if (isFieldEmpty(value)) return null;
+  if (def.type === "boolean") return null; // handled separately
+  if (def.type === "enum") {
+    return def.options?.find((o) => o.value === value)?.label ?? String(value);
+  }
+  if (def.type === "enum_multi") {
+    const list = Array.isArray(value) ? value : [];
+    return list.map((v) => def.options?.find((o) => o.value === v)?.label ?? String(v)).join(", ");
+  }
+  if (def.type === "contacts") {
+    const rows = Array.isArray(value) ? value : [];
+    return rows
+      .map((r) => {
+        if (r !== null && typeof r === "object") {
+          const { name, role } = r as Record<string, unknown>;
+          return [name, role].filter(Boolean).join(" · ");
+        }
+        return String(r);
+      })
+      .filter(Boolean)
+      .join("; ");
+  }
+  if (def.type === "record_array") {
+    const rows = Array.isArray(value) ? value : [];
+    if (rows.length === 0) return null;
+    return rows
+      .map((r) => {
+        if (r !== null && typeof r === "object") {
+          return (def.recordFields ?? [])
+            .map((f) => {
+              const v = (r as Record<string, unknown>)[f.key];
+              if (v == null || v === "") return null;
+              return f.unit ? `${v} ${f.unit}` : String(v);
+            })
+            .filter(Boolean)
+            .join(" · ");
+        }
+        return String(r);
+      })
+      .filter(Boolean)
+      .join("; ");
+  }
+  if (Array.isArray(value)) return value.join(", ");
+  if (def.unit) return `${String(value)} ${def.unit}`;
+  return String(value);
+}
+
+function VenueMetadataReadOnly({ metadata }: { metadata: MetadataDocument | null }) {
+  if (!metadata) return null;
+  return (
+    <Stack gap="md">
+      {METADATA_SECTIONS.map((section) => {
+        const rows = section.fields
+          .filter((f) => f.type !== "boolean" || Boolean(resolveFieldValue(metadata, f)))
+          .map((f) => ({ f, label: f.label, value: f.type === "boolean" ? true : formatValue(f, resolveFieldValue(metadata, f)) }))
+          .filter((r) => r.value !== null);
+
+        if (rows.length === 0) return null;
+
+        return (
+          <Box key={section.key}>
+            <Text size="xs" fw={700} tt="uppercase" c="dimmed" mb={6} style={{ letterSpacing: "0.07em" }}>
+              {section.subgroup ?? section.label}
+            </Text>
+            <Stack gap={4}>
+              {rows.map(({ f, label, value }) => (
+                <Group key={f.key} gap={6} wrap="nowrap" align="flex-start">
+                  <Text size="xs" c="dimmed" style={{ flexShrink: 0, minWidth: 140 }} lineClamp={1}>
+                    {label}
+                  </Text>
+                  <Text size="xs" fw={500} style={{ wordBreak: "break-word" }}>
+                    {f.type === "boolean" ? "✓" : String(value)}
+                  </Text>
+                </Group>
+              ))}
+            </Stack>
+          </Box>
+        );
+      }).filter(Boolean)}
+    </Stack>
   );
 }
 
