@@ -1,4 +1,4 @@
-import { useMemo, type ReactNode } from "react";
+import { useMemo, useRef, useState, type ReactNode } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { z } from "zod";
 import { motion } from "framer-motion";
@@ -18,8 +18,8 @@ import {
   ThemeIcon,
   Divider,
   SegmentedControl,
-  SimpleGrid,
 } from "@mantine/core";
+import { notifications } from "@mantine/notifications";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   IconAlertCircle,
@@ -38,7 +38,10 @@ import {
   IconFocus,
   IconActivity,
   IconBolt,
-  IconSticker,
+  IconSparkles,
+  IconUpload,
+  IconCheck,
+  IconAlertTriangle,
 } from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { PageTitle } from "@/shared/lib/page-title";
@@ -49,7 +52,7 @@ import {
   overallCompleteness,
   parseMetadata,
 } from "@/features/manage-venue";
-import { catalogApi } from "@/shared/api";
+import { catalogApi, venueAssetApi, uploadFileToPresignedUrl } from "@/shared/api";
 import { dayjs } from "@/shared/lib/date-utils";
 import { TestSelectors } from "@/shared/lib/test-selectors";
 import { useAiContextActions } from "@/features/ask-ai";
@@ -100,7 +103,42 @@ function VenueOverviewPage() {
   // Client-side profile completeness, derived from the raw metadata document.
   const completeness = overallCompleteness(parseMetadata(venue?.metadata ?? null));
 
-  // ── Overview counts (real numbers shown in the stats strip) ────────────────────────
+  const [uploadingAsset, setUploadingAsset] = useState(false);
+  const assetFileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleUploadAsset = async (file: File) => {
+    setUploadingAsset(true);
+    try {
+      const init = await venueAssetApi.initiateUpload(venueId, {
+        fileName: file.name,
+        contentType: file.type || "application/octet-stream",
+        sizeBytes: file.size,
+      });
+      await uploadFileToPresignedUrl(init.presignedUploadUrl, file, () => {});
+      await venueAssetApi.confirmUpload(venueId, init.assetId, {
+        objectKey: init.objectKey,
+        fileName: file.name,
+        assetType: file.type.startsWith("image/") ? "PHOTO" : "DOCUMENT",
+      });
+      await queryClient.invalidateQueries({ queryKey: ["tenant", "venue", venueId] });
+      notifications.show({
+        message: t`Asset uploaded.`,
+        color: "green",
+        icon: <IconCheck size={16} />,
+      });
+    } catch (err) {
+      notifications.show({
+        message: err instanceof Error ? err.message : t`Could not upload the asset.`,
+        color: "red",
+        icon: <IconAlertTriangle size={16} />,
+      });
+    } finally {
+      setUploadingAsset(false);
+      if (assetFileInputRef.current) assetFileInputRef.current.value = "";
+    }
+  };
+
+  // ── Overview counts ──────────────────────────────────────────────────────────
   const { data: assetCountData } = useQuery({
     queryKey: ["tenant", "venue", venueId, "assets", "count"],
     queryFn: () => catalogApi.countVenueAssets(venueId),
@@ -387,16 +425,87 @@ function VenueOverviewPage() {
                       </Stack>
                     </Group>
                     <Button
-                      variant="light"
+                      variant="subtle"
+                      color="gray"
                       size="sm"
-                      leftSection={<IconPencil size={15} />}
+                      leftSection={<IconSparkles size={15} />}
                       disabled={!venue}
                       onClick={() =>
                         void navigate({ to: "/venues/$venueId/research", params: { venueId } })
                       }
                     >
-                      <Trans>Research & edit</Trans>
+                      <Trans>Fill with AI</Trans>
                     </Button>
+                    <Button
+                      variant="light"
+                      size="sm"
+                      leftSection={<IconUpload size={15} />}
+                      disabled={!venue}
+                      loading={uploadingAsset}
+                      data-testid={TestSelectors.VENUE_DETAIL_ASSET_UPLOAD_BUTTON}
+                      onClick={() => assetFileInputRef.current?.click()}
+                    >
+                      <Trans>Upload asset</Trans>
+                    </Button>
+                    <input
+                      ref={assetFileInputRef}
+                      type="file"
+                      hidden
+                      onChange={(e) => {
+                        const file = e.currentTarget.files?.[0];
+                        if (file) void handleUploadAsset(file);
+                      }}
+                    />
+                  </Group>
+                  <Group gap="lg" wrap="wrap">
+                    <Group gap={6} wrap="nowrap">
+                      <ThemeIcon size={20} radius="sm" variant="light" color="blue">
+                        <IconFileText size={12} />
+                      </ThemeIcon>
+                      {countsLoading ? (
+                        <Skeleton height={14} width={40} radius="sm" />
+                      ) : (
+                        <Text size="xs" c="dimmed">
+                          {sourceCount} <Trans>sources</Trans>
+                        </Text>
+                      )}
+                    </Group>
+                    <Group gap={6} wrap="nowrap">
+                      <ThemeIcon size={20} radius="sm" variant="light" color="violet">
+                        <IconPhoto size={12} />
+                      </ThemeIcon>
+                      {countsLoading ? (
+                        <Skeleton height={14} width={40} radius="sm" />
+                      ) : (
+                        <Text size="xs" c="dimmed">
+                          {photoCount} <Trans>photos</Trans>
+                        </Text>
+                      )}
+                    </Group>
+                    <Group gap={6} wrap="nowrap">
+                      <ThemeIcon size={20} radius="sm" variant="light" color="teal">
+                        <IconPaperclip size={12} />
+                      </ThemeIcon>
+                      {countsLoading ? (
+                        <Skeleton height={14} width={40} radius="sm" />
+                      ) : (
+                        <Text size="xs" c="dimmed">
+                          {assetCount} <Trans>assets</Trans>
+                        </Text>
+                      )}
+                    </Group>
+                    <Group gap={6} wrap="nowrap">
+                      <ThemeIcon size={20} radius="sm" variant="light" color="green">
+                        <IconFocus size={12} />
+                      </ThemeIcon>
+                      {isLoading ? (
+                        <Skeleton height={14} width={40} radius="sm" />
+                      ) : (
+                        <Text size="xs" c="dimmed">
+                          {completeness.percent}% <Trans>complete</Trans>
+                        </Text>
+                      )}
+                    </Group>
                   </Group>
                   {!isLoading && venue?.updatedAt && (
                     <Text size="xs" c="dimmed">
@@ -409,54 +518,6 @@ function VenueOverviewPage() {
             </Box>
           </Box>
         </Paper>
-
-        {/* ── Stats strip — real numbers near the hero (left/main column) ────── */}
-        <SimpleGrid
-          mt="md"
-          cols={{ base: 1, sm: 2, lg: 4 }}
-          spacing="md"
-        >
-          <StatCard
-            label={t`Source documents`}
-            value={sourceCount}
-            loading={countsLoading}
-            icon={<IconFileText size={20} />}
-            color="blue"
-            onClick={() =>
-              void navigate({ to: "/venues/$venueId/files", params: { venueId } })
-            }
-          />
-          <StatCard
-            label={t`Gallery`}
-            value={photoCount}
-            loading={countsLoading}
-            icon={<IconPhoto size={20} />}
-            color="violet"
-            onClick={() =>
-              void navigate({ to: "/venues/$venueId/files", params: { venueId } })
-            }
-          />
-          <StatCard
-            label={t`Assets`}
-            value={assetCount}
-            loading={countsLoading}
-            icon={<IconPaperclip size={20} />}
-            color="teal"
-            onClick={() =>
-              void navigate({ to: "/venues/$venueId/files", params: { venueId } })
-            }
-          />
-          <StatCard
-            label={t`Profile completeness`}
-            value={`${completeness.percent}%`}
-            loading={isLoading}
-            icon={<IconFocus size={20} />}
-            color="green"
-            onClick={() =>
-              void navigate({ to: "/venues/$venueId/research", params: { venueId } })
-            }
-          />
-        </SimpleGrid>
 
         {/* ── Dashboard: main stream + right rail ──────────────────────────── */}
         <Box
@@ -492,48 +553,17 @@ function VenueOverviewPage() {
               icon={<IconBolt size={18} />}
               title={<Trans>Quick actions</Trans>}
             >
-              <Stack gap={8}>
-                <Button
-                  variant="light"
-                  leftSection={<IconPencil size={16} />}
-                  onClick={() =>
-                    void navigate({ to: "/venues/$venueId/research", params: { venueId } })
-                  }
-                >
-                  <Trans>Research & edit</Trans>
-                </Button>
-                <Button
-                  variant="light"
-                  color="gray"
-                  leftSection={<IconFolder size={16} />}
-                  onClick={() =>
-                    void navigate({ to: "/venues/$venueId/files", params: { venueId } })
-                  }
-                >
-                  <Trans>Manage files</Trans>
-                </Button>
-                <Button variant="light" color="gray" leftSection={<IconFileText size={16} />} disabled>
-                  <Trans>Add note</Trans>
-                </Button>
-              </Stack>
-            </DashboardCard>
-
-            {/* VenueNotes — placeholder for the upcoming interactive component. */}
-            <DashboardCard
-              icon={<IconSticker size={18} />}
-              title={<Trans>Venue notes</Trans>}
-              subtitle={<Trans>Internal notes and reminders</Trans>}
-            >
-              <Text size="sm" c="dimmed" py="xl" ta="center">
-                <Trans>Notes will appear here.</Trans>
-              </Text>
-            </DashboardCard>
-
-            {/* Widget area — reserved for dashboard widgets. */}
-            <DashboardCard title={<Trans>Widgets</Trans>}>
-              <Text size="sm" c="dimmed" py="xl" ta="center">
-                <Trans>Widgets will appear here.</Trans>
-              </Text>
+              <Button
+                variant="light"
+                color="gray"
+                fullWidth
+                leftSection={<IconFolder size={16} />}
+                onClick={() =>
+                  void navigate({ to: "/venues/$venueId/files", params: { venueId } })
+                }
+              >
+                <Trans>Manage files</Trans>
+              </Button>
             </DashboardCard>
           </Stack>
         </Box>
@@ -542,47 +572,7 @@ function VenueOverviewPage() {
   );
 }
 
-// ─── Dashboard building blocks (layout only — no real data yet ────────────────────────────
-
-interface StatCardProps {
-  label: string;
-  value: number | string;
-  loading: boolean;
-  icon: ReactNode;
-  color: string;
-  onClick?: () => void;
-}
-
-function StatCard({ label, value, loading, icon, color, onClick }: StatCardProps) {
-  return (
-    <Paper
-      withBorder
-      radius="md"
-      p="md"
-      shadow="xs"
-      onClick={onClick}
-      style={onClick ? { cursor: "pointer" } : undefined}
-    >
-      <Group justify="space-between" align="flex-start" gap="xs">
-        <Stack gap={4}>
-        <Text size="sm" c="dimmed" fw={500}>
-          {label}
-        </Text>
-        {loading ? (
-          <Skeleton height={26} width={60} radius="sm" />
-        ) : (
-          <Text fw={700} size="1.6rem" lh={1}>
-            {value}
-          </Text>
-        )}
-        </Stack>
-        <ThemeIcon variant="light" color={color} radius="md" size={36}>
-          {icon}
-        </ThemeIcon>
-      </Group>
-    </Paper>
-  );
-}
+// ─── Dashboard building blocks ────────────────────────────────────────────────
 
 interface DashboardCardProps {
   icon?: ReactNode;
