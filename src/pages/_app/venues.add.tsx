@@ -118,6 +118,19 @@ function AddVenuePage() {
   // "done" — so the manual-entry card never slides back in before the visit.
   const isRowCollapsed = isActive || flowStarted;
 
+  // Guard against F5 / tab close while a file is uploading or being processed — a
+  // reload would drop the in-flight import, so prompt before leaving.
+  useEffect(() => {
+    if (!isActive) return;
+    const warnBeforeUnload = (event: BeforeUnloadEvent) => {
+      event.preventDefault();
+      // Legacy Chromium needs returnValue set to show the confirmation dialog.
+      event.returnValue = "";
+    };
+    window.addEventListener("beforeunload", warnBeforeUnload);
+    return () => window.removeEventListener("beforeunload", warnBeforeUnload);
+  }, [isActive]);
+
   const handleDrop = async (files: File[]) => {
     const file = files[0];
     if (!file) return;
