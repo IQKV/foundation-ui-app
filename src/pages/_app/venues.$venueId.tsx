@@ -545,7 +545,7 @@ function VenueOverviewPage() {
               />
             </Group>
           </UnstyledButton>
-          <Collapse in={metaExpanded}>
+          <Collapse opened={metaExpanded}>
             <Box p="md" pt={0}>
               <VenueMetadataSections
                 venueId={venueId}
