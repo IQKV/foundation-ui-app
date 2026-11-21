@@ -64,6 +64,7 @@ export type {
   UserSignupSeriesPoint,
   TenantUserStatsResponse,
   TenantUserStatsParams,
+  UserPublicProfile,
 };
 export type {
   Tenant,
