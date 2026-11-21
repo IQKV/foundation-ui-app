@@ -1148,7 +1148,7 @@ function VenuesPage() {
         </Stack>
       </Group>
 
-      {canManage && (
+      {canEdit && (
         <>
           <EditVenueModal venue={selectedVenue} opened={editOpened} onClose={handleCloseEdit} />
           <DeleteVenueModal
