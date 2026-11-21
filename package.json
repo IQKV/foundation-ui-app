@@ -49,7 +49,7 @@
   },
   "dependencies": {
     "@dr.pogodin/react-helmet": "^3.3.2",
-    "@hookform/resolvers": "^5.9.2",
+    "@hookform/resolvers": "^7.0.7",
     "@lingui/core": "6.12.0",
     "@lingui/format-po": "6.12.0",
     "@lingui/react": "6.12.0",
