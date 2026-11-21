@@ -17,6 +17,7 @@ import type {
   UserSignupSeriesPoint,
   TenantUserStatsResponse,
   TenantUserStatsParams,
+  UserPublicProfile,
 } from "@/entities/user";
 import type { UserStatus } from "@/entities/user";
 import type {
@@ -279,6 +280,13 @@ export const iamApi = {
     httpClient
       .post<AcceptInvitationResponse>(`/v1/iam/invitations/${token}/accept`, data)
       .then((r) => r.data),
+
+  // Bulk-fetch slim public profiles (name + avatar) for up to 50 user UUIDs.
+  // Used by features that need to show author indicators without N+1 calls.
+  getUserProfiles: (ids: string[]) =>
+    httpClient
+      .post<{ profiles: UserPublicProfile[] }>("/v1/iam/users/profiles", { ids })
+      .then((r) => r.data.profiles),
 };
 
 // ─── Locales ──────────────────────────────────────────────────────────────────

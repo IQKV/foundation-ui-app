@@ -28,6 +28,7 @@ export type {
   UserSignupSeriesPoint,
   TenantUserStatsResponse,
   TenantUserStatsParams,
+  UserPublicProfile,
 } from "./iam";
 
 export type {

@@ -21,6 +21,7 @@ import {
   Collapse,
   UnstyledButton,
   Badge,
+  Avatar,
   TextInput as MantineTextInput,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
@@ -57,6 +58,8 @@ import {
   IconTrash,
   IconPlus,
   IconX,
+  IconSortAscending,
+  IconSortDescending,
 } from "@tabler/icons-react";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { PageTitle } from "@/shared/lib/page-title";
@@ -75,9 +78,10 @@ import {
   catalogApi,
   venueAssetApi,
   venueSmartNoteApi,
+  iamApi,
   uploadFileToPresignedUrl,
 } from "@/shared/api";
-import type { VenueSmartNote } from "@/shared/api";
+import type { VenueSmartNote, UserPublicProfile } from "@/shared/api";
 import { dayjs } from "@/shared/lib/date-utils";
 import { TestSelectors } from "@/shared/lib/test-selectors";
 import { useAiContextActions } from "@/features/ask-ai";
@@ -607,7 +611,7 @@ function VenueOverviewPage() {
 
             <DashboardCard
               icon={<IconActivity size={18} />}
-              title={<Trans>Recent activity</Trans>}
+              title={<Trans>Venue notes</Trans>}
               subtitle={<Trans>Latest changes on this venue</Trans>}
             >
               <VenueSmartNotesCard venueId={venueId} />
@@ -969,13 +973,37 @@ function VenueSmartNotesCard({ venueId }: { venueId: string }) {
 
   // null = nothing open; "new" = new note form; uuid = editing that note
   const [openId, setOpenId] = useState<string | null>(null);
+  const [sortAsc, setSortAsc] = useState(false);
 
   const { data, isLoading } = useQuery({
     queryKey: ["tenant", "venue", venueId, "smart-notes"],
     queryFn: () => venueSmartNoteApi.list(venueId, { direction: "DESC" }),
   });
 
-  const notes = data?.items ?? [];
+  const rawNotes = data?.items ?? [];
+  // pinned notes first, then sort unpinned by date (direction controlled by sortAsc)
+  const notes = [...rawNotes].sort((a, b) => {
+    if (a.pinned !== b.pinned) return a.pinned ? -1 : 1;
+    const diff = new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
+    return sortAsc ? -diff : diff;
+  });
+
+  // Bulk-fetch author profiles for all unique author ids in one request.
+  const authorIds = useMemo(
+    () => [...new Set(rawNotes.map((n) => n.authorId))],
+    [rawNotes],
+  );
+  const { data: profilesData } = useQuery({
+    queryKey: ["iam", "user-profiles", authorIds],
+    queryFn: () => iamApi.getUserProfiles(authorIds),
+    enabled: authorIds.length > 0,
+    staleTime: 5 * 60 * 1000,
+  });
+  const profilesMap = useMemo(() => {
+    const map = new Map<string, UserPublicProfile>();
+    profilesData?.forEach((p) => map.set(p.id, p));
+    return map;
+  }, [profilesData]);
 
   const saveMutation = useMutation({
     mutationFn: ({
@@ -1071,11 +1099,28 @@ function VenueSmartNotesCard({ venueId }: { venueId: string }) {
         </Text>
       )}
 
+      {/* Sort order control — shown only when there are unpinned notes */}
+      {notes.some((n) => !n.pinned) && (
+        <Group justify="flex-end" mb={4}>
+          <Tooltip label={sortAsc ? t`Oldest first — click for newest first` : t`Newest first — click for oldest first`} withArrow>
+            <UnstyledButton
+              onClick={() => setSortAsc((v) => !v)}
+              style={{ display: "flex", alignItems: "center", gap: 4, color: "var(--mantine-color-dimmed)" }}
+              aria-label={sortAsc ? t`Sort newest first` : t`Sort oldest first`}
+            >
+              {sortAsc ? <IconSortAscending size={12} /> : <IconSortDescending size={12} />}
+              <Text size="xs" c="dimmed">{sortAsc ? <Trans>Oldest first</Trans> : <Trans>Newest first</Trans>}</Text>
+            </UnstyledButton>
+          </Tooltip>
+        </Group>
+      )}
+
       {notes.map((note, idx) => {
         const bg = (note.color as NoteColor | null) ?? "#ffffff";
         const preview = stripHtml(note.content);
         const tags = note.tags ?? [];
         const isEditing = openId === note.id;
+        const author = profilesMap.get(note.authorId);
 
         return (
           <Box
@@ -1085,8 +1130,10 @@ function VenueSmartNotesCard({ venueId }: { venueId: string }) {
                 idx < notes.length - 1
                   ? "1px solid var(--mantine-color-default-border)"
                   : undefined,
-              borderLeft: `3px solid ${bg === "#ffffff" ? "var(--mantine-color-default-border)" : bg}`,
+              background: bg,
+              borderRadius: idx === 0 ? "var(--mantine-radius-sm) var(--mantine-radius-sm) 0 0" : idx === notes.length - 1 ? "0 0 var(--mantine-radius-sm) var(--mantine-radius-sm)" : undefined,
               paddingLeft: "var(--mantine-spacing-sm)",
+              paddingRight: "var(--mantine-spacing-sm)",
               opacity: isEditing ? 0.5 : 1,
               transition: "opacity 150ms",
             }}
@@ -1119,6 +1166,35 @@ function VenueSmartNotesCard({ venueId }: { venueId: string }) {
                 <Text size="xs" c="dimmed">
                   {dayjs(note.updatedAt).format("h:mm A")}
                 </Text>
+                {/* Author indicator */}
+                <Group gap={4} align="center" mt={2}>
+                  <Tooltip
+                    label={
+                      author
+                        ? `${author.firstName} ${author.lastName}`
+                        : note.authorId.slice(0, 8)
+                    }
+                    withArrow
+                    position="bottom"
+                  >
+                    <Avatar
+                      src={author?.avatarUrl ?? null}
+                      size={16}
+                      radius="xl"
+                      color="teal"
+                      style={{ cursor: "default" }}
+                    >
+                      {author
+                        ? `${author.firstName[0] ?? ""}${author.lastName[0] ?? ""}`.toUpperCase()
+                        : "?"}
+                    </Avatar>
+                  </Tooltip>
+                  {author && (
+                    <Text size="xs" c="dimmed">
+                      {author.firstName} {author.lastName}
+                    </Text>
+                  )}
+                </Group>
               </Stack>
 
               <Group gap={4} style={{ flexShrink: 0 }}>

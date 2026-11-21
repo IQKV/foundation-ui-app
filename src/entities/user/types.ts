@@ -139,3 +139,12 @@ export interface TenantUserStatsParams {
   to?: string;
   granularity?: "day" | "month";
 }
+
+/** Slim public profile returned by the bulk-lookup endpoint. */
+export interface UserPublicProfile {
+  id: string;
+  firstName: string;
+  lastName: string;
+  /** Null when the user has no avatar. */
+  avatarUrl: string | null;
+}
