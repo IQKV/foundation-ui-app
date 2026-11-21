@@ -396,12 +396,15 @@ function AssetsTab({
   assets,
   isLoading,
   extractingAssetId,
+  canDelete,
 }: {
   venueId: string;
   assets: VenueAsset[];
   isLoading: boolean;
   /** Asset whose text is still being extracted by the worker, if any. */
   extractingAssetId?: string | null;
+  /** Whether the caller may delete assets — tenant owners and admins only. */
+  canDelete: boolean;
 }) {
   const { t } = useLingui();
   const queryClient = useQueryClient();
@@ -519,57 +522,59 @@ function AssetsTab({
                         <Trans>Preview</Trans>
                       </Button>
                     )}
-                    <Popover
-                      opened={deletingId === asset.id}
-                      onClose={() => setDeletingId(null)}
-                      position="left"
-                      withArrow
-                      shadow="md"
-                      width={200}
-                    >
-                      <Popover.Target>
-                        <Tooltip label={t`Delete asset`} withArrow>
-                          <ActionIcon
-                            size="sm"
-                            variant="subtle"
-                            color="red"
-                            aria-label={t`Delete asset`}
-                            loading={deleteMutation.isPending && deletingId === asset.id}
-                            onClick={() => setDeletingId(asset.id)}
-                          >
-                            <IconTrash size={14} />
-                          </ActionIcon>
-                        </Tooltip>
-                      </Popover.Target>
-                      <Popover.Dropdown>
-                        <Stack gap={8}>
-                          <Text size="sm" fw={600}>
-                            <Trans>Delete asset?</Trans>
-                          </Text>
-                          <Text size="xs" c="dimmed" lineClamp={2}>
-                            {name}
-                          </Text>
-                          <Group gap={6} justify="flex-end">
-                            <Button
-                              size="compact-xs"
+                    {canDelete && (
+                      <Popover
+                        opened={deletingId === asset.id}
+                        onClose={() => setDeletingId(null)}
+                        position="left"
+                        withArrow
+                        shadow="md"
+                        width={200}
+                      >
+                        <Popover.Target>
+                          <Tooltip label={t`Delete asset`} withArrow>
+                            <ActionIcon
+                              size="sm"
                               variant="subtle"
-                              color="gray"
-                              onClick={() => setDeletingId(null)}
-                            >
-                              <Trans>Cancel</Trans>
-                            </Button>
-                            <Button
-                              size="compact-xs"
                               color="red"
-                              loading={deleteMutation.isPending}
-                              onClick={() => deleteMutation.mutate(asset.id)}
+                              aria-label={t`Delete asset`}
+                              loading={deleteMutation.isPending && deletingId === asset.id}
+                              onClick={() => setDeletingId(asset.id)}
                             >
-                              <Trans>Delete</Trans>
-                            </Button>
-                          </Group>
-                        </Stack>
-                      </Popover.Dropdown>
-                    </Popover>
+                              <IconTrash size={14} />
+                            </ActionIcon>
+                          </Tooltip>
+                        </Popover.Target>
+                        <Popover.Dropdown>
+                          <Stack gap={8}>
+                            <Text size="sm" fw={600}>
+                              <Trans>Delete asset?</Trans>
+                            </Text>
+                            <Text size="xs" c="dimmed" lineClamp={2}>
+                              {name}
+                            </Text>
+                            <Group gap={6} justify="flex-end">
+                              <Button
+                                size="compact-xs"
+                                variant="subtle"
+                                color="gray"
+                                onClick={() => setDeletingId(null)}
+                              >
+                                <Trans>Cancel</Trans>
+                              </Button>
+                              <Button
+                                size="compact-xs"
+                                color="red"
+                                loading={deleteMutation.isPending}
+                                onClick={() => deleteMutation.mutate(asset.id)}
+                              >
+                                <Trans>Delete</Trans>
+                              </Button>
+                            </Group>
+                          </Stack>
+                        </Popover.Dropdown>
+                      </Popover>
+                    )}
                   </Group>
                 </Group>
               </Paper>
@@ -863,8 +868,14 @@ function VenueResearchPage() {
   const navigate = useNavigate();
   const { venueId } = Route.useParams();
   const { fromUpload, source: sourceParam } = Route.useSearch();
-  const { payload, isTenantOwner } = useSession();
-  const canManage = isTenantOwner;
+  const { payload } = useSession();
+  const authorities = payload?.authorities ?? [];
+  // Any tenant member may edit venue fields and metadata; deleting stays with owners and admins.
+  const canEdit =
+    authorities.includes("MEMBER") ||
+    authorities.includes("TENANT_OWNER") ||
+    authorities.includes("ADMIN");
+  const canDelete = authorities.includes("TENANT_OWNER") || authorities.includes("ADMIN");
 
   const [editOpened, { open: openEdit, close: closeEdit }] = useDisclosure(false);
   const [deleteOpened, { open: openDelete, close: closeDelete }] = useDisclosure(false);
@@ -1155,7 +1166,7 @@ function VenueResearchPage() {
                     <IconRefresh size={15} />
                   </ActionIcon>
                 </Tooltip>
-                {canManage && (
+                {canEdit && (
                   <>
                     <Button
                       variant="light"
@@ -1199,20 +1210,22 @@ function VenueResearchPage() {
                         if (file) void handleUploadAsset(file);
                       }}
                     />
-                    <Button
-                      variant="light"
-                      color="red"
-                      size="sm"
-                      leftSection={<IconTrash size={15} />}
-                      disabled={!venue}
-                      data-testid={TestSelectors.VENUE_DETAIL_DELETE_BUTTON}
-                      onClick={() => {
-                        setDeletedVenue(venue ?? null);
-                        openDelete();
-                      }}
-                    >
-                      <Trans>Delete</Trans>
-                    </Button>
+                    {canDelete && (
+                      <Button
+                        variant="light"
+                        color="red"
+                        size="sm"
+                        leftSection={<IconTrash size={15} />}
+                        disabled={!venue}
+                        data-testid={TestSelectors.VENUE_DETAIL_DELETE_BUTTON}
+                        onClick={() => {
+                          setDeletedVenue(venue ?? null);
+                          openDelete();
+                        }}
+                      >
+                        <Trans>Delete</Trans>
+                      </Button>
+                    )}
                   </>
                 )}
               </Group>
@@ -1466,8 +1479,8 @@ function VenueResearchPage() {
                 {/* ── Details tab ──────────────────────────────────────────────── */}
                 <Tabs.Panel value="details">
                   <Stack gap="md" pt="sm">
-                    {/* ── Metadata (TENANT_OWNER / ADMIN only) ───────────────── */}
-                    {canManage && venue && (
+                    {/* ── Metadata (any tenant member) ─────────────────────────── */}
+                    {canEdit && venue && (
                       <>
                         <Divider
                           label={
@@ -1596,6 +1609,7 @@ function VenueResearchPage() {
                       assets={assets}
                       isLoading={assetsLoading}
                       extractingAssetId={extracting?.assetId ?? null}
+                      canDelete={canDelete}
                     />
                   </Tabs.Panel>
                 )}
@@ -1617,15 +1631,17 @@ function VenueResearchPage() {
           </Grid.Col>
         </Grid>
 
-        {canManage && (
+        {canEdit && (
           <>
             <EditVenueModal venue={venue ?? null} opened={editOpened} onClose={closeEdit} />
-            <DeleteVenueModal
-              venue={deletedVenue}
-              opened={deleteOpened}
-              onClose={closeDelete}
-              onDeleted={handleDeleteSuccess}
-            />
+            {canDelete && (
+              <DeleteVenueModal
+                venue={deletedVenue}
+                opened={deleteOpened}
+                onClose={closeDelete}
+                onDeleted={handleDeleteSuccess}
+              />
+            )}
             <VenueAiEnrichModal
               opened={aiEnrichOpened}
               onClose={closeAiEnrich}

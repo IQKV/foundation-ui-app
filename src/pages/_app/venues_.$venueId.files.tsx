@@ -715,8 +715,13 @@ function VenueFilesPage() {
   const navigate = useNavigate();
   const { venueId } = Route.useParams();
   const { source: sourceParam, page: sourcePageParam } = Route.useSearch();
-  const { isTenantOwner } = useSession();
-  const canManage = isTenantOwner;
+  const { payload } = useSession();
+  const authorities = payload?.authorities ?? [];
+  // Any tenant member may upload and manage venue assets.
+  const canManage =
+    authorities.includes("MEMBER") ||
+    authorities.includes("TENANT_OWNER") ||
+    authorities.includes("ADMIN");
 
   const VENUE_CHAT_ENDPOINTS: ChatEndpoints = useMemo(
     () => ({

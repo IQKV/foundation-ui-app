@@ -120,6 +120,7 @@ interface VenueCardProps {
   venue: Venue;
   selected: boolean;
   canManage: boolean;
+  canDelete: boolean;
   onToggleSelect: () => void;
   onView: () => void;
   onEdit: () => void;
@@ -130,6 +131,7 @@ function VenueCard({
   venue,
   selected,
   canManage,
+  canDelete,
   onToggleSelect,
   onView,
   onEdit,
@@ -180,7 +182,7 @@ function VenueCard({
       </Card.Section>
 
       {/* selection overlay */}
-      {canManage && (
+      {canDelete && (
         <Box
           style={{ position: "absolute", top: 8, left: 8, zIndex: 1 }}
           onClick={(e) => e.stopPropagation()}
@@ -227,15 +229,19 @@ function VenueCard({
               >
                 {t`Edit record`}
               </Menu.Item>
-              <Menu.Divider />
-              <Menu.Item
-                color="red"
-                leftSection={<IconTrash size={13} />}
-                data-testid={TestSelectors.VENUE_DELETE_BUTTON(venue.id)}
-                onClick={onDelete}
-              >
-                {t`Delete`}
-              </Menu.Item>
+              {canDelete && (
+                <>
+                  <Menu.Divider />
+                  <Menu.Item
+                    color="red"
+                    leftSection={<IconTrash size={13} />}
+                    data-testid={TestSelectors.VENUE_DELETE_BUTTON(venue.id)}
+                    onClick={onDelete}
+                  >
+                    {t`Delete`}
+                  </Menu.Item>
+                </>
+              )}
             </Menu.Dropdown>
           </Menu>
         </Box>
@@ -277,6 +283,7 @@ function VenueRow({
   venue,
   selected,
   canManage,
+  canDelete,
   onToggleSelect,
   onView,
   onEdit,
@@ -423,13 +430,15 @@ function VenueRow({
           }}
           onClick={(e) => e.stopPropagation()}
         >
-          <Checkbox
-            size="sm"
-            checked={selected}
-            onChange={onToggleSelect}
-            aria-label={t`Select venue`}
-            data-testid={TestSelectors.VENUE_SELECT_CHECKBOX(venue.id)}
-          />
+          {canDelete && (
+            <Checkbox
+              size="sm"
+              checked={selected}
+              onChange={onToggleSelect}
+              aria-label={t`Select venue`}
+              data-testid={TestSelectors.VENUE_SELECT_CHECKBOX(venue.id)}
+            />
+          )}
           <Menu shadow="md" width={160} position="bottom-end">
             <Menu.Target>
               <ActionIcon variant="subtle" size="md" color="gray">
@@ -451,15 +460,19 @@ function VenueRow({
               >
                 {t`Edit record`}
               </Menu.Item>
-              <Menu.Divider />
-              <Menu.Item
-                color="red"
-                leftSection={<IconTrash size={13} />}
-                data-testid={TestSelectors.VENUE_DELETE_BUTTON(venue.id)}
-                onClick={onDelete}
-              >
-                {t`Delete`}
-              </Menu.Item>
+              {canDelete && (
+                <>
+                  <Menu.Divider />
+                  <Menu.Item
+                    color="red"
+                    leftSection={<IconTrash size={13} />}
+                    data-testid={TestSelectors.VENUE_DELETE_BUTTON(venue.id)}
+                    onClick={onDelete}
+                  >
+                    {t`Delete`}
+                  </Menu.Item>
+                </>
+              )}
             </Menu.Dropdown>
           </Menu>
         </Stack>
@@ -633,8 +646,14 @@ type ViewMode = "grid" | "list";
 function VenuesPage() {
   const { t } = useLingui();
   const navigate = useNavigate();
-  const { payload, isTenantOwner, tenantKey } = useSession();
-  const canManage = isTenantOwner;
+  const { payload, tenantKey } = useSession();
+  const authorities = payload?.authorities ?? [];
+  // Any tenant member may create and update venues; deleting stays with owners and admins.
+  const canEdit =
+    authorities.includes("MEMBER") ||
+    authorities.includes("TENANT_OWNER") ||
+    authorities.includes("ADMIN");
+  const canDelete = authorities.includes("TENANT_OWNER") || authorities.includes("ADMIN");
 
   const VENUE_CHAT_ENDPOINTS: ChatEndpoints = useMemo(
     () => ({
@@ -812,7 +831,7 @@ function VenuesPage() {
         title={<Trans>Venues</Trans>}
         breadcrumbs={[{ label: <Trans>Home</Trans>, to: "/" }, { label: <Trans>Venues</Trans> }]}
         toolbar={
-          canManage ? (
+          canEdit ? (
             <Button
               leftSection={<IconPlus size={14} />}
               size="sm"
@@ -886,7 +905,7 @@ function VenuesPage() {
           {/* toolbar */}
           <Group justify="space-between" wrap="wrap" gap="sm">
             <Group gap="sm" wrap="nowrap">
-              {canManage && !isLoading && items.length > 0 && (
+              {canDelete && !isLoading && items.length > 0 && (
                 <Checkbox
                   size="xs"
                   checked={allOnPageSelected}
@@ -942,7 +961,7 @@ function VenuesPage() {
             )}
 
             <Group gap="xs" style={{ marginLeft: "auto" }}>
-              {canManage && selectedCount > 0 && (
+              {canDelete && selectedCount > 0 && (
                 <>
                   <Text size="xs" c="dimmed">
                     <Trans>{selectedCount} selected</Trans>
@@ -1056,7 +1075,7 @@ function VenuesPage() {
                   <Button variant="light" color="gray" size="sm" onClick={handleReset}>
                     <Trans>Clear filters</Trans>
                   </Button>
-                ) : canManage ? (
+                ) : canEdit ? (
                   <Button
                     variant="light"
                     leftSection={<IconPlus size={14} />}
@@ -1075,7 +1094,8 @@ function VenuesPage() {
                   key={venue.id}
                   venue={venue}
                   selected={selectedIds.has(venue.id)}
-                  canManage={canManage}
+                  canManage={canEdit}
+                  canDelete={canDelete}
                   onToggleSelect={() => handleToggleSelect(venue.id)}
                   onView={() =>
                     void navigate({
@@ -1095,7 +1115,8 @@ function VenuesPage() {
                   key={venue.id}
                   venue={venue}
                   selected={selectedIds.has(venue.id)}
-                  canManage={canManage}
+                  canManage={canEdit}
+                  canDelete={canDelete}
                   onToggleSelect={() => handleToggleSelect(venue.id)}
                   onView={() =>
                     void navigate({
