@@ -22,46 +22,46 @@ This is the tenant surface of the platform — separate from `foundation-ui-plat
 | **Tenant Settings**    | Organization metadata editing                                                                                                                                                                                                                                                 |
 | **Notifications**      | In-app notifications with WebSocket support; notification bell UI                                                                                                                                                                                                             |
 | **Venues**             | Venue list with semantic search; create/edit/delete and bulk delete; tabbed metadata sections with completeness scoring; document upload via presigned URLs; AI enrichment assistant                                                                                          |
-| **Ask AI**             | Catalogue-wide AI chat drawer with grounded answers and clickable citations that deep-link to the cited source page; venue-scoped conversations started from a venue page                                            |
+| **Ask AI**             | Catalogue-wide AI chat drawer with grounded answers and clickable citations that deep-link to the cited source page; venue-scoped conversations started from a venue page                                                                                                     |
 | **CMS pages**          | Publish and edit CMS pages with per-locale translations and a rich-text (Tiptap) editor                                                                                                                                                                                       |
 | **Session security**   | Access token in memory; refresh token + tenant key in `sessionStorage`; silent refresh on 401; 30-minute inactivity sign-out                                                                                                                                                  |
 | **UX**                 | Light/dark theme, Lingui i18n (`en-US`, `bg-BG`, `de-DE`, `fr-FR`) with locale cookie, navigation progress, error boundaries                                                                                                                                                  |
 
 ## Routes
 
-| Path                                   | Access        | Description                                  |
-| -------------------------------------- | ------------- | -------------------------------------------- |
-| `/sign-in`                             | Public        | Tenant sign-in with optional redirect        |
-| `/auth/callback`                       | Public        | OAuth2/OIDC callback handler                 |
-| `/signup`                              | Public        | New user + tenant registration               |
-| `/forgot-password`                     | Public        | Request password reset email                 |
-| `/reset-password`                      | Public        | Set new password from email token            |
-| `/verify-email`                        | Public        | Confirm email from link token                |
-| `/invite/:token`                       | Public        | Preview and accept workspace invitation      |
-| `/magic-link`                          | Public        | Magic link entry (feature-flagged)           |
-| `/magic-link/verify`                   | Public        | Exchange magic link token for session        |
-| `/complete-profile`                    | Authenticated | Onboarding profile completion                |
-| `/create-organization`                 | Authenticated | Create a new organization                    |
-| `/`                                    | Authenticated | Dashboard                                    |
-| `/team`                                | Authenticated | Members and invitations                      |
-| `/venues`                              | Authenticated | Venue list with semantic search              |
-| `/venues/create`, `/venues/add`        | Authenticated | Create a venue (form / import flow)          |
-| `/venues/:venueId`                     | Authenticated | Venue detail and metadata                    |
+| Path                                   | Access        | Description                                            |
+| -------------------------------------- | ------------- | ------------------------------------------------------ |
+| `/sign-in`                             | Public        | Tenant sign-in with optional redirect                  |
+| `/auth/callback`                       | Public        | OAuth2/OIDC callback handler                           |
+| `/signup`                              | Public        | New user + tenant registration                         |
+| `/forgot-password`                     | Public        | Request password reset email                           |
+| `/reset-password`                      | Public        | Set new password from email token                      |
+| `/verify-email`                        | Public        | Confirm email from link token                          |
+| `/invite/:token`                       | Public        | Preview and accept workspace invitation                |
+| `/magic-link`                          | Public        | Magic link entry (feature-flagged)                     |
+| `/magic-link/verify`                   | Public        | Exchange magic link token for session                  |
+| `/complete-profile`                    | Authenticated | Onboarding profile completion                          |
+| `/create-organization`                 | Authenticated | Create a new organization                              |
+| `/`                                    | Authenticated | Dashboard                                              |
+| `/team`                                | Authenticated | Members and invitations                                |
+| `/venues`                              | Authenticated | Venue list with semantic search                        |
+| `/venues/create`, `/venues/add`        | Authenticated | Create a venue (form / import flow)                    |
+| `/venues/:venueId`                     | Authenticated | Venue detail and metadata                              |
 | `/venues/:venueId/files`               | Authenticated | Venue files; `?source=…&page=…` opens a cited document |
-| `/cms-pages`                           | Authenticated | CMS page list                                |
-| `/cms-pages/create`                    | Authenticated | Create a CMS page                            |
-| `/cms-pages/:pageId`                   | Authenticated | Edit a CMS page                              |
-| `/addons`                              | Authenticated | Addons landing page                          |
-| `/addons/:addonPath`                   | Authenticated | Addon-rendered page                          |
-| `/billing`                             | Authenticated | Billing portal, plans, refunds, webhook logs |
-| `/billing/success`, `/billing/failure` | Authenticated | Checkout result pages                        |
-| `/settings/general`                    | Authenticated | General account settings                     |
-| `/settings/organization`               | Authenticated | Organization settings                        |
-| `/settings/security`                   | Authenticated | Security settings                            |
-| `/settings/notifications`              | Authenticated | Notification settings                        |
-| `/loading-demo`                        | Public        | Standalone loading-indicator demo            |
-| `/unauthorized`                        | Public        | Shown when JWT is not a tenant session       |
-| `/404`, `/500`                         | Public        | Error pages                                  |
+| `/cms-pages`                           | Authenticated | CMS page list                                          |
+| `/cms-pages/create`                    | Authenticated | Create a CMS page                                      |
+| `/cms-pages/:pageId`                   | Authenticated | Edit a CMS page                                        |
+| `/addons`                              | Authenticated | Addons landing page                                    |
+| `/addons/:addonPath`                   | Authenticated | Addon-rendered page                                    |
+| `/billing`                             | Authenticated | Billing portal, plans, refunds, webhook logs           |
+| `/billing/success`, `/billing/failure` | Authenticated | Checkout result pages                                  |
+| `/settings/general`                    | Authenticated | General account settings                               |
+| `/settings/organization`               | Authenticated | Organization settings                                  |
+| `/settings/security`                   | Authenticated | Security settings                                      |
+| `/settings/notifications`              | Authenticated | Notification settings                                  |
+| `/loading-demo`                        | Public        | Standalone loading-indicator demo                      |
+| `/unauthorized`                        | Public        | Shown when JWT is not a tenant session                 |
+| `/404`, `/500`                         | Public        | Error pages                                            |
 
 Authenticated routes live under the `/_app` layout, which enforces a valid tenant JWT (or silent refresh) before rendering.
 
@@ -111,13 +111,13 @@ A right-hand chat drawer over the tenant's own venue catalogue, opened from the 
 
 **Persona.** The client sends no persona: for MVP the backend pins every turn to the `compliance` overlay (`iqkv.catalog.venue-ask.default-persona`). See the catalog API reference for the `POST /chat` payload.
 
-| Symbol                        | Location                | Purpose                                                       |
-| ----------------------------- | ----------------------- | ------------------------------------------------------------- |
+| Symbol                        | Location                | Purpose                                                                |
+| ----------------------------- | ----------------------- | ---------------------------------------------------------------------- |
 | `useAiContextActions`         | `features/ask-ai/model` | Registers page suggestion chips plus a per-page chat endpoint override |
-| `AskAiButton` / `AskAiDrawer` | `features/ask-ai/ui`    | Header trigger and the drawer itself                          |
-| `useSendCatalogMessage`       | `features/ask-ai/model` | `venueChatApi.send` with optimistic user turn + reply append  |
-| `useCatalogChatMessages`      | `features/ask-ai/model` | Loads the newest message window for a session                 |
-| `venueChatApi`                | `shared/api`            | `/v1/catalog/chat`, `/sessions`, `/sessions/{id}/messages`, delete |
+| `AskAiButton` / `AskAiDrawer` | `features/ask-ai/ui`    | Header trigger and the drawer itself                                   |
+| `useSendCatalogMessage`       | `features/ask-ai/model` | `venueChatApi.send` with optimistic user turn + reply append           |
+| `useCatalogChatMessages`      | `features/ask-ai/model` | Loads the newest message window for a session                          |
+| `venueChatApi`                | `shared/api`            | `/v1/catalog/chat`, `/sessions`, `/sessions/{id}/messages`, delete     |
 
 ---
 
@@ -146,12 +146,12 @@ Two-column grid (left `lg/4`, right `lg/8`).
 
 ### Header toolbar
 
-| Button            | Role required  | Action                                                                                                                       |
-| ----------------- | -------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| Edit Manually     | `TENANT_OWNER` | Opens `EditVenueModal` (name, address, city, coordinates)                                                                     |
-| Fill empty fields | `TENANT_OWNER` | Opens `VenueAiEnrichModal`; shown when sources exist and the profile is under 100% complete                                   |
+| Button            | Role required  | Action                                                                                                                                     |
+| ----------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| Edit Manually     | `TENANT_OWNER` | Opens `EditVenueModal` (name, address, city, coordinates)                                                                                  |
+| Fill empty fields | `TENANT_OWNER` | Opens `VenueAiEnrichModal`; shown when sources exist and the profile is under 100% complete                                                |
 | Upload asset      | `TENANT_OWNER` | Presigned two-phase upload (`initiateUpload` → PUT to MinIO → `confirmUpload`); uploaded documents are text-mined by the processing worker |
-| Delete            | `TENANT_OWNER` | Opens `DeleteVenueModal` with confirmation                                                                                    |
+| Delete            | `TENANT_OWNER` | Opens `DeleteVenueModal` with confirmation                                                                                                 |
 
 ### Details tab
 
@@ -168,14 +168,14 @@ Two-column grid (left `lg/4`, right `lg/8`).
 
 ### Key symbols
 
-| Symbol                                  | Location                      | Purpose                                                     |
-| --------------------------------------- | ----------------------------- | ----------------------------------------------------------- |
-| `useVenueEnrichment`                    | `features/manage-venue/model` | Chat history, pending patches, suggest + apply mutations    |
-| `VenueAiEnrichModal`                    | `features/manage-venue/ui`    | Chat modal with reply bubbles and per-patch diff chips      |
-| `VenueMetadataSections`                 | `features/manage-venue/ui`    | Structured metadata view with inline suggestion chips       |
-| `VenueCompletenessCard`                 | `features/manage-venue/ui`    | Per-section completeness ring                               |
-| `catalogApi.venueEnrichmentSuggestions` | `shared/api`                  | `POST /v1/catalog/venues/{id}/enrichment/suggestions`       |
-| `catalogApi.venueEnrichmentApply`       | `shared/api`                  | `POST /v1/catalog/venues/{id}/enrichment/apply`             |
+| Symbol                                  | Location                      | Purpose                                                  |
+| --------------------------------------- | ----------------------------- | -------------------------------------------------------- |
+| `useVenueEnrichment`                    | `features/manage-venue/model` | Chat history, pending patches, suggest + apply mutations |
+| `VenueAiEnrichModal`                    | `features/manage-venue/ui`    | Chat modal with reply bubbles and per-patch diff chips   |
+| `VenueMetadataSections`                 | `features/manage-venue/ui`    | Structured metadata view with inline suggestion chips    |
+| `VenueCompletenessCard`                 | `features/manage-venue/ui`    | Per-section completeness ring                            |
+| `catalogApi.venueEnrichmentSuggestions` | `shared/api`                  | `POST /v1/catalog/venues/{id}/enrichment/suggestions`    |
+| `catalogApi.venueEnrichmentApply`       | `shared/api`                  | `POST /v1/catalog/venues/{id}/enrichment/apply`          |
 
 ---
 

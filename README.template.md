@@ -181,12 +181,12 @@ A collapsible raw JSON viewer is available below the sections.
 
 ### Header toolbar
 
-| Button            | Role required  | Action                                                                                   |
-| ----------------- | -------------- | ---------------------------------------------------------------------------------------- |
-| Edit Manually     | `TENANT_OWNER` | Opens `EditVenueModal` (name, address, city, coordinates)                                |
-| Fill empty fields | `TENANT_OWNER` | Opens `VenueAiEnrichModal`; shown when sources exist and the profile is under 100% complete |
+| Button            | Role required  | Action                                                                                          |
+| ----------------- | -------------- | ----------------------------------------------------------------------------------------------- |
+| Edit Manually     | `TENANT_OWNER` | Opens `EditVenueModal` (name, address, city, coordinates)                                       |
+| Fill empty fields | `TENANT_OWNER` | Opens `VenueAiEnrichModal`; shown when sources exist and the profile is under 100% complete     |
 | Upload asset      | `TENANT_OWNER` | Presigned two-phase upload to MinIO; uploaded documents are text-mined by the processing worker |
-| Delete            | `TENANT_OWNER` | Opens `DeleteVenueModal` with confirmation                                               |
+| Delete            | `TENANT_OWNER` | Opens `DeleteVenueModal` with confirmation                                                      |
 
 ### Key hooks & components
 

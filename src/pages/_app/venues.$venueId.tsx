@@ -86,6 +86,7 @@ import { dayjs } from "@/shared/lib/date-utils";
 import { TestSelectors } from "@/shared/lib/test-selectors";
 import { useAiContextActions } from "@/features/ask-ai";
 import type { ChatEndpoints } from "@/features/ask-ai";
+import { useSession } from "@/processes/session";
 
 export const Route = createFileRoute("/_app/venues/$venueId")({
   // `fromUpload` is set when the add flow lands here after importing a document.
@@ -567,7 +568,10 @@ function VenueOverviewPage() {
           <UnstyledButton
             onClick={toggleMeta}
             disabled={!venue}
-            style={{ width: "100%", padding: "var(--mantine-spacing-xs) var(--mantine-spacing-md)" }}
+            style={{
+              width: "100%",
+              padding: "var(--mantine-spacing-xs) var(--mantine-spacing-md)",
+            }}
           >
             <Group justify="space-between" align="center">
               <Text size="sm" fw={600} c="dimmed">
@@ -620,18 +624,13 @@ function VenueOverviewPage() {
 
           {/* Right rail */}
           <Stack gap="md">
-            <DashboardCard
-              icon={<IconBolt size={18} />}
-              title={<Trans>Quick actions</Trans>}
-            >
+            <DashboardCard icon={<IconBolt size={18} />} title={<Trans>Quick actions</Trans>}>
               <Button
                 variant="light"
                 color="gray"
                 fullWidth
                 leftSection={<IconFolder size={16} />}
-                onClick={() =>
-                  void navigate({ to: "/venues/$venueId/files", params: { venueId } })
-                }
+                onClick={() => void navigate({ to: "/venues/$venueId/files", params: { venueId } })}
               >
                 <Trans>Manage files</Trans>
               </Button>
@@ -700,14 +699,25 @@ function VenueMetadataReadOnly({ metadata }: { metadata: MetadataDocument | null
       {METADATA_SECTIONS.map((section) => {
         const rows = section.fields
           .filter((f) => f.type !== "boolean" || Boolean(resolveFieldValue(metadata, f)))
-          .map((f) => ({ f, label: f.label, value: f.type === "boolean" ? true : formatValue(f, resolveFieldValue(metadata, f)) }))
+          .map((f) => ({
+            f,
+            label: f.label,
+            value: f.type === "boolean" ? true : formatValue(f, resolveFieldValue(metadata, f)),
+          }))
           .filter((r) => r.value !== null);
 
         if (rows.length === 0) return null;
 
         return (
           <Box key={section.key}>
-            <Text size="xs" fw={700} tt="uppercase" c="dimmed" mb={6} style={{ letterSpacing: "0.07em" }}>
+            <Text
+              size="xs"
+              fw={700}
+              tt="uppercase"
+              c="dimmed"
+              mb={6}
+              style={{ letterSpacing: "0.07em" }}
+            >
               {section.subgroup ?? section.label}
             </Text>
             <Stack gap={4}>
@@ -767,7 +777,16 @@ function FocusListPlaceholder() {
   return (
     <Stack gap="sm">
       {[0, 1, 2].map((i) => (
-        <Group key={i} gap="sm" align="flex-start" p="sm" style={{ border: "1px solid var(--mantine-color-default-border)", borderRadius: "var(--mantine-radius-sm)" }}>
+        <Group
+          key={i}
+          gap="sm"
+          align="flex-start"
+          p="sm"
+          style={{
+            border: "1px solid var(--mantine-color-default-border)",
+            borderRadius: "var(--mantine-radius-sm)",
+          }}
+        >
           <Skeleton height={20} width={20} radius="sm" />
           <Stack gap={4} style={{ flex: 1 }}>
             <Skeleton height={14} width="60%" radius="sm" />
@@ -792,7 +811,10 @@ type NoteColor = (typeof NOTE_COLORS)[number]["value"];
 /** Strip HTML tags to plain text for the list preview. */
 function stripHtml(html: string | null | undefined): string {
   if (!html) return "";
-  return html.replace(/<[^>]+>/g, " ").replace(/\s{2,}/g, " ").trim();
+  return html
+    .replace(/<[^>]+>/g, " ")
+    .replace(/\s{2,}/g, " ")
+    .trim();
 }
 
 // ─── Colour swatch picker ─────────────────────────────────────────────────────
@@ -869,12 +891,7 @@ function NoteEditor({
   }, [initialContent]);
 
   return (
-    <Paper
-      withBorder
-      radius="md"
-      shadow="sm"
-      style={{ background: color, overflow: "hidden" }}
-    >
+    <Paper withBorder radius="md" shadow="sm" style={{ background: color, overflow: "hidden" }}>
       {/* Header */}
       <Group
         justify="space-between"
@@ -899,7 +916,13 @@ function NoteEditor({
               </ActionIcon>
             </Tooltip>
           )}
-          <ActionIcon variant="subtle" color="gray" size="sm" aria-label={t`Close`} onClick={onCancel}>
+          <ActionIcon
+            variant="subtle"
+            color="gray"
+            size="sm"
+            aria-label={t`Close`}
+            onClick={onCancel}
+          >
             <IconX size={15} />
           </ActionIcon>
         </Group>
@@ -922,8 +945,17 @@ function NoteEditor({
           editor={editor}
           styles={{
             root: { border: "none", background: "transparent" },
-            toolbar: { background: "transparent", borderBottom: "1px solid var(--mantine-color-default-border)", paddingBottom: 4, marginBottom: 4 },
-            content: { background: "transparent", minHeight: 100, fontSize: "var(--mantine-font-size-sm)" },
+            toolbar: {
+              background: "transparent",
+              borderBottom: "1px solid var(--mantine-color-default-border)",
+              paddingBottom: 4,
+              marginBottom: 4,
+            },
+            content: {
+              background: "transparent",
+              minHeight: 100,
+              fontSize: "var(--mantine-font-size-sm)",
+            },
           }}
         >
           <RichTextEditor.Toolbar>
@@ -970,6 +1002,13 @@ function NoteEditor({
 function VenueSmartNotesCard({ venueId }: { venueId: string }) {
   const { t } = useLingui();
   const queryClient = useQueryClient();
+  const { payload } = useSession();
+
+  // Only the note's author may edit it; tenant owners and admins may edit any note.
+  const currentUserId = payload?.user_id ?? null;
+  const canEditAnyNote = Boolean(
+    payload?.authorities.some((a) => a === "TENANT_OWNER" || a === "ADMIN"),
+  );
 
   // null = nothing open; "new" = new note form; uuid = editing that note
   const [openId, setOpenId] = useState<string | null>(null);
@@ -989,10 +1028,7 @@ function VenueSmartNotesCard({ venueId }: { venueId: string }) {
   });
 
   // Bulk-fetch author profiles for all unique author ids in one request.
-  const authorIds = useMemo(
-    () => [...new Set(rawNotes.map((n) => n.authorId))],
-    [rawNotes],
-  );
+  const authorIds = useMemo(() => [...new Set(rawNotes.map((n) => n.authorId))], [rawNotes]);
   const { data: profilesData } = useQuery({
     queryKey: ["iam", "user-profiles", authorIds],
     queryFn: () => iamApi.getUserProfiles(authorIds),
@@ -1055,7 +1091,14 @@ function VenueSmartNotesCard({ venueId }: { venueId: string }) {
     return (
       <Stack gap={0}>
         {[0, 1, 2].map((i) => (
-          <Group key={i} gap="sm" py="sm" style={{ borderBottom: i < 2 ? "1px solid var(--mantine-color-default-border)" : undefined }}>
+          <Group
+            key={i}
+            gap="sm"
+            py="sm"
+            style={{
+              borderBottom: i < 2 ? "1px solid var(--mantine-color-default-border)" : undefined,
+            }}
+          >
             <Skeleton height={14} width="60%" radius="sm" />
           </Group>
         ))}
@@ -1084,7 +1127,8 @@ function VenueSmartNotesCard({ venueId }: { venueId: string }) {
             }
             onCancel={() => setOpenId(null)}
             onDelete={
-              editingNote
+              // Deleting a note is reserved for tenant owners / admins, not the author alone.
+              editingNote && canEditAnyNote
                 ? () => deleteMutation.mutate(editingNote.id)
                 : undefined
             }
@@ -1102,14 +1146,28 @@ function VenueSmartNotesCard({ venueId }: { venueId: string }) {
       {/* Sort order control — shown only when there are unpinned notes */}
       {notes.some((n) => !n.pinned) && (
         <Group justify="flex-end" mb={4}>
-          <Tooltip label={sortAsc ? t`Oldest first — click for newest first` : t`Newest first — click for oldest first`} withArrow>
+          <Tooltip
+            label={
+              sortAsc
+                ? t`Oldest first — click for newest first`
+                : t`Newest first — click for oldest first`
+            }
+            withArrow
+          >
             <UnstyledButton
               onClick={() => setSortAsc((v) => !v)}
-              style={{ display: "flex", alignItems: "center", gap: 4, color: "var(--mantine-color-dimmed)" }}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 4,
+                color: "var(--mantine-color-dimmed)",
+              }}
               aria-label={sortAsc ? t`Sort newest first` : t`Sort oldest first`}
             >
               {sortAsc ? <IconSortAscending size={12} /> : <IconSortDescending size={12} />}
-              <Text size="xs" c="dimmed">{sortAsc ? <Trans>Oldest first</Trans> : <Trans>Newest first</Trans>}</Text>
+              <Text size="xs" c="dimmed">
+                {sortAsc ? <Trans>Oldest first</Trans> : <Trans>Newest first</Trans>}
+              </Text>
             </UnstyledButton>
           </Tooltip>
         </Group>
@@ -1121,6 +1179,8 @@ function VenueSmartNotesCard({ venueId }: { venueId: string }) {
         const tags = note.tags ?? [];
         const isEditing = openId === note.id;
         const author = profilesMap.get(note.authorId);
+        const isAuthor = currentUserId !== null && note.authorId === currentUserId;
+        const canEdit = isAuthor || canEditAnyNote;
 
         return (
           <Box
@@ -1131,7 +1191,12 @@ function VenueSmartNotesCard({ venueId }: { venueId: string }) {
                   ? "1px solid var(--mantine-color-default-border)"
                   : undefined,
               background: bg,
-              borderRadius: idx === 0 ? "var(--mantine-radius-sm) var(--mantine-radius-sm) 0 0" : idx === notes.length - 1 ? "0 0 var(--mantine-radius-sm) var(--mantine-radius-sm)" : undefined,
+              borderRadius:
+                idx === 0
+                  ? "var(--mantine-radius-sm) var(--mantine-radius-sm) 0 0"
+                  : idx === notes.length - 1
+                    ? "0 0 var(--mantine-radius-sm) var(--mantine-radius-sm)"
+                    : undefined,
               paddingLeft: "var(--mantine-spacing-sm)",
               paddingRight: "var(--mantine-spacing-sm)",
               opacity: isEditing ? 0.5 : 1,
@@ -1170,9 +1235,7 @@ function VenueSmartNotesCard({ venueId }: { venueId: string }) {
                 <Group gap={4} align="center" mt={2}>
                   <Tooltip
                     label={
-                      author
-                        ? `${author.firstName} ${author.lastName}`
-                        : note.authorId.slice(0, 8)
+                      author ? `${author.firstName} ${author.lastName}` : note.authorId.slice(0, 8)
                     }
                     withArrow
                     position="bottom"
@@ -1198,29 +1261,33 @@ function VenueSmartNotesCard({ venueId }: { venueId: string }) {
               </Stack>
 
               <Group gap={4} style={{ flexShrink: 0 }}>
-                <Tooltip label={note.pinned ? t`Unpin` : t`Pin`} withArrow>
-                  <ActionIcon
-                    variant="subtle"
-                    color={note.pinned ? "teal" : "gray"}
-                    size="xs"
-                    aria-label={note.pinned ? t`Unpin note` : t`Pin note`}
-                    loading={pinMutation.isPending}
-                    onClick={() => pinMutation.mutate({ id: note.id, pinned: !note.pinned })}
-                  >
-                    {note.pinned ? <IconPinFilled size={12} /> : <IconPin size={12} />}
-                  </ActionIcon>
-                </Tooltip>
-                <Tooltip label={t`Edit`} withArrow>
-                  <ActionIcon
-                    variant="subtle"
-                    color="gray"
-                    size="xs"
-                    aria-label={t`Edit note`}
-                    onClick={() => setOpenId(isEditing ? null : note.id)}
-                  >
-                    <IconPencil size={12} />
-                  </ActionIcon>
-                </Tooltip>
+                {canEdit && (
+                  <>
+                    <Tooltip label={note.pinned ? t`Unpin` : t`Pin`} withArrow>
+                      <ActionIcon
+                        variant="subtle"
+                        color={note.pinned ? "teal" : "gray"}
+                        size="xs"
+                        aria-label={note.pinned ? t`Unpin note` : t`Pin note`}
+                        loading={pinMutation.isPending}
+                        onClick={() => pinMutation.mutate({ id: note.id, pinned: !note.pinned })}
+                      >
+                        {note.pinned ? <IconPinFilled size={12} /> : <IconPin size={12} />}
+                      </ActionIcon>
+                    </Tooltip>
+                    <Tooltip label={t`Edit`} withArrow>
+                      <ActionIcon
+                        variant="subtle"
+                        color="gray"
+                        size="xs"
+                        aria-label={t`Edit note`}
+                        onClick={() => setOpenId(isEditing ? null : note.id)}
+                      >
+                        <IconPencil size={12} />
+                      </ActionIcon>
+                    </Tooltip>
+                  </>
+                )}
               </Group>
             </Group>
           </Box>
