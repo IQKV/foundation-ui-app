@@ -253,6 +253,10 @@ msgstr "AKTIV"
 msgid "Active members"
 msgstr "Aktive Mitglieder"
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Add a new note"
+msgstr ""
+
 #: src/pages/_app/venues.add.tsx
 msgid "Add a venue"
 msgstr ""
@@ -266,8 +270,8 @@ msgid "Add locale"
 msgstr "Gebietsschema hinzufügen"
 
 #: src/pages/_app/venues.$venueId.tsx
-msgid "Add note"
-msgstr ""
+#~ msgid "Add note"
+#~ msgstr ""
 
 #: src/features/manage-venue/ui/venue-metadata-sections.tsx
 msgid "Add row"
@@ -325,6 +329,10 @@ msgstr ""
 
 #: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
 msgid "All fields are already filled."
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "All metadata"
 msgstr ""
 
 #: src/pages/_app/cms-pages.index.tsx
@@ -436,11 +444,15 @@ msgstr ""
 
 #: src/pages/_app/venues_.$venueId.files.tsx
 #: src/pages/_app/venues_.$venueId.research.tsx
+#: src/pages/_app/venues.$venueId.tsx
 msgid "Asset uploaded."
 msgstr ""
 
-#: src/pages/_app/venues_.$venueId.research.tsx
 #: src/pages/_app/venues.$venueId.tsx
+msgid "assets"
+msgstr ""
+
+#: src/pages/_app/venues_.$venueId.research.tsx
 msgid "Assets"
 msgstr ""
 
@@ -580,6 +592,7 @@ msgstr "Abrechnungsportal nicht verfügbar"
 #: src/pages/_app/cms-pages.create.tsx
 #: src/pages/_app/venues_.$venueId.files.tsx
 #: src/pages/_app/venues_.$venueId.research.tsx
+#: src/pages/_app/venues.$venueId.tsx
 msgid "Cancel"
 msgstr "Abbrechen"
 
@@ -689,6 +702,7 @@ msgstr ""
 
 #: src/features/invite-member/ui/invitation-details-modal.tsx
 #: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
+#: src/pages/_app/venues.$venueId.tsx
 msgid "Close"
 msgstr "Schließen"
 
@@ -710,6 +724,10 @@ msgstr "kollege@beispiel.de"
 #: src/features/manage-billing/ui/billing-info.tsx
 msgid "Company Name"
 msgstr "Firmenname"
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "complete"
+msgstr ""
 
 #: src/pages/loading-demo.tsx
 msgid "Complete"
@@ -826,6 +844,10 @@ msgstr "Kopieren"
 msgid "Could not create the page. Please check the form and try again."
 msgstr "Seite konnte nicht erstellt werden. Bitte überprüfen Sie das Formular und versuchen Sie es erneut."
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Could not delete note."
+msgstr ""
+
 #: src/pages/_app/settings/security.tsx
 msgid "Could not delete SSO configuration."
 msgstr "SSO-Konfiguration konnte nicht gelöscht werden."
@@ -888,6 +910,10 @@ msgstr ""
 msgid "Could not open the billing portal. Please try again."
 msgstr "Abrechnungsportal konnte nicht geöffnet werden. Bitte versuchen Sie es erneut."
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Could not save note."
+msgstr ""
+
 #: src/pages/_app/cms-pages.$pageId.tsx
 msgid "Could not save the page. Please check the form and try again."
 msgstr "Seite konnte nicht gespeichert werden. Bitte überprüfen Sie das Formular und versuchen Sie es erneut."
@@ -915,6 +941,10 @@ msgstr "Dieser Anbieter konnte nicht getrennt werden."
 #: src/pages/_app/settings/security.tsx
 msgid "Could not update SSO configuration."
 msgstr "SSO-Konfiguration konnte nicht aktualisiert werden."
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Could not upload the asset."
+msgstr ""
 
 #: src/pages/_app/venues_.$venueId.files.tsx
 #: src/pages/_app/venues_.$venueId.research.tsx
@@ -1088,6 +1118,10 @@ msgstr ""
 msgid "Delete failed"
 msgstr "Löschen fehlgeschlagen"
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Delete note"
+msgstr ""
+
 #: src/features/page-admin/ui/delete-page-modal.tsx
 msgid "Delete Page"
 msgstr "Seite löschen"
@@ -1199,6 +1233,7 @@ msgstr "z. B. default, landing"
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.index.tsx
 #: src/pages/_app/settings/organization.tsx
+#: src/pages/_app/venues.$venueId.tsx
 msgid "Edit"
 msgstr "Bearbeiten"
 
@@ -1221,6 +1256,10 @@ msgstr ""
 msgid "Edit Manually"
 msgstr ""
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Edit note"
+msgstr ""
+
 #: src/pages/_app/cms-pages.$pageId.tsx
 msgid "Edit Page"
 msgstr "Seite bearbeiten"
@@ -1235,6 +1274,10 @@ msgstr ""
 
 #: src/features/manage-venue/ui/edit-venue-modal.tsx
 msgid "Edit Venue"
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Editing note"
 msgstr ""
 
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
@@ -1488,6 +1531,7 @@ msgid "Fill section with AI"
 msgstr ""
 
 #: src/features/manage-venue/ui/venue-metadata-sections.tsx
+#: src/pages/_app/venues.$venueId.tsx
 msgid "Fill with AI"
 msgstr ""
 
@@ -1553,7 +1597,6 @@ msgstr "Vollbild-Ladeanimation beim ersten App-Start (während das Gebietsschema
 
 #: src/pages/_app/venues_.$venueId.files.tsx
 #: src/pages/_app/venues_.$venueId.research.tsx
-#: src/pages/_app/venues.$venueId.tsx
 msgid "Gallery"
 msgstr ""
 
@@ -1696,8 +1739,8 @@ msgid "Incorrect password. Please try again."
 msgstr "Falsches Passwort. Bitte versuchen Sie es erneut."
 
 #: src/pages/_app/venues.$venueId.tsx
-msgid "Internal notes and reminders"
-msgstr ""
+#~ msgid "Internal notes and reminders"
+#~ msgstr ""
 
 #: src/pages/500.tsx
 msgid "Internal server error."
@@ -2089,6 +2132,10 @@ msgstr ""
 msgid "New CMS Page"
 msgstr "Neue CMS-Seite"
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "New note"
+msgstr ""
+
 #: src/features/tenant-switcher/ui/tenant-switcher.tsx
 #: src/shared/ui/app-layout/app-header.tsx
 #: src/shared/ui/app-layout/app-top-nav-bar.tsx
@@ -2116,6 +2163,14 @@ msgstr "Neue Registrierungen"
 #: src/pages/_app/venues.create.tsx
 #: src/pages/_app/venues.index.tsx
 msgid "New venue"
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Newest first"
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Newest first — click for oldest first"
 msgstr ""
 
 #: src/features/manage-billing/ui/current-subscription.tsx
@@ -2179,6 +2234,10 @@ msgstr "Keine Mitglieder gefunden."
 #: src/pages/_app/team.tsx
 msgid "No members match the search."
 msgstr "Keine Mitglieder entsprechen der Suche."
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "No notes yet. Add the first one below."
+msgstr ""
 
 #: src/features/notification-bell/ui/notification-bell.tsx
 #: src/pages/_app/settings/notifications.tsx
@@ -2277,8 +2336,8 @@ msgstr "Nicht verbunden"
 #~ msgstr ""
 
 #: src/pages/_app/venues.$venueId.tsx
-msgid "Notes will appear here."
-msgstr ""
+#~ msgid "Notes will appear here."
+#~ msgstr ""
 
 #: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
 msgid "Nothing found"
@@ -2310,6 +2369,14 @@ msgstr "OG-Titel"
 #: src/pages/_app/settings/security.tsx
 msgid "OIDC discovery endpoint"
 msgstr "OIDC-Discovery-Endpunkt"
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Oldest first"
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Oldest first — click for newest first"
+msgstr ""
 
 #: src/pages/verify-email.tsx
 msgid "One click and you're all set."
@@ -2554,7 +2621,6 @@ msgid "Permissions assigned to your account"
 msgstr "Ihrem Konto zugewiesene Berechtigungen"
 
 #: src/features/manage-billing/ui/entitlements-card.tsx
-#: src/pages/_app/billing/index.tsx
 #: src/widgets/dashboard-personal-welcome/ui/dashboard-personal-welcome.tsx
 msgid "Personal Workspace"
 msgstr "Persönlicher Workspace"
@@ -2562,6 +2628,10 @@ msgstr "Persönlicher Workspace"
 #: src/pages/_app/venues_.$venueId.files.tsx
 #: src/pages/_app/venues_.$venueId.research.tsx
 msgid "Photo"
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "photos"
 msgstr ""
 
 #: src/pages/_app/venues_.$venueId.files.tsx
@@ -2579,6 +2649,14 @@ msgstr ""
 #: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
 #: src/features/manage-venue/ui/venue-metadata-sections.tsx
 msgid "Pick a source…"
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Pin"
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Pin note"
 msgstr ""
 
 #: src/features/manage-billing/ui/current-subscription.tsx
@@ -2740,8 +2818,8 @@ msgid "Received At"
 msgstr "Empfangen am"
 
 #: src/pages/_app/venues.$venueId.tsx
-msgid "Recent activity"
-msgstr ""
+#~ msgid "Recent activity"
+#~ msgstr ""
 
 #: src/pages/_app/venues.index.tsx
 msgid "Recently Added"
@@ -2826,8 +2904,8 @@ msgid "Research"
 msgstr ""
 
 #: src/pages/_app/venues.$venueId.tsx
-msgid "Research & edit"
-msgstr ""
+#~ msgid "Research & edit"
+#~ msgstr ""
 
 #: src/features/signup/ui/verify-email-prompt.tsx
 msgid "Resend in {resendCooldown}s"
@@ -2917,6 +2995,10 @@ msgstr "Änderungen speichern"
 #: src/pages/_app/settings/security.tsx
 msgid "Save failed"
 msgstr "Speichern fehlgeschlagen"
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Save note"
+msgstr ""
 
 #: src/pages/_app/settings/security.tsx
 msgid "Saved"
@@ -3198,6 +3280,14 @@ msgstr "Bei Ihrer Zahlung ist ein Fehler aufgetreten. Bitte versuchen Sie es ern
 msgid "Something went wrong. Please try again."
 msgstr "Etwas ist schief gelaufen. Bitte versuchen Sie es erneut."
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Sort newest first"
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Sort oldest first"
+msgstr ""
+
 #. placeholder {0}: index + 1
 #: src/features/ask-ai/ui/citation-chips.tsx
 msgid "Source {0}"
@@ -3209,11 +3299,15 @@ msgid "Source document"
 msgstr ""
 
 #: src/pages/_app/venues.$venueId.tsx
-msgid "Source documents"
-msgstr ""
+#~ msgid "Source documents"
+#~ msgstr ""
 
 #: src/pages/_app/venues_.$venueId.research.tsx
 msgid "Source text extracted."
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "sources"
 msgstr ""
 
 #: src/features/ask-ai/ui/citation-chips.tsx
@@ -3448,6 +3542,7 @@ msgid "Tips"
 msgstr "Tipps"
 
 #: src/features/page-admin/ui/page-translation-fields.tsx
+#: src/pages/_app/venues.$venueId.tsx
 msgid "Title"
 msgstr "Titel"
 
@@ -3565,6 +3660,14 @@ msgstr "Unbegrenzt"
 msgid "Unlink failed"
 msgstr "Verknüpfung trennen fehlgeschlagen"
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Unpin"
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Unpin note"
+msgstr ""
+
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 msgid "Unverified"
 msgstr "Nicht verifiziert"
@@ -3592,6 +3695,7 @@ msgid "Upload another file"
 msgstr ""
 
 #: src/pages/_app/venues_.$venueId.research.tsx
+#: src/pages/_app/venues.$venueId.tsx
 msgid "Upload asset"
 msgstr ""
 
@@ -3803,12 +3907,12 @@ msgid "Which venues have photos?"
 msgstr ""
 
 #: src/pages/_app/venues.$venueId.tsx
-msgid "Widgets"
-msgstr ""
+#~ msgid "Widgets"
+#~ msgstr ""
 
 #: src/pages/_app/venues.$venueId.tsx
-msgid "Widgets will appear here."
-msgstr ""
+#~ msgid "Widgets will appear here."
+#~ msgstr ""
 
 #: src/features/signup/ui/signup-form.tsx
 msgid "Work email"
@@ -3920,8 +4024,8 @@ msgid "Your payment information is securely processed by our payment provider. W
 msgstr "Ihre Zahlungsinformationen werden sicher von unserem Zahlungsanbieter verarbeitet. Wir speichern Ihre Zahlungsdetails nicht auf unseren Servern."
 
 #: src/pages/_app/billing/index.tsx
-msgid "Your personal workspace doesn't require a subscription. Upgrade to an organization workspace to access additional features and team collaboration."
-msgstr "Ihr persönlicher Arbeitsbereich erfordert kein Abonnement. Upgraden Sie auf einen Organisations-Arbeitsbereich, um auf zusätzliche Funktionen und Teamzusammenarbeit zuzugreifen."
+#~ msgid "Your personal workspace doesn't require a subscription. Upgrade to an organization workspace to access additional features and team collaboration."
+#~ msgstr "Ihr persönlicher Arbeitsbereich erfordert kein Abonnement. Upgraden Sie auf einen Organisations-Arbeitsbereich, um auf zusätzliche Funktionen und Teamzusammenarbeit zuzugreifen."
 
 #: src/pages/_app/settings/security.tsx
 msgid "Your Roles"

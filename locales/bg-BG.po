@@ -253,6 +253,10 @@ msgstr "АКТИВЕН"
 msgid "Active members"
 msgstr "Активни членове"
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Add a new note"
+msgstr ""
+
 #: src/pages/_app/venues.add.tsx
 msgid "Add a venue"
 msgstr ""
@@ -266,8 +270,8 @@ msgid "Add locale"
 msgstr "Добави локал"
 
 #: src/pages/_app/venues.$venueId.tsx
-msgid "Add note"
-msgstr ""
+#~ msgid "Add note"
+#~ msgstr ""
 
 #: src/features/manage-venue/ui/venue-metadata-sections.tsx
 msgid "Add row"
@@ -325,6 +329,10 @@ msgstr ""
 
 #: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
 msgid "All fields are already filled."
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "All metadata"
 msgstr ""
 
 #: src/pages/_app/cms-pages.index.tsx
@@ -436,11 +444,15 @@ msgstr ""
 
 #: src/pages/_app/venues_.$venueId.files.tsx
 #: src/pages/_app/venues_.$venueId.research.tsx
+#: src/pages/_app/venues.$venueId.tsx
 msgid "Asset uploaded."
 msgstr ""
 
-#: src/pages/_app/venues_.$venueId.research.tsx
 #: src/pages/_app/venues.$venueId.tsx
+msgid "assets"
+msgstr ""
+
+#: src/pages/_app/venues_.$venueId.research.tsx
 msgid "Assets"
 msgstr ""
 
@@ -580,6 +592,7 @@ msgstr "Порталът за фактуриране е недостъпен"
 #: src/pages/_app/cms-pages.create.tsx
 #: src/pages/_app/venues_.$venueId.files.tsx
 #: src/pages/_app/venues_.$venueId.research.tsx
+#: src/pages/_app/venues.$venueId.tsx
 msgid "Cancel"
 msgstr "Отказ"
 
@@ -689,6 +702,7 @@ msgstr ""
 
 #: src/features/invite-member/ui/invitation-details-modal.tsx
 #: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
+#: src/pages/_app/venues.$venueId.tsx
 msgid "Close"
 msgstr "Затвори"
 
@@ -710,6 +724,10 @@ msgstr "колега@example.com"
 #: src/features/manage-billing/ui/billing-info.tsx
 msgid "Company Name"
 msgstr "Наименование на компанията"
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "complete"
+msgstr ""
 
 #: src/pages/loading-demo.tsx
 msgid "Complete"
@@ -826,6 +844,10 @@ msgstr "Копирай"
 msgid "Could not create the page. Please check the form and try again."
 msgstr "Не може да се създаде страницата. Моля, проверете формуляра и опитайте отново."
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Could not delete note."
+msgstr ""
+
 #: src/pages/_app/settings/security.tsx
 msgid "Could not delete SSO configuration."
 msgstr "Не може да се изтрие SSO конфигурацията."
@@ -888,6 +910,10 @@ msgstr ""
 msgid "Could not open the billing portal. Please try again."
 msgstr "Не може да се отвори порталът за фактуриране. Моля, опитайте отново."
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Could not save note."
+msgstr ""
+
 #: src/pages/_app/cms-pages.$pageId.tsx
 msgid "Could not save the page. Please check the form and try again."
 msgstr "Не може да се запази страницата. Моля, проверете формуляра и опитайте отново."
@@ -915,6 +941,10 @@ msgstr "Не може да се разкачи този доставчик."
 #: src/pages/_app/settings/security.tsx
 msgid "Could not update SSO configuration."
 msgstr "Не може да се актуализира SSO конфигурацията."
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Could not upload the asset."
+msgstr ""
 
 #: src/pages/_app/venues_.$venueId.files.tsx
 #: src/pages/_app/venues_.$venueId.research.tsx
@@ -1088,6 +1118,10 @@ msgstr ""
 msgid "Delete failed"
 msgstr "Изтриването не успя"
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Delete note"
+msgstr ""
+
 #: src/features/page-admin/ui/delete-page-modal.tsx
 msgid "Delete Page"
 msgstr "Изтрий страница"
@@ -1199,6 +1233,7 @@ msgstr "напр. default, landing"
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.index.tsx
 #: src/pages/_app/settings/organization.tsx
+#: src/pages/_app/venues.$venueId.tsx
 msgid "Edit"
 msgstr "Редактирай"
 
@@ -1221,6 +1256,10 @@ msgstr ""
 msgid "Edit Manually"
 msgstr ""
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Edit note"
+msgstr ""
+
 #: src/pages/_app/cms-pages.$pageId.tsx
 msgid "Edit Page"
 msgstr "Редактирай страница"
@@ -1235,6 +1274,10 @@ msgstr ""
 
 #: src/features/manage-venue/ui/edit-venue-modal.tsx
 msgid "Edit Venue"
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Editing note"
 msgstr ""
 
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
@@ -1488,6 +1531,7 @@ msgid "Fill section with AI"
 msgstr ""
 
 #: src/features/manage-venue/ui/venue-metadata-sections.tsx
+#: src/pages/_app/venues.$venueId.tsx
 msgid "Fill with AI"
 msgstr ""
 
@@ -1553,7 +1597,6 @@ msgstr "Цялоекранен центриран индикатор при пъ
 
 #: src/pages/_app/venues_.$venueId.files.tsx
 #: src/pages/_app/venues_.$venueId.research.tsx
-#: src/pages/_app/venues.$venueId.tsx
 msgid "Gallery"
 msgstr ""
 
@@ -1696,8 +1739,8 @@ msgid "Incorrect password. Please try again."
 msgstr "Грешна парола. Моля, опитайте отново."
 
 #: src/pages/_app/venues.$venueId.tsx
-msgid "Internal notes and reminders"
-msgstr ""
+#~ msgid "Internal notes and reminders"
+#~ msgstr ""
 
 #: src/pages/500.tsx
 msgid "Internal server error."
@@ -2089,6 +2132,10 @@ msgstr ""
 msgid "New CMS Page"
 msgstr "Нова CMS страница"
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "New note"
+msgstr ""
+
 #: src/features/tenant-switcher/ui/tenant-switcher.tsx
 #: src/shared/ui/app-layout/app-header.tsx
 #: src/shared/ui/app-layout/app-top-nav-bar.tsx
@@ -2116,6 +2163,14 @@ msgstr "Нови регистрации"
 #: src/pages/_app/venues.create.tsx
 #: src/pages/_app/venues.index.tsx
 msgid "New venue"
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Newest first"
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Newest first — click for oldest first"
 msgstr ""
 
 #: src/features/manage-billing/ui/current-subscription.tsx
@@ -2179,6 +2234,10 @@ msgstr "Не са намерени членове."
 #: src/pages/_app/team.tsx
 msgid "No members match the search."
 msgstr "Няма членове, съответстващи на търсенето."
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "No notes yet. Add the first one below."
+msgstr ""
 
 #: src/features/notification-bell/ui/notification-bell.tsx
 #: src/pages/_app/settings/notifications.tsx
@@ -2277,8 +2336,8 @@ msgstr "Не е свързан"
 #~ msgstr ""
 
 #: src/pages/_app/venues.$venueId.tsx
-msgid "Notes will appear here."
-msgstr ""
+#~ msgid "Notes will appear here."
+#~ msgstr ""
 
 #: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
 msgid "Nothing found"
@@ -2309,6 +2368,14 @@ msgstr "OG заглавие"
 
 #: src/pages/_app/settings/security.tsx
 msgid "OIDC discovery endpoint"
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Oldest first"
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Oldest first — click for newest first"
 msgstr ""
 
 #: src/pages/verify-email.tsx
@@ -2554,7 +2621,6 @@ msgid "Permissions assigned to your account"
 msgstr ""
 
 #: src/features/manage-billing/ui/entitlements-card.tsx
-#: src/pages/_app/billing/index.tsx
 #: src/widgets/dashboard-personal-welcome/ui/dashboard-personal-welcome.tsx
 msgid "Personal Workspace"
 msgstr "Лично работно пространство"
@@ -2562,6 +2628,10 @@ msgstr "Лично работно пространство"
 #: src/pages/_app/venues_.$venueId.files.tsx
 #: src/pages/_app/venues_.$venueId.research.tsx
 msgid "Photo"
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "photos"
 msgstr ""
 
 #: src/pages/_app/venues_.$venueId.files.tsx
@@ -2579,6 +2649,14 @@ msgstr ""
 #: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
 #: src/features/manage-venue/ui/venue-metadata-sections.tsx
 msgid "Pick a source…"
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Pin"
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Pin note"
 msgstr ""
 
 #: src/features/manage-billing/ui/current-subscription.tsx
@@ -2740,8 +2818,8 @@ msgid "Received At"
 msgstr "Получено на"
 
 #: src/pages/_app/venues.$venueId.tsx
-msgid "Recent activity"
-msgstr ""
+#~ msgid "Recent activity"
+#~ msgstr ""
 
 #: src/pages/_app/venues.index.tsx
 msgid "Recently Added"
@@ -2826,8 +2904,8 @@ msgid "Research"
 msgstr ""
 
 #: src/pages/_app/venues.$venueId.tsx
-msgid "Research & edit"
-msgstr ""
+#~ msgid "Research & edit"
+#~ msgstr ""
 
 #: src/features/signup/ui/verify-email-prompt.tsx
 msgid "Resend in {resendCooldown}s"
@@ -2917,6 +2995,10 @@ msgstr "Запази промените"
 #: src/pages/_app/settings/security.tsx
 msgid "Save failed"
 msgstr "Запазването не успя"
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Save note"
+msgstr ""
 
 #: src/pages/_app/settings/security.tsx
 msgid "Saved"
@@ -3198,6 +3280,14 @@ msgstr "Нещо се обърка с плащането ви. Моля, опи�
 msgid "Something went wrong. Please try again."
 msgstr "Нещо се обърка. Моля, опитайте отново."
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Sort newest first"
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Sort oldest first"
+msgstr ""
+
 #. placeholder {0}: index + 1
 #: src/features/ask-ai/ui/citation-chips.tsx
 msgid "Source {0}"
@@ -3209,11 +3299,15 @@ msgid "Source document"
 msgstr ""
 
 #: src/pages/_app/venues.$venueId.tsx
-msgid "Source documents"
-msgstr ""
+#~ msgid "Source documents"
+#~ msgstr ""
 
 #: src/pages/_app/venues_.$venueId.research.tsx
 msgid "Source text extracted."
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "sources"
 msgstr ""
 
 #: src/features/ask-ai/ui/citation-chips.tsx
@@ -3448,6 +3542,7 @@ msgid "Tips"
 msgstr "Съвети"
 
 #: src/features/page-admin/ui/page-translation-fields.tsx
+#: src/pages/_app/venues.$venueId.tsx
 msgid "Title"
 msgstr "Заглавие"
 
@@ -3565,6 +3660,14 @@ msgstr "Неограничено"
 msgid "Unlink failed"
 msgstr "Разкачването не успя"
 
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Unpin"
+msgstr ""
+
+#: src/pages/_app/venues.$venueId.tsx
+msgid "Unpin note"
+msgstr ""
+
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 msgid "Unverified"
 msgstr "Непотвърден"
@@ -3592,6 +3695,7 @@ msgid "Upload another file"
 msgstr ""
 
 #: src/pages/_app/venues_.$venueId.research.tsx
+#: src/pages/_app/venues.$venueId.tsx
 msgid "Upload asset"
 msgstr ""
 
@@ -3803,12 +3907,12 @@ msgid "Which venues have photos?"
 msgstr ""
 
 #: src/pages/_app/venues.$venueId.tsx
-msgid "Widgets"
-msgstr ""
+#~ msgid "Widgets"
+#~ msgstr ""
 
 #: src/pages/_app/venues.$venueId.tsx
-msgid "Widgets will appear here."
-msgstr ""
+#~ msgid "Widgets will appear here."
+#~ msgstr ""
 
 #: src/features/signup/ui/signup-form.tsx
 msgid "Work email"
@@ -3920,8 +4024,8 @@ msgid "Your payment information is securely processed by our payment provider. W
 msgstr "Информацията за плащане се обработва сигурно от нашия доставчик на разплащания. Не съхраняваме данните за плащане на нашите сървъри."
 
 #: src/pages/_app/billing/index.tsx
-msgid "Your personal workspace doesn't require a subscription. Upgrade to an organization workspace to access additional features and team collaboration."
-msgstr "Личното ви работно пространство не изисква абонамент. Надградете до организационно работно пространство, за да получите достъп до допълнителни функции и екипно сътрудничество."
+#~ msgid "Your personal workspace doesn't require a subscription. Upgrade to an organization workspace to access additional features and team collaboration."
+#~ msgstr "Личното ви работно пространство не изисква абонамент. Надградете до организационно работно пространство, за да получите достъп до допълнителни функции и екипно сътрудничество."
 
 #: src/pages/_app/settings/security.tsx
 msgid "Your Roles"

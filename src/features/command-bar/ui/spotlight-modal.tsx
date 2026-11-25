@@ -115,7 +115,7 @@ export function SpotlightModal() {
   const { t } = useLingui();
   const { isSpotlightOpen, closeSpotlight, spotlightActions: pageActions } = useCommandBarStore();
   const navigate = useNavigate();
-  const { isTenantOwner, isPersonalWorkspace, payload } = useSession();
+  const { isTenantOwner, payload } = useSession();
   const canManagePages = (payload?.authorities ?? []).some(
     (a) => a === "TENANT_OWNER" || a === "ADMIN",
   );
@@ -127,7 +127,7 @@ export function SpotlightModal() {
 
   const addonItems = navigationExtension.getNavItems("workspace");
   const sections = buildNavSections(
-    { isMultiTenantMode, isTenantOwner, isPersonalWorkspace, canManagePages },
+    { isMultiTenantMode, isTenantOwner, canManagePages },
     addonItems,
   );
   const allNavItems = sections.flatMap((s) => s.items);

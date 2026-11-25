@@ -33,7 +33,7 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 }
 
 export function AppNav() {
-  const { isTenantOwner, isPersonalWorkspace, payload } = useSession();
+  const { isTenantOwner, payload } = useSession();
   const routerState = useRouterState();
   const currentPath = routerState.location.pathname;
   const [search, setSearch] = useState("");
@@ -47,7 +47,6 @@ export function AppNav() {
     {
       isMultiTenantMode,
       isTenantOwner,
-      isPersonalWorkspace,
       canManagePages,
     },
     addonItems,

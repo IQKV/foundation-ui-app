@@ -1,16 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
 import { billingApi } from "@/shared/api";
-import { isSingleTenantMode } from "@/app/config";
 
-export function useRefunds(tenantKey: string | null) {
+/**
+ * `personal` selects the billing subject: true → the caller's own refunds
+ * (personal workspace), false → the active tenant's refunds.
+ */
+export function useRefunds(tenantKey: string | null, personal: boolean) {
   return useQuery({
-    queryKey: ["billing", "refunds", isSingleTenantMode ? "me" : tenantKey],
+    queryKey: ["billing", "refunds", personal ? "me" : tenantKey],
     queryFn: () =>
-      isSingleTenantMode
+      personal
         ? billingApi.listRefundsForMe()
         : tenantKey
           ? billingApi.listRefunds(tenantKey)
           : Promise.reject("No tenant key"),
-    enabled: isSingleTenantMode || !!tenantKey,
+    enabled: personal || !!tenantKey,
   });
 }
