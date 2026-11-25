@@ -26,8 +26,9 @@ export function EntitlementsCard() {
   const { isPersonalWorkspace } = useSession();
   const { hasFeature, getQuota } = useEntitlementsContext();
 
-  if (isMultiTenantMode && isPersonalWorkspace) {
-    // Personal workspace always has entitlements
+  // Personal workspace without an active subscription falls back to local defaults;
+  // once subscribed the server entitlements below take precedence.
+  if (isMultiTenantMode && isPersonalWorkspace && !entitlements) {
     const features = {
       maxUsers: getQuota("maxUsers"),
       maxProjects: getQuota("maxProjects"),

@@ -8,10 +8,11 @@ import { TestSelectors } from "@/shared/lib/test-selectors";
 
 interface RefundListProps {
   tenantKey?: string;
+  personal: boolean;
 }
 
-export function RefundList({ tenantKey }: RefundListProps) {
-  const { data: refunds, isLoading, isError } = useRefunds(tenantKey ?? null);
+export function RefundList({ tenantKey, personal }: RefundListProps) {
+  const { data: refunds, isLoading, isError } = useRefunds(tenantKey ?? null, personal);
 
   if (isLoading) {
     return <Skeleton height={200} radius="md" data-testid={TestSelectors.REFUND_LIST_LOADING} />;

@@ -36,11 +36,14 @@ export function EntitlementsProvider({ children }: EntitlementsProviderProps) {
   const entitlements = useEntitlements();
   const { isPersonalWorkspace } = useSession();
 
+  // Personal workspaces hold a USER billing subject; without an active
+  // subscription the server returns nothing, so fall back to personal defaults.
   const usesPersonalWorkspaceEntitlements = isMultiTenantMode && isPersonalWorkspace;
 
   const resolvedFeatures = (): PlanEntitlement => {
+    if (entitlements.data?.features) return entitlements.data.features;
     if (usesPersonalWorkspaceEntitlements) return DEFAULT_PERSONAL_WORKSPACE_FEATURES;
-    return entitlements.data?.features || DEFAULT_FREE_TENANT_ENTITLEMENT;
+    return DEFAULT_FREE_TENANT_ENTITLEMENT;
   };
 
   const hasFeature = (featureCode: string): boolean => {
@@ -57,9 +60,8 @@ export function EntitlementsProvider({ children }: EntitlementsProviderProps) {
   const getFeatureValue = (feature: "maxUsers" | "maxProjects"): number => getQuota(feature);
 
   const isActive = true; // Free plan is always active
-  const planCode = usesPersonalWorkspaceEntitlements
-    ? "personal"
-    : entitlements.data?.planCode || "free";
+  const planCode =
+    entitlements.data?.planCode ?? (usesPersonalWorkspaceEntitlements ? "personal" : "free");
 
   const value: EntitlementsContextType = {
     entitlements,

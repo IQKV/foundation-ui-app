@@ -5,15 +5,20 @@ import { IconX } from "@tabler/icons-react";
 import { useLingui } from "@lingui/react/macro";
 import { billingApi } from "@/shared/api";
 
-export function useBillingPortal(tenantKey?: string) {
+/**
+ * `personal` selects the billing subject: true → the caller's user portal
+ * (personal workspace), false → the active tenant's portal.
+ */
+export function useBillingPortal(tenantKey: string | null, personal: boolean) {
   const { t } = useLingui();
 
   return useMutation({
     mutationFn: () => {
-      if (tenantKey) {
-        return billingApi.createTenantPortalSession(tenantKey);
+      if (personal) {
+        return billingApi.createUserPortalSession();
       }
-      return billingApi.createUserPortalSession();
+      if (!tenantKey) throw new Error("No tenant key");
+      return billingApi.createTenantPortalSession(tenantKey);
     },
     onSuccess: (res) => {
       window.location.href = res.url;

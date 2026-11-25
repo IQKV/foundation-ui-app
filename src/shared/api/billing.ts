@@ -62,8 +62,9 @@ export const billingApi = {
     httpClient.get<Subscription>(`/v1/billing/subscriptions/me/active`).then((r) => r.data),
 
   /**
-   * Create a Stripe Checkout Session for current subject (single tenant mode).
-   * Requires TENANT_OWNER authority.
+   * Create a Stripe Checkout Session for the current subject.
+   * Subject is the user in a personal workspace, the tenant otherwise.
+   * Requires TENANT_OWNER, ADMIN, or MEMBER authority.
    * Backend: POST /api/v1/billing/subscriptions/me/checkout
    */
   createCheckoutSessionForMe: (request: CreateCheckoutSessionRequest) =>
@@ -73,7 +74,7 @@ export const billingApi = {
 
   /**
    * Create a Stripe Checkout Session for a specific tenant.
-   * Requires TENANT_OWNER authority.
+   * Requires TENANT_OWNER or ADMIN authority.
    * Backend: POST /api/v1/billing/subscriptions/{tenantKey}/checkout
    */
   createCheckoutSession: (tenantKey: string, request: CreateCheckoutSessionRequest) =>
@@ -85,7 +86,7 @@ export const billingApi = {
       .then((r) => r.data),
 
   /**
-   * Create a Stripe Customer Portal session for current user (single-tenant mode).
+   * Create a Stripe Customer Portal session for the current user (personal workspace).
    * Backend: POST /api/v1/billing/user-settings/portal
    */
   createUserPortalSession: () =>
@@ -109,7 +110,7 @@ export const billingApi = {
     httpClient.get<Entitlements>("/v1/billing/entitlements/me").then((r) => r.data),
 
   /**
-   * List refunds for current user (single-tenant mode).
+   * List refunds for the current user (personal workspace).
    */
   listRefundsForMe: () =>
     httpClient.get<Refund[]>("/v1/billing/payments/me/refunds").then((r) => r.data),
@@ -131,7 +132,7 @@ export const billingApi = {
       .then((r) => r.data),
 
   /**
-   * Get billing settings for current user (single-tenant mode).
+   * Get billing settings for the current user (personal workspace).
    * Backend: GET /api/v1/billing/user-settings
    */
   getUserBillingSettings: () =>
@@ -154,14 +155,14 @@ export const billingApi = {
       .then((r) => r.data),
 
   /**
-   * Create billing settings for current user (single-tenant mode).
+   * Create billing settings for the current user (personal workspace).
    * Backend: POST /api/v1/billing/user-settings
    */
   createUserBillingSettings: (data: CreateBillingSettingsRequest) =>
     httpClient.post<BillingSettings>("/v1/billing/user-settings", data).then((r) => r.data),
 
   /**
-   * Update billing settings for current user (single-tenant mode).
+   * Update billing settings for the current user (personal workspace).
    * Backend: PATCH /api/v1/billing/user-settings
    */
   updateUserBillingSettings: (data: UpdateBillingSettingsRequest) =>

@@ -49,7 +49,6 @@ export interface NavSection {
 export interface NavSessionFlags {
   isMultiTenantMode: boolean;
   isTenantOwner: boolean;
-  isPersonalWorkspace: boolean;
   canManagePages: boolean;
 }
 
@@ -65,14 +64,11 @@ export interface NavSessionFlags {
  * @param addonItems  Extra NavItems appended to the Workspace section
  */
 export function buildNavSections(flags: NavSessionFlags, addonItems: NavItem[] = []): NavSection[] {
-  const { isMultiTenantMode, isTenantOwner, isPersonalWorkspace, canManagePages } = flags;
+  const { isMultiTenantMode, isTenantOwner, canManagePages } = flags;
 
   const workspaceItems: NavItem[] = [
     { label: <Trans>Dashboard</Trans>, icon: IconDashboard, to: "/" },
-    // Billing: hidden only when multi-tenant AND personal workspace
-    ...(!isMultiTenantMode || !isPersonalWorkspace
-      ? [{ label: <Trans>Billing</Trans>, icon: IconCreditCard, to: "/billing" }]
-      : []),
+    { label: <Trans>Billing</Trans>, icon: IconCreditCard, to: "/billing" },
     // Team: visible only when multi-tenant AND tenant owner
     ...(isMultiTenantMode && isTenantOwner
       ? [{ label: <Trans>Team</Trans>, icon: IconUsers, to: "/team" }]

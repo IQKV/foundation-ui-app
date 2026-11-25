@@ -78,6 +78,10 @@ msgstr "• Aucune formation technique nécessaire — notre interface intuitive
 msgid "••••••••"
 msgstr "••••••••"
 
+#: src/features/ask-ai/ui/ask-ai-drawer.tsx
+msgid "+ Ask AI"
+msgstr ""
+
 #: src/widgets/dashboard-personal-welcome/ui/dashboard-personal-welcome.tsx
 msgid "<0>Configure notifications</0> to stay informed."
 msgstr "<0>Configurer les notifications</0> pour rester informé."
@@ -205,6 +209,10 @@ msgstr "Administrateur"
 msgid "Advanced Analytics"
 msgstr "Analyses avancées"
 
+#: src/features/ask-ai/ui/ask-ai-drawer.tsx
+msgid "AI Assistant"
+msgstr ""
+
 #: src/addons/platform-ai-chat/ui/ai-chat-page.tsx
 msgid "AI Chat"
 msgstr ""
@@ -261,6 +269,23 @@ msgstr "Êtes-vous sûr de vouloir retirer <0>{0} {1}</0> de cette organisation 
 #: src/features/member-role/ui/transfer-ownership-modal.tsx
 msgid "Are you sure?"
 msgstr "Êtes-vous sûr ?"
+
+#: src/features/ask-ai/ui/ask-ai-drawer.tsx
+msgid "Ask a question or pick a suggestion. The AI works from records in this workspace and links every answer to its source."
+msgstr ""
+
+#: src/features/ask-ai/ui/ask-ai-drawer.tsx
+msgid "Ask about your workspace, team or settings"
+msgstr ""
+
+#: src/features/ask-ai/ui/ask-ai-drawer.tsx
+msgid "Ask about your workspace…"
+msgstr ""
+
+#: src/features/ask-ai/ui/ask-ai-button.tsx
+#: src/features/command-bar/ui/command-bar.tsx
+msgid "Ask AI"
+msgstr ""
 
 #: src/features/reset-password/ui/reset-password-form.tsx
 #: src/features/signup/ui/password-strength.tsx
@@ -321,6 +346,10 @@ msgstr "Retour à la connexion"
 #: src/features/magic-link/ui/magic-link-initiate-form.tsx
 msgid "Back to sign-in"
 msgstr "Retour à la connexion"
+
+#: src/features/ask-ai/ui/ask-ai-drawer.tsx
+msgid "Back to suggestions"
+msgstr ""
 
 #: src/features/ban-user/ui/ban-member-modal.tsx
 msgid "Ban member"
@@ -437,9 +466,17 @@ msgstr "L'ID client est requis"
 msgid "Client secret"
 msgstr "Secret client"
 
+#: src/features/command-bar/ui/spotlight-modal.tsx
+msgid "close"
+msgstr ""
+
 #: src/features/invite-member/ui/invitation-details-modal.tsx
 msgid "Close"
 msgstr "Fermer"
+
+#: src/features/ask-ai/ui/ask-ai-drawer.tsx
+msgid "Close AI panel"
+msgstr ""
 
 #: src/pages/_app/cms-pages.$pageId.tsx
 #: src/pages/_app/cms-pages.create.tsx
@@ -613,6 +650,10 @@ msgstr "Impossible de délier ce fournisseur."
 #: src/pages/_app/settings/security.tsx
 msgid "Could not update SSO configuration."
 msgstr "Impossible de mettre à jour la configuration SSO."
+
+#: src/features/command-bar/ui/spotlight-modal.tsx
+msgid "Create"
+msgstr ""
 
 #: src/features/signup/ui/signup-form.tsx
 #: src/pages/signup.tsx
@@ -960,6 +1001,10 @@ msgstr "Échec du chargement de l'historique des logs webhook."
 msgid "Failed to send message. Please try again."
 msgstr ""
 
+#: src/features/ask-ai/ui/ask-ai-drawer.tsx
+msgid "Failed to send. Please try again."
+msgstr ""
+
 #: src/features/signup/ui/password-strength.tsx
 msgid "Fair"
 msgstr "Moyen"
@@ -1038,6 +1083,10 @@ msgstr "GitHub"
 msgid "Go home"
 msgstr "Aller à l'accueil"
 
+#: src/features/command-bar/ui/spotlight-modal.tsx
+msgid "Go to"
+msgstr ""
+
 #: src/pages/_app/billing/success.tsx
 msgid "Go to Billing"
 msgstr "Aller à la facturation"
@@ -1047,6 +1096,10 @@ msgstr "Aller à la facturation"
 #: src/pages/unauthorized.tsx
 msgid "Go to Home"
 msgstr "Aller à l'accueil"
+
+#: src/features/command-bar/ui/command-bar.tsx
+msgid "Go…"
+msgstr ""
 
 #: src/features/signup/ui/password-strength.tsx
 msgid "Good"
@@ -1336,6 +1389,10 @@ msgstr "Membres"
 msgid "Message exceeds {MAX_INPUT_CHARS} character limit"
 msgstr ""
 
+#: src/features/ask-ai/ui/ask-ai-drawer.tsx
+msgid "Message too long"
+msgstr ""
+
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "Meta description for search engines"
 msgstr "Meta description pour les moteurs de recherche"
@@ -1364,6 +1421,10 @@ msgstr "Mon compte"
 #: src/features/manage-organization/ui/organization-settings.tsx
 msgid "Name is too short"
 msgstr "Le nom est trop court"
+
+#: src/features/command-bar/ui/spotlight-modal.tsx
+msgid "navigate"
+msgstr ""
 
 #: src/pages/_app/cms-pages.create.tsx
 msgid "New"
@@ -1470,6 +1531,7 @@ msgstr "Aucune invitation en attente."
 msgid "No plans available at the moment."
 msgstr "Aucun plan disponible pour le moment."
 
+#: src/features/command-bar/ui/spotlight-modal.tsx
 #: src/shared/ui/app-layout/app-nav.tsx
 msgid "No results"
 msgstr "Aucun résultat"
@@ -1534,6 +1596,14 @@ msgstr "Un clic et vous êtes prêt."
 msgid "One last"
 msgstr "Un dernier"
 
+#: src/features/command-bar/ui/spotlight-modal.tsx
+msgid "open"
+msgstr ""
+
+#: src/features/command-bar/ui/command-bar.tsx
+msgid "Open AI assistant"
+msgstr ""
+
 #: src/features/manage-billing/ui/billing-portal-button.tsx
 msgid "Open Billing Portal"
 msgstr "Ouvrir le portail de facturation"
@@ -1545,6 +1615,10 @@ msgstr "Description Open Graph"
 #: src/features/page-admin/ui/page-translation-fields.tsx
 msgid "Open Graph title"
 msgstr "Titre Open Graph"
+
+#: src/features/command-bar/ui/command-bar.tsx
+msgid "Open spotlight search"
+msgstr ""
 
 #: src/pages/_app/settings/security.tsx
 msgid "openid profile email"
@@ -1732,7 +1806,6 @@ msgid "Permissions assigned to your account"
 msgstr "Autorisations attribuées à votre compte"
 
 #: src/features/manage-billing/ui/entitlements-card.tsx
-#: src/pages/_app/billing/index.tsx
 #: src/widgets/dashboard-personal-welcome/ui/dashboard-personal-welcome.tsx
 msgid "Personal Workspace"
 msgstr "Espace de travail personnel"
@@ -1996,6 +2069,10 @@ msgstr "Rechercher le type d'événement…"
 msgid "Search organizations…"
 msgstr "Rechercher des organisations…"
 
+#: src/features/command-bar/ui/spotlight-modal.tsx
+msgid "Search pages, actions…"
+msgstr ""
+
 #: src/shared/ui/app-layout/app-nav.tsx
 msgid "Search…"
 msgstr "Rechercher…"
@@ -2051,6 +2128,10 @@ msgstr "Envoyer l'invitation"
 #: src/features/magic-link/ui/magic-link-initiate-form.tsx
 msgid "Send magic link"
 msgstr "Envoyer le lien magique"
+
+#: src/features/ask-ai/ui/ask-ai-drawer.tsx
+msgid "Send message"
+msgstr ""
 
 #: src/features/forgot-password/ui/forgot-password-form.tsx
 msgid "Send reset link"
@@ -2250,6 +2331,10 @@ msgstr "Configuration en cours…"
 msgid "Strong"
 msgstr "Fort"
 
+#: src/features/ask-ai/ui/ask-ai-drawer.tsx
+msgid "Suggested"
+msgstr ""
+
 #: src/shared/ui/tenant-status-badge/tenant-status-badge.tsx
 #: src/shared/ui/user-status-badge/user-status-badge.tsx
 #: src/widgets/dashboard-signup-chart/ui/dashboard-signup-chart.tsx
@@ -2344,6 +2429,10 @@ msgstr "L'identifiant unique de votre organisation. Ceci ne peut pas être modif
 #: src/pages/loading-demo.tsx
 msgid "Theme-aware (respects dark mode and color scheme)"
 msgstr "Thème adaptatif (respecte le mode sombre et le schéma de couleurs)"
+
+#: src/features/ask-ai/ui/ask-ai-drawer.tsx
+msgid "Thinking…"
+msgstr ""
 
 #: src/features/manage-billing/ui/feature-gate.tsx
 msgid "This feature requires an active subscription. Please upgrade your plan to access this functionality."
@@ -2730,8 +2819,8 @@ msgid "Your payment information is securely processed by our payment provider. W
 msgstr "Vos informations de paiement sont traitées de manière sécurisée par notre fournisseur de paiement. Nous ne stockons pas vos détails de paiement sur nos serveurs."
 
 #: src/pages/_app/billing/index.tsx
-msgid "Your personal workspace doesn't require a subscription. Upgrade to an organization workspace to access additional features and team collaboration."
-msgstr "Votre espace de travail personnel ne nécessite pas d'abonnement. Mettez à jour vers un espace de travail organisationnel pour accéder à des fonctionnalités supplémentaires et à la collaboration d'équipe."
+#~ msgid "Your personal workspace doesn't require a subscription. Upgrade to an organization workspace to access additional features and team collaboration."
+#~ msgstr "Votre espace de travail personnel ne nécessite pas d'abonnement. Mettez à jour vers un espace de travail organisationnel pour accéder à des fonctionnalités supplémentaires et à la collaboration d'équipe."
 
 #: src/pages/_app/settings/security.tsx
 msgid "Your Roles"

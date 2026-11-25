@@ -11,11 +11,17 @@ interface PlanListProps {
   currentPlanId?: string;
   onSelect?: (plan: Plan) => void;
   selectingPlanId?: string;
+  personal: boolean;
 }
 
-export function PlanList({ currentPlanId, onSelect, selectingPlanId }: PlanListProps) {
+export function PlanList({ currentPlanId, onSelect, selectingPlanId, personal }: PlanListProps) {
   const { data: plans, isLoading, isError } = usePlans();
   const [billingPeriod, setBillingPeriod] = useState<"MONTHLY" | "ANNUAL">("MONTHLY");
+
+  // Only show plans that match the active billing subject (personal → USER, tenant → TENANT).
+  const subjectPlans = (plans ?? []).filter(
+    (plan) => plan.scope === (personal ? "USER" : "TENANT"),
+  );
 
   if (isLoading) {
     return (
@@ -55,7 +61,7 @@ export function PlanList({ currentPlanId, onSelect, selectingPlanId }: PlanListP
     );
   }
 
-  if (!plans || plans.length === 0) {
+  if (subjectPlans.length === 0) {
     return (
       <Text c="dimmed" ta="center" py="xl" data-testid={TestSelectors.PLAN_LIST_EMPTY}>
         <Trans>No plans available at the moment.</Trans>
@@ -63,10 +69,10 @@ export function PlanList({ currentPlanId, onSelect, selectingPlanId }: PlanListP
     );
   }
 
-  const filteredPlans = plans.filter((plan) => plan.billingPeriod === billingPeriod);
+  const filteredPlans = subjectPlans.filter((plan) => plan.billingPeriod === billingPeriod);
 
   // If no plans for selected period, show all
-  const displayPlans = filteredPlans.length > 0 ? filteredPlans : plans;
+  const displayPlans = filteredPlans.length > 0 ? filteredPlans : subjectPlans;
 
   return (
     <Stack gap="xl" align="center">

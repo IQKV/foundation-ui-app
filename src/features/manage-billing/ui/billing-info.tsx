@@ -23,16 +23,24 @@ import { TestSelectors } from "@/shared/lib/test-selectors";
 
 interface BillingInfoProps {
   tenantKey?: string;
+  personal: boolean;
 }
 
-export function BillingInfo({ tenantKey }: BillingInfoProps) {
+export function BillingInfo({ tenantKey, personal }: BillingInfoProps) {
   const { t } = useLingui();
-  const { data: settings, isLoading, isError, error } = useBillingSettings(tenantKey ?? null);
+  const {
+    data: settings,
+    isLoading,
+    isError,
+    error,
+  } = useBillingSettings(tenantKey ?? null, personal);
   const { mutate: createSettings, isPending: isCreating } = useCreateBillingSettings(
     tenantKey ?? null,
+    personal,
   );
   const { mutate: updateSettings, isPending: isUpdating } = useUpdateBillingSettings(
     tenantKey ?? null,
+    personal,
   );
 
   const isNotFound = isError && isBillingSettingsNotFound(error);

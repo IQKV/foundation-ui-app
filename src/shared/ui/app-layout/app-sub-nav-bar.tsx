@@ -20,7 +20,7 @@ import { NavItemRenderer } from "./nav-item-renderer";
 export function AppSubNavBar() {
   const routerState = useRouterState();
   const currentPath = routerState.location.pathname;
-  const { isTenantOwner, isPersonalWorkspace, payload } = useSession();
+  const { isTenantOwner, payload } = useSession();
   const authorities = payload?.authorities ?? [];
   const canManagePages = authorities.includes("TENANT_OWNER") || authorities.includes("ADMIN");
 
@@ -30,7 +30,6 @@ export function AppSubNavBar() {
     {
       isMultiTenantMode,
       isTenantOwner,
-      isPersonalWorkspace,
       canManagePages,
     },
     addonItems,

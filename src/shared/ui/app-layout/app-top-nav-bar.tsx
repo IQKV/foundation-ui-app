@@ -65,7 +65,7 @@ export function AppTopNavBar() {
   const navigate = useNavigate();
   const routerState = useRouterState();
   const currentPath = routerState.location.pathname;
-  const { isTenantOwner, isPersonalWorkspace, payload } = useSession();
+  const { isTenantOwner, payload } = useSession();
   const authorities = payload?.authorities ?? [];
   const canManagePages = authorities.includes("TENANT_OWNER") || authorities.includes("ADMIN");
   const [drawerOpened, setDrawerOpened] = useState(false);
@@ -76,7 +76,6 @@ export function AppTopNavBar() {
     {
       isMultiTenantMode,
       isTenantOwner,
-      isPersonalWorkspace,
       canManagePages,
     },
     addonItems,

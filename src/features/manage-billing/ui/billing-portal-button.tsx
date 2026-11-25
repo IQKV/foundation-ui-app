@@ -6,10 +6,11 @@ import { TestSelectors } from "@/shared/lib/test-selectors";
 
 interface BillingPortalButtonProps extends ButtonProps {
   tenantKey?: string;
+  personal: boolean;
 }
 
-export function BillingPortalButton({ tenantKey, ...props }: BillingPortalButtonProps) {
-  const { mutate, isPending } = useBillingPortal(tenantKey);
+export function BillingPortalButton({ tenantKey, personal, ...props }: BillingPortalButtonProps) {
+  const { mutate, isPending } = useBillingPortal(tenantKey ?? null, personal);
 
   return (
     <Button

@@ -16,7 +16,7 @@ import { Trans, useLingui } from "@lingui/react/macro";
 import { PageTitle } from "@/shared/lib/page-title";
 import { PageHeader } from "@/shared/ui";
 import { useSession } from "@/processes/session";
-import { isSingleTenantMode, paymentGatewayType } from "@/app/config";
+import { paymentGatewayType } from "@/app/config";
 import {
   BillingPortalButton,
   CurrentSubscription,
@@ -43,18 +43,24 @@ export const Route = createFileRoute("/_app/billing/")({
 function BillingPage() {
   const { t } = useLingui();
   const { tenantKey, isTenantOwner, isPersonalWorkspace } = useSession();
-  const { data: subscription } = useActiveSubscription(tenantKey);
-  const { mutate: createCheckout, isPending: isCreatingCheckout } =
-    useCreateCheckoutSession(tenantKey);
+  // Personal workspaces bill the user subject; tenants bill the tenant subject.
+  const personal = isPersonalWorkspace;
+  const canManageBilling = isPersonalWorkspace || isTenantOwner;
+
+  const { data: subscription } = useActiveSubscription(tenantKey, personal);
+  const { mutate: createCheckout, isPending: isCreatingCheckout } = useCreateCheckoutSession(
+    tenantKey,
+    personal,
+  );
 
   const {
     data: billingSettings,
     error: billingSettingsError,
     isLoading: isBillingSettingsLoading,
-  } = useBillingSettings(tenantKey);
+  } = useBillingSettings(tenantKey, personal);
 
   const handleSelectPlan = (plan: Plan) => {
-    if (!isTenantOwner) return;
+    if (!canManageBilling) return;
 
     createCheckout({
       planCode: plan.planCode,
@@ -63,42 +69,15 @@ function BillingPage() {
     });
   };
 
-  // In single tenant mode, don't show personal workspace message - we should have billing
-  if (!isSingleTenantMode && isPersonalWorkspace) {
-    return (
-      <Container size="md" data-testid={TestSelectors.PAGE("billing")}>
-        <PageTitle segments={[t`Billing`]} />
-        <PageHeader title={t`Billing`} />
-        <Stack gap="xl">
-          <Paper withBorder p="xl" radius="md">
-            <Stack gap="md">
-              <Title order={3}>
-                <Trans>Personal Workspace</Trans>
-              </Title>
-              <Text size="sm" c="dimmed">
-                <Trans>
-                  Your personal workspace doesn't require a subscription. Upgrade to an organization
-                  workspace to access additional features and team collaboration.
-                </Trans>
-              </Text>
-            </Stack>
-          </Paper>
-        </Stack>
-      </Container>
-    );
-  }
-
   return (
     <Container size="md" data-testid={TestSelectors.PAGE("billing")}>
       <PageTitle segments={[t`Billing`]} />
       <PageHeader title={t`Billing`} />
 
       <Stack gap="xl">
-        <CurrentSubscription
-          tenantKey={isSingleTenantMode ? undefined : (tenantKey ?? undefined)}
-        />
+        <CurrentSubscription tenantKey={tenantKey ?? undefined} personal={personal} />
 
-        {isTenantOwner && (
+        {canManageBilling && (
           <>
             <Divider
               label={
@@ -116,11 +95,12 @@ function BillingPage() {
               currentPlanId={subscription?.planId}
               onSelect={handleSelectPlan}
               selectingPlanId={isCreatingCheckout ? "all" : undefined} // Simplification
+              personal={personal}
             />
 
-            <BillingInfo tenantKey={isSingleTenantMode ? undefined : (tenantKey ?? undefined)} />
+            <BillingInfo tenantKey={tenantKey ?? undefined} personal={personal} />
 
-            <RefundList tenantKey={isSingleTenantMode ? undefined : (tenantKey ?? undefined)} />
+            <RefundList tenantKey={tenantKey ?? undefined} personal={personal} />
 
             <WebhookLogList />
 
@@ -159,7 +139,8 @@ function BillingPage() {
 
                     <Group mt="md">
                       <BillingPortalButton
-                        tenantKey={isSingleTenantMode ? undefined : (tenantKey ?? undefined)}
+                        tenantKey={tenantKey ?? undefined}
+                        personal={personal}
                         size="md"
                       />
                     </Group>

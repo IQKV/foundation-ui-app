@@ -8,10 +8,15 @@ import { TestSelectors } from "@/shared/lib/test-selectors";
 
 interface CurrentSubscriptionProps {
   tenantKey?: string;
+  personal: boolean;
 }
 
-export function CurrentSubscription({ tenantKey }: CurrentSubscriptionProps) {
-  const { data: subscription, isLoading, isError } = useActiveSubscription(tenantKey ?? null);
+export function CurrentSubscription({ tenantKey, personal }: CurrentSubscriptionProps) {
+  const {
+    data: subscription,
+    isLoading,
+    isError,
+  } = useActiveSubscription(tenantKey ?? null, personal);
 
   if (isLoading) {
     return (
