@@ -663,7 +663,7 @@ type ViewMode = "grid" | "list";
 function VenuesPage() {
   const { t } = useLingui();
   const navigate = useNavigate();
-  const { payload, tenantKey } = useSession();
+  const { payload, tenantKey, isPersonalWorkspace } = useSession();
   const authorities = payload?.authorities ?? [];
   // Any tenant member may create and update venues; deleting stays with owners and admins.
   const canEdit =
@@ -862,14 +862,26 @@ function VenuesPage() {
       />
 
       {tenantKey && (
-        <Group gap="xs" mb="md">
+        <Group gap="xs" mb={isPersonalWorkspace ? 4 : "md"}>
           <Text size="xs" c="dimmed">
             <Trans>Workspace:</Trans>
           </Text>
-          <Badge variant="outline" color="indigo" size="sm" ff="monospace" radius="sm">
-            {tenantKey}
-          </Badge>
+          {isPersonalWorkspace ? (
+            <Badge variant="outline" color="indigo" size="sm" radius="sm">
+              <Trans>Personal Workspace</Trans>
+            </Badge>
+          ) : (
+            <Badge variant="outline" color="indigo" size="sm" ff="monospace" radius="sm">
+              {tenantKey}
+            </Badge>
+          )}
         </Group>
+      )}
+
+      {isPersonalWorkspace && (
+        <Text size="xs" c="dimmed" mb="md">
+          <Trans>Only venues you created or that are shared with you appear here.</Trans>
+        </Text>
       )}
 
       {isError && (

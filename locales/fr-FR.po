@@ -2186,6 +2186,10 @@ msgstr "Nouvelles inscriptions"
 msgid "New venue"
 msgstr ""
 
+#: src/pages/_app/venues.add.tsx
+msgid "New venues in your personal workspace are private to you."
+msgstr ""
+
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Newest first"
 msgstr ""
@@ -2410,6 +2414,10 @@ msgstr "Un clic et vous êtes prêt."
 #: src/pages/complete-profile.tsx
 msgid "One last"
 msgstr "Un dernier"
+
+#: src/pages/_app/venues.index.tsx
+msgid "Only venues you created or that are shared with you appear here."
+msgstr ""
 
 #: src/features/command-bar/ui/spotlight-modal.tsx
 msgid "open"
@@ -2646,6 +2654,10 @@ msgid "Permissions assigned to your account"
 msgstr "Autorisations attribuées à votre compte"
 
 #: src/features/manage-billing/ui/entitlements-card.tsx
+#: src/pages/_app/venues_.$venueId.files.tsx
+#: src/pages/_app/venues_.$venueId.research.tsx
+#: src/pages/_app/venues.$venueId.tsx
+#: src/pages/_app/venues.index.tsx
 #: src/widgets/dashboard-personal-welcome/ui/dashboard-personal-welcome.tsx
 msgid "Personal Workspace"
 msgstr "Espace de travail personnel"
@@ -3839,6 +3851,10 @@ msgstr ""
 #: src/pages/_app/venues.index.tsx
 #: src/shared/ui/app-layout/nav-config.tsx
 msgid "Venues"
+msgstr ""
+
+#: src/features/manage-venue/ui/venue-fields.tsx
+msgid "Venues in your personal workspace are private to you. Share them with specific people from the venue page."
 msgstr ""
 
 #: src/features/edit-profile/ui/edit-profile-modal.tsx

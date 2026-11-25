@@ -715,7 +715,7 @@ function VenueFilesPage() {
   const navigate = useNavigate();
   const { venueId } = Route.useParams();
   const { source: sourceParam, page: sourcePageParam } = Route.useSearch();
-  const { payload } = useSession();
+  const { payload, isPersonalWorkspace } = useSession();
   const authorities = payload?.authorities ?? [];
   // Any tenant member may upload and manage venue assets.
   const canManage =
@@ -1023,6 +1023,13 @@ function VenueFilesPage() {
       />
       <PageHeader
         title={venue ? [venue.name, venue.city].filter(Boolean).join(", ") : <Trans>Venue</Trans>}
+        rightSection={
+          isPersonalWorkspace ? (
+            <Badge variant="outline" color="indigo" size="sm" radius="sm">
+              <Trans>Personal Workspace</Trans>
+            </Badge>
+          ) : undefined
+        }
         breadcrumbs={[
           { label: <Trans>Home</Trans>, to: "/" },
           { label: <Trans>Venues</Trans>, to: "/venues" },

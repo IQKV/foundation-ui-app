@@ -868,7 +868,7 @@ function VenueResearchPage() {
   const navigate = useNavigate();
   const { venueId } = Route.useParams();
   const { fromUpload, source: sourceParam } = Route.useSearch();
-  const { payload } = useSession();
+  const { payload, isPersonalWorkspace } = useSession();
   const authorities = payload?.authorities ?? [];
   // Any tenant member may edit venue fields and metadata; deleting stays with owners and admins.
   const canEdit =
@@ -1132,6 +1132,13 @@ function VenueResearchPage() {
         />
         <PageHeader
           title={venue ? [venue.name, venue.city].filter(Boolean).join(", ") : <Trans>Venue</Trans>}
+          rightSection={
+            isPersonalWorkspace ? (
+              <Badge variant="outline" color="indigo" size="sm" radius="sm">
+                <Trans>Personal Workspace</Trans>
+              </Badge>
+            ) : undefined
+          }
           breadcrumbs={[
             { label: <Trans>Home</Trans>, to: "/" },
             { label: <Trans>Venues</Trans>, to: "/venues" },

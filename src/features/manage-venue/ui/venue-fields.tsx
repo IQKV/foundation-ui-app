@@ -13,6 +13,7 @@ import type { UseFormReturnType } from "@mantine/form";
 import { useLingui } from "@lingui/react/macro";
 import { IconBuildingStore, IconMapPin } from "@tabler/icons-react";
 import { TestSelectors } from "@/shared/lib/test-selectors";
+import { useSession } from "@/processes/session";
 import type { VenueFormValues } from "../model";
 import { SECTION_CARD_STYLES } from "./section-accent";
 
@@ -64,6 +65,9 @@ function SectionCard({ icon, title, hint, children }: SectionCardProps) {
 /** Shared create/edit form fields for a tenant venue. */
 export function VenueFields({ form }: VenueFieldsProps) {
   const { t } = useLingui();
+  // A personal workspace shares one schema across every user, so venues are always private
+  // (owner + share grants only) — the backend forces this and the visibility choice is moot.
+  const { isPersonalWorkspace } = useSession();
 
   return (
     <Stack gap="md">
@@ -97,17 +101,28 @@ export function VenueFields({ form }: VenueFieldsProps) {
           data-testid={TestSelectors.VENUE_CITY_INPUT}
           {...form.getInputProps("city")}
         />
-        <Select
-          label={t`Visibility`}
-          description={t`Public venues are visible to everyone in the workspace; private venues only to you and people you share them with.`}
-          data={[
-            { value: "PUBLIC", label: t`Public` },
-            { value: "PRIVATE", label: t`Private` },
-          ]}
-          allowDeselect={false}
-          data-testid={TestSelectors.VENUE_VISIBILITY_INPUT}
-          {...form.getInputProps("visibility")}
-        />
+        {isPersonalWorkspace ? (
+          <Select
+            label={t`Visibility`}
+            description={t`Venues in your personal workspace are private to you. Share them with specific people from the venue page.`}
+            data={[{ value: "PRIVATE", label: t`Private` }]}
+            value="PRIVATE"
+            disabled
+            data-testid={TestSelectors.VENUE_VISIBILITY_INPUT}
+          />
+        ) : (
+          <Select
+            label={t`Visibility`}
+            description={t`Public venues are visible to everyone in the workspace; private venues only to you and people you share them with.`}
+            data={[
+              { value: "PUBLIC", label: t`Public` },
+              { value: "PRIVATE", label: t`Private` },
+            ]}
+            allowDeselect={false}
+            data-testid={TestSelectors.VENUE_VISIBILITY_INPUT}
+            {...form.getInputProps("visibility")}
+          />
+        )}
       </SectionCard>
 
       <SectionCard

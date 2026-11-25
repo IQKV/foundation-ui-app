@@ -32,6 +32,7 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { PageTitle } from "@/shared/lib/page-title";
 import { TestSelectors } from "@/shared/lib/test-selectors";
+import { useSession } from "@/processes/session";
 import { useUploadVenueDocument } from "@/features/manage-venue";
 
 export const Route = createFileRoute("/_app/venues/add")({
@@ -80,6 +81,7 @@ function AddVenuePage() {
   const { colorScheme } = useMantineColorScheme();
   const dark = colorScheme === "dark";
   const reduceMotion = useReducedMotion();
+  const { isPersonalWorkspace } = useSession();
 
   const { stage, progress, venueId, fileName, fileSize, errorMessage, upload, reset } =
     useUploadVenueDocument();
@@ -214,6 +216,11 @@ function AddVenuePage() {
         <Text size="xs" c="dimmed">
           <Trans>Accepted formats: PDF, Word, Excel, CSV, JPEG, PNG, WebP · Max 20 MB</Trans>
         </Text>
+        {isPersonalWorkspace && (
+          <Text size="xs" c="dimmed">
+            <Trans>New venues in your personal workspace are private to you.</Trans>
+          </Text>
+        )}
       </Stack>
 
       {/* Two equal cards side by side (they stack when narrow). While a file is in

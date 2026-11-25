@@ -107,7 +107,7 @@ function VenueOverviewPage() {
 
   // Any workspace member may read the share list; only the owner or an ADMIN
   // grantee may mutate it — the server returns 403 for a non-owner.
-  const { payload, tenantKey } = useSession();
+  const { payload, tenantKey, isPersonalWorkspace } = useSession();
   const canManageShares = Boolean(
     payload?.authorities.some((a) => a === "MEMBER" || a === "TENANT_OWNER" || a === "ADMIN"),
   );
@@ -403,6 +403,11 @@ function VenueOverviewPage() {
                           {venue?.name ?? t`Venue`}
                         </Text>
                         {venue && <VenueVisibilityBadge visibility={venue.visibility} />}
+                        {isPersonalWorkspace && (
+                          <Badge variant="outline" color="indigo" size="sm" radius="sm">
+                            <Trans>Personal Workspace</Trans>
+                          </Badge>
+                        )}
                       </>
                     )}
                   </Group>
