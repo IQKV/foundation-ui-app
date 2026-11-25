@@ -72,6 +72,8 @@ import {
   METADATA_SECTIONS,
   resolveFieldValue,
   isFieldEmpty,
+  VenueSharingPanel,
+  VenueVisibilityBadge,
 } from "@/features/manage-venue";
 import type { MetadataDocument, MetadataFieldDefinition } from "@/features/manage-venue";
 import {
@@ -102,6 +104,13 @@ function VenueOverviewPage() {
   const { venueId } = Route.useParams();
   const { fromUpload } = Route.useSearch();
   const queryClient = useQueryClient();
+
+  // Any workspace member may read the share list; only the owner or an ADMIN
+  // grantee may mutate it — the server returns 403 for a non-owner.
+  const { payload, tenantKey } = useSession();
+  const canManageShares = Boolean(
+    payload?.authorities.some((a) => a === "MEMBER" || a === "TENANT_OWNER" || a === "ADMIN"),
+  );
 
   const VENUE_CHAT_ENDPOINTS: ChatEndpoints = useMemo(
     () => ({
@@ -389,9 +398,12 @@ function VenueOverviewPage() {
                     {isLoading ? (
                       <Skeleton height={32} width={220} radius="sm" />
                     ) : (
-                      <Text fw={800} size="1.75rem" lh={1.15}>
-                        {venue?.name ?? t`Venue`}
-                      </Text>
+                      <>
+                        <Text fw={800} size="1.75rem" lh={1.15}>
+                          {venue?.name ?? t`Venue`}
+                        </Text>
+                        {venue && <VenueVisibilityBadge visibility={venue.visibility} />}
+                      </>
                     )}
                   </Group>
 
@@ -620,6 +632,12 @@ function VenueOverviewPage() {
             >
               <VenueSmartNotesCard venueId={venueId} />
             </DashboardCard>
+
+            <VenueSharingPanel
+              venueId={venueId}
+              tenantKey={tenantKey}
+              canManage={canManageShares}
+            />
           </Stack>
 
           {/* Right rail */}

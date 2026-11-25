@@ -397,6 +397,7 @@ export const TestSelectors = {
   VENUE_DESCRIPTION_INPUT: "venue-description-input",
   VENUE_ADDRESS_INPUT: "venue-address-input",
   VENUE_CITY_INPUT: "venue-city-input",
+  VENUE_VISIBILITY_INPUT: "venue-visibility-input",
   VENUE_LATITUDE_INPUT: "venue-latitude-input",
   VENUE_LONGITUDE_INPUT: "venue-longitude-input",
   CREATE_VENUE_MODAL: "create-venue-modal",
@@ -416,6 +417,12 @@ export const TestSelectors = {
   VENUE_FILES_PAGE: "venue-files-page",
   VENUE_FILES_SEARCH_INPUT: "venue-files-search-input",
   VENUE_FILES_UPLOAD_BUTTON: "venue-files-upload-button",
+  VENUE_SHARING_PANEL: "venue-sharing-panel",
+  VENUE_SHARE_MEMBER_SELECT: "venue-share-member-select",
+  VENUE_SHARE_ADD_ROLE_SELECT: "venue-share-add-role-select",
+  VENUE_SHARE_ADD_BUTTON: "venue-share-add-button",
+  VENUE_SHARE_ROLE_SELECT: (userId: string) => `venue-share-${userId}-role-select`,
+  VENUE_SHARE_REVOKE_BUTTON: (userId: string) => `venue-share-${userId}-revoke-button`,
 } as const;
 
 /**

@@ -300,6 +300,7 @@ msgstr "Address"
 #~ msgstr "Address & coordinates"
 
 #: src/features/invite-member/model/types.ts
+#: src/features/manage-venue/ui/venue-sharing-panel.tsx
 msgid "Admin"
 msgstr "Admin"
 
@@ -906,9 +907,17 @@ msgstr "Could not load organizations."
 msgid "Could not load the preview."
 msgstr "Could not load the preview."
 
+#: src/features/manage-venue/ui/venue-sharing-panel.tsx
+msgid "Could not load the sharing list."
+msgstr "Could not load the sharing list."
+
 #: src/features/manage-billing/model/use-billing-portal.ts
 msgid "Could not open the billing portal. Please try again."
 msgstr "Could not open the billing portal. Please try again."
+
+#: src/features/manage-venue/ui/venue-sharing-panel.tsx
+msgid "Could not revoke access"
+msgstr "Could not revoke access"
 
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Could not save note."
@@ -921,6 +930,10 @@ msgstr "Could not save the page. Please check the form and try again."
 #: src/features/manage-venue/ui/venue-ai-enrich-modal.tsx
 msgid "Could not save. Please try again."
 msgstr "Could not save. Please try again."
+
+#: src/features/manage-venue/ui/venue-sharing-panel.tsx
+msgid "Could not share this venue"
+msgstr "Could not share this venue"
 
 #: src/pages/_app/settings/security.tsx
 msgid "Could not start the linking flow."
@@ -941,6 +954,10 @@ msgstr "Could not unlink this provider."
 #: src/pages/_app/settings/security.tsx
 msgid "Could not update SSO configuration."
 msgstr "Could not update SSO configuration."
+
+#: src/features/manage-venue/ui/venue-sharing-panel.tsx
+msgid "Could not update the role"
+msgstr "Could not update the role"
 
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Could not upload the asset."
@@ -1279,6 +1296,10 @@ msgstr "Edit Venue"
 #: src/pages/_app/venues.$venueId.tsx
 msgid "Editing note"
 msgstr "Editing note"
+
+#: src/features/manage-venue/ui/venue-sharing-panel.tsx
+msgid "Editor"
+msgstr "Editor"
 
 #: src/features/edit-profile/ui/edit-profile-modal.tsx
 #: src/features/forgot-password/ui/forgot-password-form.tsx
@@ -2227,6 +2248,10 @@ msgstr "No external sign-in providers are enabled by your organization."
 msgid "No matches."
 msgstr "No matches."
 
+#: src/features/manage-venue/ui/venue-sharing-panel.tsx
+msgid "No members available"
+msgstr "No members available"
+
 #: src/pages/_app/team.tsx
 msgid "No members found."
 msgstr "No members found."
@@ -2683,6 +2708,10 @@ msgstr "Please check the form and try again."
 msgid "Please confirm your password"
 msgstr "Please confirm your password"
 
+#: src/features/manage-venue/ui/venue-sharing-panel.tsx
+msgid "Please try again."
+msgstr "Please try again."
+
 #: src/pages/auth.callback.tsx
 msgid "Please wait while we finish signing you in."
 msgstr "Please wait while we finish signing you in."
@@ -2729,6 +2758,11 @@ msgstr "Priority Support Available"
 msgid "Priority Support:"
 msgstr "Priority Support:"
 
+#: src/features/manage-venue/ui/venue-fields.tsx
+#: src/features/manage-venue/ui/venue-visibility-badge.tsx
+msgid "Private"
+msgstr "Private"
+
 #: src/features/venue-semantic-search/ui/VenueSemanticSearchWidget.tsx
 msgid "Pro tip: You can search by vibe, amenities, capacity, or specific location details."
 msgstr "Pro tip: You can search by vibe, amenities, capacity, or specific location details."
@@ -2769,6 +2803,15 @@ msgstr "Provider key"
 #: src/features/signup/ui/provisioning-wait.tsx
 msgid "Provisioning workspace"
 msgstr "Provisioning workspace"
+
+#: src/features/manage-venue/ui/venue-fields.tsx
+#: src/features/manage-venue/ui/venue-visibility-badge.tsx
+msgid "Public"
+msgstr "Public"
+
+#: src/features/manage-venue/ui/venue-fields.tsx
+msgid "Public venues are visible to everyone in the workspace; private venues only to you and people you share them with."
+msgstr "Public venues are visible to everyone in the workspace; private venues only to you and people you share them with."
 
 #: src/features/page-admin/model/types.ts
 #: src/pages/_app/cms-pages.index.tsx
@@ -2951,6 +2994,10 @@ msgstr "Retry Provisioning"
 msgid "Revoke"
 msgstr "Revoke"
 
+#: src/features/manage-venue/ui/venue-sharing-panel.tsx
+msgid "Revoke access"
+msgstr "Revoke access"
+
 #: src/shared/ui/invitation-status-badge/invitation-status-badge.tsx
 msgid "Revoked"
 msgstr "Revoked"
@@ -3048,6 +3095,10 @@ msgstr "Security Settings"
 #: src/features/notification-bell/ui/notification-bell.tsx
 msgid "See all notifications"
 msgstr "See all notifications"
+
+#: src/features/manage-venue/ui/venue-sharing-panel.tsx
+msgid "Select a member"
+msgstr "Select a member"
 
 #: src/addons/platform-ai-chat/ui/chat-window.tsx
 msgid "Select a session or start a new chat."
@@ -3161,6 +3212,18 @@ msgstr "Sets your preferred language for notifications and emails."
 #: src/features/signup/ui/provisioning-wait.tsx
 msgid "Setting up your workspace"
 msgstr "Setting up your workspace"
+
+#: src/features/manage-venue/ui/venue-sharing-panel.tsx
+msgid "Share"
+msgstr "Share"
+
+#: src/features/manage-venue/ui/venue-sharing-panel.tsx
+msgid "Share with a workspace member"
+msgstr "Share with a workspace member"
+
+#: src/features/manage-venue/ui/venue-sharing-panel.tsx
+msgid "Sharing"
+msgstr "Sharing"
 
 #: src/features/manage-venue/ui/venue-fields.tsx
 msgid "Short \"About\" line shown under the venue's name."
@@ -3533,6 +3596,10 @@ msgstr "This reset link is invalid or has expired. Please request a new one."
 msgid "This template uses Mantine's official loading components for optimal UX."
 msgstr "This template uses Mantine's official loading components for optimal UX."
 
+#: src/features/manage-venue/ui/venue-sharing-panel.tsx
+msgid "This venue is not shared with anyone yet."
+msgstr "This venue is not shared with anyone yet."
+
 #: src/pages/verify-email.tsx
 msgid "This verification link has expired or has already been used. Request a new one from your account settings."
 msgstr "This verification link has expired or has already been used. Request a new one from your account settings."
@@ -3798,6 +3865,10 @@ msgstr "View record"
 msgid "View venue"
 msgstr "View venue"
 
+#: src/features/manage-venue/ui/venue-fields.tsx
+msgid "Visibility"
+msgstr "Visibility"
+
 #: src/features/signup/ui/verify-email-prompt.tsx
 msgid "We sent a verification link to <0>{email}</0>. Click it to confirm your email address."
 msgstr "We sent a verification link to <0>{email}</0>. Click it to confirm your email address."
@@ -3925,6 +3996,10 @@ msgstr "Workspace"
 #: src/pages/sign-in.tsx
 msgid "Workspace key"
 msgstr "Workspace key"
+
+#: src/features/manage-venue/ui/venue-sharing-panel.tsx
+msgid "Workspace members who can access this venue."
+msgstr "Workspace members who can access this venue."
 
 #: src/pages/_app/cms-pages.index.tsx
 #: src/pages/_app/venues.index.tsx

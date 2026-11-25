@@ -3,6 +3,14 @@ export type { VenueFormValues } from "./types";
 export { buildVenueSchema, emptyVenueFormValues, toVenueFormValues, toWriteRequest } from "./types";
 export { useCreateVenue } from "./use-create-venue";
 export { useUpdateVenue } from "./use-update-venue";
+export {
+  useVenueShares,
+  useShareCandidates,
+  useShareProfiles,
+  useAddVenueShare,
+  useUpdateVenueShareRole,
+  useRemoveVenueShare,
+} from "./use-venue-shares";
 export { useDeleteVenue } from "./use-delete-venue";
 export { useBulkDeleteVenues } from "./use-bulk-delete-venues";
 export { useUploadVenueDocument } from "./use-upload-venue-document";

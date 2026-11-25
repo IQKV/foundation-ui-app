@@ -4,6 +4,7 @@ import {
   TextInput,
   Textarea,
   NumberInput,
+  Select,
   Paper,
   Group,
   Text,
@@ -95,6 +96,17 @@ export function VenueFields({ form }: VenueFieldsProps) {
           label={t`City`}
           data-testid={TestSelectors.VENUE_CITY_INPUT}
           {...form.getInputProps("city")}
+        />
+        <Select
+          label={t`Visibility`}
+          description={t`Public venues are visible to everyone in the workspace; private venues only to you and people you share them with.`}
+          data={[
+            { value: "PUBLIC", label: t`Public` },
+            { value: "PRIVATE", label: t`Private` },
+          ]}
+          allowDeselect={false}
+          data-testid={TestSelectors.VENUE_VISIBILITY_INPUT}
+          {...form.getInputProps("visibility")}
         />
       </SectionCard>
 

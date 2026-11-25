@@ -1,3 +1,6 @@
+/** Who can discover and view a venue. */
+export type VenueVisibility = "PUBLIC" | "PRIVATE";
+
 /**
  * Tenant venue — the safe projection returned by the tenant /venues surface.
  *
@@ -17,6 +20,8 @@ export interface Venue {
   locationLng: number | null;
   /** Optional relation to a master-catalog record. */
   masterVenueId: string | null;
+  /** Who can discover/view the venue — PUBLIC (whole workspace) or PRIVATE (owner + shares). */
+  visibility: VenueVisibility;
   /**
    * Serialised MetadataDocument JSON string. Returned by the backend on the safe projection so
    * tenants can read and edit their own venue metadata.
@@ -31,6 +36,31 @@ export interface Venue {
 export interface VenueListResponse {
   items: Venue[];
   totalElements: number;
+}
+
+// ─── Sharing ──────────────────────────────────────────────────────────────────
+// A venue grant lets another platform user open a venue they do not own.
+// ADMIN grantees can in turn manage the share list; EDITOR grantees can edit content.
+
+export type VenueShareRole = "ADMIN" | "EDITOR";
+
+export interface VenueShare {
+  id: string;
+  venueId: string;
+  sharedWithUserId: string;
+  role: VenueShareRole;
+  /** User who created the grant. */
+  grantedBy: string;
+  createdAt: string;
+}
+
+export interface VenueShareListResponse {
+  items: VenueShare[];
+}
+
+export interface VenueShareRequest {
+  sharedWithUserId: string;
+  role: VenueShareRole;
 }
 
 /** Lightweight photo returned by the master-venue photos sub-resource. */

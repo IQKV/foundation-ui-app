@@ -54,7 +54,12 @@ import { useSession } from "@/processes/session";
 import { dayjs } from "@/shared/lib/date-utils";
 import { catalogApi } from "@/shared/api";
 import type { SemanticSearchFilters } from "@/shared/api";
-import { EditVenueModal, DeleteVenueModal, BulkDeleteVenuesModal } from "@/features/manage-venue";
+import {
+  EditVenueModal,
+  DeleteVenueModal,
+  BulkDeleteVenuesModal,
+  VenueVisibilityBadge,
+} from "@/features/manage-venue";
 import {
   VenueSemanticSearchWidget,
   SemanticSearchFiltersSummary,
@@ -248,17 +253,23 @@ function VenueCard({
       )}
 
       <Stack gap={6} mt="xs">
-        <Text
-          fw={600}
-          size="sm"
-          lineClamp={2}
-          lh={1.3}
-          styles={{
-            root: { cursor: "pointer", "&:hover": { color: "var(--mantine-color-blue-6)" } },
-          }}
-        >
-          {venue.name}
-        </Text>
+        <Group gap={6} wrap="nowrap" align="center">
+          <Text
+            fw={600}
+            size="sm"
+            lineClamp={2}
+            lh={1.3}
+            style={{ flex: 1, minWidth: 0 }}
+            styles={{
+              root: { cursor: "pointer", "&:hover": { color: "var(--mantine-color-blue-6)" } },
+            }}
+          >
+            {venue.name}
+          </Text>
+          {venue.visibility === "PRIVATE" && (
+            <VenueVisibilityBadge visibility="PRIVATE" size="xs" />
+          )}
+        </Group>
         {(venue.city ?? venue.address) && (
           <Group gap={4} wrap="nowrap">
             <IconMapPin size={12} color="var(--mantine-color-gray-5)" />
@@ -335,16 +346,22 @@ function VenueRow({
         }}
       >
         <Stack gap={5} style={{ flex: 1, minWidth: 0 }}>
-          <Text
-            fw={700}
-            size="md"
-            lineClamp={1}
-            styles={{
-              root: { cursor: "pointer", "&:hover": { color: "var(--mantine-color-blue-6)" } },
-            }}
-          >
-            {venue.name}
-          </Text>
+          <Group gap={8} wrap="nowrap" align="center">
+            <Text
+              fw={700}
+              size="md"
+              lineClamp={1}
+              style={{ minWidth: 0 }}
+              styles={{
+                root: { cursor: "pointer", "&:hover": { color: "var(--mantine-color-blue-6)" } },
+              }}
+            >
+              {venue.name}
+            </Text>
+            {venue.visibility === "PRIVATE" && (
+              <VenueVisibilityBadge visibility="PRIVATE" size="xs" />
+            )}
+          </Group>
 
           <Group gap={4} wrap="nowrap">
             <IconMapPin size={13} color="var(--mantine-color-gray-5)" style={{ flexShrink: 0 }} />

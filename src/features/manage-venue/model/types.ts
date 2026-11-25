@@ -15,6 +15,7 @@ export function buildVenueSchema() {
     city: z.string(),
     locationLat: optionalNumeric(t`Latitude must be a number`),
     locationLng: optionalNumeric(t`Longitude must be a number`),
+    visibility: z.enum(["PUBLIC", "PRIVATE"]),
     // Empty means "not linked"; otherwise a master-catalog venue UUID.
     masterVenueId: z
       .string()
@@ -37,6 +38,7 @@ export function emptyVenueFormValues(): VenueFormValues {
     city: "",
     locationLat: "",
     locationLng: "",
+    visibility: "PUBLIC",
     masterVenueId: "",
   };
 }
@@ -49,6 +51,7 @@ export function toVenueFormValues(venue: Venue): VenueFormValues {
     city: venue.city ?? "",
     locationLat: venue.locationLat === null ? "" : String(venue.locationLat),
     locationLng: venue.locationLng === null ? "" : String(venue.locationLng),
+    visibility: venue.visibility,
     masterVenueId: venue.masterVenueId ?? "",
   };
 }
@@ -71,6 +74,7 @@ export function toWriteRequest(values: VenueFormValues): VenueWriteRequest {
     city: toOptionalString(values.city),
     locationLat: toOptionalNumber(values.locationLat),
     locationLng: toOptionalNumber(values.locationLng),
+    visibility: values.visibility,
     // shortcut: free-text master venue id, upgrade to an autocomplete when master-catalog browse lands
     masterVenueId: toOptionalString(values.masterVenueId),
   };

@@ -5,5 +5,7 @@ export { EditVenueModal } from "./edit-venue-modal";
 export { DeleteVenueModal } from "./delete-venue-modal";
 export { BulkDeleteVenuesModal } from "./bulk-delete-venues-modal";
 export { VenueMetadataSections } from "./venue-metadata-sections";
+export { VenueSharingPanel } from "./venue-sharing-panel";
+export { VenueVisibilityBadge } from "./venue-visibility-badge";
 export { CompletenessRing, VenueCompletenessCard, completenessColor } from "./venue-completeness";
 export { VenueAiEnrichModal } from "./venue-ai-enrich-modal";

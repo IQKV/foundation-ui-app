@@ -3,6 +3,10 @@ import type {
   Venue,
   VenueListResponse,
   ListVenueParams,
+  VenueVisibility,
+  VenueShare,
+  VenueShareListResponse,
+  VenueShareRequest,
   VenueAssetPublic,
   VenueAssetListResponse,
   VenueAsset,
@@ -23,6 +27,10 @@ export type {
   Venue,
   VenueListResponse,
   ListVenueParams,
+  VenueVisibility,
+  VenueShare,
+  VenueShareListResponse,
+  VenueShareRequest,
   VenueAssetPublic,
   VenueAssetListResponse,
   VenueAsset,
@@ -57,6 +65,8 @@ export interface VenueWriteRequest {
   locationLng?: number | null;
   /** Optional relation to a master-catalog record. */
   masterVenueId?: string | null;
+  /** Omit to let the backend default (PUBLIC for orgs, PRIVATE for personal workspaces). */
+  visibility?: VenueVisibility | null;
 }
 
 export interface VenuePatchRequest {
@@ -67,6 +77,7 @@ export interface VenuePatchRequest {
   locationLat?: number | null;
   locationLng?: number | null;
   masterVenueId?: string | null;
+  visibility?: VenueVisibility | null;
 }
 
 /** Metadata-only patch — the full serialised MetadataDocument JSON string. */
@@ -152,6 +163,25 @@ export const catalogApi = {
   // The backend caps the list at 100 ids and silently ignores unknown ids.
   bulkDeleteVenues: (ids: string[]) =>
     httpClient.delete("/v1/catalog/venues", { data: { ids } }).then(() => undefined),
+
+  // Per-venue sharing — grants that let other platform users open the venue.
+  // Any workspace member may list shares; only the owner or an ADMIN grantee
+  // may add / change-role / revoke (enforced server-side → 403).
+  listVenueShares: (venueId: string) =>
+    httpClient
+      .get<VenueShareListResponse>(`/v1/catalog/venues/${venueId}/shares`)
+      .then((r) => r.data),
+
+  addVenueShare: (venueId: string, data: VenueShareRequest) =>
+    httpClient.post<VenueShare>(`/v1/catalog/venues/${venueId}/shares`, data).then((r) => r.data),
+
+  updateVenueShareRole: (venueId: string, userId: string, data: VenueShareRequest) =>
+    httpClient
+      .patch<VenueShare>(`/v1/catalog/venues/${venueId}/shares/${userId}`, data)
+      .then((r) => r.data),
+
+  removeVenueShare: (venueId: string, userId: string) =>
+    httpClient.delete(`/v1/catalog/venues/${venueId}/shares/${userId}`).then(() => undefined),
 
   // Tenant venue asset photos — TENANT_OWNER / MEMBER.
   // Used by the venue detail Photos tab.
